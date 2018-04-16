@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {testAction} from "./actions";
+import Main from './main/index';
 
 class Forum extends Component {
     render() {
@@ -8,17 +9,7 @@ class Forum extends Component {
         return (
             <div>
                 <h1>Forum</h1>
-                <p>Result: ${testVal}</p>
-                <input
-                    type={'number'}
-                    onKeyDown={(event) => {
-                        console.log(event.target.value);
-                        if (event.keyCode === 13) {
-                            event.preventDefault();
-                            testAction(parseInt(event.target.value))
-                        }
-                    }}
-                />
+                <Main/>
             </div>
         );
     }

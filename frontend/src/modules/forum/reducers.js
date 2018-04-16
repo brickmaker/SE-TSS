@@ -1,9 +1,11 @@
-import {TEST_ADD_VAL} from './actions'
+import {combineReducers} from "redux";
+import {mainReducer} from "./main/reducers";
 
-const initState = {
-    testVal: 0
-};
+export const forumReducer = combineReducers({
+    main: mainReducer,
+});
 
+/*
 export function forumReducer(state = initState, action) {
     switch (action.type) {
         case TEST_ADD_VAL:
@@ -14,3 +16,4 @@ export function forumReducer(state = initState, action) {
             return state;
     }
 }
+*/
