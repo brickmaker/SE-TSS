@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {testAction} from "./actions";
 import Main from './main/index';
+import {Route} from "react-router-dom"
+import CollegesPage from "./colleges"
 
 class Forum extends Component {
     render() {
-        const {testVal, testAction} = this.props;
+        const {match, testVal, testAction} = this.props;
         return (
             <div>
                 <h1>Forum</h1>
-                <Main/>
+                <Route exact path={`${match.url}/`} component={Main}/>
+                <Route path={`${match.url}/colleges`} component={CollegesPage}/>
             </div>
         );
     }
@@ -26,6 +29,6 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    null,
+    null
 )(Forum);
