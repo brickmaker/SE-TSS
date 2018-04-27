@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubscriptions} from "./actions";
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import CollegesPage from '../colleges/index'
 
 class Main extends Component {
 
@@ -10,7 +12,7 @@ class Main extends Component {
     }
 
     render() {
-        const {subscriptions} = this.props;
+        const {match, subscriptions} = this.props;
         return (
             <div>
                 {
@@ -27,6 +29,12 @@ class Main extends Component {
                         )
                     })
                 }
+                <div>
+                    {/*<Link to={`${match.url}/colleges`}>*/}
+                    <Link to={`${match.url}/colleges`}>
+                        more
+                    </Link>
+                </div>
             </div>
         )
     }
