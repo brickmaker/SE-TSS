@@ -14,9 +14,9 @@ class Plate(models.Model):
 
 class Reply(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
-    uid = models.ForeignKey("User")
+    uid = models.ForeignKey("User",on_delete=models.CASCAD)
     content = models.TextField()
-    post_id = models.ForeignKey("Post")
+    post_id = models.ForeignKey("Post",on_delete=models.CASCAD)
     reply_to = models.IntegerField(null=True)
     valid = models.BooleanField(default=True)
 
@@ -26,10 +26,10 @@ class Reply(models.Model):
 
 class Notice(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
-    uid = models.ForeignKey("User")
+    uid = models.ForeignKey("User",on_delete=models.CASCAD)
     title = models.CharField(max_length=50, blank=True, default="")
     content = models.TextField()
-    plate_id = models.ForeignKey("Plate")
+    plate_id = models.ForeignKey("Plate",on_delete=models.CASCAD)
     valid = models.BooleanField(default=True)
 
     def __str__(self):
