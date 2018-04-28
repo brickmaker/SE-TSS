@@ -1,8 +1,10 @@
 import {combineReducers} from "redux";
 import {mainReducer} from "./main/reducers";
+import {coursesReducer} from "./courses/reducers"
 
 export const forumReducer = combineReducers({
     main: mainReducer,
+    courses: coursesReducer,
 });
 
 /*

@@ -50,5 +50,57 @@
         }
       ]
     }
+  ],
+  "courses": [
+    {
+      "id": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2017/8/8"
+    },
+    {
+      "id": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2017/8/8"
+    },
+    {
+      "id": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2017/8/8"
+    },
+    {
+      "id": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2017/8/8"
+    },
+    {
+      "id": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2017/8/8"
+    }
   ]
 }
