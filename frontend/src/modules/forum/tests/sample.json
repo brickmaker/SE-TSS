@@ -138,5 +138,22 @@
     "college": "计算机科学与技术学院",
     "course": "软件工程",
     "teacher": "王章野"
+  },
+  "post": {
+    "path": {
+      "college": {
+        "id": "collegeid",
+        "name": "计算机科学与技术学院"
+      },
+      "course": {
+        "id": "courseid",
+        "name": "软件工程"
+      },
+      "teacher": {
+        "id": "teacherid",
+        "name": "王章野"
+      }
+    },
+    "title": "一个帖子的标题。。。。。。"
   }
 }
