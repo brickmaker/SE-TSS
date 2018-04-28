@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {testAction} from "./actions";
-import Main from './main/index';
+import Main from './views/main/index';
 import {Route, Switch} from "react-router-dom"
-import CollegesPage from "./colleges"
-import Courses from "./courses"
-import Course from './course/index'
+import CollegesPage from "./views/colleges"
+import Courses from "./views/courses"
+import Course from './views/course/index'
 
 class Forum extends Component {
     render() {

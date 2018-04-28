@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {mainReducer} from "./main/reducers";
-import {coursesReducer} from "./courses/reducers"
+import {mainReducer} from "./views/main/reducers";
+import {coursesReducer} from "./views/courses/reducers"
 
 export const forumReducer = combineReducers({
     main: mainReducer,
