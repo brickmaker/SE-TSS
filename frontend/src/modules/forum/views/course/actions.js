@@ -1,7 +1,7 @@
 import {ROOT_URL} from "../../configs/config"
 
-const GET_COURSE_INFO = 'get_course_info'
-const GOT_COURSE_INFO = 'got_course_info'
+export const GET_COURSE_INFO = 'get_course_info'
+export const GOT_COURSE_INFO = 'got_course_info'
 
 export const getCourseInfo = (collegeId, courseId) => dispatch => {
     fetchCourseInfo(collegeId, courseId)

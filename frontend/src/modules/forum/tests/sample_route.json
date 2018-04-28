@@ -1,4 +1,5 @@
 {
   "/api/forum/subscriptions": "/subscriptions",
-  "/api/forum/courses": "/courses"
+  "/api/forum/courses": "/courses",
+  "/api/forum/course": "/course"
 }
