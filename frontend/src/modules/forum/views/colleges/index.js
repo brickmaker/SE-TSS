@@ -8,7 +8,7 @@ const CollegesPage = ({match}) => (
             <ul>
                 <li>XX学院</li>
                 <li>
-                    <Link to={`/forum/colleges/42`}>
+                    <Link to={`/forum/42`}>
                         计算机科学与技术学院
                     </Link>
                 </li>

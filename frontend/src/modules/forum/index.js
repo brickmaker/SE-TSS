@@ -5,19 +5,21 @@ import Main from './views/main/index';
 import {Route, Switch} from "react-router-dom"
 import CollegesPage from "./views/colleges"
 import Courses from "./views/courses"
-import Course from './views/course/index'
+import Course from './views/course'
+import Teacher from './views/teacher'
 
 class Forum extends Component {
     render() {
-        const {match, testVal, testAction} = this.props;
+        const {match} = this.props;
         return (
             <div>
                 <h1>Forum</h1>
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
-                    <Route path={`${match.url}/colleges/:collegeid/:courseid`} component={Course}/>
-                    <Route path={`${match.url}/colleges/:collegeid`} component={Courses}/>
+                    <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
+                    <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
+                    <Route path={`${match.url}/:collegeid`} component={Courses}/>
                 </Switch>
             </div>
         );
@@ -25,13 +27,9 @@ class Forum extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    testVal: state.forum.testVal
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    testAction: (value) => {
-        dispatch(testAction(value))
-    }
 });
 
 export default connect(

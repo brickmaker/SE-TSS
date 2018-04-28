@@ -9,7 +9,7 @@ class Course extends Component {
 
     componentDidMount() {
         const {collegeid, courseid} = this.props.match.params
-        this.props.getCourseInfo(getCourseInfo(collegeid, courseid))
+        this.props.getCourseInfo(collegeid, courseid)
     }
 
     render() {
