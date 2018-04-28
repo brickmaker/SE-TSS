@@ -2,5 +2,6 @@
   "/api/forum/subscriptions": "/subscriptions",
   "/api/forum/courses": "/courses",
   "/api/forum/course": "/course",
-  "/api/forum/teacher": "/teacher"
+  "/api/forum/teacher": "/teacher",
+  "/api/forum/post": "/post"
 }

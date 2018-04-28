@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {testAction} from "./actions";
 import Main from './views/main/index';
 import {Route, Switch} from "react-router-dom"
 import CollegesPage from "./views/colleges"
 import Courses from "./views/courses"
 import Course from './views/course'
 import Teacher from './views/teacher'
+import PostPage from './views/post'
 
 class Forum extends Component {
     render() {
@@ -16,6 +16,7 @@ class Forum extends Component {
                 <h1>Forum</h1>
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
+                    <Route path={`${match.url}/p/:postid`} component={PostPage}/>
                     <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
                     <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
@@ -26,11 +27,9 @@ class Forum extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(
     null,
