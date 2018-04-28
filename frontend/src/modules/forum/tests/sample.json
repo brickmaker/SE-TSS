@@ -102,5 +102,36 @@
       "postsNum": 3223,
       "lastUpdate": "2017/8/8"
     }
-  ]
+  ],
+  "course": {
+    "college": "计算机科学与技术学院",
+    "course": "软件工程",
+    "subForums": [
+      {
+        "id": "wzy",
+        "name": "王章野",
+        "pic": "pic_url",
+        "postsNum": 1234,
+        "lastUpdate": "2018/4/7",
+        "newestPosts": [
+          {
+            "title": "一个帖子的标题...",
+            "postId": "postid"
+          },
+          {
+            "title": "一个帖子的标题...",
+            "postId": "postid"
+          },
+          {
+            "title": "一个帖子的标题...",
+            "postId": "postid"
+          },
+          {
+            "title": "一个帖子的标题...",
+            "postId": "postid"
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -1,16 +1,39 @@
 import React, {Component} from 'react'
+import {connect} from "react-redux"
+import {getCourseInfo} from "./actions"
 
 class Course extends Component {
     constructor(props) {
         super(props)
     }
 
+    componentDidMount() {
+        const {collegeid, courseid} = this.props.match.params
+        this.props.getCourseInfo(getCourseInfo(collegeid, courseid))
+    }
+
     render() {
-        const {match} = this.props
+        const {college, course, subForums} = this.props
         return (
-            <div>course discuss: {match.params.collegeid}-{match.params.courseid}</div>
+            <div>
+                <div>{college} - {course}</div>
+            </div>
         )
     }
 }
 
-export default Course
+const mapStateToProps = (state) => ({
+    college: state.forum.course.college,
+    course: state.forum.course.course,
+    subForums: state.forum.course.subForums,
+    subscribed: false,
+    posts: []
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    getCourseInfo: (collegeId, courseId) => {
+        dispatch(getCourseInfo(collegeId, courseId))
+    },
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Course)
