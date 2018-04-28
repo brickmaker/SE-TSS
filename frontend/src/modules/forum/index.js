@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {testAction} from "./actions";
 import Main from './main/index';
-import {Route} from "react-router-dom"
+import {Route, Switch} from "react-router-dom"
 import CollegesPage from "./colleges"
+import Courses from "./courses"
+import Course from './course/index'
 
 class Forum extends Component {
     render() {
@@ -11,8 +13,12 @@ class Forum extends Component {
         return (
             <div>
                 <h1>Forum</h1>
-                <Route exact path={`${match.url}/`} component={Main}/>
-                <Route path={`${match.url}/colleges`} component={CollegesPage}/>
+                <Switch>
+                    <Route exact path={`${match.url}`} component={Main}/>
+                    <Route path={`${match.url}/colleges/:collegeid/:courseid`} component={Course}/>
+                    <Route path={`${match.url}/colleges/:collegeid`} component={Courses}/>
+                    <Route path={`${match.url}/colleges`} component={CollegesPage}/>
+                </Switch>
             </div>
         );
     }
