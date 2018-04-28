@@ -1,3 +1,4 @@
 {
-  "/api/forum/subscriptions": "/subscriptions"
+  "/api/forum/subscriptions": "/subscriptions",
+  "/api/forum/courses": "/courses"
 }
