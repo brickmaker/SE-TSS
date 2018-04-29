@@ -3,7 +3,8 @@ import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import {getPostInfo} from "./actions"
 import {Path} from "../../components/Path"
-import {PostTitle} from "../../components/PostTitle"
+import {PostTitle} from "./components/PostTitle"
+import PostBody from "./components/PostBody"
 
 class PostPage extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class PostPage extends Component {
 
     componentDidMount() {
         const pid = this.props.match.params.postid
-        this.props.getPostInfo(pid)
+        this.props.getPostInfo(pid, this.props.pageId)
     }
 
     render() {
@@ -39,20 +40,22 @@ class PostPage extends Component {
             <div>
                 <Path path={path}/>
                 <PostTitle title={title}/>
-                <div>post terms</div>
+                <PostBody/>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
+    postId: state.forum.post.postId,
+    pageId: state.forum.post.currPage,
     path: state.forum.post.path,
     title: state.forum.post.title
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    getPostInfo: (postId) => {
-        dispatch(getPostInfo(postId))
+    getPostInfo: (postId, pageId) => {
+        dispatch(getPostInfo(postId, pageId))
     }
 })
 

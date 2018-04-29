@@ -140,6 +140,7 @@
     "teacher": "王章野"
   },
   "post": {
+    "id": "pid",
     "path": {
       "college": {
         "id": "collegeid",
@@ -154,6 +155,362 @@
         "name": "王章野"
       }
     },
-    "title": "一个帖子的标题。。。。。。"
+    "title": "一个帖子的标题。。。。。。",
+    "replyPageNum": 3
+  },
+  "replies": {
+    "error": null,
+    "data": [
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "user": {
+          "id": "uid",
+          "name": "uname",
+          "pic": "picurl"
+        },
+        "content": "content, format need to be define",
+        "time": "2012-04-23T18:25:43.511Z",
+        "replies": [
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "from": "uname1",
+            "to": "uname2",
+            "content": "reply content",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      }
+    ]
   }
 }

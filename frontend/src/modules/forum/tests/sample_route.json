@@ -3,5 +3,6 @@
   "/api/forum/courses": "/courses",
   "/api/forum/course": "/course",
   "/api/forum/teacher": "/teacher",
+  "/api/forum/post_reply": "/replies",
   "/api/forum/post": "/post"
 }
