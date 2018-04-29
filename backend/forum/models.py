@@ -16,6 +16,7 @@ class Thread(models.Model):
     content = models.TextField()
     poster = models.ForeignKey('User.id',on_delete=models.CASCADE) 
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    date = DateField()
     
     CLOSED = 'CL'
     OPEN = 'OP'
@@ -36,6 +37,8 @@ class Thread(models.Model):
 class Attachment(models.Model):
     name = models.CharField(max_length=50)
     thread = models.ForeignKey('Thread',on_delete=models.CASCADE)
+    file = models.FileField()
+    date = DateField()
     
     def __str__(self):
         return self.name
@@ -44,6 +47,7 @@ class Message(models.Model):
     sender_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
     receiver_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
     content = models.TextField()
+    date = DateField()
     
     def __str__(self):
         return 'From %s to %s'%(self.sender_id,self.receiver_id)
@@ -51,6 +55,7 @@ class Message(models.Model):
 class Subscribe(models.Model):
     user_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
     section_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='section')
+    date = DateField()
     
     def __str__(self):
         return '%s subscribed %s'(self.user_id,self.section_id)
