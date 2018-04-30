@@ -37,8 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'information_management.apps.InformationManagementConfig',
     'forum.apps.ForumConfig',
+    'score_management.apps.ScoreManagementConfig',
 ]
 
 MIDDLEWARE = [
