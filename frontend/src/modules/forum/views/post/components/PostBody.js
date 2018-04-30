@@ -5,13 +5,21 @@ import {getPostReplies} from "../actions"
 class PostBody extends Component {
     constructor(props) {
         super(props)
+        this.clickPageNum = this.clickPageNum.bind(this)
     }
 
     componentDidMount() {
     }
 
+    clickPageNum(event) {
+        const page = event.target.innerText
+        console.log(page) // todo: need rewrite, only for tmp use
+        const {postId} = this.props
+        this.props.getPostReplies(postId, page)
+    }
+
     render() {
-        const {replies} = this.props
+        const {replies, pageNum, currPage} = this.props
         return (
             <div>
                 {
@@ -30,6 +38,18 @@ class PostBody extends Component {
                         )
                     })
                 }
+                <div>
+                    pages: {Array.from({length: pageNum}, (v, k) => (k + 1)).map((page) => {
+                    return (
+                        <button
+                            key={page}
+                            onClick={this.clickPageNum}
+                            style={{backgroundColor: page === currPage ? '#ff0000' : '#ffffff'}}>
+                            {page}
+                        </button>
+                    )
+                })}
+                </div>
             </div>
         )
     }
@@ -37,7 +57,8 @@ class PostBody extends Component {
 
 const mapStateToProps = (state) => ({
     postId: state.forum.post.postId,
-    currPage: state.forum.post.pageId,
+    currPage: state.forum.post.currPage,
+    pageNum: state.forum.post.pageNum,
     replies: state.forum.post.replies
 })
 
@@ -49,5 +70,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(PostBody)
