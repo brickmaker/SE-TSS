@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/info/', include('information_management.urls')),
     path('api/forum/', include('forum.urls')),
+    path('api/score/',include('score_management.urls')),
 ]
