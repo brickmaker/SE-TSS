@@ -19,7 +19,7 @@ export const getPostReplies = (postId, pageId) => dispatch => {
         .then((json) => {
             dispatch({
                 type: GOT_POST_REPLIES,
-                pageId: pageId,
+                pageId: parseInt(pageId),
                 replies: json.data
             })
         })
