@@ -76,7 +76,7 @@ class AdminSerializer(PeopleSerializer):
 
     class Meta:
         model = Account
-        fields = ('username', 'id_number', 'user_type', 'email', 'name', 'gender')
+        fields = ('username', 'id_number', 'user_type', 'email', 'name', 'gender','password')
         read_only_fields = ('date_created', 'date_modified')
 
 

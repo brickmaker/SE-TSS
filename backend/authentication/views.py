@@ -159,7 +159,7 @@ class PasswordUpdate(APIView):
             logger.info("password update failed")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+#Temporary unused
 class Login(APIView):
     serializer_class = LoginSerializer
     def post(self, request):

@@ -20,6 +20,5 @@ from rest_framework import routers
 from django.conf.urls import url, include
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     url(r'^api/', include('authentication.urls')),  
 ]

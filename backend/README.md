@@ -13,7 +13,7 @@
 
 ## JWT验证
 ```
-  <root>/api/get_token   获取 JWT token
+  <root>/api/login   获取 JWT token
   <root>/api/refresh_token  刷新JWT 
   <root>/api/is_token_valid  验证JWT
   目前处于开发阶段所以仅开启login时获取JWT，如想开启JWT验证在top.setting中设置如下即可
@@ -37,4 +37,8 @@
   
 ## 日志管理
   储存在log文件夹下
+
+## 创建用户
+    现阶段为后续批量创建用户方便，暂定初始密码是身份证号后6位
+    因为系统管理员安全性要求，创建管理员的时候需要输入密码进行创建，而非身份证后六位
   

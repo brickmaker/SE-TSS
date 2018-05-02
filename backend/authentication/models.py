@@ -102,6 +102,7 @@ class AccountManager(BaseUserManager):
         account.is_admin = True
         account.is_staff = True
         account.is_superuser = True
+        account.set_password(password)
         account.save()
         return account
 

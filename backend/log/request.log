@@ -301,3 +301,36 @@ AttributeError: 'Course' object has no attribute 'id'
 2018-05-02 04:40:00,117 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/login HTTP/1.1" 405 11733
 2018-05-02 04:40:04,563 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/login HTTP/1.1" 405 11733
 2018-05-02 04:40:11,913 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/is_token_valid HTTP/1.1" 405 11752
+2018-05-02 13:29:31,839 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 13:29:31,840 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2023
+2018-05-02 13:29:33,624 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /account/logout/
+2018-05-02 13:29:33,624 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /account/logout/ HTTP/1.1" 404 2086
+2018-05-02 13:29:33,781 [Thread-4:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 13:29:33,781 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 9066
+2018-05-02 13:29:33,975 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 13:29:33,992 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
+2018-05-02 13:29:33,994 [Thread-7:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+2018-05-02 13:29:35,044 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 13:29:39,738 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 12035
+2018-05-02 13:31:12,886 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 400 12067
+2018-05-02 13:31:33,988 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 400 12073
+2018-05-02 13:31:47,545 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 400 12073
+2018-05-02 13:32:37,346 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 12035
+2018-05-02 13:32:46,215 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 12169
+2018-05-02 13:33:00,965 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 400 12067
+2018-05-02 13:39:18,653 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 13:39:18,655 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2023
+2018-05-02 13:39:20,398 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /account/logout/
+2018-05-02 13:39:20,399 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /account/logout/ HTTP/1.1" 404 2086
+2018-05-02 13:39:20,549 [Thread-4:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 13:39:20,550 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 9066
+2018-05-02 13:39:20,692 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 13:39:21,668 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 13:39:22,278 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 13:39:24,765 [Thread-8:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/reigster_admin
+2018-05-02 13:39:24,766 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/reigster_admin HTTP/1.1" 404 9075
+2018-05-02 13:39:36,819 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_admin HTTP/1.1" 403 8078
+2018-05-02 13:39:37,363 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_admin HTTP/1.1" 403 8078
+2018-05-02 13:39:54,802 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_admin HTTP/1.1" 405 13006
+2018-05-02 13:40:21,340 [Thread-3:123145312813056] [django:78] [views:post] [INFO]- try to register admin account
+2018-05-02 13:40:21,386 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/register_admin HTTP/1.1" 400 12987
