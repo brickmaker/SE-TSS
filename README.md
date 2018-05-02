@@ -14,6 +14,63 @@ master是受保护的，不能直接push，请各组成员，建立自己的分�
 
 请务必仔细观察项目代码结构，按照统一的格式进行开发，如对项目组织有建议或意见，欢迎提出。
 
-## 配置运行
+## 实现功能:（全部为后端，详见后端接口说明）
+  多用户注册
+  
+  多用户登录
+  
+  用户信息管理
+  
+  JWT验证
+  
+  权限管理
+  
+  日志管理
+  
+## TODO
+  课程管理
+  
+## 使用说明:
+```
+后端: 
+    初始化数据库：
+        $ cd InfoSys-back
+        $ python manage.py makemigrations
+        $ python manage.py migrate
+        $ python init_data.py
+     superuser: 
+        $ python manage.py createsuperuser
+     运行: 
+        $ python manage.py runserver
+     实现功能：
+        多用户注册
+        用户登录
+        JWT的验证及刷新
+        
+     接口：(详见后端接口说明）
+        <root>/api/get_token 
+        <root>/api/refresh_token 
+        <root>/api/is_token_valid 
+        <root>/api/register_student 
+        <root>/api/register_faculty 
+        <root>/api/register_staff
+        <root>/api/register_admin
+        <root>/api/register_course
+        <root>/api/login
+        <root>/api/stuent/*/
+        <root>/api/faculty/*/
+        <root>/api/staff/*/
+        <root>/api/admin/*/
+        <root>/api/course/*/
+```
+## Dependency
 
-参见前后端各自的readme //:~
+1. `Python` (>3.5)
+
+2. `Node.js` (>8.0.0) & npm
+
+3. `django` 2.0
+
+4. `djangorestframework-jwt` >=1.5.2
+
+5. `djangorestframework` >=3.8.0
