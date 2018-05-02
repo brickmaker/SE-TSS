@@ -282,3 +282,22 @@ AttributeError: 'Course' object has no attribute 'id'
 2018-05-02 03:17:05,991 [Thread-29:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/ HTTP/1.1" 403 9377
 2018-05-02 03:17:08,780 [Thread-30:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/register HTTP/1.1" 301 0
 2018-05-02 03:17:08,841 [Thread-31:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/register/ HTTP/1.1" 403 9569
+2018-05-02 04:39:08,985 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 04:39:08,987 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2028
+2018-05-02 04:39:11,568 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 04:39:11,569 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2028
+2018-05-02 04:39:12,398 [Thread-4:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /account/logout/
+2018-05-02 04:39:12,398 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /account/logout/ HTTP/1.1" 404 2091
+2018-05-02 04:39:14,052 [Thread-5:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /account/logout/
+2018-05-02 04:39:14,052 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /account/logout/ HTTP/1.1" 404 2091
+2018-05-02 04:39:14,142 [Thread-6:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 04:39:14,143 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 2091
+2018-05-02 04:39:14,389 [Thread-7:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/
+2018-05-02 04:39:14,389 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/ HTTP/1.1" 404 2058
+2018-05-02 04:39:38,346 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/register_student HTTP/1.1" 403 8103
+2018-05-02 04:39:48,342 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/register_student HTTP/1.1" 403 8103
+2018-05-02 04:39:51,242 [Thread-10:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/log_in
+2018-05-02 04:39:51,242 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/log_in HTTP/1.1" 404 9388
+2018-05-02 04:40:00,117 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/login HTTP/1.1" 405 11733
+2018-05-02 04:40:04,563 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/login HTTP/1.1" 405 11733
+2018-05-02 04:40:11,913 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/is_token_valid HTTP/1.1" 405 11752
