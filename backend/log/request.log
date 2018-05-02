@@ -1,0 +1,284 @@
+2018-04-29 14:02:43,032 [Thread-7:7416] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11703
+2018-04-29 14:02:43,465 [Thread-6:19912] [django.request:93] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-04-29 14:02:43,467 [Thread-6:19912] [django.server:124] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2079
+2018-04-29 14:03:00,248 [Thread-8:8216] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:03:00,342 [Thread-8:8216] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:03:00,374 [Thread-8:8216] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11759
+2018-04-29 14:04:59,216 [Thread-9:18580] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 405 14001
+2018-04-29 14:09:22,362 [Thread-15:1320] [django:27] [views:post] [INFO]- try to register student account
+2018-04-29 14:09:22,368 [Thread-15:1320] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:09:22,456 [Thread-15:1320] [django:31] [views:post] [INFO]- account register successfully, username:3150103107
+2018-04-29 14:09:22,493 [Thread-15:1320] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_student HTTP/1.1" 201 14001
+2018-04-29 14:11:27,082 [Thread-16:12552] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_faculty HTTP/1.1" 405 13515
+2018-04-29 14:11:49,302 [Thread-22:5504] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 405 14001
+2018-04-29 14:11:53,815 [Thread-23:14420] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_faculty HTTP/1.1" 405 13515
+2018-04-29 14:13:14,371 [Thread-29:11064] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 405 14001
+2018-04-29 14:13:15,754 [Thread-30:15604] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/ HTTP/1.1" 200 15826
+2018-04-29 14:13:52,113 [Thread-37:19572] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/ HTTP/1.1" 200 15826
+2018-04-29 14:14:02,212 [Thread-43:14576] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/ HTTP/1.1" 200 15826
+2018-04-29 14:15:31,737 [Thread-49:12724] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 405 14001
+2018-04-29 14:16:00,533 [Thread-55:16552] [django:27] [views:post] [INFO]- try to register student account
+2018-04-29 14:16:00,535 [Thread-55:16552] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:16:00,621 [Thread-55:16552] [django:31] [views:post] [INFO]- account register successfully, username:stu1
+2018-04-29 14:16:00,675 [Thread-55:16552] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_student HTTP/1.1" 201 14001
+2018-04-29 14:16:26,827 [Thread-56:17708] [django:27] [views:post] [INFO]- try to register student account
+2018-04-29 14:16:26,830 [Thread-56:17708] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:16:26,919 [Thread-56:17708] [django:31] [views:post] [INFO]- account register successfully, username:stu2
+2018-04-29 14:16:26,955 [Thread-56:17708] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_student HTTP/1.1" 201 14001
+2018-04-29 14:16:33,018 [Thread-57:16156] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_faculty HTTP/1.1" 405 13515
+2018-04-29 14:17:11,435 [Thread-63:18428] [django:44] [views:post] [INFO]- try to register faculty account
+2018-04-29 14:17:11,437 [Thread-63:18428] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:17:11,520 [Thread-63:18428] [django:48] [views:post] [INFO]- account register successfully, username:fac1
+2018-04-29 14:17:11,557 [Thread-63:18428] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_faculty HTTP/1.1" 201 13515
+2018-04-29 14:17:31,572 [Thread-64:17832] [django:44] [views:post] [INFO]- try to register faculty account
+2018-04-29 14:17:31,575 [Thread-64:17832] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:17:31,658 [Thread-64:17832] [django:48] [views:post] [INFO]- account register successfully, username:fac2
+2018-04-29 14:17:31,693 [Thread-64:17832] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_faculty HTTP/1.1" 201 13515
+2018-04-29 14:17:36,779 [Thread-65:7580] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_staff HTTP/1.1" 405 13256
+2018-04-29 14:18:00,902 [Thread-71:11796] [django:61] [views:post] [INFO]- try to register staff account
+2018-04-29 14:18:00,904 [Thread-71:11796] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:18:01,024 [Thread-71:11796] [django:65] [views:post] [INFO]- account register successfully, username:staff1
+2018-04-29 14:18:01,065 [Thread-71:11796] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_staff HTTP/1.1" 201 13256
+2018-04-29 14:18:18,849 [Thread-72:18664] [django:61] [views:post] [INFO]- try to register staff account
+2018-04-29 14:18:18,851 [Thread-72:18664] [django:28] [serializers:create] [INFO]- create account
+2018-04-29 14:18:18,999 [Thread-72:18664] [django:65] [views:post] [INFO]- account register successfully, username:staff2
+2018-04-29 14:18:19,043 [Thread-72:18664] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_staff HTTP/1.1" 201 13256
+2018-04-29 14:18:37,174 [Thread-73:13296] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_admin HTTP/1.1" 405 12796
+2018-04-29 14:19:09,602 [Thread-80:808] [django:78] [views:post] [INFO]- try to register admin account
+2018-04-29 14:19:09,620 [Thread-80:808] [django:82] [views:post] [INFO]- account register successfully, username:admin1
+2018-04-29 14:19:09,650 [Thread-80:808] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_admin HTTP/1.1" 201 12796
+2018-04-29 14:19:43,413 [Thread-81:8904] [django:78] [views:post] [INFO]- try to register admin account
+2018-04-29 14:19:43,431 [Thread-81:8904] [django:82] [views:post] [INFO]- account register successfully, username:admin2
+2018-04-29 14:19:43,462 [Thread-81:8904] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_admin HTTP/1.1" 201 12796
+2018-04-29 14:20:08,268 [Thread-82:5200] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 14:20:31,131 [Thread-89:15356] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:20:31,275 [Thread-89:15356] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:20:31,326 [Thread-89:15356] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11777
+2018-04-29 14:21:50,501 [Thread-90:12572] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/ HTTP/1.1" 403 9415
+2018-04-29 14:21:54,722 [Thread-91:15556] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu2 HTTP/1.1" 301 0
+2018-04-29 14:21:54,764 [Thread-92:5832] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu2/ HTTP/1.1" 403 10902
+2018-04-29 14:22:05,132 [Thread-97:2080] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu3 HTTP/1.1" 301 0
+2018-04-29 14:22:05,178 [Thread-98:9112] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/student/stu3/
+2018-04-29 14:22:05,179 [Thread-98:9112] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu3/ HTTP/1.1" 404 16698
+2018-04-29 14:22:07,491 [Thread-99:708] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu1 HTTP/1.1" 301 0
+2018-04-29 14:22:07,541 [Thread-100:8684] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu1/ HTTP/1.1" 200 17286
+2018-04-29 14:24:05,161 [Thread-105:1052] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 14:24:16,712 [Thread-112:18256] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:24:16,715 [Thread-112:18256] [django:188] [views:post] [INFO]- login failed
+2018-04-29 14:24:16,737 [Thread-112:18256] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 14:24:34,480 [Thread-113:10476] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:24:34,486 [Thread-113:10476] [django:188] [views:post] [INFO]- login failed
+2018-04-29 14:24:34,524 [Thread-113:10476] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 14:24:42,993 [Thread-114:16492] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:24:42,996 [Thread-114:16492] [django:188] [views:post] [INFO]- login failed
+2018-04-29 14:24:43,021 [Thread-114:16492] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 14:24:52,948 [Thread-115:17904] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:24:52,951 [Thread-115:17904] [django:188] [views:post] [INFO]- login failed
+2018-04-29 14:24:52,973 [Thread-115:17904] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 14:25:24,217 [Thread-116:16328] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:25:24,219 [Thread-116:16328] [django:194] [views:post] [INFO]- login failed
+2018-04-29 14:25:24,243 [Thread-116:16328] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 400 11738
+2018-04-29 14:28:40,119 [Thread-1:16396] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 14:28:45,179 [Thread-3:14244] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:28:45,278 [Thread-3:14244] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:28:45,314 [Thread-3:14244] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11759
+2018-04-29 14:28:50,118 [Thread-8:14332] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 405 14001
+2018-04-29 14:28:51,649 [Thread-9:14696] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_admin HTTP/1.1" 405 12796
+2018-04-29 14:29:08,256 [Thread-15:2696] [django:78] [views:post] [INFO]- try to register admin account
+2018-04-29 14:29:08,349 [Thread-15:2696] [django:82] [views:post] [INFO]- account register successfully, username:admin1
+2018-04-29 14:29:08,382 [Thread-15:2696] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_admin HTTP/1.1" 201 12796
+2018-04-29 14:29:22,556 [Thread-16:1744] [django:78] [views:post] [INFO]- try to register admin account
+2018-04-29 14:29:22,637 [Thread-16:1744] [django:82] [views:post] [INFO]- account register successfully, username:admin2
+2018-04-29 14:29:22,664 [Thread-16:1744] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_admin HTTP/1.1" 201 12796
+2018-04-29 14:29:25,673 [Thread-17:20376] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 14:29:32,546 [Thread-18:5232] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:29:32,640 [Thread-18:5232] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:29:32,673 [Thread-18:5232] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11779
+2018-04-29 14:29:36,791 [Thread-24:6064] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/ HTTP/1.1" 200 16355
+2018-04-29 14:30:30,210 [Thread-31:16192] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/faculty HTTP/1.1" 301 0
+2018-04-29 14:30:30,263 [Thread-32:14472] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/faculty/ HTTP/1.1" 200 15628
+2018-04-29 14:31:13,127 [Thread-37:10400] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/ HTTP/1.1" 200 16355
+2018-04-29 14:31:24,695 [Thread-43:16268] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu1/ HTTP/1.1" 200 17288
+2018-04-29 14:33:05,112 [Thread-49:19184] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/faculty HTTP/1.1" 301 0
+2018-04-29 14:33:05,165 [Thread-50:17440] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/student/faculty/
+2018-04-29 14:33:05,165 [Thread-50:17440] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/faculty/ HTTP/1.1" 404 16727
+2018-04-29 14:33:08,428 [Thread-55:9596] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/faculty/ HTTP/1.1" 200 15628
+2018-04-29 14:33:52,809 [Thread-61:16148] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/faculty/fac1 HTTP/1.1" 301 0
+2018-04-29 14:33:52,868 [Thread-62:17476] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/faculty/fac1/ HTTP/1.1" 200 16638
+2018-04-29 14:34:17,633 [Thread-67:8204] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/staff1
+2018-04-29 14:34:17,633 [Thread-67:8204] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/staff1 HTTP/1.1" 404 9218
+2018-04-29 14:34:20,442 [Thread-68:18384] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff HTTP/1.1" 301 0
+2018-04-29 14:34:20,486 [Thread-69:17956] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff/ HTTP/1.1" 200 15228
+2018-04-29 14:39:45,661 [Thread-73:9080] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff/staff1 HTTP/1.1" 301 0
+2018-04-29 14:39:45,709 [Thread-74:19460] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff/staff1/ HTTP/1.1" 200 16284
+2018-04-29 14:40:01,642 [Thread-78:17740] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/admin HTTP/1.1" 301 0
+2018-04-29 14:40:01,701 [Thread-79:10740] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/admin/ HTTP/1.1" 200 15152
+2018-04-29 14:40:29,049 [Thread-83:11340] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/admin/xixi HTTP/1.1" 301 0
+2018-04-29 14:40:29,126 [Thread-84:2820] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/admin/xixi/ HTTP/1.1" 200 15850
+2018-04-29 14:42:31,064 [Thread-88:15400] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11738
+2018-04-29 14:42:40,244 [Thread-95:13896] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:42:40,336 [Thread-95:13896] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:42:40,369 [Thread-95:13896] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11777
+2018-04-29 14:42:43,760 [Thread-96:14588] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/ HTTP/1.1" 403 9415
+2018-04-29 14:43:27,722 [Thread-102:5956] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu2/ HTTP/1.1" 403 10902
+2018-04-29 14:43:30,197 [Thread-103:14124] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/student/stu3/
+2018-04-29 14:43:30,198 [Thread-103:14124] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu3/ HTTP/1.1" 404 16698
+2018-04-29 14:43:39,289 [Thread-109:9072] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu1/ HTTP/1.1" 200 17286
+2018-04-29 14:43:44,566 [Thread-110:16000] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu2/ HTTP/1.1" 403 10902
+2018-04-29 14:44:04,679 [Thread-115:9392] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/student/stu3/
+2018-04-29 14:44:04,680 [Thread-115:9392] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu3/ HTTP/1.1" 404 16698
+2018-04-29 14:44:34,774 [Thread-120:10708] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 14:44:42,916 [Thread-127:13248] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:44:42,987 [Thread-127:13248] [django:188] [views:post] [INFO]- login failed
+2018-04-29 14:44:43,012 [Thread-127:13248] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 14:44:54,733 [Thread-128:15900] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:44:54,824 [Thread-128:15900] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:44:54,857 [Thread-128:15900] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11779
+2018-04-29 14:44:58,538 [Thread-129:14252] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/staff/ HTTP/1.1" 403 9395
+2018-04-29 14:45:02,342 [Thread-130:6852] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff/staff1/ HTTP/1.1" 200 16284
+2018-04-29 14:45:04,156 [Thread-131:11636] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/staff/staff2 HTTP/1.1" 301 0
+2018-04-29 14:45:04,193 [Thread-132:16372] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/staff/staff2/ HTTP/1.1" 403 10882
+2018-04-29 14:46:40,820 [Thread-137:3364] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/update_password
+2018-04-29 14:46:40,821 [Thread-137:3364] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/update_password HTTP/1.1" 404 9245
+2018-04-29 14:46:49,916 [Thread-138:16928] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/password_update HTTP/1.1" 405 11761
+2018-04-29 14:47:59,336 [Thread-1:15556] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 403 8128
+2018-04-29 14:48:01,202 [Thread-3:11316] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_course HTTP/1.1" 405 12820
+2018-04-29 14:48:14,741 [Thread-9:18904] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11738
+2018-04-29 14:48:21,002 [Thread-10:16088] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:48:21,093 [Thread-10:16088] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:48:21,163 [Thread-10:16088] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11777
+2018-04-29 14:48:26,483 [Thread-16:6544] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_course HTTP/1.1" 405 8421
+2018-04-29 14:49:22,109 [Thread-22:8064] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/ HTTP/1.1" 200 9601
+2018-04-29 14:49:36,905 [Thread-28:19556] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/update_password HTTP/1.1" 405 11759
+2018-04-29 14:49:43,758 [Thread-29:13936] [django:145] [views:put] [INFO]- try to update password
+2018-04-29 14:49:43,760 [Thread-29:13936] [django:140] [serializers:validate_new_password] [INFO]- update account password
+2018-04-29 14:49:43,764 [Thread-29:13936] [django:159] [views:put] [INFO]- password update failed
+2018-04-29 14:49:43,785 [Thread-29:13936] [django.server:124] [basehttp:log_message] [WARNING]- "PUT /api/update_password HTTP/1.1" 400 11890
+2018-04-29 14:49:52,640 [Thread-34:7460] [django:145] [views:put] [INFO]- try to update password
+2018-04-29 14:49:52,641 [Thread-34:7460] [django:140] [serializers:validate_new_password] [INFO]- update account password
+2018-04-29 14:49:52,729 [Thread-34:7460] [django.server:124] [basehttp:log_message] [WARNING]- "PUT /api/update_password HTTP/1.1" 400 11742
+2018-04-29 14:50:59,284 [Thread-35:10468] [django:145] [views:put] [INFO]- try to update password
+2018-04-29 14:50:59,286 [Thread-35:10468] [django:140] [serializers:validate_new_password] [INFO]- update account password
+2018-04-29 14:50:59,286 [Thread-35:10468] [django:159] [views:put] [INFO]- password update failed
+2018-04-29 14:50:59,307 [Thread-35:10468] [django.server:124] [basehttp:log_message] [WARNING]- "PUT /api/update_password HTTP/1.1" 400 11888
+2018-04-29 14:51:35,181 [Thread-36:13200] [django:145] [views:put] [INFO]- try to update password
+2018-04-29 14:51:35,182 [Thread-36:13200] [django:140] [serializers:validate_new_password] [INFO]- update account password
+2018-04-29 14:51:35,390 [Thread-36:13200] [django:156] [views:put] [INFO]- password update successfully
+2018-04-29 14:51:35,411 [Thread-36:13200] [django.server:124] [basehttp:log_message] [INFO]- "PUT /api/update_password HTTP/1.1" 200 11738
+2018-04-29 14:52:21,624 [Thread-37:8440] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/stu1/ HTTP/1.1" 403 9549
+2018-04-29 14:52:29,579 [Thread-44:19336] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11703
+2018-04-29 14:52:39,362 [Thread-50:15500] [django:166] [views:post] [INFO]- try to login
+2018-04-29 14:52:39,481 [Thread-50:15500] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 14:52:39,515 [Thread-50:15500] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11759
+2018-04-29 14:52:43,520 [Thread-51:7248] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/stu1/ HTTP/1.1" 200 17286
+2018-04-29 14:53:04,905 [Thread-57:17512] [django:159] [serializers:update] [INFO]- update student info
+2018-04-29 14:53:04,952 [Thread-57:17512] [django.server:124] [basehttp:log_message] [INFO]- "PUT /api/student/stu1/ HTTP/1.1" 200 17290
+2018-04-29 14:53:31,722 [Thread-58:16032] [django:159] [serializers:update] [INFO]- update student info
+2018-04-29 14:53:31,758 [Thread-58:16032] [django.server:124] [basehttp:log_message] [WARNING]- "PUT /api/student/stu1/ HTTP/1.1" 400 16717
+2018-04-29 15:01:44,851 [Thread-1:14484] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 15:01:55,200 [Thread-9:14568] [django:166] [views:post] [INFO]- try to login
+2018-04-29 15:01:55,294 [Thread-9:14568] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 15:01:55,332 [Thread-9:14568] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11777
+2018-04-29 15:01:59,555 [Thread-10:8556] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_student HTTP/1.1" 403 8126
+2018-04-29 15:02:01,557 [Thread-11:11684] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_course HTTP/1.1" 405 12818
+2018-04-29 15:03:23,662 [Thread-18:19148] [django:95] [views:post] [INFO]- try to register course
+2018-04-29 15:03:23,665 [Thread-18:19148] [django:96] [serializers:create] [INFO]- create course
+2018-04-29 15:03:23,677 [Thread-18:19148] [django:99] [views:post] [INFO]- course register successfully, name:cs211n
+2018-04-29 15:03:23,705 [Thread-18:19148] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_course HTTP/1.1" 201 12816
+2018-04-29 15:03:27,894 [Thread-19:12516] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/ HTTP/1.1" 200 14766
+2018-04-29 15:05:11,631 [Thread-26:9076] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/register_course HTTP/1.1" 405 12818
+2018-04-29 15:05:27,907 [Thread-32:10412] [django:95] [views:post] [INFO]- try to register course
+2018-04-29 15:05:27,908 [Thread-32:10412] [django:96] [serializers:create] [INFO]- create course
+2018-04-29 15:05:27,917 [Thread-32:10412] [django:99] [views:post] [INFO]- course register successfully, name:cs231
+2018-04-29 15:05:27,952 [Thread-32:10412] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/register_course HTTP/1.1" 201 12816
+2018-04-29 15:05:31,134 [Thread-33:19460] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/ HTTP/1.1" 200 15068
+2018-04-29 15:06:01,177 [Thread-40:19168] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/course1 HTTP/1.1" 301 0
+2018-04-29 15:06:01,223 [Thread-41:5276] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/course/course1/
+2018-04-29 15:06:01,224 [Thread-41:5276] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/course/course1/ HTTP/1.1" 404 15898
+2018-04-29 15:06:04,538 [Thread-42:13752] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/1 HTTP/1.1" 301 0
+2018-04-29 15:06:04,591 [Thread-43:5436] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/1/ HTTP/1.1" 200 16079
+2018-04-29 15:06:49,428 [Thread-50:8216] [django:324] [serializers:update] [INFO]- update course info
+2018-04-29 15:06:49,428 [Thread-50:8216] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/course/1/
+Traceback (most recent call last):
+  File "D:\tools\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\tools\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\tools\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\tools\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\viewsets.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\mixins.py", line 70, in update
+    self.perform_update(serializer)
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\mixins.py", line 80, in perform_update
+    serializer.save()
+  File "D:\tools\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 209, in save
+    self.instance = self.update(self.instance, validated_data)
+  File "D:\tools\Anaconda3\lib\contextlib.py", line 30, in inner
+    return func(*args, **kwds)
+  File "C:\Users\c\Desktop\InfoSys\InfoSys-back\authentication\serializers.py", line 325, in update
+    Course.objects.filter(course_id=instance.id).delete()
+AttributeError: 'Course' object has no attribute 'id'
+2018-04-29 15:06:51,276 [Thread-50:8216] [django.server:124] [basehttp:log_message] [ERROR]- "PUT /api/course/1/ HTTP/1.1" 500 115862
+2018-04-29 15:07:35,684 [Thread-1:2824] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/course/course1/
+2018-04-29 15:07:35,685 [Thread-1:2824] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/course/course1/ HTTP/1.1" 404 15898
+2018-04-29 15:07:40,157 [Thread-3:20320] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/1/ HTTP/1.1" 200 16079
+2018-04-29 15:07:43,086 [Thread-10:8220] [django:324] [serializers:update] [INFO]- update course info
+2018-04-29 15:07:43,137 [Thread-10:8220] [django.server:124] [basehttp:log_message] [WARNING]- "PUT /api/course/1/ HTTP/1.1" 400 15853
+2018-04-29 15:07:52,596 [Thread-11:2764] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11736
+2018-04-29 15:08:00,792 [Thread-12:9088] [django:166] [views:post] [INFO]- try to login
+2018-04-29 15:08:00,862 [Thread-12:9088] [django:188] [views:post] [INFO]- login failed
+2018-04-29 15:08:00,885 [Thread-12:9088] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/login HTTP/1.1" 401 11772
+2018-04-29 15:08:12,477 [Thread-18:10404] [django:166] [views:post] [INFO]- try to login
+2018-04-29 15:08:12,594 [Thread-18:10404] [django:175] [views:post] [INFO]- login successfully
+2018-04-29 15:08:12,634 [Thread-18:10404] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/login HTTP/1.1" 200 11779
+2018-04-29 15:08:18,073 [Thread-19:11416] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/login/course
+2018-04-29 15:08:18,074 [Thread-19:11416] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login/course HTTP/1.1" 404 9236
+2018-04-29 15:08:21,611 [Thread-25:17708] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/ HTTP/1.1" 200 15070
+2018-04-29 15:08:26,557 [Thread-26:10072] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/course/1/ HTTP/1.1" 200 16081
+2018-04-29 15:08:39,420 [Thread-33:19220] [django:324] [serializers:update] [INFO]- update course info
+2018-04-29 15:08:39,461 [Thread-33:19220] [django.server:124] [basehttp:log_message] [INFO]- "PUT /api/course/1/ HTTP/1.1" 200 16081
+2018-05-02 03:16:23,191 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 03:16:23,192 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2024
+2018-05-02 03:16:28,089 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-02 03:16:28,089 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2024
+2018-05-02 03:16:28,747 [Thread-4:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /account/logout/
+2018-05-02 03:16:28,747 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /account/logout/ HTTP/1.1" 404 2087
+2018-05-02 03:16:28,943 [Thread-5:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 03:16:28,944 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 9229
+2018-05-02 03:16:29,145 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 03:16:29,172 [Thread-8:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+2018-05-02 03:16:29,175 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121200
+2018-05-02 03:16:29,180 [Thread-9:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+2018-05-02 03:16:29,185 [Thread-10:123145328578560] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1131
+2018-05-02 03:16:29,193 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+2018-05-02 03:16:29,205 [Thread-13:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
+2018-05-02 03:16:29,209 [Thread-14:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1262
+2018-05-02 03:16:29,211 [Thread-11:123145333833728] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+2018-05-02 03:16:29,219 [Thread-15:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
+2018-05-02 03:16:29,225 [Thread-16:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+2018-05-02 03:16:29,227 [Thread-17:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+2018-05-02 03:16:29,459 [Thread-18:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 03:16:38,727 [Thread-19:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/course/ HTTP/1.1" 403 9366
+2018-05-02 03:16:46,313 [Thread-20:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11703
+2018-05-02 03:16:47,438 [Thread-21:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/login HTTP/1.1" 405 11703
+2018-05-02 03:16:55,133 [Thread-22:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 03:16:56,484 [Thread-23:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 03:16:56,485 [Thread-23:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 9229
+2018-05-02 03:16:57,205 [Thread-24:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/create_user
+2018-05-02 03:16:57,205 [Thread-24:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/create_user HTTP/1.1" 404 9229
+2018-05-02 03:17:00,626 [Thread-25:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 03:17:00,766 [Thread-26:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/315010/ HTTP/1.1" 403 9559
+2018-05-02 03:17:02,342 [Thread-27:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10124
+2018-05-02 03:17:03,433 [Thread-28:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/315010/ HTTP/1.1" 403 9559
+2018-05-02 03:17:05,991 [Thread-29:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/ HTTP/1.1" 403 9377
+2018-05-02 03:17:08,780 [Thread-30:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/student/register HTTP/1.1" 301 0
+2018-05-02 03:17:08,841 [Thread-31:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/student/register/ HTTP/1.1" 403 9569
