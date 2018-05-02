@@ -48,15 +48,14 @@ master是受保护的，不能直接push，请各组成员，建立自己的分�
         JWT的验证及刷新
         
      接口：(详见后端接口说明）
-        <root>/api/get_token 
-        <root>/api/refresh_token 
+        <root>/api/login   #获取JWT token
+        <root>/api/refresh_token 
         <root>/api/is_token_valid 
         <root>/api/register_student 
         <root>/api/register_faculty 
         <root>/api/register_staff
         <root>/api/register_admin
         <root>/api/register_course
-        <root>/api/login
         <root>/api/stuent/*/
         <root>/api/faculty/*/
         <root>/api/staff/*/
