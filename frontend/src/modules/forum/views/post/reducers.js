@@ -8,6 +8,7 @@ const initState = {
     postId: "",
     title: "",
     currPage: 1,
+    pageNum: 1,
     replies: [],
 }
 
@@ -15,7 +16,8 @@ export function postReducer(state = initState, action) {
     switch (action.type) {
         case GOT_POST_INFO:
             return Object.assign({}, state, {
-                postId: action.postInfo.postId,
+                postId: action.postInfo.id,
+                pageNum: action.postInfo.replyPageNum,
                 path: JSON.parse(JSON.stringify(action.postInfo.path)),
                 title: action.postInfo.title
             })
