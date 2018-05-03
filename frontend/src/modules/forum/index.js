@@ -7,6 +7,9 @@ import Courses from "./views/courses"
 import Course from './views/course'
 import Teacher from './views/teacher'
 import PostPage from './views/post'
+import Messages from './views/messages';
+import Search from './views/search';
+import Announcements from './views/announcements';
 
 class Forum extends Component {
     render() {
@@ -14,14 +17,15 @@ class Forum extends Component {
         return (
             <div>
                 <h1>Forum</h1>
-                <Switch>
+                {/* <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/p/:postid`} component={PostPage}/>
                     <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
                     <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
                     <Route path={`${match.url}/:collegeid`} component={Courses}/>
-                </Switch>
+                </Switch> */}
+                <Announcements/><Search/><Messages/>
             </div>
         );
     }
