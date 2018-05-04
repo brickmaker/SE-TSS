@@ -15,6 +15,7 @@ const styles = {
         cursor: "pointer",
     },
 };
+
 class Search extends Component {
     render() {
         const { classes } = this.props;
@@ -22,12 +23,7 @@ class Search extends Component {
             <div>Search
                 <Grid container className={classes.container}>
                     <Grid item xs={8} sm={8} md={8} lg={6}>
-                    {/* TODO: remove search bar */}
-                        <SearchBar />
-                <SearchResultPanel />
-                    <Typography className={classes.more}>
-                        更多结果
-                </Typography>
+                        <SearchResultPanel match={this.props.match}/>
                     </Grid>
                 </Grid>
             </div>

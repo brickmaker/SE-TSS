@@ -4,7 +4,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { selectSearchType, anchorMenu, search, getContent } from '../../views/search/actions';
+import { selectSearchType, anchorMenu, search, getContent, fillQuery } from '../../views/search/actions';
 
 const styles = {
     item: {
@@ -22,10 +22,10 @@ const styles = {
 class SearchBar extends Component {
     render() {
         const typeMapping = { post: "帖子", section: "版块" };
-        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent, search } = this.props;
+        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent } = this.props;
         return (
             <div className={classes.container}>
-                <Typography className={classes.item} style={{ cursor: "pointer",}}
+                <Typography className={classes.item} style={{ cursor: "pointer", }}
                     onClick={(event) => { event.preventDefault(); anchorMenu(event.currentTarget); }}>
                     <SearchIcon className={classes.item} />
                     {typeMapping[searchType]}
@@ -44,18 +44,13 @@ class SearchBar extends Component {
                     onKeyDown={(event) => {
                         // event.preventDefault();
                         console.log(event.target.value);
-                        if (event.keyCode === 'Enter') {
+                        if (event.keyCode === 13) {
                             event.preventDefault();
-                            search(searchType, event.target.value);
+                            window.location.href = `/forum/search/${searchType}/${event.target.value}/1`;
                         }
                         getContent(event.target.value);
                     }}
                 />
-                {/* <IconButton className={classes.item} disableFocusRipple={false} onClick={
-                    (event)=>{event.preventDefault(); search(searchType, content);}
-                }>
-                    <SearchIcon />
-                </IconButton> */}
             </div>
         );
     };
@@ -74,9 +69,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     selectSearchType: (searchType) => { dispatch(selectSearchType(searchType)); },
-    anchorMenu: (anchorEl) => { console.log("anchorMenu"); dispatch(anchorMenu(anchorEl)); },
+    anchorMenu: (anchorEl) => { dispatch(anchorMenu(anchorEl)); },
     getContent: (content) => { dispatch(getContent(content)); },
-    search: (type, content) => { dispatch(search(type, content)); },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(SearchBar);

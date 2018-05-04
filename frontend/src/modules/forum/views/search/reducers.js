@@ -1,36 +1,16 @@
 import { SELECT_SEARCHTYPE, ANCHOR_MENU, GET_CONTENT, SEARCH } from './actions';
-
+import { SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE } from './actions';
 
 const initialState = {
     anchorEl: null,
     searchType: "post",
     content: "",
-    // results:
-        // {
-        //     resultType: "post", results: [
-        //         { title:"tttttt", author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //         {  title:"tttttt",author: "xx", time: "4.30", replyCnt: 10, path: "/ff/fff/fff" },
-        //     ]
-        // },
-        results:{
-            resultType:"section", results:[
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-                {sectionName:"secton", path:"path"},
-            ],
-        },
+    results: {},
+    isFetching: false,
+    postPageNum: 10,
+    sectionPageNum: 20,
+    pageNum: undefined,
+    errors:{},
 }
 
 export function searchReducer(state = initialState, action) {
@@ -40,17 +20,29 @@ export function searchReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 searchType: action.searchType,
             }));
-        case ANCHOR_MENU: return (Object.assign({}, state, {
+        case ANCHOR_MENU:
+            return (Object.assign({}, state, {
 
-            anchorEl: action.anchorEl,
-        }));
-        case GET_CONTENT:return (Object.assign({}, state,{
-            content: action.content,
-        }));
-        case SEARCH: return (Object.assign({}, state, {
-            searchType: action.searchType,
-            // TODO: 获取results
-        }))
+                anchorEl: action.anchorEl,
+            }));
+        case GET_CONTENT:
+            return (Object.assign({}, state, {
+                content: action.content,
+            }));
+        case SEARCH_REQUEST:
+            return (Object.assign({}, state, {
+                isFetching: true,
+            }));
+        case SEARCH_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetching: false,
+                results: action.results,
+            }));
+        case SEARCH_FAILURE:
+            return (Object.assign({}, state, {
+                isFetching: false,
+                errors: action.errors,
+            }));
         default: return state;
     };
 }

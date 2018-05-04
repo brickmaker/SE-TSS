@@ -4,5 +4,8 @@
   "/api/forum/course": "/course",
   "/api/forum/teacher": "/teacher",
   "/api/forum/post_reply": "/replies",
-  "/api/forum/post": "/post"
+  "/api/forum/post": "/post",
+  "/api/forum/messages":"/messages",
+  "/api/forum/msgentries":"/msgentries",
+  "/api/forum/search":"/search"
 }

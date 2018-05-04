@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Grid, Typography, Paper, Avatar, withStyles,Button } from 'material-ui';
+import { Grid, Typography, Paper, Avatar, withStyles, Button } from 'material-ui';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import {compose} from 'redux';
-import {selectEntry} from '../../views/messages/actions';
+import { compose } from 'redux';
+import { selectEntry, getMsgs } from '../../views/messages/actions';
 
 const styles = {
     entry: {
@@ -12,7 +12,7 @@ const styles = {
         backgroundColor: "inherit",
         justifyContent: "flex-start",
     },
-    selectedEntry:{
+    selectedEntry: {
         display: "flex",
         color: "primary",
         backgroundColor: "#e0e0e0",
@@ -27,24 +27,29 @@ const styles = {
 
 class MsgEntry extends Component {
     render() {
-        const { avatar, username, lastMessage, id } = this.props.entry;
-        const {classes, selectedId, selectEntry} = this.props;
+        const { avatar, username, lastMsgContent, id } = this.props.entry;
+        const { classes, selectedId, selectEntry, getMsgs} = this.props;
+        const  uid = 5;
+        // TODO: uid
         return (
             <Grid container>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                    <Button className={selectedId==id? classes.selectedEntry:classes.entry} 
-                    onClick={(event)=>{event.preventDefault(); console.log(id);selectEntry(id);console.log("aaa");}}
-                    fullWidth={true}>
+                    <Button className={selectedId == id ? classes.selectedEntry : classes.entry}
+                        onClick={(event) => { event.preventDefault(); 
+                            selectEntry(id);
+                            getMsgs(uid, id); 
+                             }}
+                        fullWidth={true}>
                         <Avatar>
                             {username[0]}
                         </Avatar>
                         <div className={classes.item}>
-                        <Typography variant='title' align="left">
-                            {username}
-                        </Typography>
-                        <Typography variant='body1' align="left">
-                            {lastMessage}
-                        </Typography>
+                            <Typography variant='title' align="left">
+                                {username}
+                            </Typography>
+                            <Typography variant='body1' align="left">
+                                {lastMsgContent}
+                            </Typography>
                         </div>
                     </Button>
                 </Grid>
@@ -62,8 +67,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    selectEntry: (id)=>{dispatch(selectEntry(id))},
+    selectEntry: (selectedId) => { dispatch(selectEntry( selectedId)) },
+    getMsgs: (id1, id2) => {
+        dispatch(getMsgs(id1, id2));
+    }
 });
 
-export default  compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles)) (MsgEntry);
+export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(MsgEntry);
 

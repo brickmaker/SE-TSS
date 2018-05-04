@@ -1,45 +1,70 @@
-import { SELECT_ENTRY } from './actions';
+import { SELECT_ENTRY, GET_CONTENT } from './actions';
+import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
+import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
+
 const initialState = {
-    entries: [{ id: 0, username: "xxx", lastMessage: "hey" },
-    { id: 1, username: "xxx", lastMessage: "hey" },
-    { id: 2, username: "xxx", lastMessage: "hey" },
-    { id: 3, username: "xxx", lastMessage: "hey" },
-    { id: 4, username: "xxx", lastMessage: "hey" },
-    { id: 5, username: "xxx", lastMessage: "hey" },
-    { id: 6, username: "xxx", lastMessage: "hey" },
-    { id: 7, username: "xxx", lastMessage: "hey" },
-    { id: 8, username: "xxx", lastMessage: "hey" },
-    { id: 9, username: "xxx", lastMessage: "hey" }],
-    messages: [{ senderId: 1, content: "hey sent by1", time: "4.30" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha senffffffffffffffffffffffft by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-    { senderId: 0, content: "haha sent by0", time: "4.32" },
-],
-    selectedId: 0,
+    entries: [],
+    newEntry: undefined,
+    isFetchingEntries: false,
+    msgs: [],
+    isFetchingMsgs: false,
+    selectedId: 30,
+    errors: {},
+    content: "",
+    // test: true,
 };
 
 export function messageReducer(state = initialState, action) {
-    console.log("reducer");
     switch (action.type) {
+        // case TEST:
+        //     return (Object.assign({}, state, {
+        //         test: action.test,
+        //     }));
         case SELECT_ENTRY:
-            console.log(action);
             return (Object.assign({}, state, {
-                selectedId: action.id,
+                selectedId: action.selectedId,
             }));
+        case GET_CONTENT:
+            return (Object.assign({}, state, {
+                content: action.content,
+            }));
+        case MSGENTRIES_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingEntries: true,
+            }));
+        case MSGENTRIES_SUCCESS:
+            console.log("reducer", action.entries);
+            var newSelectedId = state.selectedId;
+            if (action.entries.length > 0) {
+                newSelectedId = action.entries[0]['id'];
+            }
+            return (Object.assign({}, state, {
+                isFetchingEntries: false,
+                entries: action.entries,
+                // selectedId: newSelectedId,
+            }));
+        case MSGENTRIES_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingEntries: false,
+                entries: undefined,
+                errors: action.errors,
+            }));
+        case MSGS_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingMsgs: true,
+            }));
+        case MSGS_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingMsgs: false,
+                msgs: action.msgs,
+            }));
+        case MSGS_FAILURE:
+            return (Object.assign({}, state), {
+                isFetchingMsgs: false,
+                msgs: undefined,
+                errors: action.errors,
+            });
         default:
             return state;
-
     }
 }

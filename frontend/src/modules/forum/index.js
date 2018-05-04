@@ -9,6 +9,8 @@ import Teacher from './views/teacher'
 import PostPage from './views/post'
 import Messages from './views/messages';
 import Search from './views/search';
+import SearchBar from './components/searchbar';
+import SearchResultPanel from './containers/searchresultpanel';
 import Announcements from './views/announcements';
 
 class Forum extends Component {
@@ -17,15 +19,17 @@ class Forum extends Component {
         return (
             <div>
                 <h1>Forum</h1>
-                {/* <Switch>
+                <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
+                    <Route path={`${match.url}/messages`} component={Messages}/>
+                    <Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>
                     <Route path={`${match.url}/p/:postid`} component={PostPage}/>
                     <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
                     <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
                     <Route path={`${match.url}/:collegeid`} component={Courses}/>
-                </Switch> */}
-                <Announcements/><Search/><Messages/>
+                </Switch>
+                <SearchBar/><Announcements/>
             </div>
         );
     }

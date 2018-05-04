@@ -23,11 +23,11 @@ const styles = {
 class Msg extends Component {
     render() {
         const { isLeft, message, classes } = this.props;
-        const { avatar, senderId, content, time } = message;
+        const { avatar, from, content, time } = message;
         if (isLeft) {
             return (
                 <div className={classes.left}>
-                    <Avatar alt="avatar" src={avatar}> {senderId} </Avatar>
+                    <Avatar alt="avatar" src={avatar}> {from} </Avatar>
                     <Card>
                         <div className={classes.item}>
                             <Typography variant='caption' align="left">
@@ -42,7 +42,6 @@ class Msg extends Component {
             );
         }
         else {
-            console.log(senderId);
             return (
                 <div className={classes.right}>
                     <Card>
@@ -55,7 +54,7 @@ class Msg extends Component {
                             </Typography>
                         </div>
                     </Card>
-                    <Avatar> {senderId} </Avatar>
+                    <Avatar> {from} </Avatar>
                 </div>
             );
         }
