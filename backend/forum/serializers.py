@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Plate, Reply, Notice
+from .models import Section, Reply, Notice
 
 
 class Plate_serializer(serializers.ModelSerializer):
     class Meta:
-        model = Plate
+        model = Section
         fields = ('id', 'title', 'description', 'create_time')
 
 
@@ -17,16 +17,4 @@ class Reply_serializer(serializers.ModelSerializer):
 class Notice_serializer(serializers.ModelSerializer):
     class Meta:
         model = Notice
-        fields = ('id', 'uid', 'title', 'content', 'plate_id', 'create_time')
-
-
-# class Plate_Plate_serializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Plate_Plate
-#         exclude = ('valid',)
-#
-#
-# class Plate_admin_serializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Plate_admin
-#         exclude = ('valid', )
+        fields = ('id', 'uid', 'title', 'content', 'section_id', 'create_time')
