@@ -512,5 +512,291 @@
         ]
       }
     ]
-  }
+  },
+  "msgEntries": [
+    {
+      "uid": 5,
+      "entries": [
+        {
+          "id": 1,
+          "username": "user1",
+          "lastMsgContent": "hey"
+        },
+        {
+          "id": 0,
+          "username": "user0",
+          "lastMsgContent": "hey"
+        },
+        {
+          "id": 2,
+          "username": "user2",
+          "lastMsgContent": "hey"
+        },
+        {
+          "id": 3,
+          "username": "user3",
+          "lastMsgContent": "hey"
+        }
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "from": 1,
+      "to": 2,
+      "content": "hey sent by 1",
+      "time": "4.30"
+    },
+    {
+      "from": 0,
+      "to": 4,
+      "content": "hey sent by 0",
+      "time": "4.30"
+    },
+    {
+      "from": 2,
+      "to": 1,
+      "content": "hey sent by 2",
+      "time": "4.30"
+    },
+    {
+      "from": 3,
+      "to": 0,
+      "content": "hey sent by 3",
+      "time": "4.30"
+    },
+    {
+      "from": 4,
+      "to": 2,
+      "content": "hey sent by 4",
+      "time": "4.30"
+    },
+    {
+      "from": 5,
+      "to": 2,
+      "content": "hey sent by 5",
+      "time": "4.30"
+    },
+    {
+      "from": 6,
+      "to": 2,
+      "content": "hey sent by 5",
+      "time": "4.30"
+    },
+    {
+      "from": 5,
+      "to": 2,
+      "content": "hey sent by 5",
+      "time": "4.30"
+    },
+    {
+      "from": 1,
+      "to": 3,
+      "content": "hey sent by 1",
+      "time": "4.30"
+    }
+  ],
+  "search": [
+    {
+      "resultType": "post",
+      "resultNum": 54,
+      "results": [
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        },
+        {
+          "title": "tttttt",
+          "author": "xx",
+          "time": "4.30",
+          "replyCnt": 10,
+          "path": "/ff/fff/fff"
+        }
+      ]
+    },
+    {
+      "resultType": "section",
+      "resultNum": 54,
+      "results": [
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        },
+        {
+          "sectionName": "section",
+          "path": "path"
+        }
+      ]
+    }
+  ],
+  "announcements": [
+    {
+      "anncNum":24,
+      "anncs": [
+        {
+          "title": "titttttttttttttle",
+          "path": "sttttttttttttttttts",
+          "author": "teatttttttttttttttttttttcher",
+          "time": "tttttttttttttttt5.2",
+          "content": "contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        }
+      ]
+    }
+  ]
 }
