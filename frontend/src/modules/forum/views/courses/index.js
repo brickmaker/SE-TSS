@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getCourses} from "./actions"
+import Announcements from '../announcements';
 
 class Courses extends Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class Courses extends Component {
                         }
                     </ul>
                 </div>
+                <Announcements type="notmain" match={this.props.match}/>
             </div>
         )
     }

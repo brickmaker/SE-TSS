@@ -1,30 +1,31 @@
+import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE } from "./actions";
+
+// import {} from
+
 const initialState = {
-    anncCnt: 23,
+    // anncCnt: undefined,
     currentPageIdx: 2,
-    type: 'main',
-    anncs:[
-        {title:"titttttttttttttle", path:"sttttttttttttttttts", author:"teatttttttttttttttttttttcher", time:"tttttttttttttttt5.2", content:"contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-        {title:"title", path:"ss", author:"teacher", time:"5.2", content:"contentdddddddddddddddddd"},
-    ]
+    anncs: {},
+    isFetching: false,
+    errors: {},
 }
 
-export function anncReducer(state=initialState, action){
-    switch(action.type){
+export function anncReducer(state = initialState, action) {
+    switch (action.type) {
+        case ANNCS_REQUEST:
+            return (Object.assign({}, state, {
+                isFetching: true,
+            }));
+        case ANNCS_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetching: false,
+                anncs: action.anncs,
+            }));
+        case ANNCS_FAILURE:
+            return (Object.assign({}, state, {
+                isFetching: false,
+                errors: action.errors,
+            }));
         default: return state;
     };
 }

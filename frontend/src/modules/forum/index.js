@@ -10,7 +10,7 @@ import PostPage from './views/post'
 import Messages from './views/messages';
 import Search from './views/search';
 import SearchBar from './components/searchbar';
-import SearchResultPanel from './containers/searchresultpanel';
+// import SearchResultPanel from './containers/searchresultpanel';
 import Announcements from './views/announcements';
 
 class Forum extends Component {
@@ -19,6 +19,7 @@ class Forum extends Component {
         return (
             <div>
                 <h1>Forum</h1>
+                <SearchBar/>
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>
@@ -29,7 +30,8 @@ class Forum extends Component {
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
                     <Route path={`${match.url}/:collegeid`} component={Courses}/>
                 </Switch>
-                <SearchBar/><Announcements/>
+                {/* <Announcements type="notmain"/> */}
+                {/* <Announcements type="main"/> */}
             </div>
         );
     }

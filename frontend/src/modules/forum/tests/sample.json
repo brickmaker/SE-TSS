@@ -657,32 +657,144 @@
       "resultNum": 54,
       "results": [
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
         },
         {
-          "sectionName": "secton",
+          "sectionName": "section",
           "path": "path"
+        }
+      ]
+    }
+  ],
+  "announcements": [
+    {
+      "anncNum":24,
+      "anncs": [
+        {
+          "title": "titttttttttttttle",
+          "path": "sttttttttttttttttts",
+          "author": "teatttttttttttttttttttttcher",
+          "time": "tttttttttttttttt5.2",
+          "content": "contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
+        },
+        {
+          "title": "title",
+          "path": "ss",
+          "author": "teacher",
+          "time": "5.2",
+          "content": "contentdddddddddddddddddd"
         }
       ]
     }

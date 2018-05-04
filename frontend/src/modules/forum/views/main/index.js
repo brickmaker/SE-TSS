@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubscriptions} from "./actions";
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import Announcements from '../announcements';
 
 class Main extends Component {
 
@@ -33,6 +34,7 @@ class Main extends Component {
                         more
                     </Link>
                 </div>
+                <Announcements type="main"/>
             </div>
         )
     }
