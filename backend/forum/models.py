@@ -39,13 +39,13 @@ class Notice(models.Model):
         return self.title
 
 class User(models.Model):
-    id = models.CharField(max_length=20,primary_key=True)
+    uid = models.CharField(max_length=20,primary_key=True)
     name = models.CharField(max_length=50)
     signature = models.TextField()
     avatar = models.ImageField()
     
     def __str__(self):
-        return '%s %s'%(self.id,self.name)
+        return '%s %s'%(self.uid,self.name)
 
         
 class Thread(models.Model):
@@ -93,8 +93,8 @@ class Message(models.Model):
 
         
 class Subscribe(models.Model):
-    uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
-    section_id = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='section')
+    user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='section')
     date = models.DateField()
     
     def __str__(self):
