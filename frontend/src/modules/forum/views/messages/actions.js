@@ -135,9 +135,9 @@ export function postMsg(from, to, content) {
     console.log(from, to, content);
     return ((dispatch, getState) => {
         // TODO: correct POST request
-        axios.get(`${ROOT_URL}/api/forum/messages`, {
+        axios.post(`${ROOT_URL}/api/forum/messages`, {
             params: {
-                // id:{uid, selectedId},
+                // from:{"haha":"hh", "selectedId":"ff"},
                 from: from,
             },
         })
