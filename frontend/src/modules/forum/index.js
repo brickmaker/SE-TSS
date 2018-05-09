@@ -15,6 +15,7 @@ import Announcements from './views/announcements';
 
 const styles = {
     backgroundColor: '#f0f0ee',
+    minHeight: '100vh', // todo: tmp solution for background color
     paddingLeft: 20,
     paddingRight: 20
 }
