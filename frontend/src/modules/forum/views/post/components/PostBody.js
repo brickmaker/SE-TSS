@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getPostReplies} from "../actions"
 import Reply from "./Reply"
+import {Button} from "material-ui"
 
 class PostBody extends Component {
     constructor(props) {
@@ -38,17 +39,29 @@ class PostBody extends Component {
                         )
                     })
                 }
-                <div>
-                    pages: {Array.from({length: pageNum}, (v, k) => (k + 1)).map((page) => {
-                    return (
-                        <button
-                            key={page}
-                            onClick={this.clickPageNum}
-                            style={{backgroundColor: page === currPage ? '#ff0000' : '#ffffff'}}>
-                            {page}
-                        </button>
-                    )
-                })}
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    marginBottom: 20
+                }}>
+                    <div>
+                        {Array.from({length: pageNum}, (v, k) => (k + 1)).map((page) => {
+                            return (
+                                <Button
+                                    key={page}
+                                    size={'small'}
+                                    onClick={this.clickPageNum}
+                                    style={{
+                                        minWidth: 30,
+                                        width: 30,
+                                        margin: 2,
+                                        backgroundColor: page === currPage ? '#7986CB' : '#ffffff'
+                                    }}>
+                                    {page}
+                                </Button>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         )
