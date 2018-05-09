@@ -18,8 +18,6 @@ class Forum extends Component {
         const {match} = this.props;
         return (
             <div>
-                <h1>Forum</h1>
-                <SearchBar/>
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>
