@@ -13,11 +13,17 @@ import SearchBar from './components/searchbar';
 // import SearchResultPanel from './containers/searchresultpanel';
 import Announcements from './views/announcements';
 
+const styles = {
+    backgroundColor: '#f0f0ee',
+    paddingLeft: 20,
+    paddingRight: 20
+}
+
 class Forum extends Component {
     render() {
         const {match} = this.props;
         return (
-            <div>
+            <div style={styles}>
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>

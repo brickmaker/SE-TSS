@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {getPostReplies} from "../actions"
+import Reply from "./Reply"
 
 class PostBody extends Component {
     constructor(props) {
@@ -25,16 +26,15 @@ class PostBody extends Component {
                 {
                     replies.map((reply) => {
                         return (
-                            <div>
-                                {reply.user.name}
-                                {reply.content}
-                                {reply.time}
-                                <ul>
-                                    {reply.replies.map((rr) => (
-                                        <li>{rr.content}</li>
-                                    ))}
-                                </ul>
-                            </div>
+                            <Reply
+                                pic={reply.user.pic}
+                                name={reply.user.name}
+                                college={reply.user.college}
+                                postNum={reply.user.postNum}
+                                content={reply.content}
+                                time={reply.time}
+                                replies={reply.replies}
+                            />
                         )
                     })
                 }

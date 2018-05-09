@@ -2,10 +2,11 @@ import React, {Component} from 'react'
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import {getPostInfo} from "./actions"
-import {Path} from "../../components/Path"
+import {Path} from "../../components/util/Path"
 import {PostTitle} from "./components/PostTitle"
 import PostBody from "./components/PostBody"
 import PostEditor from "./components/editor/PostEditor"
+import {MainBody} from "../../components/util/MainBody"
 
 class PostPage extends Component {
     constructor(props) {
@@ -39,10 +40,12 @@ class PostPage extends Component {
         const {title} = this.props
         return (
             <div>
-                <Path path={path}/>
-                <PostTitle title={title}/>
-                <PostBody/>
-                <PostEditor/>
+                <MainBody>
+                    <Path path={path}/>
+                    <PostTitle title={title}/>
+                    <PostBody/>
+                    <PostEditor/>
+                </MainBody>
             </div>
         )
     }
