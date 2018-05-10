@@ -100,7 +100,9 @@ export default class Reply extends Component {
                                                     height: 30
                                                 }}
                                             />
-                                            <ListItemText primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`} secondary={rr.content}/>
+                                            <ListItemText
+                                                primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`}
+                                                secondary={rr.content}/>
                                             <ListItemSecondaryAction>
                                                 <IconButton aria-label="Reply">
                                                     <ReplyIcon/>

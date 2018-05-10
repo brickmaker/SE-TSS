@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux"
 import {getTeacherInfo} from "./actions"
+import {Path} from "../../components/util/Path"
+import {MainBody} from "../../components/util/MainBody"
+import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
+import {Announcement} from "@material-ui/icons"
+import {Button} from "material-ui"
+import PostsList from "./components/PostsList"
 
 class Teacher extends Component {
     constructor(props) {
@@ -14,9 +20,38 @@ class Teacher extends Component {
 
     render() {
         const {college, course, teacher} = this.props
+        const {collegeid, courseid, teacherid} = this.props.match.params
+        const path = {
+            college: {
+                name: college,
+                link: `/forum/${collegeid}`
+            },
+            course: {
+                name: course,
+                link: `/forum/${collegeid}/${courseid}`
+            },
+            teacher: {
+                name: teacher,
+                link: `/forum/${collegeid}/${courseid}/${teacherid}`
+            },
+        }
         return (
             <div>
-                <div>{college} - {course} - {teacher}</div>
+                <MainBody>
+                    <Path path={path}/>
+                    <SectionTitle>
+                        <SectionText text={'公告通知'}>
+                            <Announcement color={'primary'} style={{fontSize: 40}}/>
+                        </SectionText>
+                        <div>
+                            <Button
+                                color={'primary'}
+                                variant={'raised'}
+                            >发布公告</Button>
+                        </div>
+                    </SectionTitle>
+                    <PostsList/>
+                </MainBody>
             </div>
         )
     }
