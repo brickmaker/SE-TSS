@@ -28,7 +28,7 @@ class PostPage extends Component {
                 name: this.props.path.course.name,
                 link: `/forum/${this.props.path.college.id}/${this.props.path.course.id}`
             },
-            teacher: this.props.teacher ? {
+            teacher: this.props.path.teacher ? {
                 name: this.props.path.teacher.name,
                 link: `/forum/${this.props.path.college.id}/${this.props.path.course.id}/${this.props.path.teacher.id}`
             } : null,
