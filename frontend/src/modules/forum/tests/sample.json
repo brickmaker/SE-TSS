@@ -106,6 +106,7 @@
   "course": {
     "college": "计算机科学与技术学院",
     "course": "软件工程",
+    "pageNum": 7,
     "subForums": [
       {
         "id": "wzy",
@@ -131,6 +132,145 @@
             "postId": "postid"
           }
         ]
+      }
+    ]
+  },
+  "course_posts": {
+    "data": [
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
+      },
+      {
+        "pic": "https://api.adorable.io/avatars/144/userpic.png",
+        "name": "梅骨竹心",
+        "postId": "111",
+        "title": "软件工程，求组队....",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "lastReplyTime": "2012-04-23T18:25:43.511Z",
+        "replyNum": 27
       }
     ]
   },

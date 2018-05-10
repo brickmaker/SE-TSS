@@ -17,6 +17,7 @@ export const Path = ({path = {}}) => {
     return (
         <div style={styles}>
             <Link style={linkStyle} to={'/forum'}>首页 > </Link>
+            <Link style={linkStyle} to={'/forum/colleges'}>全部学院 > </Link>
             {Object.values(path).map((p) => (
                 p ? (
                     <Link style={linkStyle} to={p.link}>{p.name} > </Link>
