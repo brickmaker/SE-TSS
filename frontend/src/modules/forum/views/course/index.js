@@ -5,10 +5,11 @@ import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
 import {Extension, Announcement} from "@material-ui/icons"
-import {Button} from "material-ui"
+import {Button, Grid} from "material-ui"
 import {goBottom} from "../../utils/pageHandler"
 import PostsList from "./components/PostsList"
 import PostEditor from "../teacher/components/PostEditor"
+import SubForum from "./components/SubForum"
 
 class Course extends Component {
     constructor(props) {
@@ -37,14 +38,55 @@ class Course extends Component {
         return (
             <div>
                 <MainBody>
-                    <Path path={path}/>
-                    <SectionTitle>
-                        <SectionText text={'教师版块'}>
-                            <Extension color={'primary'} style={{fontSize: 40}}/>
-                        </SectionText>
-                        <div>
+                    <div>
+                        <Path path={path}/>
+                        <SectionTitle>
+                            <SectionText text={'教师版块'}>
+                                <Extension color={'primary'} style={{fontSize: 40}}/>
+                            </SectionText>
+                            <div>
+                            </div>
+                        </SectionTitle>
+                        <Grid container>
+                            {subForums.map((sub) => (
+                                <Grid item xs={4}
+                                      style={{
+                                          padding: 10
+                                      }}
+                                >
+                                    <SubForum
+                                        key={sub.id}
+                                        id={sub.id}
+                                        name={sub.name}
+                                        pic={sub.pic}
+                                        lastUpdate={sub.lastUpdate}
+                                        postsNum={sub.postsNum}
+                                        posts={sub.newestPosts}
+                                    />
+                                </Grid>
+                            ))}
+                        </Grid>
+                        {/*
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-around',
+                            flexWrap: 'wrap'
+                        }}>
+                            {subForums.map((sub) => (
+                                <SubForum
+                                    key={sub.id}
+                                    id={sub.id}
+                                    name={sub.name}
+                                    pic={sub.pic}
+                                    lastUpdate={sub.lastUpdate}
+                                    postsNum={sub.postsNum}
+                                    posts={sub.newestPosts}
+                                />
+                            ))}
                         </div>
-                    </SectionTitle>
+                        */}
+                    </div>
                     <div style={{marginTop: 40}}>
                         <SectionTitle>
                             <SectionText text={'所有帖子'}>

@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 import {Avatar} from "material-ui"
 import {dateFormat} from "../../utils/time"
-import './PostsListItem.css'
 import {DEBUG, ROOT_URL} from "../../configs/config"
 import {withRouter} from "react-router-dom"
 

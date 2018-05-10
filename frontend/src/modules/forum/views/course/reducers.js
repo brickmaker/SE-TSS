@@ -3,7 +3,7 @@ import {GOT_COURSE_INFO, GOT_COURSE_POSTS} from './actions'
 const initState = {
     college: "",
     course: "",
-    subForum: [],
+    subForums: [],
     subscribed: false,
     posts: [],
     pageNum: 1,
