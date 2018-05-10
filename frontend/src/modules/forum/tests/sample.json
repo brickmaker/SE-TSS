@@ -51,6 +51,9 @@
       ]
     }
   ],
+  "courses_info": {
+    "college": "计算机科学与技术"
+  },
   "courses": [
     {
       "id": "8E4A0001",

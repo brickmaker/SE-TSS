@@ -1,5 +1,6 @@
 {
   "/api/forum/subscriptions": "/subscriptions",
+  "/api/forum/courses_info": "/courses_info",
   "/api/forum/courses": "/courses",
   "/api/forum/course": "/course",
   "/api/forum/course_posts": "/course_posts",

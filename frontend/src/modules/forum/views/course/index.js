@@ -66,26 +66,6 @@ class Course extends Component {
                                 </Grid>
                             ))}
                         </Grid>
-                        {/*
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-around',
-                            flexWrap: 'wrap'
-                        }}>
-                            {subForums.map((sub) => (
-                                <SubForum
-                                    key={sub.id}
-                                    id={sub.id}
-                                    name={sub.name}
-                                    pic={sub.pic}
-                                    lastUpdate={sub.lastUpdate}
-                                    postsNum={sub.postsNum}
-                                    posts={sub.newestPosts}
-                                />
-                            ))}
-                        </div>
-                        */}
                     </div>
                     <div style={{marginTop: 40}}>
                         <SectionTitle>

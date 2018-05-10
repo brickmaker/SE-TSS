@@ -1,21 +1,21 @@
 import {ROOT_URL} from "../../configs/config"
 
-export const GET_COURSES = 'get_courses';
-export const GOT_COURSES = 'got_courses';
+export const GET_COURSES_INFO = 'get_courses_info';
+export const GOT_COURSES_INFO = 'got_courses_info';
 
-export const getCourses = (collegeId) => {
+export const getCoursesInfo = (collegeId) => {
     return dispatch => {
-        fetchCourses(collegeId)
+        fetchCoursesInfo(collegeId)
             .then((data) => {
                 dispatch({
-                    type: GOT_COURSES,
-                    courses: data
+                    type: GOT_COURSES_INFO,
+                    info: data
                 })
             })
     }
 };
 
-function fetchCourses(collegeId) {
-    return fetch(`${ROOT_URL}/api/forum/courses?collegeid=${collegeId}`)
+function fetchCoursesInfo(collegeId) {
+    return fetch(`${ROOT_URL}/api/forum/courses_info?collegeid=${collegeId}`)
         .then((response) => (response.json()))
 }

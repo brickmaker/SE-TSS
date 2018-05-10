@@ -1,51 +1,60 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {getCourses} from "./actions"
-import Announcements from '../announcements';
+import {getCoursesInfo} from "./actions"
+import {MainBody} from "../../components/util/MainBody"
+import {Path} from "../../components/util/Path"
+import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
+import {Extension} from "@material-ui/icons/es/index"
 
 class Courses extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            collegeId: this.props.match.params.collegeid
-        }
+        this.state = {}
     }
 
     componentDidMount() {
         console.log('get courses')
         const cid = this.props.match.params.collegeid
-        this.props.getCourses(cid)
+        this.props.getCoursesInfo(cid)
     }
 
     render() {
-        const {match} = this.props;
-        console.log(match)
+        const {collegeid} = this.props.match.params
+        const {college} = this.props
+        const path = {
+            college: {
+                name: college,
+                link: `/forum/${collegeid}`
+            }
+        }
         return (
             <div>
-                courses list: {match.params.collegeid}
-                <div>
-                    <ul>
-                        {
-                            this.props.courses.map((course) => (
-                                <li>{course.id}-{course.name}-{course.teachers.map((t) => `${t}、`)}-{course.postsNum}-{course.lastUpdate}</li>
-                            ))
-                        }
-                    </ul>
-                </div>
-                <Announcements type="notmain" match={this.props.match}/>
+                <MainBody>
+                    <div>
+                        <Path path={path}/>
+                        <SectionTitle>
+                            <SectionText text={'全部课程'}>
+                                <Extension color={'primary'} style={{fontSize: 40}}/>
+                            </SectionText>
+                            <div>
+                            </div>
+                        </SectionTitle>
+                    </div>
+                </MainBody>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
+    college: state.forum.courses.college,
     courses: state.forum.courses.courses
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getCourses: (collegeId) => {
-            dispatch(getCourses(collegeId));
+        getCoursesInfo: (collegeId) => {
+            dispatch(getCoursesInfo(collegeId));
         },
     }
 };

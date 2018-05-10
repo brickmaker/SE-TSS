@@ -1,14 +1,15 @@
-import {GOT_COURSES} from "./actions";
+import {GOT_COURSES_INFO} from "./actions";
 
 const initState = {
+    college: '',
     courses: []
 };
 
 export function coursesReducer(state = initState, action) {
     switch (action.type) {
-        case GOT_COURSES:
+        case GOT_COURSES_INFO:
             return Object.assign({}, state, {
-                courses: action.courses
+                college: action.info.college
             });
         default:
             return state;
