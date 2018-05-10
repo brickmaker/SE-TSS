@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getPostReplies} from "../actions"
 import Reply from "./Reply"
 import {Button} from "material-ui"
+import {PageNums} from "../../../components/util/PageNums"
 
 class PostBody extends Component {
     constructor(props) {
@@ -39,30 +40,7 @@ class PostBody extends Component {
                         )
                     })
                 }
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row-reverse',
-                    marginBottom: 20
-                }}>
-                    <div>
-                        {Array.from({length: pageNum}, (v, k) => (k + 1)).map((page) => {
-                            return (
-                                <Button
-                                    key={page}
-                                    size={'small'}
-                                    onClick={this.clickPageNum}
-                                    style={{
-                                        minWidth: 30,
-                                        width: 30,
-                                        margin: 2,
-                                        backgroundColor: page === currPage ? '#7986CB' : '#ffffff'
-                                    }}>
-                                    {page}
-                                </Button>
-                            )
-                        })}
-                    </div>
-                </div>
+                <PageNums pageNum={pageNum} currPage={currPage} clickPage={this.clickPageNum}/>
             </div>
         )
     }

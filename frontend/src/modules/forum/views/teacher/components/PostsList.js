@@ -3,6 +3,8 @@ import {Card} from "material-ui"
 import {connect} from "react-redux"
 import {getPosts} from "../actions"
 import PostsListItem from "../../../components/util/PostsListItem"
+import {PageNums} from "../../../components/util/PageNums"
+import {withRouter} from "react-router-dom"
 
 class PostsList extends Component {
     constructor(props) {
@@ -11,35 +13,39 @@ class PostsList extends Component {
     }
 
     clickPageNum(event) {
-        const page = event.target.innerText
+        const page = parseInt(event.target.innerText)
         const {collegeid, courseid, teacherid} = this.props.match.params
         this.props.getPosts(collegeid, courseid, teacherid, page)
     }
 
     render() {
+        const {pageNum, currPage} = this.props
         return (
-            <Card style={{
-                margin: '20px 0'
-            }}>
-                {
-                    this.props.posts.map((postItem) => (
-                        <PostsListItem
-                            pic={postItem.pic}
-                            name={postItem.name}
-                            postId={postItem.postId}
-                            title={postItem.title}
-                            postTime={postItem.postTime}
-                            lastReplyTime={postItem.lastReplyTime}
-                            replyNum={postItem.replyNum}
-                        />
-                    ))
-                }
-            </Card>
+            <div>
+                <Card style={{
+                    margin: '20px 0'
+                }}>
+                    {
+                        this.props.posts.map((postItem) => (
+                            <PostsListItem
+                                pic={postItem.pic}
+                                name={postItem.name}
+                                postId={postItem.postId}
+                                title={postItem.title}
+                                postTime={postItem.postTime}
+                                lastReplyTime={postItem.lastReplyTime}
+                                replyNum={postItem.replyNum}
+                            />
+                        ))
+                    }
+                </Card>
+                <PageNums pageNum={pageNum} currPage={currPage} clickPage={this.clickPageNum}/>
+            </div>
         )
     }
 }
 
-export default connect(
+export default withRouter(connect(
     (state) => ({
         currPage: state.forum.teacher.currPage,
         pageNum: state.forum.teacher.pageNum,
@@ -50,4 +56,4 @@ export default connect(
             dispatch(getPosts(collegeId, courseId, teacherId, pageId))
         }
     })
-)(PostsList)
+)(PostsList))

@@ -15,12 +15,15 @@ class PostsListItem extends Component {
 
 
     render() {
-        const {pic, name, postId, title, postTime, lastReplyTime, replyNum} = this.props
+        const {pic, name, postId, title, postTime, lastReplyTime, replyNum, isAnnouncement} = this.props
         return (
             <div
                 onClick={() => {
                     console.log('click')
-                    this.props.history.push(`/forum/p/${postId}`)
+                    // todo: announcement destination router
+                    isAnnouncement ?
+                        console.log('go to announcement detail') :
+                        this.props.history.push(`/forum/p/${postId}`)
                 }}
                 onMouseOver={() => {
                     this.setState({isHover: true})
@@ -77,7 +80,9 @@ class PostsListItem extends Component {
                             fontSize: 12,
                             fontWeight: 300,
                             color: '#757575'
-                        }}>-发布时间：{dateFormat(new Date(postTime))} -最后回复：{dateFormat(new Date(lastReplyTime))} -回复数量：{replyNum}</div>
+                        }}> {postTime ? `- 发布时间：${dateFormat(new Date(postTime))}` : ``}
+                            {lastReplyTime ? `  - 最后回复：${dateFormat(new Date(lastReplyTime))}` : ``}
+                            {replyNum ? `  - 回复数量：${replyNum}` : ``}</div>
                     </div>
                 </div>
             </div>

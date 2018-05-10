@@ -12,7 +12,7 @@ const editorStyle = {
 }
 
 
-export default class PostEditor extends Component {
+export default class ReplyEditor extends Component {
     constructor(props) {
         super(props);
         this.state = {

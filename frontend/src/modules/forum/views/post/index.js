@@ -5,7 +5,7 @@ import {getPostInfo} from "./actions"
 import {Path} from "../../components/util/Path"
 import {PostTitle} from "./components/PostTitle"
 import PostBody from "./components/PostBody"
-import PostEditor from "./components/editor/PostEditor"
+import ReplyEditor from "./components/editor/ReplyEditor"
 import {MainBody} from "../../components/util/MainBody"
 
 class PostPage extends Component {
@@ -44,7 +44,7 @@ class PostPage extends Component {
                     <Path path={path}/>
                     <PostTitle title={title}/>
                     <PostBody/>
-                    <PostEditor/>
+                    <ReplyEditor/>
                 </MainBody>
             </div>
         )
