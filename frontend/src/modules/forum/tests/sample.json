@@ -52,58 +52,189 @@
     }
   ],
   "courses_info": {
-    "college": "计算机科学与技术"
+    "college": "计算机科学与技术",
+    "pageNum": 27
   },
   "courses": [
     {
-      "id": "8E4A0001",
+      "id": "courseid",
+      "code": "8E4A0001",
       "name": "软件工程",
       "teachers": [
         "XXX",
-        "YYY"
+        "YYY",
+        "ZZZ"
       ],
       "postsNum": 3223,
-      "lastUpdate": "2017/8/8"
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
     },
     {
-      "id": "8E4A0001",
+      "id": "courseid",
+      "code": "8E4A0001",
       "name": "软件工程",
       "teachers": [
         "XXX",
-        "YYY"
+        "YYY",
+        "ZZZ"
       ],
       "postsNum": 3223,
-      "lastUpdate": "2017/8/8"
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
     },
     {
-      "id": "8E4A0001",
+      "id": "courseid",
+      "code": "8E4A0001",
       "name": "软件工程",
       "teachers": [
         "XXX",
-        "YYY"
+        "YYY",
+        "ZZZ"
       ],
       "postsNum": 3223,
-      "lastUpdate": "2017/8/8"
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
     },
     {
-      "id": "8E4A0001",
+      "id": "courseid",
+      "code": "8E4A0001",
       "name": "软件工程",
       "teachers": [
         "XXX",
-        "YYY"
+        "YYY",
+        "ZZZ"
       ],
       "postsNum": 3223,
-      "lastUpdate": "2017/8/8"
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
     },
     {
-      "id": "8E4A0001",
+      "id": "courseid",
+      "code": "8E4A0001",
       "name": "软件工程",
       "teachers": [
         "XXX",
-        "YYY"
+        "YYY",
+        "ZZZ"
       ],
       "postsNum": 3223,
-      "lastUpdate": "2017/8/8"
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
+    },
+    {
+      "id": "courseid",
+      "code": "8E4A0001",
+      "name": "软件工程",
+      "teachers": [
+        "XXX",
+        "YYY",
+        "ZZZ"
+      ],
+      "postsNum": 3223,
+      "lastUpdate": "2012-04-23T18:25:43.511Z"
     }
   ],
   "course": {
