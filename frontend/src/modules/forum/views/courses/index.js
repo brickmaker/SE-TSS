@@ -1,12 +1,34 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getCourses, getCoursesInfo} from "./actions"
 import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
 import {Extension} from "@material-ui/icons/es/index"
-import {Paper, Table, TableBody, TableCell, TableFooter, TableHead, TablePagination, TableRow} from "material-ui"
+import {
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableFooter,
+    TableHead,
+    TablePagination,
+    TableRow,
+    withStyles
+} from "material-ui"
 import {dateFormat} from "../../utils/time"
+import {Link} from "react-router-dom"
+
+const styles = {
+    root: {},
+    row: {
+        hover: {
+            backgroundColor: '#ff0000',
+            cursor: 'hand'
+        }
+    }
+}
 
 class Courses extends Component {
     constructor(props) {
@@ -29,7 +51,7 @@ class Courses extends Component {
 
     render() {
         const {collegeid} = this.props.match.params
-        const {college, courses, pageNum, currPage} = this.props
+        const {college, courses, pageNum, currPage, classes} = this.props
         const path = {
             college: {
                 name: college,
@@ -65,7 +87,15 @@ class Courses extends Component {
                                 <TableBody>
                                     {
                                         courses.map((c) => (
-                                            <TableRow>
+                                            <TableRow
+                                                key={c.id}
+                                                className={classes.row}
+                                                hover
+                                                onClick={() => {
+                                                    console.log(c.id)
+                                                    this.props.history.push(`${this.props.match.url}/${c.id}`)
+                                                }}
+                                            >
                                                 <TableCell>{c.code}</TableCell>
                                                 <TableCell>{c.name}</TableCell>
                                                 <TableCell>{c.teachers.join('、')}</TableCell>
@@ -121,7 +151,11 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(
+Courses.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Courses);
+)(Courses))
