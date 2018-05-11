@@ -7,9 +7,11 @@ import {postReducer} from "./views/post/reducers"
 import {messageReducer} from './views/messages/reducers';
 import {searchReducer} from './views/search/reducers';
 import {anncReducer} from './views/announcements/reducers';
+import {collegesReducer} from "./views/colleges/reducers"
 
 export const forumReducer = combineReducers({
     main: mainReducer,
+    colleges: collegesReducer,
     courses: coursesReducer,
     course: courseReducer,
     teacher: teacherReducer,
