@@ -2,50 +2,119 @@
   "subscriptions": [
     {
       "area": {
-        "name": "软件工程"
+        "name": "软件工程",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          }
+        }
       },
       "newPosts": [
         {
+          "id": "1001",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1002",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1003",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1004",
           "title": "一个帖子的标题"
         },
         {
-          "title": "一个帖子的标题"
-        },
-        {
+          "id": "1005",
           "title": "一个帖子的标题"
         }
       ]
     },
     {
       "area": {
-        "name": "计算机科学与技术"
+        "name": "软件工程-王章野",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
       },
       "newPosts": [
         {
+          "id": "1001",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1002",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1003",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1004",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1005",
+          "title": "一个帖子的标题"
+        }
+      ]
+    },
+    {
+      "area": {
+        "name": "软件工程-王章野",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      },
+      "newPosts": [
+        {
+          "id": "1001",
           "title": "一个帖子的标题"
         },
         {
+          "id": "1002",
+          "title": "一个帖子的标题"
+        },
+        {
+          "id": "1003",
+          "title": "一个帖子的标题"
+        },
+        {
+          "id": "1004",
+          "title": "一个帖子的标题"
+        },
+        {
+          "id": "1005",
           "title": "一个帖子的标题"
         }
       ]

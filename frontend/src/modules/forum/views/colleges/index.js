@@ -23,11 +23,11 @@ class CollegesPage extends Component {
         return (
             <div>
                 <MainBody>
-                    <Path path={{}}/>
+                    <Path/>
                     <Grid container>
                         <Grid item xs={4}
                               style={{
-                                  padding: 20
+                                  padding: '0 20px'
                               }}
                         >
                             <Department
@@ -45,7 +45,7 @@ class CollegesPage extends Component {
                         </Grid>
                         <Grid item xs={4}
                               style={{
-                                  padding: 20
+                                  padding: '0 20px'
                               }}
                         >
                             <Department
@@ -59,7 +59,7 @@ class CollegesPage extends Component {
                         </Grid>
                         <Grid item xs={4}
                               style={{
-                                  padding: 20
+                                  padding: '0 20px'
                               }}
                         >
                             <Department
