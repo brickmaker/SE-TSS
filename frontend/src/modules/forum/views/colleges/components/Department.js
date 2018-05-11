@@ -2,8 +2,10 @@ import React from 'react'
 import {SectionText, SectionTitle} from "../../../components/util/SectionTitle"
 import {School} from "@material-ui/icons/es/index"
 import {Avatar, Card, List, ListItem, ListItemText} from "material-ui"
+import {withRouter} from "react-router-dom"
+import {ROOT_URL} from "../../../configs/config"
 
-export const Department = ({name, colleges}) => (
+const Department = ({name, colleges, history, match}) => (
     <div style={{
         display: 'flex',
         flexDirection: 'column'
@@ -20,7 +22,13 @@ export const Department = ({name, colleges}) => (
             <List>
                 {
                     colleges.map((c) => (
-                        <ListItem key={c.collegeId}>
+                        <ListItem
+                            button
+                            onClick={() => {
+                                history.push(`/forum/${c.collegeId}`)
+                            }}
+                            key={c.collegeId}
+                        >
                             <Avatar
                                 src={c.pic}
                                 style={{
@@ -38,3 +46,5 @@ export const Department = ({name, colleges}) => (
         </Card>
     </div>
 )
+
+export default withRouter(Department)

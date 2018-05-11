@@ -6,7 +6,7 @@ import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
 import {School} from "@material-ui/icons/es/index"
-import {Department} from "./components/Department"
+import Department from "./components/Department"
 import {Grid} from "material-ui"
 
 class CollegesPage extends Component {
