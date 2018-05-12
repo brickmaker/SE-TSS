@@ -2,9 +2,11 @@ import React, {Component} from 'react'
 import {connect} from "react-redux"
 import {Link} from 'react-router-dom'
 import {getPostInfo} from "./actions"
-import {Path} from "../../components/Path"
+import {Path} from "../../components/util/Path"
 import {PostTitle} from "./components/PostTitle"
 import PostBody from "./components/PostBody"
+import ReplyEditor from "./components/editor/ReplyEditor"
+import {MainBody} from "../../components/util/MainBody"
 
 class PostPage extends Component {
     constructor(props) {
@@ -26,7 +28,7 @@ class PostPage extends Component {
                 name: this.props.path.course.name,
                 link: `/forum/${this.props.path.college.id}/${this.props.path.course.id}`
             },
-            teacher: this.props.teacher ? {
+            teacher: this.props.path.teacher ? {
                 name: this.props.path.teacher.name,
                 link: `/forum/${this.props.path.college.id}/${this.props.path.course.id}/${this.props.path.teacher.id}`
             } : null,
@@ -38,9 +40,12 @@ class PostPage extends Component {
         const {title} = this.props
         return (
             <div>
-                <Path path={path}/>
-                <PostTitle title={title}/>
-                <PostBody/>
+                <MainBody>
+                    <Path path={path}/>
+                    <PostTitle title={title}/>
+                    <PostBody/>
+                    <ReplyEditor/>
+                </MainBody>
             </div>
         )
     }

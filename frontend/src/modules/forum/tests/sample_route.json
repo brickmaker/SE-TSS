@@ -1,8 +1,16 @@
 {
   "/api/forum/subscriptions": "/subscriptions",
+  "/api/forum/colleges": "/colleges",
+  "/api/forum/courses_info": "/courses_info",
   "/api/forum/courses": "/courses",
   "/api/forum/course": "/course",
+  "/api/forum/course_posts": "/course_posts",
   "/api/forum/teacher": "/teacher",
+  "/api/forum/teacher_posts": "/teacher_posts",
   "/api/forum/post_reply": "/replies",
-  "/api/forum/post": "/post"
+  "/api/forum/post": "/post",
+  "/api/forum/messages": "/messages",
+  "/api/forum/msgentries": "/msgentries",
+  "/api/forum/search": "/search",
+  "/api/forum/announcements": "/announcements"
 }

@@ -2,37 +2,75 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubscriptions} from "./actions";
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
+import Announcements from '../announcements';
+import {MainBody} from "../../components/util/MainBody"
+import {Path} from "../../components/util/Path"
+import {Grid} from "material-ui"
+import Subscription from "./components/Subscription"
+import MoreForums from "./components/MoreForums"
+import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
+import {Announcement as AnnouncementIcon} from '@material-ui/icons'
+import {Message} from "@material-ui/icons/es/index"
 
 class Main extends Component {
 
     componentDidMount() {
-        console.log('get subs');
-        this.props.getSubscriptions("uid", "token");
+        this.props.getSubscriptions("uid");
     }
 
     render() {
         const {match, subscriptions} = this.props;
         return (
             <div>
-                {
-                    subscriptions.map((subscription) => {
-                        return (
+                <MainBody>
+                    <Path isMain/>
+                    <Grid container xs={12}>
+                        <Grid container xs={8}>
+                            {
+                                subscriptions.map((sub) => (
+                                    <Subscription
+                                        name={sub.area.name}
+                                        path={sub.area.path}
+                                        posts={sub.newPosts}
+                                    />
+                                ))
+                            }
+                            <MoreForums/>
+                        </Grid>
+                        <Grid container xs={1}></Grid>
+                        <Grid container xs={3}>
                             <div>
-                                <p>{subscription.area.name}</p>
-                                <ul>{
-                                    subscription.newPosts.map((post) => (
-                                        <li>{post.title}</li>
-                                    ))
-                                }</ul>
+                                <SectionTitle>
+                                    <SectionText
+                                        onClick={() => {
+                                            // history.push('forum/colleges')
+                                        }}
+                                        text={'公告通知'}
+                                    >
+                                        <AnnouncementIcon color={'primary'} style={{fontSize: 40}}/>
+                                    </SectionText>
+                                </SectionTitle>
+                                <div style={{
+                                    overflow: 'hidden'
+                                }}>
+                                    <Announcements type="main"/>
+                                </div>
                             </div>
-                        )
-                    })
-                }
-                <div>
-                    <Link to={`${match.url}/colleges`}>
-                        more
-                    </Link>
-                </div>
+                            <div>
+                                <SectionTitle>
+                                    <SectionText
+                                        onClick={() => {
+                                            // history.push('forum/colleges')
+                                        }}
+                                        text={'消息留言'}
+                                    >
+                                        <Message color={'primary'} style={{fontSize: 40}}/>
+                                    </SectionText>
+                                </SectionTitle>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </MainBody>
             </div>
         )
     }

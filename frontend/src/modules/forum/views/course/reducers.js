@@ -1,11 +1,13 @@
-import {GOT_COURSE_INFO} from './actions'
+import {GOT_COURSE_INFO, GOT_COURSE_POSTS} from './actions'
 
 const initState = {
     college: "",
     course: "",
-    subForum: [],
+    subForums: [],
     subscribed: false,
-    posts: []
+    posts: [],
+    pageNum: 1,
+    currPage: 1,
 }
 
 export function courseReducer(state = initState, action) {
@@ -14,8 +16,15 @@ export function courseReducer(state = initState, action) {
             return Object.assign({}, state, {
                 college: action.courseInfo.college,
                 course: action.courseInfo.course,
+                pageNum: action.courseInfo.pageNum,
                 subForums: action.courseInfo.subForums
             })
+        case GOT_COURSE_POSTS:
+            return Object.assign({}, state, {
+                currPage: action.currPage,
+                posts: action.posts
+            })
+
         default:
             return state
     }
