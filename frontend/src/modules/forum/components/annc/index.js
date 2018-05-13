@@ -12,14 +12,16 @@ const styles = {
     },
     item: {
         verticalAlign: "middle",
-        marginLeft: 10,
+        // marginLeft: 10,
         marginRight: 10,
-        display:"inline-block",
+        display: "inline-block",
     },
     line: {
         display: "flex",
         justifyContent: "space-between",
         verticalAlign: "middle",
+        marginTop: 5,
+    marginBottom: 5,
     },
     line2: {
         display: "flex",
@@ -37,7 +39,7 @@ const styles = {
 
 class Annc extends Component {
     render() {
-        const { classes } = this.props;
+        const { classes, type } = this.props;
         const { title, path, author, time, content } = this.props.annc;
         // TODO: have been read
         return (
@@ -45,16 +47,25 @@ class Annc extends Component {
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <div className={classes.root}>
                         <div className={classes.line}>
-                            <Typography variant="title" className={classes.item}>
+                            <Typography variant={type==='main'?"subheading":"title"} className={classes.item}>
                                 {title}
                             </Typography>
-                            <Typography variant="subheading" className={classes.item}>
-                                {path}
-                            </Typography>
+                            {(type != 'main') &&
+                                <Typography variant="subheading" className={classes.item}>
+                                    {`${path["course"]["name"]} > ${path["teacher"]["name"]}`}
+                                </Typography>
+                            }
+                        </div>
+                        <div className={classes.line2}>
+                            {(type === 'main') &&
+                                <Typography variant="caption" className={classes.item}>
+                                    {`${path["course"]["name"]} > ${path["teacher"]["name"]}`}
+                                </Typography>
+                            }
                         </div>
                         <div className={classes.line2}>
                             <Typography variant="caption" className={classes.item}>
-                                {author}
+                                {author["username"]}
                             </Typography>
                             <Typography variant="caption" className={classes.item}>
                                 {time}
@@ -63,9 +74,10 @@ class Annc extends Component {
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <div className={classes.detail}>
+                    <Typography variant="body1"
+                    className={classes.detail}>
                         {content}
-                    </div>
+                    </Typography>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         );

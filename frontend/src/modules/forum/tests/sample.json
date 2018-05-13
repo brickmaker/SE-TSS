@@ -125,7 +125,6 @@
       {
         "collegeId": "collegeid1",
         "pic": "https://api.adorable.io/avatars/144/userpic.png",
-        "pic": "https://api.adorable.io/avatars/144/userpic.png",
         "name": "人文学院",
         "todayPostsNum": 27,
         "totalPostsNum": 3237
@@ -1310,58 +1309,57 @@
   ],
   "messages": [
     {
+      "id": "gg",
       "from": 1,
       "to": 2,
       "content": "hey sent by 1",
       "time": "4.30"
     },
     {
-      "from": 0,
-      "to": 4,
-      "content": "hey sent by 0",
-      "time": "4.30"
-    },
-    {
+      "id": "啊啊",
       "from": 2,
-      "to": 1,
-      "content": "hey sent by 2",
-      "time": "4.30"
+      "to": 5,
+      "content": "啊啊",
+      "apiId": "forum"
     },
     {
-      "from": 3,
-      "to": 0,
-      "content": "hey sent by 3",
-      "time": "4.30"
-    },
-    {
-      "from": 4,
-      "to": 2,
-      "content": "hey sent by 4",
-      "time": "4.30"
-    },
-    {
+      "id": "啊啊啊",
       "from": 5,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 6,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 5,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 1,
       "to": 3,
-      "content": "hey sent by 1",
-      "time": "4.30"
+      "content": "啊啊啊",
+      "apiId": "forum"
+    },
+    {
+      "id": "好吧",
+      "from": 2,
+      "to": 5,
+      "content": "好吧",
+      "time": "4.30",
+      "apiId": "forum"
+    },
+    {
+      "id": "我也",
+      "from": 5,
+      "to": 1,
+      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
+      "time": "4.30",
+      "apiId": "forum"
+    },
+    {
+      "id": "我也",
+      "from": 5,
+      "to": 1,
+      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
+      "time": "4.30",
+      "apiId": "forum"
+    },
+    {
+      "id": "我也",
+      "from": 5,
+      "to": 1,
+      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
+      "time": "4.30",
+      "apiId": "forum"
     }
   ],
   "search": [
@@ -1370,53 +1368,151 @@
       "resultNum": 54,
       "results": [
         {
-          "title": "tttttt",
+          "title": "一个很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的标题",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
           "title": "tttttt",
           "author": "xx",
           "time": "4.30",
           "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "postid": "postid",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         }
       ]
     },
@@ -1425,32 +1521,112 @@
       "resultNum": 54,
       "results": [
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         {
-          "sectionName": "section",
-          "path": "path"
-        },
-        {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "yyyy/MM/dd hh:mm"
         }
       ]
     }
@@ -1461,106 +1637,93 @@
       "anncs": [
         {
           "title": "titttttttttttttle",
-          "path": "sttttttttttttttttts",
-          "author": "teatttttttttttttttttttttcher",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "tttttttttttttttt5.2",
           "content": "contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"
         },
         {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
+          "title": "一则公告的题目",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "5.2",
           "content": "contentdddddddddddddddddd"
         },
         {
           "title": "title",
-          "path": "ss",
-          "author": "teacher",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "5.2",
           "content": "contentdddddddddddddddddd"
         },
         {
           "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "5.2",
           "content": "contentdddddddddddddddddd"
         }

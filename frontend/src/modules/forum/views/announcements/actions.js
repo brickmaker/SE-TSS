@@ -5,7 +5,7 @@ export const ANNCS_REQUEST = "anncs_request";
 export const ANNCS_SUCCESS = "anncs_success";
 export const ANNCS_FAILURE = "anncs_failure";
 
-export function getAnncs(uid, collegeId, courseId, teacherId) {
+export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageSize) {
     return (dispatch, getState) => {
         const { isFetching } = getState();
         if (isFetching)
@@ -30,10 +30,12 @@ export function getAnncs(uid, collegeId, courseId, teacherId) {
             // params
         })
             .then((response) => {
+                console.log("anncs", response.data[0]);
                 dispatch({
                     type: ANNCS_SUCCESS,
                     //TODO:
-                    anncs: response.data[0],
+                    anncs: response.data[0]["anncs"],
+                    anncNum: response.data[0]["anncNum"],
                 })
             })
             .catch((errors) => {

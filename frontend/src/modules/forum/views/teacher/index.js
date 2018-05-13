@@ -10,6 +10,7 @@ import PostsList from "./components/PostsList"
 import TopAnnouncement from "./components/TopAnnouncement"
 import PostEditor from "./components/PostEditor"
 import {goBottom} from "../../utils/pageHandler"
+import Announcements from '../announcements';
 
 class Teacher extends Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class Teacher extends Component {
     }
 
     render() {
-        const {college, course, teacher} = this.props
+        const {college, course, teacher, match} = this.props
         const {collegeid, courseid, teacherid} = this.props.match.params
         const path = {
             college: {
@@ -58,7 +59,8 @@ class Teacher extends Component {
                             >发布公告</Button>
                         </div>
                     </SectionTitle>
-                    <TopAnnouncement/>
+                    {/* <TopAnnouncement/> */}
+                    <Announcements type="section" match = {match}/>
                     <div style={{marginTop: 40}}>
                         <SectionTitle>
                             <SectionText text={'所有帖子'}>

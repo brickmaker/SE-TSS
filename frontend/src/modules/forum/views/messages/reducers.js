@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT } from './actions';
+import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -9,20 +9,28 @@ const initialState = {
     msgs: [],
     isFetchingMsgs: false,
     selectedId: 30,
+    currentPageNum: 1,
+    pageSize: 10,
     errors: {},
     content: "",
-    // test: true,
+    noMoreMsgs: false,
+    msgEnd: undefined,
+    isEntering: false,
 };
 
 export function messageReducer(state = initialState, action) {
     switch (action.type) {
-        // case TEST:
-        //     return (Object.assign({}, state, {
-        //         test: action.test,
-        //     }));
         case SELECT_ENTRY:
             return (Object.assign({}, state, {
                 selectedId: action.selectedId,
+            }));
+        case CLEAR_MSGS:
+            return (Object.assign({}, state, {
+                msgs: [],
+            }));
+        case SET_MSGEND:
+            return (Object.assign({}, state, {
+                msgEnd: action.msgEnd,
             }));
         case GET_CONTENT:
             return (Object.assign({}, state, {
@@ -41,7 +49,6 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetchingEntries: false,
                 entries: action.entries,
-                // selectedId: newSelectedId,
             }));
         case MSGENTRIES_FAILURE:
             return (Object.assign({}, state, {
@@ -52,17 +59,20 @@ export function messageReducer(state = initialState, action) {
         case MSGS_REQUEST:
             return (Object.assign({}, state, {
                 isFetchingMsgs: true,
+                isEntering: action.isEntering,
             }));
         case MSGS_SUCCESS:
             return (Object.assign({}, state, {
                 isFetchingMsgs: false,
-                msgs: action.msgs,
+                msgs: action.newMsgs.concat(state.msgs),
+                currentPageNum: action.currentPageNum,
+                isEntering: false,
             }));
         case MSGS_FAILURE:
             return (Object.assign({}, state), {
                 isFetchingMsgs: false,
-                msgs: undefined,
                 errors: action.errors,
+                noMoreMsgs: true,
             });
         default:
             return state;

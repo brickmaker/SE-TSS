@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import SearchResult from '../../components/searchresult';
 import { search } from '../../views/search/actions';
-import { withStyles, Grid, Typography, Divider, CircularProgress } from 'material-ui';
+import { withStyles, Grid, Typography, Divider, CircularProgress, Paper } from 'material-ui';
 import Redirect from 'react-router-dom/Redirect';
 
 const styles = {
@@ -43,22 +43,39 @@ class SearchResultPanel extends Component {
                             <Redirect to={`/forum/search/${searchType}/${query}/1`} />
                             :
                             <div>
-                                <Typography variant="caption" className={classes.item}>
-                                    共{resultNum}个结果
+                                <Typography variant="subheading" className={classes.item}>
+                                   {resultType === 'post'? "帖子：":"版块："} 共{resultNum}个结果
                         </Typography>
                                 <Divider />
                                 {results &&
-                                    <Grid container justify="flex-start">
-                                        {
-                                            Object.values(results).map((result) => {
-                                                return (
-                                                    <Grid item xs={12} sm={resultType === 'post' ? 12 : 6}>
-                                                        <SearchResult key={resultType === 'post' ? result["title"] : result["path"]} result={result} resultType={resultType} />
-                                                    </Grid>
-                                                )
-                                            })
-                                        }
-                                    </Grid>
+                                    (
+                                        resultType === "post" ?
+                                            // <Paper>
+                                                <Grid container justify="flex-start">
+                                                    {
+                                                        Object.values(results).map((result) => {
+                                                            return (
+                                                                <Grid item xs={12} sm={12}>
+                                                                    <SearchResult key={result["title"]} result={result} resultType={resultType} />
+                                                                </Grid>
+                                                            )
+                                                        })
+                                                    }
+                                                </Grid>
+                                            // </Paper>
+                                            :
+                                            <Grid container justify="flex-start">
+                                                {
+                                                    Object.values(results).map((result) => {
+                                                        return (
+                                                            <Grid item xs={12}>
+                                                                <SearchResult key={result["path"]} result={result} resultType={resultType} />
+                                                            </Grid>
+                                                        )
+                                                    })
+                                                }
+                                            </Grid>
+                                    )
                                 }
                                 <Typography className={classes.more}>
                                     更多结果

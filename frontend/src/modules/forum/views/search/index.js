@@ -5,6 +5,7 @@ import { Avatar, withStyles, Grid, Typography } from 'material-ui';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
+import { Path } from '../../components/util/Path';
 
 const styles = {
     container: {
@@ -20,10 +21,11 @@ class Search extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div>Search
+            <div>
                 <Grid container className={classes.container}>
                     <Grid item xs={8} sm={8} md={8} lg={6}>
-                        <SearchResultPanel match={this.props.match}/>
+                        <Path isMain />
+                        <SearchResultPanel match={this.props.match} />
                     </Grid>
                 </Grid>
             </div>

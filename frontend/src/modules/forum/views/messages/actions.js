@@ -1,36 +1,36 @@
 import { ROOT_URL } from '../../configs/config';
 import axios from 'axios';
 
-// export const TEST = "test";
-// export function test(test) {
-//     return ({
-//         type: TEST,
-//         test: test,
-//     });
-// }
 
 export const GET_MSGS = "get_msgs";
 export const MSGS_REQUEST = "msgs_request";
 export const MSGS_SUCCESS = "msgs_success";
 export const MSGS_FAILURE = "msgs_failure";
-export function getMsgs(uid, selectedId) {
+export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
     return (dispatch, getState) => {
         const { isFetchingMsgs } = getState();
         if (isFetchingMsgs) {
             return;
         }
-        dispatch({ type: MSGS_REQUEST });
+        dispatch({
+            type: MSGS_REQUEST,
+            isEntering: nextPageNum === 1,
+        });
         axios.get(`${ROOT_URL}/api/forum/messages`, {
             params: {
-                // TODO:
-                // id:{uid, selectedId},
-                from: selectedId,
+                // TODO:{uid1, uid2, pagenum, pagesize}
+                // uid1: uid,
+                // uid2: selectedId,
+                // pagenum: nextPageNum,
+                // pagesize: pageSize,
+                from: [uid1, uid2],
             }
         })
             .then((response) => {
                 dispatch({
                     type: MSGS_SUCCESS,
-                    msgs: response.data,
+                    newMsgs: response.data,
+                    currentPageNum: nextPageNum,
                 });
             })
             .catch((errors) => {
@@ -50,20 +50,31 @@ export function selectEntry(selectedId) {
             selectedId: selectedId,
         });
     }
-    // return ({
-    //     type: SELECT_ENTRY,
-    //     id: id,
-    // });
 }
 
 
+export const CLEAR_MSGS = "clear_msgs";
+export function clearMsgs() {
+    return ({
+        type: CLEAR_MSGS,
+    });
+}
+
+
+export const SET_MSGEND = "set_msgend";
+export function setMsgEnd(msgEnd) {
+    return ({
+        type: SET_MSGEND,
+        msgEnd: msgEnd,
+    });
+}
 
 export const GET_MSGENTRIES = "get_msgentries";
 export const MSGENTRIES_REQUEST = 'entries_request';
 export const MSGENTRIES_SUCCESS = "entries_success";
 export const MSGENTRIES_FAILURE = "entries_failure";
 
-export function getMsgEntries(uid, selectedId) {
+export function getMsgEntries(uid, selectedId, pageSize) {
     return (dispatch, getState) => {
         const { isFetchingEntries } = getState();
         if (isFetchingEntries) {
@@ -98,7 +109,10 @@ export function getMsgEntries(uid, selectedId) {
                         type: SELECT_ENTRY,
                         selectedId: entries[0]["id"],
                     });
-                    dispatch(getMsgs(uid, entries[0]["id"]));
+                    dispatch({
+                        type: CLEAR_MSGS,
+                    });
+                    dispatch(getMsgs(uid, entries[0]["id"], 1, pageSize));
                 }
                 dispatch({
                     type: MSGENTRIES_SUCCESS,
@@ -111,45 +125,23 @@ export function getMsgEntries(uid, selectedId) {
                     errors: errors.response,
                 })
             })
-
-        // fetch(`${ROOT_URL}/api/forum/msgentries?uid=${uid}`)
-        //     .then((response) => (response.json()))
-        //     .then((entries) => {
-        //         console.log("entries", entries),
-        //             dispatch({
-        //                 type: MSGENTRIES_SUCCESS,
-        //                 entries: entries,
-        //             }),
-        //             (errors) => {
-        //                 dispatch({
-        //                     type: MSGENTRIES_FAILURE,
-        //                     errors: errors
-        //                 })
-        //             }
-        //     })
     }
 }
 
 export const POST_MSG = "post_msg";
-export function postMsg(from, to, content) {
+export function postMsg(from, to, content, pageSize) {
     console.log(from, to, content);
     return ((dispatch, getState) => {
-        // TODO: correct POST request
         axios.post(`${ROOT_URL}/api/forum/messages`, {
-            params: {
-                // from:{"haha":"hh", "selectedId":"ff"},
-                from: from,
-            },
+            //TODO: remove id and time attr
+            id: content,
+            from: from,
+            to: to,
+            content: content,
+            time: "4.30",
         })
-            // axios.post(`${ROOT_URL}/api/forum/messages`, {
-            //     params: {
-            //         from: from,
-            //         to: to,
-            //         content: content,
-            //     }
-            // })
             .then((response) => {
-                dispatch(getMsgEntries(from, undefined));
+                dispatch(getMsgEntries(from, undefined, pageSize));
             })
             .catch((errors) => {
                 console.log("postMsg errors", errors.response);

@@ -225,7 +225,7 @@ pagesize: Integer
 ##### 响应
 ```
 {
-    "size": 1000,
+    "anncNum": 1000,
     "anncs":
         [
             {
@@ -294,7 +294,7 @@ pagesize: Integer
 帖子
 ```
 {
-    "size": 1000,
+    "resultNum": 1000,
     "results": [
         {
             "title": ,
@@ -328,24 +328,29 @@ pagesize: Integer
 版块
 ```
 {
-    "size": 1000,
+    "resultNum": 1000,
     "results":[
         { 
-            "college": {
-                "id": "collegeid",
-                "name": "计算机科学与技术学院"
+            "path":{
+                "college": {
+                    "id": "collegeid",
+                    "name": "计算机科学与技术学院"
+                },
+                "course": {
+                    "id": "courseid",
+                    "name": "软件工程"
+                },
+                "teacher": {
+                    "id": "teacherid",
+                    "name": "王章野"
+                }
             },
-            "course": {
-                "id": "courseid",
-                "name": "软件工程"
-            },
-            "teacher": {
-                "id": "teacherid",
-                "name": "王章野"
-            }
+            "postNum": 1000,
+            "lastReplyTime": "yyyy/MM/dd hh:mm"
         },
         ...
     ]
 }
 ```
+path子字段可为空
 ### 管理
