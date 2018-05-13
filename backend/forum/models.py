@@ -14,7 +14,35 @@ class Section(models.Model):
     def __str__(self):
         return self.name
 
+class College(models.Model):
+    code = models.CharField(max_length=50, blank=False, default="default-college-code")
+    name = models.CharField(max_length=50, blank=False, default="default-college-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return 'College Code: %s College Name: %s'%(self.code,self.name)
+        
+class Course(models.Model):
+    
+    code = models.CharField(max_length=50, blank=False, default="default-course-code")
+    name = models.CharField(max_length=50, blank=False, default="default-course-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    college = models.ForeignKey('College',on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return 'Course Code: %s Course Name: %s'%(self.code,self.name)
 
+class Teacher(models.Model):
+    name = models.CharField(max_length=50, blank=False, default="default-course-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    college = models.ForeignKey('College',on_delete=models.CASCADE)
+    course  = models.ForeignKey('Course',on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return 'Teacher : %s'%(self.name)
+
+        
+        
 class Reply(models.Model):
     uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
     content = models.TextField()

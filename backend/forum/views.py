@@ -17,7 +17,7 @@ class subscriptions(APIView):
         token = request.GET.get('token',None)
         
         if uid is None or token is None:
-            return Response({'error':'Parameter incomplete'},status=status.HTTP_403_FORBIDDEN)
+            return Response({'error':'Parameter Error'},status=status.HTTP_403_FORBIDDEN)
         
         try:
             user = models.User.objects.get(pk=uid)
