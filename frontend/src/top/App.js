@@ -7,6 +7,7 @@ import store from './stores'
 
 import InformationManagement from "../modules/informationManagement";
 import Forum from "../modules/forum";
+import ScoreManagement from "../modules/scorem"
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                         <div>
                             <Route path={'/info'} component={InformationManagement}/>
                             <Route path={'/forum'} component={Forum}/>
+                            <Route path={'/scorem'} component={ScoreManagement}/>
                         </div>
                     </BrowserRouter>
                 </div>
