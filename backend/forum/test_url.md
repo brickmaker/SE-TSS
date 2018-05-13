@@ -6,7 +6,7 @@
 # 测试用数据库初始化
 
 ```
-python manage.py loaddata forum_fixtures_test.json
+python init_db.py -m debug
 ```
 
 # 订阅
@@ -23,3 +23,16 @@ python manage.py loaddata forum_fixtures_test.json
 3. 用户不存在
 	* http://127.0.0.1:8000/api/forum/subscriptions?uid=998&token=1
 
+# 课程列表
+
+## GET
+
+1. 基本功能测试
+	* http://127.0.0.1:8000/api/forum/courses?collegeid=1
+	
+2. 参数错误
+	* http://127.0.0.1:8000/api/forum/courses?collegeidd=1
+	* http://127.0.0.1:8000/api/forum/courses
+	
+3. 学院不存在
+	* http://127.0.0.1:8000/api/forum/courses?collegeid=998
