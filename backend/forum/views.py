@@ -15,7 +15,6 @@ class subscriptions(APIView):
     def get(self, request, format=None):
         uid  = request.GET.get('uid', None)
         token = request.GET.get('token',None)
-        
         if uid is None or token is None:
             return Response({'error':'Parameter Error'},status=status.HTTP_403_FORBIDDEN)
         
@@ -28,10 +27,26 @@ class subscriptions(APIView):
         for subscribe in models.Subscribe.objects.filter(user=user):
             section = models.Section.objects.get(pk=subscribe.section_id)
             item = {}
-            item['area'] = {'name':section.name}
+            item['area'] = {'name':section.name,'path':{}}
+            
+            assert section.type in (section.COLLEGE,section.TEACHER,section.COURSE)
+            
+            if section.type == section.TEACHER:
+                teacher = models.Teacher.objects.get(section_id = section.id)
+                college = models.College.objects.get(pk=teacher.college_id)
+                course = models.Course.objects.get(pk=teacher.course_id)
+                item['area']['path']['college'] = {'id':college.id,'name':college.name}
+                item['area']['path']['course'] = {'id':course.id,'name':course.name}
+                item['area']['path']['teacher'] = {'id':teacher.id,'name':teacher.name}
+            elif section.type == section.COURSE:
+                course = models.Course.objects.get(section_id=section.id)
+                college = models.College.objects.get(pk=course.college_id)
+                item['area']['path']['college'] = {'id':college.id,'name':college.name}
+                item['area']['path']['course'] = {'id':course.id,'name':course.name}
+                
             item['newPosts'] = []
             for newPost in models.Thread.objects.filter(section=section).order_by('-date'):
-                subItem = {'title':newPost.title}
+                subItem = {'id': newPost.id,'title':newPost.title}
                 item['newPosts'].append(subItem)
             subscriptions.append(item)
             

@@ -22,7 +22,7 @@ class SubscriptionTests(APITestCase):
         models.User.objects.create(uid='000',name='Aaron')
         models.User.objects.create(uid='001',name='Bob')
         models.Section.objects.create(name='计算机科学与技术')
-        models.Section.objects.create(name='软件工程')
+        models.Section.objects.create(name='软件工程')z
         models.Thread.objects.create(title='Hello,cpp', poster_id='000',section_id=1,date="1970-1-1")
         models.Thread.objects.create(title='Hello,go',  poster_id='000',section_id=1,date="1970-1-1")
         models.Thread.objects.create(title='Hello,scheme',poster_id='000',section_id=2,date="1970-1-1")

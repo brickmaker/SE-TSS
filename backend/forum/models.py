@@ -6,9 +6,24 @@ from django.db import models
 class Section(models.Model):
     name = models.CharField(max_length=50, blank=False, default="default-section")
     description = models.CharField(max_length=200, blank=True, default="")
-    father_section = models.ManyToManyField('self', symmetrical=False, related_name='root')
     admin = models.ManyToManyField('User',symmetrical=False,related_name='admin')
-    create_time = models.DateTimeField(auto_now_add=True)
+    
+    COLLEGE = 'CL'
+    COURSE = 'CE'
+    TEACHER = 'TR'
+    
+    SECTION_TYPE_CHOICES = (
+        (COLLEGE,'college'),
+        (COURSE,'course'),
+        (TEACHER,'teacher'),
+    )
+    
+    type = models.CharField(
+        max_length=2,
+        choices=SECTION_TYPE_CHOICES,
+        default=TEACHER,
+    )
+    
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
@@ -81,7 +96,7 @@ class Thread(models.Model):
     content = models.TextField()
     poster = models.ForeignKey('User',on_delete=models.CASCADE) 
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     CLOSED = 'CL'
     OPEN = 'OP'
@@ -104,7 +119,7 @@ class Attachment(models.Model):
     name = models.CharField(max_length=50)
     thread = models.ForeignKey('Thread',on_delete=models.CASCADE)
     file = models.FileField()
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.name
@@ -114,7 +129,7 @@ class Message(models.Model):
     sender_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
     receiver_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
     content = models.TextField()
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return 'From %s to %s'%(self.sender_id,self.receiver_id)
@@ -123,7 +138,7 @@ class Message(models.Model):
 class Subscribe(models.Model):
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
     section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='section')
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return '%s subscribed %s'(self.uid,self.section_id)
