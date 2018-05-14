@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import { Grid, Paper, Typography, withStyles, Divider, Input, Button, List, CircularProgress } from 'material-ui';
 import MsgEntry from '../../components/msgentry';
 import MsgHistory from '../../containers/msghistory';
+import MsgEntryPanel from '../../containers/msgentrypanel';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { selectEntry, getMsgEntries, postMsg, getContent, test } from './actions';
+import { MainBody } from '../../components/util/MainBody';
+import { Path } from '../../components/util/Path';
 
 const styles = {
     box: {
         outlineWidth: 1,
-        margin: 30,
+        // margin: 30,
         // outlineColor: "#00ff00",
         // backgroundColor: "#f0f0f0",
     },
@@ -73,20 +76,27 @@ const styles = {
 class Messages extends Component {
     componentWillMount() {
         //TODO: user id
-        this.props.getMsgEntries(5, this.props.selectedId, this.props.pageSize);
+        // this.props.getMsgEntries(5, this.props.selectedId, this.props.pageSize);
     }
 
     render() {
-        const { classes, entries, selectedId, isFetchingEntries,isFetchingMsgs, postMsg, content, 
+        const { classes, entries, selectedId, isFetchingEntries, isFetchingMsgs, postMsg, content,
             getContent, isEntering } = this.props;
+            const path = {'messages': {'name': '消息', 'link': '/forum/messages'}};
+            //TODO: uid
         const uid = 5;
-        return (<Grid container className={classes.container}>
-            <Grid item xs={12} sm={10} md={8} lg={8}>
-                <div className={classes.box}>
-                    <Paper>
-                        <Grid container>
-                            <Grid item xs={4} sm={4} md={4} lg={3}>
-                                {isFetchingEntries ?
+        return (
+            <div>
+                <MainBody>
+                    <Path isMain path={path}/>
+                    <Grid container className={classes.container}>
+                        <Grid item xs={12} sm={10} md={8} lg={8}>
+                            <div className={classes.box}>
+                                <Paper>
+                                    <Grid container>
+                                        <Grid item xs={4} sm={4} md={4} lg={3}>
+                                            <MsgEntryPanel />
+                                            {/* {isFetchingEntries ?
                                     <div className={classes.outterpending}>
                                         <CircularProgress className={classes.pending} />
                                     </div>
@@ -97,51 +107,53 @@ class Messages extends Component {
                                                 return (<MsgEntry entry={entry} key={entry.id} />);
                                             })}
                                         </List>
-                                    </div>}
-                            </Grid>
-                            <Grid item xs={8} sm={8} md={8} lg={9}>
-                                <Typography align="center" variant="subheading" className={classes.title}>
-                                    与 {selectedId} 的私信
+                                    </div>} */}
+                                        </Grid>
+                                        <Grid item xs={8} sm={8} md={8} lg={9}>
+                                            <Typography align="center" variant="subheading" className={classes.title}>
+                                                与 {selectedId} 的私信
                                 </Typography>
-                                <main className={classes.history}>
-                                    {
-                                        // isFetchingMsgs ?
-                                        isEntering ?
-                                            <div className={classes.outterpending}>
-                                                <CircularProgress className={classes.pending} />
-                                            </div>
-                                            :
-                                        <MsgHistory key={selectedId} />
-                                    }
-                                </main>
-                                <Divider />
-                                <main className={classes.inputpanel}>
-                                    <div className={classes.inputoutter}>
-                                        <div className={classes.input}>
-                                            <Input multiline={true} placeholder='请输入内容'
-                                                disableUnderline={true} fullWidth={true}
-                                                onChange={(event) => {
-                                                    getContent(event.target.value);
-                                                }} value={content}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className={classes.send}>
-                                        <Button variant="raised" onClick={
-                                            (event) => {
-                                                event.preventDefault();
-                                                postMsg(uid, selectedId, content);
-                                                getContent("");
-                                            }
-                                        }>发送</Button>
-                                    </div>
-                                </main>
-                            </Grid>
+                                            <main className={classes.history}>
+                                                {
+                                                    // isFetchingMsgs ?
+                                                    isEntering ?
+                                                        <div className={classes.outterpending}>
+                                                            <CircularProgress className={classes.pending} />
+                                                        </div>
+                                                        :
+                                                        <MsgHistory key={selectedId} />
+                                                }
+                                            </main>
+                                            <Divider />
+                                            <main className={classes.inputpanel}>
+                                                <div className={classes.inputoutter}>
+                                                    <div className={classes.input}>
+                                                        <Input multiline={true} placeholder='请输入内容'
+                                                            disableUnderline={true} fullWidth={true}
+                                                            onChange={(event) => {
+                                                                getContent(event.target.value);
+                                                            }} value={content}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className={classes.send}>
+                                                    <Button variant="raised" onClick={
+                                                        (event) => {
+                                                            event.preventDefault();
+                                                            postMsg(uid, selectedId, content);
+                                                            getContent("");
+                                                        }
+                                                    }>发送</Button>
+                                                </div>
+                                            </main>
+                                        </Grid>
+                                    </Grid>
+                                </Paper>
+                            </div>
                         </Grid>
-                    </Paper>
-                </div>
-            </Grid>
-        </Grid>
+                    </Grid>
+                </MainBody>
+            </div>
         );
     }
 

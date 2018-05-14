@@ -30,8 +30,8 @@ export const SEARCH_REQUEST = "search_request";
 export const SEARCH_SUCCESS = "search_success";
 export const SEARCH_FAILURE = "search_failure";
 
-export function search(searchType, query, pageNum){
-    console.log("action search", searchType, query, pageNum);
+export function search(searchType, query, pageNum, pageSize){
+    console.log("action search", searchType, query, pageNum, pageSize);
     return (dispatch, getState) => {
         const {isFetching} = getState();
         if(isFetching){

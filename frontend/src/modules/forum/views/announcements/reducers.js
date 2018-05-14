@@ -1,15 +1,15 @@
-import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE } from "./actions";
+import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_EDITING } from "./actions";
 
 // import {} from
 
 const initialState = {
     //TODO:  
-    currentPageNum: 1,
     pageSize: 10,
     anncNum: 1000,
     anncs: {},
     isFetching: false,
     errors: {},
+    isEditing: false,
 }
 
 export function anncReducer(state = initialState, action) {
@@ -28,6 +28,10 @@ export function anncReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetching: false,
                 errors: action.errors,
+            }));
+        case SET_EDITING:
+            return (Object.assign({}, state, {
+                isEditing: action.isEditing,
             }));
         default: return state;
     };

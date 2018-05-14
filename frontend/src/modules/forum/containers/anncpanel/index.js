@@ -13,10 +13,16 @@ const styles = {
         // marginRight: -17,
         // padding: 4,
     },
-    outterPanel: {
+    outterPanelmain: {
+        overflow: "hidden",
+        marginTop: 10,
+        marginBottom: 30,
+        // height: 700,
+    },
+    outterPanelsection: {
         overflow: "hidden",
         marginTop: 20,
-        marginBottom: 20,
+        marginBottom: 30,
         // height: 700,
     },
     more: {
@@ -42,24 +48,14 @@ class AnncPanel extends Component {
         // const { anncs, anncNum } = this.props.anncs;
         console.log("match", match);
         console.log("render anncs", anncs);
-        const url = match? (match.params? `/forum/annoucements/${match.params.collegeid}/${match.params.courseid}/${match.params.teacherid}`:'/forum/annoucements' ):"/forum/annoucements";
+        // const url = match? (match.params? `/forum/annoucements/${match.params.collegeid}/${match.params.courseid}/${match.params.teacherid}`:'/forum/annoucements' ):"/forum/annoucements";
         return (
             <div>
-                <div className={classes.outterPanel}>
+                <div className={type==="main"?classes.outterPanelmain: classes.outterPanelsection}>
                     <div className={classes.mainpanel}>
                         {anncs && Object.values(anncs).map((annc) => {
                             return (<Annc annc={annc} key={annc["title"] + annc["path"]} type={type} />)
                         })}
-                        {/* {(type === 'main' || type === 'section') &&
-                            <Typography align="center" className={classes.more}
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    window.location.href = url;
-                                }}
-                            >
-                                更多公告通知
-                                 </Typography>
-                        } */}
                     </div>
                 </div>
             </div>

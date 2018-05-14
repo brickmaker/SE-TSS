@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND } from './actions';
+import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -16,6 +16,8 @@ const initialState = {
     noMoreMsgs: false,
     msgEnd: undefined,
     isEntering: false,
+    isFetchingNewMsgs: false,
+    newMsgs: [],
 };
 
 export function messageReducer(state = initialState, action) {
@@ -74,6 +76,20 @@ export function messageReducer(state = initialState, action) {
                 errors: action.errors,
                 noMoreMsgs: true,
             });
+        case NEWMSGS_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: true,
+            }));
+        case NEWMSGS_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: false,
+                newMsgs: action.newMsgs,
+            }));
+        case NEWMSGS_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: false,
+                errors: action.errors,
+            }));
         default:
             return state;
     }

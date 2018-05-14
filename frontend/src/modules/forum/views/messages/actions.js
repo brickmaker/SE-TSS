@@ -42,8 +42,45 @@ export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
     }
 }
 
+export const GET_NEWMSGS = "get_newmsgs";
+export const NEWMSGS_REQUEST = "newmsgs_request";
+export const NEWMSGS_SUCCESS = "newmsgs_success";
+export const NEWMSGS_FAILURE = "newmsgs_failure";
+export function getNewMsgs(uid){
+    return (dispatch, getState)=>{
+        const {isFetchingNewMsgs} = getState();
+        if(isFetchingNewMsgs){
+            return;
+        }
+        dispatch({type: NEWMSGS_REQUEST});
+        //TODO: url
+        axios.get(`${ROOT_URL}/api/forum/newmsgs`, {
+            params:{
+                //TODO: 
+                // uid: uid,
+                to: uid,
+            }
+        })
+        .then((response)=>{
+            console.log("newmsgs", response);
+            dispatch({
+                type: NEWMSGS_SUCCESS,
+                newMsgs: response.data,
+            })
+        })
+        .catch((errors)=>{
+            console.log("newmsgs", errors);
+            dispatch({
+                type: NEWMSGS_FAILURE,
+                errors: errors.response,
+            })
+        })
+    }
+}
+
 export const SELECT_ENTRY = "select_entry";
 export function selectEntry(selectedId) {
+    console.log("selectEntry", selectedId);
     return (dispatch, getState) => {
         dispatch({
             type: SELECT_ENTRY,

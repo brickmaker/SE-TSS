@@ -129,6 +129,12 @@ success: 参照`replies`
 error: ..
 
 ### 私信
+#### 首页获取新私信
+TODO:
+##### 请求
+##### 参数
+##### 响应
+
 #### 获取联系人
 ##### 请求
 ```
@@ -317,9 +323,9 @@ pagesize: Integer
                 "username": ,
                 "uid": ,
             },
-            "replynum": 20,
+            "replyNum": 20,
             "time": "yyyy/MM/dd hh:mm",
-            "relatedcontent": ,
+            "relatedContent": ,
         },
         ...
     ]

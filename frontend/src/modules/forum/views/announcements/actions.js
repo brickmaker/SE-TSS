@@ -46,3 +46,12 @@ export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageS
             })
     }
 }
+
+
+export const SET_EDITING = "set_editing";
+export function setEditing(isEditing){
+    return ({
+        type: SET_EDITING,
+        isEditing: isEditing,
+    });
+}

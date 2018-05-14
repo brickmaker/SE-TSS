@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom'
 const styles = {
     container: {
         // justifyContent: "center",
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 8,
+        marginBottom: 8,
         // paddingTop: 10,
         // paddingBottom: 10,
-        padding: 20,
+        padding: 15,
         backgroundColor: "#ffffff",
     },
     item: {
@@ -31,21 +31,14 @@ const styles = {
         display: "flex",
         justifyContent: "space-between",
         verticalAlign: "middle",
-        paddingTop: 10,
-        paddingBottom: 10,
-    },
-    line2: {
-        display: "flex",
-        justifyContent: "space-between",
-        verticalAlign: "middle",
-        paddingTop: -10,
-        paddingBottom: 10,
+        paddingTop: 3,
+        paddingBottom: 3,
     },
     container2: {
-        marginTop: 10,
-        marginBottom: 10,
+        marginTop: 8,
+        marginBottom: 8,
         verticalAlign: "middle",
-        padding: 20,
+        padding: 15,
         // borderWidth: 1,
         // borderStyle: "solid",
         // borderRadius: 5,
@@ -76,7 +69,7 @@ class SearchResult extends Component {
             link = sectionPath["teacher"]["link"];
         };
         if (resultType === 'post') {
-            const { title, author, time, replyCnt, path, postid } = result;
+            const { title, author, time, replyNum,relatedContent, path, postid } = result;
             return (
                 <Card className={classes.container}>
                     <div className={classes.line}>
@@ -101,13 +94,18 @@ class SearchResult extends Component {
                     </div>
                     <div className={classes.line}>
                         <Typography className={classes.item}>
-                            作者：{author}
+                            作者：{author["username"]}
                         </Typography>
                         <Typography className={classes.item}>
                             最后回复时间：{time}
                         </Typography>
                         <Typography className={classes.item}>
-                            回复数：{replyCnt}
+                            回复数：{replyNum}
+                        </Typography>
+                    </div>
+                    <div className={classes.line}>
+                        <Typography className={classes.item}>
+                    {relatedContent}
                         </Typography>
                     </div>
                 </Card>
@@ -131,7 +129,7 @@ class SearchResult extends Component {
                         </div>
                     </div>
 
-                    <div className={classes.line2}
+                    <div className={classes.line}
                     >
                         <Typography align="left" className={classes.item}>
                             最后回复时间 {lastReplyTime}

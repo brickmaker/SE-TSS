@@ -1312,54 +1312,80 @@
       "id": "gg",
       "from": 1,
       "to": 2,
-      "content": "hey sent by 1",
-      "time": "4.30"
+      "content": "一条消息 sent by 1",
+      "time": "5/15 4:30"
     },
     {
       "id": "啊啊",
       "from": 2,
       "to": 5,
-      "content": "啊啊",
-      "apiId": "forum"
+      "content": "一条消息 sent by 2",
+      "time": "5/15 4:30"
     },
     {
       "id": "啊啊啊",
       "from": 5,
       "to": 3,
-      "content": "啊啊啊",
-      "apiId": "forum"
+      "content": "一条消息 sent by 5",
+      "time": "5/15 4:30"
     },
     {
       "id": "好吧",
       "from": 2,
       "to": 5,
-      "content": "好吧",
-      "time": "4.30",
-      "apiId": "forum"
+      "content": "一条消息 sent by 2",
+      "time": "5/15 4:30"
     },
     {
       "id": "我也",
       "from": 5,
       "to": 1,
       "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
-      "time": "4.30",
-      "apiId": "forum"
+      "time": "5/15 4:30"
     },
     {
       "id": "我也",
       "from": 5,
       "to": 1,
       "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
-      "time": "4.30",
-      "apiId": "forum"
+      "time": "5/15 4:30"
     },
     {
       "id": "我也",
       "from": 5,
       "to": 1,
-      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
-      "time": "4.30",
-      "apiId": "forum"
+      "content": "一条消息 sent by 5",
+      "time": "5/15 4:30"
+    }
+  ],
+  "newmsgs": [
+    {
+      "from": {
+        "id": "id",
+        "username": "友人A"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": "id",
+        "username": "友人A"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": "id",
+        "username": "友人A"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": "id",
+        "username": "友人A"
+      },
+      "content": "一条新消息"
     }
   ],
   "search": [
@@ -1368,11 +1394,15 @@
       "resultNum": 54,
       "results": [
         {
-          "title": "一个很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的标题",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1389,11 +1419,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1410,11 +1444,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1431,11 +1469,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1452,11 +1494,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1473,11 +1519,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1494,11 +1544,15 @@
           }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
           "time": "4.30",
-          "replyCnt": 10,
+          "replyNum": 10,
           "postid": "postid",
+          "relatedContent": "相关内容",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1536,7 +1590,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         },
         {
           "path": {
@@ -1554,7 +1608,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         },
         {
           "path": {
@@ -1572,7 +1626,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         },
         {
           "path": {
@@ -1590,7 +1644,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         },
         {
           "path": {
@@ -1608,7 +1662,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         },
         {
           "path": {
@@ -1626,7 +1680,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "yyyy/MM/dd hh:mm"
+          "lastReplyTime": "2018/05/15 12:00"
         }
       ]
     }
@@ -1636,7 +1690,7 @@
       "anncNum": 24,
       "anncs": [
         {
-          "title": "titttttttttttttle",
+          "title": "一则公告的题目",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1655,8 +1709,8 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "tttttttttttttttt5.2",
-          "content": "contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"
+          "time": "2018/05/11",
+          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
         },
         {
           "title": "一则公告的题目",
@@ -1678,11 +1732,11 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
+          "time": "2018/05/11",
+          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
         },
         {
-          "title": "title",
+          "title": "一则公告的题目",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1701,11 +1755,11 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
+          "time": "2018/05/11",
+          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
         },
         {
-          "title": "title",
+          "title": "一则公告的题目",
           "path": {
             "college": {
               "id": "collegeid",
@@ -1724,10 +1778,62 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
+          "time": "2018/05/11",
+          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
         }
       ]
+    }
+  ],
+  "hotposts": [
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
     }
   ]
 }

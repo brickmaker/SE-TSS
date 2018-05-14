@@ -11,6 +11,7 @@ import MoreForums from "./components/MoreForums"
 import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
 import { Announcement as AnnouncementIcon } from '@material-ui/icons'
 import { Message } from "@material-ui/icons/es/index"
+import NewMsgPanel from '../../containers/newmsgpanel';
 
 class Main extends Component {
 
@@ -51,21 +52,24 @@ class Main extends Component {
                                             <AnnouncementIcon color={'primary'} style={{ fontSize: 40 }} />
                                         </SectionText>
                                     </SectionTitle>
-                                    <Announcements type="main" />
+                                    <Announcements type="main" match={{'params': {"pageNum":1}}} />
                                 </div>
                             </Grid>
-                            <div>
-                                <SectionTitle>
-                                    <SectionText
-                                        onClick={() => {
-                                            // history.push('forum/colleges')
-                                        }}
-                                        text={'消息留言'}
-                                    >
-                                        <Message color={'primary'} style={{ fontSize: 40 }} />
-                                    </SectionText>
-                                </SectionTitle>
-                            </div>
+                            <Grid item xs={12}>
+                                <div>
+                                    <SectionTitle>
+                                        <SectionText
+                                            onClick={() => {
+                                                // history.push('forum/colleges')
+                                            }}
+                                            text={'消息留言'}
+                                        >
+                                            <Message color={'primary'} style={{ fontSize: 40 }} />
+                                        </SectionText>
+                                    </SectionTitle>
+                                    <NewMsgPanel />
+                                </div>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </MainBody>

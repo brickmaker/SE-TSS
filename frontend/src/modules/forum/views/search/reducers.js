@@ -7,8 +7,8 @@ const initialState = {
     content: "",
     results: {},
     isFetching: false,
-    postPageNum: 10,
-    sectionPageNum: 20,
+    postPageSize: 10,
+    sectionPageSize: 20,
     pageNum: undefined,
     errors:{},
 }

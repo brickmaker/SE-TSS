@@ -20,8 +20,8 @@ const styles = {
         display: "flex",
         justifyContent: "space-between",
         verticalAlign: "middle",
-        marginTop: 5,
-    marginBottom: 5,
+        marginTop: 2,
+        marginBottom: 1,
     },
     line2: {
         display: "flex",
@@ -41,13 +41,14 @@ class Annc extends Component {
     render() {
         const { classes, type } = this.props;
         const { title, path, author, time, content } = this.props.annc;
+        console.log(content);
         // TODO: have been read
         return (
             <ExpansionPanel className={classes.root}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                     <div className={classes.root}>
                         <div className={classes.line}>
-                            <Typography variant={type==='main'?"subheading":"title"} className={classes.item}>
+                            <Typography variant={type === 'main' ? "subheading" : "title"} className={classes.item}>
                                 {title}
                             </Typography>
                             {(type != 'main') &&
@@ -74,10 +75,11 @@ class Annc extends Component {
                     </div>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
-                    <Typography variant="body1"
-                    className={classes.detail}>
+                    {/* <Typography variant="body1"
+                        className={classes.detail}>
                         {content}
-                    </Typography>
+                    </Typography> */}
+                    <span style={{whiteSpace: "pre-line", fontSize:14}}>{content}</span>
                 </ExpansionPanelDetails>
             </ExpansionPanel>
         );
