@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models
 
+post_per_page = 20
+max_new_post = 5
+
+
 def index(request):
     return JsonResponse({'key': 'Are you OK??'})
     
@@ -56,7 +60,7 @@ class subscriptions(APIView):
 
 class courses(APIView):
     def get(self, request, format=None):
-        collegeid  = request.GET.get('collegeid', None)
+        collegeid = request.GET.get('collegeid', None)
         if collegeid is None:
             return Response({'error':'Parameter Error'},status=status.HTTP_403_FORBIDDEN)
         
@@ -78,6 +82,58 @@ class courses(APIView):
             item['postNum'] = post_set.count()
             item['lastUpdate'] = post_set.last().date if item['postNum'] != 0 else "1970-01-01T00:00:00+00:00"
             courses.append(item)
-            
-        
         return Response(courses,status=status.HTTP_200_OK)
+        
+class course(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        if collegeid is None or courseid is None:
+            return Response({'error':'Parameter Error'},status=status.HTTP_403_FORBIDDEN)
+        
+        try:
+            course = models.Course.objects.get(pk=courseid,college=collegeid)
+            college = models.College.objects.get(pk=collegeid)
+        except:
+            return Response({'error':'Course not found'},status=status.HTTP_404_NOT_FOUND)
+        
+        res = {}
+        res['college'] = college.name
+        res['course'] = course.name
+        res['subForums'] = []
+        for sub in models.Teacher.objects.filter(course=course):
+            item = {'id':sub.id,'name':sub.name,'pic':'TODO'}
+            sub_post_set = models.Thread.objects.filter(section=sub.section).order_by('-date')
+            item['postNum'] = sub_post_set.count()
+            item['lastUpdate'] = sub_post_set.first().date if item['postNum'] != 0 else "1970-01-01T00:00:00+00:00"
+            if item['postNum'] <= max_new_post:
+                item['newPosts'] = [{'title':x.title,'postId':x.id} for x in sub_post_set]
+            else:
+                item['newPosts'] = [{'title':x.title,'postId':x.id} for x in sub_post_set[:max_new_post]]
+            
+            res['subForums'].append(item)
+            
+        post_num = models.Thread.objects.filter(section=course.section).count()
+        res['pageNum'] = post_num//post_per_page + 1 
+        
+        return Response(res,status=status.HTTP_200_OK)
+        
+class teacher(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid', None)
+        if collegeid is None or courseid is None or teacherid is None:
+            return Response({'error':'Parameter Error'},status=status.HTTP_403_FORBIDDEN)
+                
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid,college=collegeid,course=courseid)
+            college = models.College.objects.get(pk=collegeid)
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error':'Teacher not found'},status=status.HTTP_404_NOT_FOUND)
+        
+        res = {'college':college.name,'course':course.name,'teacher':teacher.name}
+        post_num = models.Thread.objects.filter(section=teacher.section).count()
+        res['pageNum'] = post_num//post_per_page + 1 
+        return Response(res,status=status.HTTP_200_OK)

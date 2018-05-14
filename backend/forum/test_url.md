@@ -9,6 +9,10 @@
 python init_db.py -m debug
 ```
 
+# TODO
+* avatar
+
+
 # 订阅
 
 ## GET
@@ -36,3 +40,18 @@ python init_db.py -m debug
 	
 3. 学院不存在
 	* http://127.0.0.1:8000/api/forum/courses?collegeid=998
+
+# 课程信息
+
+## GET
+1. 基本功能测试
+	* http://127.0.0.1:8000/api/forum/course?collegeid=1&courseid=1
+	* http://127.0.0.1:8000/api/forum/course?collegeid=1&courseid=2
+
+# 教师信息
+
+## GET
+1. 基本功能测试
+	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=1&teacherid=1
+	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=1&teacherid=2
+	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=2&teacherid=3
