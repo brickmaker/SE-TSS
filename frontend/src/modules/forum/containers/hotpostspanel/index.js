@@ -33,7 +33,7 @@ const styles = {
     },
     selectBar: {
         marginLeft: 20,
-        marginTop: 40,
+        // marginTop: 40,
         marginBottom: 20,
         marginRight: 20,
         paddingTop: 20,
