@@ -141,7 +141,7 @@ class Message(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return 'From %s to %s'%(self.sender_id,self.receiver_id)
+        return 'From %s to %s: %s'%(self.sender_id,self.receiver_id,self.content)
 
         
 class Subscribe(models.Model):

@@ -69,4 +69,21 @@ python init_db.py -m debug
 
 # 私信
 ## 联系人列表
-未测试，数据库增加了消息列表
+### GET
+1. 基本功能
+    * http://127.0.0.1:8000/api/forum/msgentries?uid=1
+
+## 获取发送私信
+### GET
+1. 基本功能
+    * http://127.0.0.1:8000/api/forum/messages?uid1=1&uid2=2&pagenum=0&pagesize=3
+
+### POST
+1. 基本功能
+    http://127.0.0.1:8000/api/forum/messages
+    body
+        uid1 = 1
+        uid2 = 2
+        content = "post的新消息"
+
+

@@ -10,4 +10,6 @@ urlpatterns = [
     path('teacher',views.teacher.as_view(),name='teacher'),
     path('post',views.thread.as_view(),name='post'),
     path('post_reply',views.reply.as_view(),name='reply'),
+    path('msgentries',views.msgentries.as_view(),name='msgentries'),
+    path('messages',views.messages.as_view(),name='messages'),
 ]
