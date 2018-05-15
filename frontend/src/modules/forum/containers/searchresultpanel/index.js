@@ -22,6 +22,7 @@ class SearchResultPanel extends Component {
     componentWillMount() {
         const { searchType, query, pageNum, pageSize } = this.props.match.params;
         this.props.search(searchType, query, pageNum, pageSize);
+        // this.props.setPageNum(pageNum);
     }
 
     clickPageNum(event) {
@@ -31,29 +32,25 @@ class SearchResultPanel extends Component {
     }
 
     render() {
-        const { classes, postPageSize, sectionPageSize, isFetching } = this.props;
-        const { results, resultNum } = this.props.results;
+        const { classes, pageSize, isFetching, results, resultNum } = this.props;
+        // const { results, resultNum } = this.props.results;
         const { searchType, query, pageNum } = this.props.match.params;
         const resultType = searchType;
-        var perPageNum;
-        if (searchType == 'post') {
-            perPageNum = postPageSize;
-        }
-        else {
-            perPageNum = sectionPageSize;
-        }
+        // console.log("pageNum", pageNum);
+        // console.log("max", isFetching, resultNum, resultNum/perPageNum+1);
+        // console.log("max", pageNum > resultNum/perPageNum+1);
         return (
             <Grid container justify="center" className={classes.container}>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                     {isFetching ? <CircularProgress /> :
-                        (pageNum > resultNum / perPageNum + 1) ?
+                        (resultNum && pageNum > resultNum / pageSize + 1) ?
                             <Redirect to={`/forum/search/${searchType}/${query}/1`} />
                             :
                             <div>
                                 <div styles={{ marginBottom: 30 }}>
                                     <Typography variant="subheading" className={classes.item}>
                                         共{resultNum}个结果
-                        </Typography>
+                                    </Typography>
                                     <Divider />
                                     {results &&
                                         (
@@ -84,9 +81,9 @@ class SearchResultPanel extends Component {
                                         )
                                     }
                                 </div>
-                                <PageNums pageNum={resultNum / perPageNum + 1} currPage={pageNum} clickPage={(event) => {
+                                <PageNums pageNum={resultNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                     const page = parseInt(event.target.innerText);
-                                    // window.location.href = `/forum/search/${searchType}/${query}/${page}`
+                                    window.location.href = `/forum/search/${searchType}/${query}/${page}`
                                 }
                                 } />
                             </div>
@@ -100,11 +97,10 @@ SearchResultPanel.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-
 const mapStateToProps = (state) => ({
     results: state.forum.search.results,
-    postPageSize: state.forum.search.postPageSize,
-    sectionPageSize: state.forum.search.sectionPageSize,
+    resultNum: state.forum.search.resultNum,
+    pageSize: state.forum.search.pageSize,
     isFetching: state.forum.search.isFetching,
 });
 
@@ -112,6 +108,9 @@ const mapDispatchToProps = (dispatch) => ({
     search: (searchType, query, pageNum, pageSize) => {
         dispatch(search(searchType, query, pageNum, pageSize));
     },
+    // setPageNum: (pageNum)=>{
+    //     dispatch(setPageNum(pageNum));
+    // },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(SearchResultPanel);

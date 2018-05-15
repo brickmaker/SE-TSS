@@ -29,9 +29,10 @@ class Forum extends Component {
                 <Switch>
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>
-                    <Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>
-                    <Route exact path={`${match.url}/announcements/:pageNum`} component={Announcements} /> 
-                    <Route path={`${match.url}/announcements/:pageNum/:collegeid/:courseid/:teacherid`} component={Announcements}/>
+                    {/* <Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/> */}
+                    <Route path={`${match.url}/search/:searchType/:query`} component={Search}/>
+                    <Route path={`${match.url}/announcements/user`} component={Announcements} /> 
+                    <Route path={`${match.url}/announcements/section/:collegeid/:courseid/:teacherid`} component={Announcements}/>
                     <Route path={`${match.url}/annceditor/:collegeid/:courseid/:teacherid`} component={AnncEditor}/>
                     <Route path={`${match.url}/management`} component={Management}/>
                     <Route path={`${match.url}/p/:postid`} component={PostPage}/>

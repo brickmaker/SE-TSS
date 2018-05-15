@@ -8,6 +8,7 @@ import { getAnncs } from './actions';
 import { Path } from '../../components/util/Path';
 import { MainBody } from '../../components/util/MainBody';
 import { PageNums } from '../../components/util/PageNums';
+import Route from 'react-router-dom/Route';
 
 const styles = {
     more: {
@@ -18,32 +19,32 @@ const styles = {
 
 class Announcements extends Component {
     componentWillMount() {
-        //TODO: 
-        const uid = 5;
-        console.log("annc match", this.props.match);
-        const { pageSize, type } = this.props;
-        //TODO: set different page size for different type.
-        if (type === 'main') {
-            this.props.getAnncs(uid, undefined, undefined, undefined, 1, pageSize);
-        }
-        else if (type === "section") {
-            const { collegeid, courseid, teacherid } = this.props.match["params"];
-            this.props.getAnncs(undefined, collegeid, courseid, teacherid, 1, pageSize);
-        }
-        else {
-            if (this.props.match.params.collegeid) {
-                const { collegeid, courseid, teacherid, pageNum } = this.props.match["params"];
-                this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
-            } else {
-                const { pageNum } = this.props.match["params"];
-                this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
-            }
-        }
+        // //TODO: 
+        // const uid = 5;
+        // console.log("annc match", this.props.match);
+        // const { pageSize, type } = this.props;
+        // //TODO: set different page size for different type.
+        // if (type === 'main') {
+        //     this.props.getAnncs(uid, undefined, undefined, undefined, 1, pageSize);
+        // }
+        // else if (type === "section") {
+        //     const { collegeid, courseid, teacherid } = this.props.match["params"];
+        //     this.props.getAnncs(undefined, collegeid, courseid, teacherid, 1, pageSize);
+        // }
+        // else {
+        //     if (this.props.match.params.collegeid) {
+        //         const { collegeid, courseid, teacherid, pageNum } = this.props.match["params"];
+        //         this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
+        //     } else {
+        //         const { pageNum } = this.props.match["params"];
+        //         this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
+        //     }
+        // }
     }
 
     render() {
-        const { classes, type, match, anncNum, anncs, pageSize, isFetching } = this.props;
-        const { collegeid, courseid, teacherid, pageNum } = match.params;
+        const { classes, type, match, anncNum, pageNum, anncs, pageSize, isFetching } = this.props;
+        const { collegeid, courseid, teacherid } = match.params;
         const sectionPath = {};
         console.log("render annc", anncs);
         // var link;
@@ -69,22 +70,32 @@ class Announcements extends Component {
                             <Path isMain path={sectionPath} />}
                         <Grid container justify="center">
                             <Grid item xs={12}>
-                                {isFetching ? <CircularProgress />
-                                    :
+                                <div>
                                     <div>
-                                        <div>
-                                            <Typography variant="subheading" className={classes.item}>
-                                                共{anncNum}个公告
+                                        <Typography variant="subheading" className={classes.item}>
+                                            共{anncNum}个公告
                                     </Typography>
-                                        </div>
-                                        <AnncPanel type={type} match={match} />
-                                        <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
-                                            const page = parseInt(event.target.innerText);
-                                            // window.location.href = `/forum/announcements/${page}/${collegeid}/${courseid}/${teacherid}`;
-                                        }
-                                        } />
                                     </div>
-                                }
+                                    <Route path={`${match.url}/:pageNum`} render={(props) => {
+                                        const newMatch = props.match;
+                                        newMatch.params = Object.assign({}, newMatch.params, {
+                                            "collegeid": collegeid,
+                                            "courseid": courseid,
+                                            "teacherid": teacherid,
+                                        });
+                                        console.log("newmatch", newMatch);
+                                        return (
+                                            <AnncPanel type={type} match={newMatch} oldlink={props.match.url} />
+                                        );
+                                    }} />
+                                    {/* <AnncPanel type={type} match={match} /> */}
+                                    {/* {console.log("announcements", anncNum, pageSize, pageNum)} */}
+                                    {anncNum && <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                                        const page = parseInt(event.target.innerText);
+                                        window.location.href = `${match.url}/${page}`;
+                                    }
+                                    } />}
+                                </div>
                             </Grid>
                         </Grid>
                     </MainBody>
@@ -111,6 +122,7 @@ const mapStateToProps = (state) => ({
     anncs: state.forum.annc.anncs,
     anncNum: state.forum.annc.anncNum,
     pageSize: state.forum.annc.pageSize,
+    pageNum: state.forum.annc.pageNum,
     isFetching: state.forum.annc.isFetching,
 });
 
