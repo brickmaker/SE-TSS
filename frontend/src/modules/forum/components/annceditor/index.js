@@ -40,9 +40,9 @@ class AnncEditor extends Component {
         console.log("match", this.props.match);
         //TODO: get corresponding names by ids
         const path = {};
-        path["college"] = { "name": collegeid, "link": `/forum/${collegeid}` };
-        path["course"] = { "name": courseid, "link": `/forum/${collegeid}/${courseid}` };
-        path["teacher"] = { "name": teacherid, "link": `/forum/${collegeid}/${courseid}/${teacherid}` };
+        path["college"] = { "name": "计算机科学与技术学院", "link": `/forum/${collegeid}` };
+        path["course"] = { "name": "软件工程", "link": `/forum/${collegeid}/${courseid}` };
+        path["teacher"] = { "name": "王章野", "link": `/forum/${collegeid}/${courseid}/${teacherid}` };
         path["annceditor"] = { "name": "发布公告", "link": `/forum/annceditor/${collegeid}/${courseid}/${teacherid}` };
         return (
             <MainBody>

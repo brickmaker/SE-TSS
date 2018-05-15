@@ -55,3 +55,12 @@ export function setEditing(isEditing){
         isEditing: isEditing,
     });
 }
+
+
+export const SET_PAGENUM = 'set_pagenum';
+export function setPageNum(pageNum){
+    return ({
+        type: SET_PAGENUM,
+        pageNum: pageNum,
+    });
+}

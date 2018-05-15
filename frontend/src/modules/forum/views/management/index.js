@@ -33,7 +33,7 @@ class Management extends Component {
                         </SectionTitle>
                         <ForumInfoPanel />
                     </Grid>
-                    <Grid item xs={1}/>
+                    <Grid item xs={10} lg={1}/>
                     <Grid item xs={12} sm={10} md={10} lg={5} className={classes.container}>
                         <SectionTitle>
                             <SectionText

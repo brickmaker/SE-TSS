@@ -1,4 +1,4 @@
-import { SELECT_SEARCHTYPE, ANCHOR_MENU, GET_CONTENT, SEARCH } from './actions';
+import { SELECT_SEARCHTYPE, ANCHOR_MENU, GET_CONTENT, SEARCH, SET_PAGENUM } from './actions';
 import { SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE } from './actions';
 
 const initialState = {
@@ -6,16 +6,20 @@ const initialState = {
     searchType: "post",
     content: "",
     results: {},
+    resultNum: 0,
     isFetching: false,
-    postPageSize: 10,
-    sectionPageSize: 20,
+    pageSize: 10,
     pageNum: undefined,
-    errors:{},
+    errors: {},
 }
 
 export function searchReducer(state = initialState, action) {
     console.log(state, action);
     switch (action.type) {
+        // case SET_PAGENUM:
+        //     return (Object.assign({}, state, {
+        //         pageNum: action.pageNum,
+        //     }));
         case SELECT_SEARCHTYPE:
             return (Object.assign({}, state, {
                 searchType: action.searchType,
@@ -37,6 +41,7 @@ export function searchReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetching: false,
                 results: action.results,
+                resultNum: action.resultNum,
             }));
         case SEARCH_FAILURE:
             return (Object.assign({}, state, {

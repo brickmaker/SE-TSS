@@ -25,6 +25,14 @@ export function getContent(content){
     });
 }
 
+// export const SET_PAGENUM = "set_pagenum";
+// export function setPageNum(pageNum){
+//     return ({
+//         type: SET_PAGENUM,
+//         pageNum: pageNum,
+//     });
+// }
+
 export const SEARCH = "SEARCH";
 export const SEARCH_REQUEST = "search_request";
 export const SEARCH_SUCCESS = "search_success";
@@ -51,7 +59,8 @@ export function search(searchType, query, pageNum, pageSize){
             dispatch({
                 type: SEARCH_SUCCESS,
                 //TODO: correct response
-                results: response.data[0],
+                results: response.data[0].results,
+                resultNum: response.data[0].resultNum,
             });
         })
         .catch((errors)=>{
