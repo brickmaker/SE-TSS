@@ -32,7 +32,7 @@ class Section(models.Model):
 class College(models.Model):
     code = models.CharField(max_length=50, blank=False, default="default-college-code")
     name = models.CharField(max_length=50, blank=False, default="default-college-name")
-    section = models.ForeignKey('Section',on_delete=models.CASCADE)
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='college')
     
     def __str__(self):
         return 'College Code: %s College Name: %s'%(self.code,self.name)
@@ -41,17 +41,17 @@ class Course(models.Model):
     
     code = models.CharField(max_length=50, blank=False, default="default-course-code")
     name = models.CharField(max_length=50, blank=False, default="default-course-name")
-    section = models.ForeignKey('Section',on_delete=models.CASCADE)
-    college = models.ForeignKey('College',on_delete=models.CASCADE)
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='course')
+    college = models.ForeignKey('College',on_delete=models.CASCADE,related_name='course')
     
     def __str__(self):
         return 'Course Code: %s Course Name: %s'%(self.code,self.name)
 
 class Teacher(models.Model):
     name = models.CharField(max_length=50, blank=False, default="default-course-name")
-    section = models.ForeignKey('Section',on_delete=models.CASCADE)
-    college = models.ForeignKey('College',on_delete=models.CASCADE)
-    course  = models.ForeignKey('Course',on_delete=models.CASCADE)
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='teacher')
+    college = models.ForeignKey('College',on_delete=models.CASCADE,related_name='teacher')
+    course  = models.ForeignKey('Course',on_delete=models.CASCADE,related_name='teacher')
     
     def __str__(self):
         return 'Teacher : %s'%(self.name)
@@ -62,13 +62,22 @@ class Reply(models.Model):
     uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
     content = models.TextField()
     post_id = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
-    reply_to = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='reply')
+    #reply_to = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, related_name='reply')
     create_time = models.DateTimeField(auto_now_add=True)
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.content
 
+class Reply_reply(models.Model):
+    from_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_from')
+    to_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_to')
+    content = models.TextField()
+    reply_id = models.ForeignKey(Reply,on_delete=models.CASCADE,related_name='replyreply')
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'from %s to %s : %s'%(self.from_uid.name,self.to_uid.name,self.content)
 
 class Notice(models.Model):
     uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='notice')
@@ -142,4 +151,3 @@ class Subscribe(models.Model):
     
     def __str__(self):
         return '%s subscribed %s'(self.uid,self.section_id)
-    

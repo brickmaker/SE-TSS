@@ -55,3 +55,18 @@ python init_db.py -m debug
 	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=1&teacherid=1
 	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=1&teacherid=2
 	* http://127.0.0.1:8000/api/forum/teacher?collegeid=1&courseid=2&teacherid=3
+
+# 帖子信息
+## GET
+1. 基本功能
+    * http://127.0.0.1:8000/api/forum/post?id=1
+    * http://127.0.0.1:8000/api/forum/post?id=4
+
+# 帖子回复信息
+## GET
+1. 基本功能
+    * http://127.0.0.1:8000/api/forum/post_reply?postid=1&page=0
+
+# 私信
+## 联系人列表
+未测试，数据库增加了消息列表

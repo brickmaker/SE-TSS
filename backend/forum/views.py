@@ -5,6 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import models
+from .models import *
+from django.db.models import Q
+
 
 post_per_page = 20
 max_new_post = 5
@@ -137,3 +140,117 @@ class teacher(APIView):
         post_num = models.Thread.objects.filter(section=teacher.section).count()
         res['pageNum'] = post_num//post_per_page + 1 
         return Response(res,status=status.HTTP_200_OK)
+
+
+class thread(APIView):
+    def get(self,request,format=None):
+        thread_id = request.GET.get('id',None)
+        if thread_id is None:
+            return Response({'error':'Parameter Error'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            #print(thread_id)
+            thread = Thread.objects.get(pk=thread_id)
+        except Thread.DoesNotExist:
+            return Response({'error':'Post not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        if thread.status == Thread.CLOSED:
+            return Response({'error':'Post closed'}, status=status.HTTP_404_NOT_FOUND)
+
+        res = {}
+        res['id'] = thread_id
+        res['title'] = thread.title
+        path = {}
+        section = thread.section
+        if section.type==Section.TEACHER:
+            teacher = section.teacher.all()[0]
+            path['teacher'] = {'id':teacher.section.id,'name':teacher.name}
+            path['course'] = {'id':teacher.course.section.id,'name':teacher.course.name}
+            path['college'] = {'id':teacher.college.section.id,'name':teacher.college.name}
+        elif section.type ==Section.COURSE:
+            course = section.course.all()[0]
+            path['course'] = {'id':course.section.id,'name':course.name}
+            path['college'] = {'id':course.college.section.id,'name':course.college.name}
+        else:
+            college = Section.college.all()[0]
+            path['college'] = {'id':college.section.id,'name':college.name}
+        res['path'] = path
+        reply_num = Reply.objects.filter(post_id=section.id).count()
+        res['replyPageNum'] = reply_num // post_per_page + 1
+        return Response(res,status=status.HTTP_200_OK)
+
+
+class reply(APIView):
+    def get(self,request,format=None):
+        post_id = request.GET.get('postid',None)
+        page = request.GET.get('page',None)
+        if post_id is None or page is None:
+            return Response({'error':'Parameter Error'},status=status.HTTP_400_BAD_REQUEST)
+        page = int(page)
+        res = {}
+        res['error']=None
+        datas = Reply.objects.filter(post_id=post_id).order_by('create_time')[page*post_per_page:(page+1)*post_per_page]
+        res['data'] = []
+        for data in datas:
+            t_data = {}
+            t_data['user'] = {#'id':data.uid.id,
+                              'name':data.uid.name}
+            t_data['content'] = data.content
+            t_data['time'] = data.create_time
+            t_data['replies'] = [
+                {'from':rr.from_uid.name,'to':rr.to_uid.name,'content':rr.content,'time':rr.create_time}
+                for rr in data.replyreply.all().order_by('create_time')
+            ]
+            res['data'].append(t_data)
+        return Response(res,status=status.HTTP_200_OK)
+
+
+class msgentries(APIView):
+    def get(self,request,format=None):
+        # 有了认证之后这段代码就不需要了
+        uid = request.GET.get('uid',None)
+        if uid is None:
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        u = User.objects.get(uid=uid)
+
+        raw_datas = Message.objects.filter(Q(sender_id=u)|Q(receiver_id=u)).order_by('-date')
+
+        d={}
+        for rd in raw_datas:
+            if rd.sender_id==u:
+                if rd.receiver_id.uid in d:
+                    if d[rd.receiver_id.uid].date < rd.date:
+                        d[rd.receiver_id.uid] = rd
+                else:
+                    d[rd.receiver_id.uid]=rd
+            else:
+                if rd.sender_id.uid in d:
+                    if d[rd.sender_id.uid].date < rd.date:
+                        d[rd.sender_id.uid] = rd
+                else:
+                    d[rd.sender_id.uid]=rd
+
+        res = []
+        for k,v in d.items():
+            t = {}
+            if v.sender_id==u:
+                t['uid']=v.receiver_id.uid
+                t['username']=v.receiver_id.name
+                t['avatarurl']=v.receiver_id.avatar
+            else:
+                t['uid'] = v.sender_id.uid
+                t['username'] = v.sender_id.name
+                t['avatarurl'] = v.sender_id.avatar
+            t['lastMsgContent'] = v.content
+            t['time'] = v.date
+            res.append(t)
+        res.sort(key=lambda x: x['time'], reverse=True)
+        return Response(t, status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
