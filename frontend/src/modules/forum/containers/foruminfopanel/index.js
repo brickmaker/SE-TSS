@@ -11,8 +11,8 @@ const styles = {
         marginTop: 20,
         // marginBottom: 20,
     },
-    box:{
-padding: 20,
+    box: {
+        padding: 20,
     },
     item: {
         verticalAlign: "middle",
@@ -26,6 +26,14 @@ padding: 20,
         paddingTop: 3,
         paddingBottom: 3,
     },
+    title:{
+        marginLeft:10,
+        marginRight:10,
+    },
+    titlebox:{
+        marginTop: 10,
+        marginBottom: 10,
+    }
 };
 
 class ForumInfoPanel extends Component {
@@ -34,17 +42,25 @@ class ForumInfoPanel extends Component {
         return (
             <div className={classes.container}>
                 <Paper className={classes.box}>
+                    <div className={classes.titlebox}>
+                        <Typography variant="title" className={classes.title}>
+                            论坛交流子系统
+                        </Typography>
+                        <Typography variant="subheading" className={classes.title}>
+                            Discussion Forum
+                        </Typography>
+                    </div>
                     {Object.keys(info).map((key, index) => {
                         return (
-                        <div className={classes.line}>
-                        <Typography variant="body1" className={classes.item}>
-                        {key}
-                        </Typography>
-                        <Typography variant="body1" className={classes.item}>
-                        {info[key]}
-                        </Typography>
-                            {/* {key}:{info[key]} */}
-                        </div>
+                            <div className={classes.line}>
+                                <Typography variant="body1" className={classes.item}>
+                                    {key}
+                                </Typography>
+                                <Typography variant="body1" className={classes.item}>
+                                    {info[key]}
+                                </Typography>
+                                {/* {key}:{info[key]} */}
+                            </div>
                         )
                     })
                     }

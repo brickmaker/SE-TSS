@@ -93,6 +93,8 @@ class Announcements extends Component {
                                     {anncNum && <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                         const page = parseInt(event.target.innerText);
                                         window.location.href = `${match.url}/${page}`;
+                                        // this.props.history.push(`${match.url}/${page}`);
+                                        // this.props.history.push(`/forum/`);
                                     }
                                     } />}
                                 </div>
