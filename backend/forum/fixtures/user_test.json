@@ -1,0 +1,23 @@
+[
+    {
+        "model":"forum.User",
+        "pk":"1",
+        "fields":{
+            "name":"张一"
+        }
+    },
+    {
+        "model":"forum.User",
+        "pk":"2",
+        "fields":{
+            "name":"张二"
+        }
+    },
+    {
+        "model":"forum.User",
+        "pk":"3",
+        "fields":{
+            "name":"张三"
+        }
+    }
+]
