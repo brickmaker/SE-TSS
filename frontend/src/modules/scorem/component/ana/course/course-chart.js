@@ -15,9 +15,9 @@ import Paper from 'material-ui/Paper';
 class CChart extends Component {
     componentDidMount() {
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('p-chart'));
+        var myCChart = echarts.init(document.getElementById('co-chart'));
         // 绘制图表
-        myChart.setOption({
+        myCChart.setOption({
             title: { text: '班级成绩分析', x : 'right' },
             tooltip: {
                 
@@ -29,7 +29,7 @@ class CChart extends Component {
             },
             
             series: [{
-                name: '统计',
+                name: '统计2',
                 type: 'pie',
                 radius:['50%', '70%'],
                 avoidLabelOverlap : false,
@@ -48,9 +48,9 @@ class CChart extends Component {
                 },
                 data: [
                     {value:0, name:'0-59'},
-                    {value:5, name:'60-69'},
-                    {value:7, name:'70-79'},
-                    {value:12, name:'80-89'},
+                    {value:7, name:'60-69'},
+                    {value:22, name:'70-79'},
+                    {value:13, name:'80-89'},
                     {value:7, name:'90-100'},
                 ]
             }]
@@ -59,7 +59,7 @@ class CChart extends Component {
     render() {
         return (
             <Paper>
-                <div id="p-chart" style={{ width: 500, height: 400 }}></div>
+                <div id="co-chart" style={{ width: 500, height: 400 }}></div>
             </Paper>
         );
     }

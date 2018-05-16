@@ -15,9 +15,9 @@ import Paper from 'material-ui/Paper';
 class PChart extends Component {
     componentDidMount() {
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('p-chart'));
+        var myPChart = echarts.init(document.getElementById('p-chart'));
         // 绘制图表
-        myChart.setOption({
+        myPChart.setOption({
             title: { text: '个人成绩分析', x : 'right' },
             tooltip: {
                 
@@ -29,7 +29,7 @@ class PChart extends Component {
             },
             
             series: [{
-                name: '统计',
+                name: '统计1',
                 type: 'pie',
                 radius:['50%', '70%'],
                 avoidLabelOverlap : false,

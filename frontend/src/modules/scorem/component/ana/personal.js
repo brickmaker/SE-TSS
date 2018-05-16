@@ -30,12 +30,11 @@ const style = {
 
 class Personal extends React.Component{
     render(){
-        var data = this.props.data;
         return (
             <div>
                 <div style={style.left}>
                     <div style={style.pchart}>
-                        
+                        <PChart />
                     </div>
                     <div style={style.totalTable}>
                         <TotalTable />

@@ -26,16 +26,17 @@ const data = [
 
 
 class AnalysisTabs extends Component{
+    
     render(){
         return (
             <MuiThemeProvider>
                 <Tabs>
-                    <Tab label="个人分析">
+                    <Tab label="个人分析" value={1}>
                         <div>
-                            <Personal data={JSON.stringify(data)} />
+                            <Personal />
                         </div>
                     </Tab>
-                    <Tab label="班级分析">
+                    <Tab label="班级分析" value={2}>
                         <div>
                             <Course />
                         </div>
