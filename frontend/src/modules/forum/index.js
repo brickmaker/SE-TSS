@@ -4,11 +4,11 @@ import {testAction} from "./actions";
 
 class Forum extends Component {
     render() {
-        const {testVal, testAction} = this.props;
+        const {val, testAction} = this.props;
         return (
             <div>
                 <h1>Forum</h1>
-                <p>Result: ${testVal}</p>
+                <p>Result: ${val}</p>
                 <input
                     type={'number'}
                     onKeyDown={(event) => {
@@ -25,7 +25,7 @@ class Forum extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    testVal: state.forum.testVal
+    val: state.forum.testVal
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 });
 
-export default connect(
+export default Forum=connect(
     mapStateToProps,
     mapDispatchToProps
 )(Forum);

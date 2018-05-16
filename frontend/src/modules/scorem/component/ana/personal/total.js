@@ -22,7 +22,7 @@ import {
                             <TableHeaderColumn>统计值</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody displayRowCheckbox={false} stripRows={true}>
+                    <TableBody displayRowCheckbox={false} >
                         <TableRow>
                             <TableRowColumn>平均分</TableRowColumn>
                             <TableRowColumn>90.3</TableRowColumn>

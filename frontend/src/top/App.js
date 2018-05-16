@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './App.css';
-
 import store from './stores'
 
 import InformationManagement from "../modules/informationManagement";
@@ -14,9 +13,9 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div className="App">
-                    <header className="App-header">
-                        <h1 className="App-title">Keep Calm and Just Do It</h1>
-                    </header>
+                    {/*<header className="App-header">*/}
+                        {/*<h1 className="App-title">Keep Calm and Just Do It</h1>*/}
+                    {/*</header>*/}
                     <BrowserRouter>
                         <div>
                             <Route path={'/info'} component={InformationManagement}/>

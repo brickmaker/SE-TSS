@@ -23,7 +23,7 @@ class ScoreList extends Component{
                             <TableHeaderColumn>绩点</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
-                    <TableBody displayRowCheckbox={false} stripRows={true}>
+                    <TableBody displayRowCheckbox={false} >
                         <TableRow>
                             <TableRowColumn>软件工程</TableRowColumn>
                             <TableRowColumn>90</TableRowColumn>
