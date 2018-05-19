@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'information_management.apps.InformationManagementConfig',
     'forum.apps.ForumConfig',
+    'xkxt.apps.XkxtConfig',
 ]
 
 MIDDLEWARE = [
