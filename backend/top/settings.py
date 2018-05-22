@@ -25,7 +25,7 @@ SECRET_KEY = 'y(p7i)iexolfi92dq2&nlzmzp59(-871tjb2mopwlias*)rs13'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'information_management.apps.InformationManagementConfig',
     'forum.apps.ForumConfig',
+    'online_testing.apps.OnlineTestingConfig',
 ]
 
 MIDDLEWARE = [
