@@ -15,6 +15,7 @@ from rest_framework.response import Response
 from django.contrib import auth
 from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck
 import logging
+from django.core import serializers
 
 logger = logging.getLogger('django')
 
@@ -93,6 +94,7 @@ class CourseRegister(APIView):
 
     def post(self, request):
         logger.info("try to register course")
+        print(request.data)
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -128,6 +130,18 @@ class AdminViewSet(viewsets.ModelViewSet):
     serializer_class = AdminQuerySerializer
 
 
+class MajorViewSet(viewsets.ModelViewSet):
+    queryset = Major.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = MajorQuerySerializer
+
+
+class DepartmentViewSet(viewsets.ModelViewSet):
+    queryset = Department.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = DepartmentQuerySerializer
+
+
 class CourseViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, CourseCheck,)
     queryset = Course.objects.all()
@@ -158,6 +172,24 @@ class PasswordUpdate(APIView):
         else:
             logger.info("password update failed")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserViewSet(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, format=None):
+        user = People.objects.all().filter(username=request.user.username)
+        data = serializers.serialize("json", user, fields=('username','id_number', 'email', 'name', 'gender', 'department'), ensure_ascii = False)
+        return Response(data, status=status.HTTP_200_OK)
+
+class CourseFacultyViewSet(APIView):
+    serializer_class = CourseQuerySerializer
+    permission_classes = (IsAuthenticated,)
+    def get(self, request, format=None):
+        courses = Course.objects.all().filter(faculty=request.user.username)
+        data = serializers.serialize("json", courses,
+                                     fields=('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment'), ensure_ascii = False)
+        return Response(data, status=status.HTTP_200_OK)
+
 
 #Temporary unused
 class Login(APIView):

@@ -1,7 +1,10 @@
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
+
 from django.db import transaction
+from rest_framework.relations import ManyRelatedField
+
 from .models import *
 from rest_framework.exceptions import APIException, ParseError, NotFound
 import logging
@@ -14,7 +17,7 @@ class PeopleSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True)
     name = serializers.CharField(required=True)
     gender = serializers.CharField(max_length=1, required=True)
-    department = serializers.CharField(max_length=50, required=True)
+    department = serializers.PrimaryKeyRelatedField(queryset=Department.objects.all())
 
     class Meta:
         model = Account
@@ -39,8 +42,8 @@ class PeopleSerializer(serializers.ModelSerializer):
 class StudentSerializer(PeopleSerializer):
     img = serializers.ImageField(max_length=None, allow_null=True, required=False)
     grade = serializers.IntegerField(required=True)
-    major = serializers.CharField(max_length=100, required=True)
-    class_name = serializers.CharField(max_length=100, required=True)
+    major = serializers.PrimaryKeyRelatedField(queryset=Major.objects.all(), required=True)
+    class_name = serializers.PrimaryKeyRelatedField(queryset=Major_Class.objects.all(), required=True)
 
     class Meta:
         model = Account
@@ -87,20 +90,31 @@ class CourseSerializer(serializers.ModelSerializer):
     capacity = serializers.IntegerField(max_value=200)
     classroom = serializers.CharField(max_length=20)
     assessment = serializers.CharField(max_length=20)
+    faculty = serializers.MultipleChoiceField(choices=Faculty.objects.all())
 
     class Meta:
         model = Course
-        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment')
+        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment', 'faculty')
 
     def create(self, validated_data):
         logger.info("create course")
-        return Course.objects.create(**validated_data)
+        course_id = validated_data['course_id']
+        name = validated_data['name']
+        classroom = validated_data['classroom']
+        capacity = validated_data['capacity']
+        credit = validated_data['credit']
+        assessment = validated_data['assessment']
+        instance = Course.objects.create(course_id=course_id, name=name, classroom=classroom, capacity=capacity, credit=credit, assessment=assessment)
+        instance.faculty.set(validated_data['faculty'])
+        instance.save()
+        return instance
+
 
     @transaction.atomic
     def update(self, instance, validated_data):
         logger.info("update course info")
         instance.course_id = validated_data.get('course_id', instance.course_id)
-        instance.name = validated_data.get('img', instance.name)
+        instance.name = validated_data.get('name', instance.name)
         instance.credit = validated_data.get('credit', instance.credit)
         instance.capacity = validated_data.get('capacity', instance.capacity)
         instance.classroom = validated_data.get('classroom', instance.classroom)
@@ -343,3 +357,19 @@ class LoginSerializer(PeopleSerializer):
     class Meta:
         model = Account
         fields = ('username', 'password')
+
+class DepartmentQuerySerializer(serializers.ModelSerializer):
+    #major=TrackSerializer(many=True, read_only=True)
+    major=serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Department
+        fields = ('name','major')
+        read_only_fields =('name','major')
+
+class MajorQuerySerializer(serializers.ModelSerializer):
+    #class_name=TrackSerializer(many=True, read_only=True)
+    class_name=serializers.StringRelatedField(many=True)
+    class Meta:
+        model = Major
+        fields = ('depart','major',"class_name")
+        #read_only_fields =('major',"class_name")

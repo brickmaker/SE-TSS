@@ -15,6 +15,25 @@ GENDER_CHOICES = (
 class Department(models.Model):
     name = models.CharField("所在院系", primary_key=True, max_length=100)
 
+    def __str__(self):
+        return self.name
+
+
+class Major(models.Model):
+    depart = models.ForeignKey(Department, verbose_name="所在院系", related_name='major', on_delete=models.CASCADE)
+    major = models.CharField("开设专业", max_length=100, unique=True, primary_key=True)
+
+    def __str__(self):
+        return self.major
+
+
+class Major_Class(models.Model):
+    major = models.ForeignKey(Major, verbose_name="开设专业", related_name='class_name', on_delete=models.CASCADE)
+    class_name = models.CharField("专业班级", max_length=100)
+
+    def __str__(self):
+        return self.class_name
+
 
 class AccountManager(BaseUserManager):
 
@@ -149,14 +168,17 @@ class People(models.Model):
 class Student(People):
     img = models.ImageField("个人头像", max_length=1024 * 1024, upload_to="profile", blank=True, null=True)
     grade = models.IntegerField("入学年份", null=False, default=2015)
-    major = models.CharField("专业", max_length=100, null=False)
-    class_name = models.CharField("所在班级", max_length=100, null=False)
+    major = models.ForeignKey(Major, verbose_name="专业", on_delete=models.CASCADE, null=True)
+    class_name = models.ForeignKey(Major_Class, verbose_name="所在班级", on_delete=models.CASCADE, null=True)
 
 
 # Professor
 class Faculty(People):
     title = models.CharField("职称", max_length=50, blank=True, null=False)  # eg: lecturer,associate professor ....
     img = models.ImageField("个人头像", max_length=1024 * 1024, upload_to="profile", blank=True, null=True)
+
+    def __str__(self):
+        return self.username.username
 
 
 # Education Advisor/School Official
@@ -181,4 +203,4 @@ class Course(models.Model):
     classroom = models.CharField("教室", max_length=20, null=True)
     assessment = models.CharField("考核方式", max_length=20, null=True)
     state = models.PositiveSmallIntegerField("审核状态", choices=STATE_CHOICES, default=0)
-    # faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, null=False)
+    faculty = models.ManyToManyField(Faculty, related_name='teacher_course')

@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class RegisterCheck(permissions.BasePermission):
     def has_permission(self, request, view):
         type = request.user.user_type
@@ -7,6 +8,7 @@ class RegisterCheck(permissions.BasePermission):
             return False
         else:
             return True
+
 
 class StudentCheck(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -110,13 +112,11 @@ class AdminCheck(permissions.BasePermission):
 class CourseCheck(permissions.BasePermission):
     def has_permission(self, request, view):
         type = request.user.user_type
-        if request.method in permissions.SAFE_METHODS:
+        if type == 2 or type == 3 or type == 4:
             return True
-        else:
-            if type == 2 or type == 3 or type == 4:
-                return True
-            else:
-                return False
+        return False
 
     def has_object_permission(self, request, view, obj):
+        print(request)
+        print('1')
         return True

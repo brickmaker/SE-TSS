@@ -1,0 +1,17 @@
+INSERT INTO "django_content_type" VALUES ('1', 'authentication', 'faculty_course');
+INSERT INTO "django_content_type" VALUES ('2', 'authentication', 'people');
+INSERT INTO "django_content_type" VALUES ('3', 'authentication', 'major_class');
+INSERT INTO "django_content_type" VALUES ('4', 'authentication', 'major');
+INSERT INTO "django_content_type" VALUES ('5', 'authentication', 'staff');
+INSERT INTO "django_content_type" VALUES ('6', 'authentication', 'admin');
+INSERT INTO "django_content_type" VALUES ('7', 'authentication', 'student');
+INSERT INTO "django_content_type" VALUES ('8', 'authentication', 'department');
+INSERT INTO "django_content_type" VALUES ('9', 'authentication', 'account');
+INSERT INTO "django_content_type" VALUES ('10', 'authentication', 'course');
+INSERT INTO "django_content_type" VALUES ('11', 'authentication', 'faculty');
+INSERT INTO "django_content_type" VALUES ('12', 'admin', 'logentry');
+INSERT INTO "django_content_type" VALUES ('13', 'auth', 'group');
+INSERT INTO "django_content_type" VALUES ('14', 'auth', 'permission');
+INSERT INTO "django_content_type" VALUES ('15', 'contenttypes', 'contenttype');
+INSERT INTO "django_content_type" VALUES ('16', 'sessions', 'session');
+INSERT INTO "django_content_type" VALUES ('17', 'authtoken', 'token');
