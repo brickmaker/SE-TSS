@@ -23,7 +23,7 @@ const styles = {
 
 class Search extends Component {
     render() {
-        const { classes, match , pageNum, pageSize, resultNum} = this.props;
+        const { classes, match , pageNum, pageSize, resultNum, history} = this.props;
         const { searchType, query } = this.props.match.params;
         console.log("search, match", this.props.match);
         var path = {};
@@ -41,25 +41,17 @@ class Search extends Component {
                     <Grid container className={classes.container}>
                         <Grid item xs={12} sm={10} md={8} lg={6}>
                             {/* <Route path={"/forum/search/:searchType/:query/:pageNum"} component={SearchResultPanel} /> */}
-                            <Route path={`${match.url}/:pageNum`} render={(props)=>{
+                            {/* <Route path={`${match.url}/:pageNum`} render={(props)=>{
                                     const newMatch = props.match;
                                     newMatch.params = Object.assign({}, newMatch.params, {
                                         "searchType": searchType,
                                         "query": query,
                                     });
                                 return (
-                                    <SearchResultPanel match={newMatch}/>
+                                    <SearchResultPanel match={newMatch} history={history}/>
                                 )
-                            }}/>
-                            {/* <SearchResultPanel match={match}` /> */}
-                                {/* <PageNums pageNum={resultNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
-                                    const page = parseInt(event.target.innerText);
-                                    // console.log("setpage");
-                                    // setPageNum(page);
-                                    // console.log("setpageover");
-                                    window.location.href = `/forum/search/${searchType}/${query}/${page}`
-                                }
-                                } /> */}
+                            }}/> */}
+                            <SearchResultPanel match={match} history={this.props.history}/>
                         </Grid>
                     </Grid>
                 </MainBody>

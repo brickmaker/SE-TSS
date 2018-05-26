@@ -43,21 +43,27 @@ class Announcements extends Component {
     }
 
     render() {
-        const { classes, type, match, anncNum, pageNum, anncs, pageSize, isFetching } = this.props;
-        const { collegeid, courseid, teacherid } = match.params;
+        const { classes, type, match, anncNum, anncs, pageSize, isFetching } = this.props;
+        const { collegeid, courseid, teacherid,pageNum } = match.params;
         const sectionPath = {};
         console.log("render annc", anncs);
-        // var link;
+        var link = '/forum/announcements';
         if (match) {
             if (anncs.length) {
                 if (match.params["collegeid"]) {
                     sectionPath["college"] = { "name": anncs[0]["path"]["college"]["name"], "link": `/forum/${match.params["collegeid"]}` };
-                };
+                    link += `/section/${collegeid}`;
+                }
+                else {
+                    link += `/user`;
+                }
                 if (match.params["courseid"]) {
                     sectionPath["course"] = { "name": anncs[0]["path"]["course"]["name"], "link": `/forum/${match.params["collegeid"]}/${match.params["courseid"]}` };
+                    link += `/${courseid}`;
                 };
                 if (match.params["teacherid"]) {
                     sectionPath["teacher"] = { "name": anncs[0]["path"]["teacher"]["name"], "link": `/forum/${match.params["collegeid"]}/${match.params["courseid"]}/${match.params["teacherid"]}` };
+                    link += `/${teacherid}`;
                 };
             }
             sectionPath["annc"] = { "name": "公告通知", "link": match.url };
@@ -76,7 +82,7 @@ class Announcements extends Component {
                                             共{anncNum}个公告
                                     </Typography>
                                     </div>
-                                    <Route path={`${match.url}/:pageNum`} render={(props) => {
+                                    {/* <Route path={`${match.url}/:pageNum`} render={(props) => {
                                         const newMatch = props.match;
                                         newMatch.params = Object.assign({}, newMatch.params, {
                                             "collegeid": collegeid,
@@ -87,14 +93,11 @@ class Announcements extends Component {
                                         return (
                                             <AnncPanel type={type} match={newMatch} oldlink={props.match.url} />
                                         );
-                                    }} />
-                                    {/* <AnncPanel type={type} match={match} /> */}
-                                    {/* {console.log("announcements", anncNum, pageSize, pageNum)} */}
+                                    }} /> */}
+                                    <AnncPanel type={type} match={match} />
                                     {anncNum && <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                         const page = parseInt(event.target.innerText);
-                                        window.location.href = `${match.url}/${page}`;
-                                        // this.props.history.push(`${match.url}/${page}`);
-                                        // this.props.history.push(`/forum/`);
+                                        this.props.history.push(`${link}/${page}`);
                                     }
                                     } />}
                                 </div>

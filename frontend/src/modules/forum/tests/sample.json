@@ -1280,6 +1280,32 @@
       }
     ]
   },
+  "teacher_list": [
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "施青松"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    }
+  ],
   "msgEntries": [
     {
       "uid": 5,
@@ -1361,28 +1387,28 @@
   "newmsgs": [
     {
       "from": {
-        "id": "id",
+        "id": 3,
         "username": "友人A"
       },
       "content": "一条新消息"
     },
     {
       "from": {
-        "id": "id",
+        "id": 2,
         "username": "友人A"
       },
       "content": "一条新消息"
     },
     {
       "from": {
-        "id": "id",
+        "id": 2,
         "username": "友人A"
       },
       "content": "一条新消息"
     },
     {
       "from": {
-        "id": "id",
+        "id": 2,
         "username": "友人A"
       },
       "content": "一条新消息"
@@ -1834,6 +1860,370 @@
           "name": "王章野"
         }
       }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018/05/11 12:00",
+      "lastReplyTime": "2018/05/15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
     }
-  ]
+  ],
+  "userStates": [
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018/05/14",
+      "type": "学生"
+    }
+  ],
+  "info": {
+    "用户数": 10000,
+    "历史最高在线数": 9999,
+    "今日注册数": 29,
+    "版块数": 2000
+  }
 }

@@ -134,12 +134,14 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                         if (entry["id"] === selectedId)
                             idx = index;
                     });
+                    console.log("entries",entries, 'idx', idx, 'selectedid', selectedId);
                     if (idx === -1) {
                         entries.unshift({ id: selectedId, username: username, content: "" });
                     }
                     else if (idx != 0) {
                         entries = [entries[idx]].concat(entries.slice(0, idx), entries.slice(idx + 1));
                     }
+                    console.log("new entries", entries);
                 };
                 if (entries.length > 0) {
                     dispatch({

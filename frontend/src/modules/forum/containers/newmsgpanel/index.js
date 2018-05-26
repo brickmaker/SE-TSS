@@ -14,21 +14,24 @@ class NewMsgPanel extends Component {
         this.props.getNewMsgs(5);
         this.props.selectEntry(2);
     }
-
+changeid(id, changeurl){
+    this.props.selectEntry(id);
+    
+}
     render() {
         const { classes, newMsgs, isFetchingNewMsgs, selectEntry } = this.props;
         return (
             <Card style={{ marginTop: 10, marginBottom: 30 }}>
                 {isFetchingNewMsgs ? <CircularProgress />
                     :
-                    <List dense>
+                    newMsgs && <List dense>
                         {newMsgs.map((msg) => {
                             return (
                                 <ListItem button
                                     onClick={(event) => {
                                         event.preventDefault();
                                         selectEntry(msg['from']['id']);
-                                        window.location.href = `/forum/messages`;
+                        this.props.history.push(`/forum/messages`);
                                     }}
                                 >
                                     <Avatar>{msg["from"]['username'][0]}</Avatar>

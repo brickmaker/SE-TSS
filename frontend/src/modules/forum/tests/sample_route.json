@@ -7,6 +7,7 @@
   "/api/forum/course_posts": "/course_posts",
   "/api/forum/teacher": "/teacher",
   "/api/forum/teacher_posts": "/teacher_posts",
+  "/api/forum/teacher_list": "teacher_list",
   "/api/forum/post_reply": "/replies",
   "/api/forum/post": "/post",
   "/api/forum/messages": "/messages",
@@ -14,5 +15,7 @@
   "/api/forum/newmsgs": "/newmsgs",
   "/api/forum/search": "/search",
   "/api/forum/announcements": "/announcements",
-  "/api/forum/hotposts": "/hotpost"
+  "/api/forum/hotposts": "/hotpost",
+  "/api/forum/userstates": "/userstates",
+  "/api/forum/info": "/info"
 }

@@ -66,21 +66,12 @@ const mapStateToProps = (state) => ({
     // testval: state.forum.messages.test,
     entries: state.forum.messages.entries,
     isFetchingEntries: state.forum.messages.isFetchingEntries,
-    // isFetchingMsgs: state.forum.messages.isFetchingMsgs,
     selectedId: state.forum.messages.selectedId,
-    // content: state.forum.messages.content,
-    // isEntering: state.forum.messages.isEntering,
     pageSize: state.forum.messages.pageSize,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     getMsgEntries: (uid, selectedId, pageSize) => dispatch(getMsgEntries(uid, selectedId, pageSize)),
-    // postMsg: (from, to, content, pageSize) => {
-    //     dispatch(postMsg(from, to, content, pageSize));
-    // },
-    // getContent: (content) => {
-    //     dispatch(getContent(content));
-    // },
     selectEntry: (selectedId) => {
         dispatch(selectEntry(selectedId));
     },

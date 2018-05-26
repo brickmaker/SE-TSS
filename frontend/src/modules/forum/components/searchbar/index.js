@@ -46,7 +46,7 @@ class SearchBar extends Component {
                         console.log(event.target.value);
                         if (event.keyCode === 13) {
                             event.preventDefault();
-                            window.location.href = `/forum/search/${searchType}/${event.target.value}/1`;
+                            this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
                         }
                         getContent(event.target.value);
                     }}

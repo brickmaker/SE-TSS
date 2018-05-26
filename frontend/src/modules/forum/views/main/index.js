@@ -42,32 +42,46 @@ class Main extends Component {
                         <Grid container xs={3}>
                             <Grid item xs={12}>
                                 <div>
-                                    <SectionTitle>
-                                        <SectionText
-                                            onClick={() => {
-                                                // history.push('forum/annoucements')
-                                            }}
-                                            text={'公告通知'}
-                                        >
-                                            <AnnouncementIcon color={'primary'} style={{ fontSize: 40 }} />
-                                        </SectionText>
-                                    </SectionTitle>
-                                    <Announcements type="main" match={{'params': {"pageNum":1}}} />
+                                    <div
+                                        onClick={() => {
+                                            this.props.history.push('/forum/announcements/user/1')
+                                        }}
+                                    >
+                                        <SectionTitle>
+                                            <SectionText
+                                                onClick={() => {
+                                                    // event.preventDefault();
+                                                    console.log('main click', this.props.history);
+                                                    this.props.history.push('/forum/announcements/user/1')
+                                                }}
+                                                text={'公告通知'}
+                                            >
+                                                <AnnouncementIcon color={'primary'} style={{ fontSize: 40 }} />
+                                            </SectionText>
+                                        </SectionTitle>
+                                    </div>
+                                    <Announcements type="main" match={{ 'params': { "pageNum": 1 } }} />
                                 </div>
                             </Grid>
                             <Grid item xs={12}>
                                 <div>
-                                    <SectionTitle>
-                                        <SectionText
-                                            onClick={() => {
-                                                // history.push('forum/colleges')
-                                            }}
-                                            text={'消息留言'}
-                                        >
-                                            <Message color={'primary'} style={{ fontSize: 40 }} />
-                                        </SectionText>
-                                    </SectionTitle>
-                                    <NewMsgPanel />
+                                    <div
+                                        onClick={() => {
+                                            this.props.history.push('/forum/messages')
+                                        }}
+                                    >
+                                        <SectionTitle>
+                                            <SectionText
+                                                onClick={() => {
+                                                    this.props.history.push('/forum/messages')
+                                                }}
+                                                text={'消息留言'}
+                                            >
+                                                <Message color={'primary'} style={{ fontSize: 40 }} />
+                                            </SectionText>
+                                        </SectionTitle>
+                                    </div>
+                                    <NewMsgPanel history={this.props.history} />
                                 </div>
                             </Grid>
                         </Grid>

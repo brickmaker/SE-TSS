@@ -69,14 +69,14 @@ class SearchResult extends Component {
             link = sectionPath["teacher"]["link"];
         };
         if (resultType === 'post') {
-            const { title, author, time, replyNum,relatedContent, path, postid } = result;
+            const { title, author, time, replyNum, relatedContent, path, postid } = result;
             return (
                 <Card className={classes.container}>
                     <div className={classes.line}>
                         <Typography variant="title" className={classes.title}
                             onClick={(event) => {
                                 event.preventDefault();
-                                window.location.href = `/forum/p/${postid}`;
+                                this.props.history.push(`/forum/p/${postid}`)
                             }}
                         >
 
@@ -92,7 +92,12 @@ class SearchResult extends Component {
                         </div>
                         {/* <Path path={sectionPath} /> */}
                     </div>
-                    <div className={classes.line}>
+                    <div className={classes.line}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            this.props.history.push(`/forum/p/${postid}`)
+                        }}
+                    >
                         <Typography className={classes.item}>
                             作者：{author["username"]}
                         </Typography>
@@ -105,7 +110,7 @@ class SearchResult extends Component {
                     </div>
                     <div className={classes.line}>
                         <Typography className={classes.item}>
-                    {relatedContent}
+                            {relatedContent}
                         </Typography>
                     </div>
                 </Card>
@@ -125,11 +130,14 @@ class SearchResult extends Component {
                                 > {sectionPath['course']["name"]} </Link>
                             <Link to={sectionPath["teacher"]["link"]} className={classes.link}>
                                 > {sectionPath['teacher']["name"]} </Link>
-                            {/* <Path path={sectionPath} /> */}
                         </div>
                     </div>
 
                     <div className={classes.line}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            this.props.history.push(link);
+                        }}
                     >
                         <Typography align="left" className={classes.item}>
                             最后回复时间 {lastReplyTime}

@@ -1,144 +1,97 @@
+import { FORUMINFO_REQUEST, FORUMINFO_SUCCESS, FORUMINFO_FAILURE, HOTPOSTS_REQUEST, HOTPOSTS_SUCCESS, HOTPOSTS_FAILURE, USERSTATES_REQUEST, USERSTATES_FAILURE, USERSTATES_SUCCESS, COLLEGES_SUCCESS, COLLEGES_FAILURE, COURSES_SUCCESS, COURSES_FAILURE, TEACHERLIST_SUCCESS, TEACHERLIST_FAILURE } from "./actions";
 
 
 const initialState = {
-    hotPosts: [
-        {
-            "title": "一个帖子的标题",
-            "author": {
-                "username": "王章野",
-                "uid": "uid"
-            },
-            "time": "2018/05/11",
-            "lastReplyTime": "2018/05/15",
-            "replyNum": 10,
-            "postid": "postid",
-            "path": {
-                "college": {
-                    "id": "collegeid",
-                    "name": "计算机科学与技术学院"
-                },
-                "course": {
-                    "id": "courseid",
-                    "name": "软件工程"
-                },
-                "teacher": {
-                    "id": "teacherid",
-                    "name": "王章野"
-                }
-            }
-        },
-        {
-            "title": "一个帖子的标题",
-            "author": {
-                "username": "王章野",
-                "uid": "uid"
-            },
-            "time": "2018/05/11",
-            "lastReplyTime": "2018/05/15",
-            "replyNum": 10,
-            "postid": "postid",
-            "path": {
-                "college": {
-                    "id": "collegeid",
-                    "name": "计算机科学与技术学院"
-                },
-                "course": {
-                    "id": "courseid",
-                    "name": "软件工程"
-                },
-                "teacher": {
-                    "id": "teacherid",
-                    "name": "王章野"
-                }
-            }
-        },
-        {
-            "title": "一个帖子的标题",
-            "author": {
-                "username": "王章野",
-                "uid": "uid"
-            },
-            "time": "2018/05/11",
-            "lastReplyTime": "2018/05/15",
-            "replyNum": 10,
-            "postid": "postid",
-            "path": {
-                "college": {
-                    "id": "collegeid",
-                    "name": "计算机科学与技术学院"
-                },
-                "course": {
-                    "id": "courseid",
-                    "name": "软件工程"
-                },
-                "teacher": {
-                    "id": "teacherid",
-                    "name": "王章野"
-                }
-            }
-        },
-        {
-            "title": "一个帖子的标题",
-            "author": {
-                "username": "王章野",
-                "uid": "uid"
-            },
-            "time": "2018/05/11",
-            "lastReplyTime": "2018/05/15",
-            "replyNum": 10,
-            "postid": "postid",
-            "path": {
-                "college": {
-                    "id": "collegeid",
-                    "name": "计算机科学与技术学院"
-                },
-                "course": {
-                    "id": "courseid",
-                    "name": "软件工程"
-                },
-                "teacher": {
-                    "id": "teacherid",
-                    "name": "王章野"
-                }
-            }
-        },
-    ],
+    hotPosts: undefined,
     isFetchingHotPosts: false,
-    userStates: [
-        {
-            "uid":"uid",
-            "username": "Alice",
-            "replyNum": 23,
-            "lastLoginTime": "2018/05/14",
-            "type": "学生",
-        },
-        {
-            "uid":"uid",
-            "username": "Alice",
-            "replyNum": 23,
-            "lastLoginTime": "2018/05/14",
-            "type": "学生",
-        },
-        {
-            "uid":"uid",
-            "username": "Alice",
-            "replyNum": 23,
-            "lastLoginTime": "2018/05/14",
-            "type": "学生",
-        }
-    ],
+    collegeItems: undefined,
+    courseItems: undefined,
+    teacherItems: undefined,
+    yearItems: [],
+    monthItems: [],
+    weekItems: [],
+    userStatesPageSize: 10,
+    userStates: undefined,
     isFetchingUserStates: false,
-    info:{
-        "用户数": 10000,
-        "历史最高在线数": 9999,
-        "今日注册数": 29,
-        "版块数": 2000,
-    },
-    isFetchingInfor: false,
+    userStatesPageSize: 5,
+    info: undefined,
+    isFetchingInfo: false,
+    errors: undefined,
 };
 
 export function managementReducer(state = initialState, action) {
     switch (action.type) {
+        case FORUMINFO_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingInfo: true,
+            }));
+        case FORUMINFO_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingInfo: false,
+                info: action.info
+            }));
+        case FORUMINFO_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingInfo: false,
+                errors: action.errors,
+                info: undefined,
+            }));
+        case USERSTATES_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingUserStates: true,
+            }));
+        case USERSTATES_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingUserStates: false,
+                userStates: action.userStates,
+            }))
+        case USERSTATES_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingUserStates: false,
+                errors: action.errors,
+                userStates: undefined,
+            }))
+        case HOTPOSTS_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingHotPosts: true,
+            }));
+        case HOTPOSTS_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingHotPosts: false,
+                hotPosts: action.hotPosts,
+            }))
+        case HOTPOSTS_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingHotPosts: false,
+                errors: action.errors,
+                hotPosts: undefined,
+            }))
+        case COLLEGES_SUCCESS:
+            return (Object.assign({}, state, {
+                collegeItems: action.collegeItems,
+            }));
+        case COLLEGES_FAILURE:
+            return (Object.assign({}, state, {
+                collegeItems: undefined,
+                errors: action.errors,
+            }));
+        case COURSES_SUCCESS:
+            return (Object.assign({}, state, {
+                courseItems: action.courseItems,
+            }));
+        case COURSES_FAILURE:
+            return (Object.assign({}, state, {
+                courseItems: undefined,
+                errors: action.errors,
+            }));
+        case TEACHERLIST_SUCCESS:
+            return (Object.assign({}, state, {
+                teacherItems: action.teacherItems,
+            }));
+        case TEACHERLIST_FAILURE:
+            return (Object.assign({}, state, {
+                teacherItems: undefined,
+            }));
         default: return state;
     };
 }
