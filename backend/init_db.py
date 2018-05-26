@@ -15,6 +15,9 @@ if mode == 'debug':
                 r'.\forum\fixtures\teacher_test.json',
                 r'.\forum\fixtures\thread_test.json',
                 r'.\forum\fixtures\sub_test.json',
+                r'.\forum\fixtures\reply_test.json',
+                r'.\forum\fixtures\replyreply_test.json',
+                r'.\forum\fixtures\message_test.json',
             ]
     total = len(files)
     print("{} fixtures found".format(total))
