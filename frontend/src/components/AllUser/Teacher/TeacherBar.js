@@ -14,6 +14,8 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import {browserHistory} from "react-router";
 import jwtDecode from "jwt-decode";
 import {Helmet} from "react-helmet";
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
 
 function mapStateToProps(state) {
     return {
@@ -65,29 +67,41 @@ export default class TeacherBar extends React.Component {
         return (
             <div>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
-                <Drawer open={this.state.drawerOpen} width={200} >
+                <Drawer open={this.props.drawerOpen} width={200} >
                     <div >
-                        <AppBar onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}/>
+                        <AppBar onLeftIconButtonTouchTap={() => this.props.handleClick()}/>
                         <MenuItem primaryText="个人信息" leftIcon={<ContentCopy />}  />
                         <MenuItem primaryText="课程信息" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/teacher/lessons')}/>
                         <MenuItem primaryText="申请课程" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/teacher/apply')} />
-                        <MenuItem primaryText="退出" leftIcon={<ContentCopy />} onClick={(e) => this.logout(e)}/>
                     </div>
 
                 </Drawer>
 
-                <AppBar title={'Hello, '+this.state.userName}
-                        onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}
+                <AppBar
+                        onLeftIconButtonTouchTap={() => this.props.handleClick()}
                         iconElementRight={
                             <div>
                                 <FlatButton label={"基础信息管理"} style={buttonStyle}/>
                                 <FlatButton label={"自动排课"} style={buttonStyle}/>
-                                <FlatButton label={"选课"} style={buttonStyle}/>
+                                <FlatButton label={"选择课程"} style={buttonStyle}/>
                                 <FlatButton label={"论坛交流"} style={buttonStyle}/>
                                 <FlatButton label={"在线测试"} style={buttonStyle}/>
                                 <FlatButton label={"成绩管理"} style={buttonStyle}/>
-                                <FlatButton label="Back" onClick={() => browserHistory.push("/")}
-                                            style={buttonStyle}/>
+                                <FlatButton label={this.state.userName}  onClick={(e) => this.handleClick(e)} style={buttonStyle}/>
+                                <Popover
+                                    open={this.state.open}
+                                    anchorEl={this.state.anchorEl}
+                                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                                    onRequestClose={this.handleRequestClose}
+                                    animation={PopoverAnimationVertical}
+                                >
+                                    <Menu>
+                                        <MenuItem primaryText="修改密码" />
+                                        <MenuItem primaryText="退出" onClick={(e) => this.logout(e)}/>
+                                    </Menu>
+                                </Popover>
+
                             </div>
                         }
                 />
@@ -101,6 +115,8 @@ export default class TeacherBar extends React.Component {
 
 TeacherBar.propType = {
     userName: React.PropTypes.string,
+    drawerOpen: React.PropTypes.boolean,
+    handleClick: React.PropTypes.func
 };
 
 

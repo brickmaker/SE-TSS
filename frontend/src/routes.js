@@ -27,6 +27,7 @@ import Sta_basicInfo from './components/AllUser/Staff/Sta_basicInfo';
 import Tea_LessonInfo from './components/AllUser/Teacher/LessonInfo';
 import MainMenu from './components/MainMenu';
 import AdminView from './components/AllUser/Admin/AdminView';
+import StaffPwd from './components/AllUser/Staff/ChangePwd';
 
 
 import { DetermineAuth } from './components/DetermineAuth';
@@ -46,7 +47,7 @@ export default (
 
         <Route path = "student"  component = {StudentView}/>
         {/*<Route path = "student/basicInfo" component = {StudentBasicInfo}/>*/}
-        {/*<Route path = "student/lessons" component = {Lessons_info}/>*/}
+        <Route path = "student/lessons" component = {Lessons_info}/>
 
         <Route path = "teacher" component = {TeacherView}/>
         {/*<Route path = "teacher/basicinfo" component = {TeacherBasicInfo}/>*/}
@@ -54,8 +55,7 @@ export default (
         <Route path = "teacher/lessons"  components={Tea_LessonInfo}/>
 
         <Route path = "staff" component = {StaffView}/>
-                {/*<Route path = "staff" component = {{CardContent:CardContentInit}}/>*/}
-        {/*<Route path = "staff/basicinfo" component = {Sta_basicInfo}/>*/}
+        <Route path = "staff/pwd" component = {StaffPwd}/>
         <Route path = "staff/process" component = {LessonPro}/>
         <Route path = "staff/lessons" component = {Sta_LessonInfo} />
         <Route path = "staff/createLesson" component = {CreateLesson} />

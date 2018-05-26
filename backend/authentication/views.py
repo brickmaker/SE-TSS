@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
@@ -16,6 +17,8 @@ from django.contrib import auth
 from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck
 import logging
 from django.core import serializers
+import json
+
 
 logger = logging.getLogger('django')
 
@@ -177,18 +180,39 @@ class PasswordUpdate(APIView):
 class UserViewSet(APIView):
     permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
-        user = People.objects.all().filter(username=request.user.username)
-        data = serializers.serialize("json", user, fields=('username','id_number', 'email', 'name', 'gender', 'department'), ensure_ascii = False)
-        return Response(data, status=status.HTTP_200_OK)
+        users = People.objects.all().filter(username=request.user.username)
+        total = []
+        for user in users:
+            data = {}
+            data['user_type'] = user.username.user_type
+            data['name'] = user.name
+            data['id_number'] = user.id_number
+            data['email'] = user.email
+            data['gender'] = user.gender
+            data['department'] = user.department_id
+            total.append(data)
+        json_data = json.dumps(total, ensure_ascii=False)
+
+        return Response(json_data, status=status.HTTP_200_OK)
 
 class CourseFacultyViewSet(APIView):
     serializer_class = CourseQuerySerializer
     permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         courses = Course.objects.all().filter(faculty=request.user.username)
-        data = serializers.serialize("json", courses,
-                                     fields=('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment'), ensure_ascii = False)
-        return Response(data, status=status.HTTP_200_OK)
+        total = []
+        for course in courses:
+            data = {}
+            data['course_id'] = course.course_id
+            data['name'] = course.name
+            data['credit'] = course.credit
+            data['capacity'] = course.capacity
+            data['classroom'] = course.classroom
+            data['assessment'] = course.assessment
+            data['state'] = course.state
+            total.append(data)
+        json_data = json.dumps(total, ensure_ascii=False)
+        return Response(json_data, status=status.HTTP_200_OK)
 
 
 #Temporary unused

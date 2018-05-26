@@ -47,7 +47,9 @@ export default class Sta_LessonInfo extends React.Component {
             drawerOpen:true,
         };
     }
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
     componentDidMount() {
         fetch('/api/course/',{
@@ -82,7 +84,7 @@ export default class Sta_LessonInfo extends React.Component {
         }
         return (
             <div>
-              <StaffBar/>
+                <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
 
                 <Card style={contentStyle}>
                     <TextField

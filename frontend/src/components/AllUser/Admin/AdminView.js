@@ -49,7 +49,9 @@ export default class AdminView extends React.Component {
     componentDidMount() {
         this.setState({userName: localStorage.getItem('userName')});
     }
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
 
     render() {
@@ -65,7 +67,7 @@ export default class AdminView extends React.Component {
         return (
             <div >
 
-                <AdminBar/>
+                <AdminBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
                 <Content/>
 

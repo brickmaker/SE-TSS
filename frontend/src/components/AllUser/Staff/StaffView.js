@@ -17,7 +17,7 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import {grey400} from 'material-ui/styles/colors';
 import StaffBar from "./StaffBar";
-import {Helmet} from "react-helmet";
+
 
 
 
@@ -63,6 +63,9 @@ export default class StaffView extends React.Component {
         this.setState({userName: localStorage.getItem('userName')});
     }
 
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
 
     render() {
@@ -78,7 +81,7 @@ export default class StaffView extends React.Component {
         return (
             <div >
 
-              <StaffBar/>
+              <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
 
                     <Content/>
 
@@ -91,6 +94,7 @@ export default class StaffView extends React.Component {
 
 StaffView.propType={
     userName:React.PropTypes.string,
+
 };
 
 

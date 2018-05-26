@@ -10,6 +10,8 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import StudentBar from "./StudentBar";
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 
 function mapStateToProps(state) {
     return {
@@ -44,41 +46,55 @@ export default class Stu_LessonsInfo extends React.Component {
 
         this.state={
             username:'student',
-
+            drawerOpen:false,
         };
     }
 
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
 
     render(){
+        const contentStyle = {
+            transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)',
+            margin: '50'
+        };
+        if (this.state.drawerOpen) {
+            contentStyle.marginLeft = 220;
+        }
+        else {
+            contentStyle.marginLeft = 50;
+        }
         return (
             <div >
-                <h2> Hello, {this.state.username} !</h2>
-                <hr />
+                <StudentBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
-                <Table  >
-                    <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                <Card style={contentStyle}>
 
-                        <TableRow  >
-                            <TableHeaderColumn>Course ID</TableHeaderColumn>
-                            <TableHeaderColumn>Name</TableHeaderColumn>
-                            <TableHeaderColumn>Credit</TableHeaderColumn>
-                            <TableHeaderColumn>Classroom</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
-                        {tableData.map( (row) => (
-                            <TableRow key={row.course_id}  >
-                                <TableRowColumn>{row.course_id}</TableRowColumn>
-                                <TableRowColumn>{row.name}</TableRowColumn>
-                                <TableRowColumn>{row.credit}</TableRowColumn>
-                                <TableRowColumn>{row.classroom}</TableRowColumn>
+                    <Table  >
+                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+
+                            <TableRow  >
+                                <TableHeaderColumn>Course ID</TableHeaderColumn>
+                                <TableHeaderColumn>Name</TableHeaderColumn>
+                                <TableHeaderColumn>Credit</TableHeaderColumn>
+                                <TableHeaderColumn>Classroom</TableHeaderColumn>
                             </TableRow>
-                        ))}
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false}>
+                            {tableData.map( (row) => (
+                                <TableRow key={row.course_id}  >
+                                    <TableRowColumn>{row.course_id}</TableRowColumn>
+                                    <TableRowColumn>{row.name}</TableRowColumn>
+                                    <TableRowColumn>{row.credit}</TableRowColumn>
+                                    <TableRowColumn>{row.classroom}</TableRowColumn>
+                                </TableRow>
+                            ))}
 
-                    </TableBody>
-                </Table>
+                        </TableBody>
+                    </Table>
+                </Card>
             </div>
         );
     }

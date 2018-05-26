@@ -49,32 +49,45 @@ export default class MainMenu extends React.Component {
         this.state={
             username:'',
             redirectTo: '',
+            user_type: -1,
             drawerOpen:true,
         };
     }
 
-    // componentDidMount() {
-    //     fetch('/api/user/',{
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': 'JWT '+ localStorage.getItem('token'),
-    //             'Content-Type': 'application/json'
-    //         },
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => {
-    //             this.setState({ user_type: data.user_type })
-    //         })
-    //         .catch((e) => {
-    //             alert("身份验证失效，请重新登录");
-    //             browserHistory.push("/login");
-    //         });
-    //     this.setState({userName: localStorage.getItem('userName')});
-    // }
+    componentDidMount() {
+        fetch('/api/user',{
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT '+ localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                var json =  JSON.parse(data);//转换为json对象
+                var user_type = json[0].user_type;
+                this.setState({ user_type:user_type });
+                console.log("get user_type:"+this.state.user_type);
+            })
+            .catch((e) => {
+                alert("身份验证失效，请重新登录");
+                browserHistory.push("/login");
+            });
+        this.setState({userName: localStorage.getItem('userName')});
+    }
 
 
-    dispatchNewRoute(e, route) {
+    dispatchNewRoute(e) {
         e.preventDefault();
+        var route = '';
+        if(this.state.user_type === 4)
+            route = '/admin';
+        else if(this.state.user_type === 1)
+            route = '/student';
+        else if(this.state.user_type === 2)
+            route = '/teacher';
+        else if(this.state.user_type === 3)
+            route = '/staff';
         browserHistory.push(route);
         this.setState({
             redirectTo: route,
@@ -101,7 +114,7 @@ export default class MainMenu extends React.Component {
                 />
                 <Card style={{width:"72%", marginLeft:"13%", marginTop:"3%"}}>
 
-                    <Card style={style} onClick={(e)=>this.dispatchNewRoute(e,'student')}>
+                    <Card style={style} onClick={(e)=>this.dispatchNewRoute(e)}>
                        <CardHeader title={"基础信息管理系统"} titleStyle={buttonStyle}/>
                     </Card>
                     <Card style={style}>

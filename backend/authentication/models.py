@@ -196,8 +196,14 @@ class Course(models.Model):
         (1, '待审批'),
         (2, '已通过'),
     )
+    TYPE_CHOICES = (
+        (0,"公共课"),  
+         (1,"专业选修课"),
+         (2,"专业必修课"),
+    )
     course_id = models.CharField("课号", max_length=10, primary_key=True, default="null")
     name = models.CharField("名称", max_length=20, unique=True)
+    course_type= models.PositiveSmallIntegerField("课程类别", choices=TYPE_CHOICES)
     credit = models.FloatField("学分", null=False)
     capacity = models.IntegerField("容量", null=False)
     classroom = models.CharField("教室", max_length=20, null=True)

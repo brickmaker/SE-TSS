@@ -5,7 +5,7 @@ import * as actionCreators from '../../../actions/auth';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import Drawer from 'material-ui/Drawer';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import ContentCopy from 'material-ui/svg-icons/content/content-copy';
@@ -41,48 +41,49 @@ export default class Tea_LessonInfo extends React.Component {
         this.state = {
             lesson_data: [],
             userName: '',
-            drawerOpen:true,
+            drawerOpen: true,
         };
     }
 
     //TODO:get teacher's courses
     componentDidMount() {
-        fetch('/api/course/',{
+        fetch('/api/course_faculty', {
             method: 'GET',
             headers: {
-                'Authorization': 'JWT '+ localStorage.getItem('token'),
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             },
         })
             .then((response) => response.json())
             .then((data) => {
-                this.setState({ lesson_data: data })
+                var json = JSON.parse(data);
+                this.setState({lesson_data: json})
             })
             .catch((e) => {
-                alert("身份验证失效，请重新登录");
-                browserHistory.push("/login");
+                alert("获取课程信息错误，请重新登录");
             });
+
         this.setState({userName: localStorage.getItem('userName')});
     }
-    dispatchNewRoute(e, route) {
-        e.preventDefault();
-        browserHistory.push(route);
+
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
     }
 
     render() {
         const contentStyle = {
-            transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' ,
+            transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)',
             margin: '50'
         };
         if (this.state.drawerOpen) {
             contentStyle.marginLeft = 220;
         }
-        else{
+        else {
             contentStyle.marginLeft = 50;
         }
         return (
             <div>
-                <TeacherBar/>
+                <TeacherBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
                 <Card style={contentStyle}>
 

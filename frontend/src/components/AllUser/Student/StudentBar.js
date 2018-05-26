@@ -12,7 +12,8 @@ import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import {Helmet} from "react-helmet";
-
+import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
 function mapStateToProps(state) {
     return {
         isRegistering: state.auth.isRegistering,
@@ -38,7 +39,7 @@ export default class StudentBar extends React.Component {
         super(props);
         const redirectRoute = '/student';
         this.state={
-            username:'',
+            userName:'',
             redirectTo: redirectRoute,
             drawerOpen:true,
         };
@@ -68,19 +69,17 @@ export default class StudentBar extends React.Component {
         return (
             <div>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
-                <Drawer open={this.state.drawerOpen} width={200} >
+                <Drawer open={this.props.drawerOpen} width={200} >
                     <div >
-                        <AppBar onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}/>
+                        <AppBar onLeftIconButtonTouchTap={() => this.props.handleClick()}/>
                         <MenuItem primaryText="个人信息" leftIcon={<ContentCopy />} />
-                        <MenuItem primaryText="课程信息" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/student/lessons')}/>
-                        <MenuItem primaryText="退出" leftIcon={<ContentCopy />} onClick={(e) => this.logout(e)}/>
-                        {/*<MenuItem primaryText="网上选课" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/student/')} />*/}
+                        {/*<MenuItem primaryText="课程信息" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/student/lessons')}/>*/}
                     </div>
 
                 </Drawer>
 
-                <AppBar title={'Hello, '+this.state.userName}
-                        onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}
+                <AppBar
+                        onLeftIconButtonTouchTap={() => this.props.handleClick()}
                         iconElementRight={
                             <div>
                                 <FlatButton label={"基础信息管理"} style={buttonStyle} />
@@ -89,7 +88,21 @@ export default class StudentBar extends React.Component {
                                 <FlatButton label={"论坛交流"} style={buttonStyle}/>
                                 <FlatButton label={"在线测试"} style={buttonStyle}/>
                                 <FlatButton label={"成绩管理"} style={buttonStyle}/>
-                                <FlatButton label="Back"  onClick={() => browserHistory.push("/")} style={buttonStyle}/>
+                                <FlatButton label={this.state.userName}  onClick={(e) => this.handleClick(e)} style={buttonStyle}/>
+                                <Popover
+                                    open={this.state.open}
+                                    anchorEl={this.state.anchorEl}
+                                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+                                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
+                                    onRequestClose={this.handleRequestClose}
+                                    animation={PopoverAnimationVertical}
+                                >
+                                    <Menu>
+                                        <MenuItem primaryText="修改密码" />
+                                        <MenuItem primaryText="退出" onClick={(e) => this.logout(e)}/>
+                                    </Menu>
+                                </Popover>
+
                             </div>
                         }
                 />
@@ -101,7 +114,8 @@ export default class StudentBar extends React.Component {
 
 
 StudentBar.propType={
-
+    drawerOpen: React.PropTypes.boolean,
+    handleClick: React.PropTypes.func
 
 };
 

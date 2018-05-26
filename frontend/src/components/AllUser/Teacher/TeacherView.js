@@ -34,7 +34,7 @@ export default class TeacherView extends React.Component {
         super(props);
         this.state = {
             userName: '',
-            drawerOpen:true,
+            drawerOpen:false,
         };
     }
 
@@ -43,6 +43,9 @@ export default class TeacherView extends React.Component {
         this.setState({userName: localStorage.getItem('userName')});
     }
 
+    handleClick(){
+       this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
     render() {
         const contentStyle = {
@@ -57,7 +60,7 @@ export default class TeacherView extends React.Component {
         }
         return (
             <div>
-              <TeacherBar/>
+              <TeacherBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
                 <Card style={contentStyle}>
                     <CardHeader title={"欢迎登录基础信息管理系统"}/>

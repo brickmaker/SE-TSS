@@ -11,7 +11,6 @@ import { Card, CardHeader, CardText } from 'material-ui/Card';
 import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
-import StaffBar from "../Staff/StaffBar";
 import StudentBar from "./StudentBar";
 
 function mapStateToProps(state) {
@@ -46,9 +45,9 @@ export default class StudentView extends React.Component {
         super(props);
         const redirectRoute = '/student';
         this.state={
-            username:'',
+            userName:'',
             redirectTo: redirectRoute,
-            drawerOpen:true,
+            drawerOpen:false,
         };
     }
 
@@ -57,8 +56,9 @@ export default class StudentView extends React.Component {
     }
 
 
-
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
     render() {
         const contentStyle = {
             transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' ,
@@ -73,7 +73,7 @@ export default class StudentView extends React.Component {
 
         return (
             <div>
-                <StudentBar/>
+                <StudentBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
                 <Card style={contentStyle}>
                     <CardHeader title={"欢迎登录基础信息管理系统"}/>

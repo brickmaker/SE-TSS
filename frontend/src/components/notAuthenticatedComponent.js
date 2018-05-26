@@ -76,7 +76,7 @@ export function requireNoAuthentication(Component) {
                 <div>
                     {!this.props.isAuthenticated && this.state.loaded
                         ? <Component {...this.props} />
-                        : null
+                        : <Component {...this.props} />
                     }
                 </div>
             );

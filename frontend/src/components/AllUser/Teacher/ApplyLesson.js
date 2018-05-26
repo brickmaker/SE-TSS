@@ -42,8 +42,8 @@ export default class ApplyLesson extends React.Component {
             username : 'teacher',
             course_id : '',
             course_name : '',
-            course_credit : -1,
-            course_cap : -1,
+            course_credit : '',
+            course_cap : '',
             course_room : '',
             course_assessment:'',
             redirectTo : redirectRoute,
@@ -67,7 +67,9 @@ export default class ApplyLesson extends React.Component {
     componentDidMount() {
         this.setState({userName: localStorage.getItem('userName')});
     }
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
     isDisabled(){
         let name_is_valid = false;
         let id_is_valid = false;
@@ -151,6 +153,27 @@ export default class ApplyLesson extends React.Component {
                 });
             }
         }
+        if(this.state.flag === 0){
+            if (this.state.course_id.length < 10) {
+                id_is_valid = true;
+            }
+
+           if (this.state.course_name.length < 40) {
+                name_is_valid = true;
+            }
+
+            if (this.state.course_credit <= 10 && this.state.course_credit > 0) {
+                credit_is_valid = true;
+            }
+
+           if (this.state.course_cap <= 300 && this.state.course_cap > 0) {
+                cap_is_valid = true;
+            }
+
+            if (this.state.course_room) {
+                room_is_valid = true;
+            }
+        }
 
         if( id_is_valid && name_is_valid && credit_is_valid && room_is_valid && cap_is_valid ) {
             this.setState({
@@ -179,13 +202,17 @@ export default class ApplyLesson extends React.Component {
         this.state.open = true;
 
 
-        //TODO: refresh page after submission (async)
-     //   window.location.reload();
-
         if (this.state.disabled === false) {
             this.apply(e);
             this.setState({
                 dialog_text: "课程将被尽快审批！",
+                course_id : '',
+                course_name : '',
+                course_credit : '',
+                course_cap : '',
+                course_room : '',
+                course_assessment:'',
+
             });
         }
         else{
@@ -222,28 +249,28 @@ export default class ApplyLesson extends React.Component {
 
         return (
             <div>
-                <TeacherBar/>
+                <TeacherBar drawerOpen={this.state.drawerOpen} handleClick={this.handleClick.bind(this)}/>
 
                 <Card style={contentStyle}>
                     <CardHeader title="填写申请课程信息" />
                     <Paper zDepth={2} style={{marginLeft:100,marginRight:100, marginTop:50}}>
                         <TextField hintText="Course ID" errorText={this.state.id_errortext}  style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_id')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_id')} value={this.state.course_id}/>
                         <Divider />
                         <TextField hintText="Course Name" errorText={this.state.name_errortext} style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_name')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_name')} value={this.state.course_name}/>
                         <Divider />
                         <TextField hintText="Credit" errorText={this.state.credit_errortext} style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_credit')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_credit')} value={this.state.course_credit}/>
                         <Divider />
                         <TextField hintText="Capacity" errorText={this.state.cap_errortext} style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_cap')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_cap')} value={this.state.course_cap}/>
                         <Divider />
                         <TextField hintText="Classroom" errorText={this.state.room_errortext} style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_room')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_room')} value={this.state.course_room}/>
                         <Divider />
                         <TextField hintText="Assessment (Optional)"  style={style} underlineShow={false}
-                                   onChange={(e) => this.changeValue(e, 'course_assessment')}/>
+                                   onChange={(e) => this.changeValue(e, 'course_assessment')} value={this.state.course_assessment}/>
                         <Divider />
                     </Paper>
                     <RaisedButton

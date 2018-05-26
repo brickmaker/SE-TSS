@@ -77,7 +77,7 @@ export function redirectToRoute(route) {
 }
 
 
-export function loginUser(username, password, user_type) {
+export function loginUser(username, password, type) {
     return function (dispatch) {
         dispatch(loginUserRequest());
         return get_token(username, password)
@@ -85,52 +85,44 @@ export function loginUser(username, password, user_type) {
             .then(response => {
                 try {
                     dispatch(loginUserSuccess(response.token));
-                    data_about_user(localStorage.getItem('token'))
-                        .then(parseJSON)
-                        .then(response => {
-                            try {
-                                console.log(USER[user_type]);
-                                console.log(response.user_type);
-                                if (USER[user_type] != response.user_type) {
-                                    dispatch(loginUserFailure({
-                                        response: {
-                                            status: 403,
-                                            statusText: 'Type Error',
-                                        },
-                                    }));
-                                }
-                                else {
-                                    dispatch(getUserSuccess( response));
-                                    if (response.user_type == "1") {
-                                        browserHistory.push('/student');
-                                    } else if (response.user_type == "2") {
-                                        browserHistory.push('/teacher');
-                                    } else if (response.user_type == "3") {
-                                        browserHistory.push('/staff');
-                                    } else if (response.user_type == "4") {
-                                        browserHistory.push('/admin');
-                                    }
-                                 //   browserHistory.push('/main');
-                                }
-                            } catch (e) {
-                                alert(e);
-                                return {
+                    fetch('/api/user',{
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'JWT '+ response.token,
+                            'Content-Type': 'application/json'
+                        },
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            var json =  JSON.parse(data);//转换为json对象
+                            var user_type = json[0].user_type;
+                            console.log(user_type);
+                            console.log(USER[user_type]);
+                            if (USER[type] != user_type) {
+                                dispatch(loginUserFailure({
                                     response: {
                                         status: 403,
-                                        statusText: 'Invalid token',
+                                        statusText: 'Type Error',
                                     },
-                                };
+                                }));
+                            } else {
+                                dispatch(getUserSuccess(json[0]));
+                                browserHistory.push('/main');
+                                // if (user_type == "1") {
+                                //     browserHistory.push('/student');
+                                // } else if (user_type == "2") {
+                                //     browserHistory.push('/teacher');
+                                // } else if (user_type == "3") {
+                                //     browserHistory.push('/staff');
+                                // } else if (user_type == "4") {
+                                //     browserHistory.push('/admin');
+                                // }
                             }
                         })
-                        .catch(error => {
-                            return {
-                                response: {
-                                    status: 403,
-                                    statusText: 'Invalid',
-                                },
-                            };
+                        .catch((e) => {
+                            alert("身份验证失效，请重新登录");
+                            browserHistory.push("/login");
                         });
-                    // browserHistory.push(redirectTo);
                 } catch (e) {
                     alert(e);
                     dispatch(loginUserFailure({

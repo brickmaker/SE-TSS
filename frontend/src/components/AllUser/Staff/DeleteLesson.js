@@ -54,8 +54,8 @@ export default class DeleteLesson extends React.Component {
 
 
     componentDidMount() {
-        fetch('/api/course/:cid',{
-            method: 'DELETE',
+        fetch('/api/course/',{
+            method: 'GET',
             headers: {
                 'Authorization': 'JWT '+ localStorage.getItem('token'),
                 'Content-Type': 'application/json'
@@ -71,6 +71,7 @@ export default class DeleteLesson extends React.Component {
             });
         this.setState({userName: localStorage.getItem('userName')});
     }
+
     dispatchNewRoute(e, route) {
         e.preventDefault();
         browserHistory.push(route);
@@ -98,6 +99,9 @@ export default class DeleteLesson extends React.Component {
     _handleClose = () => {
         this.setState({delete:true,open:false});
     };
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
 
     render() {
         const contentStyle = {
@@ -124,7 +128,7 @@ export default class DeleteLesson extends React.Component {
         ];
         return (
             <div>
-                <StaffBar/>
+                <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
 
                 <Card style={contentStyle}>
                     <TextField

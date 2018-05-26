@@ -222,9 +222,8 @@ export default class CreateLesson extends React.Component {
         this.setState(next_state);
     }
 
-    dispatchNewRoute(e, route) {
-        e.preventDefault();
-        browserHistory.push(route);
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
     }
 
     render() {
@@ -250,7 +249,7 @@ export default class CreateLesson extends React.Component {
         return (
 
             <div >
-                <StaffBar/>
+                <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
                 {/*<Drawer open={this.state.drawerOpen} width={200} >*/}
                     {/*<div >*/}
                         {/*<AppBar onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}/>*/}

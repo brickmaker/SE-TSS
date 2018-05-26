@@ -151,7 +151,9 @@ export default class LessonPro extends React.Component {
         e.preventDefault();
     }
 
-
+    handleClick(){
+        this.setState({drawerOpen: !this.state.drawerOpen});
+    }
     render(){
         const action = [
             <FlatButton
@@ -174,7 +176,7 @@ export default class LessonPro extends React.Component {
 
         return (
             <div >
-              <StaffBar/>
+                <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
 
                 <Card style={contentStyle}>
                     <CardHeader title="教师申请课程审批" />
