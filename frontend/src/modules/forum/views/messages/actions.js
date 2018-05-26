@@ -23,7 +23,7 @@ export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
                 // uid2: selectedId,
                 // pagenum: nextPageNum,
                 // pagesize: pageSize,
-                from: [uid1, uid2],
+                // from: [uid1, uid2],
             }
         })
             .then((response) => {
@@ -46,45 +46,44 @@ export const GET_NEWMSGS = "get_newmsgs";
 export const NEWMSGS_REQUEST = "newmsgs_request";
 export const NEWMSGS_SUCCESS = "newmsgs_success";
 export const NEWMSGS_FAILURE = "newmsgs_failure";
-export function getNewMsgs(uid){
-    return (dispatch, getState)=>{
-        const {isFetchingNewMsgs} = getState();
-        if(isFetchingNewMsgs){
+export function getNewMsgs(uid) {
+    return (dispatch, getState) => {
+        const { isFetchingNewMsgs } = getState();
+        if (isFetchingNewMsgs) {
             return;
         }
-        dispatch({type: NEWMSGS_REQUEST});
+        dispatch({ type: NEWMSGS_REQUEST });
         //TODO: url
         axios.get(`${ROOT_URL}/api/forum/newmsgs`, {
-            params:{
+            params: {
                 //TODO: 
                 // uid: uid,
                 to: uid,
             }
         })
-        .then((response)=>{
-            console.log("newmsgs", response);
-            dispatch({
-                type: NEWMSGS_SUCCESS,
-                newMsgs: response.data,
+            .then((response) => {
+                dispatch({
+                    type: NEWMSGS_SUCCESS,
+                    newMsgs: response.data,
+                })
             })
-        })
-        .catch((errors)=>{
-            console.log("newmsgs", errors);
-            dispatch({
-                type: NEWMSGS_FAILURE,
-                errors: errors.response,
+            .catch((errors) => {
+                dispatch({
+                    type: NEWMSGS_FAILURE,
+                    errors: errors.response,
+                })
             })
-        })
     }
 }
 
 export const SELECT_ENTRY = "select_entry";
-export function selectEntry(selectedId) {
-    console.log("selectEntry", selectedId);
+export function selectEntry(selectedId, selectedAvatar, selectedUsername) {
     return (dispatch, getState) => {
         dispatch({
             type: SELECT_ENTRY,
             selectedId: selectedId,
+            selectedAvatar: selectedAvatar,
+            selectedUsername: selectedUsername,
         });
     }
 }
@@ -113,7 +112,7 @@ export const MSGENTRIES_FAILURE = "entries_failure";
 
 export function getMsgEntries(uid, selectedId, pageSize) {
     return (dispatch, getState) => {
-        const { isFetchingEntries } = getState();
+        const { isFetchingEntries, selectedAvatar, selectedUsername } = getState().forum.messages;
         if (isFetchingEntries) {
             return;
         }
@@ -127,26 +126,25 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                 //TODO: test subscription, get username
                 var entries = response.data[0]["entries"];
                 // var entries = response.data;
-                var username = "username";
+                // var username = "username";
                 if (Boolean(selectedId)) {
                     var idx = -1;
                     entries.forEach((entry, index) => {
                         if (entry["id"] === selectedId)
                             idx = index;
                     });
-                    console.log("entries",entries, 'idx', idx, 'selectedid', selectedId);
                     if (idx === -1) {
-                        entries.unshift({ id: selectedId, username: username, content: "" });
+                        entries.unshift({ id: selectedId, username: selectedUsername, content: "", avatar: selectedAvatar });
                     }
                     else if (idx != 0) {
                         entries = [entries[idx]].concat(entries.slice(0, idx), entries.slice(idx + 1));
                     }
-                    console.log("new entries", entries);
                 };
                 if (entries.length > 0) {
                     dispatch({
                         type: SELECT_ENTRY,
                         selectedId: entries[0]["id"],
+                        selectedUsername: entries[0]['username'],
                     });
                     dispatch({
                         type: CLEAR_MSGS,
@@ -169,7 +167,6 @@ export function getMsgEntries(uid, selectedId, pageSize) {
 
 export const POST_MSG = "post_msg";
 export function postMsg(from, to, content, pageSize) {
-    console.log(from, to, content);
     return ((dispatch, getState) => {
         axios.post(`${ROOT_URL}/api/forum/messages`, {
             //TODO: remove id and time attr

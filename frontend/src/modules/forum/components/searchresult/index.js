@@ -120,7 +120,7 @@ class SearchResult extends Component {
         else if (resultType === 'section') {
             const { path, postNum, lastReplyTime } = result;
             return (
-                <div className={classes.container}
+                <Card className={classes.container}
                 >
                     <div className={classes.line}>
                         <div className={classes.item}>
@@ -146,7 +146,7 @@ class SearchResult extends Component {
                             帖子总数 {postNum}
                         </Typography>
                     </div >
-                </div >
+                </Card >
             );
         }
     }

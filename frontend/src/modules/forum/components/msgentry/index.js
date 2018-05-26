@@ -36,13 +36,12 @@ class MsgEntry extends Component {
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                     <Button className={selectedId == id ? classes.selectedEntry : classes.entry}
                         onClick={(event) => { event.preventDefault(); 
-                            selectEntry(id);
+                            selectEntry(id, avatar, username);
                             clearMsgs();
                             getMsgs(uid, id, 1, pageSize); 
                              }}
                         fullWidth={true}>
-                        <Avatar>
-                            {username[0]}
+                        <Avatar alt={username} src={avatar}>
                         </Avatar>
                         <div className={classes.item}>
                             <Typography variant='subheading' align="left">
@@ -69,7 +68,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    selectEntry: (selectedId) => { dispatch(selectEntry( selectedId)) },
+    selectEntry: (selectedId,selectedAvatar, selectedUsername) => { 
+        dispatch(selectEntry( selectedId, selectedAvatar, selectedUsername)); 
+    },
     getMsgs: (uid1, uid2, nextPageNum, pageSize) => {
         dispatch(getMsgs(uid1, uid2, nextPageNum, pageSize));
     },

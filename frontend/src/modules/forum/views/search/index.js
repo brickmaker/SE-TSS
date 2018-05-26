@@ -39,8 +39,7 @@ class Search extends Component {
                 <MainBody>
                     <Path isMain path={path} />
                     <Grid container className={classes.container}>
-                        <Grid item xs={12} sm={10} md={8} lg={6}>
-                            {/* <Route path={"/forum/search/:searchType/:query/:pageNum"} component={SearchResultPanel} /> */}
+                        <Grid item xs={12} sm={12} md={10} lg={10}>
                             {/* <Route path={`${match.url}/:pageNum`} render={(props)=>{
                                     const newMatch = props.match;
                                     newMatch.params = Object.assign({}, newMatch.params, {

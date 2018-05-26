@@ -21,7 +21,7 @@ const styles = {
         margin: 10,
     },
     rightCard: {
-        backgroundColor: "#303030",
+        backgroundColor: "#3f51b5",
         color: "#ffffff",
         marginRight: 10,
     },
@@ -38,11 +38,11 @@ const styles = {
 class Msg extends Component {
     render() {
         const { isLeft, message, classes } = this.props;
-        const { avatar, from, content, time } = message;
+        const {  from, content, time } = message;
         if (isLeft) {
             return (
                 <div className={classes.left}>
-                    <Avatar alt="avatar" src={avatar}> {from} </Avatar>
+                    <Avatar alt="avatar" src={from.avatar}></Avatar>
                     <Card className={classes.leftCard}>
                         <div className={classes.item}>
                             <Typography variant='body1' align="left" color="inherit">
@@ -69,7 +69,7 @@ class Msg extends Component {
                             </Typography>
                         </div>
                     </Card>
-                    <Avatar> {from} </Avatar>
+                    <Avatar alt="avatar" src={from.avatar}></Avatar>
                 </div>
             );
         }

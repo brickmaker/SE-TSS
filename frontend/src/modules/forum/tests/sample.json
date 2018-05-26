@@ -1313,21 +1313,25 @@
         {
           "id": 1,
           "username": "user1",
+          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
           "lastMsgContent": "hey"
         },
         {
           "id": 0,
           "username": "user0",
+          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
           "lastMsgContent": "hey"
         },
         {
           "id": 2,
           "username": "user2",
+          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
           "lastMsgContent": "hey"
         },
         {
           "id": 3,
           "username": "user3",
+          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
           "lastMsgContent": "hey"
         }
       ]
@@ -1336,80 +1340,106 @@
   "messages": [
     {
       "id": "gg",
-      "from": 1,
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 2,
       "content": "一条消息 sent by 1",
       "time": "5/15 4:30"
     },
     {
       "id": "啊啊",
-      "from": 2,
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 5,
       "content": "一条消息 sent by 2",
       "time": "5/15 4:30"
     },
     {
       "id": "啊啊啊",
-      "from": 5,
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 3,
       "content": "一条消息 sent by 5",
       "time": "5/15 4:30"
     },
     {
       "id": "好吧",
-      "from": 2,
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 5,
       "content": "一条消息 sent by 2",
       "time": "5/15 4:30"
     },
     {
       "id": "我也",
-      "from": 5,
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 1,
       "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
       "time": "5/15 4:30"
     },
     {
       "id": "我也",
-      "from": 5,
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 1,
       "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
       "time": "5/15 4:30"
     },
     {
       "id": "我也",
-      "from": 5,
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 1,
       "content": "一条消息 sent by 5",
       "time": "5/15 4:30"
     }
+
   ],
   "newmsgs": [
     {
       "from": {
-        "id": 3,
-        "username": "友人A"
+        "id": 30,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
       },
       "content": "一条新消息"
     },
     {
       "from": {
         "id": 2,
-        "username": "友人A"
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
       },
       "content": "一条新消息"
     },
     {
       "from": {
         "id": 2,
-        "username": "友人A"
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
       },
       "content": "一条新消息"
     },
     {
       "from": {
         "id": 2,
-        "username": "友人A"
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
       },
       "content": "一条新消息"
     }

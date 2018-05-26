@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { Grid, Typography, Paper, CircularProgress } from 'material-ui';
 import Annc from '../../components/annc';
 import { withStyles } from 'material-ui';
-import { getAnncs, setPageNum } from '../../views/announcements/actions';
+import { getAnncs } from '../../views/announcements/actions';
 import { PageNums } from '../../components/util/PageNums';
 
 const styles = {
@@ -49,7 +49,6 @@ class AnncPanel extends Component {
             this.props.getAnncs(undefined, collegeid, courseid, teacherid, 1, pageSize);
         }
         else {
-            this.props.setPageNum(this.props.match.params.pageNum);
             if (this.props.match.params.collegeid) {
                 const { collegeid, courseid, teacherid, pageNum } = this.props.match["params"];
                 this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
@@ -61,21 +60,34 @@ class AnncPanel extends Component {
     }
 
     render() {
-        const { classes, type, match, pageNum,anncs,pageSize, anncNum, isFetching } = this.props;
-        // const { anncs, anncNum } = this.props.anncs;
-        console.log("match", match);
-        console.log("render anncs", anncs);
-        // const url = match? (match.params? `/forum/annoucements/${match.params.collegeid}/${match.params.courseid}/${match.params.teacherid}`:'/forum/annoucements' ):"/forum/annoucements";
+        const { classes, match, type, anncs, pageSize, anncNum, isFetching, link } = this.props;
+        const { pageNum, collegeid, courseid, teacherid } = match.params;
+
         return (
             <div>
                 {isFetching ? <CircularProgress />
                     :
-                    <div className={type === "main" ? classes.outterPanelmain : classes.outterPanelsection}>
-                        <div className={classes.mainpanel}>
-                            {anncs && Object.values(anncs).map((annc) => {
-                                return (<Annc annc={annc} key={annc["title"] + annc["path"]} type={type} />)
-                            })}
+                    <div>
+                        <div className={type === "main" ? classes.outterPanelmain : classes.outterPanelsection}>
+                            <div className={classes.mainpanel}>
+                                {anncs && Object.values(anncs).map((annc) => {
+                                    return (<Annc annc={annc} key={annc["title"] + annc["path"]} type={type} />)
+                                })}
+                            </div>
                         </div>
+                        {type != 'main' && type != 'section' && anncNum &&
+                            <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                                const page = parseInt(event.target.innerText);
+                                //TODO: 
+                                const uid = 5;
+                                if (collegeid)
+                                    this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
+                                else
+                                    this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
+
+                                this.props.history.push(`${link}/${page}`);
+                            }
+                            } />}
                     </div>
                 }
             </div>
@@ -92,7 +104,7 @@ const mapStateToProps = (state) => ({
     anncNum: state.forum.annc.anncNum,
     isFetching: state.forum.annc.isFetching,
     pageSize: state.forum.annc.pageSize,
-    pageNum: state.forum.annc.pageNum,
+    // pageNum: state.forum.annc.pageNum,
     // anncCnt: state.forum.annc.anncCnt,
 });
 
@@ -100,9 +112,9 @@ const mapDispatchToProps = (dispatch) => ({
     getAnncs: (uid, collegeid, courseid, teacherid, nextPageNum, pageSize) => {
         dispatch(getAnncs(uid, collegeid, courseid, teacherid, nextPageNum, pageSize));
     },
-    setPageNum: (pageNum) => {
-        dispatch(setPageNum(pageNum));
-    },
+    // setPageNum: (pageNum) => {
+    //     dispatch(setPageNum(pageNum));
+    // },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(AnncPanel);

@@ -28,7 +28,7 @@ import { createFilter } from 'redux-persist-transform-filter';
 // });
 
 
-const persistedFilter = createFilter('messages', ['selectedId']);
+const persistedFilter = createFilter('messages', ['selectedId', 'selectedAvatar', 'selectedUsername']);
 
 export const forumReducer = persistReducer(
     {

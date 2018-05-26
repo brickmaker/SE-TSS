@@ -94,12 +94,12 @@ class Announcements extends Component {
                                             <AnncPanel type={type} match={newMatch} oldlink={props.match.url} />
                                         );
                                     }} /> */}
-                                    <AnncPanel type={type} match={match} />
-                                    {anncNum && <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                                    <AnncPanel type={type} match={match} history={this.props.history} link={link}/>
+                                    {/* {anncNum && <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                         const page = parseInt(event.target.innerText);
                                         this.props.history.push(`${link}/${page}`);
                                     }
-                                    } />}
+                                    } />} */}
                                 </div>
                             </Grid>
                         </Grid>

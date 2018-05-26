@@ -57,10 +57,10 @@ export function setEditing(isEditing){
 }
 
 
-export const SET_PAGENUM = 'set_pagenum';
-export function setPageNum(pageNum){
-    return ({
-        type: SET_PAGENUM,
-        pageNum: pageNum,
-    });
-}
+// export const SET_PAGENUM = 'set_pagenum';
+// export function setPageNum(pageNum){
+//     return ({
+//         type: SET_PAGENUM,
+//         pageNum: pageNum,
+//     });
+// }

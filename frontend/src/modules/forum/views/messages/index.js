@@ -21,14 +21,14 @@ const styles = {
         justifyContent: "center",
     },
     history: {
-        backgroundColor: "#fafafa",
+        backgroundColor: "#fcfcfc",
         display: "flex",
         justifyContent: "flex-end",
         padding: 10,
         height: 400,
     },
     inputpanel: {
-        backgroundColor: "#fafafa",
+        backgroundColor: "#fcfcfc",
         // justifyContent: "flex-end",
         padding: 15,
         // display: "flex",
@@ -80,7 +80,7 @@ class Messages extends Component {
     }
 
     render() {
-        const { classes, entries, selectedId, isFetchingEntries, isFetchingMsgs, postMsg, content,
+        const { classes, entries, selectedId,selectedUsername ,isFetchingEntries, isFetchingMsgs, postMsg, content,
             getContent, isEntering } = this.props;
             const path = {'messages': {'name': '消息', 'link': '/forum/messages'}};
             //TODO: uid
@@ -90,28 +90,16 @@ class Messages extends Component {
                 <MainBody>
                     <Path isMain path={path}/>
                     <Grid container className={classes.container}>
-                        <Grid item xs={12} sm={10} md={8} lg={8}>
+                        <Grid item xs={12} sm={12} md={10} lg={8}>
                             <div className={classes.box}>
                                 <Paper>
                                     <Grid container>
                                         <Grid item xs={4} sm={4} md={4} lg={3}>
                                             <MsgEntryPanel />
-                                            {/* {isFetchingEntries ?
-                                    <div className={classes.outterpending}>
-                                        <CircularProgress className={classes.pending} />
-                                    </div>
-                                    :
-                                    entries && entries.length && <div className={classes.listcontainer}>
-                                        <List className={classes.list}>
-                                            {Object.values(entries).map((entry, index) => {
-                                                return (<MsgEntry entry={entry} key={entry.id} />);
-                                            })}
-                                        </List>
-                                    </div>} */}
                                         </Grid>
                                         <Grid item xs={8} sm={8} md={8} lg={9}>
                                             <Typography align="center" variant="subheading" className={classes.title}>
-                                                与 {selectedId} 的私信
+                                                与 {selectedUsername} 的私信
                                 </Typography>
                                             <main className={classes.history}>
                                                 {
@@ -158,7 +146,7 @@ class Messages extends Component {
     }
 
     componentWillUnmount() {
-        this.props.selectEntry(undefined);
+        this.props.selectEntry(undefined, undefined, undefined);
     }
 }
 
@@ -172,6 +160,7 @@ const mapStateToProps = (state) => ({
     isFetchingEntries: state.forum.messages.isFetchingEntries,
     isFetchingMsgs: state.forum.messages.isFetchingMsgs,
     selectedId: state.forum.messages.selectedId,
+    selectedUsername: state.forum.messages.selectedUsername,
     content: state.forum.messages.content,
     isEntering: state.forum.messages.isEntering,
     pageSize: state.forum.messages.pageSize,
@@ -185,8 +174,8 @@ const mapDispatchToProps = (dispatch) => ({
     getContent: (content) => {
         dispatch(getContent(content));
     },
-    selectEntry: (selectedId) => {
-        dispatch(selectEntry(selectedId));
+    selectEntry: (selectedId, selectedAvatar, selectedUsername) => {
+        dispatch(selectEntry(selectedId, selectedAvatar, selectedUsername));
     },
 });
 

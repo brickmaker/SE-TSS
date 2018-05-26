@@ -20,8 +20,8 @@ const styles = {
 
 class SearchResultPanel extends Component {
     componentWillMount() {
-        const { searchType, query, pageNum, pageSize } = this.props.match.params;
-        this.props.search(searchType, query, pageNum, pageSize);
+        const { searchType, query, pageNum } = this.props.match.params;
+        this.props.search(searchType, query, pageNum, this.props.pageSize);
     }
 
     render() {
@@ -53,7 +53,7 @@ class SearchResultPanel extends Component {
                                                         Object.values(results).map((result) => {
                                                             return (
                                                                 <Grid item xs={12} sm={12}>
-                                                                    <SearchResult key={result["title"]} result={result} resultType={resultType} history={history}/>
+                                                                    <SearchResult key={result["title"]} result={result} resultType={resultType} history={history} />
                                                                 </Grid>
                                                             )
                                                         })
@@ -76,6 +76,7 @@ class SearchResultPanel extends Component {
                                 </div>
                                 <PageNums pageNum={resultNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                     const page = parseInt(event.target.innerText);
+                                    this.props.search(searchType, query, pageNum, pageSize);
                                     this.props.history.push(`/forum/search/${searchType}/${query}/${page}`);
                                 }
                                 } />

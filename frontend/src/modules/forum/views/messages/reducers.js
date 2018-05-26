@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE } from './actions';
+import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -8,7 +8,9 @@ const initialState = {
     isFetchingEntries: false,
     msgs: [],
     isFetchingMsgs: false,
-    selectedId: 30,
+    selectedId: undefined,
+    selectedAvatar: "",
+    selectedUsername: "",
     currentPageNum: 1,
     pageSize: 10,
     errors: {},
@@ -25,6 +27,8 @@ export function messageReducer(state = initialState, action) {
         case SELECT_ENTRY:
             return (Object.assign({}, state, {
                 selectedId: action.selectedId,
+                selectedAvatar: action.selectedAvatar,
+                selectedUsername: action.selectedUsername,
             }));
         case CLEAR_MSGS:
             return (Object.assign({}, state, {
@@ -43,7 +47,6 @@ export function messageReducer(state = initialState, action) {
                 isFetchingEntries: true,
             }));
         case MSGENTRIES_SUCCESS:
-            console.log("reducer", action.entries);
             var newSelectedId = state.selectedId;
             if (action.entries.length > 0) {
                 newSelectedId = action.entries[0]['id'];

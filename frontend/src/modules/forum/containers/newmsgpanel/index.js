@@ -14,10 +14,10 @@ class NewMsgPanel extends Component {
         this.props.getNewMsgs(5);
         this.props.selectEntry(2);
     }
-changeid(id, changeurl){
-    this.props.selectEntry(id);
-    
-}
+    changeid(id, changeurl) {
+        this.props.selectEntry(id);
+
+    }
     render() {
         const { classes, newMsgs, isFetchingNewMsgs, selectEntry } = this.props;
         return (
@@ -30,11 +30,11 @@ changeid(id, changeurl){
                                 <ListItem button
                                     onClick={(event) => {
                                         event.preventDefault();
-                                        selectEntry(msg['from']['id']);
-                        this.props.history.push(`/forum/messages`);
+                                        selectEntry(msg.from.id, msg.from.avatar, msg.from.username);
+                                        this.props.history.push(`/forum/messages`);
                                     }}
                                 >
-                                    <Avatar>{msg["from"]['username'][0]}</Avatar>
+                                    <Avatar alt={msg.from.username} src={msg.from.avatar}></Avatar>
                                     <ListItemText primary={msg['from']['username']} secondary={msg["content"]} />
                                 </ListItem>
                             )
@@ -54,18 +54,13 @@ NewMsgPanel.propTypes = {
 const mapStateToProps = (state) => ({
     newMsgs: state.forum.messages.newMsgs,
     isFetchingNewMsgs: state.forum.messages.isFetchingNewMsgs,
-    // entries: state.forum.messages.entries,
-    // isFetchingEntries: state.forum.messages.isFetchingEntries,
-    // selectedId: state.forum.messages.selectedId,
-    // pageSize: state.forum.messages.pageSize,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    selectEntry: (selectedId) => {
-        dispatch(selectEntry(selectedId));
+    selectEntry: (selectedId, selectedAvatar, selectedUsername) => {
+        dispatch(selectEntry(selectedId, selectedAvatar, selectedUsername));
     },
     getNewMsgs: (uid) => {
-        // console.log("newmsgs", uid);
         dispatch(getNewMsgs(uid));
     },
 });
