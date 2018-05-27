@@ -79,13 +79,13 @@ class Reply_reply(models.Model):
     def __str__(self):
         return 'from %s to %s : %s'%(self.from_uid.name,self.to_uid.name,self.content)
 
-class Notice(models.Model):
-    uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='notice')
+class Announcement(models.Model):
+    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=50, blank=True, default="")
     content = models.TextField()
-    section_id = models.ForeignKey("Section", on_delete=models.CASCADE, related_name='notice')
-    valid = models.BooleanField(default=True)
-    create_time = models.DateTimeField(auto_now_add=True)
+    section = models.ForeignKey("Section", on_delete=models.CASCADE, related_name='notice')
+    #valid = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
