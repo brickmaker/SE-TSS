@@ -18,24 +18,27 @@ import CourseChoosing from './modules/courseChoosing';
 import ScheduleViewing from './modules/scheduleViewing';
 import CourseManagement from './modules/courseManagement';
 const drawerWidth = 210;
-const styles = theme => ({
+const HEIGHT = 715;
+const styles = theme => (console.log(theme),{
   root: {
-	flexGrow: 1,
-    //overflow: 'hidden',
-    //position: 'relative',
-    //display: 'flex',
+	position: 'absolute',
+	height: HEIGHT,
+	width: document.body.scrollWidth 
   },
   simpleText: {
-    marginLeft: 50,
+    marginLeft: drawerWidth + 50,
   },
   drawerPaper: {
-    position: 'relative',
+	position: 'absolute',
 	width: drawerWidth,
+	height: HEIGHT,
   },
   toolbar: theme.mixins.toolbar,
   divStyle: {
 	  marginLeft: drawerWidth+1,
-	  marginTop: 30,
+	  marginTop: 70,
+	  overflow: 'auto',
+	  height: HEIGHT-70,
   },
   title: {
 	  padding: "20px",
@@ -65,14 +68,15 @@ const Xkxt = ({ isAdmin, utility, switchUtility, classes }) => {
 
 	return (
 		<div className={classes.root}>
+			<AppBar position="absolute" style={{height:'65px'}}>
+				<Toolbar>
+					<Typography variant="title" color="inherit" className={classes.simpleText}>
+						{utility}
+					</Typography>
+				</Toolbar>
+			</AppBar>
 			<div className={classes.divStyle}>
-				<AppBar position="absolute" style={{left:drawerWidth,right:1}}>
-					<Toolbar>
-						<Typography variant="title" color="inherit" className={classes.simpleText}>
-							{utility}
-						</Typography>
-					</Toolbar>
-				</AppBar>
+				
 				{whatToShow}
 			</div>
 			<Drawer
