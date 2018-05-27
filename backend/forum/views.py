@@ -5,7 +5,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import models
-from .models import *
 from django.db.models import Q
 
 post_per_page = 20
@@ -22,7 +21,7 @@ class subscriptions(APIView):
         token = request.GET.get('token', None)
         if uid is None or token is None:
             return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
-
+        
         try:
             user = models.User.objects.get(pk=uid)
         except:
@@ -151,11 +150,11 @@ class thread(APIView):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         try:
             # print(thread_id)
-            thread = Thread.objects.get(pk=thread_id)
-        except Thread.DoesNotExist:
+            thread = models.Thread.objects.get(pk=thread_id)
+        except models.Thread.DoesNotExist:
             return Response({'error': 'Post not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        if thread.status == Thread.CLOSED:
+        if thread.status == models.Thread.CLOSED:
             return Response({'error': 'Post closed'}, status=status.HTTP_404_NOT_FOUND)
 
         res = {}
@@ -163,20 +162,20 @@ class thread(APIView):
         res['title'] = thread.title
         path = {}
         section = thread.section
-        if section.type == Section.TEACHER:
+        if section.type == models.Section.TEACHER:
             teacher = section.teacher.all()[0]
             path['teacher'] = {'id': teacher.section.id, 'name': teacher.name}
             path['course'] = {'id': teacher.course.section.id, 'name': teacher.course.name}
             path['college'] = {'id': teacher.college.section.id, 'name': teacher.college.name}
-        elif section.type == Section.COURSE:
+        elif section.type == models.Section.COURSE:
             course = section.course.all()[0]
             path['course'] = {'id': course.section.id, 'name': course.name}
             path['college'] = {'id': course.college.section.id, 'name': course.college.name}
         else:
-            college = Section.college.all()[0]
+            college = models.Section.college.all()[0]
             path['college'] = {'id': college.section.id, 'name': college.name}
         res['path'] = path
-        reply_num = Reply.objects.filter(post_id=section.id).count()
+        reply_num = models.Reply.objects.filter(post_id=section.id).count()
         res['replyPageNum'] = reply_num // post_per_page + 1
         return Response(res, status=status.HTTP_200_OK)
 
@@ -190,7 +189,7 @@ class reply(APIView):
         page = int(page)
         res = {}
         res['error'] = None
-        datas = Reply.objects.filter(post_id=post_id).order_by('create_time')[
+        datas = models.Reply.objects.filter(post_id=post_id).order_by('create_time')[
                 page * post_per_page:(page + 1) * post_per_page]
         res['data'] = []
         for data in datas:
@@ -213,10 +212,10 @@ class msgentries(APIView):
         uid = request.GET.get('uid', None)
         if uid is None:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-        u = User.objects.get(uid=uid)
+        u = models.User.objects.get(uid=uid)
 
-        raw_datas = Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
-        print(raw_datas)
+        raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
+        #print(raw_datas)
         d = {}
         for rd in raw_datas:
             if rd.sender_id == u:
@@ -261,7 +260,7 @@ class messages(APIView):
             return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
         pagenum = int(pagenum)
         pagesize = int(pagesize)
-        raw_datas = Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
+        raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
                                            | Q(sender_id=uid2, receiver_id=uid1))\
                                             .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
@@ -295,3 +294,86 @@ class messages(APIView):
             return Response({'errors':'send message fail'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response({'from':res.sender_id.uid,'to':res.receiver_id.uid,'content':res.content,'date':res.date},status=status.HTTP_200_OK)
+
+        
+class announcements(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        if uid is None:
+            return self.section_wise(request,format)
+        return self.user_wise(request,format)
+        
+    def user_wise(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        pagenum = request.GET.get('pagenum', None)
+        pagesize = request.GET.get('pagesize', None)
+        
+        if None in (uid,pagenum,pagesize):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+        
+        subs = models.Subscribe.objects.filter(user_id = uid)
+        subs = [sub.section for sub in subs]
+        announcements = models.Announcement.objects.filter(section__in=subs).order_by('-date')
+        anncNum = len(announcements)   
+        res = {}
+        res['anncNum'] = anncNum
+        res['anncs'] = []
+        for ann in announcements:
+            item = {'title':ann.title,'content':ann.content,'time':ann.date}
+            author = models.User.objects.get(uid=ann.user_id)
+            item['author'] = {'username':author.name,'uid':author.uid}
+            section = models.Section.objects.get(pk=ann.section_id)
+            if section.type == models.Section.TEACHER:
+                teacher = models.Teacher.objects.get(section=section)
+                course = models.Course.objects.get(pk=teacher.course_id)
+                college = models.College.objects.get(pk=teacher.college_id)
+                item['path'] = {'college':{'id':college.id,'name':college.name},
+                                'course':{'id':course.id,'name':course.name},
+                                'teacher':{'id':teacher.id,'name':teacher.name}}
+            elif section.type == models.Section.COURSE:
+                course = models.Course.objects.get(section=section)
+                college = models.College.objects.get(pk=course.college_id)
+                item['path'] = {'college':{'id':college.id,'name':college.name},
+                                'course':{'id':course.id,'name':course.name}}
+            res['anncs'].append(item)
+        return Response(res, status=status.HTTP_200_OK)
+        
+    def section_wise(self, request, format=None):        
+        colledgeid = request.GET.get('colledgeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid', None)
+        pagenum = request.GET.get('pagenum', None)
+        pagesize = request.GET.get('pagesize', None)
+        
+        if None in (colledgeid,courseid,teacherid,pagenum,pagesize):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+        
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error': 'Section not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        announcements = models.Announcement.objects.filter(section=teacher.section).order_by('-date')
+        anncNum = len(announcements)   
+        res = {}
+        res['anncNum'] = anncNum
+        res['anncs'] = []
+        for ann in announcements:
+            item = {'title':ann.title,'content':ann.content,'time':ann.date}
+            author = models.User.objects.get(uid=ann.user_id)
+            item['author'] = {'username':author.name,'uid':author.uid}
+            section = models.Section.objects.get(pk=ann.section_id)
+            if section.type == models.Section.TEACHER:
+                teacher = models.Teacher.objects.get(section=section)
+                course = models.Course.objects.get(pk=teacher.course_id)
+                college = models.College.objects.get(pk=teacher.college_id)
+                item['path'] = {'college':{'id':college.id,'name':college.name},
+                                'course':{'id':course.id,'name':course.name},
+                                'teacher':{'id':teacher.id,'name':teacher.name}}
+            elif section.type == models.Section.COURSE:
+                course = models.Course.objects.get(section=section)
+                college = models.College.objects.get(pk=course.college_id)
+                item['path'] = {'college':{'id':college.id,'name':college.name},
+                                'course':{'id':course.id,'name':course.name}}
+            res['anncs'].append(item)
+        return Response(res, status=status.HTTP_200_OK)
