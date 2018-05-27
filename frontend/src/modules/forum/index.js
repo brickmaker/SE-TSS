@@ -12,7 +12,7 @@ import Search from './views/search';
 import SearchBar from './components/searchbar';
 import Announcements from './views/announcements';
 import Management from './views/management';
-import  AnncEditor from './components/annceditor'; 
+import  AnncEditor from './views/annceditor'; 
 
 const styles = {
     backgroundColor: '#f0f0ee',

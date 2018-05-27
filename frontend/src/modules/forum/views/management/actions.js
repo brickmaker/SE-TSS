@@ -66,7 +66,7 @@ export const HOTPOSTS_REQUEST = 'hotposts_request';
 export const HOTPOSTS_SUCCESS = 'hotposts_success';
 export const HOTPOSTS_FAILURE = 'hotposts_failure';
 
-export const getHotPosts = (collegeid, courseid, teacherid, year, week, month) => {
+export const getHotPosts = (collegeid, courseid, teacherid, time, timeType) => {
     return (dispatch, getState) => {
         const { isFetchingHotPosts } = getState();
         console.log("gethotposts");
@@ -80,9 +80,8 @@ export const getHotPosts = (collegeid, courseid, teacherid, year, week, month) =
                 collegeid,
                 courseid,
                 teacherid,
-                year,
-                week,
-                month,
+                time,
+                timeType,
             }
         })
             .then((response) => {
@@ -162,18 +161,33 @@ export const getTeachers = (collegeid, courseid) => {
                 courseid: courseid,
             }
         })
-        .then((response)=>{
-            dispatch({
-                type: TEACHERLIST_SUCCESS,
-                teacherItems: response.data,
-            });
-        })
-        .catch((errors)=>{
-            dispatch({
-                type: TEACHERLIST_FAILURE,
-                teacherItems: undefined,
+            .then((response) => {
+                dispatch({
+                    type: TEACHERLIST_SUCCESS,
+                    teacherItems: response.data,
+                });
             })
-        })
+            .catch((errors) => {
+                dispatch({
+                    type: TEACHERLIST_FAILURE,
+                    teacherItems: undefined,
+                })
+            })
     }
 }
 
+export const SET_TIMETYPE = 'set_timetype';
+export const setTimeType = (timeType) => {
+    return ({
+        type: SET_TIMETYPE,
+        timeType: timeType,
+    })
+}
+
+export const SET_TIME = 'set_time';
+export const setTime = (time) => {
+    return ({
+        type: SET_TIME,
+        time: time,
+    })
+}

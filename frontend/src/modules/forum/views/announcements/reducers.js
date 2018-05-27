@@ -1,4 +1,4 @@
-import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_EDITING } from "./actions";
+import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_HASFINISHED, NEWANNC_REQUEST, NEWANNC_SUCCESS, NEWANNC_FAILURE, SECTIONNAMES_SUCCESS, SECTIONNAMES_FAILURE } from "./actions";
 
 // import {} from
 
@@ -10,7 +10,10 @@ const initialState = {
     anncs: {},
     isFetching: false,
     errors: {},
-    isEditing: false,
+    isPosting: false,
+    hasFinished: false,
+    isSuccess: false,
+    sectionNames: undefined,
 }
 
 export function anncReducer(state = initialState, action) {
@@ -34,9 +37,34 @@ export function anncReducer(state = initialState, action) {
                 isFetching: false,
                 errors: action.errors,
             }));
-        case SET_EDITING:
+        case NEWANNC_REQUEST:
             return (Object.assign({}, state, {
-                isEditing: action.isEditing,
+                isPosting: true,
+            }));
+        case NEWANNC_SUCCESS:
+            return (Object.assign({}, state, {
+                isPosting: false,
+                hasFinished: true,
+                isSuccess: true,
+            }));
+        case NEWANNC_FAILURE:
+            return (Object.assign({}, state, {
+                isPosting: false,
+                hasFinished: true,
+                isSuccess: false,
+            }));
+        case SET_HASFINISHED:
+            return (Object.assign({}, state, {
+                hasFinished: action.hasFinished,
+            }));
+        case SECTIONNAMES_SUCCESS:
+            return (Object.assign({}, state, {
+                sectionNames: action.sectionNames,
+            }));
+        case SECTIONNAMES_FAILURE:
+            return (Object.assign({}, state, {
+                sectionNames: undefined,
+                errors: action.errors,
             }));
         default: return state;
     };

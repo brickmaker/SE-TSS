@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Paper, Typography, withStyles, Divider, Input, Button, List, CircularProgress } from 'material-ui';
+import { Grid, Paper, Typography, withStyles, Divider, Input, Button, List, CircularProgress, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from 'material-ui';
 import MsgEntry from '../../components/msgentry';
 import MsgHistory from '../../containers/msghistory';
 import MsgEntryPanel from '../../containers/msgentrypanel';
@@ -74,21 +74,30 @@ const styles = {
 }
 
 class Messages extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isDialogOpen: false,
+            dialogContent: "",
+        };
+    }
+
     componentWillMount() {
         //TODO: user id
         // this.props.getMsgEntries(5, this.props.selectedId, this.props.pageSize);
     }
 
     render() {
-        const { classes, entries, selectedId,selectedUsername ,isFetchingEntries, isFetchingMsgs, postMsg, content,
+        const { classes, entries, selectedId, selectedUsername, isFetchingEntries, isFetchingMsgs, postMsg, content,
             getContent, isEntering } = this.props;
-            const path = {'messages': {'name': '消息', 'link': '/forum/messages'}};
-            //TODO: uid
+        const path = { 'messages': { 'name': '消息', 'link': '/forum/messages' } };
+        const { isDialogOpen, dialogContent } = this.state;
+        //TODO: uid
         const uid = 5;
         return (
             <div>
                 <MainBody>
-                    <Path isMain path={path}/>
+                    <Path isMain path={path} />
                     <Grid container className={classes.container}>
                         <Grid item xs={12} sm={12} md={10} lg={8}>
                             <div className={classes.box}>
@@ -117,6 +126,7 @@ class Messages extends Component {
                                                 <div className={classes.inputoutter}>
                                                     <div className={classes.input}>
                                                         <Input multiline={true} placeholder='请输入内容'
+                                                        inputProps={{style: {width:"100%", height:100}}}
                                                             disableUnderline={true} fullWidth={true}
                                                             onChange={(event) => {
                                                                 getContent(event.target.value);
@@ -128,11 +138,39 @@ class Messages extends Component {
                                                     <Button variant="raised" onClick={
                                                         (event) => {
                                                             event.preventDefault();
-                                                            postMsg(uid, selectedId, content);
-                                                            getContent("");
+                                                            if (!content || content.length == 0) {
+                                                                this.setState({ dialogContent: "消息内容不得为空", isDialogOpen: true });
+                                                            }
+                                                            else if (content.length > 500) {
+                                                                this.setState({ dialogContent: "消息长度不得超过500", isDialogOpen: true });
+                                                            }
+                                                            else {
+                                                                postMsg(uid, selectedId, content);
+                                                                getContent("");
+                                                            }
                                                         }
                                                     }>发送</Button>
                                                 </div>
+                                                <Dialog open={isDialogOpen}
+                                                    aria-labelledby="alert-dialog-title"
+                                                    aria-describedby="alert-dialog-description"
+                                                    onClose={() => {
+                                                        this.setState({ isDialogOpen: false });
+                                                    }}
+                                                    fullWidth
+                                                >
+                                                    <DialogTitle id="alert-dialog-title" >私信</DialogTitle>
+                                                    <DialogContent>
+                                                        <DialogContentText id="alert-dialog-description">
+                                                            {dialogContent}
+                                                        </DialogContentText>
+                                                    </DialogContent>
+                                                    <DialogActions>
+                                                        <Button color='primary' onClick={() => { this.setState({ isDialogOpen: false }); }}>
+                                                            确定
+                                                    </Button>
+                                                    </DialogActions>
+                                                </Dialog>
                                             </main>
                                         </Grid>
                                     </Grid>

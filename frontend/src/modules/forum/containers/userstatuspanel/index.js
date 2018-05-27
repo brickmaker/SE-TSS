@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { withStyles, Table, TableHead, TableRow, TableCell, TableBody, Paper, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Button, CircularProgress, TableFooter, TablePagination } from 'material-ui';
+import { withStyles, Table, TableHead, TableRow, TableCell, TableBody, Paper, Grid, FormControl, InputLabel, Select, MenuItem, TextField, Button, CircularProgress, TableFooter, TablePagination, Dialog, DialogContent, DialogContentText, DialogActions, DialogTitle } from 'material-ui';
 import { Flag } from '@material-ui/icons';
 import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
 // import { Input } from '@material-ui/icons/es';
@@ -47,11 +47,24 @@ const styles = {
         marginBottom: 20,
     },
     button: {
+        display: "inline-block",
+        // display: "inline-flex",
+        flexGrow: 1,
         maxHeight: 20,
         minWidth: 120,
         marginTop: 30,
         marginLeft: 10,
         marginRight: 10,
+    },
+    input: {
+        display: "inline-block",
+        // display: "inline-flex",
+        flexGrow: 3,
+        // maxHeight: 20,
+        // minWidth: 120,
+        // marginTop: 30,
+        // marginLeft: 10,
+        // marginRight: 10,
     },
 };
 
@@ -62,6 +75,8 @@ class UserStatusPanel extends Component {
             username: "",
             pageSize: 5,
             pageNum: 0,
+            isDialogOpen: false,
+            dialogContent: "",
         };
     }
 
@@ -72,12 +87,12 @@ class UserStatusPanel extends Component {
     render() {
         //TODO: username
         const { classes, userStates, getUserStates, isFetchingUserStates } = this.props;
-        const { username, pageSize,pageNum } = this.state;
+        const { username, pageSize, pageNum, isDialogOpen, dialogContent } = this.state;
         return (
             <div className={classes.container}>
                 <Paper style={{ paddingBottom: 10 }}>
                     <div className={classes.selectBar}>
-                        <div  >
+                        <div  className={classes.input}>
                             <TextField
                                 label="用户名"
                                 name="username"
@@ -87,17 +102,45 @@ class UserStatusPanel extends Component {
                                 margin="normal"
                                 autoComplete='off'
                                 className={classes.item}
+                                // fullWidth
+                                inputProps={{ style: { width: "100%" } }}
                             />
                         </div>
                         <div>
                             <Button color="primary" variant="raised"
                                 className={classes.button}
                                 onClick={(event) => {
-                                    console.log("management userstate", username);
+                                    // console.log("management userstate", username);
                                     event.preventDefault();
-                                    getUserStates(username);
+                                    if (!username || username.length == 0) {
+                                        this.setState({ dialogContent: "用户名不得为空", isDialogOpen: true });
+                                    }
+                                    else if (username.length > 20) {
+                                        this.setState({ dialogContent: "用户名长度不得超过20", isDialogOpen: true });
+                                    }
+                                    else getUserStates(username);
                                 }}
                             >统计</Button>
+                            <Dialog open={isDialogOpen}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                                onClose={() => {
+                                    this.setState({ isDialogOpen: false });
+                                }}
+                                fullWidth
+                            >
+                                <DialogTitle id="alert-dialog-title" >用户发帖统计</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        {dialogContent}
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button color='primary' onClick={() => { this.setState({ isDialogOpen: false }); }}>
+                                        确定
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
                         </div>
                     </div>
                     {

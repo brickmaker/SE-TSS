@@ -1,3 +1,5 @@
+
+import 'rc-calendar/assets/index.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -8,6 +10,51 @@ import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
 import Link from 'react-router-dom/Link';
 import { PageNums } from '../../components/util/PageNums';
 import { getColleges, getCourses, getTeachers, getHotPosts } from '../../views/management/actions';
+
+import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
+import DatePicker from 'rc-calendar/lib/Picker';
+import MonthPicker from '../../components/monthpicker';
+import WeekPicker from '../../components/weekpicker';
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import 'moment/locale/en-gb';
+
+const format = 'YYYY-MM';
+const cn = true;
+
+const now = moment();
+if (cn) {
+    now.locale('zh-cn').utcOffset(8);
+} else {
+    now.locale('en-gb').utcOffset(0);
+}
+
+const defaultCalendarValue = now.clone();
+defaultCalendarValue.add(-1, 'month');
+
+
+function onStandaloneSelect(value) {
+    console.log('month-calendar select', (value && value.format(format)));
+}
+
+function onStandaloneChange(value) {
+    console.log('month-calendar change', (value && value.format(format)));
+}
+
+function disabledDate(value) {
+    return value.year() > now.year() ||
+        value.year() === now.year() && value.month() > now.month();
+}
+
+function onMonthCellContentRender(value) {
+    // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+    return `${value.month() + 1}月`;
+}
+
 
 const styles = {
     container: {
@@ -35,7 +82,7 @@ const styles = {
     selectBar: {
         marginLeft: 20,
         // marginTop: 40,
-        marginBottom: 20,
+        // marginBottom: 20,
         marginRight: 20,
         paddingTop: 20,
         display: 'flex',
@@ -61,6 +108,7 @@ class HotPostsPanel extends Component {
             month: "",
             pageNum: 0,
             pageSize: 25,
+            date: new Date(),
         };
     }
 
@@ -74,7 +122,7 @@ class HotPostsPanel extends Component {
 
 
     render() {
-        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, yearItems, monthItems, getCourses, getTeachers, getHotPosts } = this.props;
+        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, getCourses, getTeachers, getHotPosts, time, timeType} = this.props;
         const { collegeid, courseid, teacherid, year, week, month, pageNum, pageSize } = this.state;
         return (
             <div className={classes.container}>
@@ -151,54 +199,8 @@ class HotPostsPanel extends Component {
                                             })}
                                     </Select>
                                 </FormControl>
-                                <FormControl className={classes.item}>
-                                    <InputLabel htmlFor="year">年</InputLabel>
-                                    <Select
-                                        value={this.state.year}
-                                        onChange={this.handleChange}
-                                        inputProps={{
-                                            name: 'year',
-                                            id: 'year',
-                                        }}
-                                    >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={2018}>2018</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className={classes.item}>
-                                    <InputLabel htmlFor="month">月</InputLabel>
-                                    <Select
-                                        value={this.state.month}
-                                        onChange={this.handleChange}
-                                        inputProps={{
-                                            name: 'month',
-                                            id: 'month',
-                                        }}
-                                    >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={5}>5</MenuItem>
-                                    </Select>
-                                </FormControl>
-                                <FormControl className={classes.item}>
-                                    <InputLabel htmlFor="week">周</InputLabel>
-                                    <Select
-                                        value={this.state.week}
-                                        onChange={this.handleChange}
-                                        inputProps={{
-                                            name: 'week',
-                                            id: 'week',
-                                        }}
-                                    >
-                                        <MenuItem value="">
-                                            <em>None</em>
-                                        </MenuItem>
-                                        <MenuItem value={23}>23</MenuItem>
-                                    </Select>
-                                </FormControl>
+                                <MonthPicker defaultValue={now} />
+                                <WeekPicker defaultValue={now} />
                             </form>
                         </div>
                         <div style={{ textJustify: "right" }}>
@@ -207,7 +209,7 @@ class HotPostsPanel extends Component {
                                 className={classes.button}
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    getHotPosts(collegeid, courseid, teacherid, year, week, month);
+                                    getHotPosts(collegeid, courseid, teacherid, time, timeType);
                                 }}
                             >统计</Button>
                         </div>
@@ -318,9 +320,8 @@ const mapStateToProps = (state) => ({
     collegeItems: state.forum.management.collegeItems,
     courseItems: state.forum.management.courseItems,
     teacherItems: state.forum.management.teacherItems,
-    yearItems: state.forum.management.yearItems,
-    monthItems: state.forum.management.monthItems,
-    weekItems: state.forum.management.weekItems,
+    time: state.forum.management.time,
+    timeType: state.forum.management.timeType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -333,8 +334,8 @@ const mapDispatchToProps = (dispatch) => ({
     getTeachers: (collegeid, courseid) => {
         dispatch(getTeachers(collegeid, courseid));
     },
-    getHotPosts: (collegeid, courseid, teacherid, year, week, month) => {
-        dispatch(getHotPosts(collegeid, courseid, teacherid, year, week, month));
+    getHotPosts: (collegeid, courseid, teacherid, time, timeType) => {
+        dispatch(getHotPosts(collegeid, courseid, teacherid, time, timeType));
     },
 });
 

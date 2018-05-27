@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_URL } from '../../configs/config';
+import { Title } from '@material-ui/icons/es';
 
 export const ANNCS_REQUEST = "anncs_request";
 export const ANNCS_SUCCESS = "anncs_success";
@@ -7,7 +8,7 @@ export const ANNCS_FAILURE = "anncs_failure";
 
 export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageSize) {
     return (dispatch, getState) => {
-        const { isFetching } = getState();
+        const { isFetching } = getState().forum.annc;
         if (isFetching)
             return;
         dispatch({ type: ANNCS_REQUEST });
@@ -48,19 +49,69 @@ export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageS
 }
 
 
-export const SET_EDITING = "set_editing";
-export function setEditing(isEditing){
+export const SET_HASFINISHED = "set_hasfinished";
+export const setHasFinished = (hasFinished) => {
     return ({
-        type: SET_EDITING,
-        isEditing: isEditing,
+        type: SET_HASFINISHED,
+        hasFinished: hasFinished,
     });
 }
 
 
-// export const SET_PAGENUM = 'set_pagenum';
-// export function setPageNum(pageNum){
-//     return ({
-//         type: SET_PAGENUM,
-//         pageNum: pageNum,
-//     });
-// }
+
+export const NEWANNC_REQUEST = "newannc_request";
+export const NEWANNC_SUCCESS = "newannc_success";
+export const NEWANNC_FAILURE = "newannc_failure";
+export const postAnnc = (title, content, collegeid, courseid, teacherid) => {
+    console.log("post", title, content, collegeid, courseid, teacherid);
+    return (dispatch, getState) => {
+        const { isPosting } = getState().forum.annc;
+        if (isPosting)
+            return;
+        dispatch({
+            type: NEWANNC_REQUEST,
+        })
+        axios.post(`${ROOT_URL}/api/forum/announcements`, {
+            title,
+            content,
+            collegeid,
+            courseid,
+            teacherid,
+        })
+            .then((response) => {
+                dispatch({
+                    type: NEWANNC_SUCCESS,
+                });
+            })
+            .catch((errors) => {
+                dispatch({
+                    type: NEWANNC_FAILURE,
+                    errors: errors,
+                });
+            })
+    }
+}
+
+export const SECTIONNAMES_SUCCESS = "sectionnames_success";
+export const SECTIONNAMES_FAILURE = "sectionnames_failure";
+export const getSectionNames = (sectionids) => {
+    return (dispatch, getState) => {
+        axios.get(`${ROOT_URL}/api/forum/sectionnames`, {
+            params: {
+                sectionids,
+            }
+        })
+            .then((response) => {
+                dispatch({
+                    type: SECTIONNAMES_SUCCESS,
+                    sectionNames: response.data,
+                });
+            })
+            .catch((errors) => {
+                dispatch({
+                    type: SECTIONNAMES_FAILURE,
+                    errors: errors,
+                });
+            })
+    }
+}

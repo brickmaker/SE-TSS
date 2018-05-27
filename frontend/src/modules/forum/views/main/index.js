@@ -12,6 +12,7 @@ import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
 import { Announcement as AnnouncementIcon } from '@material-ui/icons'
 import { Message } from "@material-ui/icons/es/index"
 import NewMsgPanel from '../../containers/newmsgpanel';
+import SearchBar from '../../components/searchbar';
 
 class Main extends Component {
 
@@ -25,6 +26,7 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain />
+                    <SearchBar history={this.props.history}/>
                     <Grid container xs={12}>
                         <Grid container xs={8}>
                             {

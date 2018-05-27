@@ -48,7 +48,7 @@ export const NEWMSGS_SUCCESS = "newmsgs_success";
 export const NEWMSGS_FAILURE = "newmsgs_failure";
 export function getNewMsgs(uid) {
     return (dispatch, getState) => {
-        const { isFetchingNewMsgs } = getState();
+        const { isFetchingNewMsgs } = getState().forum.messages;
         if (isFetchingNewMsgs) {
             return;
         }
