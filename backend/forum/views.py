@@ -19,8 +19,8 @@ class subscriptions(APIView):
     def get(self, request, format=None):
         uid = request.GET.get('uid', None)
         token = request.GET.get('token', None)
-        if uid is None or token is None:
-            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+        if None in (uid,token):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             user = models.User.objects.get(pk=uid)
@@ -64,7 +64,7 @@ class courses(APIView):
     def get(self, request, format=None):
         collegeid = request.GET.get('collegeid', None)
         if collegeid is None:
-            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             college = models.College.objects.get(pk=collegeid)
@@ -91,8 +91,8 @@ class course(APIView):
     def get(self, request, format=None):
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
-        if collegeid is None or courseid is None:
-            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+        if None in (collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             course = models.Course.objects.get(pk=courseid, college=collegeid)
@@ -127,8 +127,8 @@ class teacher(APIView):
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
-        if collegeid is None or courseid is None or teacherid is None:
-            return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
+        if None in (colledgeid,courseid,teacherid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             teacher = models.Teacher.objects.get(pk=teacherid, college=collegeid, course=courseid)
@@ -184,7 +184,7 @@ class reply(APIView):
     def get(self, request, format=None):
         post_id = request.GET.get('postid', None)
         page = request.GET.get('page', None)
-        if post_id is None or page is None:
+        if None in (post_id,page):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         page = int(page)
         res = {}
@@ -256,7 +256,7 @@ class messages(APIView):
         uid2 = request.GET.get('uid2', None)
         pagenum = request.GET.get('pagenum', None)
         pagesize = request.GET.get('pagesize', None)
-        if uid1 is None or uid2 is None or pagenum is None or pagesize is None:
+        if None in (uid1,uid2,pagenum,pagesize):
             return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
         pagenum = int(pagenum)
         pagesize = int(pagesize)
@@ -284,11 +284,11 @@ class messages(APIView):
         from_id = request.data.get('from',None)
         to_id = request.data.get('to',None)
         content = request.data.get('content',None)
-        if from_id is None or to_id is None or content is None:
+        if None in (from_id,to_id,content):
             return Response({'error':'Parameter errors'},status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            res = Message.objects.create(sender_id=User.objects.get(pk=from_id),receiver_id=User.objects.get(pk=to_id),content=content)
+            res = models.Message.objects.create(sender_id=User.objects.get(pk=from_id),receiver_id=User.objects.get(pk=to_id),content=content)
         except Exception as e:
             print(e)
             return Response({'errors':'send message fail'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -302,6 +302,37 @@ class announcements(APIView):
         if uid is None:
             return self.section_wise(request,format)
         return self.user_wise(request,format)
+        
+    def post(self,request,format=None):
+        try:
+            raw = json.loads(request.body.decode("utf-8"))
+        except Exception as e:
+            #print(e)
+            return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            uid = raw['uid']
+            collegeid = raw['path']['collegeid']
+            courseid = raw['path']['courseid']
+            teacherid = raw['path']['teacherid']
+            content = raw['content']
+            title = raw['title']
+        except Exception as e:
+            #print(e)
+            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            user = models.User.objects.get(pk=uid)
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except Exception as e:
+            return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+            
+        try:
+            models.Announcement.objects.create(user_id=uid,title=title,content=content,section_id=teacher.section_id)
+        except:
+            return Response({'error':'Fail to release announcement'}, status=status.HTTP_403_FORBIDDEN)
+        
+        return Response(raw, status=status.HTTP_200_OK)
         
     def user_wise(self, request, format=None):
         uid = request.GET.get('uid', None)
