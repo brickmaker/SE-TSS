@@ -13,4 +13,5 @@ urlpatterns = [
     path('msgentries',views.msgentries.as_view(),name='msgentries'),
     path('messages',views.messages.as_view(),name='messages'),
     path('announcements',views.announcements.as_view(),name='announcements'),
+    path('info',views.info.as_view(),name='info'),
 ]

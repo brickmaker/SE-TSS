@@ -94,6 +94,18 @@ python init_db.py -m debug
 * http://127.0.0.1:8000/api/forum/announcements?uid=1&pagenum=1&pagesize=1
 * http://127.0.0.1:8000/api/forum/announcements?colledgeid=1&courseid=1&teacherid=1&pagenum=1&pagesize=1
 
+## POST
+```
+python manager.py test forum
+```
+
+#统计信息
+## GET
+* http://127.0.0.1:8000/api/forum/info
 	
+#用户统计信息
+## GET
+* http://127.0.0.1:8000/api/forum/info
+
 
 

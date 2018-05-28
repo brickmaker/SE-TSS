@@ -408,3 +408,18 @@ class announcements(APIView):
                                 'course':{'id':course.id,'name':course.name}}
             res['anncs'].append(item)
         return Response(res, status=status.HTTP_200_OK)
+        
+        
+class info(APIView):
+    def get(self, request, format=None):
+        res = {}
+        user_count = models.User.objects.all().count()
+        thread_count = models.Thread.objects.all().count()
+        reply_count = models.Reply.objects.all().count()
+        res = {'用户总数':user_count,
+               '帖子总数':thread_count,
+               '回复总数':reply_count,
+        }
+        return Response(res, status=status.HTTP_200_OK)
+        
+       

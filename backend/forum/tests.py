@@ -57,7 +57,7 @@ class AnnoucementTests(APITestCase):
         response = self.client.post(url,data,format='json')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         
-        #Basic Case 1, also check the order is right(latest first)
+        #Basic Case
         url = reverse('announcements')
         data = {'uid':'1','path':{'collegeid':1,'courseid':1,'teacherid':1},'content':'这是一条新公告',
                 'title':'这是公告的标题'}
