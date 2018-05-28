@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROOT_URL } from '../../configs/config';
+import { ROOT_URL, DEBUG } from '../../configs/config';
 import { Title } from '@material-ui/icons/es';
 
 export const ANNCS_REQUEST = "anncs_request";
@@ -13,30 +13,30 @@ export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageS
             return;
         dispatch({ type: ANNCS_REQUEST });
         var params = {};
-        if (uid) {
-            params["uid"] = uid;
+        if (!DEBUG) {
+            if (uid) {
+                params["uid"] = uid;
+            }
+            else {
+                if (collegeId)
+                    params["collegeid"] = collegeId;
+                if (courseId)
+                    params["courseid"] = courseId;
+                if (teacherId)
+                    params["teacherid"] = teacherId;
+            };
         }
-        else {
-            if (collegeId)
-                params["collegeId"] = collegeId;
-            if (courseId)
-                params["courseId"] = courseId;
-            if (teacherId)
-                params["teacherId"] = teacherId;
-        };
-        console.log("params", params, collegeId);
+        // console.log("params", params, collegeId);
 
         axios.get(`${ROOT_URL}/api/forum/announcements`, {
-            //TODO:
-            // params
+            params
         })
             .then((response) => {
                 console.log("anncs", response.data[0]);
                 dispatch({
                     type: ANNCS_SUCCESS,
-                    //TODO:
-                    anncs: response.data[0]["anncs"],
-                    anncNum: response.data[0]["anncNum"],
+                    anncs: response.data["anncs"],
+                    anncNum: response.data["anncNum"],
                 })
             })
             .catch((errors) => {
@@ -62,7 +62,7 @@ export const setHasFinished = (hasFinished) => {
 export const NEWANNC_REQUEST = "newannc_request";
 export const NEWANNC_SUCCESS = "newannc_success";
 export const NEWANNC_FAILURE = "newannc_failure";
-export const postAnnc = (title, content, collegeid, courseid, teacherid) => {
+export const postAnnc = (uid, title, content, collegeid, courseid, teacherid) => {
     console.log("post", title, content, collegeid, courseid, teacherid);
     return (dispatch, getState) => {
         const { isPosting } = getState().forum.annc;
@@ -72,11 +72,14 @@ export const postAnnc = (title, content, collegeid, courseid, teacherid) => {
             type: NEWANNC_REQUEST,
         })
         axios.post(`${ROOT_URL}/api/forum/announcements`, {
+            uid,
             title,
             content,
-            collegeid,
-            courseid,
-            teacherid,
+            path: {
+                collegeid,
+                courseid,
+                teacherid,
+            }
         })
             .then((response) => {
                 dispatch({

@@ -127,13 +127,122 @@ page: Number 页号
 success: 参照`replies`
 
 error: ..
+****
+### 版块信息
+#### 获取版块名字
+##### 请求
+```
+GET /api/forum/sectionnames
+```
+##### 参数
+```
+sectionids: Array of Integer
+```
+##### 响应
+```
+[
+    "sectionname1",
+    "sectionname2",
+    ...
+]
+```
+版块id与name次序对应
 
+#### 获取学院列表
+##### 请求
+```
+GET /api/forum/college_list
+```
+##### 响应
+```
+[
+    {
+      "id": 123,
+      "name": "计算机科学与技术学院",
+    },
+    {
+      "id": 678,
+      "name": "xx学院",
+    }
+]
+```
+
+
+#### 获取课程列表
+##### 请求
+```
+GET /api/forum/course_list
+```
+##### 参数
+```
+collegeid: Integer
+```
+##### 响应
+```
+[
+    {
+      "id": 123,
+      "name": "软件工程",
+    },
+    {
+      "id": 123,
+      "name": "编译原理",
+    }
+]
+```
+
+#### 获取教师列表
+##### 请求
+```
+GET /api/forum/teacher_list
+```
+##### 参数
+```
+collegeid: Integer
+courseid: Integer
+```
+##### 响应
+```
+[
+    {
+      "id": 123,
+      "name": "王章野"
+    },
+    {
+      "id": 456,
+      "name": "施青松"
+    },
+    ...
+]
+```
+****
 ### 私信
 #### 首页获取新私信
-TODO:
 ##### 请求
+```
+GET /api/forum/newmsgs
+```
 ##### 参数
+```
+uid: Integer
+pagesize: Integer
+```
 ##### 响应
+```
+[
+    {
+      "from": {
+        "id": 30,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "content": "一条新消息"
+    },
+    ...
+]
+```
+
+获取登录用户uid的最新pagesize条消息
 
 #### 获取联系人
 ##### 请求
@@ -142,21 +251,21 @@ GET /api/forum/msgentries
 ```
 ##### 参数
 ```
-uid: String
+uid: Integer
 ```
 ##### 响应
 ```
 [
     {
-        "uid": "1",
+        "id": 1,
         "username": "user1",
-        "avatarurl": "",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png",
         "lastMsgContent": "hey"
     },
     ...
 ]
 ```
-按最后联系时间降序排列
+按最后联系时间降序排列，消息内容为用户或对方发送的最后一条消息
 #### 获取私信
 ##### 请求
 ```
@@ -165,9 +274,9 @@ GET /api/forum/messages
 ##### 参数
 
 ```
-uid1: String
-uid2: String
-pagenum: Number 页号
+uid1: Integer
+uid2: Integer
+pagenum: Integer
 pagesize: Integer
 ```
 发送者、接受者分别为uid1、uid2，或uid2、uid1。
@@ -176,16 +285,15 @@ pagesize: Integer
 ```
 [
     {
-      "from": "1", (uid)
-      "to": "1", (uid)
-      "content": "hey sent by 1",
-      "time": {
-          "year": 2018,
-          "month": 12,
-          "day": 27,
-          "hour": 1,
-          "minute": 14 
-      }
+        "from": {
+            "id":2,
+            "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+        },
+        "to": {
+            "id":29,
+        },
+        "content": "hey sent by 1",
+        "time": "2012-04-23T18:25:43.511Z"
     },
     ...
 ]
@@ -200,11 +308,11 @@ POST /api/forum/messages
 
 ##### 参数
 ```
-from: String uid
-to: String uid
+from: Integer
+to: Integer
 content: String
 ```
-
+****
 ### 公告
 #### 获取公告
 ##### 请求
@@ -214,16 +322,16 @@ GET /api/forum/announcements
 ##### 参数
 某用户订阅的版块的公告
 ```
-uid: String
+uid: Integer
 pagenum: Integer
 pagesize: Integer
 ```
 
 或某板块的公告
 ```
-colledgeid: String
-courseid: String
-teacherid: String
+colledgeid: Integer
+courseid: Integer
+teacherid: Integer
 pagenum: Integer
 pagesize: Integer
 ```
@@ -252,17 +360,17 @@ pagesize: Integer
                 },
                 "author": {
                     "username": ,
-                    "uid": 
+                    "uid": ,
                 },
                 "content": "content",
-                "time": "yyyy/MM/dd"
+                "time": "yyyy-MM-dd hh:mm"
             },
             ...
         ]
 }
 ```
 "size"字段为公告总数, "anncs"字段按发布时间降序排列
-"content"暂定为纯文本
+"content"为纯文本
 
 #### 发布公告
 
@@ -273,26 +381,25 @@ POST /api/forum/announcements
 
 ##### 参数
 ```
-uid: String
+uid: Integer
 path: {
-    "collegeid": String,
-    "courseid": String,
-    "teacherid": String,
+    collegeid: Integer,
+    courseid: Integer,
+    teacherid: Integer,
 }
 content: String
 title: String
 ```
-
-
+****
 ### 搜索
 #### 请求
 ```
-GET /api/search
+GET /api/forum/search
 ```
 #### 参数
 ```
 searchtype: String ("post"或"section")
-content: String
+query: String
 pagenum: Integer
 pagesize: Integer
 ```
@@ -324,7 +431,7 @@ pagesize: Integer
                 "uid": ,
             },
             "replyNum": 20,
-            "time": "yyyy/MM/dd hh:mm",
+            "time": "yyyy-MM-dd hh:mm",
             "relatedContent": ,
         },
         ...
@@ -352,11 +459,101 @@ pagesize: Integer
                 }
             },
             "postNum": 1000,
-            "lastReplyTime": "yyyy/MM/dd hh:mm"
+            "lastReplyTime": "yyyy-MM-dd hh:mm"
         },
         ...
     ]
 }
 ```
-path子字段可为空
+版块搜索结果中，path中college，course等字段视情况为空
+****
 ### 管理
+#### 获取论坛基本信息
+##### 请求
+```
+GET /api/forum/info
+```
+
+##### 响应
+```
+{
+    "用户数": 10000,
+    "历史最高在线数": 9999,
+    "今日注册数": 29,
+    "版块数": 2000
+}
+```
+内容不限于以上条目
+#### 查看用户统计
+##### 请求
+```
+GET /api/forum/userstates
+```
+##### 参数
+```
+username: String
+```
+##### 响应
+```
+[
+   {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018-05-14 12:30",
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "lastLoginTime": "2018-05-14 12:30",
+      "type": "学生"
+    },
+    ...
+]
+```
+#### 查看热门帖子
+##### 请求
+```
+GET /api/forum/hotposts
+```
+##### 参数
+```
+collegeid: Integer
+courseid: Integer
+teacherid: Integer
+time: String ("2018-05-28T14:15:21+08:00")
+timetype: String ("month" or "week")
+```
+##### 响应
+```
+[
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2018-05-11 12:00",
+      "lastReplyTime": "2018-05-15 12:00",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+]
+```
+

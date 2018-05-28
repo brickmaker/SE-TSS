@@ -72,6 +72,7 @@ export function messageReducer(state = initialState, action) {
                 msgs: action.newMsgs.concat(state.msgs),
                 currentPageNum: action.currentPageNum,
                 isEntering: false,
+                pageSize: action.pageSize,
             }));
         case MSGS_FAILURE:
             return (Object.assign({}, state), {

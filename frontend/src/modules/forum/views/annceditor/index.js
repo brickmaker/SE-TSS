@@ -63,7 +63,8 @@ class AnncEditor extends Component {
         const { classes, postAnnc, hasFinished, isSuccess, setHasFinished, sectionNames } = this.props;
         const { collegeid, courseid, teacherid } = this.props.match.params;
         // console.log("match", this.props.match);
-        //TODO: get corresponding names by ids
+        //TODO: uid
+        const uid = 5;
         const path = {};
         if (sectionNames) {
             path["college"] = { "name": sectionNames[0], "link": `/forum/${collegeid}` };
@@ -150,7 +151,7 @@ class AnncEditor extends Component {
                                         });
                                     }
                                     else {
-                                        postAnnc(title, content, collegeid, courseid, teacherid);
+                                        postAnnc(uid, title, content, collegeid, courseid, teacherid);
                                         this.setState({
                                             title: "",
                                             content: "",
@@ -219,8 +220,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    postAnnc: (title, content, collegeid, courseid, teacherid) => {
-        dispatch(postAnnc(title, content, collegeid, courseid, teacherid));
+    postAnnc: (uid, title, content, collegeid, courseid, teacherid) => {
+        dispatch(postAnnc(uid, title, content, collegeid, courseid, teacherid));
     },
     setHasFinished: (hasFinished) => {
         dispatch(setHasFinished(hasFinished));

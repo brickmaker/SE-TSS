@@ -16,10 +16,6 @@ const initialState = {
 export function searchReducer(state = initialState, action) {
     console.log(state, action);
     switch (action.type) {
-        // case SET_PAGENUM:
-        //     return (Object.assign({}, state, {
-        //         pageNum: action.pageNum,
-        //     }));
         case SELECT_SEARCHTYPE:
             return (Object.assign({}, state, {
                 searchType: action.searchType,

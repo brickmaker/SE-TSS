@@ -41,7 +41,7 @@ class Annc extends Component {
     render() {
         const { classes, type } = this.props;
         const { title, path, author, time, content } = this.props.annc;
-        console.log(content);
+        // console.log(content);
         // TODO: have been read
         return (
             <ExpansionPanel className={classes.root}>

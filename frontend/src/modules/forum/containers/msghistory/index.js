@@ -34,6 +34,7 @@ class MsgHistory extends Component {
     render() {
         const { selectedId, msgs, classes, isFetchingMsgs, noMoreMsgs,
             currentPageNum, pageSize, getMsgs, setMsgEnd } = this.props;
+            console.log("pagesize", pageSize);
         // TODO: uid
         const uid = 5;
         return (

@@ -32,6 +32,7 @@ class MsgEntryPanel extends Component {
     componentWillMount() {
         //TODO: user id
         this.props.getMsgEntries(5, this.props.selectedId, this.props.pageSize);
+        console.log("sss", this.props.selectedId, this.props.pageSize);
     }
 
     render() {

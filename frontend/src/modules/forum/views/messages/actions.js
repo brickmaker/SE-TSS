@@ -1,4 +1,4 @@
-import { ROOT_URL } from '../../configs/config';
+import { ROOT_URL, DEBUG } from '../../configs/config';
 import axios from 'axios';
 
 
@@ -7,6 +7,7 @@ export const MSGS_REQUEST = "msgs_request";
 export const MSGS_SUCCESS = "msgs_success";
 export const MSGS_FAILURE = "msgs_failure";
 export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
+    console.log("parse", new Date("2012-04-23T18:25:43.511Z"));
     return (dispatch, getState) => {
         const { isFetchingMsgs } = getState();
         if (isFetchingMsgs) {
@@ -16,21 +17,24 @@ export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
             type: MSGS_REQUEST,
             isEntering: nextPageNum === 1,
         });
+
+        let params = DEBUG ? {} : {
+            uid1,
+            uid2,
+            pagenum: nextPageNum,
+            pagesize: pageSize,
+        };
+
         axios.get(`${ROOT_URL}/api/forum/messages`, {
-            params: {
-                // TODO:{uid1, uid2, pagenum, pagesize}
-                // uid1: uid,
-                // uid2: selectedId,
-                // pagenum: nextPageNum,
-                // pagesize: pageSize,
-                // from: [uid1, uid2],
-            }
+            params,
         })
             .then((response) => {
                 dispatch({
                     type: MSGS_SUCCESS,
                     newMsgs: response.data,
                     currentPageNum: nextPageNum,
+                    //bug：pagesize变为undefined；临时解决
+                    pageSize: pageSize,
                 });
             })
             .catch((errors) => {
@@ -53,13 +57,9 @@ export function getNewMsgs(uid) {
             return;
         }
         dispatch({ type: NEWMSGS_REQUEST });
-        //TODO: url
+        let params = DEBUG ? { to: uid } : { uid: uid };
         axios.get(`${ROOT_URL}/api/forum/newmsgs`, {
-            params: {
-                //TODO: 
-                // uid: uid,
-                to: uid,
-            }
+            params,
         })
             .then((response) => {
                 dispatch({
@@ -123,10 +123,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
             },
         })
             .then((response) => {
-                //TODO: test subscription, get username
-                var entries = response.data[0]["entries"];
-                // var entries = response.data;
-                // var username = "username";
+                var entries = response.data;
                 if (Boolean(selectedId)) {
                     var idx = -1;
                     entries.forEach((entry, index) => {
@@ -168,14 +165,17 @@ export function getMsgEntries(uid, selectedId, pageSize) {
 export const POST_MSG = "post_msg";
 export function postMsg(from, to, content, pageSize) {
     return ((dispatch, getState) => {
-        axios.post(`${ROOT_URL}/api/forum/messages`, {
-            //TODO: remove id and time attr
+        let params = DEBUG ? {
             id: content,
             from: from,
             to: to,
             content: content,
             time: "4.30",
-        })
+        } :
+            {
+                from, to, content,
+            };
+        axios.post(`${ROOT_URL}/api/forum/messages`, params)
             .then((response) => {
                 dispatch(getMsgEntries(from, undefined, pageSize));
             })

@@ -1308,33 +1308,28 @@
   ],
   "msgEntries": [
     {
-      "uid": 5,
-      "entries": [
-        {
-          "id": 1,
-          "username": "user1",
-          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 0,
-          "username": "user0",
-          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 2,
-          "username": "user2",
-          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 3,
-          "username": "user3",
-          "avatar": "https://api.adorable.io/avatars/144/userpic.png",
-          "lastMsgContent": "hey"
-        }
-      ]
+      "id": 1,
+      "username": "user1",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 0,
+      "username": "user0",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 2,
+      "username": "user2",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 3,
+      "username": "user3",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
     }
   ],
   "messages": [
@@ -1454,7 +1449,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1479,7 +1474,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1504,7 +1499,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1529,7 +1524,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1554,7 +1549,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1579,7 +1574,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1604,7 +1599,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "4.30",
+          "time": "2018-04-30 13:30",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1740,105 +1735,33 @@
       ]
     }
   ],
-  "announcements": [
-    {
-      "anncNum": 24,
-      "anncs": [
-        {
-          "title": "一则公告的题目",
-          "path": {
-            "college": {
-              "id": "collegeid",
-              "name": "计算机科学与技术学院"
-            },
-            "course": {
-              "id": "courseid",
-              "name": "软件工程"
-            },
-            "teacher": {
-              "id": "teacherid",
-              "name": "王章野"
-            }
+  "announcements": {
+    "anncNum": 1000,
+    "anncs": [
+      {
+        "title": "annc",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
           },
-          "author": {
-            "username": "王章野",
-            "uid": "uid"
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
           },
-          "time": "2018/05/11",
-          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
         },
-        {
-          "title": "一则公告的题目",
-          "path": {
-            "college": {
-              "id": "collegeid",
-              "name": "计算机科学与技术学院"
-            },
-            "course": {
-              "id": "courseid",
-              "name": "软件工程"
-            },
-            "teacher": {
-              "id": "teacherid",
-              "name": "王章野"
-            }
-          },
-          "author": {
-            "username": "王章野",
-            "uid": "uid"
-          },
-          "time": "2018/05/11",
-          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
+        "author": {
+          "username": "王章野"
         },
-        {
-          "title": "一则公告的题目",
-          "path": {
-            "college": {
-              "id": "collegeid",
-              "name": "计算机科学与技术学院"
-            },
-            "course": {
-              "id": "courseid",
-              "name": "软件工程"
-            },
-            "teacher": {
-              "id": "teacherid",
-              "name": "王章野"
-            }
-          },
-          "author": {
-            "username": "王章野",
-            "uid": "uid"
-          },
-          "time": "2018/05/11",
-          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
-        },
-        {
-          "title": "一则公告的题目",
-          "path": {
-            "college": {
-              "id": "collegeid",
-              "name": "计算机科学与技术学院"
-            },
-            "course": {
-              "id": "courseid",
-              "name": "软件工程"
-            },
-            "teacher": {
-              "id": "teacherid",
-              "name": "王章野"
-            }
-          },
-          "author": {
-            "username": "王章野",
-            "uid": "uid"
-          },
-          "time": "2018/05/11",
-          "content": "请于下周二（5.15）之前将设计报告上交（以组别命名，如A2组的，则可命名为：A2设计报告.PDF）上传至本群中，以便大家Review."
-        }
-      ]
-    }
-  ],
+        "content": "content",
+        "time": "yyyy-MM-dd hh:mm"
+      }
+    ]
+  },
   "hotposts": [
     {
       "title": "一个帖子的标题",

@@ -89,7 +89,7 @@ class Messages extends Component {
 
     render() {
         const { classes, entries, selectedId, selectedUsername, isFetchingEntries, isFetchingMsgs, postMsg, content,
-            getContent, isEntering } = this.props;
+            getContent, isEntering, pageSize } = this.props;
         const path = { 'messages': { 'name': '消息', 'link': '/forum/messages' } };
         const { isDialogOpen, dialogContent } = this.state;
         //TODO: uid
@@ -126,7 +126,7 @@ class Messages extends Component {
                                                 <div className={classes.inputoutter}>
                                                     <div className={classes.input}>
                                                         <Input multiline={true} placeholder='请输入内容'
-                                                        inputProps={{style: {width:"100%", height:100}}}
+                                                            inputProps={{ style: { width: "100%", height: 100 } }}
                                                             disableUnderline={true} fullWidth={true}
                                                             onChange={(event) => {
                                                                 getContent(event.target.value);
@@ -145,7 +145,7 @@ class Messages extends Component {
                                                                 this.setState({ dialogContent: "消息长度不得超过500", isDialogOpen: true });
                                                             }
                                                             else {
-                                                                postMsg(uid, selectedId, content);
+                                                                postMsg(uid, selectedId, content, pageSize);
                                                                 getContent("");
                                                             }
                                                         }

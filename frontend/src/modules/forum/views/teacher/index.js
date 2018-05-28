@@ -59,6 +59,9 @@ class Teacher extends Component {
                             <Button
                                 color={'primary'}
                                 variant={'raised'}
+                                onClick={()=>{
+                                    this.props.history.push(`/forum/annceditor/${collegeid}/${courseid}/${teacherid}`)
+                                }}
                             >发布公告</Button>
                         </div>
                     </SectionTitle>
