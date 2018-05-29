@@ -6,6 +6,8 @@
   "/api/forum/course": "/course",
   "/api/forum/course_posts": "/course_posts",
   "/api/forum/course_subscribed": "/course_subscribed",
+  "/api/forum/course_subscribe": "/course_subscribe",
+  "/api/forum/course_unsubscribe": "/course_unsubscribe",
   "/api/forum/teacher": "/teacher",
   "/api/forum/teacher_posts": "/teacher_posts",
   "/api/forum/teacher_list": "teacher_list",

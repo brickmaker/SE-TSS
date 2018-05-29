@@ -67,7 +67,7 @@ success: 参照`course`
 
 error: ..
 
-##### 课程板块订阅查询
+#### 课程板块订阅查询
 
 查看用户是否订阅了这个板块
 
@@ -88,6 +88,46 @@ courseid: String
 ##### response
 
 参见`course_subscribed`
+
+#### 课程板块订阅
+
+##### 请求
+
+```
+GET /api/forum/course_subscribe
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+```
+
+##### response
+
+参见`course_subscribe`
+
+#### 课程板块取消订阅
+
+##### 请求
+
+```
+GET /api/forum/course_unsubscribe
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+```
+
+##### response
+
+参见`course_unsubscribe`
 
 #### 课程板块帖子
 

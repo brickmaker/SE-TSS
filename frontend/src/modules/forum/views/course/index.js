@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux"
-import {checkSubscribed, getCourseInfo} from "./actions"
+import {checkSubscribed, getCourseInfo, newPost, subscribe, unsubscribe} from "./actions"
 import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
@@ -17,6 +17,10 @@ class Course extends Component {
         this.state = {
             isLogin: true // todo: get login!!!
         }
+        this.subscribe = this.subscribe.bind(this)
+        this.unsubscribe = this.unsubscribe.bind(this)
+        this.goToPost = this.goToPost.bind(this)
+        this.post = this.post.bind(this)
     }
 
     componentDidMount() {
@@ -25,6 +29,39 @@ class Course extends Component {
         if (this.state.isLogin) {
             this.props.checkSubscribed("uid", collegeid, courseid) // todo: get uid
         }
+    }
+
+    subscribe() {
+        if (!this.state.isLogin) {
+            // todo: redirect to login
+        }
+        else {
+            const {collegeid, courseid} = this.props.match.params
+            this.props.subscribe("uid", collegeid, courseid) // todo: get uid
+        }
+    }
+
+    unsubscribe() {
+        if (!this.state.isLogin) {
+            // todo: redirect to login
+        }
+        else {
+            const {collegeid, courseid} = this.props.match.params
+            this.props.unsubscribe("uid", collegeid, courseid)
+        }
+    }
+
+    goToPost() {
+        if (this.state.isLogin)
+            goBottom()
+        else {
+            // todo: redirect to login
+        }
+    }
+
+    post(title, content) {
+        const {collegeid, courseid} = this.props.match.params
+        this.props.newPost("uid", collegeid, courseid, title, content) // todo: get uid
     }
 
     render() {
@@ -84,24 +121,28 @@ class Course extends Component {
                                         <Button
                                             color={'secondary'}
                                             variant={'raised'}
+                                            onClick={this.unsubscribe}
                                         >取消订阅</Button>
                                         :
                                         <Button
                                             color={'secondary'}
                                             variant={'raised'}
+                                            onClick={this.subscribe}
                                         >订阅</Button>
                                 }
                                 <span style={{width: 10}}> </span>
                                 <Button
                                     color={'primary'}
                                     variant={'raised'}
-                                    onClick={goBottom}
+                                    onClick={this.goToPost}
                                 >发布新帖</Button>
                             </div>
                         </SectionTitle>
                         <PostsList/>
                     </div>
-                    <PostEditor/>
+                    <PostEditor
+                        post={this.post}
+                    />
                 </MainBody>
             </div>
         )
@@ -117,6 +158,15 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    newPost: (uid, collegeId, courseId, title, content) => {
+        dispatch(newPost(uid, collegeId, courseId, title, content))
+    },
+    subscribe: (uid, collegeId, courseId) => {
+        dispatch(subscribe(uid, collegeId, courseId))
+    },
+    unsubscribe: (uid, collegeId, courseId) => {
+        dispatch(unsubscribe(uid, collegeId, courseId))
+    },
     checkSubscribed: (uid, collegeId, courseId) => {
         dispatch(checkSubscribed(uid, collegeId, courseId))
     },

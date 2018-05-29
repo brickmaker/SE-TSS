@@ -726,6 +726,12 @@
       }
     ]
   },
+  "course_subscribe": {
+    "subscribed": true
+  },
+  "course_unsubscribe": {
+    "subscribed": false
+  },
   "course_subscribed": {
     "subscribed": true
   },
