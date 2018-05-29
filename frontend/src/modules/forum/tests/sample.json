@@ -726,6 +726,9 @@
       }
     ]
   },
+  "course_subscribed": {
+    "subscribed": true
+  },
   "course_posts": {
     "data": [
       {
@@ -1736,31 +1739,14 @@
     }
   ],
   "announcements": {
-    "anncNum": 1000,
-    "anncs": [
-      {
-        "title": "annc",
-        "path": {
-          "college": {
-            "id": "collegeid",
-            "name": "计算机科学与技术学院"
-          },
-          "course": {
-            "id": "courseid",
-            "name": "软件工程"
-          },
-          "teacher": {
-            "id": "teacherid",
-            "name": "王章野"
-          }
-        },
-        "author": {
-          "username": "王章野"
-        },
-        "content": "content",
-        "time": "yyyy-MM-dd hh:mm"
-      }
-    ]
+    "uid": 5,
+    "title": "asfdasdf",
+    "content": "fwdasdfasd",
+    "path": {
+      "collegeid": "collegeid",
+      "courseid": "courseid",
+      "teacherid": "t3"
+    }
   },
   "hotposts": [
     {

@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getSubscriptions } from "./actions";
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {getSubscriptions} from "./actions";
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import Announcements from '../announcements';
-import { MainBody } from "../../components/util/MainBody"
-import { Path } from "../../components/util/Path"
-import { Grid } from "material-ui"
+import {MainBody} from "../../components/util/MainBody"
+import {Path} from "../../components/util/Path"
+import {Grid} from "material-ui"
 import Subscription from "./components/Subscription"
 import MoreForums from "./components/MoreForums"
-import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
-import { Announcement as AnnouncementIcon } from '@material-ui/icons'
-import { Message } from "@material-ui/icons/es/index"
+import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
+import {Announcement as AnnouncementIcon} from '@material-ui/icons'
+import {Message} from "@material-ui/icons/es/index"
 import NewMsgPanel from '../../containers/newmsgpanel';
 import SearchBar from '../../components/searchbar';
 
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("uid");
+        this.props.getSubscriptions("uid"); // todo: get uid
     }
 
     render() {
-        const { match, subscriptions } = this.props;
+        const {match, subscriptions} = this.props;
         return (
             <div>
                 <MainBody>
-                    <Path isMain />
+                    <Path isMain/>
                     <SearchBar history={this.props.history}/>
                     <Grid container xs={12}>
                         <Grid container xs={8}>
@@ -38,7 +38,7 @@ class Main extends Component {
                                     />
                                 ))
                             }
-                            <MoreForums />
+                            <MoreForums/>
                         </Grid>
                         <Grid container xs={1}></Grid>
                         <Grid container xs={3}>
@@ -58,11 +58,11 @@ class Main extends Component {
                                                 }}
                                                 text={'公告通知'}
                                             >
-                                                <AnnouncementIcon color={'primary'} style={{ fontSize: 40 }} />
+                                                <AnnouncementIcon color={'primary'} style={{fontSize: 40}}/>
                                             </SectionText>
                                         </SectionTitle>
                                     </div>
-                                    <Announcements type="main" match={{ 'params': { "pageNum": 1 } }} />
+                                    <Announcements type="main" match={{'params': {"pageNum": 1}}}/>
                                 </div>
                             </Grid>
                             <Grid item xs={12}>
@@ -79,11 +79,11 @@ class Main extends Component {
                                                 }}
                                                 text={'消息留言'}
                                             >
-                                                <Message color={'primary'} style={{ fontSize: 40 }} />
+                                                <Message color={'primary'} style={{fontSize: 40}}/>
                                             </SectionText>
                                         </SectionTitle>
                                     </div>
-                                    <NewMsgPanel history={this.props.history} />
+                                    <NewMsgPanel history={this.props.history}/>
                                 </div>
                             </Grid>
                         </Grid>
@@ -100,8 +100,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSubscriptions: (uid, token) => {
-            dispatch(getSubscriptions(uid, token));
+        getSubscriptions: (uid) => {
+            dispatch(getSubscriptions(uid));
         },
     }
 };

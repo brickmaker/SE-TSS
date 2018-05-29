@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux"
-import {getCourseInfo} from "./actions"
+import {checkSubscribed, getCourseInfo} from "./actions"
 import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
@@ -14,15 +14,21 @@ import SubForum from "./components/SubForum"
 class Course extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isLogin: true // todo: get login!!!
+        }
     }
 
     componentDidMount() {
         const {collegeid, courseid} = this.props.match.params
         this.props.getCourseInfo(collegeid, courseid)
+        if (this.state.isLogin) {
+            this.props.checkSubscribed("uid", collegeid, courseid) // todo: get uid
+        }
     }
 
     render() {
-        const {college, course, subForums} = this.props
+        const {college, course, subForums, subscribed} = this.props
         const {collegeid, courseid} = this.props.match.params
         const path = {
             college: {
@@ -73,10 +79,18 @@ class Course extends Component {
                                 <Announcement color={'primary'} style={{fontSize: 40}}/>
                             </SectionText>
                             <div>
-                                <Button
-                                    color={'secondary'}
-                                    variant={'raised'}
-                                >订阅</Button>
+                                {
+                                    subscribed ?
+                                        <Button
+                                            color={'secondary'}
+                                            variant={'raised'}
+                                        >取消订阅</Button>
+                                        :
+                                        <Button
+                                            color={'secondary'}
+                                            variant={'raised'}
+                                        >订阅</Button>
+                                }
                                 <span style={{width: 10}}> </span>
                                 <Button
                                     color={'primary'}
@@ -98,11 +112,14 @@ const mapStateToProps = (state) => ({
     college: state.forum.course.college,
     course: state.forum.course.course,
     subForums: state.forum.course.subForums,
-    subscribed: false,
+    subscribed: state.forum.course.subscribed,
     posts: []
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    checkSubscribed: (uid, collegeId, courseId) => {
+        dispatch(checkSubscribed(uid, collegeId, courseId))
+    },
     getCourseInfo: (collegeId, courseId) => {
         dispatch(getCourseInfo(collegeId, courseId))
     },

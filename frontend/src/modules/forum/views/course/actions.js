@@ -4,6 +4,20 @@ export const GET_COURSE_INFO = 'get_course_info'
 export const GOT_COURSE_INFO = 'got_course_info'
 export const GET_COURSE_POSTS = 'get_course_posts'
 export const GOT_COURSE_POSTS = 'got_course_posts'
+export const CHECKED_SUBSCRIBED = 'checked_subscribed'
+
+export const checkSubscribed = (uid, collegeId, courseId) => (dispatch, getState) => {
+    fetch(`${ROOT_URL}/api/forum/course_subscribed${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
+        .then(res => res.json())
+        .then((data) => {
+            if (data.subscribed) {
+                dispatch({
+                    type: CHECKED_SUBSCRIBED,
+                    subscribed: true
+                })
+            }
+        })
+}
 
 export const getCourseInfo = (collegeId, courseId) => (dispatch, getState) => {
     fetchCourseInfo(collegeId, courseId)

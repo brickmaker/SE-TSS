@@ -1,4 +1,4 @@
-import {GOT_COURSE_INFO, GOT_COURSE_POSTS} from './actions'
+import {CHECKED_SUBSCRIBED, GOT_COURSE_INFO, GOT_COURSE_POSTS} from './actions'
 
 const initState = {
     college: "",
@@ -24,7 +24,10 @@ export function courseReducer(state = initState, action) {
                 currPage: action.currPage,
                 posts: action.posts
             })
-
+        case CHECKED_SUBSCRIBED:
+            return Object.assign({}, state, {
+                subscribed: true
+            })
         default:
             return state
     }

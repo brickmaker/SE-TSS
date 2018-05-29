@@ -19,7 +19,6 @@ GET /api/forum/subscriptions
 
 ```
 uid: String
-token: String
 ```
 
 ##### response
@@ -67,6 +66,47 @@ courseid: String
 success: 参照`course`
 
 error: ..
+
+##### 课程板块订阅查询
+
+查看用户是否订阅了这个板块
+
+##### 请求
+
+```
+GET /api/forum/course_subscribed
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+```
+
+##### response
+
+参见`course_subscribed`
+
+#### 课程板块帖子
+
+##### 请求
+
+```
+GET /api/forum/course_posts
+```
+
+##### params
+
+```
+collegeid: String
+courseid: String
+```
+
+##### response
+
+参见`course_posts`
 
 #### 教师板块信息
 
