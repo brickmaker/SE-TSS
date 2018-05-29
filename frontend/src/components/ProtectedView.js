@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actionCreators from '../actions/data';
@@ -47,9 +48,9 @@ export default class ProtectedView extends React.Component {
 }
 
 ProtectedView.propTypes = {
-    fetchProtectedData: React.PropTypes.func,
-    loaded: React.PropTypes.bool,
-    userName: React.PropTypes.string,
-    data: React.PropTypes.any,
-    token: React.PropTypes.string,
+    fetchProtectedData: PropTypes.func,
+    loaded: PropTypes.bool,
+    userName: PropTypes.string,
+    data: PropTypes.any,
+    token: PropTypes.string,
 };

@@ -2,15 +2,10 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import {browserHistory} from "react-router";
-import FlatButton from 'material-ui/FlatButton';
-import Drawer from 'material-ui/Drawer';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import AppBar from 'material-ui/AppBar';
-import MenuItem from 'material-ui/MenuItem';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+
+
 import StudentBar from "./StudentBar";
 
 function mapStateToProps(state) {

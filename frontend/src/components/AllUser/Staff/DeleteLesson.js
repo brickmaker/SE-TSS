@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
@@ -106,7 +107,7 @@ export default class DeleteLesson extends React.Component {
     render() {
         const contentStyle = {
             transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' ,
-            margin: '50'
+            marginTop: '50',
         };
         if (this.state.drawerOpen) {
             contentStyle.marginLeft = 220;
@@ -178,7 +179,7 @@ export default class DeleteLesson extends React.Component {
 
 
 DeleteLesson.propType = {
-    userName: React.PropTypes.string,
+    userName: PropTypes.string,
 };
 
 

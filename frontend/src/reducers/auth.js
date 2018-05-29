@@ -6,14 +6,15 @@ import {
     LOGIN_USER_FAILURE,
     LOGIN_USER_REQUEST,
     LOGOUT_USER,
-    GET_USER_SUCCESS,
 } from '../constants/index';
 
 const initialState = {
     token: null,
     userName: null,
+    userType: null,
     isAuthenticated: false,
     isAuthenticating: false,
+    status: null,
     statusText: null,
     isRegistering: false,
     isRegistered: false,
@@ -32,14 +33,9 @@ export default createReducer(initialState, {
             isAuthenticated: true,
             token: payload.token,
             userName: jwtDecode(payload.token).username,
-            statusText: 'You have been successfully logged in.',
-        }),
-    [GET_USER_SUCCESS]: (state, payload) =>
-        Object.assign({}, state, {
-            isAuthenticating: false,
-            isAuthenticated: true,
-            statusText: 'You have been successfully get user info',
-            userName: payload.userName,
+            userType: payload.user_type,
+            status: payload.status,
+            statusText: '您已成功登录',
         }),
     [LOGIN_USER_FAILURE]: (state, payload) =>
         Object.assign({}, state, {
@@ -54,6 +50,6 @@ export default createReducer(initialState, {
             isAuthenticated: false,
             token: null,
             userName: null,
-            statusText: 'You have been successfully logged out.',
+            statusText: '您已成功注销',
         }),
 });

@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.parsers import FileUploadParser,MultiPartParser, FormParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -18,6 +19,7 @@ from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, Ad
 import logging
 from django.core import serializers
 import json
+
 
 
 logger = logging.getLogger('django')
@@ -38,6 +40,40 @@ class StudentRegister(APIView):
             print(serializer.errors)
             logger.info('account register failed, invalid parameters')
             return Response({'msg': 'invalid parameters', 'state': False}, status=status.HTTP_400_BAD_REQUEST)
+
+class BatchStudentView(APIView):
+    parser_classes = (FileUploadParser,)
+    def put(self, request, format=None):
+        file_obj = request.FILES['file']
+        wb=xlrd.open_workbook(filename=None,file_contents=file_obj)
+        table=wb.sheets()[0]
+        col_dict=getColumnTitle(table)
+        row=table.nrows
+        manager=AccountManager()
+        print(row)
+        
+        for i in range(1,row):
+            try:
+                department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
+                major=Major.objects.get(major=table.row_values(i)[col_dict['专业']],depart=department)
+                class_name=Major_Class.objects.get(major=major,class_name=table.row_values(i)[col_dict['班级']])
+                student=manager.create_user(username=str(table.row_values(i)[col_dict['学号']]),id_number=table.row_values(i)[col_dict['身份证号']],
+                            email=table.row_values(i)[col_dict['电子邮件']],
+                            user_type=1,
+                            name=table.row_values(i)[col_dict['姓名']], 
+                            gender  =table.row_values(i)[col_dict['性别']], 
+                            department=department,
+                            grade=table.row_values(i)[col_dict['入学年份']],  
+                            major=major,
+                            class_name=class_name,  
+                            ) 
+            except ValueError as err:
+                print(err)
+                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
+                return Response(status=400)
+
+        return Response(status=204)
+
 
 
 class FacultyRegister(APIView):

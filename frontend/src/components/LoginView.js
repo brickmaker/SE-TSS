@@ -1,15 +1,18 @@
-/* eslint camelcase: 0, no-underscore-dangle: 0 */
-
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import * as actionCreators from '../actions/auth';
-import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import {Helmet} from "react-helmet";
-
+import {
+    Button,
+    TextField,
+    Input,
+    FormControl,
+    NativeSelect,
+    Paper,
+} from '@material-ui/core';
 
 function mapStateToProps(state) {
     return {
@@ -22,25 +25,37 @@ function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
 
-
-const style = {
-    marginTop: 80,
-    paddingBottom: 50,
-    paddingTop: 40,
-    alignItems: 'center',
-    width: '80%',
-    textAlign: 'center',
-    display: 'inline-block',
-
-};
+const styles = theme => ({
+    Paper: {
+        marginTop: '10%',
+        paddingBottom: 50,
+        paddingTop: 50,
+        alignItems: 'center',
+        width: '100%',
+        textAlign: 'center',
+        display: 'inline-block',
+    },
+    TextField: {
+        width: 200,
+    },
+    NativeSelect: {
+        width: 200,
+        marginTop: 30,
+    },
+    Button: {
+        marginTop: 30,
+    }
+});
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class LoginView extends React.Component {
+class LoginView extends React.Component {
 
     constructor(props) {
         super(props);
         const redirectRoute = '/login';
         this.state = {
+            dialog_text: '',
+            open: false,
             username: '',
             password: '',
             user_type: 'Student',
@@ -60,16 +75,16 @@ export default class LoginView extends React.Component {
                 username_error_text: null,
             });
         }
-        else{
-            username_is_valid=true;
+        else {
+            username_is_valid = true;
         }
 
         if (this.state.password === '' || !this.state.password) {
             this.setState({
                 password_error_text: null,
             });
-        }else{
-            password_is_valid=true;
+        } else {
+            password_is_valid = true;
         }
 
         if (username_is_valid && password_is_valid) {
@@ -98,66 +113,81 @@ export default class LoginView extends React.Component {
         }
     }
 
+    handleChange = name => event => {
+        this.setState({[name]: event.target.value});
+    };
+
     login(e) {
         e.preventDefault();
         this.props.loginUser(this.state.username, this.state.password, this.state.user_type);
-
     }
 
+
     render() {
+        const {classes} = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)} >
+            <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
-                <Paper style={style}>
+                <Paper className={classes.Paper}>
                     <form role="form">
                         <div className="text-center">
-                            <h2>Login</h2>
+                            <h2>用户登录</h2>
                             {
                                 this.props.statusText &&
                                 <div className="alert alert-info">
                                     {this.props.statusText}
                                 </div>
                             }
-
-                            <div className="col-md-12">
+                            <div>
                                 <TextField
-                                    hintText="Username"
-                                    floatingLabelText="Username"
+                                    className={classes.TextField}
+                                    label="账户"
+                                    floatingLabelText="账户"
                                     type="email"
-                                    errorText={this.state.username_error_text}
                                     onChange={(e) => this.changeValue(e, 'username')}
+                                    margin="normal"
+                                    errorText={this.state.username_error_text}
                                 />
                             </div>
-                            <div className="col-md-12">
+                            <div>
                                 <TextField
-                                    hintText="Password"
-                                    floatingLabelText="Password"
+                                    className={classes.TextField}
+                                    label="密码"
+                                    floatingLabelText="密码"
                                     type="password"
-                                    errorText={this.state.password_error_text}
                                     onChange={(e) => this.changeValue(e, 'password')}
+                                    margin="normal"
+                                    errorText={this.state.password_error_text}
                                 />
+
+                            </div>
+                            <div>
+                                <FormControl className={classes.NativeSelect}>
+                                    <NativeSelect
+                                        value={this.state.user_type}
+                                        onChange={this.handleChange('user_type')}
+                                        input={<Input id="age-native-helper"/>}
+                                    >
+                                        <option value={"Admin"}>系统</option>
+                                        <option value={"Staff"}>教务</option>
+                                        <option value={"Student"}>学生</option>
+                                        <option value={"Teacher"}>教师</option>
+                                    </NativeSelect>
+                                </FormControl>
                             </div>
 
-                            <RadioButtonGroup name="status" defaultSelected="Student"
-                                              type="user_type"
-                                              onChange={(e) => this.changeValue(e, 'user_type')}>
-                                <RadioButton style={{ display: 'inline-block', width: '100px', height: '20px'}} label="Admin" value="Admin"/>
-                                <RadioButton style={{ display: 'inline-block', width: '100px', height: '20px'}} label="Staff" value="Staff" />
-                                <RadioButton style={{ display: 'inline-block', width: '100px', height: '20px'}} label="Student" value="Student" />
-                                <RadioButton style={{ display: 'inline-block', width: '100px',  height: '20px'}} label="Teacher" value="Teacher" />
-                            </RadioButtonGroup>
-
-                            <RaisedButton
+                            <Button
+                                variant="raised"
+                                color="primary"
+                                className={classes.Button}
                                 disabled={this.state.disabled}
-                                style={{ marginTop: 50 }}
-                                label="Submit"
                                 onClick={(e) => this.login(e)}
-                            />
-
+                            >
+                                登录
+                            </Button>
                         </div>
                     </form>
                 </Paper>
-
             </div>
         );
 
@@ -165,6 +195,9 @@ export default class LoginView extends React.Component {
 }
 
 LoginView.propTypes = {
+    classes: PropTypes.object.isRequired,
     loginUser: actionCreators.loginUser(),
-    statusText: React.PropTypes.string,
+    statusText: PropTypes.string,
 };
+
+export default withStyles(styles, {withTheme: true})(LoginView);

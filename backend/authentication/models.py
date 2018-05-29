@@ -29,17 +29,17 @@ class Major(models.Model):
 
 class Major_Class(models.Model):
     major = models.ForeignKey(Major, verbose_name="开设专业", related_name='class_name', on_delete=models.CASCADE)
-    class_name = models.CharField("专业班级", max_length=100)
+    class_name = models.CharField("专业班级", max_length=100,unique=True)
 
     def __str__(self):
         return self.class_name
 
 
 class AccountManager(BaseUserManager):
-
     @transaction.atomic
     def create_user(self, username, id_number=None, password=None, user_type=None, **kwargs):
         # if the user is not admin, don't need password
+        
         if not id_number or len(id_number) != 18:
             raise ParseError(detail='id_number format invalid')
         password = password
@@ -59,15 +59,12 @@ class AccountManager(BaseUserManager):
             department = Department.objects.get(name=kwargs.get('department', '信息中心'))
         except Exception as err:
             raise ParseError(detail='department not exists')
-
-        account = self.model(
-            username=username,
-            id_number=id_number,
-            password=password,
-            user_type=user_type,
-        )
+        account = Account()
 
         # password encrypt
+        account.username=username,
+        account.id_number=id_number
+        account.user_type=user_type
         account.set_password(password)
         account.save()
 
@@ -125,7 +122,6 @@ class AccountManager(BaseUserManager):
         account.save()
         return account
 
-
 class Account(AbstractBaseUser):
     username = models.CharField("用户名", unique=True, max_length=20, primary_key=True)
     id_number = models.CharField("身份证号", unique=True, max_length=18, default='null')
@@ -152,6 +148,7 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return self.is_superuser
+
 
 
 class People(models.Model):

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
@@ -73,7 +74,7 @@ export default class TeacherView extends React.Component {
 
 
 TeacherView.propType = {
-    userName: React.PropTypes.string,
+    userName: PropTypes.string,
 };
 
 

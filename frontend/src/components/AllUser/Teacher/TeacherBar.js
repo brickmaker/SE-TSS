@@ -12,6 +12,7 @@ import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import {browserHistory} from "react-router";
+import PropTypes from 'prop-types';
 import jwtDecode from "jwt-decode";
 import {Helmet} from "react-helmet";
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
@@ -114,9 +115,9 @@ export default class TeacherBar extends React.Component {
 
 
 TeacherBar.propType = {
-    userName: React.PropTypes.string,
-    drawerOpen: React.PropTypes.boolean,
-    handleClick: React.PropTypes.func
+    userName: PropTypes.string,
+    drawerOpen: PropTypes.boolean,
+    handleClick: PropTypes.func
 };
 
 

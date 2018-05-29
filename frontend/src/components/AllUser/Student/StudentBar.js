@@ -2,18 +2,16 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
 import {browserHistory} from "react-router";
 import FlatButton from 'material-ui/FlatButton';
 import Drawer from 'material-ui/Drawer';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
 import ContentCopy from 'material-ui/svg-icons/content/content-copy';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import {Helmet} from "react-helmet";
 import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
+import PropTypes from 'prop-types';
 function mapStateToProps(state) {
     return {
         isRegistering: state.auth.isRegistering,
@@ -30,7 +28,7 @@ const buttonStyle = {
     color: 'white',
     width: 150,
     marginTop: 10,
-}
+};
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class StudentBar extends React.Component {
@@ -64,8 +62,6 @@ export default class StudentBar extends React.Component {
     }
 
     render() {
-
-
         return (
             <div>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
@@ -106,7 +102,6 @@ export default class StudentBar extends React.Component {
                             </div>
                         }
                 />
-
             </div>
         );
     }
@@ -114,8 +109,8 @@ export default class StudentBar extends React.Component {
 
 
 StudentBar.propType={
-    drawerOpen: React.PropTypes.boolean,
-    handleClick: React.PropTypes.func
+    drawerOpen: PropTypes.boolean,
+    handleClick: PropTypes.func
 
 };
 

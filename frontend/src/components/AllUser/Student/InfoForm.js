@@ -4,7 +4,7 @@ import {Field, reduxForm, formValueSelector} from 'redux-form';
 import {RadioButton} from 'material-ui/RadioButton';
 import MenuItem from 'material-ui/MenuItem';
 import {AutoComplete as MUIAutoComplete} from 'material-ui';
-import {AutoComplete, Checkbox, DatePicker, TimePicker, RadioButtonGroup, SelectField, Slider, TextField, Toggle,} from 'redux-form-material-ui';
+import {AutoComplete, Checkbox, DatePicker, TimePicker, RadioButtonGroup, SelectField, Slider, TextField, Toggle,} from 'material-ui';
 
 // validation functions
 const required = value => (value == null ? 'Required' : undefined);

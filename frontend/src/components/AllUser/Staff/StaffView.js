@@ -1,100 +1,142 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import {bindActionCreators} from 'redux';
+import {withStyles} from '@material-ui/core/styles';
+import {connect} from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
-import MenuItem from 'material-ui/MenuItem';
-import Drawer from 'material-ui/Drawer';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+
+
 import {browserHistory} from "react-router";
-import AppBar from 'material-ui/AppBar';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import IconButton from 'material-ui/IconButton';
-import SvgIcon from 'material-ui/SvgIcon';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
-import {grey400} from 'material-ui/styles/colors';
+
 import StaffBar from "./StaffBar";
-
-
-
 
 function mapStateToProps(state) {
     return {
-        isRegistering: state.auth.isRegistering,
-        registerStatusText: state.auth.registerStatusText,
         userName: state.auth.userName,
+        data: state.auth.data,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
-const contentStyle = {
-    transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' ,
-    margin: '50'
-};
 
-class Content extends React.Component{
-    render(){
-        return(
-            <Card style={contentStyle}>
-                <CardHeader title="欢迎登录信息管理系统" />
-                <CardText>HELLO HELLO HELLO</CardText>
-            </Card>
-        );
-    }
-}
+const drawerWidth = 240;
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    appFrame: {
+        height: '90%',
+        zIndex: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        width: '100%',
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    'content-left': {
+        marginLeft: -drawerWidth,
+    },
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    'contentShift-left': {
+        marginLeft: 0,
+    },
+});
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class StaffView extends React.Component {
+class Sta_View extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            anchor: 'left',
             userName: '',
-            drawerOpen: false,
-        }
+            open: false,
+        };
+    }
+
+    handleClick() {
+        this.setState({open: !this.state.open});
     }
 
     componentDidMount() {
-        this.setState({userName: localStorage.getItem('userName')});
-    }
-
-    handleClick(){
-        this.setState({drawerOpen: !this.state.drawerOpen});
+        // fetch('/api/course/', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Authorization': 'JWT ' + localStorage.getItem('token'),
+        //         'Content-Type': 'application/json'
+        //     },
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         this.setState({lesson_data: data})
+        //     })
+        //     .catch((e) => {
+        //         alert("身份验证失效，请重新登录");
+        //         browserHistory.push("/login");
+        //     });
+        // this.setState({userName: localStorage.getItem('userName')});
     }
 
 
     render() {
-
-        if (this.state.drawerOpen) {
-            contentStyle.marginLeft = 220;
-        }
-        else{
-            contentStyle.marginLeft = 50;
-        }
-
-
+        const {classes, theme} = this.props;
+        const {anchor, open} = this.state;
         return (
-            <div >
+            <div className={classes.root}>
+                <div className={classes.appFrame}>
+                    <StaffBar click={this.handleClick.bind(this)} open={this.state.open}/>
 
-              <StaffBar handleClick={this.handleClick.bind(this)} drawerOpen={this.state.drawerOpen}/>
-
-                    <Content/>
-
+                    <Card
+                        className={classNames(classes.content, classes[`content-${anchor}`], {
+                            [classes.contentShift]: open,
+                            [classes[`contentShift-${anchor}`]]: open,
+                        })}
+                    >
+                        <div className={classes.drawerHeader} />
+                        <CardContent>
+                            <Typography>{'欢迎来到教务管理系统吸吸'}</Typography>
+                        </CardContent>
+                    </Card>
+                </div>
             </div>
-
-    );
+        );
     }
 }
 
 
-StaffView.propType={
-    userName:React.PropTypes.string,
-
+Sta_View.propType = {
+    userName: PropTypes.string,
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
+
+export default withStyles(styles, {withTheme: true})(Sta_View);
 
 

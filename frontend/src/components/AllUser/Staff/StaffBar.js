@@ -1,151 +1,301 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import {withStyles} from '@material-ui/core/styles';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
-import RaisedButton from 'material-ui/RaisedButton';
-import Paper from 'material-ui/Paper';
-import AppBar from 'material-ui/AppBar';
-import MenuItem from 'material-ui/MenuItem';
-import Drawer from 'material-ui/Drawer';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
-import TextField from 'material-ui/TextField';
-import Popover, {PopoverAnimationVertical} from 'material-ui/Popover';
-import Menu from 'material-ui/Menu';
-import FlatButton from 'material-ui/FlatButton';
-import {Helmet} from "react-helmet";
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
-import StaffView from "./StaffView";
-import {browserHistory} from "react-router";
-import jwtDecode from "jwt-decode";
+import {browserHistory, Link} from "react-router";
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import StarIcon from '@material-ui/icons/Star';
+import Button from '@material-ui/core/Button';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu';
 
 function mapStateToProps(state) {
     return {
-        userName: state.auth.userName,
-        data: state.auth.data,
+        status: state.auth.status,
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
-const buttonStyle = {
-    color: 'white',
-    width: 150,
-    marginTop: 10,
 
-}
+const drawerWidth = 240;
+
+const styles = theme => ({
+    root: {
+        flexGrow: 1,
+    },
+    appFrame: {
+        height: 600,
+        zIndex: 1,
+        overflow: 'hidden',
+        position: 'relative',
+        display: 'flex',
+        width: '100%',
+    },
+    appBar: {
+        position: 'absolute',
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    'appBarShift-left': {
+        marginLeft: drawerWidth,
+    },
+    'appBarShift-right': {
+        marginRight: drawerWidth,
+    },
+    menuButton: {
+        marginLeft: 12,
+        marginRight: 20,
+    },
+    hide: {
+        display: 'none',
+    },
+    drawerPaper: {
+        position: 'relative',
+        width: drawerWidth,
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
+    },
+    content: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.default,
+        padding: theme.spacing.unit * 3,
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    'content-left': {
+        marginLeft: -drawerWidth,
+    },
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    'contentShift-left': {
+        marginLeft: 0,
+    },
+    flex: {
+        flex: 1,
+    },
+});
+
+const ListItems = (
+    <div>
+        <Link to={'/staff'}>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="主页"/>
+        </ListItem>
+        </Link>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="个人信息"/>
+        </ListItem>
+        <Link to={'/staff/lessons'}>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="课程信息"/>
+        </ListItem>
+        </Link>
+        <Link to={'/staff/createLesson'}>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="添加课程"/>
+        </ListItem>
+        </Link>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="删除课程"/>
+        </ListItem>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="处理申请课程"/>
+        </ListItem>
+    </div>
+);
+
+const otherListItems = (
+    <div>
+        <ListItem button>
+            <ListItemIcon>
+                <StarIcon/>
+            </ListItemIcon>
+            <ListItemText primary="退出"/>
+        </ListItem>
+    </div>
+);
+
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class StaffBar extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            userName: '',
-            drawerOpen:true,
-            open: false,
-        };
-    }
-    handleClick = (event) => {
-        // This prevents ghost click.
-        event.preventDefault();
-
-        this.setState({
-            open: true,
-            anchorEl: event.currentTarget,
-        });
+class StaffBar extends React.Component {
+    state = {
+        anchor: 'left',
+        anchorEl: null,
     };
 
-    handleRequestClose = () => {
-        this.setState({
-            open: false,
-        });
+    handleMenu = event => {
+        this.setState({anchorEl: event.currentTarget});
     };
 
-    componentDidMount() {
-        this.setState({userName: localStorage.getItem('userName')});
-    }
+    handleClose = () => {
+        this.setState({anchorEl: null});
+    };
 
-    dispatchNewRoute(e, route) {
-        e.preventDefault();
-        browserHistory.push(route);
-    }
     logout(e) {
         e.preventDefault();
         this.props.logoutAndRedirect();
     }
 
-
     render() {
+        const {classes, theme, open, click} = this.props;
+        const {anchor, anchorEl} = this.state;
+        const drawer = (
+            <Drawer
+                variant="persistent"
+                anchor={anchor}
+                open={open}
+                classes={{
+                    paper: classes.drawerPaper,
+                }}
+            >
+                <div className={classes.drawerHeader}>
+                    <IconButton onClick={click}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
+                    </IconButton>
+                </div>
+                <Divider/>
+                <List>{ListItems}</List>
+                <Divider/>
+                <List>{otherListItems}</List>
+            </Drawer>
+        );
+
+        let before = null;
+        let after = null;
+
+        if (anchor === 'left') {
+            before = drawer;
+        } else {
+            after = drawer;
+        }
 
         return (
             <div>
-                <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
-                <Drawer open={this.props.drawerOpen} width={200} >
-                    <div >
-                        <AppBar onLeftIconButtonTouchTap={() => this.props.handleClick()}/>
-                        {/*<AppBar onLeftIconButtonTouchTap={() => this.setState({ drawerOpen: !this.state.drawerOpen })}/>*/}
-                        <MenuItem primaryText="个人信息" leftIcon={<ContentCopy />}  />
-                        <MenuItem primaryText="课程信息" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/staff/lessons')}/>
-                        <MenuItem primaryText="添加课程" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/staff/createLesson')}/>
-                        <MenuItem primaryText="删除课程" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/staff/delete')}/>
-                        <MenuItem primaryText="处理申请课程" leftIcon={<ContentCopy />} onClick={(e) => this.dispatchNewRoute(e, '/staff/process')} />
-                    </div>
-
-                </Drawer>
-
                 <AppBar
-                        onLeftIconButtonTouchTap={() => this.props.handleClick()}
-                        iconElementRight={
-                            <div>
-                                <FlatButton label={"基础信息管理"} style={buttonStyle}/>
-                                <FlatButton label={"自动排课"} style={buttonStyle}/>
-                                <FlatButton label={"选择课程"} style={buttonStyle}/>
-                                <FlatButton label={"论坛交流"} style={buttonStyle}/>
-                                <FlatButton label={"在线测试"} style={buttonStyle}/>
-                                <FlatButton label={"成绩管理"} style={buttonStyle}/>
-
-                                <FlatButton label={this.state.userName}  onClick={(e) => this.handleClick(e)} style={buttonStyle}/>
-                                <Popover
-                                    open={this.state.open}
-                                    anchorEl={this.state.anchorEl}
-                                    anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-                                    targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                                    onRequestClose={this.handleRequestClose}
-                                    animation={PopoverAnimationVertical}
-                                >
-                                    <Menu>
-                                        <MenuItem primaryText="修改密码" onClick={(e) => this.dispatchNewRoute(e,'/staff/pwd')}/>
-                                        <MenuItem primaryText="退出" onClick={(e) => this.logout(e)}/>
-                                    </Menu>
-                                </Popover>
-
-                            </div>
-
-                        }
+                    className={classNames(classes.appBar, {
+                        [classes.appBarShift]: open,
+                        [classes[`appBarShift-${anchor}`]]: open,
+                    })}
                 >
-
-
+                    <Toolbar disableGutters={!open}>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={click}
+                            className={classNames(classes.menuButton, open && classes.hide)}
+                        >
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography className={classes.flex} variant="title" color="inherit">
+                            InfoSys
+                        </Typography>
+                        <Button color="inherit">信息系统</Button>
+                        <Button color="inherit">排课系统</Button>
+                        <Button color="inherit">选课系统</Button>
+                        <Button color="inherit">论坛交流</Button>
+                        <Button color="inherit">在线测试</Button>
+                        <Button color="inherit">成绩管理</Button>
+                        <div>
+                            <IconButton
+                                aria-owns={Boolean(anchorEl) ? 'menu-appbar' : null}
+                                aria-haspopup="true"
+                                onClick={this.handleMenu}
+                                color="inherit"
+                            >
+                                <AccountCircle/>
+                            </IconButton>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(anchorEl)}
+                                onClose={this.handleClose}
+                            >
+                                <MenuItem onClick={this.handleClose}>个人信息</MenuItem>
+                                <MenuItem onClick={this.handleClose}>修改密码</MenuItem>
+                                <MenuItem onClick={this.handleClose}>返回上层</MenuItem>
+                                <MenuItem onClick={(e) => this.logout(e)}>退出系统</MenuItem>
+                            </Menu>
+                        </div>
+                    </Toolbar>
                 </AppBar>
+                {before}
+
+                {after}
 
             </div>
+
         );
     }
 }
 
-
-StaffBar.propType = {
-    userName: React.PropTypes.string,
-    handleClick: React.PropTypes.func,
-    drawerOpen:React.PropTypes.boolean,
+StaffBar.propTypes = {
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
 };
 
-
+export default withStyles(styles, {withTheme: true})(StaffBar);

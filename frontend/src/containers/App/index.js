@@ -1,7 +1,9 @@
 import React from 'react';
 
+import PropTypes from 'prop-types'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'; // v1.x
+import { MuiThemeProvider as V0MuiThemeProvider} from 'material-ui';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 /* application components */
 import { Header } from '../../components/Header';
@@ -10,14 +12,23 @@ import { Footer } from '../../components/Footer';
 /* global styles for app */
 import './styles/app.scss';
 
+const theme = createMuiTheme({
+    /* theme for v1.x */
+});
+const themeV0 = getMuiTheme({
+    /* theme for v0.x */
+});
+
+
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
     static propTypes = {
-        children: React.PropTypes.node,
+        children: PropTypes.node,
     };
 
     render() {
         return (
-            <MuiThemeProvider muiTheme={getMuiTheme()}>
+            <MuiThemeProvider theme={theme}>
+                <V0MuiThemeProvider muiTheme={themeV0}>
                 <section>
                     <Header />
                     <div
@@ -30,6 +41,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
                         <Footer />
                     </div>
                 </section>
+                </V0MuiThemeProvider>
             </MuiThemeProvider>
         );
     }

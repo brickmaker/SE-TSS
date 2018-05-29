@@ -1,5 +1,6 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../../actions/auth';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -118,9 +119,9 @@ export default class AdminBar extends React.Component {
 
 
 AdminBar.propType = {
-    userName: React.PropTypes.string,
-    drawerOpen: React.PropTypes.boolean,
-    handleClick: React.PropTypes.func
+    userName: PropTypes.string,
+    drawerOpen: PropTypes.boolean,
+    handleClick: PropTypes.func
 };
 
 

@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import AppBar from 'material-ui/AppBar';
 import LeftNav from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import Divider from 'material-ui/Divider';
 
@@ -114,6 +115,6 @@ export class Header extends Component {
 }
 
 Header.propTypes = {
-    logoutAndRedirect: React.PropTypes.func,
-    isAuthenticated: React.PropTypes.bool,
+    logoutAndRedirect: PropTypes.func,
+    isAuthenticated: PropTypes.bool,
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import * as actionCreators from '../../../actions/auth';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
@@ -118,7 +119,7 @@ export default class Tea_LessonInfo extends React.Component {
 
 
 Tea_LessonInfo.propType = {
-    userName: React.PropTypes.string,
+    userName: PropTypes.string,
 };
 
 
