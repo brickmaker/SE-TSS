@@ -1,4 +1,4 @@
-import {CLOSE_COMMENT, GOT_POST_INFO, GOT_POST_REPLIES, OPEN_COMMENT} from './actions'
+import {CLOSE_COMMENT, COMMENT_SUCCESS, GOT_POST_INFO, GOT_POST_REPLIES, OPEN_COMMENT} from './actions'
 
 const initState = {
     path: {
@@ -50,6 +50,16 @@ export function postReducer(state = initState, action) {
                     to: ""
                 }
             })
+        case COMMENT_SUCCESS:
+            return Object.assign({}, state, {
+                comment: {
+                    open: false,
+                    postId: "",
+                    replyId: "",
+                    to: ""
+                }
+            })
+
         default:
             return state
     }

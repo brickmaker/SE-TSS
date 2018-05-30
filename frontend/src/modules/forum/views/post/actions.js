@@ -4,6 +4,35 @@ export const GOT_POST_INFO = 'got_post_info'
 export const GOT_POST_REPLIES = 'got_post_replies'
 export const OPEN_COMMENT = 'open_comment'
 export const CLOSE_COMMENT = 'close_comment'
+export const COMMENT = 'comment'
+export const COMMENT_SUCCESS = 'comment_success'
+
+export const comment = (postId, replyId, from, to, content) =>(dispatch, getState) => {
+    fetch(
+        `${ROOT_URL}/api/forum/comment`,
+        {
+            method: 'POST',
+            // todo: token header
+            body: JSON.stringify({
+                from: from,
+                to: to,
+                postId: postId,
+                replyId: replyId,
+                content: content
+            })
+        }
+    )
+        .then(res => res.json())
+        .then((data) => {
+            console.log(data)
+            // todo: post test
+            dispatch({
+                type: COMMENT_SUCCESS
+            })
+            dispatch(getPostReplies(postId, getState().forum.post.currPage))
+            // todo: fail check
+        })
+}
 
 export const getPostInfo = (postId, pageId) => dispatch => {
     fetchPostInfo(postId, pageId)
