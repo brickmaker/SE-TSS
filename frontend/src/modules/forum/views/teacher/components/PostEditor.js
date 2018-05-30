@@ -60,6 +60,10 @@ export default class PostEditor extends Component {
                 if (this.props.post) {
                     this.props.post(this.state.title, html)
                 }
+                this.setState({
+                    title: "",
+                    editorState: EditorState.createEmpty(),
+                })
             }
         }
     }

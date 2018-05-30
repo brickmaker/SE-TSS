@@ -178,7 +178,7 @@ const mapStateToProps = (state) => ({
     course: state.forum.course.course,
     subForums: state.forum.course.subForums,
     subscribed: state.forum.course.subscribed,
-    posts: []
+    posts: state.forum.course.posts
 })
 
 const mapDispatchToProps = (dispatch) => ({

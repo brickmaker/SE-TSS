@@ -1019,6 +1019,15 @@
       }
     ]
   },
+  "teacher_subscribe": {
+    "subscribed": true
+  },
+  "teacher_unsubscribe": {
+    "subscribed": false
+  },
+  "teacher_subscribed": {
+    "subscribed": true
+  },
   "post": {
     "id": "pid",
     "path": {

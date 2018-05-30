@@ -148,6 +148,39 @@ courseid: String
 
 参见`course_posts`
 
+#### 课程板块发帖
+
+##### 请求
+
+```
+POST /api/forum/course_newpost
+```
+
+##### 内容
+
+```
+{
+    uid: String,
+    collegeId: String,
+    courseId: String,
+    title: String,
+    content: String
+}
+```
+
+##### response
+
+```
+成功：
+{
+    error: null
+}
+失败：
+{
+    error: "Error info"
+}
+```
+
 #### 教师板块信息
 
 ##### 请求
@@ -168,6 +201,69 @@ teacherid: String
 success: 参照`teacher`
 
 error: ..
+
+#### 教师板块订阅查询
+
+##### 请求
+
+```
+GET /api/forum/teacher_subscribed
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+teacherid: String
+```
+
+##### response
+
+参见`teacher_subscribed`
+
+#### 教师板块订阅
+
+##### 请求
+
+```
+GET /api/forum/teacher_subscribe
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+teacherid: String
+```
+
+##### response
+
+参见`teacher_subscribe`
+
+#### 教师板块取消订阅
+
+##### 请求
+
+```
+GET /api/forum/teacher_unsubscribe
+```
+
+##### params
+
+```
+uid: String
+collegeid: String
+courseid: String
+teacherid: String
+```
+
+##### response
+
+参见`teacher_unsubscribe`
 
 #### 帖子信息
 

@@ -4,7 +4,76 @@ export const GET_TEACHER_INFO = 'get_teacher_info'
 export const GOT_TEACHER_INFO = 'got_teacher_info'
 export const GET_TEACHER_POSTS = 'get_teacher_posts'
 export const GOT_TEACHER_POSTS = 'got_teacher_posts'
+export const CHECKED_SUBSCRIBED = 'checked_teacher_subscribed'
+export const SUBSCRIBE_COURSE = 'subscribe_teacher'
+export const UNSUBSCRIBE_COURSE = 'unsubscribe_teacher'
+export const POSTING = 'teacher_posting'
+export const POST_SUCCESS = 'teacher_post_success'
+export const POST_FAIL = 'teacher_post_fail'
+export const CLOSE_DIALOG = 'close_teacher_dialog'
 
+export const newPost = (uid, collegeId, courseId, teacherId, title, content) => (dispatch, getState) => {
+    dispatch({
+        type: POSTING
+    })
+    fetch(
+        `${ROOT_URL}/api/forum/teacher_newpost`,
+        {
+            method: 'POST',
+            // todo: token header
+            body: JSON.stringify({
+                uid: uid,
+                collegeId: collegeId,
+                courseId: courseId,
+                teacherId: teacherId,
+                title: title,
+                content: content
+            })
+        }
+    )
+        .then(res => res.json())
+        .then((data) => {
+            console.log(data)
+            // todo: post test
+            dispatch({
+                type: POST_SUCCESS
+            })
+            // todo: fail check
+        })
+}
+
+export const subscribe = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
+    fetch(`${ROOT_URL}/api/forum/teacher_subscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+        .then(res => res.json())
+        .then((data) => {
+            dispatch({
+                type: SUBSCRIBE_COURSE,
+                subscribed: data.subscribed
+            })
+        })
+}
+
+export const unsubscribe = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
+    fetch(`${ROOT_URL}/api/forum/teacher_unsubscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+        .then(res => res.json())
+        .then((data) => {
+            dispatch({
+                type: UNSUBSCRIBE_COURSE,
+                subscribed: data.subscribed
+            })
+        })
+}
+
+export const checkSubscribed = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
+    fetch(`${ROOT_URL}/api/forum/teacher_subscribed${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+        .then(res => res.json())
+        .then((data) => {
+            dispatch({
+                type: CHECKED_SUBSCRIBED,
+                subscribed: data.subscribed
+            })
+        })
+}
 export const getTeacherInfo = (collegeId, courseId, teacherId) => (dispatch, getState) => {
     fetchTeacherInfo(collegeId, courseId, teacherId)
         .then((data) => {
