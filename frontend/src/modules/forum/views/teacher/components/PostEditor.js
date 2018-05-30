@@ -59,7 +59,6 @@ export default class PostEditor extends Component {
                 const html = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
                 if (this.props.post) {
                     this.props.post(this.state.title, html)
-                    this.alertDialog("提交成功", "您可以在帖子列表中查看您新发布的帖子！") // todo: stupid fake post success!!!
                 }
             }
         }

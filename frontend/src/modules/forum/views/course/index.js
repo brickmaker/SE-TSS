@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from "react-redux"
-import {checkSubscribed, getCourseInfo, newPost, subscribe, unsubscribe} from "./actions"
+import {checkSubscribed, CLOSE_DIALOG, getCourseInfo, newPost, subscribe, unsubscribe} from "./actions"
 import {MainBody} from "../../components/util/MainBody"
 import {Path} from "../../components/util/Path"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
 import {Extension, Announcement} from "@material-ui/icons"
-import {Button, Grid} from "material-ui"
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid} from "material-ui"
 import {goBottom} from "../../utils/pageHandler"
 import PostsList from "./components/PostsList"
 import PostEditor from "../teacher/components/PostEditor"
@@ -21,6 +21,7 @@ class Course extends Component {
         this.unsubscribe = this.unsubscribe.bind(this)
         this.goToPost = this.goToPost.bind(this)
         this.post = this.post.bind(this)
+        this.onDialogClose = this.onDialogClose.bind(this)
     }
 
     componentDidMount() {
@@ -62,6 +63,10 @@ class Course extends Component {
     post(title, content) {
         const {collegeid, courseid} = this.props.match.params
         this.props.newPost("uid", collegeid, courseid, title, content) // todo: get uid
+    }
+
+    onDialogClose() {
+        this.props.closeDialog()
     }
 
     render() {
@@ -144,12 +149,31 @@ class Course extends Component {
                         post={this.post}
                     />
                 </MainBody>
+                <Dialog
+                    open={this.props.dialog.open}
+                    onClose={this.onDialogClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{this.props.dialog.title}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {this.props.dialog.content}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.onDialogClose} color="primary" autoFocus>
+                            确认
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
+    dialog: state.forum.course.dialog,
     college: state.forum.course.college,
     course: state.forum.course.course,
     subForums: state.forum.course.subForums,
@@ -158,6 +182,11 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
+    closeDialog: () => {
+        dispatch({
+            type: CLOSE_DIALOG
+        })
+    },
     newPost: (uid, collegeId, courseId, title, content) => {
         dispatch(newPost(uid, collegeId, courseId, title, content))
     },

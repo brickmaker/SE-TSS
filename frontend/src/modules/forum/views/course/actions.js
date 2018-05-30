@@ -7,8 +7,15 @@ export const GOT_COURSE_POSTS = 'got_course_posts'
 export const CHECKED_SUBSCRIBED = 'checked_subscribed'
 export const SUBSCRIBE_COURSE = 'subscribe_course'
 export const UNSUBSCRIBE_COURSE = 'unsubscribe_course'
+export const POSTING = 'course_posting'
+export const POST_SUCCESS = 'course_post_success'
+export const POST_FAIL = 'course_post_fail'
+export const CLOSE_DIALOG = 'close_course_dialog'
 
 export const newPost = (uid, collegeId, courseId, title, content) => (dispatch, getState) => {
+    dispatch({
+        type: POSTING
+    })
     fetch(
         `${ROOT_URL}/api/forum/course_newpost`,
         {
@@ -26,6 +33,11 @@ export const newPost = (uid, collegeId, courseId, title, content) => (dispatch, 
         .then(res => res.json())
         .then((data) => {
             console.log(data)
+            // todo: post test
+            dispatch({
+                type: POST_SUCCESS
+            })
+            // todo: fail check
         })
 }
 
