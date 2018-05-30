@@ -11,19 +11,21 @@ import {
     ListItemText
 } from "material-ui"
 import {Reply as ReplyIcon} from '@material-ui/icons'
+import {connect} from "react-redux"
+import {OPEN_COMMENT} from "../actions"
 
 const style = {
     margin: '15px 0',
     display: 'flex'
 }
 
-export default class Reply extends Component {
+class Reply extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
-        const {pic, name, college, postNum, content, time, replies} = this.props
+        const {postId, id, pic, name, college, postNum, content, time, replies} = this.props
         return (
             <Card style={style}>
                 <div style={{
@@ -104,7 +106,12 @@ export default class Reply extends Component {
                                                 primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`}
                                                 secondary={rr.content}/>
                                             <ListItemSecondaryAction>
-                                                <IconButton aria-label="Reply">
+                                                <IconButton
+                                                    onClick={() => {
+                                                        this.props.openComment(postId, id, rr.to)
+                                                    }}
+                                                    aria-label="Reply"
+                                                >
                                                     <ReplyIcon/>
                                                 </IconButton>
                                             </ListItemSecondaryAction>
@@ -119,3 +126,17 @@ export default class Reply extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    openComment: (postId, replyId, to) => {
+        dispatch({
+            type: OPEN_COMMENT,
+            postId: postId,
+            replyId: replyId,
+            to: to
+        })
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reply)

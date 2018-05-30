@@ -47,6 +47,8 @@ success: 参照`courses`
 
 error: ..
 
+### 课程板块页
+
 #### 课程信息
 
 ##### 请求
@@ -181,6 +183,8 @@ POST /api/forum/course_newpost
 }
 ```
 
+### 教师板块页
+
 #### 教师板块信息
 
 ##### 请求
@@ -201,6 +205,26 @@ teacherid: String
 success: 参照`teacher`
 
 error: ..
+
+#### 教师板块帖子
+
+##### 请求
+
+```
+GET /api/forum/teacher_posts
+```
+
+##### params
+
+```
+collegeid: String
+courseid: String
+teacherid: String
+```
+
+##### response
+
+参照`teacher_posts`
 
 #### 教师板块订阅查询
 

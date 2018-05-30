@@ -7,10 +7,15 @@ import {PostTitle} from "./components/PostTitle"
 import PostBody from "./components/PostBody"
 import ReplyEditor from "./components/editor/ReplyEditor"
 import {MainBody} from "../../components/util/MainBody"
+import {goBottom} from "../../utils/pageHandler"
+import Comment from "./components/Comment"
 
 class PostPage extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            isLogin: true // todo: get login!!!
+        }
     }
 
     componentDidMount() {
@@ -45,6 +50,7 @@ class PostPage extends Component {
                     <PostTitle title={title}/>
                     <PostBody/>
                     <ReplyEditor/>
+                    <Comment/>
                 </MainBody>
             </div>
         )

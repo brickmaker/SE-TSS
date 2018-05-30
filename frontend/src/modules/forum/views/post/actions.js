@@ -2,6 +2,8 @@ import {DEBUG, ROOT_URL} from "../../configs/config"
 
 export const GOT_POST_INFO = 'got_post_info'
 export const GOT_POST_REPLIES = 'got_post_replies'
+export const OPEN_COMMENT = 'open_comment'
+export const CLOSE_COMMENT = 'close_comment'
 
 export const getPostInfo = (postId, pageId) => dispatch => {
     fetchPostInfo(postId, pageId)
