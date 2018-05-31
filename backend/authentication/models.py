@@ -58,12 +58,11 @@ class AccountManager(BaseUserManager):
             department = Department.objects.get(name=kwargs.get('department', '信息中心'))
         except Exception as err:
             raise ParseError(detail='department not exists')
-        account = Account()
-
-        # password encrypt
-        account.username=username,
-        account.id_number=id_number
-        account.user_type=user_type
+        account = Account(
+            account.username=username,
+            account.id_number=id_number,
+            account.user_type=user_type,
+        )
         account.set_password(password)
         account.save()
 
