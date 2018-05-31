@@ -59,10 +59,11 @@ class AccountManager(BaseUserManager):
         except Exception as err:
             raise ParseError(detail='department not exists')
         account = Account(
-            account.username=username,
-            account.id_number=id_number,
-            account.user_type=user_type,
+            username=username,
+            id_number=id_number,
+            user_type=user_type,
         )
+
         account.set_password(password)
         account.save()
 

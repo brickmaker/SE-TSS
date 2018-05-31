@@ -23,7 +23,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y(p7i)iexolfi92dq2&nlzmzp59(-871tjb2mopwlias*)rs13'
+SECRET_KEY = 'r@bp4_$%=vm@f5l0a^z$$$&y@)l0x=ne3-rcdzbc=nka15^&+d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     # 'LogIn.apps.LoginConfig',
     'authentication.apps.AuthenticationConfig',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -43,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework.authtoken',  # 设置token
-
     'rest_framework',
+
     'forum.apps.ForumConfig',
     'online_testing.apps.OnlineTestingConfig',
 ]
@@ -68,11 +67,9 @@ WEBPACK_LOADER = {
     }
 }
 
-# TODO
-'''
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
 
+#开启JWT验证
+REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -82,7 +79,7 @@ REST_FRAMEWORK = {
         
     ),
 }
-'''
+
 
 
 TEMPLATES = [

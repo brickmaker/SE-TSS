@@ -4255,3 +4255,42 @@ django.db.utils.IntegrityError: UNIQUE constraint failed: authentication_account
 2018-05-28 16:41:02,440 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/ HTTP/1.1" 200 10434
 2018-05-28 16:41:14,887 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/batch_student HTTP/1.1" 405 9963
 2018-05-28 16:56:39,707 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/batch_student HTTP/1.1" 405 10091
+2018-05-31 15:30:38,868 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-31 15:30:38,869 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2243
+2018-05-31 15:30:39,306 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/account/ HTTP/1.1" 302 0
+2018-05-31 15:30:39,343 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/authentication/account/ HTTP/1.1" 200 1902
+2018-05-31 15:30:39,497 [Thread-5:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/get_token
+2018-05-31 15:30:39,498 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/get_token HTTP/1.1" 404 2300
+2018-05-31 15:30:39,612 [Thread-6:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/
+2018-05-31 15:30:39,612 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/ HTTP/1.1" 404 2273
+2018-05-31 15:30:41,895 [Thread-7:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/course/
+2018-05-31 15:30:41,896 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/course/ HTTP/1.1" 404 2294
+2018-05-31 15:30:46,545 [Thread-8:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/course/
+2018-05-31 15:30:46,546 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/course/ HTTP/1.1" 404 12139
+2018-05-31 15:30:50,751 [Thread-9:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/course
+2018-05-31 15:30:50,752 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/course HTTP/1.1" 404 12136
+2018-05-31 15:30:53,782 [Thread-10:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/course
+2018-05-31 15:30:53,783 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/course HTTP/1.1" 404 12136
+2018-05-31 15:30:55,705 [Thread-11:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/department
+2018-05-31 15:30:55,706 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/department HTTP/1.1" 404 12148
+2018-05-31 15:31:09,590 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/department HTTP/1.1" 301 0
+2018-05-31 15:31:09,785 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/department/ HTTP/1.1" 403 9440
+2018-05-31 15:31:16,046 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/department HTTP/1.1" 301 0
+2018-05-31 15:31:16,066 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/department/ HTTP/1.1" 403 9440
+2018-05-31 15:31:18,590 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/get_token HTTP/1.1" 405 12085
+2018-05-31 15:31:24,847 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/info/get_token HTTP/1.1" 200 12213
+2018-05-31 15:31:33,023 [Thread-8:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-31 15:31:33,024 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2244
+2018-05-31 15:31:34,228 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/account/ HTTP/1.1" 302 0
+2018-05-31 15:31:34,280 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/authentication/account/ HTTP/1.1" 200 1902
+2018-05-31 15:31:35,082 [Thread-11:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-05-31 15:31:35,082 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2244
+2018-05-31 15:31:35,727 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/account/ HTTP/1.1" 302 0
+2018-05-31 15:31:35,758 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/authentication/account/ HTTP/1.1" 200 1902
+2018-05-31 15:31:36,568 [Thread-14:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/get_token
+2018-05-31 15:31:36,569 [Thread-14:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/get_token HTTP/1.1" 404 2301
+2018-05-31 15:31:36,722 [Thread-15:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/
+2018-05-31 15:31:36,723 [Thread-15:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/ HTTP/1.1" 404 2274
+2018-05-31 15:31:39,878 [Thread-16:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/get_token HTTP/1.1" 405 12085
+2018-05-31 15:31:43,351 [Thread-17:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/course HTTP/1.1" 301 0
+2018-05-31 15:31:43,373 [Thread-18:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/course/ HTTP/1.1" 403 9396

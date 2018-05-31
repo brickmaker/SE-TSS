@@ -92,9 +92,10 @@ class CourseSerializer(serializers.ModelSerializer):
     assessment = serializers.CharField(max_length=20)
     faculty = serializers.MultipleChoiceField(choices=Faculty.objects.all())
     course_type=serializers.IntegerField(max_value=3, required=True)
+    state=serializers.IntegerField(max_value=3, default=1)
     class Meta:
         model = Course
-        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment', 'faculty','course_type')
+        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment', 'faculty','course_type', 'state')
 
     def create(self, validated_data):
         logger.info("create course")
@@ -105,7 +106,8 @@ class CourseSerializer(serializers.ModelSerializer):
         credit = validated_data['credit']
         assessment = validated_data['assessment']
         course_type=validated_data['course_type']
-        instance = Course.objects.create(course_id=course_id, name=name, classroom=classroom, capacity=capacity, credit=credit, assessment=assessment,course_type=course_type)
+        state=validated_data['state']
+        instance = Course.objects.create(course_id=course_id, name=name, classroom=classroom, capacity=capacity, credit=credit, assessment=assessment,course_type=course_type, state=state)
         instance.faculty.set(validated_data['faculty'])
         instance.save()
         return instance
@@ -120,7 +122,9 @@ class CourseSerializer(serializers.ModelSerializer):
         instance.capacity = validated_data.get('capacity', instance.capacity)
         instance.classroom = validated_data.get('classroom', instance.classroom)
         instance.assessment = validated_data.get('assessment', instance.assessment)
-        instance.course_type=validated_data.get('course_type',isinstance.course_type)
+        instance.course_type=validated_data.get('course_type',instance.course_type)
+        instance.state=validated_data.get('state',instance.state)
+        instance.faculty.set(validated_data.get('faculty', instance.faculty))
         instance.save()
         return instance
 

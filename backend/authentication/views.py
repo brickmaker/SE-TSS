@@ -133,7 +133,6 @@ class CourseRegister(APIView):
 
     def post(self, request):
         logger.info("try to register course")
-        print(request.data)
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             serializer.save()
