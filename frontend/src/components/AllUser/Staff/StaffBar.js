@@ -10,9 +10,7 @@ import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -22,9 +20,22 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
-import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/core/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import UserIcon from '@material-ui/icons/AccountBox';
+import AccountIcon from '@material-ui/icons/SupervisorAccount';
+import ClassIcon from '@material-ui/icons/Class';
+import {
+    TextField,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Button,
+    MenuItem,
+} from '@material-ui/core';
 
 function mapStateToProps(state) {
     return {
@@ -117,49 +128,38 @@ const styles = theme => ({
 const ListItems = (
     <div>
         <Link to={'/staff'}>
-        <ListItem button>
-            <ListItemIcon>
-                <StarIcon/>
-            </ListItemIcon>
-            <ListItemText primary="主页"/>
-        </ListItem>
+            <ListItem button>
+                <ListItemIcon>
+                    <HomeIcon/>
+                </ListItemIcon>
+                <ListItemText primary="主页"/>
+            </ListItem>
         </Link>
         <ListItem button>
             <ListItemIcon>
-                <StarIcon/>
+                <UserIcon/>
             </ListItemIcon>
             <ListItemText primary="个人信息"/>
         </ListItem>
+        <Link to={'/staff/accounts'}>
+            <ListItem button>
+                <ListItemIcon>
+                    <AccountIcon/>
+                </ListItemIcon>
+                <ListItemText primary="用户信息"/>
+            </ListItem>
+        </Link>
         <Link to={'/staff/lessons'}>
-        <ListItem button>
-            <ListItemIcon>
-                <StarIcon/>
-            </ListItemIcon>
-            <ListItemText primary="课程信息"/>
-        </ListItem>
+            <ListItem button>
+                <ListItemIcon>
+                    <ClassIcon/>
+                </ListItemIcon>
+                <ListItemText primary="课程信息"/>
+            </ListItem>
         </Link>
-        <Link to={'/staff/createLesson'}>
-        <ListItem button>
-            <ListItemIcon>
-                <StarIcon/>
-            </ListItemIcon>
-            <ListItemText primary="添加课程"/>
-        </ListItem>
-        </Link>
-        <ListItem button>
-            <ListItemIcon>
-                <StarIcon/>
-            </ListItemIcon>
-            <ListItemText primary="删除课程"/>
-        </ListItem>
-        <ListItem button>
-            <ListItemIcon>
-                <StarIcon/>
-            </ListItemIcon>
-            <ListItemText primary="处理申请课程"/>
-        </ListItem>
     </div>
 );
+
 
 const otherListItems = (
     <div>
@@ -176,8 +176,18 @@ const otherListItems = (
 @connect(mapStateToProps, mapDispatchToProps)
 class StaffBar extends React.Component {
     state = {
+        userName: '',
         anchor: 'left',
         anchorEl: null,
+        pwdDialog: false,
+        Old_pwd: '',
+        New_pwd: '',
+        New_pwd_1: '',
+        pwd_txt1: '',
+        pwd_error: false,
+        pwd_txt: '',
+        dialogState: false,
+        dialogText: '',
     };
 
     handleMenu = event => {
@@ -188,10 +198,112 @@ class StaffBar extends React.Component {
         this.setState({anchorEl: null});
     };
 
-    logout(e) {
+    logout = (e) => {
         e.preventDefault();
         this.props.logoutAndRedirect();
+    };
+
+    handleBack = () => {
+        browserHistory.push('/main');
+    };
+
+    handleDialogClose = () => {
+        this.setState({dialogState: false});
+    };
+
+    componentDidMount() {
+        this.setState({userName: localStorage.getItem('userName')});
     }
+
+    pwdDialogOpen = () => {
+        this.setState({
+            pwdDialog: true,
+            Old_pwd: '',
+            New_pwd: '',
+            New_pwd_1: '',
+            pwd_txt1: '',
+            pwd_txt: '',
+        });
+    };
+
+    pwdDialogClose = () => {
+        this.setState({pwdDialog: false});
+    };
+
+    UploadpwdDialog = () => {
+        if (this.state.New_pwd !== this.state.New_pwd_1){
+            this.setState({
+                dialogState: true,
+                dialogText: "新密码不一致",
+            });
+        }
+        else {
+            this.setState({pwdDialog: false});
+
+            let data = {};
+            data.old_password = this.state.Old_pwd;
+            data.new_password = this.state.New_pwd;
+            fetch('/api/update_password', {
+                method: 'put',
+                headers: {
+                    'Authorization': 'JWT ' + localStorage.getItem('token'),
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    let status = response.status;
+                    if (status === 200) {
+                        this.setState({
+                            dialogState: true,
+                            dialogText: "密码修改成功",
+                        });
+                    } else {
+                        this.setState({
+                            dialogState: true,
+                            dialogText: response.statusText,
+                        });
+                    }
+                    return response.json;
+                })
+                .catch(() => {
+                    this.setState({
+                        dialogState: true,
+                        dialogText: "服务器无响应",
+                    });
+                    // browserHistory.push("/login");
+                });
+        }
+    };
+
+    handleChange = prop => event => {
+        this.setState({[prop]: event.target.value});
+    };
+
+    handleChange_pwd = prop => event => {
+
+        this.setState({[prop]: event.target.value});
+        var p = /[0-9a-z]/i;
+        var ifTrue = p.test(event.target.value);
+        if(event.target.value.length < 8 || !ifTrue){
+            this.setState({pwd_txt1: "密码至少8位，且包括数字和字母"});
+        }
+        else{
+            this.setState({pwd_txt1: ""});
+        }
+
+    };
+
+    _handleChange = prop => event => {
+        this.setState({[prop]: event.target.value});
+        if(this.state.New_pwd === event.target.value){
+            this.setState({pwd_error: false, pwd_txt: ""});
+        }
+        else{
+            this.setState({pwd_error: true, pwd_txt: "密码不一致"});
+        }
+    };
 
     render() {
         const {classes, theme, open, click} = this.props;
@@ -252,6 +364,7 @@ class StaffBar extends React.Component {
                         <Button color="inherit">论坛交流</Button>
                         <Button color="inherit">在线测试</Button>
                         <Button color="inherit">成绩管理</Button>
+
                         <div>
                             <IconButton
                                 aria-owns={Boolean(anchorEl) ? 'menu-appbar' : null}
@@ -275,9 +388,15 @@ class StaffBar extends React.Component {
                                 open={Boolean(anchorEl)}
                                 onClose={this.handleClose}
                             >
-                                <MenuItem onClick={this.handleClose}>个人信息</MenuItem>
-                                <MenuItem onClick={this.handleClose}>修改密码</MenuItem>
-                                <MenuItem onClick={this.handleClose}>返回上层</MenuItem>
+                                {/*<Paper>*/}
+                                    {/*<Typography align='center' color="inherit">*/}
+                                        {/*{this.state.userName}*/}
+                                    {/*</Typography>*/}
+                                {/*</Paper>*/}
+
+
+                                <MenuItem onClick={this.pwdDialogOpen}>修改密码</MenuItem>
+                                <MenuItem onClick={this.handleBack}>返回上层</MenuItem>
                                 <MenuItem onClick={(e) => this.logout(e)}>退出系统</MenuItem>
                             </Menu>
                         </div>
@@ -286,7 +405,82 @@ class StaffBar extends React.Component {
                 {before}
 
                 {after}
+                <div>
+                    <Dialog
+                        open={this.state.pwdDialog}
+                        onClose={this.pwdDialogClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">修改密码</DialogTitle>
+                        <DialogContent>
 
+
+                            <div>
+                                <TextField
+                                    fullWidth
+                                    label="旧密码"
+                                    type = "password"
+                                    value={this.state.Old_pwd}
+                                    onChange={this.handleChange('Old_pwd')}
+
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    fullWidth
+                                    label="新密码"
+                                    type = "password"
+                                    value={this.state.New_pwd}
+                                    onChange={this.handleChange_pwd('New_pwd')}
+                                    helperText= {this.state.pwd_txt1}
+
+                                />
+                            </div>
+                            <div>
+                                <TextField
+                                    fullWidth
+                                    label="再次输入新密码"
+                                    type = "password"
+                                    value={this.state.New_pwd_1}
+                                    onChange={this._handleChange('New_pwd_1')}
+                                    error = {this.state.pwd_error}
+                                    helperText= {this.state.pwd_txt}
+                                >
+
+                                </TextField>
+                            </div>
+
+
+                        </DialogContent>
+
+                        <DialogActions>
+                            <Button onClick={this.UploadpwdDialog} color="primary">
+                                确定
+                            </Button>
+                            <Button onClick={this.pwdDialogClose} color="primary">
+                                关闭
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+                <div>
+                    <Dialog
+                        open={this.state.dialogState}
+                        onClose={this.handleDialogClose}
+                    >
+                        <DialogTitle>{"提示"}</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                {this.state.dialogText}
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleDialogClose} color="primary">
+                                关闭
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
             </div>
 
         );

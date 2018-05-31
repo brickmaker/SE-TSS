@@ -18,11 +18,9 @@ import TeacherView from './components/AllUser/Teacher/TeacherView';
 import ApplyLesson from './components/AllUser/Teacher/ApplyLesson';
 import TeacherBasicInfo from './components/AllUser/Teacher/Tea_basicInfo';
 import StaffView from './components/AllUser/Staff/StaffView';
-import LessonPro from './components/AllUser/Staff/LessonPro';
 import Sta_LessonInfo from './components/AllUser/Staff/LessonInfo';
-import CreateLesson from './components/AllUser/Staff/CreateLesson';
+import Staff_AccountInfo from './components/AllUser/Staff/AccountInfo';
 import CardContentInit from './components/AllUser/Staff/StaffBar';
-import DeleteLesson from './components/AllUser/Staff/DeleteLesson';
 import Sta_basicInfo from './components/AllUser/Staff/Sta_basicInfo';
 import Tea_LessonInfo from './components/AllUser/Teacher/LessonInfo';
 import MainMenu from './components/MainMenu';
@@ -56,11 +54,8 @@ export default (
 
         <Route path = "staff" component = {StaffView}/>
         <Route path = "staff/pwd" component = {StaffPwd}/>
-        <Route path = "staff/process" component = {LessonPro}/>
         <Route path = "staff/lessons" component = {Sta_LessonInfo} />
-        <Route path = "staff/createLesson" component = {CreateLesson} />
-        <Route path = "staff/delete" component = {DeleteLesson} />
-
+        <Route path = "staff/accounts" component = {Staff_AccountInfo} />
 
         <Route path = "admin" component = {AdminView}/>
 

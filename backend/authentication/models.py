@@ -14,7 +14,6 @@ GENDER_CHOICES = (
 
 class Department(models.Model):
     name = models.CharField("所在院系", primary_key=True, max_length=100)
-
     def __str__(self):
         return self.name
 
@@ -198,12 +197,21 @@ class Course(models.Model):
          (1,"专业选修课"),
          (2,"专业必修课"),
     )
+    SEM_CHOICE = (
+        (0,"春"),
+        (1,"夏"),
+        (2,"春夏"),
+        (3,"秋"),
+        (4,"秋冬"),
+        (5,"短")
+    )
     course_id = models.CharField("课号", max_length=10, primary_key=True, default="null")
     name = models.CharField("名称", max_length=20, unique=True)
     course_type= models.PositiveSmallIntegerField("课程类别", choices=TYPE_CHOICES)
     credit = models.FloatField("学分", null=False)
     capacity = models.IntegerField("容量", null=False)
-    classroom = models.CharField("教室", max_length=20, null=True)
+    semester = models.PositiveSmallIntegerField("开课学期",choices=SEM_CHOICE,default=0)
+    department=models.ForeignKey(Department,on_delete=models.CASCADE, null=False)
     assessment = models.CharField("考核方式", max_length=20, null=True)
     state = models.PositiveSmallIntegerField("审核状态", choices=STATE_CHOICES, default=0)
     faculty = models.ManyToManyField(Faculty, related_name='teacher_course')

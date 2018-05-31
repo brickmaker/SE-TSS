@@ -77,7 +77,7 @@ class Sta_View extends React.Component {
         this.state = {
             anchor: 'left',
             userName: '',
-            open: false,
+            open: true,
         };
     }
 
@@ -86,22 +86,7 @@ class Sta_View extends React.Component {
     }
 
     componentDidMount() {
-        // fetch('/api/course/', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Authorization': 'JWT ' + localStorage.getItem('token'),
-        //         'Content-Type': 'application/json'
-        //     },
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         this.setState({lesson_data: data})
-        //     })
-        //     .catch((e) => {
-        //         alert("身份验证失效，请重新登录");
-        //         browserHistory.push("/login");
-        //     });
-        // this.setState({userName: localStorage.getItem('userName')});
+
     }
 
 

@@ -38,6 +38,7 @@ import {
     FormGroup,
     Input,
     FormControl,
+    Menu,
 } from '@material-ui/core';
 
 
@@ -51,7 +52,6 @@ import ClearIcon from '@material-ui/icons/Clear';
 import {lighten} from '@material-ui/core/styles/colorManipulator';
 
 
-// 增强的表头
 class EnhancedTableHead extends React.Component {
     createSortHandler = property => event => {
         this.props.onRequestSort(event, property);
@@ -59,11 +59,13 @@ class EnhancedTableHead extends React.Component {
 
     render() {
         const columnData = [
-            {value: 'course_id', label: '课程号'},
-            {value: 'name', label: '课程名'},
-            {value: 'credit', label: '学分'},
-            {value: 'classroom', label: '教室'},
-            {value: 'state', label: '状态'},
+            {value: 'username', label: '用户名'},
+            {value: 'id_number', label: '身份证号'},
+            {value: 'name', label: '姓名'},
+            {value: 'gender', label: '性别'},
+            {value: 'email', label: '邮箱'},
+            {value: 'department', label: '部门'},
+
         ];
         const {onSelectAllClick, order, orderBy, numSelected, rowCount} = this.props;
 
@@ -139,7 +141,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, handleFilterOpen, tableState, handleTableData, handleAccept, handleRefuse, handleDelete} = props;
+    const {numSelected, classes, handleAddOpen, handleFilterOpen, handleAccept, handleRefuse, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
 
     return (
         <Toolbar
@@ -154,47 +156,30 @@ let EnhancedTableToolbar = props => {
                     </Typography>
                 ) : (
                     <Typography variant="title" id="tableTitle">
-                        课程信息
+                        用户信息
                     </Typography>
                 )}
             </div>
             <div className={classes.spacer}/>
             <div className={classes.actions}>
-                {tableState && (
-                    <Tooltip title="同意">
-                        <IconButton aria-label="Accept" onClick={handleAccept}>
-                            <DoneIcon/>
-                        </IconButton>
-                    </Tooltip>
-                )
-                }
-            </div>
-            <div className={classes.actions}>
-                {tableState && (
-                    <Tooltip title="拒绝">
-                        <IconButton aria-label="Refuse" onClick={handleRefuse}>
-                            <ClearIcon/>
-                        </IconButton>
-                    </Tooltip>
-                )
-                }
-            </div>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={type_anchorEl}
+                    open={Boolean(type_anchorEl)}
+                    onClose={handleTypeNormalClose}
+                >
+                    <MenuItem onClick={handleTypeStudentClose}>学生</MenuItem>
+                    <MenuItem onClick={handleTypeFacultyClose}>教师</MenuItem>
+                </Menu>
 
 
-            <div className={classes.actions}>
-                {!tableState ? (
-                    <Tooltip title="审批">
-                        <IconButton aria-label="Process" onClick={handleTableData}>
-                            <SelectIcon/>
-                        </IconButton>
-                    </Tooltip>
-                ) : (
-                    <Tooltip title="普通">
-                        <IconButton aria-label="Normal" onClick={handleTableData}>
-                            <StarIcon/>
-                        </IconButton>
-                    </Tooltip>
-                )}
+                <Tooltip title="类型">
+                    <IconButton aria-label="Process" onClick={handleTypeOpen}>
+                        <SelectIcon/>
+                    </IconButton>
+                </Tooltip>
+
+
             </div>
             <div className={classes.actions}>
                 {numSelected > 0 ? (
@@ -298,12 +283,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 @connect(mapStateToProps, mapDispatchToProps)
-class LessonInfo extends React.Component {
+class AccountInfo extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             order: 'asc',
-            orderBy: 'course_id',
+            orderBy: 'username',
             selected: [],
             allowSelected: true,
             anchor: 'left',
@@ -335,18 +320,20 @@ class LessonInfo extends React.Component {
             chipLabel: [],
             tableState: false,
             acceptState: true,
-            id_filter: '',
-            id_filter_state: false,
+            username_filter: '',
+            username_filter_state: false,
             name_filter: '',
             name_filter_state: false,
-            credit_filter: 1,
-            credit_filter_state: false,
-            classroom_filter: '',
-            classroom_filter_state: false,
-            type_filter: 0,
-            type_filter_state: false,
-            faculty_filter_state: false,
-            faculty_filter: '',
+            id_number_filter: '',
+            id_number_filter_state: false,
+            gender_filter: 'M',
+            gender_filter_state: false,
+            department_filter: '',
+            department_filter_state: false,
+            email_filter_state: false,
+            email_filter: '',
+            account_type: 0,
+            type_anchorEl: null,
         };
     }
 
@@ -369,18 +356,11 @@ class LessonInfo extends React.Component {
     };
 
     handleAddOpen = () => {
-        this.setState({add: true});
+        this.setState({dialogState: true, dialogText: '您没有注册用户权限，请联系系统管理员。'});
     };
 
     handleAddClose = () => {
-        this.setState({add: false});
-        const chipData = [...this.state.chipData];
-        chipData.splice(0, chipData.length);
-        this.setState({chipData});
-        const chipLabel = [...this.state.chipLabel];
-        chipLabel.splice(0, chipLabel.length);
-        this.setState({chipLabel});
-        this.setState({course_type: -1});
+        this.setState({dialog: false});
     };
 
     handleFilterOpen = () => {
@@ -394,25 +374,25 @@ class LessonInfo extends React.Component {
     handleFilterSubmit = () => {
         let data = this.state.originData;
         let filterData = data;
-        if (this.state.id_filter_state) {
-            filterData = filterData.filter(item => item.course_id.indexOf(this.state.id_filter) !== -1);
+        if (this.state.username_filter_state) {
+            filterData = filterData.filter(item => item.username.indexOf(this.state.username_filter) !== -1);
+        }
+        if (this.state.id_number_filter_state) {
+            filterData = filterData.filter(item => item.id_number.indexOf(this.state.id_number_filter) !== -1);
         }
         if (this.state.name_filter_state) {
             filterData = filterData.filter(item => item.name.indexOf(this.state.name_filter) !== -1);
         }
-        if (this.state.classroom_filter_state) {
-            filterData = filterData.filter(item => item.classroom.indexOf(this.state.classroom_filter) !== -1);
+        console.log(filterData);
+        if (this.state.gender_filter_state) {
+            filterData = filterData.filter(item => item.gender.toString() === this.state.gender_filter.toString());
+        }if (this.state.email_filter_state) {
+            filterData = filterData.filter(item => item.email.indexOf(this.state.email_filter) !== -1);
         }
-        if (this.state.credit_filter_state) {
-            filterData = filterData.filter(item => item.credit.toString() === this.state.credit_filter.toString());
+        if (this.state.department_filter_state) {
+            filterData = filterData.filter(item => item.department.indexOf(this.state.department_filter) !== -1);
         }
-        if (this.state.type_filter_state) {
-            filterData = filterData.filter(item => item.course_type.toString() === this.state.type_filter.toString());
-        }
-        console.log(this.state.faculty_filter);
-        if (this.state.faculty_filter_state) {
-            filterData = filterData.filter(item => item.faculty.filter(subItem => subItem.name.toString() === this.state.faculty_filter.toString()).length > 0);
-        }
+
         this.setState({data: filterData});
         this.handleFilterClose();
     };
@@ -531,8 +511,48 @@ class LessonInfo extends React.Component {
         }
     };
 
+    handleTypeOpen = event => {
+        this.setState({type_anchorEl: event.currentTarget});
+    };
+
+    handleTypeNormalClose = () => {
+        this.setState({type_anchorEl: null});
+        this.setState({account_type: this.state.account_type}, () => {
+            this.handleInitData();
+        });
+
+    };
+
+    handleTypeStudentClose = () => {
+        this.setState({type_anchorEl: null});
+        this.setState({account_type: 0}, () => {
+            this.handleInitData();
+        });
+    };
+
+    handleTypeFacultyClose = () => {
+        this.setState({type_anchorEl: null});
+        this.setState({account_type: 1}, () => {
+            this.handleInitData();
+        });
+    };
+
+
     handleInitData = () => {
-        fetch('/api/course/', {
+
+
+        console.log(this.state.account_type);
+        let url = '/api/student/';
+        if (this.state.account_type === 0) {
+            url = '/api/student/';
+        } else if (this.state.account_type === 1) {
+            url = '/api/faculty/';
+        } else if (this.state.account_type === 2) {
+            url = '/api/staff/';
+        } else if (this.state.account_type === 3) {
+            url = '/api/admin/';
+        }
+        fetch(url, {
             method: 'GET',
             headers: {
                 'Authorization': 'JWT ' + localStorage.getItem('token'),
@@ -541,13 +561,8 @@ class LessonInfo extends React.Component {
         })
             .then((response) => response.json())
             .then((data) => {
-                this.setState({originData: data.sort((a, b) => (a.course_id < b.course_id ? -1 : 1))});
-                if (!this.state.tableState) {
-                    this.setState({data: this.state.originData});
-                } else {
-                    this.setState({data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1))});
-                }
-
+                this.setState({originData: data.sort((a, b) => (a.username < b.username ? -1 : 1))});
+                this.setState({data: this.state.originData});
             })
             .catch(() => {
                 this.setState({
@@ -594,7 +609,7 @@ class LessonInfo extends React.Component {
         }
 
         if (checked) {
-            this.setState({selected: this.state.data.map(n => n.course_id)});
+            this.setState({selected: this.state.data.map(n => n.username)});
             return;
         }
         this.setState({selected: []});
@@ -641,30 +656,14 @@ class LessonInfo extends React.Component {
 
     handleCheckChange = name => event => {
         if (!event.target.checked) {
-            if (name === 'type_filter_state') {
-                this.setState({type_filter: 0});
-            }
-            else if (name === 'credit_filter_state') {
-                this.setState({credit_filter: 1});
+            if (name === 'gender_filter_state') {
+                this.setState({gender_filter: 'M'});
             }
             else {
                 this.setState({[name.substring(0, name.length - 6)]: ''});
             }
         }
         this.setState({[name]: event.target.checked});
-    };
-
-    handleTableData = () => {
-        if (!this.state.tableState) {
-            this.setState({
-                data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
-                allowSelected: false
-            });
-        } else {
-            this.setState({data: this.state.originData, allowSelected: true});
-        }
-        this.setState({tableState: !this.state.tableState});
-        this.setState({selected: []});
     };
 
     handleAccept = () => {
@@ -780,20 +779,15 @@ class LessonInfo extends React.Component {
                 label: '专业必修课',
             },
         ];
-        const credit = [
-            {value: 0.5, label: '0.5'},
-            {value: 1, label: '1'},
-            {value: 1.5, label: '1.5'},
-            {value: 2, label: '2'},
-            {value: 2.5, label: '2.5'},
-            {value: 3, label: '3'},
-            {value: 3.5, label: '3.5'},
-            {value: 4, label: '4'},
-            {value: 4.5, label: '4.5'},
-            {value: 5, label: '5'},
-            {value: 5.5, label: '5.5'},
-            {value: 6, label: '6'},
-            {value: 6.5, label: '6.5'},
+        const gender = [
+            {
+                value: 'M',
+                label: '男',
+            },
+            {
+                value: 'F',
+                label: '女',
+            },
         ];
         return (
             <div className={classes.root}>
@@ -812,11 +806,14 @@ class LessonInfo extends React.Component {
                                                   handleAddClose={this.handleAddClose.bind(this)}
                                                   handleFilterOpen={this.handleFilterOpen.bind(this)}
                                                   handleFilterClose={this.handleFilterClose.bind(this)}
-                                                  tableState={tableState}
-                                                  handleTableData={this.handleTableData.bind(this)}
                                                   handleAccept={this.handleAccept.bind(this)}
                                                   handleRefuse={this.handleRefuse.bind(this)}
-                                                  handleDelete={this.handleDelete.bind(this)}/>
+                                                  handleDelete={this.handleDelete.bind(this)}
+                                                  type_anchorEl={this.state.type_anchorEl}
+                                                  handleTypeNormalClose={this.handleTypeNormalClose.bind(this)}
+                                                  handleTypeStudentClose={this.handleTypeStudentClose.bind(this)}
+                                                  handleTypeFacultyClose={this.handleTypeFacultyClose.bind(this)}
+                                                  handleTypeOpen={this.handleTypeOpen.bind(this)}/>
                             <div className={classes.tableWrapper}>
                                 <Table className={classes.table} aria-labelledby="tableTitle">
                                     <EnhancedTableHead
@@ -829,27 +826,28 @@ class LessonInfo extends React.Component {
                                     />
                                     <TableBody>
                                         {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
-                                            const isSelected = this.isSelected(n.course_id);
+                                            const isSelected = this.isSelected(n.username);
                                             return (
                                                 <TableRow
                                                     hover
-                                                    onClick={event => this.handleSelectClick(event, n.course_id)}
+                                                    onClick={event => this.handleSelectClick(event, n.username)}
                                                     role="checkbox"
                                                     aria-checked={isSelected}
                                                     tabIndex={-1}
-                                                    key={n.course_id}
+                                                    key={n.username}
                                                     selected={isSelected}
                                                 >
                                                     <TableCell padding="checkbox">
                                                         <Checkbox checked={isSelected}/>
                                                     </TableCell>
                                                     <TableCell component="th" scope="row">
-                                                        {n.course_id}
+                                                        {n.username}
                                                     </TableCell>
+                                                    <TableCell>{n.id_number}</TableCell>
                                                     <TableCell>{n.name}</TableCell>
-                                                    <TableCell>{n.credit}</TableCell>
-                                                    <TableCell>{n.classroom}</TableCell>
-                                                    <TableCell>{n.state}</TableCell>
+                                                    <TableCell>{n.gender}</TableCell>
+                                                    <TableCell>{n.email}</TableCell>
+                                                    <TableCell>{n.department}</TableCell>
                                                 </TableRow>
                                             );
                                         })}
@@ -881,126 +879,38 @@ class LessonInfo extends React.Component {
                 </div>
                 <div>
                     <Dialog
-                        open={this.state.add}
-                        onClose={this.handleAddClose}
-                        aria-labelledby="form-dialog-title"
-                    >
-                        <DialogTitle id="form-dialog-title">添加课程</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                请输入课程信息（教师信息输入后通过搜索教师添加）
-                            </DialogContentText>
-                            <TextField
-                                autoFocus
-                                fullWidth
-                                label="课程号"
-                                onChange={this.handleChange('course_id')}
-                                margin="normal"
-                                error={this.state.id_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="课程名"
-                                onChange={this.handleChange('course_name')}
-                                margin="normal"
-                                error={this.state.name_error}
-                            />
-                            <TextField
-                                fullWidth
-                                select='true'
-                                label="课程类型"
-                                margin="normal"
-                                value={this.state.course_type}
-                                onChange={this.handleChange('course_type')}
-                            >
-                                {ranges.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField
-                                fullWidth
-                                label="学分"
-                                onChange={this.handleChange('course_credit')}
-                                margin="normal"
-                                error={this.state.credit_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="容量"
-                                onChange={this.handleChange('course_cap')}
-                                margin="normal"
-                                error={this.state.cap_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="教室"
-                                onChange={this.handleChange('course_room')}
-                                margin="normal"
-                                error={this.state.room_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="考核方式"
-                                onChange={this.handleChange('course_assessment')}
-                                margin="normal"
-                            />
-                            <TextField
-                                fullWidth
-                                label="教师"
-                                onChange={this.handleChange('course_teacher')}
-                                margin="normal"
-                            />
-                            {this.state.chipData.map(data => {
-                                let avatar = null;
-
-                                return (
-                                    <Chip
-                                        key={data.key}
-                                        avatar={avatar}
-                                        label={data.label}
-                                        onDelete={this.handleChipDelete(data)}
-                                        className={classes.chip}
-                                    />
-                                );
-                            })}
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={(e) => this.handleFacultySearch(e)} color="primary">
-                                添加教师
-                            </Button>
-                            <Button onClick={this.handleAddClose} color="primary">
-                                关闭
-                            </Button>
-                            <Button onClick={(e) => this.handleAddSubmit(e)} color="primary">
-                                提交
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
-                <div>
-                    <Dialog
                         open={this.state.filter}
                         onClose={this.handleFilterClose}
                         aria-labelledby="form-dialog-title"
                     >
-                        <DialogTitle id="form-dialog-title">筛选课程</DialogTitle>
+                        <DialogTitle id="form-dialog-title">筛选用户</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                请输入相关课程信息，默认筛选方式为包含方式
+                                请输入相关用户信息，默认筛选方式为包含方式
                             </DialogContentText>
 
                             <div>
                                 <Checkbox
-                                    checked={this.state.id_filter_state}
-                                    onChange={this.handleCheckChange('id_filter_state')}
+                                    checked={this.state.username_filter_state}
+                                    onChange={this.handleCheckChange('username_filter_state')}
                                 />
                                 <TextField
-                                    label="课程号"
-                                    value={this.state.id_filter}
-                                    onChange={this.handleChange('id_filter')}
-                                    disabled={!this.state.id_filter_state}
+                                    label="用户名"
+                                    value={this.state.username_filter}
+                                    onChange={this.handleChange('username_filter')}
+                                    disabled={!this.state.username_filter_state}
+                                />
+                            </div>
+                            <div>
+                                <Checkbox
+                                    checked={this.state.id_number_filter_state}
+                                    onChange={this.handleCheckChange('id_number_filter_state')}
+                                />
+                                <TextField
+                                    label="身份证号"
+                                    value={this.state.id_number_filter}
+                                    onChange={this.handleChange('id_number_filter')}
+                                    disabled={!this.state.id_number_filter_state}
                                 />
                             </div>
                             <div>
@@ -1009,7 +919,7 @@ class LessonInfo extends React.Component {
                                     onChange={this.handleCheckChange('name_filter_state')}
                                 />
                                 <TextField
-                                    label="课程名"
+                                    label="姓名"
                                     value={this.state.name_filter}
                                     onChange={this.handleChange('name_filter')}
                                     disabled={!this.state.name_filter_state}
@@ -1017,42 +927,20 @@ class LessonInfo extends React.Component {
                             </div>
                             <div>
                                 <Checkbox
-                                    checked={this.state.type_filter_state}
-                                    onChange={this.handleCheckChange('type_filter_state')}
+                                    checked={this.state.gender_filter_state}
+                                    onChange={this.handleCheckChange('gender_filter_state')}
                                 />
                                 <TextField
                                     select
-                                    label="类型"
-                                    value={this.state.type_filter}
-                                    onChange={this.handleChange('type_filter')}
-                                    disabled={!this.state.type_filter_state}
+                                    label="性别"
+                                    value={this.state.gender_filter}
+                                    onChange={this.handleChange('gender_filter')}
+                                    disabled={!this.state.gender_filter_state}
                                     SelectProps={{
                                         native: true,
                                     }}
                                 >
-                                    {ranges.map(option => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.label}
-                                        </option>
-                                    ))}
-                                </TextField>
-                            </div>
-                            <div>
-                                <Checkbox
-                                    checked={this.state.credit_filter_state}
-                                    onChange={this.handleCheckChange('credit_filter_state')}
-                                />
-                                <TextField
-                                    select
-                                    label="学分"
-                                    value={this.state.credit_filter}
-                                    onChange={this.handleChange('credit_filter')}
-                                    disabled={!this.state.credit_filter_state}
-                                    SelectProps={{
-                                        native: true,
-                                    }}
-                                >
-                                    {credit.map(option => (
+                                    {gender.map(option => (
                                         <option key={option.value} value={option.value}>
                                             {option.label}
                                         </option>
@@ -1060,28 +948,29 @@ class LessonInfo extends React.Component {
                                 </TextField>
                             </div>
 
+
                             <div>
                                 <Checkbox
-                                    checked={this.state.classroom_filter_state}
-                                    onChange={this.handleCheckChange('classroom_filter_state')}
+                                    checked={this.state.email_filter_state}
+                                    onChange={this.handleCheckChange('email_filter_state')}
                                 />
                                 <TextField
-                                    label="教室"
-                                    value={this.state.classroom_filter}
-                                    onChange={this.handleChange('classroom_filter')}
-                                    disabled={!this.state.classroom_filter_state}
+                                    label="邮箱"
+                                    value={this.state.email_filter}
+                                    onChange={this.handleChange('email_filter')}
+                                    disabled={!this.state.email_filter_state}
                                 />
                             </div>
                             <div>
                                 <Checkbox
-                                    checked={this.state.faculty_filter_state}
-                                    onChange={this.handleCheckChange('faculty_filter_state')}
+                                    checked={this.state.department_filter_state}
+                                    onChange={this.handleCheckChange('department_filter_state')}
                                 />
                                 <TextField
-                                    label="教师"
-                                    value={this.state.faculty_filter}
-                                    onChange={this.handleChange('faculty_filter')}
-                                    disabled={!this.state.faculty_filter_state}
+                                    label="部门"
+                                    value={this.state.department_filter}
+                                    onChange={this.handleChange('department_filter')}
+                                    disabled={!this.state.department_filter_state}
                                 />
                             </div>
 
@@ -1123,8 +1012,8 @@ class LessonInfo extends React.Component {
 }
 
 
-LessonInfo.propTypes = {
+AccountInfo.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(LessonInfo);
+export default withStyles(styles)(AccountInfo);

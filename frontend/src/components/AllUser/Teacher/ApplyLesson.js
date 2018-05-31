@@ -205,7 +205,7 @@ export default class ApplyLesson extends React.Component {
         if (this.state.disabled === false) {
             this.apply(e);
             this.setState({
-                dialog_text: "课程将被尽快审批！",
+                dialogText: "课程将被尽快审批！",
                 course_id : '',
                 course_name : '',
                 course_credit : '',
@@ -217,7 +217,7 @@ export default class ApplyLesson extends React.Component {
         }
         else{
             this.setState({
-                dialog_text: "请填写所有必需信息!",
+                dialogText: "请填写所有必需信息!",
             });
         }
 

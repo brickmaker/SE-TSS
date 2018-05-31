@@ -70,45 +70,42 @@ class MainMenu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            redirectTo: '',
-            user_type: -1,
-            open: false,
-            dialog_text: '',
+            userName: '',
+            userType: -1,
+            dialogOpen: false,
+            dialogText: '',
         };
     }
 
     handleClickOpen = () => {
-        this.setState({dialog_text: "当前的密码为默认密码（身份证后6位），请及时修改密码确保账户安全", open: true});
+        this.setState({dialogText: "当前的密码为默认密码（身份证后6位），请及时修改密码确保账户安全", dialogOpen: true});
     };
 
-
     handleClose = () => {
-        this.setState({open: false});
+        this.setState({dialogOpen: false});
     };
 
     componentDidMount() {
-        this.setState({user_type: localStorage.getItem('type')});
+        this.setState({userType: localStorage.getItem('type')});
         this.setState({userName: localStorage.getItem('userName')});
-        this.handleClickOpen();
+        if (this.props.status === 200) {
+            this.handleClickOpen();
+        }
     }
 
 
     dispatchNewRoute(e) {
         e.preventDefault();
-        var route = '';
-        if (this.state.user_type === '4')
+        let route = '';
+        if (this.state.userType === '4')
             route = '/admin';
-        else if (this.state.user_type === '1')
+        else if (this.state.userType === '1')
             route = '/student';
-        else if (this.state.user_type === '2')
+        else if (this.state.userType === '2')
             route = '/teacher';
-        else if (this.state.user_type === '3')
+        else if (this.state.userType === '3')
             route = '/staff';
         browserHistory.push(route);
-        this.setState({
-            redirectTo: route,
-        });
     }
 
     logout(e) {
@@ -117,14 +114,14 @@ class MainMenu extends React.Component {
     }
 
     render() {
-        const {classes} = this.props;
+        const {classes, theme} = this.props;
         return (
             <div>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
 
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton color="inherit" aria-label="Menu">
+                        <IconButton color="inherit">
                             <MenuIcon/>
                         </IconButton>
                         <Typography variant="title" color="inherit" className={classes.Typography}>
@@ -138,7 +135,7 @@ class MainMenu extends React.Component {
                     <Card className={classes.SubCard}>
                         <CardActions>
                             <Button variant='flat' className={classes.Button}
-                                onClick={(e) => this.dispatchNewRoute(e)}>基础信息系统</Button>
+                                    onClick={(e) => this.dispatchNewRoute(e)}>基础信息系统</Button>
                         </CardActions>
                     </Card>
                     <Card className={classes.SubCard}>
@@ -168,15 +165,13 @@ class MainMenu extends React.Component {
                     </Card>
                 </Card>
                 <Dialog
-                    open={this.state.open}
+                    open={this.state.dialogOpen}
                     onClose={this.handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"安全提示"}</DialogTitle>
+                    <DialogTitle>{"安全提示"}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            {this.state.dialog_text}
+                        <DialogContentText>
+                            {this.state.dialogText}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

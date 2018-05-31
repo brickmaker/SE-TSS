@@ -12,6 +12,9 @@ import {
     FormControl,
     NativeSelect,
     Paper,
+    Typography,
+    Card,
+    CardContent,
 } from '@material-ui/core';
 
 function mapStateToProps(state) {
@@ -44,7 +47,14 @@ const styles = theme => ({
     },
     Button: {
         marginTop: 30,
-    }
+    },
+    card: {
+        // minWidth: 275,
+        'background-color': '#3f51b5',
+    },
+    title: {
+        fontSize: 15,
+    },
 });
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -52,16 +62,12 @@ class LoginView extends React.Component {
 
     constructor(props) {
         super(props);
-        const redirectRoute = '/login';
         this.state = {
-            dialog_text: '',
-            open: false,
             username: '',
             password: '',
             user_type: 'Student',
             username_error_text: null,
             password_error_text: null,
-            redirectTo: redirectRoute,
             disabled: true,
         };
     }
@@ -134,9 +140,13 @@ class LoginView extends React.Component {
                             <h2>用户登录</h2>
                             {
                                 this.props.statusText &&
-                                <div className="alert alert-info">
-                                    {this.props.statusText}
-                                </div>
+                                <Card className={classes.card}>
+                                    <CardContent>
+                                        <Typography className={classes.title} color="textSecondary">
+                                            {this.props.statusText}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
                             }
                             <div>
                                 <TextField
