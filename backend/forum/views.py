@@ -18,8 +18,8 @@ def index(request):
 class subscriptions(APIView):
     def get(self, request, format=None):
         uid = request.GET.get('uid', None)
-        token = request.GET.get('token', None)
-        if None in (uid,token):
+        #token = request.GET.get('token', None)
+        if None in (uid,):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
@@ -105,14 +105,14 @@ class course(APIView):
         res['course'] = course.name
         res['subForums'] = []
         for sub in models.Teacher.objects.filter(course=course):
-            item = {'id': sub.id, 'name': sub.name, 'pic': 'TODO'}
+            item = {'id': str(sub.id), 'name': sub.name, 'pic': 'https://api.adorable.io/avatars/144/userpic.png'}
             sub_post_set = models.Thread.objects.filter(section=sub.section).order_by('-date')
             item['postNum'] = sub_post_set.count()
             item['lastUpdate'] = sub_post_set.first().date if item['postNum'] != 0 else "1970-01-01T00:00:00+00:00"
             if item['postNum'] <= max_new_post:
-                item['newPosts'] = [{'title': x.title, 'postId': x.id} for x in sub_post_set]
+                item['newPosts'] = [{'title': x.title, 'postId': str(x.id)} for x in sub_post_set]
             else:
-                item['newPosts'] = [{'title': x.title, 'postId': x.id} for x in sub_post_set[:max_new_post]]
+                item['newPosts'] = [{'title': x.title, 'postId': str(x.id)} for x in sub_post_set[:max_new_post]]
 
             res['subForums'].append(item)
 
@@ -121,13 +121,74 @@ class course(APIView):
 
         return Response(res, status=status.HTTP_200_OK)
 
+class course_posts(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        if None in (collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
+        try:
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+        res = {}
+        res['data'] = []
+        for post in models.Thread.objects.filter(section_id=course.section_id).order_by('-date'):
+            poster = models.User.objects.get(pk=post.poster_id)
+            reply_set = models.Reply.objects.filter(post_id=post.id).order_by('-date')
+            reply_num = reply_set.count()
+            if reply_num > 0:
+                last_reply_time = reply_set.first().date
+            else:
+                last_reply_time = post.date
+            item = {"pic":"https://api.adorable.io/avatars/144/userpic.png",
+                    "name":poster.name,
+                    "postId":str(post.id),
+                    "title":post.title,
+                    "postTime":post.date,
+                    "lastReplyTime":last_reply_time,
+                    "replyNum":reply_num}
+            res['data'].append(item)
+        return Response(res, status=status.HTTP_200_OK)
+ 
+class course_newpost(APIView):        
+    def post(self,request,format=None):
+        try:
+            raw = json.loads(request.body.decode("utf-8"))
+        except Exception as e:
+            #print(e)
+            return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            uid = raw['uid']
+            collegeId = int(raw['collegeId'])
+            courseId = int(raw['courseId'])
+            title = raw['title']
+            content = raw['content']
+        except Exception as e:
+            #print(e)
+            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            course = models.Course.objects.get(pk=courseId)
+        except Exception as e:
+            return Response({'error': "Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+        try:
+            models.Thread.objects.create(poster_id=uid,title=title,content=content,section_id=course.section_id)
+        except:
+            return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = {'error':None}
+        return Response(res, status=status.HTTP_200_OK)
+        
 class teacher(APIView):
     def get(self, request, format=None):
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
-        if None in (colledgeid,courseid,teacherid):
+        if None in (collegeid,courseid,teacherid):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
@@ -142,7 +203,202 @@ class teacher(APIView):
         res['pageNum'] = post_num // post_per_page + 1
         return Response(res, status=status.HTTP_200_OK)
 
+        
+      
+class teacher_posts(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid', None)
+        if None in (collegeid,courseid,teacherid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+        res = {}
+        res['data'] = []
+        for post in models.Thread.objects.filter(section=teacher.section).order_by('-date'):
+            poster = models.User.objects.get(pk=post.poster_id)
+            reply_set = models.Reply.objects.filter(post_id=post.id).order_by('-date')
+            reply_num = reply_set.count()
+            if reply_num > 0:
+                last_reply_time = reply_set.first().date
+            else:
+                last_reply_time = post.date
+            item = {"pic":"https://api.adorable.io/avatars/144/userpic.png",
+                    "name":poster.name,
+                    "postId":str(post.id),
+                    "title":post.title,
+                    "postTime":post.date,
+                    "lastReplyTime":last_reply_time,
+                    "replyNum":reply_num}
+            res['data'].append(item)
+        return Response(res, status=status.HTTP_200_OK)
+        
+        
+   
+class teacher_newpost(APIView):        
+    def post(self,request,format=None):
+        try:
+            raw = json.loads(request.body.decode("utf-8"))
+        except Exception as e:
+            return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            uid = raw['uid']
+            collegeId = int(raw['collegeId'])
+            courseId = int(raw['courseId'])
+            teacherId = int(raw['teacherId'])
+            title = raw['title']
+            content = raw['content']
+        except Exception as e:
+            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherId)
+        except Exception as e:
+            return Response({'error': "Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+        try:
+            models.Thread.objects.create(poster_id=uid,title=title,content=content,section=teacher.section)
+        except:
+            return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = {'error':None}
+        return Response(res, status=status.HTTP_200_OK)
+   
+class post_newreply(APIView):        
+    def post(self,request,format=None):
+        try:
+            raw = json.loads(request.body.decode("utf-8"))
+        except Exception as e:
+            return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            uid = raw['uid']
+            postId = int(raw['postId'])
+            content = raw['content']
+        except Exception as e:
+            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            post = models.Thread.objects.get(pk=postId)
+        except Exception as e:
+            return Response({'error': "Post doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+    
+        try:
+            models.Reply.objects.create(user_id=uid,post_id=postId,content=content)
+        except:
+            return Response({'error':'Fail to reply to the post'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = {'error':None}
+        return Response(res, status=status.HTTP_200_OK)
+        
+class comment(APIView):        
+    def post(self,request,format=None):
+        try:
+            raw = json.loads(request.body.decode("utf-8"))
+        except Exception as e:
+            return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        try:
+            from_id = raw['from']
+            to_id = raw['to']
+            postId = int(raw['postId'])
+            replyId = int(raw['replyId'])
+            content = raw['content']
+        except Exception as e:
+            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+    
+        try:
+            models.Reply_reply.objects.create(from_uid_id=from_id,to_uid_id=to_id,content=content,reply_id_id=replyId)
+        except:
+            return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = {'error':None}
+        return Response(res, status=status.HTTP_200_OK)
+        
+class sectionnames(APIView):
+    def get(self, request, format=None):
+        sectionids = request.GET.getlist('sectionids', None)
+        
+        if None in (sectionids,):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+
+        res = []
+        for sectionid in sectionids:
+            try:
+                section = models.Section.objects.get(pk=sectionid)
+                res.append(section.name)
+            except:
+                return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
+        return Response(res, status=status.HTTP_200_OK)
+   
+class college_list(APIView):
+    def get(self, request, format=None):
+        res = []
+        for colledge in models.College.objects.all():
+            item = {'id':colledge.id,'name':colledge.name}
+            res.append(item)
+        return Response(res, status=status.HTTP_200_OK)
+      
+class course_list(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        
+        if None in (collegeid,):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = []
+        for course in models.Course.objects.filter(college_id=collegeid):
+            item = {'id':course.id,'name':course.name}
+            res.append(item)
+        return Response(res, status=status.HTTP_200_OK)
+        
+class teacher_list(APIView):
+    def get(self, request, format=None):
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid',None)
+        
+        if None in (collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = []
+        for teacher in models.Teacher.objects.filter(college_id=collegeid,course_id = courseid):
+            item = {'id':teacher.id,'name':teacher.name}
+            res.append(item)
+        return Response(res, status=status.HTTP_200_OK)
+   
+class newmsgs(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        pagesize = int(request.GET.get('pagesize',None))
+        
+        if None in (uid,pagesize):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        msg_set = models.Message.objects.filter(receiver_id=uid).order_by('-date')
+        msg_num = msg_set.count()
+        if msg_num > pagesize:
+            msg_set = msg_set[:pagesize]
+
+        res = []
+        for msg in msg_set:
+            item = {}
+            sender = models.User.objects.get(pk=msg.sender_id)
+            item['from'] = {'id':sender.id,'username':sender.name,'avatar':"https://api.adorable.io/avatars/144/userpic.png"}
+            item['content'] = msg.content
+            res.append(item)
+        
+        return Response(res, status=status.HTTP_200_OK)
+   
+   
+   
+   
+   
 class thread(APIView):
     def get(self, request, format=None):
         thread_id = request.GET.get('id', None)
@@ -336,8 +592,8 @@ class announcements(APIView):
         
     def user_wise(self, request, format=None):
         uid = request.GET.get('uid', None)
-        pagenum = request.GET.get('pagenum', None)
-        pagesize = request.GET.get('pagesize', None)
+        pagenum = int(request.GET.get('pagenum', None))
+        pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
@@ -349,10 +605,12 @@ class announcements(APIView):
         res = {}
         res['anncNum'] = anncNum
         res['anncs'] = []
+        ann_num = announcements.count()
+        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
-            author = models.User.objects.get(uid=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.uid}
+            author = models.User.objects.get(pk=ann.user_id)
+            item['author'] = {'username':author.name,'uid':author.id}
             section = models.Section.objects.get(pk=ann.section_id)
             if section.type == models.Section.TEACHER:
                 teacher = models.Teacher.objects.get(section=section)
@@ -370,13 +628,13 @@ class announcements(APIView):
         return Response(res, status=status.HTTP_200_OK)
         
     def section_wise(self, request, format=None):        
-        colledgeid = request.GET.get('colledgeid', None)
+        collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
-        pagenum = request.GET.get('pagenum', None)
-        pagesize = request.GET.get('pagesize', None)
+        pagenum = int(request.GET.get('pagenum', None))
+        pagesize = int(request.GET.get('pagesize', None))
         
-        if None in (colledgeid,courseid,teacherid,pagenum,pagesize):
+        if None in (collegeid,courseid,teacherid,pagenum,pagesize):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
         
         try:
@@ -389,10 +647,11 @@ class announcements(APIView):
         res = {}
         res['anncNum'] = anncNum
         res['anncs'] = []
+        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
-            author = models.User.objects.get(uid=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.uid}
+            author = models.User.objects.get(pk=ann.user_id)
+            item['author'] = {'username':author.name,'uid':author.id}
             section = models.Section.objects.get(pk=ann.section_id)
             if section.type == models.Section.TEACHER:
                 teacher = models.Teacher.objects.get(section=section)

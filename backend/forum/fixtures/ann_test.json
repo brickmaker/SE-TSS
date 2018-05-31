@@ -3,7 +3,7 @@
         "model":"forum.Announcement",
         "pk":1,
         "fields":{
-            "uid":"3",
+            "user":"3",
             "title":"准备写需求报告",
             "content":"下周准备写需求报告",
             "section":3,
@@ -14,7 +14,7 @@
         "model":"forum.Announcement",
         "pk":2,
         "fields":{
-            "uid":"3",
+            "user":"3",
             "title":"准备写设计报告",
             "content":"下周准备写设计报告",
             "section":3,
@@ -25,7 +25,7 @@
         "model":"forum.Announcement",
         "pk":3,
         "fields":{
-            "uid":"3",
+            "user":"3",
             "title":"准备写测试报告",
             "content":"下周准备写测试报告",
             "section":3,
@@ -36,7 +36,7 @@
         "model":"forum.Announcement",
         "pk":4,
         "fields":{
-            "uid":"3",
+            "user":"3",
             "title":"软工课程安排",
             "content":"这是软工课程安排",
             "section":2,
@@ -47,7 +47,7 @@
         "model":"forum.Announcement",
         "pk":5,
         "fields":{
-            "uid":"3",
+            "user":"3",
             "title":"不是软工课程安排",
             "content":"这不是软工课程安排",
             "section":2,

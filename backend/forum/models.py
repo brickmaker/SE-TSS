@@ -59,11 +59,11 @@ class Teacher(models.Model):
         
         
 class Reply(models.Model):
-    uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
+    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
     content = models.TextField()
-    post_id = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
+    post = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
     #reply_to = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, related_name='reply')
-    create_time = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True)
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
@@ -73,7 +73,7 @@ class Reply_reply(models.Model):
     from_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_from')
     to_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_to')
     content = models.TextField()
-    reply_id = models.ForeignKey(Reply,on_delete=models.CASCADE,related_name='replyreply')
+    reply_id = models.ForeignKey('Reply',on_delete=models.CASCADE,related_name='replyreply')
     create_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -91,7 +91,7 @@ class Announcement(models.Model):
         return self.title
 
 class User(models.Model):
-    uid = models.CharField(max_length=20,primary_key=True)
+    id = models.CharField(max_length=20,primary_key=True)
     name = models.CharField(max_length=50)
     signature = models.TextField()
     avatar = models.ImageField()
@@ -135,8 +135,8 @@ class Attachment(models.Model):
 
     
 class Message(models.Model):
-    sender_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
-    receiver_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
+    sender = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
+    receiver = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
     content = models.TextField()
     date = models.DateTimeField(auto_now_add=True)
     

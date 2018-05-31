@@ -19,8 +19,8 @@ class BasicTests(APITestCase):
 class AnnoucementTests(APITestCase):
         
     def setUp(self):
-        models.User.objects.create(uid='1',name='Aaron')
-        models.User.objects.create(uid='2',name='Bob')
+        models.User.objects.create(id='1',name='Aaron')
+        models.User.objects.create(id='2',name='Bob')
         models.Section.objects.create(name='计算机科学与技术',type='CE')
         models.Section.objects.create(name='软件工程',type='CL')
         models.Section.objects.create(name='王章野',type='TL')
@@ -65,6 +65,99 @@ class AnnoucementTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
         response_data = json.loads(response.content.decode("utf-8"))
-        self.assertEqual(response_data,data)        
+        self.assertEqual(response_data,data) 
+
+class CourseNewPostTests(APITestCase):
+        
+    def setUp(self):
+        models.User.objects.create(id='1',name='Aaron')
+        models.User.objects.create(id='2',name='Bob')
+        models.Section.objects.create(name='计算机科学与技术',type='CE')
+        models.Section.objects.create(name='软件工程',type='CL')
+        models.Section.objects.create(name='王章野',type='TL')
+        models.College.objects.create(name='计算机科学与技术',code='A',section_id=1,)
+        models.Course.objects.create(name='软件工程',code='B',section_id=2,college_id=1)
+        models.Teacher.objects.create(name='王章野',section_id=3,course_id=1,college_id=1)
+        
+       
+    def test_post_method(self):        
+        #Basic Case
+        url = reverse('course_newpost')
+        data = {'uid':'1','collegeId':'1','courseId':'1','content':'这是一个新帖子',
+                'title':'这是帖子的标题'}
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode("utf-8"))
+        self.assertEqual(response_data['error'],None)       
+
+class TeacherNewPostTests(APITestCase):
+        
+    def setUp(self):
+        models.User.objects.create(id='1',name='Aaron')
+        models.User.objects.create(id='2',name='Bob')
+        models.Section.objects.create(name='计算机科学与技术',type='CE')
+        models.Section.objects.create(name='软件工程',type='CL')
+        models.Section.objects.create(name='王章野',type='TL')
+        models.College.objects.create(name='计算机科学与技术',code='A',section_id=1,)
+        models.Course.objects.create(name='软件工程',code='B',section_id=2,college_id=1)
+        models.Teacher.objects.create(name='王章野',section_id=3,course_id=1,college_id=1)
+        
+       
+    def test_post_method(self):        
+        #Basic Case
+        url = reverse('teacher_newpost')
+        data = {'uid':'1','collegeId':'1','courseId':'1','teacherId':'1','content':'这是一个新帖子',
+                'title':'这是帖子的标题'}
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode("utf-8"))
+        self.assertEqual(response_data['error'],None)           
+        
+class NewReplyTests(APITestCase):
+        
+    def setUp(self):
+        models.User.objects.create(id='1',name='Aaron')
+        models.User.objects.create(id='2',name='Bob')
+        models.Section.objects.create(name='计算机科学与技术',type='CE')
+        models.Section.objects.create(name='软件工程',type='CL')
+        models.Section.objects.create(name='王章野',type='TL')
+        models.College.objects.create(name='计算机科学与技术',code='A',section_id=1,)
+        models.Course.objects.create(name='软件工程',code='B',section_id=2,college_id=1)
+        models.Teacher.objects.create(name='王章野',section_id=3,course_id=1,college_id=1)
+        models.Thread.objects.create(title="帖子一号",content="啥都没有",poster_id=1,section_id=3)
+        
+       
+    def test_post_method(self):        
+        #Basic Case
+        url = reverse('post_newreply')
+        data = {'uid':'1','postId':'1','content':'lzsb'}
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode("utf-8"))
+        self.assertEqual(response_data['error'],None)
+
+class CommentTests(APITestCase):
+        
+    def setUp(self):
+        models.User.objects.create(id='1',name='Aaron')
+        models.User.objects.create(id='2',name='Bob')
+        models.Section.objects.create(name='计算机科学与技术',type='CE')
+        models.Section.objects.create(name='软件工程',type='CL')
+        models.Section.objects.create(name='王章野',type='TL')
+        models.College.objects.create(name='计算机科学与技术',code='A',section_id=1,)
+        models.Course.objects.create(name='软件工程',code='B',section_id=2,college_id=1)
+        models.Teacher.objects.create(name='王章野',section_id=3,course_id=1,college_id=1)
+        models.Thread.objects.create(title="帖子一号",content="啥都没有",poster_id=1,section_id=3)
+        models.Reply.objects.create(user_id=1,content='SF',post_id=1)
+        
+       
+    def test_post_method(self):        
+        #Basic Case
+        url = reverse('comment')
+        data = {'from':'Aaron','to':'Bob','postId':'1','replyId':'1','content':'lzsb'}
+        response = self.client.post(url,data,format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        response_data = json.loads(response.content.decode("utf-8"))
+        self.assertEqual(response_data['error'],None)          
         
     
