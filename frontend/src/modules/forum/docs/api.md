@@ -289,6 +289,41 @@ teacherid: String
 
 参见`teacher_unsubscribe`
 
+
+#### 教师板块发帖
+
+##### 请求
+
+```
+POST /api/forum/teacher_newpost
+```
+
+##### 内容
+
+```
+{
+    uid: String,
+    collegeId: String,
+    courseId: String,
+    teacherId: String,
+    title: String,
+    content: String
+}
+```
+
+##### response
+
+```
+成功：
+{
+    error: null
+}
+失败：
+{
+    error: "Error info"
+}
+```
+
 #### 帖子信息
 
 ##### 请求
@@ -328,6 +363,71 @@ success: 参照`replies`
 
 error: ..
 ****
+
+#### 回帖
+
+##### 请求
+
+```
+POST /api/forum/post_newreply
+```
+
+##### 内容
+
+```
+{
+    uid: String,
+    postId: String,
+    content: String
+}
+```
+
+##### response
+
+```
+成功：
+{
+    error: null
+}
+失败：
+{
+    error: "Error info"
+}
+```
+
+#### 评论 
+
+##### 请求
+
+```
+POST /api/forum/comment
+```
+
+##### 内容
+
+```
+{
+    from: String,
+    to: String,
+    postId: String,
+    replyId: String,
+    content: String
+}
+```
+
+##### response
+
+```
+成功：
+{
+    error: null
+}
+失败：
+{
+    error: "Error info"
+}
+```
+
 ### 版块信息
 #### 获取版块名字
 ##### 请求
