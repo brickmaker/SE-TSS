@@ -6,7 +6,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models
 from django.db.models import Q
+<<<<<<< Updated upstream
 from haystack.query import SearchQuerySet
+=======
+from django.utils.dateparse import parse_datetime
+from django.db.models import Max
+>>>>>>> Stashed changes
 
 post_per_page = 20
 max_new_post = 5
@@ -692,7 +697,7 @@ class messages(APIView):
             return Response({'error':'Parameter errors'},status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            res = models.Message.objects.create(sender_id=User.objects.get(pk=from_id),receiver_id=User.objects.get(pk=to_id),content=content)
+            res = models.Message.objects.create(sender_id=models.User.objects.get(pk=from_id),receiver_id=models.User.objects.get(pk=to_id),content=content)
         except Exception as e:
             print(e)
             return Response({'errors':'send message fail'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -816,10 +821,13 @@ class userstates(APIView):
             
         res = []
         
-        for user in models.User.objects.filter(name=username):
+        for user in models.User.objects.filter(name__contains=username):
             item = {"uid":user.id,"name":user.name}
             reply_num = models.Reply.objects.filter(user=user).count()
             item['replyNum'] = reply_num
+            post_num = models.Thread.objects.filter(poster=user).count()
+            item['postNum'] = post_num
+            item['type'] = "学生" #todo
             res.append(item)
         return Response(res, status=status.HTTP_200_OK)
         
@@ -887,3 +895,96 @@ class search(APIView):
             res['results'].append(item)
             
         return Response(res, status=status.HTTP_200_OK)
+
+
+class hotpost(APIView):
+    def get(self,request,format=None):
+        collegeid = request.GET.get('collegeid',None)
+        courseid = request.GET.get('courseid',None)
+        teacherid = request.GET.get('teacherid',None)
+        #time = request.GET.get('time',None)
+        #timeType = request.GET.get('timeType',None)
+        time_start = request.GET.get('start_time',None)
+        time_end = request.GET.get('end_time',None)
+        if time_start is None:
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        begin = parse_datetime(time_start.replace(' ','+'))
+        end = parse_datetime(time_end.replace(' ','+'))
+        # print(begin,end)
+        ss = None
+        if teacherid is not None:
+            try:
+                ss = models.Teacher.objects.get(pk=teacherid)
+            except:
+                return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
+        elif courseid is not None:
+            try:
+                ss = models.Course.objects.get(pk=courseid)
+            except:
+                return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
+        elif collegeid is not None:
+            try:
+                ss = models.College.objects.get(pk=collegeid)
+            except:
+                return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
+
+        section = ss.section
+        print(section.id)
+        posts = models.Thread.objects.filter(section=section,date__range=(begin,end))
+        print(len(posts))
+        filter_posts = sorted(posts, key = lambda x:x.reply.count(),reverse=True)[:100]
+        res = []
+        for p in filter_posts:
+            t = {}
+            t['title'] = p.title
+            t['author'] = {
+                'username':p.poster.name,
+                'uid':p.poster.id
+            }
+            t['time'] = p.date
+            t['lastReplyTime'] = p.reply.aggregate(Max('date'))['date__max']
+            t['replyNum'] = p.reply.count()
+            t['postid'] = p.id
+            if p.section.type==models.Section.TEACHER:
+                teacher = models.Teacher.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id': teacher.college.id,
+                        'name': teacher.college.name
+                    },
+                    'course':{
+                        'id': teacher.course.id,
+                        'name': teacher.course.name
+                    },
+                    'teacher':{
+                        'id': teacher.id,
+                        'name': teacher.name
+                    }
+                }
+            elif p.section.type==models.Section.COURSE:
+                course = models.Course.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id':course.college.id,
+                        'name':course.college.name
+                    },
+                    'course':{
+                        'id':course.id,
+                        'name':course.name
+                    }
+                }
+            elif p.section.type==models.Section.COLLEGE:
+                college = models.College.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id':course.id,
+                        'name':course.name
+                    }
+                }
+            else:
+                pass
+            res.append(t)
+        return Response(res, status=status.HTTP_200_OK)
+

@@ -134,7 +134,47 @@
     "pk":14,
     "fields":{
       "user":2,
-      "post":6,
+      "post":15,
+      "content":"这是回复14",
+      "date":"9018-01-02T00:00:00+00:00"
+    }
+  },
+  {
+    "model": "forum.Reply",
+    "pk": 15,
+    "fields": {
+      "user": 2,
+      "post": 15,
+      "content": "这是回复14",
+      "date": "9018-01-02T00:00:00+00:00"
+    }
+  },
+  {
+    "model":"forum.Reply",
+    "pk":16,
+    "fields":{
+      "user":2,
+      "post":16,
+      "content":"这是回复14",
+      "date":"9018-01-02T00:00:00+00:00"
+    }
+  },
+  {
+    "model":"forum.Reply",
+    "pk":17,
+    "fields":{
+      "user":2,
+      "post":16,
+      "content":"这是回复14",
+      "date":"9018-01-02T00:00:00+00:00"
+    }
+  },
+  {
+    "model":"forum.Reply",
+    "pk":18,
+    "fields":{
+      "user":2,
+      "post":16,
       "content":"这是回复14",
       "date":"9018-01-02T00:00:00+00:00"
     }

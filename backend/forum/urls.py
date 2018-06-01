@@ -33,4 +33,5 @@ urlpatterns = [
     path('info',views.info.as_view(),name='info'),
     path('userstates',views.userstates.as_view(),name='userstates'),
     path('search',views.search.as_view(),name='search'),
+    path('hotposts',views.hotpost.as_view(),name='hotposts'),
 ]
