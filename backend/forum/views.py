@@ -6,12 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models
 from django.db.models import Q
-<<<<<<< Updated upstream
 from haystack.query import SearchQuerySet
-=======
 from django.utils.dateparse import parse_datetime
 from django.db.models import Max
->>>>>>> Stashed changes
 
 post_per_page = 20
 max_new_post = 5
@@ -987,4 +984,3 @@ class hotpost(APIView):
                 pass
             res.append(t)
         return Response(res, status=status.HTTP_200_OK)
-
