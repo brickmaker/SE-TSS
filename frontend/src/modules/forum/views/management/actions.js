@@ -64,10 +64,10 @@ export const HOTPOSTS_REQUEST = 'hotposts_request';
 export const HOTPOSTS_SUCCESS = 'hotposts_success';
 export const HOTPOSTS_FAILURE = 'hotposts_failure';
 
-export const getHotPosts = (collegeid, courseid, teacherid, time, timeType) => {
+export const getHotPosts = (collegeid, courseid, teacherid, startTime, endTime) => {
     return (dispatch, getState) => {
         const { isFetchingHotPosts } = getState();
-        console.log("gethotposts", timeType, time.format(),time);
+        console.log("gethotposts", startTime.format(), endTime.format());
         if (isFetchingHotPosts)
             return;
         dispatch({
@@ -78,8 +78,8 @@ export const getHotPosts = (collegeid, courseid, teacherid, time, timeType) => {
                 collegeid,
                 courseid,
                 teacherid,
-                time: time.format(),
-                timetype:timeType,
+                start_time: startTime.format(),
+                end_time: endTime.format(),
             }
         })
             .then((response) => {
@@ -175,18 +175,18 @@ export const getTeachers = (collegeid, courseid) => {
     }
 }
 
-export const SET_TIMETYPE = 'set_timetype';
-export const setTimeType = (timeType) => {
-    return ({
-        type: SET_TIMETYPE,
-        timeType: timeType,
-    })
-}
 
-export const SET_TIME = 'set_time';
-export const setTime = (time) => {
+export const SET_STARTTIME = 'set_starttime';
+export const SET_ENDTIME = 'set_endtime';
+export const setStartTime = (startTime) => {
     return ({
-        type: SET_TIME,
-        time: time,
-    })
+        type: SET_STARTTIME,
+        startTime: startTime    ,
+    });
+}
+export const setEndTime = (endTime) => {
+    return ({
+        type: SET_ENDTIME,
+        endTime: endTime,
+    });
 }

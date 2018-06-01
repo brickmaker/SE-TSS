@@ -151,8 +151,8 @@ class UserStatusPanel extends Component {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>用户名</TableCell>
+                                        <TableCell numeric>回复数</TableCell>
                                         <TableCell numeric>发帖数</TableCell>
-                                        <TableCell>最后登录时间</TableCell>
                                         <TableCell>用户类别</TableCell>
                                     </TableRow>
                                 </TableHead>
@@ -162,7 +162,7 @@ class UserStatusPanel extends Component {
                                             <TableRow>
                                                 <TableCell>{userState.username}</TableCell>
                                                 <TableCell numeric>{userState.replyNum}</TableCell>
-                                                <TableCell>{userState.lastLoginTime}</TableCell>
+                                                <TableCell numeric>{userState.postNum}</TableCell>
                                                 <TableCell>{userState.type}</TableCell>
                                             </TableRow>
                                         )

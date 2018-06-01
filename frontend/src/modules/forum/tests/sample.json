@@ -1330,6 +1330,26 @@
       "name": "王章野"
     }
   ],
+  "course_list": [
+    {
+      "id": 123,
+      "name": "软件工程"
+    },
+    {
+      "id": 123,
+      "name": "编译原理"
+    }
+  ],
+  "college_list": [
+    {
+      "id": 123,
+      "name": "计算机科学与技术学院"
+    },
+    {
+      "id": 456,
+      "name": "xx学院"
+    }
+  ],
   "msgEntries": [
     {
       "id": 1,
@@ -1473,7 +1493,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1498,7 +1518,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1523,7 +1543,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1548,7 +1568,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1573,7 +1593,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1598,7 +1618,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1623,7 +1643,7 @@
             "username": "王章野",
             "uid": "uid"
           },
-          "time": "2018-04-30 13:30",
+          "time": "2012-04-24T18:25:43.511Z",
           "replyNum": 10,
           "postid": "postid",
           "relatedContent": "相关内容",
@@ -1664,7 +1684,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
           "path": {
@@ -1682,7 +1702,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
           "path": {
@@ -1700,7 +1720,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
           "path": {
@@ -1718,7 +1738,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
           "path": {
@@ -1736,7 +1756,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
           "path": {
@@ -1754,7 +1774,7 @@
             }
           },
           "postNum": 1000,
-          "lastReplyTime": "2018/05/15 12:00"
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         }
       ]
     }
@@ -1782,7 +1802,7 @@
           "username": "王章野"
         },
         "content": "content",
-        "time": "yyyy-MM-dd hh:mm"
+        "time": "2012-04-24T18:25:43.511Z"
       }
     ]
   },
@@ -1793,8 +1813,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1818,8 +1838,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1843,8 +1863,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1868,8 +1888,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1893,8 +1913,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1918,8 +1938,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1943,8 +1963,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1968,8 +1988,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -1993,8 +2013,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2018,8 +2038,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2043,8 +2063,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2068,8 +2088,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2093,8 +2113,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2118,8 +2138,8 @@
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018/05/11 12:00",
-      "lastReplyTime": "2018/05/15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {
@@ -2143,56 +2163,56 @@
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018/05/14",
+      "postNum": 2,
       "type": "学生"
     }
   ],

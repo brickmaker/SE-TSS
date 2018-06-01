@@ -1,4 +1,4 @@
-import { FORUMINFO_REQUEST, FORUMINFO_SUCCESS, FORUMINFO_FAILURE, HOTPOSTS_REQUEST, HOTPOSTS_SUCCESS, HOTPOSTS_FAILURE, USERSTATES_REQUEST, USERSTATES_FAILURE, USERSTATES_SUCCESS, COLLEGES_SUCCESS, COLLEGES_FAILURE, COURSES_SUCCESS, COURSES_FAILURE, TEACHERLIST_SUCCESS, TEACHERLIST_FAILURE, SET_TIMETYPE, SET_TIME } from "./actions";
+import { FORUMINFO_REQUEST, FORUMINFO_SUCCESS, FORUMINFO_FAILURE, HOTPOSTS_REQUEST, HOTPOSTS_SUCCESS, HOTPOSTS_FAILURE, USERSTATES_REQUEST, USERSTATES_FAILURE, USERSTATES_SUCCESS, COLLEGES_SUCCESS, COLLEGES_FAILURE, COURSES_SUCCESS, COURSES_FAILURE, TEACHERLIST_SUCCESS, TEACHERLIST_FAILURE, SET_STARTTIME, SET_ENDTIME } from "./actions";
 import moment from 'moment';
 
 
@@ -8,8 +8,8 @@ const initialState = {
     collegeItems: undefined,
     courseItems: undefined,
     teacherItems: undefined,
-    timeType: 'month',
-    time: moment().locale('zh-cn').utcOffset(8),
+    startTime: moment().locale('zh-cn').utcOffset(8),
+    endTime: moment().locale('zh-cn').utcOffset(8),
     userStatesPageSize: 10,
     userStates: undefined,
     isFetchingUserStates: false,
@@ -94,13 +94,13 @@ export function managementReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 teacherItems: undefined,
             }));
-        case SET_TIMETYPE:
+        case SET_STARTTIME:
             return (Object.assign({}, state, {
-                timeType: action.timeType,
+                startTime: action.startTime,
             }));
-        case SET_TIME:
+        case SET_ENDTIME:
             return (Object.assign({}, state, {
-                time: action.time,
+                endTime: action.endTime,
             }));
         default: return state;
     };

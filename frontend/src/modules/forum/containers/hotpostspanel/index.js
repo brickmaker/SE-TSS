@@ -11,10 +11,11 @@ import Link from 'react-router-dom/Link';
 import { PageNums } from '../../components/util/PageNums';
 import { getColleges, getCourses, getTeachers, getHotPosts } from '../../views/management/actions';
 
-import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
-import DatePicker from 'rc-calendar/lib/Picker';
-import MonthPicker from '../../components/monthpicker';
-import WeekPicker from '../../components/weekpicker';
+// import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
+// import DatePicker from 'rc-calendar/lib/Picker';
+// import MonthPicker from '../../components/monthpicker';
+// import WeekPicker from '../../components/weekpicker';
+import TimeRangePicker from "../../components/timerangepicker";
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
@@ -23,37 +24,37 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const format = 'YYYY-MM';
-const cn = true;
+// const format = 'YYYY-MM';
+// const cn = true;
 
 const now = moment();
-if (cn) {
-    now.locale('zh-cn').utcOffset(8);
-} else {
-    now.locale('en-gb').utcOffset(0);
-}
+// if (cn) {
+//     now.locale('zh-cn').utcOffset(8);
+// } else {
+//     now.locale('en-gb').utcOffset(0);
+// }
 
-const defaultCalendarValue = now.clone();
-defaultCalendarValue.add(-1, 'month');
+// const defaultCalendarValue = now.clone();
+// defaultCalendarValue.add(-1, 'month');
 
 
-function onStandaloneSelect(value) {
-    console.log('month-calendar select', (value && value.format(format)));
-}
+// function onStandaloneSelect(value) {
+//     console.log('month-calendar select', (value && value.format(format)));
+// }
 
-function onStandaloneChange(value) {
-    console.log('month-calendar change', (value && value.format(format)));
-}
+// function onStandaloneChange(value) {
+//     console.log('month-calendar change', (value && value.format(format)));
+// }
 
-function disabledDate(value) {
-    return value.year() > now.year() ||
-        value.year() === now.year() && value.month() > now.month();
-}
+// function disabledDate(value) {
+//     return value.year() > now.year() ||
+//         value.year() === now.year() && value.month() > now.month();
+// }
 
-function onMonthCellContentRender(value) {
-    // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
-    return `${value.month() + 1}月`;
-}
+// function onMonthCellContentRender(value) {
+//     // console.log('month-calendar onMonthCellContentRender', (value && value.format(format)));
+//     return `${value.month() + 1}月`;
+// }
 
 
 const styles = {
@@ -84,6 +85,7 @@ const styles = {
         // marginTop: 40,
         // marginBottom: 20,
         marginRight: 20,
+        paddingBottom:20,
         paddingTop: 20,
         display: 'flex',
         justifyContent: "space-between",
@@ -122,7 +124,7 @@ class HotPostsPanel extends Component {
 
 
     render() {
-        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, getCourses, getTeachers, getHotPosts, time, timeType} = this.props;
+        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, getCourses, getTeachers, getHotPosts, startTime, endTime} = this.props;
         const { collegeid, courseid, teacherid, year, week, month, pageNum, pageSize } = this.state;
         return (
             <div className={classes.container}>
@@ -151,7 +153,7 @@ class HotPostsPanel extends Component {
                                         </MenuItem>
                                         {collegeItems &&
                                             Object.values(collegeItems).map((college) => {
-                                                return <MenuItem value={college.collegeId}>{college.name}</MenuItem>
+                                                return <MenuItem value={college.id}>{college.name}</MenuItem>
                                             })
                                         }
                                     </Select>
@@ -199,8 +201,9 @@ class HotPostsPanel extends Component {
                                             })}
                                     </Select>
                                 </FormControl>
-                                <MonthPicker defaultValue={now} />
-                                <WeekPicker defaultValue={now} />
+                                {/* <MonthPicker defaultValue={now} /> */}
+                                {/* <WeekPicker defaultValue={now} /> */}
+                                <TimeRangePicker defaultValue={now}/>
                             </form>
                         </div>
                         <div style={{ textJustify: "right" }}>
@@ -209,7 +212,7 @@ class HotPostsPanel extends Component {
                                 className={classes.button}
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    getHotPosts(collegeid, courseid, teacherid, time, timeType);
+                                    getHotPosts(collegeid, courseid, teacherid, startTime, endTime);
                                 }}
                             >统计</Button>
                         </div>
@@ -263,8 +266,8 @@ class HotPostsPanel extends Component {
 
                                             </TableCell>
                                             <TableCell>{hotPost.author.username}</TableCell>
-                                            <TableCell>{hotPost.time}</TableCell>
-                                            <TableCell>{hotPost.lastReplyTime}</TableCell>
+                                            <TableCell>{moment(hotPost.time).format("YYYY-MM-DD")}</TableCell>
+                                            <TableCell>{moment(hotPost.lastReplyTime).format("YYYY-MM-DD")}</TableCell>
                                             <TableCell numeric>{hotPost.replyNum}</TableCell>
                                         </TableRow>)
                                     })}
@@ -320,8 +323,8 @@ const mapStateToProps = (state) => ({
     collegeItems: state.forum.management.collegeItems,
     courseItems: state.forum.management.courseItems,
     teacherItems: state.forum.management.teacherItems,
-    time: state.forum.management.time,
-    timeType: state.forum.management.timeType,
+    startTime: state.forum.management.startTime,
+    endTime: state.forum.management.endTime,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -334,8 +337,8 @@ const mapDispatchToProps = (dispatch) => ({
     getTeachers: (collegeid, courseid) => {
         dispatch(getTeachers(collegeid, courseid));
     },
-    getHotPosts: (collegeid, courseid, teacherid, time, timeType) => {
-        dispatch(getHotPosts(collegeid, courseid, teacherid, time, timeType));
+    getHotPosts: (collegeid, courseid, teacherid, startTime, endTime) => {
+        dispatch(getHotPosts(collegeid, courseid, teacherid, startTime, endTime));
     },
 });
 

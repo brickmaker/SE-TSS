@@ -663,7 +663,7 @@ pagesize: Integer
                     "uid": ,
                 },
                 "content": "content",
-                "time": "yyyy-MM-dd hh:mm"
+                "time": "2012-04-24T18:25:43.511Z"
             },
             ...
         ]
@@ -679,16 +679,18 @@ pagesize: Integer
 POST /api/forum/announcements
 ```
 
-##### 参数
+##### 数据（JSON）
 ```
-uid: Integer
-path: {
-    collegeid: Integer,
-    courseid: Integer,
-    teacherid: Integer,
+{
+    uid: Integer
+    path: {
+        collegeid: Integer,
+        courseid: Integer,
+        teacherid: Integer,
+    }
+    content: String
+    title: String
 }
-content: String
-title: String
 ```
 ****
 ### 搜索
@@ -731,7 +733,7 @@ pagesize: Integer
                 "uid": ,
             },
             "replyNum": 20,
-            "time": "yyyy-MM-dd hh:mm",
+            "time": "2012-04-24T18:25:43.511Z",
             "relatedContent": ,
         },
         ...
@@ -759,7 +761,7 @@ pagesize: Integer
                 }
             },
             "postNum": 1000,
-            "lastReplyTime": "yyyy-MM-dd hh:mm"
+            "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         ...
     ]
@@ -835,8 +837,8 @@ end_time: String ("2012-04-24T18:25:43.511Z")
         "username": "王章野",
         "uid": "uid"
       },
-      "time": "2018-05-11 12:00",
-      "lastReplyTime": "2018-05-15 12:00",
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
       "replyNum": 10,
       "postid": "postid",
       "path": {

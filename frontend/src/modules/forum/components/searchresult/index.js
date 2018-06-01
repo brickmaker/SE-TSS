@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Typography, withStyles, Divider, Grid, Card } from 'material-ui';
 import { Path } from '../util/Path';
 import { Link } from 'react-router-dom'
+import moment from 'moment';
 
 const styles = {
     container: {
@@ -102,7 +103,7 @@ class SearchResult extends Component {
                             作者：{author["username"]}
                         </Typography>
                         <Typography className={classes.item}>
-                            最后回复时间：{time}
+                            发表时间：{moment(time).format("YYYY-MM-DD HH:mm")}
                         </Typography>
                         <Typography className={classes.item}>
                             回复数：{replyNum}
@@ -140,7 +141,7 @@ class SearchResult extends Component {
                         }}
                     >
                         <Typography align="left" className={classes.item}>
-                            最后回复时间 {lastReplyTime}
+                            最后回复时间 {moment(lastReplyTime).format("YYYY-MM-DD HH:mm")}
                         </Typography>
                         <Typography align="left" className={classes.item}>
                             帖子总数 {postNum}

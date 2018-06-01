@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { withStyles, ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails } from 'material-ui';
+import moment from 'moment';
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
@@ -42,7 +43,6 @@ class Annc extends Component {
         const { classes, type } = this.props;
         const { title, path, author, time, content } = this.props.annc;
         // console.log(content);
-        // TODO: have been read
         return (
             <ExpansionPanel className={classes.root}>
                 <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -69,7 +69,7 @@ class Annc extends Component {
                                 {author["username"]}
                             </Typography>
                             <Typography variant="caption" className={classes.item}>
-                                {time}
+                                {moment(time).format("YYYY-MM-DD HH:mm")}
                             </Typography>
                         </div>
                     </div>
