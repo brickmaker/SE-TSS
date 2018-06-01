@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/info/', include('information_management.urls')),
     path('api/online_testing/', include('online_testing.urls')),
     path('api/forum/', include('forum.urls')),
+    path('api/xkxt/', include('xkxt.urls')),
 ]

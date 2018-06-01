@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'information_management.apps.InformationManagementConfig',
     'forum.apps.ForumConfig',
     'online_testing.apps.OnlineTestingConfig',
+    'xkxt.apps.XkxtConfig',
 ]
 
 MIDDLEWARE = [
