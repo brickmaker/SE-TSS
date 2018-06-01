@@ -13,26 +13,38 @@ from rest_framework.viewsets import GenericViewSet, mixins
 
 from authentication.models import Student, Course
 from online_testing.models import Question, Paper, Examination
-from online_testing.serializers import QuestionSerializer, PaperSerializer, ExaminationSerializer
+from online_testing.serializers import QuestionSerializer, QuestionDetailSerializer, \
+    PaperSerializer, ExaminationSerializer, PaperDetailSerializer
 from online_testing.filters import QuestionFilter
-from online_testing.permissions import ExamInfoAccessPermission, ModifyPermission
+from online_testing.permissions import ExamInfoAccessPermission, QuestionPermission, PaperPermission
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
     # not safe: update(object), partial_update(object), delete(object), insert,
     # safe: list, retrieve(object)
     queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+    serializer_class = (QuestionSerializer, QuestionDetailSerializer)
     filter_backends = (DjangoFilterBackend, QuestionFilter)
-    filter_fields = ('course',)
-    permission_classes = (IsAuthenticated, ModifyPermission)
+    filter_fields = ('course', )
+    permission_classes = (IsAuthenticated, QuestionPermission)
+
+    def get_serializer_class(self):
+        assert self.serializer_class is not None, (
+            "'%s' should either include a `serializer_class` attribute, "
+            "or override the `get_serializer_class()` method."
+            % self.__class__.__name__
+        )
+        if self.request.detail:
+            return self.serializer_class[1]
+        return self.serializer_class[0]
 
     @action(methods=['post'], detail=False)
     def batches_deletion(self, request):
-        question_id_list = request.data.getlist('question_id_list')
+        question_id_list = request.data.getlist('question_id_list', [])
         for question_id in question_id_list:
             self.queryset.get(question_id=question_id).delete()
-        return Response({'question_list': question_id_list})
+        return Response({'question_list': question_id_list, 'is_ok': True,
+                         'message': 'delete successfully'})
 
     def create(self, request, *args, **kwargs):
         return super(QuestionViewSet, self).create(request, *args, **kwargs)
@@ -45,17 +57,12 @@ class QuestionViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
-        if request.user.user_type == 1:
-            for question in data:
-                question.pop('answer_list', None)
         return Response({'question_list': data})
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         data = serializer.data
-        if request.user.user_type == 1:
-            data.pop('answer_list', None)
         return Response(data)
 
 
@@ -65,12 +72,22 @@ class PaperViewSet(mixins.CreateModelMixin,
                    mixins.ListModelMixin,
                    GenericViewSet):
     queryset = Paper.objects.all()
-    serializer_class = PaperSerializer
-    permission_classes = (IsAuthenticated, ModifyPermission)
+    serializer_class = (PaperSerializer, PaperDetailSerializer)
+    permission_classes = (IsAuthenticated, PaperPermission)
     filter_backends = (DjangoFilterBackend, )
     filter_fields = ('course',)
     # not safe: delete(object), insert,
     # safe: list, retrieve(object)
+
+    def get_serializer_class(self):
+        assert self.serializer_class is not None, (
+            "'%s' should either include a `serializer_class` attribute, "
+            "or override the `get_serializer_class()` method."
+            % self.__class__.__name__
+        )
+        if self.request.detail:
+            return self.serializer_class[1]
+        return self.serializer_class[0]
 
     def create(self, request, *args, **kwargs):
 
@@ -123,7 +140,7 @@ class PaperViewSet(mixins.CreateModelMixin,
         data['question_list'] = []
         for question_id in data['question_id_list']:
             question = Question.objects.all().get(question_id=question_id)
-            question_data = QuestionSerializer(question).data
+            question_data = QuestionDetailSerializer(question).data
             if request.user.user_type == 1:
                 question_data.pop('answer_list', None)
             data['question_list'].append(question_data)
@@ -137,7 +154,11 @@ class PaperViewSet(mixins.CreateModelMixin,
             serializer = self.get_serializer(page, many=True)
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(queryset, many=True)
-        return Response({'paper_list': serializer.data})
+        data = serializer.data
+        '''if request.user.user_type == 1:
+            for question in data:
+                question.pop('answer_list', None)'''
+        return Response({'paper_list': data})
 
 
 class ExaminationViewSet(mixins.CreateModelMixin,

@@ -12,6 +12,12 @@ class ListField(serializers.ListField):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ('question_id', 'description', 'course', 'provider')
+
+
+class QuestionDetailSerializer(serializers.ModelSerializer):
     answer_list = ListField(child=serializers.IntegerField())
     choice_list = ListField(child=serializers.CharField())
     course_name = serializers.SerializerMethodField()
@@ -28,13 +34,16 @@ class QuestionSerializer(serializers.ModelSerializer):
     def get_course_name(self, obj):
         return obj.course.name
 
-    #def to_representation(self, instance):
-    #    request = self.context.get('request', None)
-        #print(request.user)
-    #    return super(QuestionSerializer, self).to_representation(instance)
-
 
 class PaperSerializer(serializers.ModelSerializer):
+    score_list = ListField(child=serializers.IntegerField())
+
+    class Meta:
+        model = Paper
+        fields = ('paper_id', 'paper_name', 'teacher', 'course', 'start_time', 'deadline', 'duration')
+
+
+class PaperDetailSerializer(serializers.ModelSerializer):
     score_list = ListField(child=serializers.IntegerField())
 
     class Meta:
