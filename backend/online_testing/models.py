@@ -63,6 +63,7 @@ class Paper(models.Model):
     teacher = models.ForeignKey('布置人', Faculty, on_delete=models.CASCADE, null=True, default=None)
     course = models.ForeignKey('所属课程', Course, on_delete=models.CASCADE, null=False)
 
+
 class Examination(models.Model):
     exam_id = models.UUIDField('考试号', primary_key=True, default=uuid.uuid1, editable=False)
     paper = models.ForeignKey('试卷', Paper, on_delete=models.CASCADE, null=False)
