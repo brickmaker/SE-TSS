@@ -2,16 +2,16 @@
 - [x] subscriptions 
 - [x] courses
 - [x] course 
-- [ ] course_subscribed 
-- [ ] course_subscribe
-- [ ] course_unsubscribe
+- [x] course_subscribed 
+- [x] course_subscribe
+- [x] course_unsubscribe
 - [x] course_posts 
 - [x] course_newpost 
 - [x] teacher
 - [x] teacher_posts
-- [ ] teacher_subscribed 
-- [ ] teacher_subscribe
-- [ ] teacher_unsubscribe
+- [x] teacher_subscribed 
+- [x] teacher_subscribe
+- [x] teacher_unsubscribe
 - [x] teacher_newpost
 - [x] post 
 - [x] post_reply 
@@ -37,7 +37,7 @@
 
 # 使用方法
 1. 先跑一下数据库初始化
-2. ** python manager.py runserver**
+2. **python manager.py runserver**
 3. 用**Chrome**浏览器的话，GET请求直接点下面的链接看结果
 
 # 测试用数据库初始化
@@ -197,6 +197,44 @@ python manager.py test forum
 * http://127.0.0.1:8000/api/forum/newmsgs?uid=1&pagesize=100
 * http://127.0.0.1:8000/api/forum/newmsgs?uid=2&pagesize=10
 
+# 课程板块订阅查询
+
+## GET 
+### 已订阅
+* http://127.0.0.1:8000/api/forum/course_subscribed?uid=1&collegeid=1&courseid=1
+
+### 未订阅
+* http://127.0.0.1:8000/api/forum/course_subscribed?uid=1&collegeid=1&courseid=2
 
 
+# 课程板块订阅
+## GET
+### 订阅成功
+* http://127.0.0.1:8000/api/forum/course_subscribe?uid=1&collegeid=1&courseid=2
+### 课程不存在
+* http://127.0.0.1:8000/api/forum/course_subscribe?uid=1&collegeid=1&courseid=998
 
+# 课程板块取消订阅
+## GET
+### 去订阅成功
+* http://127.0.0.1:8000/api/forum/course_unsubscribe?uid=1&collegeid=1&courseid=1
+
+### 订阅关系不存在
+* http://127.0.0.1:8000/api/forum/course_unsubscribe?uid=1&collegeid=1&courseid=2
+
+### 课程不存在
+* http://127.0.0.1:8000/api/forum/course_unsubscribe?uid=1&collegeid=1&courseid=998
+
+
+# 教师板块订阅查询
+## GET
+* http://127.0.0.1:8000/api/forum/teacher_subscribed?uid=1&collegeid=1&courseid=1&teacherid=1
+* http://127.0.0.1:8000/api/forum/teacher_subscribed?uid=1&collegeid=1&courseid=1&teacherid=2 
+
+# 教师板块订阅
+## GET
+* http://127.0.0.1:8000/api/forum/teacher_subscribe?uid=1&collegeid=1&courseid=1&teacherid=2
+
+# 教师板块取消订阅
+## GET
+* http://127.0.0.1:8000/api/forum/teacher_unsubscribe?uid=1&collegeid=1&courseid=1&teacherid=2

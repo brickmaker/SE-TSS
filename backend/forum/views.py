@@ -121,6 +121,133 @@ class course(APIView):
 
         return Response(res, status=status.HTTP_200_OK)
 
+class course_subscribed(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        if None in (uid,collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        res = {'subscribed':True}
+        sub_set = models.Subscribe.objects.filter(user_id=uid,section=course.section)
+        if sub_set.count() == 0:
+            res['subscribed'] = False
+
+        return Response(res, status=status.HTTP_200_OK)  
+
+
+class teacher_subscribed(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid',None)
+        if None in (uid,collegeid,courseid,teacherid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
+        
+        res = {'subscribed':True}
+        sub_set = models.Subscribe.objects.filter(user_id=uid,section=teacher.section)
+        if sub_set.count() == 0:
+            res['subscribed'] = False
+
+        return Response(res, status=status.HTTP_200_OK) 
+
+class course_subscribe(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        if None in (uid,collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        try:
+            models.Subscribe.objects.create(user_id=uid,section=course.section)
+        except:
+            return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
+        res = {'subscribed':True}
+        return Response(res, status=status.HTTP_200_OK)         
+
+class teacher_subscribe(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid', None)
+        if None in (uid,collegeid,courseid,teacherid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        try:
+            models.Subscribe.objects.create(user_id=uid,section=teacher.section)
+        except Exception as e:
+            return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        res = {'subscribed':True}
+        return Response(res, status=status.HTTP_200_OK)   
+
+  
+class course_unsubscribe(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        if None in (uid,collegeid,courseid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        try:
+            models.Subscribe.objects.filter(user_id=uid,section=course.section).delete()
+        except:
+            return Response({'error':'Fail to unsubscribe'}, status=status.HTTP_400_BAD_REQUEST)
+        res = {'subscribed':False}
+        return Response(res, status=status.HTTP_200_OK) 
+        
+class teacher_unsubscribe(APIView):
+    def get(self, request, format=None):
+        uid = request.GET.get('uid', None)
+        collegeid = request.GET.get('collegeid', None)
+        courseid = request.GET.get('courseid', None)
+        teacherid = request.GET.get('teacherid', None)
+        if None in (uid,collegeid,courseid,teacherid):
+            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
+            
+        try:
+            models.Subscribe.objects.filter(user_id=uid,section=teacher.section).delete()
+        except:
+            return Response({'error':'Fail to unsubscribe'}, status=status.HTTP_400_BAD_REQUEST)
+        res = {'subscribed':False}
+        return Response(res, status=status.HTTP_200_OK) 
+        
+        
 class course_posts(APIView):
     def get(self, request, format=None):
         collegeid = request.GET.get('collegeid', None)
