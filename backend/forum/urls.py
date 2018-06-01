@@ -31,4 +31,5 @@ urlpatterns = [
     path('messages',views.messages.as_view(),name='messages'),
     path('announcements',views.announcements.as_view(),name='announcements'),
     path('info',views.info.as_view(),name='info'),
+    path('userstates',views.userstates.as_view(),name='userstates'),
 ]

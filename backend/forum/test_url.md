@@ -48,7 +48,8 @@ python init_db.py -m debug
 
 # TODO
 * avatar
-# 订阅
+* 用户上次登录？
+* 热门帖子那些time字段是什么意思?
 
 ## GET
 
@@ -238,3 +239,14 @@ python manager.py test forum
 # 教师板块取消订阅
 ## GET
 * http://127.0.0.1:8000/api/forum/teacher_unsubscribe?uid=1&collegeid=1&courseid=1&teacherid=2
+
+
+# 查看用户统计
+## GET
+* http://127.0.0.1:8000/api/forum/userstates?username=张一
+* http://127.0.0.1:8000/api/forum/userstates?username=张二
+* http://127.0.0.1:8000/api/forum/userstates?username=张三
+
+# 查看热门帖子
+## GET
+* http://127.0.0.1:8000/api/forum/hotposts?collegeid=1&courseid=1&teacherid=2&time=2018-05-28T14:15:21+08:00&timetype=month

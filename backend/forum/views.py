@@ -807,5 +807,20 @@ class info(APIView):
                '回复总数':reply_count,
         }
         return Response(res, status=status.HTTP_200_OK)
+       
+
+class userstates(APIView):
+    def get(self, request, format=None):
+        username = request.GET.get('username', None)
+        if None in (username,):
+            return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        res = []
         
+        for user in models.User.objects.filter(name=username):
+            item = {"uid":user.id,"name":user.name}
+            reply_num = models.Reply.objects.filter(user=user).count()
+            item['replyNum'] = reply_num
+            res.append(item)
+        return Response(res, status=status.HTTP_200_OK)
        
