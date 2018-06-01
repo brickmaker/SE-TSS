@@ -1,7 +1,9 @@
+import ast
 import uuid
-from datetime import timezone
 
 from django.db import models
+from django.utils import timezone
+
 from authentication.models import Faculty, Course, Student
 
 
@@ -48,8 +50,8 @@ class Question(models.Model):
     tag = models.CharField('标签', max_length=32)
     type = models.CharField('问题类型', choices=QUESTION_TYPE, null=False, max_length=12, default='Choice')
     level = models.IntegerField('问题难度', choices=QUESTION_LEVEL, null=False, default=0)
-    provider = models.ForeignKey('出题人', Faculty, on_delete=models.CASCADE, null=True, default=None)
-    course = models.ForeignKey('所属课程', Course, on_delete=models.CASCADE, null=False)
+    provider = models.ForeignKey(Faculty, verbose_name='出题人', on_delete=models.CASCADE, null=True, default=None)
+    course = models.ForeignKey(Course, verbose_name='所属课程', on_delete=models.CASCADE, null=False)
 
 
 class Paper(models.Model):
@@ -58,16 +60,16 @@ class Paper(models.Model):
     start_time = models.DateTimeField('开始时间', default=timezone.now())
     deadline = models.DateTimeField('结束时间', default=timezone.now())
     duration = models.IntegerField('持续时间(分)')
-    question_id_list = models.ManyToManyField('问题', Question)
+    question_id_list = models.ManyToManyField(Question, related_name='问题')
     score_list = ListField('分数表', null=False)
-    teacher = models.ForeignKey('布置人', Faculty, on_delete=models.CASCADE, null=True, default=None)
-    course = models.ForeignKey('所属课程', Course, on_delete=models.CASCADE, null=False)
+    teacher = models.ForeignKey(Faculty, verbose_name='布置人', on_delete=models.CASCADE, null=True, default=None)
+    course = models.ForeignKey(Course, verbose_name='所属课程', on_delete=models.CASCADE, null=False)
 
 
 class Examination(models.Model):
     exam_id = models.UUIDField('考试号', primary_key=True, default=uuid.uuid1, editable=False)
-    paper = models.ForeignKey('试卷', Paper, on_delete=models.CASCADE, null=False)
-    student = models.ForeignKey('学生', Student, on_delete=models.CASCADE, null=True, default=None)
+    paper = models.ForeignKey(Paper, verbose_name='试卷', on_delete=models.CASCADE, null=False)
+    student = models.ForeignKey(Student, verbose_name='学生', on_delete=models.CASCADE, null=True, default=None)
     # teacher = models.ForeignKey('老师', Faculty, on_delete=models.CASCADE, null=True, default=None)
     answers = models.TextField('答案', null=True, default=None)
     score = models.SmallIntegerField('分数', null=False, default=-1)
