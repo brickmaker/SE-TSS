@@ -106,6 +106,7 @@ def createStaff(filename):
 def main():
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "top.settings")
 	django.setup()
+	from authentication.models import Department
 	depart=Department(name='信息中心')
 	depart.save()
 	d_filename='department.xlsx'
