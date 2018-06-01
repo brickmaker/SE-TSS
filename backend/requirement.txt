@@ -1,4 +1,7 @@
 Django==2.0.3
+django-haystack==2.8.1
 djangorestframework==3.7.7
+jieba==0.39
 Pillow==5.1.0
 pytz==2018.3
+Whoosh==2.7.4

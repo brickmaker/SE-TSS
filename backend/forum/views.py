@@ -6,9 +6,30 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models
 from django.db.models import Q
+from haystack.query import SearchQuerySet
 
 post_per_page = 20
 max_new_post = 5
+
+def fetch_path_dict(section):
+    if section.type == models.Section.TEACHER:
+        teacher = models.Teacher.objects.get(section=section)
+        course = models.Course.objects.get(pk=teacher.course_id)
+        college = models.College.objects.get(pk=teacher.college_id)
+        res = {'college':{'id':college.id,'name':college.name},
+                'course':{'id':course.id,'name':course.name},
+                'teacher':{'id':teacher.id,'name':teacher.name}}
+    elif section.type == models.Section.COURSE:
+        course = models.Course.objects.get(section=section)
+        college = models.College.objects.get(pk=course.college_id)
+        res = {'college':{'id':college.id,'name':college.name},
+                'course':{'id':course.id,'name':course.name}}
+    elif section.type == models.Section.COLLEGE:
+        college = models.College.objects.get(section=section)
+        res = {'college':{'id':college.id,'name':college.name}}
+    else:
+        assert False
+    return res
 
 
 def index(request):
@@ -739,18 +760,7 @@ class announcements(APIView):
             author = models.User.objects.get(pk=ann.user_id)
             item['author'] = {'username':author.name,'uid':author.id}
             section = models.Section.objects.get(pk=ann.section_id)
-            if section.type == models.Section.TEACHER:
-                teacher = models.Teacher.objects.get(section=section)
-                course = models.Course.objects.get(pk=teacher.course_id)
-                college = models.College.objects.get(pk=teacher.college_id)
-                item['path'] = {'college':{'id':college.id,'name':college.name},
-                                'course':{'id':course.id,'name':course.name},
-                                'teacher':{'id':teacher.id,'name':teacher.name}}
-            elif section.type == models.Section.COURSE:
-                course = models.Course.objects.get(section=section)
-                college = models.College.objects.get(pk=course.college_id)
-                item['path'] = {'college':{'id':college.id,'name':college.name},
-                                'course':{'id':course.id,'name':course.name}}
+            item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)
         return Response(res, status=status.HTTP_200_OK)
         
@@ -780,18 +790,7 @@ class announcements(APIView):
             author = models.User.objects.get(pk=ann.user_id)
             item['author'] = {'username':author.name,'uid':author.id}
             section = models.Section.objects.get(pk=ann.section_id)
-            if section.type == models.Section.TEACHER:
-                teacher = models.Teacher.objects.get(section=section)
-                course = models.Course.objects.get(pk=teacher.course_id)
-                college = models.College.objects.get(pk=teacher.college_id)
-                item['path'] = {'college':{'id':college.id,'name':college.name},
-                                'course':{'id':course.id,'name':course.name},
-                                'teacher':{'id':teacher.id,'name':teacher.name}}
-            elif section.type == models.Section.COURSE:
-                course = models.Course.objects.get(section=section)
-                college = models.College.objects.get(pk=course.college_id)
-                item['path'] = {'college':{'id':college.id,'name':college.name},
-                                'course':{'id':course.id,'name':course.name}}
+            item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)
         return Response(res, status=status.HTTP_200_OK)
         
@@ -823,4 +822,68 @@ class userstates(APIView):
             item['replyNum'] = reply_num
             res.append(item)
         return Response(res, status=status.HTTP_200_OK)
-       
+        
+class search(APIView):
+    def get(self, request, format=None):
+        searchtype = request.GET.get('searchtype', None)
+        
+        if None in (searchtype,):
+            return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if searchtype == 'post':
+            return self.post_search(request,format)
+            
+        return self.section_search(request,format)
+    
+    def section_search(self, request, format=None):
+        query = request.GET.get('query', None)
+        pagenum = int(request.GET.get('pagenum', None))
+        pagesize = int(request.GET.get('pagesize', None))
+        
+        if None in (query,pagenum,pagesize):
+            return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
+                
+        results = SearchQuerySet().models(models.Section).filter(content=query)
+        res = {'resultNum':results.count(),'results':[]}
+        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        for result in results:
+            item = {}
+            section = models.Section.objects.get(pk=result.section)
+            item['path'] = fetch_path_dict(section)
+            post_set = models.Thread.objects.filter(section=section).order_by('-date')
+            item['postNum'] = post_set.count()
+            if(item['postNum'] > 0):
+                item['lastReplyTime'] = post_set.first().date
+            else:
+                item['lastReplyTime'] = "1970-01-01T00:00:00+00:00"
+                
+            res['results'].append(item)
+            
+        return Response(res, status=status.HTTP_200_OK)
+    
+    def post_search(self, request, format=None):
+        query = request.GET.get('query', None)
+        pagenum = int(request.GET.get('pagenum', None))
+        pagesize = int(request.GET.get('pagesize', None))
+        
+        if None in (query,pagenum,pagesize):
+            return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
+                
+        results = SearchQuerySet().models(models.Thread).filter(content=query)
+        res = {'resultNum':results.count(),'results':[]}
+        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        for result in results:
+            item = {'relatedContetn':"还没实现"}
+            post = models.Thread.objects.get(pk=result.post)
+            item['title'] = post.title
+            item['postid'] = post.id
+            author = models.User.objects.get(pk=post.poster_id)
+            item['author'] = {'username':author.name,'uid':author.id}
+            reply_num = models.Reply.objects.filter(post=post).count()
+            item['replyNum'] = reply_num
+            item['time'] = post.date
+            section = models.Section.objects.get(pk=post.section_id)
+            item['path'] = fetch_path_dict(section)
+            res['results'].append(item)
+            
+        return Response(res, status=status.HTTP_200_OK)

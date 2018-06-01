@@ -25,9 +25,9 @@
 - [x] msgentries
 - [x] messages
 - [x] announcements
-- [ ] search
+- [x] search
 - [x] info
-- [ ] userstates
+- [x] userstates
 - [ ] hotposts
 
 
@@ -250,3 +250,19 @@ python manager.py test forum
 # 查看热门帖子
 ## GET
 * http://127.0.0.1:8000/api/forum/hotposts?collegeid=1&courseid=1&teacherid=2&time=2018-05-28T14:15:21+08:00&timetype=month
+
+# 搜素
+## GET
+* http://127.0.0.1:8000/api/forum/search?searchtype=post&query=标记&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=post&query=搜索&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=post&query=666&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=post&query=代号&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=post&query=得得得得&pagenum=0&pagesize=16
+*http://127.0.0.1:8000/api/forum/search?searchtype=section&query=王章野&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=section&query=学院&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=section&query=计算&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=section&query=张三&pagenum=0&pagesize=16
+* http://127.0.0.1:8000/api/forum/search?searchtype=section&query=软件工程&pagenum=0&pagesize=16
+
+
+
