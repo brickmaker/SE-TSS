@@ -3,19 +3,19 @@ from authentication.models import Faculty, Course
 
 
 class QuestionPermission(permissions.BasePermission):
+    # if you are teacher, you can list.
     def has_permission(self, request, view):
         t = request.user.user_type
         if t != 2:
             return False
         return True
 
+    # if you want details of questions, you must be the teacher of this course.
     def has_object_permission(self, request, view, obj):
-        if request.method not in permissions.SAFE_METHODS:
-            faculty = Faculty.objects().get(username=request.user)
-            cnt = Course.objects().filter(faculty=faculty, course_id=obj.course).count()
-            if cnt <= 0:
-                return False
-            return True
+        faculty = Faculty.objects().get(username=request.user)
+        cnt = Course.objects().filter(faculty=faculty, course_id=obj.course).count()
+        if cnt <= 0:
+            return False
         return True
 
 
@@ -28,6 +28,13 @@ class PaperPermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         t = request.user.user_type
+        if t == 2:
+            faculty = Faculty.objects().get(username=request.user)
+            cnt = Course.objects().filter(faculty=faculty, course_id=obj.course).count()
+            if cnt <= 0:
+                return False
+        if t == 1:  # must check if this student has taken this course
+            pass
         if request.method not in permissions.SAFE_METHODS:
             if t == 1:
                 return False

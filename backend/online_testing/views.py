@@ -175,15 +175,13 @@ class ExaminationViewSet(mixins.CreateModelMixin,
     #2. 超时自动交卷
 
     def create(self, request, *args, **kwargs):
-        data = request.data.copy()
-        data['student'] = request.user.username
         try:
-            Examination.objects.get(paper=data['paper']
-                                    , student=data['student'])
+            Examination.objects.get(paper=request.data['paper']
+                                    , student=request.user)
             return Response({'message': 'already done.', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
         except ObjectDoesNotExist:
-            serializer = self.get_serializer(data=data)
+            serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
@@ -213,7 +211,6 @@ class ExaminationViewSet(mixins.CreateModelMixin,
 
     @action(methods=['get'], detail=False)
     def info(self, request, pk=None):
-        #username = request.query_params.get('username')
         username = request.user.username
         paper_id = request.query_params.get('paper_id')
         try:
