@@ -2,7 +2,7 @@ import uuid
 from datetime import timezone
 
 from django.db import models
-from backend.authentication.models import Faculty, Course, Student
+from authentication.models import Faculty, Course, Student
 
 
 class ListField(models.TextField):
@@ -68,7 +68,7 @@ class Examination(models.Model):
     exam_id = models.UUIDField('考试号', primary_key=True, default=uuid.uuid1, editable=False)
     paper = models.ForeignKey('试卷', Paper, on_delete=models.CASCADE, null=False)
     student = models.ForeignKey('学生', Student, on_delete=models.CASCADE, null=True, default=None)
-    teacher = models.ForeignKey('老师', Faculty, on_delete=models.CASCADE, null=True, default=None)
+    # teacher = models.ForeignKey('老师', Faculty, on_delete=models.CASCADE, null=True, default=None)
     answers = models.TextField('答案', null=True, default=None)
     score = models.SmallIntegerField('分数', null=False, default=-1)
     start_time = models.DateTimeField('开始时间', auto_now_add=True)
