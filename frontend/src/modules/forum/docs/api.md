@@ -800,14 +800,14 @@ username: String
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018-05-14 12:30",
+      "postNum":3,
       "type": "学生"
     },
     {
       "uid": "uid",
       "username": "Alice",
       "replyNum": 23,
-      "lastLoginTime": "2018-05-14 12:30",
+      "postNum":3,
       "type": "学生"
     },
     ...
