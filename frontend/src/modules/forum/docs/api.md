@@ -823,8 +823,8 @@ GET /api/forum/hotposts
 collegeid: Integer
 courseid: Integer
 teacherid: Integer
-start_time: String ("2018-05-28")
-end_time: String ("2018-05-29")
+start_time: String ("2012-04-23T18:25:43.511Z")
+end_time: String ("2012-04-24T18:25:43.511Z")
 ```
 ##### 响应
 ```
