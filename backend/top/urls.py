@@ -26,6 +26,6 @@ urlpatterns = [
  
     path('api/info/', include('authentication.urls')), 
     path('admin/', admin.site.urls),
-    #path('api/online_testing/', include('online_testing.urls')),
+    path('api/online_testing/', include('online_testing.urls')),
     path('api/forum/', include('forum.urls')),
 ]
