@@ -189,7 +189,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
 
     def create(self, request, *args, **kwargs):
         try:
-            Examination.objects.get(paper=request.data['paper']
+            exam = Examination.objects.get(paper=request.data['paper']
                                     , student=request.user)
             return Response({'message': 'already done.', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
@@ -201,7 +201,10 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def retrieve(self, request, *args, **kwargs):
-        return super(ExaminationViewSet, self).retrieve(request, *args, **kwargs)
+        instance = self.get_object()
+        self.get_left_time(instance)
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
     def list(self, request, *args, **kwargs):
         return super(ExaminationViewSet, self).list(request, *args, **kwargs)
@@ -372,6 +375,7 @@ class AnalysisViewSet(GenericViewSet):
         for paper_id in paper_id_list:
             q = q | Q(paper_id=paper_id)
         papers = Paper.objects.filter(course=course).filter(q)
+        # TODO:
         pass
 
     @action(methods=['get'], detail=False)
