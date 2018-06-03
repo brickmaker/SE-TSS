@@ -4312,3 +4312,9 @@ django.db.utils.IntegrityError: UNIQUE constraint failed: authentication_account
 2018-06-01 10:40:51,034 [Thread-11:3676] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
 2018-06-01 10:40:51,046 [Thread-12:5428] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
 2018-06-01 10:40:51,054 [Thread-13:7064] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+2018-06-03 18:36:52,269 [Thread-1:10476] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/online_testing/question/ HTTP/1.1" 401 9601
+2018-06-03 18:36:52,612 [Thread-3:10624] [django.request:93] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-06-03 18:36:52,613 [Thread-3:10624] [django.server:124] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2307
+2018-06-03 18:37:15,508 [Thread-8:8320] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/get_token HTTP/1.1" 405 12085
+2018-06-03 18:39:29,933 [Thread-14:10184] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/info/get_token HTTP/1.1" 400 68
+2018-06-03 18:41:02,525 [Thread-15:5892] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/info/get_token HTTP/1.1" 400 68
