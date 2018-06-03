@@ -25,6 +25,41 @@ print(response.content.decode('utf-8'))
 
 response = c.get('/api/online_testing/question/2/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/paper/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/paper/f9758434-6729-11e8-b335-c48e8f7f190e/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+exit(0)
+
+d = datetime.datetime.now()
+response = c.post('/api/online_testing/paper/', {
+    "paper_name": "Data Structure MidTerm Exam",
+    'auto': True,
+    'tag_list': [],
+    'start_time': d,
+    'deadline': d + datetime.timedelta(days=7),
+    'duration': 120,
+    'num_choice': 15,
+    'num_judge': 10,
+    'course': '2000',
+}, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.post('/api/online_testing/paper/', {
+        "paper_name": "Data Structure Final Exam",
+        'auto': False,
+        'question_id_list': [i for i in range(2, 80)],
+        'start_time': d + datetime.timedelta(days=2),
+        'deadline': d + datetime.timedelta(days=7),
+        'duration': 120,
+        'course': '2000',
+    }, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/paper/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
 exit(0)
 
 response = c.post('/api/online_testing/question/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION, data={
