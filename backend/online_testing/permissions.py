@@ -12,8 +12,8 @@ class QuestionPermission(permissions.BasePermission):
 
     # if you want details of questions, you must be the teacher of this course.
     def has_object_permission(self, request, view, obj):
-        faculty = Faculty.objects().get(username=request.user)
-        cnt = Course.objects().filter(faculty=faculty, course_id=obj.course).count()
+        faculty = Faculty.objects.all().get(username=request.user)
+        cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
         if cnt <= 0:
             return False
         return True
@@ -30,7 +30,7 @@ class PaperPermission(permissions.BasePermission):
         t = request.user.user_type
         if t == 2:
             faculty = Faculty.objects().get(username=request.user)
-            cnt = Course.objects().filter(faculty=faculty, course_id=obj.course).count()
+            cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
             if cnt <= 0:
                 return False
         if t == 1:  # must check if this student has taken this course

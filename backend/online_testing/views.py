@@ -17,6 +17,7 @@ from online_testing.serializers import QuestionSerializer, QuestionDetailSeriali
     PaperSerializer, ExaminationSerializer, PaperDetailSerializer
 from online_testing.filters import QuestionFilter
 from online_testing.permissions import ExamInfoAccessPermission, QuestionPermission, PaperPermission
+from rest_framework import permissions
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
@@ -34,7 +35,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
             "or override the `get_serializer_class()` method."
             % self.__class__.__name__
         )
-        if self.request.detail:
+        if self.detail or self.request.method not in permissions.SAFE_METHODS:
             return self.serializer_class[1]
         return self.serializer_class[0]
 
@@ -47,7 +48,16 @@ class QuestionViewSet(viewsets.ModelViewSet):
                          'message': 'delete successfully'})
 
     def create(self, request, *args, **kwargs):
-        return super(QuestionViewSet, self).create(request, *args, **kwargs)
+        data = request.data.copy()
+        data['provider'] = request.user.username
+        if isinstance(data['level'], str):
+            data['level'] = int(data['level'])
+            data.setlist('answer_list', [int(i) for i in data.getlist('answer_list')])
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -85,7 +95,7 @@ class PaperViewSet(mixins.CreateModelMixin,
             "or override the `get_serializer_class()` method."
             % self.__class__.__name__
         )
-        if self.request.detail:
+        if self.detail or self.request.method not in permissions.SAFE_METHODS:
             return self.serializer_class[1]
         return self.serializer_class[0]
 
@@ -100,7 +110,7 @@ class PaperViewSet(mixins.CreateModelMixin,
             if request.data.get('auto') == 'True':
                 auto = True
         else:
-            auto = bool(request.data.get('auto'))
+            auto = request.data.get('auto')
         if auto:
             num_choice = int(request.data.get('num_choice'))
             num_judge = int(request.data.get('num_judge'))
