@@ -19,7 +19,7 @@ class Department(models.Model):
 
 
 class Major(models.Model):
-    depart = models.ForeignKey(Department, verbose_name="所在院系", related_name='major', on_delete=models.CASCADE)
+    depart = models.ForeignKey(Department, verbose_name="所在院系", related_name='major_for', on_delete=models.CASCADE)
     major = models.CharField("开设专业", max_length=100, unique=True, primary_key=True)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Major(models.Model):
 
 
 class Major_Class(models.Model):
-    major = models.ForeignKey(Major, verbose_name="开设专业", related_name='class_name', on_delete=models.CASCADE)
+    major = models.ForeignKey(Major, verbose_name="开设专业", related_name='class_name_for', on_delete=models.CASCADE)
     class_name = models.CharField("专业班级", max_length=100,unique=True)
 
     def __str__(self):
@@ -44,7 +44,8 @@ class AccountManager(BaseUserManager):
         password = password
         if len(id_number) < 6:
             raise ParseError(detail='username format invalid')
-        else:
+        else: 
+            
             password = id_number[-6:]
 
         if not user_type:
@@ -68,6 +69,11 @@ class AccountManager(BaseUserManager):
         account.save()
 
         if user_type == 1:
+            try:
+                class_name=Major_Class.objects.get(class_name=kwargs.get('class_name'))
+            except:
+                raise ParseError(detail='class not exists')
+
             Student.objects.create(
                 username=account,
                 id_number=id_number,
@@ -77,7 +83,7 @@ class AccountManager(BaseUserManager):
                 department=department,
                 grade=kwargs.get('grade'),
                 major=kwargs.get('major'),
-                class_name=kwargs.get('class_name'),
+                class_name=class_name,
                 img=kwargs.get('img', None)
             )
         elif user_type == 2:
@@ -202,8 +208,9 @@ class Course(models.Model):
         (1,"夏"),
         (2,"春夏"),
         (3,"秋"),
-        (4,"秋冬"),
-        (5,"短")
+        (4,"冬"),
+        (5,"秋冬"),
+        (6,"短")
     )
     course_id = models.CharField("课号", max_length=10, primary_key=True, default="null")
     name = models.CharField("名称", max_length=20, unique=True)

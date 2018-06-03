@@ -43,8 +43,7 @@ class StudentSerializer(PeopleSerializer):
     img = serializers.ImageField(max_length=None, allow_null=True, required=False)
     grade = serializers.IntegerField(required=True)
     major = serializers.PrimaryKeyRelatedField(queryset=Major.objects.all(), required=True)
-    class_name = serializers.PrimaryKeyRelatedField(queryset=Major_Class.objects.all(), required=True)
-
+    class_name = serializers.CharField(max_length=20)
     class Meta:
         model = Account
         fields = (
@@ -52,6 +51,22 @@ class StudentSerializer(PeopleSerializer):
             'class_name',
             'img')
         read_only_fields = ('date_created', 'date_modified')
+    def create(self, validated_data):
+        logger.info("create student")
+        username = validated_data['username']
+        name = validated_data['name']
+        id_number = validated_data['id_number']
+        user_type = validated_data['user_type']
+        email = validated_data['email']
+        gender = validated_data['gender']
+        department=validated_data['department']
+        grade=validated_data['grade']
+        major=validated_data["major"]
+        class_name=validated_data["class_name"]
+        instance = Account.objects.create_user(id_number=id_number, user_type=user_type, username=username, email=email, gender=gender, name=name,department=department,grade=grade, major=major,class_name=class_name)
+        
+        instance.save()
+        return instance
 
 
 class FacultySerializer(PeopleSerializer):
@@ -88,26 +103,33 @@ class CourseSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=20, required=True)
     credit = serializers.FloatField(min_value=0.5, required=True)
     capacity = serializers.IntegerField(max_value=200)
-    classroom = serializers.CharField(max_length=20)
     assessment = serializers.CharField(max_length=20)
     faculty = serializers.MultipleChoiceField(choices=Faculty.objects.all())
     course_type=serializers.IntegerField(max_value=3, required=True)
     state=serializers.IntegerField(max_value=3, default=1)
+    department=serializers.CharField(max_length=20)
+    semester=serializers.IntegerField(max_value=6, default=0)
+
     class Meta:
         model = Course
-        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment', 'faculty','course_type', 'state')
+        fields = ('course_id', 'name', 'credit', 'semester','capacity','assessment', 'faculty','course_type', 'state','department')
 
     def create(self, validated_data):
         logger.info("create course")
         course_id = validated_data['course_id']
         name = validated_data['name']
-        classroom = validated_data['classroom']
+        try:
+            depart = Department.objects.get(name=validated_data.get('department'))
+        except Exception as err:
+            raise ParseError(detail='department not exists')
+        
         capacity = validated_data['capacity']
+        semester = validated_data['semester']
         credit = validated_data['credit']
         assessment = validated_data['assessment']
         course_type=validated_data['course_type']
         state=validated_data['state']
-        instance = Course.objects.create(course_id=course_id, name=name, classroom=classroom, capacity=capacity, credit=credit, assessment=assessment,course_type=course_type, state=state)
+        instance = Course.objects.create(semester=semester,department=depart,course_id=course_id, name=name,  capacity=capacity, credit=credit, assessment=assessment,course_type=course_type, state=state)
         instance.faculty.set(validated_data['faculty'])
         instance.save()
         return instance
@@ -116,14 +138,19 @@ class CourseSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def update(self, instance, validated_data):
         logger.info("update course info")
+        try:
+            depart = Department.objects.get(name=validated_data.get('department'))
+        except Exception as err:
+            raise ParseError(detail='department not exists')
+        instance.department = depart
         instance.course_id = validated_data.get('course_id', instance.course_id)
         instance.name = validated_data.get('name', instance.name)
         instance.credit = validated_data.get('credit', instance.credit)
         instance.capacity = validated_data.get('capacity', instance.capacity)
-        instance.classroom = validated_data.get('classroom', instance.classroom)
         instance.assessment = validated_data.get('assessment', instance.assessment)
         instance.course_type=validated_data.get('course_type',instance.course_type)
         instance.state=validated_data.get('state',instance.state)
+        instance.department=depart
         instance.faculty.set(validated_data.get('faculty', instance.faculty))
         instance.save()
         return instance
@@ -331,13 +358,14 @@ class CourseQuerySerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=20, required=True)
     credit = serializers.FloatField(min_value=0.5, required=True)
     capacity = serializers.IntegerField(max_value=200)
-    classroom = serializers.CharField(max_length=20)
+    semester=serializers.IntegerField(required=True)
     assessment = serializers.CharField(max_length=20)
     state = serializers.IntegerField(required=True)
     course_type=serializers.IntegerField(required=True)
+    department=serializers.CharField(max_length=20)
     class Meta:
         model = Course
-        fields = ('course_id', 'name', 'credit', 'capacity', 'classroom', 'assessment', 'state','course_type')
+        fields = ('course_id', 'name', 'credit', 'capacity','semester','department',  'assessment', 'state','course_type')
 
     @transaction.atomic
     def update(self, instance, validated_data):
@@ -347,7 +375,12 @@ class CourseQuerySerializer(serializers.ModelSerializer):
         instance.name = validated_data.get('img', instance.name)
         instance.credit = validated_data.get('credit', instance.credit)
         instance.capacity = validated_data.get('capacity', instance.capacity)
-        instance.classroom = validated_data.get('classroom', instance.classroom)
+        instance.semester = validated_data.get('semester', instance.semester)
+        try:
+            depart = Department.objects.get(name=validated_data.get('department', instance.department))
+        except Exception as err:
+            raise ParseError(detail='department not exists')
+        instance.department = depart
         instance.assessment = validated_data.get('assessment', instance.assessment)
         instance.course_type = validated_data.get('course_type', instance.course_type)
         type = self._context['request'].user.user_type

@@ -27,7 +27,7 @@ logger = logging.getLogger('django')
 
 class StudentRegister(APIView):
     serializer_class = StudentSerializer
-    permission_classes = (IsAuthenticated, RegisterCheck,)
+    #permission_classes = (IsAuthenticated, RegisterCheck,)
 
     def post(self, request):
         logger.info("try to register student account")
@@ -145,20 +145,20 @@ class CourseRegister(APIView):
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, StudentCheck,)
+   # permission_classes = (IsAuthenticated, StudentCheck,)
     queryset = Student.objects.all()
     serializer_class = StudentQuerySerializer
 
 
 class FacultyViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, FacultyCheck,)
+    #permission_classes = (IsAuthenticated, FacultyCheck,)
     queryset = Faculty.objects.all()
     serializer_class = FacultyQuerySerializer
 
 
 class StaffViewSet(viewsets.ModelViewSet):
     queryset = Staff.objects.all()
-    permission_classes = (IsAuthenticated, StaffCheck,)
+  #  permission_classes = (IsAuthenticated, StaffCheck,)
     serializer_class = StaffQuerySerializer
 
 
@@ -181,7 +181,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, CourseCheck,)
+   # permission_classes = (IsAuthenticated, CourseCheck,)
     queryset = Course.objects.all()
     serializer_class = CourseQuerySerializer
 
