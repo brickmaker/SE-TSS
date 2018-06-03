@@ -29,7 +29,7 @@ class PaperPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         t = request.user.user_type
         if t == 2:
-            faculty = Faculty.objects().get(username=request.user)
+            faculty = Faculty.objects.all().get(username=request.user)
             cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
             if cnt <= 0:
                 return False

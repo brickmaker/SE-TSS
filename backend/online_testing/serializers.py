@@ -29,9 +29,8 @@ class QuestionDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class PaperSerializer(serializers.ModelSerializer):
-    score_list = ListField(child=serializers.IntegerField())
+    #score_list = ListField(child=serializers.IntegerField())
 
     class Meta:
         model = Paper

@@ -102,9 +102,10 @@ class PaperViewSet(mixins.CreateModelMixin,
     def create(self, request, *args, **kwargs):
 
         def softmax(x):
-            return np.exp(x) / np.sum(np.exp(x))
+            return x / np.sum(np.abs(x))
 
         data = request.data.copy()
+        data['teacher'] = request.user.username
         auto = False
         if isinstance(request.data.get('auto'), str):
             if request.data.get('auto') == 'True':
@@ -127,6 +128,7 @@ class PaperViewSet(mixins.CreateModelMixin,
             l = l1[0: num_choice] + l2[0: num_judge]
             question_id_list = [li[0] for li in l]
             score_list = np.array(np.around(100 * softmax([li[1] for li in l])), dtype='int32')
+            score_list[score_list == 0] = 1
             data.setlist('score_list', score_list)
             data.setlist('question_id_list', question_id_list)
         else:
@@ -136,6 +138,7 @@ class PaperViewSet(mixins.CreateModelMixin,
                 question = Question.objects.get(question_id=question_id)
                 score_list.append(question.level)
             score_list = np.array(np.around(100 * softmax(score_list)), dtype='int32')
+            score_list[score_list == 0] = 1
             data.setlist('score_list', score_list)
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
