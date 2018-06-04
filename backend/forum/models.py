@@ -1,5 +1,5 @@
 from django.db import models
-
+from authentication.models import Account
 
 # Create your models here.
 
@@ -95,9 +95,10 @@ class User(models.Model):
     name = models.CharField(max_length=50)
     signature = models.TextField()
     avatar = models.ImageField()
+    account = models.OneToOneField(Account,on_delete=models.CASCADE,to_field='username',default='315010000')
     
     def __str__(self):
-        return '%s %s'%(self.uid,self.name)
+        return '%s %s'%(self.id,self.name)
 
         
 class Thread(models.Model):

@@ -4,11 +4,15 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from . import models
+from forum import models
 from django.db.models import Q
 from haystack.query import SearchQuerySet
 from django.utils.dateparse import parse_datetime
 from django.db.models import Max
+
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck
+
 
 post_per_page = 20
 max_new_post = 5
@@ -488,6 +492,7 @@ class sectionnames(APIView):
         return Response(res, status=status.HTTP_200_OK)
    
 class college_list(APIView):
+    permission_classes = (AllowAny,)
     def get(self, request, format=None):
         res = []
         for colledge in models.College.objects.all():
@@ -496,6 +501,7 @@ class college_list(APIView):
         return Response(res, status=status.HTTP_200_OK)
       
 class course_list(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         collegeid = request.GET.get('collegeid', None)
         
