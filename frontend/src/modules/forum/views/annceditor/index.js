@@ -84,7 +84,7 @@ class AnncEditor extends Component {
                             alignItems: 'center',
                             width: "100%",
                         }}>
-                            <Card style={{ backgroundColor: '#ffffff', paddingLeft: 20, paddingTop: 5, paddingBottom: 5, margin: 10, width: "100%" }}>
+                            <Card style={{ backgroundColor: '#ffffff', paddingLeft: 20,paddingRight:20, paddingTop: 5, paddingBottom: 5, margin: 10, width: "100%" }}>
                                 <Input fullWidth disableUnderline placeholder="请输入公告标题"
                                     inputProps={{
                                         style: {
@@ -101,7 +101,7 @@ class AnncEditor extends Component {
                             <Card
                                 style={{
                                     paddingLeft: 20,
-                                    // paddingRight: 20,
+                                    paddingRight: 20,
                                     height: 400,
                                     width: "100%",
                                     paddingTop: 5,

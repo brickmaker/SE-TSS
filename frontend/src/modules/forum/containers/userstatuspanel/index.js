@@ -85,7 +85,6 @@ class UserStatusPanel extends Component {
     };
 
     render() {
-        //TODO: username
         const { classes, userStates, getUserStates, isFetchingUserStates } = this.props;
         const { username, pageSize, pageNum, isDialogOpen, dialogContent } = this.state;
         return (
