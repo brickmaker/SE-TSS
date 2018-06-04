@@ -152,6 +152,7 @@ class Teacher extends Component {
                     onClose={this.onDialogClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    fullWidth
                 >
                     <DialogTitle id="alert-dialog-title">{this.props.dialog.title}</DialogTitle>
                     <DialogContent>
