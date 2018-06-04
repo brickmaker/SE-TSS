@@ -4,6 +4,7 @@ import {Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "material-ui"
+import FileUploader from "../../../components/fileuploader"
 
 const editorStyle = {
     marginTop: 10,
@@ -23,6 +24,7 @@ export default class PostEditor extends Component {
                 content: ""
             },
             title: "",
+            file: null,
             editorState: EditorState.createEmpty(),
         };
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
@@ -49,6 +51,8 @@ export default class PostEditor extends Component {
             this.alertDialog("提交失败", "标题不能为空！")
         } else if (this.state.title.length > 50) {
             this.alertDialog("提交失败", "标题不能超过50个字符长度！")
+        } else if (this.state.file && this.state.file.size) {
+            console.log(this.state.file.size)
         } else {
             const text = this.state.editorState.getCurrentContent().getPlainText()
             if (text.length === 0) {
@@ -58,7 +62,7 @@ export default class PostEditor extends Component {
             } else {
                 const html = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
                 if (this.props.post) {
-                    this.props.post(this.state.title, html)
+                    this.props.post(this.state.title, html, this.state.file)
                 }
                 this.setState({
                     title: "",
@@ -117,6 +121,9 @@ export default class PostEditor extends Component {
                     editorStyle={editorStyle}
                     onEditorStateChange={this.onEditorStateChange}
                 />
+                <FileUploader changeFile={(fileId) => {
+                    this.setState({file: fileId})
+                }}/>
                 <Button
                     style={{margin: 20}}
                     color={'primary'}

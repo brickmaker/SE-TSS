@@ -166,7 +166,8 @@ POST /api/forum/course_newpost
     collegeId: String,
     courseId: String,
     title: String,
-    content: String
+    content: String,
+    fileId: String
 }
 ```
 
@@ -307,7 +308,8 @@ POST /api/forum/teacher_newpost
     courseId: String,
     teacherId: String,
     title: String,
-    content: String
+    content: String,
+    fileId: String
 }
 ```
 
@@ -378,7 +380,8 @@ POST /api/forum/post_newreply
 {
     uid: String,
     postId: String,
-    content: String
+    content: String,
+    fileId: String
 }
 ```
 
@@ -425,6 +428,43 @@ POST /api/forum/comment
 失败：
 {
     error: "Error info"
+}
+```
+
+### 附件
+
+#### 上传附件
+
+##### 请求
+
+```
+POST /api/forum//upload_file
+```
+
+##### 参数
+
+post的body就是一个File对象，包含了文件名、大小等信息，具体后端如何解析不是很清楚，如果有问题请提出
+
+```
+File
+```
+
+##### 响应
+
+成功：
+
+```
+{
+    error: null
+    fileId: String // 可以是文件的md5值，能够区分文件即可
+}
+```
+
+错误：
+
+```
+{
+    error: String
 }
 ```
 

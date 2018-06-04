@@ -12,7 +12,7 @@ export const POST_SUCCESS = 'course_post_success'
 export const POST_FAIL = 'course_post_fail'
 export const CLOSE_DIALOG = 'close_course_dialog'
 
-export const newPost = (uid, collegeId, courseId, title, content) => (dispatch, getState) => {
+export const newPost = (uid, collegeId, courseId, title, content, fileId) => (dispatch, getState) => {
     dispatch({
         type: POSTING
     })
@@ -21,13 +21,14 @@ export const newPost = (uid, collegeId, courseId, title, content) => (dispatch, 
         {
             method: 'POST',
             // todo: token header
-            body: JSON.stringify({
+            body: {
                 uid: uid,
                 collegeId: collegeId,
                 courseId: courseId,
                 title: title,
-                content: content
-            })
+                content: content,
+                fileId: fileId
+            }
         }
     )
         .then(res => res.json())
