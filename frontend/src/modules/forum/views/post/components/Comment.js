@@ -34,6 +34,7 @@ class Comment extends Component {
                 open={open}
                 onClose={() => closeComment()}
                 aria-labelledby="form-dialog-title"
+                fullWidth
             >
                 <DialogTitle
                     style={{
