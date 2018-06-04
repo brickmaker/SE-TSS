@@ -11,17 +11,18 @@ export const REPLY_FAIL = 'reply_fail'
 export const COMMENT_SUCCESS = 'comment_success'
 export const CLOSE_DIALOG = 'close_post_dialog'
 
-export const reply = (uid, postId, content) => (dispatch) => {
+export const reply = (uid, postId, content, fileId) => (dispatch) => {
     fetch(
         `${ROOT_URL}/api/forum/post_newreply`,
         {
             method: 'POST',
             // todo: token header
-            body: JSON.stringify({
+            body: {
                 uid: uid,
                 postId: postId,
-                content: content
-            })
+                content: content,
+                fileId: fileId
+            }
         }
     )
         .then(res => res.json())
@@ -41,13 +42,13 @@ export const comment = (postId, replyId, from, to, content) => (dispatch, getSta
         {
             method: 'POST',
             // todo: token header
-            body: JSON.stringify({
+            body: {
                 from: from,
                 to: to,
                 postId: postId,
                 replyId: replyId,
                 content: content
-            })
+            }
         }
     )
         .then(res => res.json())

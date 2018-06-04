@@ -26,9 +26,9 @@ class PostPage extends Component {
         this.props.getPostInfo(pid, this.props.pageId)
     }
 
-    reply(content) {
+    reply(content, fileId) {
         const {postId} = this.props
-        this.props.reply("uid", postId, content) // todo: get uid
+        this.props.reply("uid", postId, content, fileId) // todo: get uid
     }
 
     onDialogClose() {
@@ -103,8 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
             type: CLOSE_DIALOG
         })
     },
-    reply: (uid, postId, content) => {
-        dispatch(reply(uid, postId, content))
+    reply: (uid, postId, content, fileId) => {
+        dispatch(reply(uid, postId, content, fileId))
     },
     getPostInfo: (postId, pageId) => {
         dispatch(getPostInfo(postId, pageId))

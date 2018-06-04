@@ -4,6 +4,7 @@ import {Editor} from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "material-ui"
+import FileUploader from "../../../../components/fileuploader"
 
 const editorStyle = {
     marginTop: 10,
@@ -22,6 +23,7 @@ export default class ReplyEditor extends Component {
                 title: "",
                 content: ""
             },
+            file: null,
             editorState: EditorState.createEmpty(),
         };
         this.onEditorStateChange = this.onEditorStateChange.bind(this)
@@ -45,7 +47,7 @@ export default class ReplyEditor extends Component {
         } else {
             const html = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
             if (this.props.post) {
-                this.props.post(html)
+                this.props.post(html, this.state.file)
             }
             this.setState({
                 editorState: EditorState.createEmpty(),
@@ -88,6 +90,9 @@ export default class ReplyEditor extends Component {
                     editorStyle={editorStyle}
                     onEditorStateChange={this.onEditorStateChange}
                 />
+                <FileUploader changeFile={(fileId) => {
+                    this.setState({file: fileId})
+                }}/>
                 <Button
                     style={{margin: 20}}
                     color={'primary'}

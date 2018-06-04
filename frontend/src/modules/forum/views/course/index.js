@@ -60,9 +60,9 @@ class Course extends Component {
         }
     }
 
-    post(title, content) {
+    post(title, content, fileId) {
         const {collegeid, courseid} = this.props.match.params
-        this.props.newPost("uid", collegeid, courseid, title, content) // todo: get uid
+        this.props.newPost("uid", collegeid, courseid, title, content, fileId) // todo: get uid
     }
 
     onDialogClose() {
@@ -187,8 +187,8 @@ const mapDispatchToProps = (dispatch) => ({
             type: CLOSE_DIALOG
         })
     },
-    newPost: (uid, collegeId, courseId, title, content) => {
-        dispatch(newPost(uid, collegeId, courseId, title, content))
+    newPost: (uid, collegeId, courseId, title, content, fileId) => {
+        dispatch(newPost(uid, collegeId, courseId, title, content, fileId))
     },
     subscribe: (uid, collegeId, courseId) => {
         dispatch(subscribe(uid, collegeId, courseId))

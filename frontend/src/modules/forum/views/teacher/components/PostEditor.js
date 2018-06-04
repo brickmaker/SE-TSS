@@ -32,13 +32,6 @@ export default class PostEditor extends Component {
         this.onTitleChange = this.onTitleChange.bind(this)
         this.onDialogClose = this.onDialogClose.bind(this)
         this.alertDialog = this.alertDialog.bind(this)
-        this.handleUploadFile = this.handleUploadFile.bind(this)
-    }
-
-    handleUploadFile() {
-        const files = document.getElementById('upload_files').files
-        this.setState({file: files[0]})
-        console.log(files[0].size)
     }
 
     onTitleChange(event) {
@@ -69,7 +62,7 @@ export default class PostEditor extends Component {
             } else {
                 const html = draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
                 if (this.props.post) {
-                    this.props.post(this.state.title, html)
+                    this.props.post(this.state.title, html, this.state.file)
                 }
                 this.setState({
                     title: "",
