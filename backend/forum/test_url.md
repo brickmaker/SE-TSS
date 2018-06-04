@@ -249,8 +249,7 @@ python manager.py test forum
 
 # 查看热门帖子
 ## GET
-<<<<<<< Updated upstream
-* http://127.0.0.1:8000/api/forum/hotposts?collegeid=1&courseid=1&teacherid=2&time=2018-05-28T14:15:21+08:00&timetype=month
+* http://127.0.0.1:8000/api/forum/hotposts?collegeid=1&courseid=1&teacherid=2&start_time=2018-05-28T14:15:21+08:00&end_time=2018-05-29T14:15:21+08:00
 
 # 搜素
 ## GET
@@ -265,8 +264,3 @@ python manager.py test forum
 * http://127.0.0.1:8000/api/forum/search?searchtype=section&query=张三&pagenum=0&pagesize=16
 * http://127.0.0.1:8000/api/forum/search?searchtype=section&query=软件工程&pagenum=0&pagesize=16
 
-
-
-=======
-* http://127.0.0.1:8000/api/forum/hotposts?collegeid=1&courseid=1&teacherid=2&start_time=2018-05-28T14:15:21+08:00&end_time=2018-05-29T14:15:21+08:00
->>>>>>> Stashed changes

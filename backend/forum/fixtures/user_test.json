@@ -3,21 +3,24 @@
         "model":"forum.User",
         "pk":"1",
         "fields":{
-            "name":"张一"
+            "name":"张一",
+            "account":"3150100000"
         }
     },
     {
         "model":"forum.User",
         "pk":"2",
         "fields":{
-            "name":"张二"
+            "name":"张二",
+            "account":"3150100001.0"
         }
     },
     {
         "model":"forum.User",
         "pk":"3",
         "fields":{
-            "name":"张三"
+            "name":"张三",
+            "account":"3150100002.0"
         }
     }
 ]

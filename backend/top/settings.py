@@ -43,10 +43,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',  # 设置token
     'rest_framework',
-
+    'haystack',
     'forum.apps.ForumConfig',
     'online_testing.apps.OnlineTestingConfig',
 ]
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'forum.whoosh_backend_cn.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
