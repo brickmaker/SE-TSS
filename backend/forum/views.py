@@ -2,6 +2,8 @@ import json
 from django.http import JsonResponse
 from django.http import Http404
 from rest_framework.views import APIView
+from rest_framework.decorators import parser_classes
+from rest_framework.parsers import FileUploadParser
 from rest_framework.response import Response
 from rest_framework import status
 from forum import models
@@ -320,6 +322,7 @@ class course_newpost(APIView):
             courseId = int(raw['courseId'])
             title = raw['title']
             content = raw['content']
+            fileId = raw['fileId']
         except Exception as e:
             #print(e)
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
@@ -330,7 +333,8 @@ class course_newpost(APIView):
             return Response({'error': "Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
     
         try:
-            models.Thread.objects.create(poster_id=uid,title=title,content=content,section_id=course.section_id)
+            models.Thread.objects.create(poster_id=uid,title=title,content=content,section_id=course.section_id,
+                                            attachment_md5=fileId)
         except:
             return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -407,6 +411,7 @@ class teacher_newpost(APIView):
             teacherId = int(raw['teacherId'])
             title = raw['title']
             content = raw['content']
+            fileId = raw['fileId']
         except Exception as e:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
             
@@ -416,7 +421,8 @@ class teacher_newpost(APIView):
             return Response({'error': "Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
     
         try:
-            models.Thread.objects.create(poster_id=uid,title=title,content=content,section=teacher.section)
+            models.Thread.objects.create(poster_id=uid,title=title,content=content,section=teacher.section,
+                                        attachment_md5=fileId)
         except:
             return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -434,6 +440,7 @@ class post_newreply(APIView):
             uid = raw['uid']
             postId = int(raw['postId'])
             content = raw['content']
+            fileId = raw['fileId']
         except Exception as e:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
             
@@ -443,7 +450,7 @@ class post_newreply(APIView):
             return Response({'error': "Post doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
     
         try:
-            models.Reply.objects.create(user_id=uid,post_id=postId,content=content)
+            models.Reply.objects.create(user_id=uid,post_id=postId,content=content,attachment_md5=fileId)
         except:
             return Response({'error':'Fail to reply to the post'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -989,4 +996,24 @@ class hotpost(APIView):
             else:
                 pass
             res.append(t)
+        return Response(res, status=status.HTTP_200_OK)
+        
+class upload_file(APIView):
+    parser_classes = (FileUploadParser,)
+    def post(self, request,format=None):
+    
+        try:
+            file_obj = request.data['file']
+        except Exception as e:
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            att = models.Attachment(file=file_obj)
+            att.save()
+        except Exception as e:
+            print(e)
+            return Response({'error':'Fail to upload file'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        res = {'error':None,'fileId':att.md5sum}
+        
         return Response(res, status=status.HTTP_200_OK)

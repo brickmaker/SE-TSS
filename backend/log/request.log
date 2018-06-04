@@ -4377,3 +4377,99 @@ TypeError: 'type' object is not iterable
 2018-06-03 18:48:16,861 [Thread-1:8924] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/forum/course_list?collegeid=1 HTTP/1.1" 401 58
 2018-06-03 18:48:57,018 [Thread-4:15432] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/info/get_token HTTP/1.1" 200 204
 2018-06-03 18:49:39,513 [Thread-5:16764] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/course_list?collegeid=1 HTTP/1.1" 200 63
+2018-06-04 15:03:38,524 [Thread-1:11528] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/forum/search?searchtype=section&query=%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B&pagenum=0&pagesize=16 HTTP/1.1" 401 9773
+2018-06-04 15:03:38,679 [Thread-3:2176] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+2018-06-04 15:03:38,998 [Thread-4:11676] [django.request:93] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-06-04 15:03:39,001 [Thread-4:11676] [django.server:124] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2307
+2018-06-04 15:04:51,348 [Thread-5:9464] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/forum/teacher_unsubscribe?uid=1&collegeid=1&courseid=1&teacherid=2 HTTP/1.1" 401 9744
+2018-06-04 15:09:48,622 [Thread-1:7868] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/forum/messages?uid1=1&uid2=2&pagenum=0&pagesize=3 HTTP/1.1" 401 9605
+2018-06-04 15:09:48,655 [Thread-3:12436] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+2018-06-04 15:10:01,512 [Thread-1:9968] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/forum/messages
+Traceback (most recent call last):
+  File "E:\django_project\SEF\sef\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "E:\django_project\SEF\sef\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "E:\django_project\SEF\sef\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\django_project\SEF\sef\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "E:\django_project\SEF\sef\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "E:\django_project\SEF\sef\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "E:\django_project\SEF\sef\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "E:\django_project\SEF\sef\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "E:\django_project\SE-TSS\backend\forum\views.py", line 691, in get
+    for rr in raw_datas
+  File "E:\django_project\SE-TSS\backend\forum\views.py", line 691, in <listcomp>
+    for rr in raw_datas
+AttributeError: 'str' object has no attribute 'uid'
+2018-06-04 15:10:01,589 [Thread-1:9968] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/forum/messages?uid1=1&uid2=2&pagenum=0&pagesize=3 HTTP/1.1" 500 112278
+2018-06-04 15:10:14,485 [Thread-8:13036] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/search?searchtype=post&query=%E5%BE%97%E5%BE%97%E5%BE%97%E5%BE%97&pagenum=0&pagesize=16 HTTP/1.1" 200 10985
+2018-06-04 15:10:47,237 [Thread-1:7332] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/course_subscribe?uid=1&collegeid=1&courseid=2 HTTP/1.1" 200 9824
+2018-06-04 15:10:57,868 [Thread-8:3732] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/newmsgs?uid=1&pagesize=1 HTTP/1.1" 200 9971
+2018-06-04 15:11:05,100 [Thread-9:11096] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/college_list HTTP/1.1" 200 9654
+2018-06-04 15:11:19,482 [Thread-15:9540] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/teacher?collegeid=1&courseid=2&teacherid=3 HTTP/1.1" 200 9895
+2018-06-04 15:11:25,523 [Thread-16:9680] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/subscriptions?uid=1 HTTP/1.1" 200 15103
+2018-06-04 15:42:29,817 [Thread-1:12832] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/search?searchtype=section&query=%E5%AD%A6%E9%99%A2&pagenum=0&pagesize=16 HTTP/1.1" 200 10286
+2018-06-04 15:42:29,870 [Thread-3:11800] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+2018-06-04 15:42:37,981 [Thread-8:12788] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/search?searchtype=section&query=%E8%AE%A1%E7%AE%97&pagenum=0&pagesize=16 HTTP/1.1" 200 10803
+2018-06-04 15:47:05,979 [Thread-1:12488] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/teacher_posts?collegeid=1&courseid=1&teacherid=1&fileId=abcd HTTP/1.1" 200 16743
+2018-06-04 15:52:39,419 [MainThread:12808] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:52:39,424 [MainThread:12808] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:12,914 [MainThread:2980] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:12,917 [MainThread:2980] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:31,350 [MainThread:12340] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:31,353 [MainThread:12340] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:46,150 [MainThread:12508] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 15:53:46,153 [MainThread:12508] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:12:46,209 [Thread-1:10088] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/search?searchtype=section&query=%E8%AE%A1%E7%AE%97&pagenum=0&pagesize=16 HTTP/1.1" 200 10803
+2018-06-04 16:12:46,253 [Thread-3:11972] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+2018-06-04 16:17:11,668 [MainThread:9308] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:17:11,672 [MainThread:9308] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:18:18,001 [MainThread:13064] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:18:18,005 [MainThread:13064] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:20:12,783 [MainThread:9364] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:20:12,786 [MainThread:9364] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:20:48,722 [MainThread:10712] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:20:48,725 [MainThread:10712] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:24:27,629 [MainThread:13000] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:24:27,632 [MainThread:13000] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:25:26,417 [MainThread:12628] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:25:26,420 [MainThread:12628] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:26:49,653 [MainThread:6976] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:26:49,657 [MainThread:6976] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:27:26,186 [MainThread:7540] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:27:26,190 [MainThread:7540] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:27:51,043 [MainThread:10712] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:27:51,046 [MainThread:10712] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:34:25,928 [MainThread:13192] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:34:25,932 [MainThread:13192] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:34:55,762 [MainThread:11988] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:34:55,766 [MainThread:11988] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:35:37,949 [MainThread:8296] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:35:37,952 [MainThread:8296] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:36:20,971 [MainThread:6188] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:36:20,974 [MainThread:6188] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:37:58,593 [MainThread:13160] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:37:58,596 [MainThread:13160] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:38:44,403 [MainThread:13064] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:38:44,406 [MainThread:13064] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:39:08,603 [MainThread:11468] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:39:08,606 [MainThread:11468] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:40:39,386 [MainThread:2944] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:40:39,390 [MainThread:2944] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/forum/announcements
+2018-06-04 16:40:57,551 [Thread-1:9692] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/forum/search?searchtype=section&query=%E8%AE%A1%E7%AE%97&pagenum=0&pagesize=16 HTTP/1.1" 200 10803
+2018-06-04 16:40:57,604 [Thread-4:13116] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+2018-06-04 16:40:57,606 [Thread-5:11320] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+2018-06-04 16:40:57,608 [Thread-6:12612] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/default.css HTTP/1.1" 200 1131
+2018-06-04 16:40:57,618 [Thread-8:8092] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+2018-06-04 16:40:57,629 [Thread-3:5888] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121200
+2018-06-04 16:40:57,631 [Thread-7:8356] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/jquery-3.3.1.min.js HTTP/1.1" 304 0
+2018-06-04 16:40:57,646 [Thread-9:6188] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1735
+2018-06-04 16:40:57,660 [Thread-10:6000] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
+2018-06-04 16:40:57,662 [Thread-12:10892] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/default.js HTTP/1.1" 200 1262
+2018-06-04 16:40:57,668 [Thread-11:11812] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
