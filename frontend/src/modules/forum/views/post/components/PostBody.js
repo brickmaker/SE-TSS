@@ -32,6 +32,7 @@ class PostBody extends Component {
                                 postId={postId}
                                 key={reply.id}
                                 id={reply.id}
+                                uid={reply.user.id}
                                 pic={reply.user.pic}
                                 name={reply.user.name}
                                 college={reply.user.college}

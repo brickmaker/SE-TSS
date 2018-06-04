@@ -21,7 +21,10 @@ class Comment extends Component {
 
     handleSubmit() {
         const {to, postId, replyId} = this.props
-        this.props.comment(postId, replyId, "uid", to, this.state.content)
+        if (this.state.content.length > 0 && this.state.content.length < 80) {
+            this.props.comment(postId, replyId, "uid", to, this.state.content) // todo: get uid
+            this.setState({content: ""})
+        }
     }
 
     render() {
@@ -39,7 +42,14 @@ class Comment extends Component {
                     id="form-dialog-title"
                 >评论</DialogTitle>
                 <DialogContent>
+                    {
+                        this.state.content.length < 80 && this.state.content.length > 0 ? null :
+                            <DialogContentText color={'secondary'}>
+                                评论字数需在1-80之间！
+                            </DialogContentText>
+                    }
                     <TextField
+                        error={this.state.content.length <= 0 || this.state.content.length > 80}
                         autoFocus
                         value={this.state.content}
                         margin="dense"
@@ -51,10 +61,16 @@ class Comment extends Component {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => closeComment()} color="secondary">
+                    <Button onClick={() => {
+                        closeComment()
+                        this.setState({content: ""})
+                    }} color="secondary">
                         取消
                     </Button>
-                    <Button onClick={() => this.handleSubmit()} color="primary">
+                    <Button onClick={() => {
+                        this.handleSubmit()
+                        this.setState({content: ""})
+                    }} color="primary">
                         提交
                     </Button>
                 </DialogActions>

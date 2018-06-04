@@ -25,7 +25,7 @@ class Reply extends Component {
     }
 
     render() {
-        const {postId, id, pic, name, college, postNum, content, time, replies} = this.props
+        const {postId, id, uid, pic, name, college, postNum, content, time, replies} = this.props
         return (
             <Card style={style}>
                 <div style={{
@@ -82,7 +82,12 @@ class Reply extends Component {
                             alignItems: 'center',
                             color: '#9E9E9E'
                         }}>
-                            <Button size={'small'}>
+                            <Button
+                                size={'small'}
+                                onClick={() => {
+                                    this.props.openComment(postId, id, uid)
+                                }}
+                            >
                                 <ReplyIcon/>
                                 回复
                             </Button>
