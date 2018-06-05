@@ -1,83 +1,80 @@
 import React, {Component} from 'react';
 
-import Paper from 'material-ui/Paper';
 
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-  } from 'material-ui/Table'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 class ScoreList extends Component{
     render(){
         return(
             <Paper>
                 <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                    <TableHead displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>学号</TableHeaderColumn>
-                            <TableHeaderColumn>分数</TableHeaderColumn>
-                            <TableHeaderColumn>绩点</TableHeaderColumn>
+                            <TableCell>学号</TableCell>
+                            <TableCell>分数</TableCell>
+                            <TableCell>绩点</TableCell>
                         </TableRow>
-                    </TableHeader>
+                    </TableHead>
                     <TableBody displayRowCheckbox={false} stripRows={true}>
                         <TableRow>
-                            <TableRowColumn>3150104532</TableRowColumn>
-                            <TableRowColumn>90</TableRowColumn>
-                            <TableRowColumn>4.2</TableRowColumn>
+                            <TableCell>3150104532</TableCell>
+                            <TableCell>90</TableCell>
+                            <TableCell>4.2</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104533</TableRowColumn>
-                            <TableRowColumn>88</TableRowColumn>
-                            <TableRowColumn>4.2</TableRowColumn>
+                            <TableCell>3150104533</TableCell>
+                            <TableCell>88</TableCell>
+                            <TableCell>4.2</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104534</TableRowColumn>
-                            <TableRowColumn>77</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>3150104534</TableCell>
+                            <TableCell>77</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104535</TableRowColumn>
-                            <TableRowColumn>84</TableRowColumn>
-                            <TableRowColumn>3.9</TableRowColumn>
+                            <TableCell>3150104535</TableCell>
+                            <TableCell>84</TableCell>
+                            <TableCell>3.9</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104536</TableRowColumn>
-                            <TableRowColumn>92</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>3150104536</TableCell>
+                            <TableCell>92</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104537</TableRowColumn>
-                            <TableRowColumn>77</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>3150104537</TableCell>
+                            <TableCell>77</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104538</TableRowColumn>
-                            <TableRowColumn>92</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>3150104538</TableCell>
+                            <TableCell>92</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104539</TableRowColumn>
-                            <TableRowColumn>85</TableRowColumn>
-                            <TableRowColumn>3.9</TableRowColumn>
+                            <TableCell>3150104539</TableCell>
+                            <TableCell>85</TableCell>
+                            <TableCell>3.9</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104540</TableRowColumn>
-                            <TableRowColumn>79</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>3150104540</TableCell>
+                            <TableCell>79</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104541</TableRowColumn>
-                            <TableRowColumn>74</TableRowColumn>
-                            <TableRowColumn>3.0</TableRowColumn>
+                            <TableCell>3150104541</TableCell>
+                            <TableCell>74</TableCell>
+                            <TableCell>3.0</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>3150104542</TableRowColumn>
-                            <TableRowColumn>90</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>3150104542</TableCell>
+                            <TableCell>90</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

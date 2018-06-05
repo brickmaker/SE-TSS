@@ -1,83 +1,79 @@
 import React, {Component} from 'react';
 
-import Paper from 'material-ui/Paper';
-
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-  } from 'material-ui/Table'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 class ScoreList extends Component{
     render(){
         return(
             <Paper>
                 <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                    <TableHead displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>课程</TableHeaderColumn>
-                            <TableHeaderColumn>分数</TableHeaderColumn>
-                            <TableHeaderColumn>绩点</TableHeaderColumn>
+                            <TableCell>课程</TableCell>
+                            <TableCell>分数</TableCell>
+                            <TableCell>绩点</TableCell>
                         </TableRow>
-                    </TableHeader>
+                    </TableHead>
                     <TableBody displayRowCheckbox={false} >
                         <TableRow>
-                            <TableRowColumn>软件工程</TableRowColumn>
-                            <TableRowColumn>90</TableRowColumn>
-                            <TableRowColumn>4.2</TableRowColumn>
+                            <TableCell>软件工程</TableCell>
+                            <TableCell>90</TableCell>
+                            <TableCell>4.2</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>计算机网络</TableRowColumn>
-                            <TableRowColumn>88</TableRowColumn>
-                            <TableRowColumn>4.2</TableRowColumn>
+                            <TableCell>计算机网络</TableCell>
+                            <TableCell>88</TableCell>
+                            <TableCell>4.2</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>数据结构</TableRowColumn>
-                            <TableRowColumn>77</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>数据结构</TableCell>
+                            <TableCell>77</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>体系结构</TableRowColumn>
-                            <TableRowColumn>84</TableRowColumn>
-                            <TableRowColumn>3.9</TableRowColumn>
+                            <TableCell>体系结构</TableCell>
+                            <TableCell>84</TableCell>
+                            <TableCell>3.9</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>专题研讨</TableRowColumn>
-                            <TableRowColumn>92</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>专题研讨</TableCell>
+                            <TableCell>92</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>操作系统</TableRowColumn>
-                            <TableRowColumn>77</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>操作系统</TableCell>
+                            <TableCell>77</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>毛泽东思想</TableRowColumn>
-                            <TableRowColumn>92</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>毛泽东思想</TableCell>
+                            <TableCell>92</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>计算机图形学</TableRowColumn>
-                            <TableRowColumn>85</TableRowColumn>
-                            <TableRowColumn>3.9</TableRowColumn>
+                            <TableCell>计算机图形学</TableCell>
+                            <TableCell>85</TableCell>
+                            <TableCell>3.9</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>中国当代经济</TableRowColumn>
-                            <TableRowColumn>79</TableRowColumn>
-                            <TableRowColumn>3.3</TableRowColumn>
+                            <TableCell>中国当代经济</TableCell>
+                            <TableCell>79</TableCell>
+                            <TableCell>3.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>计算理论</TableRowColumn>
-                            <TableRowColumn>74</TableRowColumn>
-                            <TableRowColumn>3.0</TableRowColumn>
+                            <TableCell>计算理论</TableCell>
+                            <TableCell>74</TableCell>
+                            <TableCell>3.0</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>大学英语</TableRowColumn>
-                            <TableRowColumn>90</TableRowColumn>
-                            <TableRowColumn>4.8</TableRowColumn>
+                            <TableCell>大学英语</TableCell>
+                            <TableCell>90</TableCell>
+                            <TableCell>4.8</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

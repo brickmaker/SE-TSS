@@ -9,6 +9,8 @@ import Forum from "../modules/forum";
 import ScoreManagement from "../modules/scorem"
 import Top from "./components/Top"
 
+
+
 const topStyles = {}
 
 class App extends Component {
@@ -27,7 +29,6 @@ class App extends Component {
                                     className="App-title">TSS
                                 </span>
                             </Link>
-
                             <span className="App-title"> | Here is Navbar placeholder</span>
                         </header>
                         <div>

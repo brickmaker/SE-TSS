@@ -191,7 +191,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
+
 
 
 #跨域增加忽略
@@ -224,7 +224,7 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'Pragma',
 )
-=======
+
 LOGIN_REDIRECT_URL = '/'  # redirect the user upon a successful login
 
 LOGGING = {
@@ -304,4 +304,3 @@ LOGGING = {
         },
     }
 }
->>>>>>> b5b0584b2332bbbd8f0e283f3b8a83cde916e9c9

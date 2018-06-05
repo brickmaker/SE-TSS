@@ -1,15 +1,17 @@
 // React
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 // Reducer
 import store from "../../../top/stores"
 import {changePage} from "../actions";
 import {ENTER_SCORE, SEARCH_SCORE_TEA, SEARCH_SCORE_STU, ANALYSIS_SCORE} from "../reducers";
 // UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Menu, MenuItem} from 'material-ui/Menu';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
-
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 const style = {
   menu: {
     float: 'left',
@@ -23,23 +25,23 @@ const style = {
 class LeftMenu extends Component {
   render() {
     return (
-      <MuiThemeProvider>
-        <Paper style={style.paper}>
-          <Menu desktop={true} style={style}>
-            <MenuItem primaryText="返回主页"/>
+        <Paper >
+          <MenuList >
+            <MenuItem><Link to={'/'} >返回主页</Link></MenuItem>
             <Divider/>
-            <MenuItem primaryText="成绩录入" onClick={() => {
+
+            <MenuItem onClick={() => {
               store.dispatch(changePage(ENTER_SCORE))
-            }}/>
-            <MenuItem primaryText="成绩查询" onClick={() => {
+            }}>成绩录入</MenuItem>
+            <MenuItem onClick={() => {
               store.dispatch(changePage(SEARCH_SCORE_TEA))
-            }}/>
-            <MenuItem primaryText="成绩分析" onClick={() => {
+            }}>成绩查询</MenuItem>
+            <MenuItem onClick={() => {
               store.dispatch(changePage(ANALYSIS_SCORE))
-            }}/>
-          </Menu>
+            }}>成绩分析</MenuItem>
+
+          </MenuList>
         </Paper>
-      </MuiThemeProvider>
     );
   }
 }
