@@ -10,7 +10,7 @@ import 'echarts/lib/component/legend';
 
 import 'echarts/lib/chart/pie'
 
-import Paper from 'material-ui/Paper';
+import Paper from '@material-ui/core/Paper';
 
 class CChart extends Component {
     componentDidMount() {

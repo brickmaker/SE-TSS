@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {connect} from "react-redux";
 
+
 // Reducer
 import {changePage} from "./actions";
 import {ENTER_SCORE, SEARCH_SCORE_TEA, SEARCH_SCORE_STU, ANALYSIS_SCORE} from "./reducers";
@@ -13,6 +14,11 @@ import AnalysisTabs from './component/analyse';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
 import {Take} from "./utils";
+
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 const style = {
   leftMenu: {
@@ -81,6 +87,13 @@ class ScoreManagement extends Component {
     }
     return (
       <div>
+        <AppBar  position={"static"}>
+          <Toolbar>
+            <Typography color={"inherit"} variant="title"  >
+              Title
+            </Typography>
+          </Toolbar>
+        </AppBar>
         {left}
         <div id="content" style={style.content}>
           {right}

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Tabs, Tab} from 'material-ui/Tabs';
-
+import Tabs from 'material-ui/Tabs';
+import Tab from 'material-ui/Tabs';
 import Personal from './ana/personal';
 import Course from './ana/course';
 

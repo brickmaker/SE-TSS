@@ -1,39 +1,36 @@
 import React, {Component} from 'react';
 
-import Paper from 'material-ui/Paper';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-  } from 'material-ui/Table'
 
   class TotalTable extends Component{
       render(){
           return(
               <Paper>
                   <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                    <TableHead displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow>
-                            <TableHeaderColumn>统计项目</TableHeaderColumn>
-                            <TableHeaderColumn>统计值</TableHeaderColumn>
+                            <TableCell>统计项目</TableCell>
+                            <TableCell>统计值</TableCell>
                         </TableRow>
-                    </TableHeader>
+                    </TableHead>
                     <TableBody displayRowCheckbox={false} >
                         <TableRow>
-                            <TableRowColumn>平均分</TableRowColumn>
-                            <TableRowColumn>90.3</TableRowColumn>
+                            <TableCell>平均分</TableCell>
+                            <TableCell>90.3</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>平均绩点</TableRowColumn>
-                            <TableRowColumn>4.27</TableRowColumn>
+                            <TableCell>平均绩点</TableCell>
+                            <TableCell>4.27</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableRowColumn>挂科率</TableRowColumn>
-                            <TableRowColumn>0.00%</TableRowColumn>
+                            <TableCell>挂科率</TableCell>
+                            <TableCell>0.00%</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
