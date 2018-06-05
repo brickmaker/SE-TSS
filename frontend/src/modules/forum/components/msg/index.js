@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Grid, Avatar, CardContent, Typography, withStyles } from 'material-ui';
 import PropTypes from 'prop-types';
+import moment, { now } from 'moment';
 
 const styles = {
     left: {
@@ -60,7 +61,7 @@ class Msg extends Component {
             return (
                 <div className={classes.right}>
                     <Typography className={classes.time} variant='caption' align="left" color="inherit">
-                        {time}
+                        {moment(time).format("YYYY-MM-DD HH:mm")}
                     </Typography>
                     <Card className={classes.rightCard}>
                         <div className={classes.item} styles={{ color: "0x000000" }}>

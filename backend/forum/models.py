@@ -1,5 +1,8 @@
 from django.db import models
 from authentication.models import Account
+from django.core.files.storage import FileSystemStorage
+import hashlib
+import os
 
 # Create your models here.
 
@@ -64,6 +67,7 @@ class Reply(models.Model):
     post = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
     #reply_to = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, related_name='reply')
     date = models.DateTimeField(auto_now_add=True)
+    attachment_md5 = models.CharField(max_length=36,blank=True)
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
@@ -79,10 +83,45 @@ class Reply_reply(models.Model):
     def __str__(self):
         return 'from %s to %s : %s'%(self.from_uid.name,self.to_uid.name,self.content)
 
+        
+class MediaFileSystemStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        if max_length and len(name) > max_length:
+            raise(Exception("name's length is greater than max_length"))
+        return name
+
+    def _save(self, name, content):
+        if self.exists(name):
+            return name
+        return super()._save(name, content)
+
+
+def media_file_name(instance, filename):
+    h = instance.md5sum
+    basename, ext = os.path.splitext(filename)
+    return os.path.join('forum', h + ext.lower())
+
+ 
+class Attachment(models.Model):
+    file = models.FileField(upload_to=media_file_name, storage=MediaFileSystemStorage(),blank=True)
+    md5sum = models.CharField(max_length=36,blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # file is new
+            md5 = hashlib.md5()
+            for chunk in self.file.chunks():
+                md5.update(chunk)
+            self.md5sum = md5.hexdigest()
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.md5sum
+        
 class Announcement(models.Model):
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name='poster')
     title = models.CharField(max_length=50, blank=True, default="")
-    content = models.TextField()
+    content = models.TextField(blank=True)
     section = models.ForeignKey("Section", on_delete=models.CASCADE, related_name='notice')
     #valid = models.BooleanField(default=True)
     date = models.DateTimeField(auto_now_add=True)
@@ -107,6 +146,8 @@ class Thread(models.Model):
     poster = models.ForeignKey('User',on_delete=models.CASCADE) 
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
+    attachment_md5 = models.CharField(max_length=36,blank=True)
+    
     
     CLOSED = 'CL'
     OPEN = 'OP'
@@ -124,15 +165,6 @@ class Thread(models.Model):
     def __str__(self):
         return self.title
  
-
-class Attachment(models.Model):
-    name = models.CharField(max_length=50)
-    thread = models.ForeignKey('Thread',on_delete=models.CASCADE)
-    file = models.FileField()
-    date = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.name
 
     
 class Message(models.Model):
