@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './App.css';
-
 import store from './stores'
 
 import InformationManagement from "../modules/informationManagement";
 import Forum from "../modules/forum";
+import ScoreManagement from "../modules/scorem"
 import Top from "./components/Top"
+
+
 
 const topStyles = {}
 
@@ -27,13 +29,11 @@ class App extends Component {
                                     className="App-title">TSS
                                 </span>
                             </Link>
-
                             <span className="App-title"> | Here is Navbar placeholder</span>
                         </header>
                         <div>
                             <Route exact path={'/'} component={Top}/>
-                            <Route path={'/info'} component={InformationManagement}/>
-                            <Route path={'/forum'} component={Forum}/>
+                            <Route path={'/scorem'} component={ScoreManagement}/>
                         </div>
                     </div>
                 </BrowserRouter>

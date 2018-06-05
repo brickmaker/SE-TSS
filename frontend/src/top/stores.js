@@ -3,8 +3,10 @@ import {combineReducers} from 'redux';
 import thunk from "redux-thunk";
 
 import {forumReducer} from '../modules/forum/reducers';
+import {scoreReducer} from "../modules/scorem/reducers";
 
 const rootReducer = combineReducers({
+    score: scoreReducer,
     forum: forumReducer
 });
 
