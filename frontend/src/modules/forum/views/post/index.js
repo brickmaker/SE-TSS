@@ -60,7 +60,7 @@ class PostPage extends Component {
                 <MainBody>
                     <Path path={path}/>
                     <PostTitle title={title}/>
-                    <PostBody/>
+                    <PostBody history={this.props.history}/>
                     <ReplyEditor
                         post={this.reply}
                     />

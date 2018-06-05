@@ -13,6 +13,7 @@ import {
 import {Reply as ReplyIcon} from '@material-ui/icons'
 import {connect} from "react-redux"
 import {OPEN_COMMENT} from "../actions"
+import {selectEntry} from "../../messages/actions";
 
 const style = {
     margin: '15px 0',
@@ -62,6 +63,12 @@ class Reply extends Component {
                     <Button
                         variant={'raised'}
                         color={'primary'}
+                        onClick={(event)=>{
+                            event.preventDefault();
+                            console.log("click msg", uid, pic, name);
+                            this.props.selectEntry(uid, pic, name);
+                            this.props.history.push(`/forum/messages`);
+                        }}
                         style={{
                             margin: 15,
                             backgroundColor: '#3949AB'
@@ -141,6 +148,9 @@ const mapDispatchToProps = (dispatch) => ({
             replyId: replyId,
             to: to
         })
+    },
+    selectEntry:(id, avatar, username)=>{
+        dispatch(selectEntry(id, avatar, username));
     }
 })
 

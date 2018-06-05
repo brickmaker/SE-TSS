@@ -22,7 +22,7 @@ class PostBody extends Component {
     }
 
     render() {
-        const {replies, pageNum, currPage, postId} = this.props
+        const {replies, pageNum, currPage, postId, history} = this.props
         return (
             <div>
                 {
@@ -40,6 +40,7 @@ class PostBody extends Component {
                                 content={reply.content}
                                 time={reply.time}
                                 replies={reply.replies}
+                                history={history}
                             />
                         )
                     })
