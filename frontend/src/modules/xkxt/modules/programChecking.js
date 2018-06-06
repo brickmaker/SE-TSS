@@ -8,6 +8,7 @@ import Typography from 'material-ui/Typography';
 
 import ProgramViewing from './programViewing';
 import ProgramFormulating from './programFormulating';
+import { getProgram } from '../actions';
 
 const styles = theme => ({
 	divStyle: {
@@ -18,29 +19,41 @@ const styles = theme => ({
 	},
 });
 
-const ProgramChecking = ({ classes }) => {
-	var isFormulated = false;
+class ProgramChecking extends React.Component {
+	constructor() {
+		super();
 
-	return (
-		<div className={classes.divStyle}>
-			<Paper elevation={4}>
-				<AppBar position="static" color="default">
-					<Typography align="center" style={{ padding: 15 }}>培养方案{isFormulated ? "查看" : "制定"}</Typography>
-				</AppBar>
-				<Typography component="div"  style={{ padding: 8 * 3 }}>
-					{isFormulated ? <ProgramViewing/> : <ProgramFormulating/>}
-				</Typography>
-			</Paper>
-		</div>
-	);
-};
+	}
+
+	componentWillMount() {
+		this.props.getProgram('uid=0002');
+	}
+
+	render() {
+		let { classes, program } = this.props;
+		let isFormulated = (Boolean(program) ? program.is_form : false);
+		return (
+			<div className={classes.divStyle}>
+				<Paper elevation={4}>
+					<AppBar position="static" color="default">
+						<Typography align="center" style={{ padding: 15 }}>培养方案{isFormulated ? "查看" : "制定"}</Typography>
+					</AppBar>
+					<Typography component="div"  style={{ padding: 8 * 3 }}>
+						{isFormulated ? <ProgramViewing/> : <ProgramFormulating/>}
+					</Typography>
+				</Paper>
+			</div>
+		);
+	}
+}
 
 const mapStateToProps = (state, props) => ({
-	classes: props.classes
+	classes: props.classes,
+	program: state.xkxt.program,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-	
+	getProgram: (attr) => getProgram(dispatch, attr),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ProgramChecking));

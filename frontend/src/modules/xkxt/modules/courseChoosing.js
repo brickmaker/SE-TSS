@@ -45,9 +45,9 @@ const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes }) => {
 						<Tab label="专业选修课" />
 					</Tabs>
 				</AppBar>
-				{tabsCCValue === 0 && <TabContainer><CourseViewer /></TabContainer>}
-				{tabsCCValue === 1 && <TabContainer><CourseViewer /></TabContainer>}
-				{tabsCCValue === 2 && <TabContainer><CourseViewer /></TabContainer>}
+				{tabsCCValue === 0 && <TabContainer><CourseViewer query={"&userid=0001&course_type=0"} /></TabContainer>}
+				{tabsCCValue === 1 && <TabContainer><CourseViewer query={"&userid=0001&course_type=2"} /></TabContainer>}
+				{tabsCCValue === 2 && <TabContainer><CourseViewer query={"&userid=0001&course_type=1"} /></TabContainer>}
 			</Paper>
 		</div>
 	);

@@ -44,70 +44,7 @@ const styles = theme => ({
 
 });
 
-const data1 = [
-	{
-		id: 0,
-		name: '中外管理思想史',
-		credits: 1.5,
-		time: '一'
-	},
-	{
-		id: 1,
-		name: '西方音乐简史',
-		credits: 1.5,
-		time: '一'
-	},
-	{
-		id: 2,
-		name: '体育',
-		credits: 1.5,
-		time: '一'
-	},
-];
-
-const data2 = [
-	{
-		id: 0,
-		name: '微积分',
-		credits: 4.5,
-		time: '一'
-	},
-	{
-		id: 1,
-		name: '大学物理',
-		credits: 4.5,
-		time: '二'
-	},
-	{
-		id: 2,
-		name: '线性代数',
-		credits: 2.5,
-		time: '一'
-	},
-];
-
-const data3 = [
-	{
-		id: 0,
-		name: '操作系统',
-		credits: 4.5,
-		time: '三'
-	},
-	{
-		id: 1,
-		name: '软件工程',
-		credits: 2.5,
-		time: '三'
-	},
-	{
-		id: 2,
-		name: '计算机网络',
-		credits: 4.5,
-		time: '三'
-	},
-];
-
-const ProgramViewing = ({ classes }) => {
+const ProgramViewing = ({ classes, program }) => {
     function getTable(data){
 		return (
 			<Table>
@@ -119,11 +56,11 @@ const ProgramViewing = ({ classes }) => {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{data.map(n => { return (
-					<TableRow className={classes.row} key={n.id}>
+					{data.map((n, i) => { return (
+					<TableRow className={classes.row} key={i}>
 						<CustomTableCell>{n.name}</CustomTableCell>
-						<CustomTableCell numeric>{n.credits}</CustomTableCell>
-						<CustomTableCell numeric>{n.time}</CustomTableCell>
+						<CustomTableCell numeric>{n.credit}</CustomTableCell>
+						<CustomTableCell numeric>{n.term}</CustomTableCell>
 					</TableRow>
 					);})}
 				</TableBody>
@@ -131,7 +68,7 @@ const ProgramViewing = ({ classes }) => {
 		);
 	}
     return (
-        <Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto'}}>
+        <Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto', textAlign:'center'}}>
             <Typography className={classes.title0}>培养方案</Typography>
             <Typography className={classes.title2}>
                 计算机科学与技术1502班 李朋洋 3150104666
@@ -139,13 +76,13 @@ const ProgramViewing = ({ classes }) => {
             <Divider />
             <div className={classes.innerDiv}>
                 <Typography variant="title" className={classes.title1}>公共课</Typography>
-                {getTable(data1)}
+                {Boolean(program)?getTable(program.public):''}
                 <Divider /><br/>
                 <Typography variant="title" className={classes.title1}>专业必修课</Typography>
-                {getTable(data2)}
+                {Boolean(program)?getTable(program.major_comp):''}
                 <Divider /><br/>
                 <Typography variant="title" className={classes.title1}>专业选修课</Typography>
-                {getTable(data3)}
+                {Boolean(program)?getTable(program.major_op):''}
                 <br/>
             </div>
         </Paper>
@@ -153,7 +90,8 @@ const ProgramViewing = ({ classes }) => {
 }
 
 const mapStateToProps = (state, props) => ({
-	classes: props.classes
+	classes: props.classes,
+	program: state.xkxt.program,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

@@ -110,7 +110,7 @@ const ScheduleTableViewer = ({ classes }) => {
 				<TableBody>
 					{data.map(n => {
 					return (
-                        <TableRow className={classes.row} key={n.id}>
+                        <TableRow className={classes.row} key={n.id} style={{fontStyle:{color:'red'}}}>
                             { n.id===3||n.id===6||n.id===8 ? <CustomTableCell>{n.label}</CustomTableCell>
                              : <CustomTableCell className={classes.cell}>{n.label}</CustomTableCell>}
                             {getCourseCell(courses["一"] ? getCourse(courses["一"], n.id) : "")}

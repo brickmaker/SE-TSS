@@ -4,8 +4,20 @@ const initState = {
     tabsCCValue: 2,
     tabsSVValue: 0,
     tabsCMValue: 0,
-    checkedCVBools: [false, false, false],
-    checkedPFBools: [false, false, false, false, false, false],
+    bottom: false,
+    CS_show: 0,
+    checkedCVBools: {},
+    checkedPFBools: {
+        public: {},
+        major_op: {},
+    },
+    program: null,
+    course: null,
+    courseInfo: null,
+    courseStudent: null,
+    time: null,
+    management1: null,
+    management2: null,
 };
 
 export const xkxtReducer = (state = initState, action) => {
@@ -14,9 +26,10 @@ export const xkxtReducer = (state = initState, action) => {
             return Object.assign({}, state, {
                 utility: action.utility
             });
-        case 'OPEN_FUNC':
+        case 'TOGGLE_DRAWER':
+            console.log(action.bool);
             return Object.assign({}, state, {
-                openDrawer: !state.openDrawer
+                bottom: action.bool
             });
         case 'TABS_CC_FUNC':
             return Object.assign({}, state, {
@@ -27,27 +40,83 @@ export const xkxtReducer = (state = initState, action) => {
                 tabsSVValue: action.value
             });
         case 'TABS_CM_FUNC':
+            if(action.value===0)
+                state.management1 = null;
             return Object.assign({}, state, {
                 tabsCMValue: action.value
             });
-        case 'CHECKED_CV_FUNC':
-            var a = [];
-            for(let i=0; i<state.checkedCVBools.length; i++){
-                if(i===action.index) a.push(!state.checkedCVBools[i]);
-                else a.push(state.checkedCVBools[i]);
-            }
+        case 'CHANGE_CS_FUNC':
             return Object.assign({}, state, {
-                checkedCVBools: a
+                CS_show: action.show
+            });
+        case 'CHECKED_CV_FUNC':
+            if(action.index in state.checkedCVBools)
+                state.checkedCVBools[action.index] = !state.checkedCVBools[action.index];
+            else
+                state.checkedCVBools[action.index] = true;
+            return Object.assign({}, state, {
+                checkedCVBools: JSON.parse(JSON.stringify(state.checkedCVBools))
             });
         case 'CHECKED_PF_FUNC':
-            var a = [];
-            for(let i=0; i<state.checkedPFBools.length; i++){
-                if(i===action.index) a.push(!state.checkedPFBools[i]);
-                else a.push(state.checkedPFBools[i]);
-            }
+            if(action.index.i in state.checkedPFBools[action.index.type])
+                state.checkedPFBools[action.index.type][action.index.i] = !state.checkedPFBools[action.index.type][action.index.i];
+            else
+                state.checkedPFBools[action.index.type][action.index.i] = true;
             return Object.assign({}, state, {
-                checkedPFBools: a
+                checkedPFBools: JSON.parse(JSON.stringify(state.checkedPFBools))
             });
+        case 'GET_PROGRAM':
+            console.log(action.data);
+            return Object.assign({}, state, {
+                program: action.data
+            });
+        case 'GET_COURSE':
+            console.log(action.data);
+            return Object.assign({}, state, {
+                course: action.data
+            });
+        case 'POST_COURSE':
+            console.log(action.data);
+            if(action.data.if_ok===false)
+                return state;
+            let newCourse;
+            if(Boolean(state.management1))
+                newCourse = state.management1;
+            else
+                newCourse = state.course;
+            newCourse[action.index].state = action.data.state;
+            return Object.assign({}, state, {
+                course: JSON.parse(JSON.stringify(newCourse))
+            });
+        case 'GET_COURSE_INFO': 
+            console.log(action.data);
+            return Object.assign({}, state, {
+                courseInfo: action.data
+            });
+        case 'GET_COURSE_STUDENT': 
+            console.log(action.data);
+            return Object.assign({}, state, {
+                courseStudent: action.data
+            });
+        case 'GET_MANAGEMENT': 
+            console.log(action.data);
+            if(action.typ===0){
+                return Object.assign({}, state, {
+                    time: action.data
+                });
+            }
+            else if(action.typ===1){
+                return Object.assign({}, state, {
+                    management1: action.data
+                });
+            }
+            else if(action.typ===2){
+                return Object.assign({}, state, {
+                    management2: action.data
+                });
+            }
+            else
+                return state;
         default:
             return state;
     }

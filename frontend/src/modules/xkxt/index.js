@@ -10,16 +10,20 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from 'material-ui/Button';
+import TextField from 'material-ui/TextField';
 
-import {switchUtility, openFunc} from './actions';
+import {switchUtility, changeCSFunc, tabsSVFunc, tabsCMFunc} from './actions';
 import ProgramChecking from './modules/programChecking';
 import CourseSearching from './modules/courseSearching';
 import CourseChoosing from './modules/courseChoosing';
 import ScheduleViewing from './modules/scheduleViewing';
 import CourseManagement from './modules/courseManagement';
+import CourseStudent from './modules/courseStudent';
+
 const drawerWidth = 210;
 const HEIGHT = 715;
-const styles = theme => (console.log(theme),{
+const styles = theme => ({
   root: {
 	position: 'absolute',
 	height: HEIGHT,
@@ -30,8 +34,10 @@ const styles = theme => (console.log(theme),{
   },
   drawerPaper: {
 	position: 'absolute',
+	top: 0,
 	width: drawerWidth,
 	height: HEIGHT,
+	zIndex: theme.zIndex.appBar+1
   },
   toolbar: theme.mixins.toolbar,
   divStyle: {
@@ -49,7 +55,7 @@ const styles = theme => (console.log(theme),{
   }
 });
 
-const Xkxt = ({ isAdmin, utility, switchUtility, classes }) => {
+const Xkxt = ({ isAdmin, utility, switchUtility, classes, changeCSFunc, tabsSVFunc, tabsCMFunc }) => {
 	var whatToShow = (<ProgramChecking />);
 	switch(utility){
 		case "培养方案":	
@@ -62,6 +68,8 @@ const Xkxt = ({ isAdmin, utility, switchUtility, classes }) => {
 			whatToShow = (<ScheduleViewing />); break;
 		case "选课管理":
 			whatToShow = (<CourseManagement />); break;
+		case "课程导出学生":
+			whatToShow = (<CourseStudent />); break;
 		default:
 			//whatToShow = ('');
 	}
@@ -76,14 +84,19 @@ const Xkxt = ({ isAdmin, utility, switchUtility, classes }) => {
 				</Toolbar>
 			</AppBar>
 			<div className={classes.divStyle}>
-				
 				{whatToShow}
 			</div>
 			<Drawer
 				variant="permanent"
+				PaperProps={{
+					className: classes.drawerPaper,
+				}}
+				/*
 				classes={{
-				paper: classes.drawerPaper,
-			}}>
+					paperAnchorTop: '40px',
+					paper: classes.drawerPaper,
+				}}*/
+			>
 				<div className={classes.toolbar}>
 					<Typography variant="title" color="inherit" className={classes.title}>
 						选课系统
@@ -94,20 +107,23 @@ const Xkxt = ({ isAdmin, utility, switchUtility, classes }) => {
 					<ListItem button onClick={() => switchUtility("培养方案")} className={classes.listItem}>
 						<ListItemText primary="培养方案" />
 					</ListItem>
-					<ListItem button onClick={() => switchUtility("课程搜索")} className={classes.listItem}>
+					<ListItem button onClick={() => {changeCSFunc();switchUtility("课程搜索")}} className={classes.listItem}>
 						<ListItemText primary="课程搜索" />
 					</ListItem>
 					<ListItem button onClick={() => switchUtility("自主选课")} className={classes.listItem}>
 						<ListItemText primary="自主选课" />
 					</ListItem>
-					<ListItem button onClick={() => switchUtility("查看课表")} className={classes.listItem}>
+					<ListItem button onClick={() => {tabsSVFunc();switchUtility("查看课表")}} className={classes.listItem}>
 						<ListItemText primary="查看课表" />
 					</ListItem>
 					{isAdmin ?
-					<ListItem button onClick={() => switchUtility("选课管理")} className={classes.listItem}>
+					<ListItem button onClick={() => {tabsCMFunc();switchUtility("选课管理")}} className={classes.listItem}>
 						<ListItemText primary="选课管理" />
 					</ListItem>
 					:''}
+					<ListItem button onClick={() => {tabsSVFunc();switchUtility("课程导出学生")}} className={classes.listItem}>
+						<ListItemText primary="课程导出学生" />
+					</ListItem>
 				</List>			
 			</Drawer>	
 		</div>
@@ -124,6 +140,9 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
 	switchUtility: (utility) => dispatch(switchUtility(utility)),
+	changeCSFunc:() => dispatch(changeCSFunc(0)),
+	tabsSVFunc: () => dispatch(tabsSVFunc(0)),
+	tabsCMFunc: () => dispatch(tabsCMFunc(0)),
 });
 
 

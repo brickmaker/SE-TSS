@@ -37,7 +37,7 @@ const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes }) => {
 					</Tabs>
 				</AppBar>
 				<Typography component="div"  style={{ padding: 8 * 3 }}>
-					{tabsSVValue === 0 && <CourseViewer />}
+					{tabsSVValue === 0 && <CourseViewer query={"&uid=0002"}/>}
 					{tabsSVValue === 1 && <ScheduleTableViewer />}
 				</Typography>
 			</Paper>
