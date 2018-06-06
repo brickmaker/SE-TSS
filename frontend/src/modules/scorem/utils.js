@@ -1,6 +1,6 @@
-export function Take(cname, tname, sid, score) {
-  this.cname = cname;
-  this.tname = tname;
+export function Take(cid,tid, sid, score) {
+  this.cid = cid;
+  this.tid = tid;
   this.sid = sid;
   this.score = score;
 }
