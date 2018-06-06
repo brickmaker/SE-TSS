@@ -22,13 +22,17 @@ class PostBody extends Component {
     }
 
     render() {
-        const {replies, pageNum, currPage} = this.props
+        const {replies, pageNum, currPage, postId, history} = this.props
         return (
             <div>
                 {
                     replies.map((reply) => {
                         return (
                             <Reply
+                                postId={postId}
+                                key={reply.id}
+                                id={reply.id}
+                                uid={reply.user.id}
                                 pic={reply.user.pic}
                                 name={reply.user.name}
                                 college={reply.user.college}
@@ -36,6 +40,7 @@ class PostBody extends Component {
                                 content={reply.content}
                                 time={reply.time}
                                 replies={reply.replies}
+                                history={history}
                             />
                         )
                     })

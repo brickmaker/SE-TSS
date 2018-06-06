@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT } from './actions';
+import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -8,21 +8,35 @@ const initialState = {
     isFetchingEntries: false,
     msgs: [],
     isFetchingMsgs: false,
-    selectedId: 30,
+    selectedId: undefined,
+    selectedAvatar: "",
+    selectedUsername: "",
+    currentPageNum: 1,
+    pageSize: 10,
     errors: {},
     content: "",
-    // test: true,
+    noMoreMsgs: false,
+    msgEnd: undefined,
+    isEntering: false,
+    isFetchingNewMsgs: false,
+    newMsgs: [],
 };
 
 export function messageReducer(state = initialState, action) {
     switch (action.type) {
-        // case TEST:
-        //     return (Object.assign({}, state, {
-        //         test: action.test,
-        //     }));
         case SELECT_ENTRY:
             return (Object.assign({}, state, {
                 selectedId: action.selectedId,
+                selectedAvatar: action.selectedAvatar,
+                selectedUsername: action.selectedUsername,
+            }));
+        case CLEAR_MSGS:
+            return (Object.assign({}, state, {
+                msgs: [],
+            }));
+        case SET_MSGEND:
+            return (Object.assign({}, state, {
+                msgEnd: action.msgEnd,
             }));
         case GET_CONTENT:
             return (Object.assign({}, state, {
@@ -33,7 +47,6 @@ export function messageReducer(state = initialState, action) {
                 isFetchingEntries: true,
             }));
         case MSGENTRIES_SUCCESS:
-            console.log("reducer", action.entries);
             var newSelectedId = state.selectedId;
             if (action.entries.length > 0) {
                 newSelectedId = action.entries[0]['id'];
@@ -41,7 +54,6 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetchingEntries: false,
                 entries: action.entries,
-                // selectedId: newSelectedId,
             }));
         case MSGENTRIES_FAILURE:
             return (Object.assign({}, state, {
@@ -52,18 +64,36 @@ export function messageReducer(state = initialState, action) {
         case MSGS_REQUEST:
             return (Object.assign({}, state, {
                 isFetchingMsgs: true,
+                isEntering: action.isEntering,
             }));
         case MSGS_SUCCESS:
             return (Object.assign({}, state, {
                 isFetchingMsgs: false,
-                msgs: action.msgs,
+                msgs: action.newMsgs.concat(state.msgs),
+                currentPageNum: action.currentPageNum,
+                isEntering: false,
+                pageSize: action.pageSize,
             }));
         case MSGS_FAILURE:
             return (Object.assign({}, state), {
                 isFetchingMsgs: false,
-                msgs: undefined,
                 errors: action.errors,
+                noMoreMsgs: true,
             });
+        case NEWMSGS_REQUEST:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: true,
+            }));
+        case NEWMSGS_SUCCESS:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: false,
+                newMsgs: action.newMsgs,
+            }));
+        case NEWMSGS_FAILURE:
+            return (Object.assign({}, state, {
+                isFetchingNewMsgs: false,
+                errors: action.errors,
+            }));
         default:
             return state;
     }

@@ -3,7 +3,7 @@ import { Grid, Typography, Paper, Avatar, withStyles, Button } from 'material-ui
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { selectEntry, getMsgs } from '../../views/messages/actions';
+import { selectEntry, getMsgs, clearMsgs } from '../../views/messages/actions';
 
 const styles = {
     entry: {
@@ -28,26 +28,26 @@ const styles = {
 class MsgEntry extends Component {
     render() {
         const { avatar, username, lastMsgContent, id } = this.props.entry;
-        const { classes, selectedId, selectEntry, getMsgs} = this.props;
-        const  uid = 5;
+        const { classes, selectedId, selectEntry, getMsgs, pageSize, clearMsgs} = this.props;
         // TODO: uid
+        const  uid = 5;
         return (
             <Grid container>
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                     <Button className={selectedId == id ? classes.selectedEntry : classes.entry}
                         onClick={(event) => { event.preventDefault(); 
-                            selectEntry(id);
-                            getMsgs(uid, id); 
+                            selectEntry(id, avatar, username);
+                            clearMsgs();
+                            getMsgs(uid, id, 1, pageSize); 
                              }}
                         fullWidth={true}>
-                        <Avatar>
-                            {username[0]}
+                        <Avatar alt={username} src={avatar}>
                         </Avatar>
                         <div className={classes.item}>
-                            <Typography variant='title' align="left">
+                            <Typography variant='subheading' align="left">
                                 {username}
                             </Typography>
-                            <Typography variant='body1' align="left">
+                            <Typography variant='caption' align="left">
                                 {lastMsgContent}
                             </Typography>
                         </div>
@@ -64,13 +64,19 @@ MsgEntry.propTypes = {
 
 const mapStateToProps = (state) => ({
     selectedId: state.forum.messages.selectedId,
+    pageSize: state.forum.messages.pageSize,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    selectEntry: (selectedId) => { dispatch(selectEntry( selectedId)) },
-    getMsgs: (id1, id2) => {
-        dispatch(getMsgs(id1, id2));
-    }
+    selectEntry: (selectedId,selectedAvatar, selectedUsername) => { 
+        dispatch(selectEntry( selectedId, selectedAvatar, selectedUsername)); 
+    },
+    getMsgs: (uid1, uid2, nextPageNum, pageSize) => {
+        dispatch(getMsgs(uid1, uid2, nextPageNum, pageSize));
+    },
+    clearMsgs:()=>{
+        dispatch(clearMsgs());
+    },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(MsgEntry);
