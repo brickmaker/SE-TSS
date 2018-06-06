@@ -1,51 +1,143 @@
 from django.db import models
-
+from authentication.models import Account
+from django.core.files.storage import FileSystemStorage
+import hashlib
+import os
 
 # Create your models here.
 
 class Section(models.Model):
     name = models.CharField(max_length=50, blank=False, default="default-section")
     description = models.CharField(max_length=200, blank=True, default="")
-    father_section = models.ManyToManyField('self', symmetrical=False, related_name='root')
     admin = models.ManyToManyField('User',symmetrical=False,related_name='admin')
-    create_time = models.DateTimeField(auto_now_add=True)
+    
+    COLLEGE = 'CL'
+    COURSE = 'CE'
+    TEACHER = 'TR'
+    
+    SECTION_TYPE_CHOICES = (
+        (COLLEGE,'college'),
+        (COURSE,'course'),
+        (TEACHER,'teacher'),
+    )
+    
+    type = models.CharField(
+        max_length=2,
+        choices=SECTION_TYPE_CHOICES,
+        default=TEACHER,
+    )
+    
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
 
+class College(models.Model):
+    code = models.CharField(max_length=50, blank=False, default="default-college-code")
+    name = models.CharField(max_length=50, blank=False, default="default-college-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='college')
+    
+    def __str__(self):
+        return 'College Code: %s College Name: %s'%(self.code,self.name)
+        
+class Course(models.Model):
+    
+    code = models.CharField(max_length=50, blank=False, default="default-course-code")
+    name = models.CharField(max_length=50, blank=False, default="default-course-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='course')
+    college = models.ForeignKey('College',on_delete=models.CASCADE,related_name='course')
+    
+    def __str__(self):
+        return 'Course Code: %s Course Name: %s'%(self.code,self.name)
 
+class Teacher(models.Model):
+    name = models.CharField(max_length=50, blank=False, default="default-course-name")
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='teacher')
+    college = models.ForeignKey('College',on_delete=models.CASCADE,related_name='teacher')
+    course  = models.ForeignKey('Course',on_delete=models.CASCADE,related_name='teacher')
+    
+    def __str__(self):
+        return 'Teacher : %s'%(self.name)
+
+        
+        
 class Reply(models.Model):
-    uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
+    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name='reply')
     content = models.TextField()
-    post_id = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
-    reply_to = models.ForeignKey('self', on_delete=models.CASCADE, null=True, related_name='reply')
-    create_time = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey("Thread", on_delete=models.CASCADE, related_name='reply')
+    #reply_to = models.ForeignKey('Section', on_delete=models.CASCADE, null=True, related_name='reply')
+    date = models.DateTimeField(auto_now_add=True)
+    attachment_md5 = models.CharField(max_length=36,blank=True)
     #valid = models.BooleanField(default=True)
 
     def __str__(self):
         return self.content
 
-
-class Notice(models.Model):
-    uid = models.ForeignKey("User", on_delete=models.CASCADE, related_name='notice')
-    title = models.CharField(max_length=50, blank=True, default="")
+class Reply_reply(models.Model):
+    from_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_from')
+    to_uid = models.ForeignKey('User',on_delete=models.CASCADE,related_name='replyreply_to')
     content = models.TextField()
-    section_id = models.ForeignKey("Section", on_delete=models.CASCADE, related_name='notice')
-    valid = models.BooleanField(default=True)
+    reply_id = models.ForeignKey('Reply',on_delete=models.CASCADE,related_name='replyreply')
     create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return 'from %s to %s : %s'%(self.from_uid.name,self.to_uid.name,self.content)
+
+        
+class MediaFileSystemStorage(FileSystemStorage):
+    def get_available_name(self, name, max_length=None):
+        if max_length and len(name) > max_length:
+            raise(Exception("name's length is greater than max_length"))
+        return name
+
+    def _save(self, name, content):
+        if self.exists(name):
+            return name
+        return super()._save(name, content)
+
+
+def media_file_name(instance, filename):
+    h = instance.md5sum
+    basename, ext = os.path.splitext(filename)
+    return os.path.join('forum', h + ext.lower())
+
+ 
+class Attachment(models.Model):
+    file = models.FileField(upload_to=media_file_name, storage=MediaFileSystemStorage(),blank=True)
+    md5sum = models.CharField(max_length=36,blank=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:  # file is new
+            md5 = hashlib.md5()
+            for chunk in self.file.chunks():
+                md5.update(chunk)
+            self.md5sum = md5.hexdigest()
+        super().save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.md5sum
+        
+class Announcement(models.Model):
+    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name='poster')
+    title = models.CharField(max_length=50, blank=True, default="")
+    content = models.TextField(blank=True)
+    section = models.ForeignKey("Section", on_delete=models.CASCADE, related_name='notice')
+    #valid = models.BooleanField(default=True)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
 class User(models.Model):
-    uid = models.CharField(max_length=20,primary_key=True)
+    id = models.CharField(max_length=20,primary_key=True)
     name = models.CharField(max_length=50)
     signature = models.TextField()
     avatar = models.ImageField()
+    account = models.OneToOneField(Account,on_delete=models.CASCADE,to_field='username',default='315010000')
     
     def __str__(self):
-        return '%s %s'%(self.uid,self.name)
+        return '%s %s'%(self.id,self.name)
 
         
 class Thread(models.Model):
@@ -53,7 +145,9 @@ class Thread(models.Model):
     content = models.TextField()
     poster = models.ForeignKey('User',on_delete=models.CASCADE) 
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
+    attachment_md5 = models.CharField(max_length=36,blank=True)
+    
     
     CLOSED = 'CL'
     OPEN = 'OP'
@@ -72,31 +166,21 @@ class Thread(models.Model):
         return self.title
  
 
-class Attachment(models.Model):
-    name = models.CharField(max_length=50)
-    thread = models.ForeignKey('Thread',on_delete=models.CASCADE)
-    file = models.FileField()
-    date = models.DateField()
-    
-    def __str__(self):
-        return self.name
-
     
 class Message(models.Model):
-    sender_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
-    receiver_id = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
+    sender = models.ForeignKey('User',on_delete=models.CASCADE,related_name='sender')
+    receiver = models.ForeignKey('User',on_delete=models.CASCADE,related_name='receiver')
     content = models.TextField()
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return 'From %s to %s'%(self.sender_id,self.receiver_id)
+        return 'From %s to %s: %s'%(self.sender_id,self.receiver_id,self.content)
 
         
 class Subscribe(models.Model):
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
     section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='section')
-    date = models.DateField()
+    date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return '%s subscribed %s'(self.uid,self.section_id)
-    

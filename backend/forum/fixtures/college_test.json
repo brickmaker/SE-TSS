@@ -1,0 +1,11 @@
+[
+    {
+        "model":"forum.College",
+        "pk":1,
+        "fields":{
+            "code":"1",
+            "name":"计算机科学与技术学院",
+            "section":1
+        }
+    }
+]
