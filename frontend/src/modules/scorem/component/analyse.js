@@ -24,24 +24,20 @@ const data = [
 ];
 
 
-
+/*
+<div>
+                    <Course />
+                </div>
+*/
 class AnalysisTabs extends Component{
     
     render(){
         return (
             <MuiThemeProvider>
-                <Tabs>
-                    <Tab label="个人分析" value={1}>
-                        <div>
-                            <Personal />
-                        </div>
-                    </Tab>
-                    <Tab label="班级分析" value={2}>
-                        <div>
-                            <Course />
-                        </div>
-                    </Tab>
-                </Tabs>
+                <div>
+                    <Course />
+                </div>
+                
             </MuiThemeProvider>
         );
     }

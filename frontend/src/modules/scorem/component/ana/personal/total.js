@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
 
-  class TotalTable extends Component{
+  class PTotalTable extends Component{
       render(){
           return(
               <Paper>
@@ -39,4 +39,4 @@ import Paper from '@material-ui/core/Paper';
       }
   }
 
-  export default TotalTable;
+  export default PTotalTable;
