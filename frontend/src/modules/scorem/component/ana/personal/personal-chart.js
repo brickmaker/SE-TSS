@@ -59,7 +59,7 @@ class PChart extends Component {
     render() {
         return (
             <Paper>
-                <div id="p-chart" style={{ width: 500, height: 400 }}></div>
+                <div id="p-chart" style={{ width: "100%", height: "400%" }}></div>
             </Paper>
         );
     }

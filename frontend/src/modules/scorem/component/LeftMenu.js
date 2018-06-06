@@ -4,7 +4,7 @@ import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 // Reducer
 import store from "../../../top/stores"
 import {changePage} from "../actions";
-import {ENTER_SCORE, SEARCH_SCORE_TEA, SEARCH_SCORE_STU, ANALYSIS_SCORE} from "../reducers";
+import {ENTER_SCORE, SEARCH_SCORE, ANALYSIS_SCORE} from "../reducers";
 // UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,25 +24,42 @@ const style = {
 
 class LeftMenu extends Component {
   render() {
+    if(this.props.user.type==='t'){
     return (
         <Paper >
           <MenuList >
-            <MenuItem><Link to={'/'} >返回主页</Link></MenuItem>
+            <MenuItem><Link style={{ textDecoration: 'none' }} to={'/'} >返回主页</Link></MenuItem>
             <Divider/>
-
             <MenuItem onClick={() => {
               store.dispatch(changePage(ENTER_SCORE))
             }}>成绩录入</MenuItem>
             <MenuItem onClick={() => {
-              store.dispatch(changePage(SEARCH_SCORE_TEA))
+              store.dispatch(changePage(SEARCH_SCORE))
             }}>成绩查询</MenuItem>
             <MenuItem onClick={() => {
               store.dispatch(changePage(ANALYSIS_SCORE))
             }}>成绩分析</MenuItem>
-
           </MenuList>
         </Paper>
     );
+    }else if(this.props.user.type==='s'){
+      return (
+        <Paper >
+          <MenuList >
+            <MenuItem><Link style={{ textDecoration: 'none' }} to={'/'} >返回主页</Link></MenuItem>
+            <Divider/>
+            <MenuItem onClick={() => {
+              store.dispatch(changePage(SEARCH_SCORE))
+            }}>成绩查询</MenuItem>
+            <MenuItem onClick={() => {
+              store.dispatch(changePage(ANALYSIS_SCORE))
+            }}>成绩分析</MenuItem>
+          </MenuList>
+        </Paper>
+      );
+    }else{
+      return <div> <Paper>请先登录</Paper></div>
+    }
   }
 }
 
