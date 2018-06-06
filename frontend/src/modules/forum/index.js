@@ -10,8 +10,9 @@ import PostPage from './views/post'
 import Messages from './views/messages';
 import Search from './views/search';
 import SearchBar from './components/searchbar';
-// import SearchResultPanel from './containers/searchresultpanel';
 import Announcements from './views/announcements';
+import Management from './views/management';
+import  AnncEditor from './views/annceditor'; 
 
 const styles = {
     backgroundColor: '#f0f0ee',
@@ -29,14 +30,16 @@ class Forum extends Component {
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>
                     <Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>
+                    <Route path={`${match.url}/announcements/user/:pageNum`} component={Announcements} /> 
+                    <Route path={`${match.url}/announcements/section/:collegeid/:courseid/:teacherid/:pageNum`} component={Announcements}/>
+                    <Route path={`${match.url}/annceditor/:collegeid/:courseid/:teacherid`} component={AnncEditor}/>
+                    <Route path={`${match.url}/management`} component={Management}/>
                     <Route path={`${match.url}/p/:postid`} component={PostPage}/>
                     <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
                     <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>
                     <Route path={`${match.url}/colleges`} component={CollegesPage}/>
                     <Route path={`${match.url}/:collegeid`} component={Courses}/>
                 </Switch>
-                {/* <Announcements type="notmain"/> */}
-                {/* <Announcements type="main"/> */}
             </div>
         );
     }

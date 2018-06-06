@@ -11,19 +11,22 @@ import {
     ListItemText
 } from "material-ui"
 import {Reply as ReplyIcon} from '@material-ui/icons'
+import {connect} from "react-redux"
+import {OPEN_COMMENT} from "../actions"
+import {selectEntry} from "../../messages/actions";
 
 const style = {
     margin: '15px 0',
     display: 'flex'
 }
 
-export default class Reply extends Component {
+class Reply extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
-        const {pic, name, college, postNum, content, time, replies} = this.props
+        const {postId, id, uid, pic, name, college, postNum, content, time, replies} = this.props
         return (
             <Card style={style}>
                 <div style={{
@@ -60,6 +63,12 @@ export default class Reply extends Component {
                     <Button
                         variant={'raised'}
                         color={'primary'}
+                        onClick={(event)=>{
+                            event.preventDefault();
+                            console.log("click msg", uid, pic, name);
+                            this.props.selectEntry(uid, pic, name);
+                            this.props.history.push(`/forum/messages`);
+                        }}
                         style={{
                             margin: 15,
                             backgroundColor: '#3949AB'
@@ -80,7 +89,12 @@ export default class Reply extends Component {
                             alignItems: 'center',
                             color: '#9E9E9E'
                         }}>
-                            <Button size={'small'}>
+                            <Button
+                                size={'small'}
+                                onClick={() => {
+                                    this.props.openComment(postId, id, uid)
+                                }}
+                            >
                                 <ReplyIcon/>
                                 回复
                             </Button>
@@ -104,7 +118,12 @@ export default class Reply extends Component {
                                                 primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`}
                                                 secondary={rr.content}/>
                                             <ListItemSecondaryAction>
-                                                <IconButton aria-label="Reply">
+                                                <IconButton
+                                                    onClick={() => {
+                                                        this.props.openComment(postId, id, rr.to)
+                                                    }}
+                                                    aria-label="Reply"
+                                                >
                                                     <ReplyIcon/>
                                                 </IconButton>
                                             </ListItemSecondaryAction>
@@ -119,3 +138,20 @@ export default class Reply extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    openComment: (postId, replyId, to) => {
+        dispatch({
+            type: OPEN_COMMENT,
+            postId: postId,
+            replyId: replyId,
+            to: to
+        })
+    },
+    selectEntry:(id, avatar, username)=>{
+        dispatch(selectEntry(id, avatar, username));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reply)
