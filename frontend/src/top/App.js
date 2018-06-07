@@ -8,6 +8,7 @@ import store from './stores'
 import InformationManagement from "../modules/informationManagement";
 import Forum from "../modules/forum";
 import Top from "./components/Top"
+import Xkxt from "../modules/xkxt";
 
 const topStyles = {}
 
@@ -34,6 +35,7 @@ class App extends Component {
                             <Route exact path={'/'} component={Top}/>
                             <Route path={'/info'} component={InformationManagement}/>
                             <Route path={'/forum'} component={Forum}/>
+                            <Route path={'/xkxt'} component={Xkxt}/>
                         </div>
                     </div>
                 </BrowserRouter>
