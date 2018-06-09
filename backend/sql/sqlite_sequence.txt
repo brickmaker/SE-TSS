@@ -1,6 +1,0 @@
-"django_migrations"	"17"
-"django_admin_log"	"0"
-"django_content_type"	"16"
-"auth_permission"	"48"
-"authentication_major_class"	"2"
-"authentication_course_faculty"	"6"

@@ -4,8 +4,10 @@ import thunk from "redux-thunk";
 import {persistStore} from 'redux-persist';
 
 import {forumReducer} from '../modules/forum/reducers';
+import {xkxtReducer} from '../modules/xkxt/reducers';
 
 const rootReducer = combineReducers({
+    xkxt: xkxtReducer,
     forum: forumReducer
 });
 
