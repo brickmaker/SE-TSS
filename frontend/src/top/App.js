@@ -5,7 +5,7 @@ import './App.css';
 
 import store from './stores'
 
-import InformationManagement from "../modules/informationManagement";
+import InformationManagement from "../modules/info";
 import Forum from "../modules/forum";
 import Top from "./components/Top"
 import Xkxt from "../modules/xkxt";

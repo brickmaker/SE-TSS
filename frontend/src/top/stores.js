@@ -5,10 +5,13 @@ import {persistStore} from 'redux-persist';
 
 import {forumReducer} from '../modules/forum/reducers';
 import {xkxtReducer} from '../modules/xkxt/reducers';
+import {infoReducer} from '../modules/info/reducers/index';
 
 const rootReducer = combineReducers({
     xkxt: xkxtReducer,
-    forum: forumReducer
+    forum: forumReducer,
+    info : infoReducer,
+
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
