@@ -13,8 +13,9 @@ const styles = {
         margin: 10,
     },
     container: {
-        display: "flex",
-        justifyContent: "space-between",
+        // display: "flex",
+        // justifyContent: "space-between",
+        marginBottom: 20,
     },
 }
 
@@ -33,14 +34,14 @@ class SearchResultPanel extends Component {
         // console.log("max", isFetching, resultNum, resultNum/perPageNum+1);
         // console.log("max", pageNum > resultNum/perPageNum+1);
         return (
-            <Grid container justify="center" className={classes.container}>
+            <Grid container justify="center" >
                 <Grid item xs={12} sm={12} md={12} lg={12}>
                     {isFetching ? <CircularProgress /> :
                         (resultNum && pageNum > resultNum / pageSize + 1) ?
                             <Redirect to={`/forum/search/${searchType}/${query}/1`} />
                             :
                             <div>
-                                <div styles={{ marginBottom: 30 }}>
+                                <div className={classes.container}>
                                     <Typography variant="subheading" className={classes.item}>
                                         共{resultNum}个结果
                                     </Typography>

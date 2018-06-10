@@ -124,7 +124,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
         })
             .then((response) => {
                 var entries = response.data;
-                if (Boolean(selectedId)) {
+                if (Boolean(selectedId) && selectedId != uid) {
                     var idx = -1;
                     entries.forEach((entry, index) => {
                         if (entry["id"] === selectedId)
@@ -186,10 +186,10 @@ export function postMsg(from, to, content, pageSize) {
 }
 
 
-export const GET_CONTENT = 'get_content';
+export const GET_MSGCONTENT = 'get_msgcontent';
 export function getContent(content) {
     return ({
-        type: GET_CONTENT,
+        type: GET_MSGCONTENT,
         content: content,
     });
 }

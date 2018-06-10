@@ -17,10 +17,10 @@ export function anchorMenu(anchorEl) {
     });
 }
 
-export const GET_CONTENT = "get_content";
+export const GET_SEARCHCONTENT = "get_searchcontent";
 export function getContent(content) {
     return ({
-        type: GET_CONTENT,
+        type: GET_SEARCHCONTENT,
         content: content,
     });
 }

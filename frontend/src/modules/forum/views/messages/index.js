@@ -95,7 +95,7 @@ class Messages extends Component {
         //TODO: uid
         const uid = 5;
         return (
-            <div>
+            // <div>
                 <MainBody>
                     <Path isMain path={path} />
                     <Grid container className={classes.container}>
@@ -179,7 +179,7 @@ class Messages extends Component {
                         </Grid>
                     </Grid>
                 </MainBody>
-            </div>
+            // </div>
         );
     }
 

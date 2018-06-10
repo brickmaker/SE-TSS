@@ -43,11 +43,12 @@ const styles = {
         display: "flex",
         // verticalAlign: "middle",
         alignItems: "center",
-        marginLeft: 20,
+        height: 48,
+        // marginLeft: 20,
         paddingRight: 20,
         paddingLeft: 20,
         marginBottom: 30,
-    }
+    },
 }
 
 class SearchBar extends Component {
@@ -66,7 +67,7 @@ class SearchBar extends Component {
         return (
             <Card className={classes.container}>
                 {/* <div  styles={{backgroundColor: "#3f51b5"}}> */}
-                <Typography className={classes.type} style={{ cursor: "pointer" }}
+                <Typography variant="subheading" className={classes.type} style={{ cursor: "pointer" }}
                     onClick={(event) => { event.preventDefault(); anchorMenu(event.currentTarget); }}>
                     {typeMapping[searchType]}
                     {Boolean(anchorEl) ? <KeyboardArrowUpIcon className={classes.item} /> : <KeyboardArrowDownIcon className={classes.item} />}
@@ -79,8 +80,8 @@ class SearchBar extends Component {
                     }} transformOrigin={{ vertical: "top", horizontal: "left", }}
                     onClose={(event) => { anchorMenu(null); }}
                 >
-                    <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("section"); }}>版块</MenuItem>
                     <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("post"); }}>帖子</MenuItem>
+                    <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("section"); }}>版块</MenuItem>
                 </Menu>
                 <Input className={classes.input} disableUnderline={true} placeholder="请输入搜索内容"
                     inputProps={{ style: { width: "100%" } }}

@@ -7,13 +7,13 @@ const styles = {
     left: {
         display: "flex",
         justifyContent: "flex-start",
-        margin: 10,
+        margin: 15,
         alignItems: "center",
     },
     right: {
         display: "flex",
         justifyContent: "flex-end",
-        margin: 10,
+        margin: 15,
         alignItems: "center",
     },
     item: {
@@ -40,6 +40,10 @@ class Msg extends Component {
     render() {
         const { isLeft, message, classes } = this.props;
         const {  from, content, time } = message;
+        const {currenttime} = moment(now());
+        const {msgtime} = moment(time);
+
+        moment.locale('zh-cn');
         if (isLeft) {
             return (
                 <div className={classes.left}>
@@ -52,7 +56,7 @@ class Msg extends Component {
                         </div>
                     </Card>
                     <Typography className={classes.time} variant='caption' align="left" color="inherit">
-                        {time}
+                        {moment(time).calendar()}
                     </Typography>
                 </div>
             );
@@ -61,7 +65,7 @@ class Msg extends Component {
             return (
                 <div className={classes.right}>
                     <Typography className={classes.time} variant='caption' align="left" color="inherit">
-                        {moment(time).format("YYYY-MM-DD HH:mm")}
+                        {moment(time).calendar()}
                     </Typography>
                     <Card className={classes.rightCard}>
                         <div className={classes.item} styles={{ color: "0x000000" }}>

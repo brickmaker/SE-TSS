@@ -12,7 +12,8 @@ import Search from './views/search';
 import SearchBar from './components/searchbar';
 import Announcements from './views/announcements';
 import Management from './views/management';
-import  AnncEditor from './views/annceditor'; 
+import AnncEditor from './views/annceditor'; 
+import Usercenter from './views/usercenter';
 
 const styles = {
     backgroundColor: '#f0f0ee',
@@ -34,6 +35,7 @@ class Forum extends Component {
                     <Route path={`${match.url}/announcements/section/:collegeid/:courseid/:teacherid/:pageNum`} component={Announcements}/>
                     <Route path={`${match.url}/annceditor/:collegeid/:courseid/:teacherid`} component={AnncEditor}/>
                     <Route path={`${match.url}/management`} component={Management}/>
+                    <Route path={`${match.url}/usercenter/:uid`} component={Usercenter}/>
                     <Route path={`${match.url}/p/:postid`} component={PostPage}/>
                     <Route path={`${match.url}/:collegeid/:courseid/:teacherid`} component={Teacher}/>
                     <Route path={`${match.url}/:collegeid/:courseid`} component={Course}/>

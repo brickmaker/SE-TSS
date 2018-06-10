@@ -26,7 +26,6 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain/>
-                    <SearchBar history={this.props.history}/>
                     <Grid container xs={12}>
                         <Grid container xs={8}>
                             {

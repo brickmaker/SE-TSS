@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBar from '../../components/searchbar';
 import SearchResultPanel from '../../containers/searchresultpanel';
-import { Avatar, withStyles, Grid, Typography } from 'material-ui';
+import { Avatar, withStyles, Grid, Typography, Paper } from 'material-ui';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
@@ -23,7 +23,7 @@ const styles = {
 
 class Search extends Component {
     render() {
-        const { classes, match , pageNum, pageSize, resultNum, history} = this.props;
+        const { classes, match, pageNum, pageSize, resultNum, history } = this.props;
         const { searchType, query } = this.props.match.params;
         console.log("search, match", this.props.match);
         var path = {};
@@ -35,26 +35,17 @@ class Search extends Component {
         }
         console.log("path", path);
         return (
-            <div>
-                <MainBody>
-                    <Path isMain path={path} />
-                    <Grid container className={classes.container}>
-                        <Grid item xs={12} sm={12} md={10} lg={10}>
-                            {/* <Route path={`${match.url}/:pageNum`} render={(props)=>{
-                                    const newMatch = props.match;
-                                    newMatch.params = Object.assign({}, newMatch.params, {
-                                        "searchType": searchType,
-                                        "query": query,
-                                    });
-                                return (
-                                    <SearchResultPanel match={newMatch} history={history}/>
-                                )
-                            }}/> */}
-                            <SearchResultPanel match={match} history={this.props.history}/>
-                        </Grid>
+            <MainBody>
+                <Path isMain path={path}/>
+                <Grid container className={classes.container}>
+                    <Grid item xs={12} sm={12} md={10} lg={10}>
+                    {/* <Paper> */}
+                        <SearchBar history={this.props.history} />
+                        <SearchResultPanel match={match} history={this.props.history} />
+                        {/* </Paper> */}
                     </Grid>
-                </MainBody>
-            </div>
+                </Grid>
+            </MainBody>
         );
     };
 }
