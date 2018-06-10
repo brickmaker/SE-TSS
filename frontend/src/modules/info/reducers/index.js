@@ -6,9 +6,9 @@ import data from './data';
 export const infoReducer = combineReducers({
     routing: routerReducer,
     /* your reducers */
-    auth,
-    data,
+    auth: auth,
+    data : data,
 });
 
-//export default  infoReducer;
+
 

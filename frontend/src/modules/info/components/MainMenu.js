@@ -23,7 +23,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 function mapStateToProps(state) {
     return {
-        status: state.auth.status,
+        status: state.info.auth.status,
     };
 }
 

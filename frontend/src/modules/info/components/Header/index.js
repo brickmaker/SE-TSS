@@ -11,9 +11,10 @@ import * as actionCreators from '../../actions/auth';
 
 function mapStateToProps(state) {
     return {
-        token: state.auth.token,
-        userName: state.auth.userName,
-        isAuthenticated: state.auth.isAuthenticated,
+        
+        isAuthenticated: state.info.auth.isAuthenticated,
+        token: state.info.auth.token,
+        userName: state.info.auth.userName,
     };
 }
 
@@ -67,9 +68,10 @@ class Header extends Component {
             <header>
                 <Drawer docked={false} open={this.state.open}>
                     {
+
                         !this.props.isAuthenticated ?
                             <div>
-
+                                
                                 <MenuItem onClick={() => this.dispatchNewRoute('/login')}>
                                     Login
                                 </MenuItem>
@@ -84,6 +86,7 @@ class Header extends Component {
                             </div>
                             :
                             <div>
+
                                 {/*<MenuItem onClick={() => this.dispatchNewRoute('/analytics')}>*/}
                                     {/*Analytics*/}
                                 {/*</MenuItem>*/}

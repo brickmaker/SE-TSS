@@ -19,8 +19,8 @@ import {
 
 function mapStateToProps(state) {
     return {
-        isAuthenticating: state.auth.isAuthenticating,
-        statusText: state.auth.statusText,
+        isAuthenticating: state.info.auth.isAuthenticating,
+        statusText: state.info.auth.statusText,
     };
 }
 

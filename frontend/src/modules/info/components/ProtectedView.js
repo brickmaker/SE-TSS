@@ -6,10 +6,10 @@ import * as actionCreators from '../actions/data';
 
 function mapStateToProps(state) {
     return {
-        data: state.data,
-        token: state.auth.token,
-        loaded: state.data.loaded,
-        isFetching: state.data.isFetching,
+        data: state.info.data,
+        token: state.info.auth.token,
+        loaded: state.info.data.loaded,
+        isFetching: state.info.data.isFetching,
     };
 }
 

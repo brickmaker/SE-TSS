@@ -5,7 +5,7 @@ import {persistStore} from 'redux-persist';
 
 import {forumReducer} from '../modules/forum/reducers';
 import {xkxtReducer} from '../modules/xkxt/reducers';
-import {infoReducer} from '../modules/info/reducers/index';
+import {infoReducer} from '../modules/info/reducers';
 
 const rootReducer = combineReducers({
     xkxt: xkxtReducer,

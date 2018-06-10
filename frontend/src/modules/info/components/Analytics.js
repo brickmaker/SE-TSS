@@ -7,7 +7,7 @@ function mapStateToProps(state) {
     return {
        // isRegistering: state.auth.isRegistering,
        // registerStatusText: state.auth.registerStatusText,
-        isAuthenticated: state.auth.isAuthenticated,
+        isAuthenticated: state.info.auth.isAuthenticated,
     };
 }
 

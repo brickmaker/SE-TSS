@@ -13,8 +13,8 @@ import { validateEmail } from '../utils/misc';
 // Map Redux state to component props
 function mapStateToProps(state) {
     return {
-        isRegistering: state.auth.isRegistering,
-        registerStatusText: state.auth.registerStatusText,
+        isRegistering: state.info.auth.isRegistering,
+        registerStatusText: state.info.auth.registerStatusText,
     };
 }
 // Map Redux actions to component props

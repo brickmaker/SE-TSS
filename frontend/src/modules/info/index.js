@@ -14,13 +14,15 @@ import styles from './style.scss';
 class Info extends Component {
     render() {
         return (
+        	
             <div>
             	{routes}
-            	<Redirect from="/info" to="login" />
+            	<Redirect from="/" to="/info/login" />
             </div>
 
         );
     }
 }
+
 
 export default Info;

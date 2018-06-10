@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './App.css';
-
+import  Header  from '../modules/info/components/Header';
 import store from './stores'
 
 import InformationManagement from "../modules/info";
