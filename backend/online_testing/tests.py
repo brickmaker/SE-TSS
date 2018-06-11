@@ -20,6 +20,11 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
+response = c.get('/api/online_testing/question/tags_and_teachers/?course_id=2000', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+exit(0)
+
 response = c.get('/api/online_testing/question/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 

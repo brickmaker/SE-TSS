@@ -32,7 +32,7 @@ for i in range(100):
                             'choice3', 'choice4'],
             "answer_list": [random.randint(0, 4)],
             'level': random.randint(0, 3),
-            'provider': 'Zachariah',
+            'provider': '2110100000',
             'course': '2000',
         }, HTTP_AUTHORIZATION='JWT ' + data['token'])
     else:
@@ -43,7 +43,7 @@ for i in range(100):
             "choice_list": ['T', 'F'],
             "answer_list": [1] if random.randint(0, 1) == 1 else [0],
             'level': random.randint(0, 4),
-            'provider': 'Zachariah',
+            'provider': '2110100000',
             'course': '2000',
         }, HTTP_AUTHORIZATION='JWT ' + data['token'])
     print(response.content.decode('utf-8'))

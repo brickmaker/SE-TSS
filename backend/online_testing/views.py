@@ -47,6 +47,16 @@ class QuestionViewSet(viewsets.ModelViewSet):
         return Response({'question_list': question_id_list, 'is_ok': True,
                          'message': 'delete successfully'})
 
+    @action(methods=['get'], detail=False)
+    def tags_and_teachers(self, request):
+        course_id = request.query_params.get('course_id', None)
+        if course_id:
+            course = Course.objects().get(course_id=course_id)
+            for faculty in course.teacher_course:
+                print(faculty)
+        return Response({'is_ok':False, 'message': 'course_id is needed'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
         data['provider'] = request.user.username
