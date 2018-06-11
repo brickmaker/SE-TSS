@@ -899,3 +899,64 @@ end_time: String ("2012-04-24T18:25:43.511Z")
 ]
 ```
 
+****
+### 个人中心
+#### 获取个人信息
+##### 请求
+```
+GET /api/forum/userinfo
+```
+##### 参数
+```
+uid: Integer
+```
+##### 响应
+```
+{
+    "uid": 5,
+    "username": "用户名字",
+    "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+    "signature": "♀遈什麼濛蔽叻鉨ㄖㄅ雙yаη，讓鉨看不菿誐る鉨ィ寸cんù。♀",
+    "registrationTime": "2012-04-24T18:25:43.511Z",
+    "replyNum": 10,
+    "postNum": 2,
+    "subscriptionNum": 5,
+    "posts": [
+      {
+        "postId": "111",
+        "title": "一个帖子的标题",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      },
+      ...
+    ]
+}
+```
+#### 修改个人信息
+##### 请求
+```
+POST /api/forum/userinfo
+```
+##### 内容
+```
+uid
+username
+signature
+imagefile
+```
+username长度 1-20
+signature长度 0-100
+imagefile键不存在则不修改头像

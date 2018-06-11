@@ -31,6 +31,7 @@ class Forum extends Component {
                     <Route exact path={`${match.url}`} component={Main}/>
                     <Route path={`${match.url}/messages`} component={Messages}/>
                     <Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>
+                    <Route path={`${match.url}/search/`} component={Search}/>
                     <Route path={`${match.url}/announcements/user/:pageNum`} component={Announcements} /> 
                     <Route path={`${match.url}/announcements/section/:collegeid/:courseid/:teacherid/:pageNum`} component={Announcements}/>
                     <Route path={`${match.url}/annceditor/:collegeid/:courseid/:teacherid`} component={AnncEditor}/>

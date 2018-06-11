@@ -44,7 +44,12 @@ class Reply extends Component {
                         src={pic}
                         style={{
                             width: 100,
-                            height: 100
+                            height: 100,
+                            cursor:"pointer",
+                        }}
+                        onClick={(event)=>{
+                            event.preventDefault();
+                            this.props.history.push(`/forum/usercenter/${uid}`);
                         }}
                     />
                     <span style={{
@@ -111,7 +116,12 @@ class Reply extends Component {
                                                 src={pic}
                                                 style={{
                                                     width: 30,
-                                                    height: 30
+                                                    height: 30,
+                                                    cursor:"pointer",
+                                                }}
+                                                onClick={(event)=>{
+                                                    event.preventDefault();
+                                                    this.props.history.push(`/forum/usercenter/${uid}`);
                                                 }}
                                             />
                                             <ListItemText

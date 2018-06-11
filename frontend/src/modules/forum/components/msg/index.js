@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Grid, Avatar, CardContent, Typography, withStyles } from 'material-ui';
 import PropTypes from 'prop-types';
 import moment, { now } from 'moment';
+import Link from 'react-router-dom/Link';
 
 const styles = {
     left: {
@@ -39,15 +40,17 @@ const styles = {
 class Msg extends Component {
     render() {
         const { isLeft, message, classes } = this.props;
-        const {  from, content, time } = message;
-        const {currenttime} = moment(now());
-        const {msgtime} = moment(time);
+        const { from, content, time } = message;
+        const { currenttime } = moment(now());
+        const { msgtime } = moment(time);
 
         moment.locale('zh-cn');
         if (isLeft) {
             return (
                 <div className={classes.left}>
-                    <Avatar alt="avatar" src={from.avatar}></Avatar>
+                    <Avatar alt="avatar" src={from.avatar}
+                        component={Link} to={`/forum/usercenter/${from.id}`}
+                    ></Avatar>
                     <Card className={classes.leftCard}>
                         <div className={classes.item}>
                             <Typography variant='body1' align="left" color="inherit">
@@ -74,7 +77,9 @@ class Msg extends Component {
                             </Typography>
                         </div>
                     </Card>
-                    <Avatar alt="avatar" src={from.avatar}></Avatar>
+                    <Avatar alt="avatar" src={from.avatar}
+                        component={Link} to={`/forum/usercenter/${from.id}`}>
+                    </Avatar>
                 </div>
             );
         }

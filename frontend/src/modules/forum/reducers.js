@@ -13,6 +13,7 @@ import { managementReducer } from './views/management/reducers';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 import { createFilter } from 'redux-persist-transform-filter';
+import { usercenterReducer } from "./views/usercenter/reducers";
 
 // export const forumReducer = combineReducers({
 //     main: mainReducer,
@@ -48,5 +49,6 @@ export const forumReducer = persistReducer(
         search: searchReducer,
         annc: anncReducer,
         management: managementReducer,
+        usercenter: usercenterReducer,
     })
 );

@@ -124,6 +124,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
         })
             .then((response) => {
                 var entries = response.data;
+                console.log("entry", uid, selectedId);
                 if (Boolean(selectedId) && selectedId != uid) {
                     var idx = -1;
                     entries.forEach((entry, index) => {

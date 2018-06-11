@@ -27,11 +27,17 @@ class Search extends Component {
         const { searchType, query } = this.props.match.params;
         console.log("search, match", this.props.match);
         var path = {};
+        let flag = false;
         if (match.params.searchType === 'post') {
             path['post'] = { "name": `帖子 : "${match.params.query}" 的搜索结果`, "link": `${match.url}/1` }
+            flag = true;
+        }
+        else if(match.params.searchType === 'section'){
+            path['section'] = { "name": `版块:"${match.params.query}" 的搜索结果`, "link": `${match.url}/1` }
+            flag = true;
         }
         else {
-            path['section'] = { "name": `版块:"${match.params.query}" 的搜索结果`, "link": `${match.url}/1` }
+            path['search'] = {"name": "搜索", "link": match.url}
         }
         console.log("path", path);
         return (
@@ -41,7 +47,7 @@ class Search extends Component {
                     <Grid item xs={12} sm={12} md={10} lg={10}>
                     {/* <Paper> */}
                         <SearchBar history={this.props.history} />
-                        <SearchResultPanel match={match} history={this.props.history} />
+                        {flag && <SearchResultPanel match={match} history={this.props.history} />}
                         {/* </Paper> */}
                     </Grid>
                 </Grid>

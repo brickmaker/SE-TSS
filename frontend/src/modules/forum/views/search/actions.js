@@ -34,7 +34,7 @@ export const SEARCH_FAILURE = "search_failure";
 export function search(searchType, query, pageNum, pageSize) {
     console.log("action search", searchType, query, pageNum, pageSize);
     return (dispatch, getState) => {
-        const { isFetching } = getState();
+        const { isFetching } = getState().forum.search;
         if (isFetching) {
             return;
         }
