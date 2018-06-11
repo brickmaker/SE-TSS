@@ -299,7 +299,7 @@ class Usercenter extends Component {
                                         marginBottom: 30,
                                     }}>
                                         <Typography variant="title">
-                                            发表的主题
+                                            最近发表的主题
                                         </Typography>
                                         {posts && Object.values(posts).map((post) => {
                                             return (
