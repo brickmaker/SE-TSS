@@ -3,15 +3,16 @@ import {combineReducers} from 'redux';
 import thunk from "redux-thunk";
 import {persistStore} from 'redux-persist';
 
-import {forumReducer} from '../modules/forum/reducers';
-import {xkxtReducer} from '../modules/xkxt/reducers';
 import {infoReducer} from '../modules/info/reducers';
 
-const rootReducer = combineReducers({
-    xkxt: xkxtReducer,
-    forum: forumReducer,
-    info : infoReducer,
+import {forumReducer} from '../modules/forum/reducers';
+import {xkxtReducer} from '../modules/xkxt/reducers';
 
+
+const rootReducer = combineReducers({
+    info : infoReducer,
+    xkxt: xkxtReducer,
+    forum: forumReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

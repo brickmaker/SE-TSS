@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import './App.css';
-import  Header  from '../modules/info/components/Header';
 import store from './stores'
 
-import InformationManagement from "../modules/info";
-import Forum from "../modules/forum";
-import Top from "./components/Top"
-import Xkxt from "../modules/xkxt";
 
-const topStyles = {}
+import Info from "../modules/info";
+import Forum from "../modules/forum";
+import Xkxt from "../modules/xkxt";
+import Login from "../modules/info/components/LoginView"
+import Main from "./components/Top";
+
+const topStyles = {};
 
 class App extends Component {
     render() {
@@ -18,22 +19,10 @@ class App extends Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <div style={topStyles}>
-                        <header className="App-header">
-                            <Link to={'/'}>
-                                <span
-                                    style={{
-                                        textAlign: 'left',
-                                        color: 'white'
-                                    }}
-                                    className="App-title">TSS
-                                </span>
-                            </Link>
-
-                            <span className="App-title"> | Here is Navbar placeholder</span>
-                        </header>
                         <div>
-                            <Route exact path={'/'} component={Top}/>
-                            <Route path={'/info'} component={InformationManagement}/>
+                            <Route exact path={'/'} component={Login}/>
+                            <Route path={'/main'} component={Main}/>
+                            <Route path={'/info'} component={Info}/>
                             <Route path={'/forum'} component={Forum}/>
                             <Route path={'/xkxt'} component={Xkxt}/>
                         </div>

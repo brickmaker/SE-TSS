@@ -1,25 +1,22 @@
-
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, Redirect, BrowserRouter } from 'react-router-dom';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-import { syncHistoryWithStore } from 'react-router-redux';
+import {Route, Switch} from "react-router-dom"
 
-
-import routes from './routes';
-import styles from './style.scss';
-
+import StaffView from './components/Staff/StaffView';
+import StaffLessonInfo from './components/Staff/LessonInfo';
+import StaffAccountInfo from './components/Staff/AccountInfo';
+import Main from './components/Main';
 
 class Info extends Component {
     render() {
         return (
-        	
             <div>
-            	{routes}
-            	<Redirect from="/" to="/info/login" />
+                <Switch>
+                    <Route exact path="/info" component={Main}/>
+                    <Route exact path="/info/staff" component={StaffView}/>
+                    <Route path="/info/staff/accounts" component={StaffAccountInfo}/>
+                    <Route path="/info/staff/lessons" component={StaffLessonInfo}/>
+                </Switch>
             </div>
-
         );
     }
 }

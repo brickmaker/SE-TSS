@@ -8,18 +8,19 @@ import {Helmet} from "react-helmet";
 import {
     Button,
     TextField,
-    Input,
-    FormControl,
-    NativeSelect,
     Paper,
     Typography,
     Card,
     CardContent,
+    FormControl,
+    Input,
+    NativeSelect,
 } from '@material-ui/core';
 
 function mapStateToProps(state) {
     return {
         isAuthenticating: state.info.auth.isAuthenticating,
+        isAuthenticated: state.info.auth.isAuthenticated,
         statusText: state.info.auth.statusText,
     };
 }
@@ -31,10 +32,11 @@ function mapDispatchToProps(dispatch) {
 const styles = theme => ({
     Paper: {
         marginTop: '10%',
+        marginLeft: '25%',
         paddingBottom: 50,
         paddingTop: 50,
         alignItems: 'center',
-        width: '100%',
+        width: '50%',
         textAlign: 'center',
         display: 'inline-block',
     },
@@ -123,14 +125,16 @@ class LoginView extends React.Component {
         this.setState({[name]: event.target.value});
     };
 
-    login(e) {
+    login = (e) => {
         e.preventDefault();
-        this.props.loginUser(this.state.username, this.state.password, this.state.user_type);
-    }
-
+        this.props.login(this.state.username, this.state.password, this.state.user_type);
+    };
 
     render() {
-        const {classes} = this.props;
+        const {classes, isAuthenticated} = this.props;
+        if (isAuthenticated) {
+            this.props.history.push('/main');
+        }
         return (
             <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
@@ -153,7 +157,6 @@ class LoginView extends React.Component {
                                     className={classes.TextField}
                                     label="账户"
                                     floatingLabelText="账户"
-                                    type="email"
                                     onChange={(e) => this.changeValue(e, 'username')}
                                     margin="normal"
                                     errorText={this.state.username_error_text}
@@ -185,7 +188,6 @@ class LoginView extends React.Component {
                                     </NativeSelect>
                                 </FormControl>
                             </div>
-
                             <Button
                                 variant="raised"
                                 color="primary"
@@ -206,7 +208,7 @@ class LoginView extends React.Component {
 
 LoginView.propTypes = {
     classes: PropTypes.object.isRequired,
-    loginUser: actionCreators.loginUser(),
+    login: actionCreators.login(),
     statusText: PropTypes.string,
 };
 

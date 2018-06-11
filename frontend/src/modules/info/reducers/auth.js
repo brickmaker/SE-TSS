@@ -12,6 +12,7 @@ const initialState = {
     token: null,
     userName: null,
     userType: null,
+    name: null,
     isAuthenticated: false,
     isAuthenticating: false,
     status: null,
@@ -35,6 +36,7 @@ export default createReducer(initialState, {
             userName: jwtDecode(payload.token).username,
             userType: payload.user_type,
             status: payload.status,
+            name: payload.name,
             statusText: '您已成功登录',
         }),
     [LOGIN_USER_FAILURE]: (state, payload) =>
@@ -43,7 +45,7 @@ export default createReducer(initialState, {
             isAuthenticated: false,
             token: null,
             userName: null,
-            statusText: `Authentication Error: ${payload.status} ${payload.statusText}`,
+            statusText: `登录失败: ${payload.status} ${payload.statusText}`,
         }),
     [LOGOUT_USER]: (state) =>
         Object.assign({}, state, {
