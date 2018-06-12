@@ -157,6 +157,7 @@ class PaperViewSet(mixins.CreateModelMixin,
             if request.user.user_type == 1:
                 question_data.pop('answer_list', None)
             data['question_list'].append(question_data)
+        #print(data['question_id_list'])
         data.pop('question_id_list')
         return Response(data)
 
@@ -190,11 +191,13 @@ class ExaminationViewSet(mixins.CreateModelMixin,
     def create(self, request, *args, **kwargs):
         try:
             exam = Examination.objects.get(paper=request.data['paper']
-                                    , student=request.user)
+                                    , student=request.user.username)
             return Response({'message': 'already done.', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
         except ObjectDoesNotExist:
-            serializer = self.get_serializer(data=request.data)
+            data = request.data.copy()
+            data['student'] = request.user.username
+            serializer = self.get_serializer(data=data)
             serializer.is_valid(raise_exception=True)
             self.perform_create(serializer)
             headers = self.get_success_headers(serializer.data)
@@ -213,6 +216,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
     def get_left_time(exam):
         left_time = exam.paper.duration * 60 - \
                     (datetime.now() - exam.start_time.replace(tzinfo=None)).total_seconds()
+        #print(datetime.now() - exam.start_time.replace(tzinfo=None))
         if left_time < 0:
             left_time = 0
         if left_time == 0 and not exam.submit:
@@ -230,9 +234,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         username = request.user.username
         paper_id = request.query_params.get('paper_id')
         try:
-            paper = Paper.objects.get(paper_id=paper_id)
-            student = Student.objects.get(username=username)
-            exam_list = Examination.objects.filter(paper=paper, student=student)
+            exam_list = Examination.objects.filter(paper=paper_id, student=username)
             for exam in exam_list:
                 if self.get_left_time(exam) > 0:
                     self.check_object_permissions(request, exam)
@@ -246,6 +248,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
     @action(methods=['post'], detail=True)
     def conservation(self, request, pk=None):
         exam = self.get_object()
+
         if self.get_left_time(exam) == 0:
             return Response({'message': 'already finished', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
@@ -253,13 +256,11 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        exam.answers = request.data['answers']
-        data = {'answers': request.data['answers']}
-        #print(data)
-        serializer = self.get_serializer(exam, data=data, partial=True)
+        answers = request.data.get('answers')
+        exam.answers = answers
+        serializer = self.get_serializer(exam, data={'answers': answers}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
@@ -273,17 +274,20 @@ class ExaminationViewSet(mixins.CreateModelMixin,
                             status=status.HTTP_400_BAD_REQUEST)
         if exam.answers:
             answers = json.loads(exam.answers.replace('\'', '\"'))
-            total_score = 0
-            pattern = '%d_answers'
-            exam_serializer = PaperSerializer(exam.paper)
 
+            total_score = 0
+            #print(exam.paper.paper_question)
+            exam_serializer = PaperDetailSerializer(exam.paper)
             for question_id, score in zip(exam_serializer.data['question_id_list'],
                                           exam_serializer.data['score_list']):
-                answer = answers[pattern % question_id]
+                answer = answers[str(question_id)]
+                answer.sort()
                 question = Question.objects.get(question_id=question_id)
-                question_serializer = QuestionSerializer(question)
+                question_serializer = QuestionDetailSerializer(question)
+                #print(answer, question_serializer.data['answer_list'])
                 if answer == question_serializer.data['answer_list']:
                     total_score += score
+            #print(total_score, np.sum(exam_serializer.data['score_list']))
         else:
             total_score = -1
         # data = {'answers': repr(request.data['answers']), 'submit': True}
