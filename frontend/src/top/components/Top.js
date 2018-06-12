@@ -17,7 +17,7 @@ class Top extends Component {
                     marginTop: 120
                 }}>
                     <Grid container>
-                        <SubSystem name={'基础信息'} uri={''}/>
+                        <SubSystem name={'基础信息'} uri={'info'}/>
                         <SubSystem name={'subsystem2'} uri={''}/>
                         <SubSystem name={'subsystem3'} uri={''}/>
                         <SubSystem name={'论坛'} uri={'forum'}/>
