@@ -130,11 +130,12 @@ class Announcement(models.Model):
         return self.title
 
 class User(models.Model):
-    id = models.CharField(max_length=20,primary_key=True)
+    #id = models.CharField(max_length=20,primary_key=True)
     name = models.CharField(max_length=50)
-    signature = models.TextField()
-    avatar = models.ImageField()
-    account = models.OneToOneField(Account,on_delete=models.CASCADE,to_field='username',default='315010000')
+    signature = models.TextField(default="no thing")
+    avatar = models.ImageField(default='forum/img/default.png')
+    date = models.DateTimeField(auto_now_add=True) 
+    id = models.OneToOneField(Account,on_delete=models.CASCADE,primary_key=True)
     
     def __str__(self):
         return '%s %s'%(self.id,self.name)
@@ -143,7 +144,7 @@ class User(models.Model):
 class Thread(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    poster = models.ForeignKey('User',on_delete=models.CASCADE) 
+    poster = models.ForeignKey('User',on_delete=models.CASCADE,related_name='thread') 
     section = models.ForeignKey('Section',on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     attachment_md5 = models.CharField(max_length=36,blank=True)

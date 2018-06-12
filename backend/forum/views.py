@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.decorators import parser_classes
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import FileUploadParser,MultiPartParser
 from rest_framework.response import Response
 from rest_framework import status
 from forum import models
@@ -14,7 +14,7 @@ from django.db.models import Max
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck
-
+from authentication.models import Account
 
 post_per_page = 20
 max_new_post = 5
@@ -821,7 +821,6 @@ class info(APIView):
                '回复总数':reply_count,
         }
         return Response(res, status=status.HTTP_200_OK)
-       
 
 class userstates(APIView):
     def get(self, request, format=None):
@@ -1017,3 +1016,93 @@ class upload_file(APIView):
         res = {'error':None,'fileId':att.md5sum}
         
         return Response(res, status=status.HTTP_200_OK)
+
+class userinfo(APIView):
+    parser_classes = (MultiPartParser,)
+    def get(self,request,format=None):
+        uid = request.GET.get('uid',None)
+        if uid == None:
+            return Response({'error':'parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        au = Account.objects.get(pk=uid)
+        try:
+            u = models.User.objects.get(pk=au)
+        except:
+            uu = models.User(id=au,name=au.username)
+            uu.save()
+            u=uu
+        res = {
+            'uid':uid,
+            'username':u.name,
+            "avatar": u.avatar.url,
+            "signature": u.signature,
+            "registrationTime": u.date
+        }
+
+        res["replyNum"] = u.reply.count()
+        res["postNum"] = u.thread.count()
+        res["subscriptionNum"] = models.Subscribe.objects.filter(user=u).count()
+        res["posts"] = []
+        posts = u.thread.order_by('-date')[:5]
+        for p in posts:
+            t = {}
+            t['title'] = p.title
+            t['postTime'] = p.date
+            t['postId'] = p.id
+            if p.section.type==models.Section.TEACHER:
+                teacher = models.Teacher.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id': teacher.college.id,
+                        'name': teacher.college.name
+                    },
+                    'course':{
+                        'id': teacher.course.id,
+                        'name': teacher.course.name
+                    },
+                    'teacher':{
+                        'id': teacher.id,
+                        'name': teacher.name
+                    }
+                }
+            elif p.section.type==models.Section.COURSE:
+                course = models.Course.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id':course.college.id,
+                        'name':course.college.name
+                    },
+                    'course':{
+                        'id':course.id,
+                        'name':course.name
+                    }
+                }
+            elif p.section.type==models.Section.COLLEGE:
+                college = models.College.objects.get(section=p.section)
+                t['path']={
+                    'college':{
+                        'id':course.id,
+                        'name':course.name
+                    }
+                }
+            else:
+                pass
+            res['posts'].append(t)
+        return Response(res,status=status.HTTP_200_OK)
+    
+    def post(self,request,format=None):
+        uid = request.data.get('uid',None)
+        username = request.data.get('username',None)
+        signature = request.data.get('signature',None)
+        imgfile = request.data.get('imagefile',None)
+
+        try:
+            u = models.User.objects.get(pk=uid)
+        except Exception as e:
+            print(e)
+            return Response({'error':'not exit user'},status=status.HTTP_400_BAD_REQUEST)
+        
+        if username is not None: u.name = username
+        if signature is not None: u.signature = signature
+        if imgfile is not None: u.avatar= imgfile
+        u.save()
+        return Response({'message':'success'}, status=status.HTTP_200_OK)

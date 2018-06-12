@@ -109,10 +109,10 @@ def main():
 	from authentication.models import Department
 	depart=Department(name='信息中心')
 	depart.save()
-	d_filename='department.xlsx'
-	s_filename='student.xlsx'
-	t_filename='teacher.xlsx'
-	st_filename='staff.xlsx'
+	d_filename='authentication/init_data/department.xlsx'
+	s_filename='authentication/init_data/student.xlsx'	
+	t_filename='authentication/init_data/teacher.xlsx'
+	st_filename='authentication/init_data/staff.xlsx'
 
 	createDepartment(d_filename)
 	createStudent(s_filename)
