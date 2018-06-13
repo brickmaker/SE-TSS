@@ -22,7 +22,7 @@ class Comment extends Component {
     handleSubmit() {
         const {to, postId, replyId} = this.props
         if (this.state.content.length > 0 && this.state.content.length < 80) {
-            this.props.comment(postId, replyId, "uid", to, this.state.content) // todo: get uid
+            this.props.comment(postId, replyId, "uid", to, this.state.content) // todo: remove uid
             this.setState({content: ""})
         }
     }
