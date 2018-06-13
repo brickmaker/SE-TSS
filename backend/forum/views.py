@@ -12,7 +12,7 @@ from haystack.query import SearchQuerySet
 from django.utils.dateparse import parse_datetime
 from django.db.models import Max
 
-from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser,IsAuthenticatedOrReadOnly
 from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck
 from authentication.models import Account
 
@@ -626,41 +626,38 @@ class reply(APIView):
 
 
 class msgentries(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
-        # 有了认证之后这段代码就不需要了
-        uid = request.GET.get('uid', None)
-        if uid is None:
-            return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-        u = models.User.objects.get(uid=uid)
+        u = models.User.objects.get(uid=request.user)
 
         raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
         #print(raw_datas)
         d = {}
         for rd in raw_datas:
             if rd.sender_id == u:
-                if rd.receiver_id.uid in d:
-                    if d[rd.receiver_id.uid].date < rd.date:
-                        d[rd.receiver_id.uid] = rd
+                if rd.receiver_id.id.username in d:
+                    if d[rd.receiver_id.id.username].date < rd.date:
+                        d[rd.receiver_id.id.username] = rd
                 else:
-                    d[rd.receiver_id.uid] = rd
+                    d[rd.receiver_id.id.username] = rd
             else:
-                if rd.sender_id.uid in d:
-                    if d[rd.sender_id.uid].date < rd.date:
-                        d[rd.sender_id.uid] = rd
+                if rd.sender_id.id.username in d:
+                    if d[rd.sender_id.id.username].date < rd.date:
+                        d[rd.sender_id.id.username] = rd
                 else:
-                    d[rd.sender_id.uid] = rd
+                    d[rd.sender_id.id.username] = rd
         print(d)
         res = []
         for k, v in d.items():
             t = {}
             if v.sender_id == u:
-                t['uid'] = v.receiver_id.uid
+                t['uid'] = v.receiver_id.id.username
                 t['username'] = v.receiver_id.name
-                # t['avatarurl']=v.receiver_id.avatar
+                t['avatarurl']=v.receiver_id.avatar.url
             else:
-                t['uid'] = v.sender_id.uid
+                t['uid'] = v.sender_id.id.username
                 t['username'] = v.sender_id.name
-                # t['avatarurl'] = v.sender_id.avatar
+                t['avatarurl'] = v.sender_id.avatar.url
             t['lastMsgContent'] = v.content
             t['time'] = v.date
             res.append(t)
@@ -669,23 +666,30 @@ class msgentries(APIView):
 
 
 class messages(APIView):
+    permission_classes=(IsAuthenticated,)
     def get(self, request, format=None):
         # 暂时 uid1 自己 uid2 对方
-        uid1 = request.GET.get('uid1', None)
-        uid2 = request.GET.get('uid2', None)
+        # uid1 = request.GET.get('uid1', None)
+        uid = request.GET.get('uid', None)
         pagenum = request.GET.get('pagenum', None)
         pagesize = request.GET.get('pagesize', None)
-        if None in (uid1,uid2,pagenum,pagesize):
+        if None in (uid,pagenum,pagesize):
             return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
         pagenum = int(pagenum)
         pagesize = int(pagesize)
+        uid1 = request.user
+        try:
+            uid2 = Account.objects.get(uid)
+        except:
+            return Response({'error':'no such user'},status=status.HTTP_400_BAD_REQUEST)
+
         raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
                                            | Q(sender_id=uid2, receiver_id=uid1))\
                                             .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
             {
-                'from':rr.sender_id.uid,
-                'to':rr.receiver_id.uid,
+                'from':rr.sender_id.id.username,
+                'to':rr.receiver_id.id.username,
                 'content':rr.content,
                 'time':{
                     'year':rr.date.year,
@@ -712,7 +716,7 @@ class messages(APIView):
             print(e)
             return Response({'errors':'send message fail'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response({'from':res.sender_id.uid,'to':res.receiver_id.uid,'content':res.content,'date':res.date},status=status.HTTP_200_OK)
+        return Response({'from':res.sender_id.id.username,'to':res.receiver_id.id.username,'content':res.content,'date':res.date},status=status.HTTP_200_OK)
 
         
 class announcements(APIView):
@@ -811,6 +815,7 @@ class announcements(APIView):
         
         
 class info(APIView):
+    # permission_classes=(AdminCheck,)
     def get(self, request, format=None):
         res = {}
         user_count = models.User.objects.all().count()
@@ -823,6 +828,7 @@ class info(APIView):
         return Response(res, status=status.HTTP_200_OK)
 
 class userstates(APIView):
+    # permission_classes=(AdminCheck,)
     def get(self, request, format=None):
         username = request.GET.get('username', None)
         if None in (username,):
@@ -831,12 +837,12 @@ class userstates(APIView):
         res = []
         
         for user in models.User.objects.filter(name__contains=username):
-            item = {"uid":user.id,"name":user.name}
+            item = {"uid":user.id.username,"name":user.name}
             reply_num = models.Reply.objects.filter(user=user).count()
             item['replyNum'] = reply_num
             post_num = models.Thread.objects.filter(poster=user).count()
             item['postNum'] = post_num
-            item['type'] = "学生" #todo
+            item['type'] = user.id.get_user_type_display()
             res.append(item)
         return Response(res, status=status.HTTP_200_OK)
         
@@ -950,7 +956,7 @@ class hotpost(APIView):
             t['title'] = p.title
             t['author'] = {
                 'username':p.poster.name,
-                'uid':p.poster.id
+                'uid':p.poster.id.username
             }
             t['time'] = p.date
             t['lastReplyTime'] = p.reply.aggregate(Max('date'))['date__max']
@@ -1018,6 +1024,7 @@ class upload_file(APIView):
         return Response(res, status=status.HTTP_200_OK)
 
 class userinfo(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     parser_classes = (MultiPartParser,)
     def get(self,request,format=None):
         uid = request.GET.get('uid',None)
@@ -1090,13 +1097,13 @@ class userinfo(APIView):
         return Response(res,status=status.HTTP_200_OK)
     
     def post(self,request,format=None):
-        uid = request.data.get('uid',None)
+        # uid = request.data.get('uid',None)
         username = request.data.get('username',None)
         signature = request.data.get('signature',None)
         imgfile = request.data.get('imagefile',None)
 
         try:
-            u = models.User.objects.get(pk=uid)
+            u = models.User.objects.get(pk=request.user)
         except Exception as e:
             print(e)
             return Response({'error':'not exit user'},status=status.HTTP_400_BAD_REQUEST)
