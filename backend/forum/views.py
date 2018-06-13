@@ -78,7 +78,7 @@ class subscriptions(APIView):
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
 
             item['newPosts'] = []
-            for newPost in models.Thread.objects.filter(section=section).order_by('-date'):
+            for newPost in models.Thread.objects.filter(section=section).order_by('-date')[:5]:
                 subItem = {'id': newPost.id, 'title': newPost.title}
                 item['newPosts'].append(subItem)
             subscriptions.append(item)
