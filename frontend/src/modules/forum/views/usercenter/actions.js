@@ -61,7 +61,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
         body.append('uid', uid);
         body.append('username', newUsername);
         body.append('signature', newSignature);
-        body.append('imagefile', imageFile, imageFile.name);
+        body.append('imagefile', imageFile, {type: 'image/*'});
 
         console.log(body);
         const token = localStorage.getItem("token");
@@ -76,7 +76,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
             // headers: headers,
             headers: {
                 Authorization: 'JWT ' + localStorage.getItem('token'),
-                'Content-Type': undefined,
+                // 'Content-Type': undefined,
                 //'Accept': 'application/json',
             }
         })
