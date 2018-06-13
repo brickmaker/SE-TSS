@@ -6,16 +6,13 @@ curl -H "Content-Type:application/json" -X POST --data '{"cid":"010A0000","pid":
 insertscore接口说明：根据课程
 
 statistics接口说明：根据课程id分析整门课程所有成绩的平均值，中值，最大值，最小值，方差
- curl -H "Content-Type:application/json" -X POST --data '{"cid":"010A0000"}' "http://127.0.0.1:8000/api/score/scorest
-atistics/"
+curl -H "Content-Type:application/json" -X POST --data '{"cid":"010A0000"}' "http://127.0.0.1:8000/api/score/scorestatistics/"
 {"averageScore": 14.628571428571428, "medianScore": 14, "maxScore": 80, "minScore": 0, "deviant": 98.98571428571425}
 
 scoredistribution接口说明：根据课程id和考试时间分析该课程学生成绩的分布状况
- curl -H "Content-Type:application/json" -X POST --data '{"date":"2018-06-13","cid":"010A0000"}' "http://127.0.0.1:80
-00/api/score/scoredistribution/"
+curl -H "Content-Type:application/json" -X POST --data '{"date":"2018-06-13","cid":"010A0000"}' "http://127.0.0.1:8000/api/score/scoredistribution/"
 {"totalNum": 105, "[0,60)": 104, "[60,70)": 0, "[70,80)": 0, "[80,90)": 1, "[90,100]": 0}
 
 scoreteacherhistory接口：根据课程id和教师id分析学生的总人数和平均绩点
-curl -H "Content-Type:application/json" -X POST --data '{"pid":"2110100000","cid":"010A0000"}' "http://127.0.0.1:800
-0/api/score/scoreteacherhistory/"
+curl -H "Content-Type:application/json" -X POST --data '{"pid":"2110100000","cid":"010A0000"}' "http://127.0.0.1:8000/api/score/scoreteacherhistory/"
 {"totalNum": 27, "averageGradePoint": 0.12962962962962962}
