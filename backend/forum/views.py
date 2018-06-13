@@ -666,7 +666,7 @@ class reply(APIView):
         t_data['replies'] = []
         
         try:
-            attr = models.Attachment.objects.get(md5sum=thread.attachment_md5)
+            attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
             t_data['file'] = attr.file.url
         except:
             t_data['file'] = None
@@ -692,13 +692,10 @@ class reply(APIView):
                 for rr in data.replyreply.all().order_by('create_time')
             ]
             try:
-                attr = models.Attachment.objects.get(md5sum=data.attachment_md5)
+                attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
                 t_data['file'] = attr.file.url
             except Exception as e:
-                print("######Debug Node 1 #########")
-                print(e)
                 t_data['file'] = None
-                print("######Debug Node 1 #########")
             res['data'].append(t_data)
         #res['data'].insert(0,)
         return Response(res, status=status.HTTP_200_OK)
