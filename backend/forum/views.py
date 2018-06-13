@@ -621,16 +621,16 @@ class thread(APIView):
         section = thread.section
         if section.type == models.Section.TEACHER:
             teacher = section.teacher.all()[0]
-            path['teacher'] = {'id': teacher.section.id, 'name': teacher.name}
-            path['course'] = {'id': teacher.course.section.id, 'name': teacher.course.name}
-            path['college'] = {'id': teacher.college.section.id, 'name': teacher.college.name}
+            path['teacher'] = {'id': teacher.id, 'name': teacher.name}
+            path['course'] = {'id': teacher.course.id, 'name': teacher.course.name}
+            path['college'] = {'id': teacher.college.id, 'name': teacher.college.name}
         elif section.type == models.Section.COURSE:
             course = section.course.all()[0]
-            path['course'] = {'id': course.section.id, 'name': course.name}
-            path['college'] = {'id': course.college.section.id, 'name': course.college.name}
+            path['course'] = {'id': course.id, 'name': course.name}
+            path['college'] = {'id': course.college.id, 'name': course.college.name}
         else:
             college = models.Section.college.all()[0]
-            path['college'] = {'id': college.section.id, 'name': college.name}
+            path['college'] = {'id': college.id, 'name': college.name}
         res['path'] = path
         reply_num = models.Reply.objects.filter(post_id=section.id).count()
         res['replyPageNum'] = reply_num // post_per_page + 1
