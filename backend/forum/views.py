@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.decorators import parser_classes
-from rest_framework.parsers import FileUploadParser,MultiPartParser
+from rest_framework.parsers import FileUploadParser,MultiPartParser,JSONParser
 from rest_framework.response import Response
 from rest_framework import status
 from forum import models
@@ -62,7 +62,7 @@ class subscriptions(APIView):
         for subscribe in models.Subscribe.objects.filter(user=user):
             section = models.Section.objects.get(pk=subscribe.section_id)
             item = {}
-            item['area'] = {'name': section.name, 'path': {}}
+            item['area'] = {'path': {}}
 
             assert section.type in (section.COLLEGE, section.TEACHER, section.COURSE)
 
@@ -73,11 +73,13 @@ class subscriptions(APIView):
                 item['area']['path']['college'] = {'id': college.id, 'name': college.name}
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
                 item['area']['path']['teacher'] = {'id': teacher.id, 'name': teacher.name}
+                item['area']['name'] = course.name + '-' + teacher.name
             elif section.type == section.COURSE:
                 course = models.Course.objects.get(section_id=section.id)
                 college = models.College.objects.get(pk=course.college_id)
                 item['area']['path']['college'] = {'id': college.id, 'name': college.name}
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
+                item['area']['name'] = college.name + '-' + course.name
 
             item['newPosts'] = []
             for newPost in models.Thread.objects.filter(section=section).order_by('-date')[:5]:
@@ -475,7 +477,7 @@ class post_newreply(APIView):
             
         if fileId is None:
             fileId = "Empty"
-
+        
         try:
             post = models.Thread.objects.get(pk=postId)
         except Exception as e:
@@ -662,6 +664,13 @@ class reply(APIView):
         t_data['content'] = thread.content
         t_data['time'] = thread.date
         t_data['replies'] = []
+        
+        try:
+            attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
+            t_data['file'] = attr.file.url
+        except:
+            t_data['file'] = None
+        
         res['data'].append(t_data)
         
         for data in datas:
@@ -682,6 +691,11 @@ class reply(APIView):
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
+            try:
+                attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
+                t_data['file'] = attr.file.url
+            except Exception as e:
+                t_data['file'] = None
             res['data'].append(t_data)
         #res['data'].insert(0,)
         return Response(res, status=status.HTTP_200_OK)
@@ -1173,9 +1187,12 @@ class userinfo(APIView):
     
     def post(self,request,format=None):
         # uid = request.data.get('uid',None)
-        username = request.data.get('username',None)
-        signature = request.data.get('signature',None)
-        imgfile = request.data.get('imagefile',None)
+        username = request.DATA.get('username',None)
+        signature = request.DATA.get('signature',None)
+        #imgfile = request.POST.get('imagefile',None)
+        imgfile = request.FILES.get('imagefile',None)
+
+        print(username,signature)
 
         try:
             u = models.User.objects.get(pk=request.user)
@@ -1224,7 +1241,7 @@ class courses_info(APIView):
             return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            college = models.College.objects.
+            college = models.College.objects.get(pk=collegeid)
         except:
             return Response({'error':'college is not exit'},status=status.HTTP_400_BAD_REQUEST)
         res = {
