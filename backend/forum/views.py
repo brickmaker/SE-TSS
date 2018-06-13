@@ -655,6 +655,7 @@ class reply(APIView):
                 for rr in data.replyreply.all().order_by('create_time')
             ]
             res['data'].append(t_data)
+        #res['data'].insert(0,)
         return Response(res, status=status.HTTP_200_OK)
 
 
