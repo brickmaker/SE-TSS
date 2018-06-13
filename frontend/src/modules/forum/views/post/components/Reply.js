@@ -28,7 +28,7 @@ class Reply extends Component {
     }
 
     render() {
-        const {postId, id, uid, pic, name, college, postNum, content, time, replies} = this.props
+        const {postId, id, uid, pic, name, college, postNum, content, time, file, replies} = this.props
         return (
             <Card style={style}>
                 <div style={{
@@ -110,6 +110,9 @@ class Reply extends Component {
                                     </Button>
                             }
                             发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
+                            {
+                                file ? file : null
+                            }
                         </div>
                         {
                             replies.length === 0 ? null :
