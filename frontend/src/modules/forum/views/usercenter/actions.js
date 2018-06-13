@@ -56,7 +56,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
         if(imageFile){
             body["imagefile"] = imageFile;
         }
-        console.log("body", body);
+        console.log(body);
         const token = localStorage.getItem("token");
         console.log("token", token);
         const headers = withAuthHeader();
@@ -66,11 +66,11 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
         // headers: withAuthHeader(), 
         // data: body })
         axios.post(`${ROOT_URL}/api/forum/userinfo`,body, {
-            // headers: withAuthHeader(),
+            // headers: headers,
             headers: {
                 Authorization: 'JWT ' + localStorage.getItem('token'),
-                "Content-Type": "multipart/form-data"
-                // 'content-type': 'application/json'
+                "Content-Type": "multipart/form-data;application/x-www-form-urlencoded",
+                
             }
         })
         .then((response)=>{
