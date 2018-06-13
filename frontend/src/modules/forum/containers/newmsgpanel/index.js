@@ -20,29 +20,33 @@ class NewMsgPanel extends Component {
     }
     render() {
         const { classes, newMsgs, isFetchingNewMsgs, selectEntry } = this.props;
-        return (
-            <Card style={{ marginTop: 10, marginBottom: 30 }}>
-                {isFetchingNewMsgs ? <CircularProgress />
-                    :
-                    newMsgs && <List dense>
-                        {newMsgs.map((msg) => {
-                            return (
-                                <ListItem button
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        selectEntry(msg.from.id, msg.from.avatar, msg.from.username);
-                                        this.props.history.push(`/forum/messages`);
-                                    }}
-                                >
-                                    <Avatar alt={msg.from.username} src={`${ROOT_URL}${msg.from.avatar}`}></Avatar>
-                                    <ListItemText primary={msg['from']['username']} secondary={msg["content"]} />
-                                </ListItem>
-                            )
-                        })}
-                    </List>
-                }
-            </Card>
-        )
+        if (isFetchingNewMsgs) {
+            return <CircularProgress />;
+        }
+        else
+            return (
+                <Card style={{ marginTop: 10, marginBottom: 30 }}>
+                    {/* {isFetchingNewMsgs ? <CircularProgress />: */}
+                    {
+                        newMsgs && <List dense>
+                            {newMsgs.map((msg) => {
+                                return (
+                                    <ListItem button
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            selectEntry(msg.from.id, msg.from.avatar, msg.from.username);
+                                            this.props.history.push(`/forum/messages`);
+                                        }}
+                                    >
+                                        <Avatar alt={msg.from.username} src={`${ROOT_URL}${msg.from.avatar}`}></Avatar>
+                                        <ListItemText primary={msg['from']['username']} secondary={msg["content"]} />
+                                    </ListItem>
+                                )
+                            })}
+                        </List>
+                    }
+                </Card>
+            )
     }
 };
 
