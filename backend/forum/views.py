@@ -434,11 +434,15 @@ class teacher_newpost(APIView):
             title = raw['title']
             content = raw['content']
         except Exception as e:
+            
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             fileId = raw['fileId']
         except Exception as e:
+            fileId = "Empty"
+        
+        if fileId is None:
             fileId = "Empty"
         
         try:
@@ -449,7 +453,7 @@ class teacher_newpost(APIView):
         try:
             models.Thread.objects.create(poster_id=uid,title=title,content=content,section=teacher.section,
                                         attachment_md5=fileId)
-        except:
+        except Exception as e:
             return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -722,7 +726,7 @@ class msgentries(APIView):
                         d[rd.sender.id.username] = rd
                 else:
                     d[rd.sender.id.username] = rd
-        print(d)
+        #print(d)
         res = []
         for k, v in d.items():
             t = {}
@@ -1034,9 +1038,9 @@ class hotpost(APIView):
             return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
 
         section = ss.section
-        print(section.id)
+        #print(section.id)
         posts = models.Thread.objects.filter(section=section,date__range=(begin,end))
-        print(len(posts))
+        #print(len(posts))
         filter_posts = sorted(posts, key = lambda x:x.reply.count(),reverse=True)[:100]
         res = []
         for p in filter_posts:
