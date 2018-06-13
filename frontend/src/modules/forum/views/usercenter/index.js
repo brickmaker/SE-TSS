@@ -11,6 +11,7 @@ import { selectEntry } from '../messages/actions';
 import moment from 'moment';
 import Link from 'react-router-dom/Link';
 import PostItem from '../../components/postitem';
+import {ROOT_URL} from '../../configs/config';
 
 const styles = {
     container: {
@@ -102,7 +103,7 @@ class Usercenter extends Component {
         const { avatar, uid, username, signature, replyNum, postNum,
             posts, registrationTime, subscriptionNum } = userInfo;
         //TODO:
-        const currentLoginUid = 5;
+        const currentLoginUid = '2';
         var path = {};
         path['settings'] = { "name": `个人中心`, "link": `${match.url}` };
 
@@ -117,7 +118,7 @@ class Usercenter extends Component {
                                 } */}
                             <Grid container>
                                 <Grid item xs={6} sm={4} md={3}>
-                                    <Avatar alt={username} src={avatar} className={classes.bigAvatar} />
+                                    <Avatar alt={username} src={`${ROOT_URL}${avatar}`} className={classes.bigAvatar} />
                                 </Grid>
                                 <Grid item xs={6} sm={8} md={9}>
                                     <div style={{

@@ -38,7 +38,7 @@ class MsgEntry extends Component {
                         onClick={(event) => { event.preventDefault(); 
                             selectEntry(id, avatar, username);
                             clearMsgs();
-                            getMsgs(uid, id, 1, pageSize); 
+                            getMsgs(id, 1, pageSize); 
                              }}
                         fullWidth={true}>
                         <Avatar alt={username} src={avatar}>
@@ -71,8 +71,8 @@ const mapDispatchToProps = (dispatch) => ({
     selectEntry: (selectedId,selectedAvatar, selectedUsername) => { 
         dispatch(selectEntry( selectedId, selectedAvatar, selectedUsername)); 
     },
-    getMsgs: (uid1, uid2, nextPageNum, pageSize) => {
-        dispatch(getMsgs(uid1, uid2, nextPageNum, pageSize));
+    getMsgs: (uid, nextPageNum, pageSize) => {
+        dispatch(getMsgs(uid, nextPageNum, pageSize));
     },
     clearMsgs:()=>{
         dispatch(clearMsgs());

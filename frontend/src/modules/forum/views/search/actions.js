@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_URL, DEBUG } from '../../configs/config';
+import { withAuthHeader } from '../../utils/api';
 export const SELECT_SEARCHTYPE = "select_type";
 
 export function selectSearchType(searchType) {
@@ -52,6 +53,7 @@ export function search(searchType, query, pageNum, pageSize) {
 
         axios.get(`${ROOT_URL}/api/forum/search`, {
             params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({

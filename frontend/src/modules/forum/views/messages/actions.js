@@ -1,12 +1,13 @@
 import { ROOT_URL, DEBUG } from '../../configs/config';
 import axios from 'axios';
+import { withAuthHeader } from '../../utils/api';
 
 
 export const GET_MSGS = "get_msgs";
 export const MSGS_REQUEST = "msgs_request";
 export const MSGS_SUCCESS = "msgs_success";
 export const MSGS_FAILURE = "msgs_failure";
-export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
+export function getMsgs(uid, nextPageNum, pageSize) {
     console.log("parse", new Date("2012-04-23T18:25:43.511Z"));
     return (dispatch, getState) => {
         const { isFetchingMsgs } = getState();
@@ -19,14 +20,15 @@ export function getMsgs(uid1, uid2, nextPageNum, pageSize) {
         });
 
         let params = DEBUG ? {} : {
-            uid1,
-            uid2,
+            // uid1,
+            uid,
             pagenum: nextPageNum,
             pagesize: pageSize,
         };
 
         axios.get(`${ROOT_URL}/api/forum/messages`, {
             params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({
@@ -60,6 +62,7 @@ export function getNewMsgs(uid) {
         let params = DEBUG ? { to: uid } : { uid: uid };
         axios.get(`${ROOT_URL}/api/forum/newmsgs`, {
             params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({
@@ -117,10 +120,13 @@ export function getMsgEntries(uid, selectedId, pageSize) {
             return;
         }
         dispatch({ type: MSGENTRIES_REQUEST });
+        // const headers = withAuthHeader();
+        // console.log("msgentries", headers);
         axios.get(`${ROOT_URL}/api/forum/msgentries`, {
             params: {
                 uid: uid,
             },
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 var entries = response.data;

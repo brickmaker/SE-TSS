@@ -19,7 +19,7 @@
     "npm": "^6.0.0",
     "prop-types": "^15.6.1",
     "rc-calendar": "^9.6.1",
-    "react": "^16.2.0",
+    "react": "^16.4.0",
     "react-date-picker": "^6.10.1",
     "react-dom": "^16.2.0",
     "react-draft-wysiwyg": "^1.12.13",
