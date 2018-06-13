@@ -63,7 +63,7 @@ class SearchBar extends Component {
 
     render() {
         const typeMapping = { post: "帖子", section: "版块" };
-        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent, clearAnncs } = this.props;
+        const { classes, searchType, pageSize, selectSearchType,search, anchorEl, anchorMenu, content, getContent, clearAnncs } = this.props;
         const { isDialogOpen, dialogContent } = this.state;
         return (
             <Card className={classes.container}>
@@ -99,6 +99,8 @@ class SearchBar extends Component {
                             }
                             else {
                                 clearAnncs();
+                                this.props.search(searchType, event.target.value, 1, pageSize);
+                            
                                 this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
                             }
                         }
@@ -151,6 +153,7 @@ const mapStateToProps = (state) => ({
     searchType: state.forum.search.searchType,
     results: state.forum.search.results,
     anchorEl: state.forum.search.anchorEl,
+    pageSize: state.forum.search.pageSize,
     content: state.forum.search.content,
 });
 
@@ -160,6 +163,9 @@ const mapDispatchToProps = (dispatch) => ({
     getContent: (content) => { dispatch(getContent(content)); },
     clearAnncs: () => {
         dispatch(clearAnncs());
+    },
+    search: (searchType, query, pageNum, pageSize) => {
+        dispatch(search(searchType, query, pageNum, pageSize));
     },
 });
 
