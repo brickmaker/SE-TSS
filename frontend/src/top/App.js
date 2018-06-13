@@ -65,7 +65,7 @@ class App extends Component {
                         <Button 
                             component={Link}
                             raised
-                            to="info"
+                            to="/info"
                             color="inherit">信息系统</Button>
                         <Button 
                             component={Link}
@@ -75,12 +75,12 @@ class App extends Component {
                         <Button 
                             component={Link}
                             raised
-                            to="xkxt"
+                            to="/xkxt"
                             color="inherit">选课系统</Button>
                         <Button 
                             component={Link}
                             raised
-                            to="forum"
+                            to="/forum"
                             color="inherit">论坛交流</Button>
                         <Button 
                             component={Link}
