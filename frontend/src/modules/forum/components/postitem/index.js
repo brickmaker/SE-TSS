@@ -50,7 +50,7 @@ class PostItem extends Component {
                         <Link to={sectionPath["course"]["link"]} style={styles.link}>{sectionPath['course']["name"]} > </Link>
                         <Link to={sectionPath["teacher"]["link"]} style={styles.link}>{sectionPath['teacher']["name"]}</Link>
                     </div>
-                    <Typography style={{display:"inline-block"}}>{moment(postTime).format("YYYY-MM-DD HH-mm")}</Typography>
+                    <Typography style={{display:"inline-block"}}>{moment(postTime).format("YYYY-MM-DD HH:mm")}</Typography>
                 </div>
                 <Typography variant="subheading" component={Link} to={`/forum/p/${postId}`} style={{
                     cursor: "pointer",
