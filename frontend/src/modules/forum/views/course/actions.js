@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
+import axios from "axios"
 
 export const GET_COURSE_INFO = 'get_course_info'
 export const GOT_COURSE_INFO = 'got_course_info'
@@ -16,6 +17,28 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
     dispatch({
         type: POSTING
     })
+    /*
+    axios.post(
+        `${ROOT_URL}/api/forum/course_newpost`,
+        {
+            uid: "1", // todo: remove uid
+            collegeId: collegeId,
+            courseId: courseId,
+            title: title,
+            content: content,
+            fileId: fileId
+        }
+    )
+    */
+    const postData = {
+        uid: "1", // todo: remove uid
+        collegeId: collegeId,
+        courseId: courseId,
+        title: title,
+        content: content,
+        fileId: fileId
+    }
+    console.log(postData)
     fetch(
         `${ROOT_URL}/api/forum/course_newpost`,
         {
@@ -23,14 +46,7 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                uid: "1", // todo: remove uid
-                collegeId: collegeId,
-                courseId: courseId,
-                title: title,
-                content: content,
-                fileId: fileId
-            })
+            body: JSON.stringify(postData)
         }
     )
         .then(res => res.json())
