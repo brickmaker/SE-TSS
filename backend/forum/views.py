@@ -621,16 +621,16 @@ class thread(APIView):
         section = thread.section
         if section.type == models.Section.TEACHER:
             teacher = section.teacher.all()[0]
-            path['teacher'] = {'id': teacher.section.id, 'name': teacher.name}
-            path['course'] = {'id': teacher.course.section.id, 'name': teacher.course.name}
-            path['college'] = {'id': teacher.college.section.id, 'name': teacher.college.name}
+            path['teacher'] = {'id': teacher.id, 'name': teacher.name}
+            path['course'] = {'id': teacher.course.id, 'name': teacher.course.name}
+            path['college'] = {'id': teacher.college.id, 'name': teacher.college.name}
         elif section.type == models.Section.COURSE:
             course = section.course.all()[0]
-            path['course'] = {'id': course.section.id, 'name': course.name}
-            path['college'] = {'id': course.college.section.id, 'name': course.college.name}
+            path['course'] = {'id': course.id, 'name': course.name}
+            path['college'] = {'id': course.college.id, 'name': course.college.name}
         else:
             college = models.Section.college.all()[0]
-            path['college'] = {'id': college.section.id, 'name': college.name}
+            path['college'] = {'id': college.id, 'name': college.name}
         res['path'] = path
         reply_num = models.Reply.objects.filter(post_id=section.id).count()
         res['replyPageNum'] = reply_num // post_per_page + 1
@@ -727,11 +727,11 @@ class msgentries(APIView):
         for k, v in d.items():
             t = {}
             if v.sender.id == u:
-                t['uid'] = v.receiver.id.username
+                t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
                 t['avatarurl']=v.receiver.avatar.url
             else:
-                t['uid'] = v.sender.id.username
+                t['id'] = v.sender.id.username
                 t['username'] = v.sender.name
                 t['avatarurl'] = v.sender.avatar.url
             t['lastMsgContent'] = v.content
@@ -761,7 +761,7 @@ class messages(APIView):
 
         raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
                                            | Q(sender_id=uid2, receiver_id=uid1))\
-                                            .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
+                                            .order_by('-date')[(pagenum-1)*pagesize:(pagenum)*pagesize]
         res = [
             {
                 'from':rr.sender.id.username,
@@ -860,7 +860,7 @@ class announcements(APIView):
         res['anncNum'] = anncNum
         res['anncs'] = []
         ann_num = announcements.count()
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
@@ -891,7 +891,7 @@ class announcements(APIView):
         res = {}
         res['anncNum'] = anncNum
         res['anncs'] = []
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
@@ -1187,10 +1187,10 @@ class userinfo(APIView):
     
     def post(self,request,format=None):
         # uid = request.data.get('uid',None)
-        username = request.DATA.get('username',None)
-        signature = request.DATA.get('signature',None)
+        username = request.data.get('username',None)
+        signature = request.data.get('signature',None)
         #imgfile = request.POST.get('imagefile',None)
-        imgfile = request.FILES.get('imagefile',None)
+        imgfile = request.data.get('imagefile',None)
 
         print(username,signature)
 
