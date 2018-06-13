@@ -694,8 +694,11 @@ class reply(APIView):
             try:
                 attr = models.Attachment.objects.get(md5sum=data.attachment_md5)
                 t_data['file'] = attr.file.url
-            except:
+            except Exception as e:
+                print("######Debug Node 1 #########")
+                print(e)
                 t_data['file'] = None
+                print("######Debug Node 1 #########")
             res['data'].append(t_data)
         #res['data'].insert(0,)
         return Response(res, status=status.HTTP_200_OK)
