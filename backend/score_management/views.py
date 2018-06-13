@@ -104,24 +104,28 @@ def insert_score(request):
     :return: Information of save state
     """
     r=0
+    takes=Take.objects.all()
+    take_list=[]
     for d in request.data:
         course=Course.objects.get(course_id=d["cid"])
         #r=d["sid"]
-        student_account=Account.objects.get_by_natural_key("3150100003")
+        student_account=Account.objects.get_by_natural_key(d["sid"])
         student=Student.objects.get(username=student_account)
         teacher_account = Account.objects.get_by_natural_key(d["pid"])
         teacher=Faculty.objects.get(username=teacher_account)
         score=d["score"]
         test_date=d["test_date"]
-        take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
+
+        take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
         #print(take.score)
         take.score=score
-        take.save()
+        take_list.append(take)
+        #take.save()
 
-    #serializer=TakeSerializer(data=take,many=True)
-    #if serializer.is_valid():
-    #    serializer.save()
-    return Response(r, status=status.HTTP_201_CREATED)
+    serializer=TakeSerializer(data=take_list,many=True)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
     #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','POST'])

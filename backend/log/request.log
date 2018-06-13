@@ -7309,3 +7309,377 @@ Traceback (most recent call last):
     self.model._meta.object_name
 authentication.models.DoesNotExist: Account matching query does not exist.
 2018-06-14 01:08:53,484 [Thread-4:8572] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22375
+2018-06-14 01:11:58,600 [Thread-1:13996] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:15:09,817 [Thread-1:8184] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:09,843 [Thread-1:8184] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:15:18,239 [Thread-3:3672] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 124, in insert_score
+    return Response(r, status=status.HTTP_201_CREATED)
+NameError: name 'r' is not defined
+2018-06-14 01:15:18,256 [Thread-3:3672] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 21830
+2018-06-14 01:15:42,736 [Thread-1:1280] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:42,762 [Thread-1:1280] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22370
+2018-06-14 01:15:57,289 [Thread-3:5964] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:57,309 [Thread-3:5964] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:16:11,877 [Thread-4:7516] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:16:11,902 [Thread-4:7516] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:18:33,617 [Thread-5:10060] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:21:17,328 [Thread-1:19152] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:21:17,354 [Thread-1:19152] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:21:25,395 [Thread-3:13668] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 125, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:21:25,417 [Thread-3:13668] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22487
+2018-06-14 01:21:32,557 [Thread-4:1460] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 125, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:21:32,577 [Thread-4:1460] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22488
+2018-06-14 01:22:13,838 [Thread-1:19220] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:13,861 [Thread-1:19220] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:14,918 [Thread-3:5940] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:14,935 [Thread-3:5940] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:15,717 [Thread-4:19048] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:15,742 [Thread-4:19048] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:34,308 [Thread-5:18076] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:34,329 [Thread-5:18076] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:24:14,074 [Thread-6:11936] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 2
+2018-06-14 01:31:05,125 [Thread-1:14184] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/insertscore/ HTTP/1.1" 400 83
+2018-06-14 01:31:14,152 [Thread-3:8408] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 128, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:31:14,180 [Thread-3:8408] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22485
