@@ -65,6 +65,7 @@ class Usercenter extends Component {
 
         let reader = new FileReader();
         let file = event.target.files[0];
+        console.log("file", file);
         if (file.type.slice(0, 6) !== "image/") {
             this.setState({
                 isDialogOpen: true,

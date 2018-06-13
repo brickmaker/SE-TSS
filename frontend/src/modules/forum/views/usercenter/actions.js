@@ -62,7 +62,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
         body.append('username', newUsername);
         body.append('signature', newSignature);
         if(imageFile){
-        body.append('imagefile', imageFile, {type: 'image/*'});
+        body.append('imagefile', imageFile, imageFile.name, {type: 'image/*'});
         }
 
         console.log(body);
