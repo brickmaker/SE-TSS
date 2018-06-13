@@ -8,6 +8,7 @@ from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
+import json
 from itertools import chain
 
 @api_view(['GET','POST'])
@@ -105,7 +106,8 @@ def insert_score(request):
     """
     takes=Take.objects.all()
     take_list=[]
-    data=request.data["test"]
+    data =json.load(request.data["test"])
+
     for d in data:
         course=Course.objects.get(course_id=d["cid"])
         #r=d["sid"]
@@ -127,6 +129,11 @@ def insert_score(request):
         serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
     #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET',"POST"])
+def apply_create(request):
+    pass
+
 
 @api_view(['GET','POST'])
 def score_statistics(request):
