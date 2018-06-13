@@ -1,0 +1,8 @@
+[
+    {
+        "model":"forum.Area",
+        "pk":1,
+        "name":"666",
+        "college":2
+    }
+]

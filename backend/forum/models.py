@@ -191,3 +191,8 @@ class section_admin_relation(models.Model):
     
     def __str__(self):
         return 'Admin of %s is %s'(self.section_id,self.user.name)
+        
+class Area(models.Model):
+    name = models.CharField(max_length=50, blank=False, default="default-college-name")
+    college =  models.ForeignKey('College',on_delete=models.CASCADE,related_name='areacollege')
+    avatar = models.ImageField(default='forum/img/default.png')
