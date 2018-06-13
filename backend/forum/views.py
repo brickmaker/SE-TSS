@@ -736,11 +736,11 @@ class msgentries(APIView):
             if v.sender.id == u:
                 t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
-                t['avatarurl']=v.receiver.avatar.url
+                t['avatar']=v.receiver.avatar.url
             else:
                 t['id'] = v.sender.id.username
                 t['username'] = v.sender.name
-                t['avatarurl'] = v.sender.avatar.url
+                t['avatar'] = v.sender.avatar.url
             t['lastMsgContent'] = v.content
             t['time'] = v.date
             res.append(t)
@@ -760,19 +760,26 @@ class messages(APIView):
             return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
         pagenum = int(pagenum)
         pagesize = int(pagesize)
+        pagenum -= 1
         uid1 = request.user
         try:
-            uid2 = Account.objects.get(uid)
+            uid2 = Account.objects.get(pk=uid)
         except:
             return Response({'error':'no such user'},status=status.HTTP_400_BAD_REQUEST)
 
-        raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
-                                           | Q(sender_id=uid2, receiver_id=uid1))\
-                                            .order_by('-date')[(pagenum-1)*pagesize:(pagenum)*pagesize]
+        raw_datas = models.Message.objects.filter(Q(sender_id=uid1.username, receiver_id=uid2.username)
+                                           | Q(sender_id=uid2.username, receiver_id=uid1.username))\
+                                            .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
             {
-                'from':rr.sender.id.username,
-                'to':rr.receiver.id.username,
+                'from':{
+                    'id':rr.sender.id.username,
+                    'avatar':rr.sender.avatar.url
+                },
+                'to':{
+                    'id':rr.receiver.id.username,
+                    'avatar':rr.receiver.avatar.url
+                },
                 'content':rr.content,
                 'time':{
                     'year':rr.date.year,
@@ -784,6 +791,7 @@ class messages(APIView):
             }
             for rr in raw_datas
         ]
+        res.reverse()
         return Response(res,status=status.HTTP_200_OK)
 
     def post(self,request,format=None):
@@ -839,8 +847,10 @@ class announcements(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid)
         except Exception as e:
             return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
-        
-        if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
+
+        if user not in teacher.section.admin.all():
+
+        #if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
             return Response({'error':'no permission'},status=status.HTTP_400_BAD_REQUEST)
         try:
             models.Announcement.objects.create(user_id=uid.username,title=title,content=content,section_id=teacher.section_id)
@@ -853,7 +863,7 @@ class announcements(APIView):
         #uid = request.GET.get('uid', None)
         uid = request.user
         pagenum = int(request.GET.get('pagenum', None))
-        pagenum -= 1
+        #pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
@@ -882,7 +892,7 @@ class announcements(APIView):
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
         pagenum = int(request.GET.get('pagenum', None))
-        pagenum -= 1
+        #pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (collegeid,courseid,teacherid,pagenum,pagesize):
@@ -996,7 +1006,7 @@ class search(APIView):
             item['title'] = post.title
             item['postid'] = post.id
             author = models.User.objects.get(pk=post.poster_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             reply_num = models.Reply.objects.filter(post=post).count()
             item['replyNum'] = reply_num
             item['time'] = post.date
@@ -1135,6 +1145,7 @@ class userinfo(APIView):
             u=uu
         res = {
             'uid':uid,
+            'cuid':request.user.username,
             'username':u.name,
             "avatar": u.avatar.url,
             "signature": u.signature,
@@ -1199,7 +1210,7 @@ class userinfo(APIView):
         #imgfile = request.POST.get('imagefile',None)
         imgfile = request.data.get('imagefile',None)
 
-        print(username,signature)
+        print(username,signature,imgfile)
 
         try:
             u = models.User.objects.get(pk=request.user)
