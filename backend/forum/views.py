@@ -818,7 +818,9 @@ class announcements(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid)
         except Exception as e:
             return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
-            
+        
+        if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
+            return Response({'error':'no permission'},status=status.HTTP_400_BAD_REQUEST)
         try:
             models.Announcement.objects.create(user_id=uid.username,title=title,content=content,section_id=teacher.section_id)
         except:
@@ -966,7 +968,7 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Thread).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
             item = {'relatedContent':"还没实现"}
             post = models.Thread.objects.get(pk=result.post)
@@ -1202,10 +1204,10 @@ class colleges(APIView):
             todayPostsNum = 0
             totalPostsNum = 0 
             
-            for course in models.Course.object.filter(college=area.college):
+            for course in models.Course.objects.filter(college=area.college):
                 todayPostsNum += models.Thread.objects.filter(section=course.section,date__range=(today_min, today_max)).count()
                 totalPostsNum += models.Thread.objects.filter(section=course.section).count()
-            for teacher in models.Teacher.object.filter(college=area.college):
+            for teacher in models.Teacher.objects.filter(college=area.college):
                 todayPostsNum += models.Thread.objects.filter(section=teacher.section,date__range=(today_min, today_max)).count()
                 totalPostsNum += models.Thread.objects.filter(section=teacher.section).count()
             
@@ -1214,3 +1216,19 @@ class colleges(APIView):
             res[area.name].append(item)
             
         return Response(res, status=status.HTTP_200_OK)
+
+class courses_info(APIView):
+    def get(self,request,format=None):
+        collegeid = request.GET.get('collegeid',None)
+        if collegeid is None:
+            return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            college = models.College.objects.
+        except:
+            return Response({'error':'college is not exit'},status=status.HTTP_400_BAD_REQUEST)
+        res = {
+            'college':college.name,
+            'pageNum':college.course.all().count()//15+1
+        }
+        return Response(res,status=status.HTTP_200_OK)
