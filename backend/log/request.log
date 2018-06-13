@@ -4369,7 +4369,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4407,7 +4407,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4445,7 +4445,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4483,7 +4483,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4521,7 +4521,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:33:50,033 [Thread-6:9780] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 103941
@@ -4545,7 +4545,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4583,7 +4583,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:36:31,015 [Thread-13:14408] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104076
@@ -4607,7 +4607,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4647,7 +4647,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4685,7 +4685,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 17, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:38:34,676 [Thread-3:10672] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104076
@@ -4711,7 +4711,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 50, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 50, in score_statistics
     scores = Take.objects.filter(course__cid=request.data["cid"]).values_list('score', flat=True).order_by("score")
 KeyError: 'cid'
 2018-06-13 15:39:39,954 [Thread-9:16600] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorestatistics/ HTTP/1.1" 500 104261
@@ -4735,7 +4735,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 84, in score_distribution
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 84, in score_distribution
     scores = Take.objects.filter(course__cid=request.data["cid"], test_date=request.data["date"]).values_list('score', flat=True).order_by("score")
 KeyError: 'cid'
 2018-06-13 15:39:50,064 [Thread-13:7432] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scoredistribution/ HTTP/1.1" 500 104375
@@ -4759,7 +4759,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 116, in score_teacher_history
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 116, in score_teacher_history
     scores = Take.objects.filter(course__cid=request.data["cid"], teacher_id=request.data["pid"]).values_list('score', flat=True).order_by("score")
 KeyError: 'cid'
 2018-06-13 15:39:57,205 [Thread-14:14412] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scoreteacherhistory/ HTTP/1.1" 500 104407
@@ -4802,7 +4802,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:42:23,782 [Thread-1:4428] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104053
@@ -4827,7 +4827,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:42:59,907 [Thread-4:1044] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/?cid=test HTTP/1.1" 500 104275
@@ -4851,7 +4851,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:43:07,795 [Thread-5:17724] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/cid=test HTTP/1.1" 500 104028
@@ -4875,7 +4875,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 19, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 19, in score_list
     takes = Take.objects.filter(course__cid=a["id"])
 KeyError: 'id'
 2018-06-13 15:44:23,847 [Thread-1:12584] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/cid=test HTTP/1.1" 500 104298
@@ -4899,7 +4899,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 15:52:21,455 [Thread-1:15736] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/cid=test HTTP/1.1" 500 104159
@@ -4923,7 +4923,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4961,7 +4961,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data["cid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -4999,7 +4999,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data)
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5037,7 +5037,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data)
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5075,7 +5075,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid=request.data)
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5113,7 +5113,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5151,7 +5151,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5189,7 +5189,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5227,7 +5227,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5265,7 +5265,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5303,7 +5303,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5341,7 +5341,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5379,7 +5379,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__cid="010A0000")
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5426,7 +5426,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 57, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 57, in score_statistics
     median_score = (scores[count//2-1] + scores[count//2]) / 2
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 286, in __getitem__
     "Negative indexing is not supported."
@@ -5452,7 +5452,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:09:20,572 [Thread-3:15944] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104060
@@ -5477,7 +5477,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:10:07,755 [Thread-6:14036] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104061
@@ -5501,7 +5501,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:10:08,290 [Thread-7:3736] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 104061
@@ -5525,7 +5525,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:10:19,611 [Thread-9:8620] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/cid=test HTTP/1.1" 500 104036
@@ -5549,7 +5549,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:10:31,806 [Thread-11:11476] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 103926
@@ -5574,7 +5574,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 57, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 57, in score_statistics
     median_score = (scores[count//2-1] + scores[count//2]) / 2
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 286, in __getitem__
     "Negative indexing is not supported."
@@ -5582,7 +5582,7 @@ AssertionError: Negative indexing is not supported.
 2018-06-13 16:11:22,834 [Thread-14:11892] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorestatistics/ HTTP/1.1" 500 22044
 2018-06-13 16:11:32,564 [Thread-15:3044] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorestatistics/
 Traceback (most recent call last):
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 64, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 64, in score_statistics
     diff = next(it) - average_score['avg_score']
 StopIteration
 
@@ -5607,7 +5607,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 68, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 68, in score_statistics
     deviant /= count - 1
 ZeroDivisionError: float division by zero
 2018-06-13 16:11:32,585 [Thread-15:3044] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorestatistics/ HTTP/1.1" 500 22072
@@ -5632,7 +5632,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 51, in score_statistics
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 51, in score_statistics
     scores = Take.objects.filter(course__course_id=request.data["cid"]).values_list('score', flat=True).order_by("score")
 KeyError: 'cid'
 2018-06-13 16:12:06,690 [Thread-17:2772] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorestatistics/ HTTP/1.1" 500 104273
@@ -5656,7 +5656,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:12:40,671 [Thread-18:11804] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/%20cid=%22010A0000%22 HTTP/1.1" 500 104212
@@ -5680,7 +5680,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 18, in score_list
     takes = Take.objects.filter(course__course_id=request.data["cid"])
 KeyError: 'cid'
 2018-06-13 16:12:52,370 [Thread-20:8592] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 103926
@@ -5691,7 +5691,7 @@ KeyError: 'cid'
 2018-06-13 19:43:45,927 [Thread-4:12144] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scoredistribution/ HTTP/1.1" 200 89
 2018-06-13 19:44:09,369 [Thread-5:9076] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scoreteacherhistory/
 Traceback (most recent call last):
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 123, in score_teacher_history
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 123, in score_teacher_history
     score = next(it)
 StopIteration
 
@@ -5716,7 +5716,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 134, in score_teacher_history
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 134, in score_teacher_history
     average_grade_point /= count
 ZeroDivisionError: division by zero
 2018-06-13 19:44:09,507 [Thread-5:9076] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scoreteacherhistory/ HTTP/1.1" 500 22068
@@ -5741,7 +5741,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 44, in insert_score
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 44, in insert_score
     take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5771,7 +5771,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
     student=Student.objects.get(username=d["sid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5799,7 +5799,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
     student=Student.objects.get(username=d["sid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -5827,7 +5827,7 @@ Traceback (most recent call last):
     response = handler(request, *args, **kwargs)
   File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
     return func(*args, **kwargs)
-  File "D:\¿Î³Ì\Èí¼þ¹¤³Ì\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 41, in insert_score
     student=Student.objects.get(username=d["sid"])
   File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
     return getattr(self.get_queryset(), name)(*args, **kwargs)
@@ -7078,3 +7078,1850 @@ ZeroDivisionError: division by zero
 2018-06-14 03:11:58,548 [Thread-1:9256] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/studentrank/ HTTP/1.1" 500 0
 2018-06-14 03:12:02,439 [Thread-3:2460] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/studentrank/ HTTP/1.1" 500 0
 2018-06-14 03:28:11,176 [Thread-1:13064] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/studentrank/ HTTP/1.1" 500 0
+2018-06-13 22:13:44,443 [Thread-1:14140] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 747
+2018-06-13 22:43:05,574 [Thread-1:11048] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2178
+2018-06-13 22:44:39,686 [Thread-3:8388] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2178
+2018-06-13 22:44:51,864 [Thread-4:18104] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2178
+2018-06-13 22:45:49,099 [Thread-1:6476] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2849
+2018-06-13 23:15:21,265 [Thread-1:17584] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:15:21,504 [Thread-1:17584] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 131288
+2018-06-13 23:16:42,712 [Thread-1:7460] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:16:42,774 [Thread-1:7460] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 131286
+2018-06-13 23:17:56,163 [Thread-3:19388] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:17:56,219 [Thread-3:19388] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 131351
+2018-06-13 23:20:41,611 [Thread-7:14196] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:20:42,025 [Thread-7:14196] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 132826
+2018-06-13 23:21:27,061 [Thread-8:14592] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:21:28,173 [Thread-8:14592] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 132891
+2018-06-13 23:23:36,119 [Thread-1:8556] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:23:36,179 [Thread-1:8556] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 131286
+2018-06-13 23:25:03,610 [Thread-1:8356] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 41
+2018-06-13 23:25:37,478 [Thread-1:18100] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:25:37,534 [Thread-1:18100] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 112008
+2018-06-13 23:26:12,836 [Thread-3:18132] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:26:12,885 [Thread-3:18132] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 112008
+2018-06-13 23:26:27,779 [Thread-1:12512] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 41
+2018-06-13 23:26:48,796 [Thread-1:14532] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:26:48,854 [Thread-1:14532] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 112079
+2018-06-13 23:27:39,679 [Thread-1:16816] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:27:39,735 [Thread-1:16816] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 112078
+2018-06-13 23:28:53,784 [Thread-1:3484] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/score/scorelist/
+2018-06-13 23:28:53,785 [Thread-1:3484] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/scorelist/ HTTP/1.1" 404 3725
+2018-06-13 23:28:54,987 [Thread-3:12460] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/score/scorelist/
+2018-06-13 23:28:54,988 [Thread-3:12460] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/scorelist/ HTTP/1.1" 404 3725
+2018-06-13 23:29:18,975 [Thread-4:5116] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 747
+2018-06-13 23:30:35,130 [Thread-1:7472] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 747
+2018-06-13 23:30:50,130 [Thread-1:18360] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:30:50,189 [Thread-1:18360] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121201
+2018-06-13 23:31:55,966 [Thread-3:16688] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:31:56,021 [Thread-3:16688] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121201
+2018-06-13 23:31:58,662 [Thread-1:13900] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:31:58,721 [Thread-1:13900] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121201
+2018-06-13 23:32:25,468 [Thread-1:19220] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 747
+2018-06-13 23:33:35,170 [Thread-1:5840] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:33:35,274 [Thread-1:5840] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:33:36,127 [Thread-3:19164] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:33:36,189 [Thread-3:19164] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:33:36,979 [Thread-4:8052] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:33:37,032 [Thread-4:8052] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:33:41,337 [Thread-5:3804] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:33:41,401 [Thread-5:3804] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:33:42,225 [Thread-6:10648] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:33:42,279 [Thread-6:10648] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:33:45,229 [Thread-1:16676] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 747
+2018-06-13 23:34:00,398 [Thread-1:17724] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:34:00,461 [Thread-1:17724] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 121159
+2018-06-13 23:34:17,806 [Thread-1:3704] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 774
+2018-06-13 23:37:26,777 [Thread-3:19192] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-13 23:37:26,833 [Thread-3:19192] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 112079
+2018-06-13 23:37:59,286 [Thread-1:17584] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Faculty' is not JSON serializable
+2018-06-13 23:37:59,346 [Thread-1:17584] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133064
+2018-06-13 23:38:51,447 [Thread-1:17288] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 45, in teacher_match
+    match_dict["tname"] = takes[0].teacher.name
+NameError: name 'teacher' is not defined
+2018-06-13 23:38:51,471 [Thread-1:17288] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 21839
+2018-06-13 23:38:54,162 [Thread-1:17324] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Faculty' is not JSON serializable
+2018-06-13 23:38:54,216 [Thread-1:17324] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 111413
+2018-06-13 23:39:31,448 [Thread-1:3944] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:39:57,715 [Thread-3:19376] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:39:59,338 [Thread-4:952] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:40:00,420 [Thread-5:8484] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:40:02,550 [Thread-6:12988] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:40:19,543 [Thread-7:17524] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:40:27,210 [Thread-8:8956] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:40:43,053 [Thread-1:5328] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:09,589 [Thread-3:17624] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:17,950 [Thread-4:14176] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:24,333 [Thread-5:18900] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:26,342 [Thread-6:11256] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:40,425 [Thread-7:13088] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:42,751 [Thread-8:968] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:41:54,217 [Thread-9:18740] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:40:43,118 [Thread-1:5328] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:09,644 [Thread-3:17624] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:18,005 [Thread-4:14176] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:24,386 [Thread-5:18900] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:26,403 [Thread-6:11256] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133069
+2018-06-13 23:41:40,513 [Thread-7:13088] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:42,807 [Thread-8:968] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:41:54,272 [Thread-9:18740] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 133070
+2018-06-13 23:42:15,789 [Thread-1:16264] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:42:21,325 [Thread-3:15744] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:42:22,165 [Thread-4:16456] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 14
+2018-06-13 23:42:25,378 [Thread-1:14356] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:42:25,432 [Thread-1:14356] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 111419
+2018-06-13 23:42:26,478 [Thread-3:9480] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:42:26,526 [Thread-3:9480] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 111418
+2018-06-13 23:42:37,903 [Thread-4:13712] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:42:37,962 [Thread-4:13712] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 111419
+2018-06-13 23:42:40,867 [Thread-1:19072] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 23
+2018-06-13 23:44:47,439 [Thread-3:13228] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 23
+2018-06-13 23:44:51,443 [Thread-1:6344] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/teachermatch/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Take' is not JSON serializable
+2018-06-13 23:44:51,522 [Thread-1:6344] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/teachermatch/ HTTP/1.1" 500 156142
+2018-06-13 23:45:03,790 [Thread-1:18328] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/teachermatch/ HTTP/1.1" 200 11774
+2018-06-13 23:55:50,641 [Thread-1:15212] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 3362
+2018-06-13 23:59:12,969 [Thread-1:13656] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 27, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\fields.py", line 1855, in to_representation
+    return method(value)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\serializers.py", line 16, in get_faculty_name
+    return obj.faculty.name
+AttributeError: 'Take' object has no attribute 'faculty'
+2018-06-13 23:59:13,115 [Thread-1:13656] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 22992
+2018-06-13 23:59:14,673 [Thread-3:15212] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 27, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\fields.py", line 1855, in to_representation
+    return method(value)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\serializers.py", line 16, in get_faculty_name
+    return obj.faculty.name
+AttributeError: 'Take' object has no attribute 'faculty'
+2018-06-13 23:59:14,699 [Thread-3:15212] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 22992
+2018-06-13 23:59:29,085 [Thread-1:12216] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 4766
+2018-06-14 00:17:12,871 [Thread-3:14488] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scoreliststudent/ HTTP/1.1" 200 14182
+2018-06-14 00:49:07,610 [Thread-1:14856] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student=Student.objects.get(username=d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Student matching query does not exist.
+2018-06-14 00:49:07,637 [Thread-1:14856] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22180
+2018-06-14 00:50:04,545 [Thread-1:14360] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student=Student.objects.get(username="3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Student matching query does not exist.
+2018-06-14 00:50:04,569 [Thread-1:14360] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22184
+2018-06-14 00:50:12,256 [Thread-3:9480] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student=Student.objects.get(username="3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Student matching query does not exist.
+2018-06-14 00:50:12,275 [Thread-3:9480] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22184
+2018-06-14 00:50:13,720 [Thread-4:2568] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student=Student.objects.get(username="3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Student matching query does not exist.
+2018-06-14 00:50:13,742 [Thread-4:2568] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22184
+2018-06-14 00:54:12,071 [Thread-1:720] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    account=Account.objects.get_by_natural_key("3150104111")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 00:54:12,275 [Thread-1:720] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22367
+2018-06-14 00:54:31,230 [Thread-1:3164] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 12
+2018-06-14 01:01:55,053 [Thread-1:10892] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:01:55,083 [Thread-1:10892] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:02:44,138 [Thread-3:3892] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:02:44,161 [Thread-3:3892] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:03:04,032 [Thread-4:12808] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:04:23,998 [Thread-1:16824] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:04:35,865 [Thread-3:16464] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:07:30,783 [Thread-1:12908] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 116, in insert_score
+    take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 487, in get_or_create
+    return self.get(**lookup), False
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 407, in get
+    (self.model._meta.object_name, num)
+score_management.models.MultipleObjectsReturned: get() returned more than one Take -- it returned 8!
+2018-06-14 01:07:30,808 [Thread-1:12908] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22412
+2018-06-14 01:07:47,832 [Thread-3:8388] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:07:47,853 [Thread-3:8388] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:08:24,584 [Thread-4:12392] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:08:24,602 [Thread-4:12392] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:08:46,183 [Thread-1:17388] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key("3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:08:46,206 [Thread-1:17388] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22375
+2018-06-14 01:08:47,402 [Thread-3:14324] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key("3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:08:47,423 [Thread-3:14324] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22374
+2018-06-14 01:08:53,462 [Thread-4:8572] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key("3150100003")
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:08:53,484 [Thread-4:8572] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22375
+2018-06-14 01:11:58,600 [Thread-1:13996] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:15:09,817 [Thread-1:8184] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 110, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:09,843 [Thread-1:8184] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:15:18,239 [Thread-3:3672] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 124, in insert_score
+    return Response(r, status=status.HTTP_201_CREATED)
+NameError: name 'r' is not defined
+2018-06-14 01:15:18,256 [Thread-3:3672] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 21830
+2018-06-14 01:15:42,736 [Thread-1:1280] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:42,762 [Thread-1:1280] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22370
+2018-06-14 01:15:57,289 [Thread-3:5964] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:15:57,309 [Thread-3:5964] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:16:11,877 [Thread-4:7516] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:16:11,902 [Thread-4:7516] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:18:33,617 [Thread-5:10060] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 1
+2018-06-14 01:21:17,328 [Thread-1:19152] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 111, in insert_score
+    student_account=Account.objects.get_by_natural_key(d["sid"])
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\contrib\auth\base_user.py", line 44, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\manager.py", line 82, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+authentication.models.DoesNotExist: Account matching query does not exist.
+2018-06-14 01:21:17,354 [Thread-1:19152] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22371
+2018-06-14 01:21:25,395 [Thread-3:13668] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 125, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:21:25,417 [Thread-3:13668] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22487
+2018-06-14 01:21:32,557 [Thread-4:1460] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 125, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:21:32,577 [Thread-4:1460] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22488
+2018-06-14 01:22:13,838 [Thread-1:19220] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:13,861 [Thread-1:19220] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:14,918 [Thread-3:5940] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:14,935 [Thread-3:5940] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:15,717 [Thread-4:19048] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:15,742 [Thread-4:19048] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:22:34,308 [Thread-5:18076] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 117, in insert_score
+    take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\db\models\query.py", line 403, in get
+    self.model._meta.object_name
+score_management.models.DoesNotExist: Take matching query does not exist.
+2018-06-14 01:22:34,329 [Thread-5:18076] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22031
+2018-06-14 01:24:14,074 [Thread-6:11936] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 2
+2018-06-14 01:31:05,125 [Thread-1:14184] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/insertscore/ HTTP/1.1" 400 83
+2018-06-14 01:31:14,152 [Thread-3:8408] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\è¯¾ç¨‹\è½¯ä»¶å·¥ç¨‹\TSS\SE-TSS\backend\score_management\views.py", line 128, in insert_score
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 266, in data
+    self._data = self.get_initial()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 600, in get_initial
+    return self.to_representation(self.initial_data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+TypeError: 'Take' object is not iterable
+2018-06-14 01:31:14,180 [Thread-3:8408] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22485
+2018-06-14 01:31:45,858 [Thread-1:8184] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
+2018-06-14 02:21:23,909 [Thread-1:17272] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
+2018-06-14 02:21:49,327 [Thread-3:11952] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
