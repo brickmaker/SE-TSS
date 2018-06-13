@@ -729,11 +729,11 @@ class msgentries(APIView):
             if v.sender.id == u:
                 t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
-                t['avatarurl']=v.receiver.avatar.url
+                t['avatar']=v.receiver.avatar.url
             else:
                 t['id'] = v.sender.id.username
                 t['username'] = v.sender.name
-                t['avatarurl'] = v.sender.avatar.url
+                t['avatar'] = v.sender.avatar.url
             t['lastMsgContent'] = v.content
             t['time'] = v.date
             res.append(t)
@@ -753,14 +753,15 @@ class messages(APIView):
             return Response({'error': 'Parameters error'}, status=status.HTTP_400_BAD_REQUEST)
         pagenum = int(pagenum)
         pagesize = int(pagesize)
+        pagenum -= 1
         uid1 = request.user
         try:
-            uid2 = Account.objects.get(uid)
+            uid2 = Account.objects.get(pk=uid)
         except:
             return Response({'error':'no such user'},status=status.HTTP_400_BAD_REQUEST)
 
-        raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
-                                           | Q(sender_id=uid2, receiver_id=uid1))\
+        raw_datas = models.Message.objects.filter(Q(sender_id=uid1.username, receiver_id=uid2.username)
+                                           | Q(sender_id=uid2.username, receiver_id=uid1.username))\
                                             .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
             {
@@ -777,6 +778,7 @@ class messages(APIView):
             }
             for rr in raw_datas
         ]
+        res.reverse()
         return Response(res,status=status.HTTP_200_OK)
 
     def post(self,request,format=None):
@@ -1128,6 +1130,7 @@ class userinfo(APIView):
             u=uu
         res = {
             'uid':uid,
+            'cuid':request.user.username,
             'username':u.name,
             "avatar": u.avatar.url,
             "signature": u.signature,

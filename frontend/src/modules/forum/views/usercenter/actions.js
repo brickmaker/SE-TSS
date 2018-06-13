@@ -69,7 +69,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
             // headers: headers,
             headers: {
                 Authorization: 'JWT ' + localStorage.getItem('token'),
-                'Content-Type': undefined,
+                //"content-type": "application/x-www-form-urlencoded",
                 //'Accept': 'application/json',
             }
         })
