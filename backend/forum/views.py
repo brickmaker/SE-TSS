@@ -647,6 +647,7 @@ class reply(APIView):
         
         thread = models.Thread.objects.get(pk=post_id)
         t_data = {}
+        t_data['id'] = post_id
         post_num = models.Thread.objects.filter(poster=thread.poster).count()
         t_data['user'] = {'id':thread.poster.id_id,
             'name': thread.poster.name,
@@ -661,6 +662,7 @@ class reply(APIView):
         
         for data in datas:
             t_data = {}
+            t_data['id'] = data.id
             post_num = models.Thread.objects.filter(poster=data.user).count()
             t_data['user'] = {'id':data.user.id_id,
                 'name': data.user.name,
