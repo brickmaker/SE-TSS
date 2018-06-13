@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from score_management.models import Take
+from authentication.models import Course,Student,Faculty
 from score_management.serializers import TakeSerializer
 from django.db.models import Avg
 from django.db.models import Max
@@ -16,8 +17,14 @@ def score_list(request):
     """
 
     takes = Take.objects.filter(course__course_id=request.data["cid"],teacher__username=request.data["pid"])
-    serializer = TakeSerializer(takes, many=True)
-    return Response(serializer.data)
+    takes_list=[]
+    for take in takes:
+        dict={}
+        dict["stu_name"]=take.student.name
+        dict["score"]=take.score
+        takes_list.append(dict)
+    #serializer = TakeSerializer(takes, many=True)
+    return Response(takes_list)
 
         #serializer = TakeSerializer(data=request.data)
         #if serializer.is_valid():
@@ -35,12 +42,22 @@ def insert_score(request):
     :param request: Take List
     :return: Information of save state
     """
+    r=0
+    for d in request.data:
+        course=Course.objects.get(course_id=d["cid"])
+        r=d["sid"]
+        #student=Student.objects.get(username=d["sid"])
+        #teacher=Faculty.objects.get(username=d["pid"])
+        #score=d["score"]
+        #take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
+        #take.score=score
+        #take.save()
 
-    serializer=TakeSerializer(data=request.data,many=True)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    #serializer=TakeSerializer(data=take,many=True)
+    #if serializer.is_valid():
+    #    serializer.save()
+    return Response(r, status=status.HTTP_201_CREATED)
+    #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','POST'])
 def score_statistics(request):

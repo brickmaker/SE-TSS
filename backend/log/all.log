@@ -1356,3 +1356,16 @@
 2018-06-13 16:12:52,370 [Thread-20:8592] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/score/scorelist/ HTTP/1.1" 500 103926
 2018-06-13 19:27:43,159 [Thread-1:3820] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 11087
 2018-06-13 19:28:49,889 [Thread-3:17292] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorestatistics/ HTTP/1.1" 200 116
+2018-06-13 19:40:15,683 [Thread-1:8440] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2849
+2018-06-13 19:40:52,213 [Thread-3:18304] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelist/ HTTP/1.1" 200 2849
+2018-06-13 19:43:45,927 [Thread-4:12144] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scoredistribution/ HTTP/1.1" 200 89
+2018-06-13 19:44:09,507 [Thread-5:9076] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scoreteacherhistory/ HTTP/1.1" 500 22068
+2018-06-13 19:44:36,304 [Thread-6:7792] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scoreteacherhistory/ HTTP/1.1" 200 58
+2018-06-13 21:51:32,662 [Thread-1:16752] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22410
+2018-06-13 21:52:41,558 [Thread-3:3764] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22179
+2018-06-13 21:53:26,425 [Thread-4:14680] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22179
+2018-06-13 21:56:21,294 [Thread-5:8020] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22179
+2018-06-13 21:58:32,632 [Thread-1:9000] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 12
+2018-06-13 21:59:14,335 [Thread-1:16704] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 10
+2018-06-13 21:59:22,401 [Thread-3:9204] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 10
+2018-06-13 21:59:26,479 [Thread-1:18472] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 12

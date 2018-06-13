@@ -13,7 +13,7 @@ class Take(models.Model):
     student=models.ForeignKey(Student,on_delete=models.CASCADE,null=False)
     course=models.ForeignKey(Course,on_delete = models.CASCADE,null=False)
     teacher=models.ForeignKey(Faculty,on_delete = models.CASCADE,null=False)
-    score=models.IntegerField("分数",null=True)
+    score=models.IntegerField("分数",null=True,default=0)
     test_date=models.DateField("考试时间",auto_now=True)
 
 
