@@ -1,20 +1,2 @@
 [
-    {
-        "model":"forum.section_admin_relation",
-        "pk":1,
-        "fields":{
-            "user":"1",
-            "section":3,
-            "date":"2018-01-01T00:00:00+00:00"
-        }
-    },
-    {
-        "model":"forum.section_admin_relation",
-        "pk":2,
-        "fields":{
-            "user":"1",
-            "section":2,
-            "date":"2018-01-01T00:00:00+00:00"
-        }
-    }
 ]

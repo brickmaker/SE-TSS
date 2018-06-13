@@ -11,8 +11,8 @@ const styles = {
 class NewMsgPanel extends Component {
     componentWillMount() {
         //TODO: uid
-        this.props.getNewMsgs(5);
-        this.props.selectEntry(2);
+        this.props.getNewMsgs(5, 5);
+        // this.props.selectEntry(2);
     }
     changeid(id, changeurl) {
         this.props.selectEntry(id);
@@ -60,8 +60,8 @@ const mapDispatchToProps = (dispatch) => ({
     selectEntry: (selectedId, selectedAvatar, selectedUsername) => {
         dispatch(selectEntry(selectedId, selectedAvatar, selectedUsername));
     },
-    getNewMsgs: (uid) => {
-        dispatch(getNewMsgs(uid));
+    getNewMsgs: (uid, pageSize) => {
+        dispatch(getNewMsgs(uid, pageSize));
     },
 });
 

@@ -53,14 +53,14 @@ export const GET_NEWMSGS = "get_newmsgs";
 export const NEWMSGS_REQUEST = "newmsgs_request";
 export const NEWMSGS_SUCCESS = "newmsgs_success";
 export const NEWMSGS_FAILURE = "newmsgs_failure";
-export function getNewMsgs(uid) {
+export function getNewMsgs(uid, pageSize) {
     return (dispatch, getState) => {
         const { isFetchingNewMsgs } = getState().forum.messages;
         if (isFetchingNewMsgs) {
             return;
         }
         dispatch({ type: NEWMSGS_REQUEST });
-        let params = DEBUG ? { to: uid } : { uid: uid };
+        let params = DEBUG ? { to: uid } : { uid: uid, pagesize: pageSize };
         axios.get(`${ROOT_URL}/api/forum/newmsgs`, {
             params,
             headers: withAuthHeader(),

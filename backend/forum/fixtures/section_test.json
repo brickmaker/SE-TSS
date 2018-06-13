@@ -61,5 +61,32 @@
             "type":"TR",
             "admin":"1"
         }
+    },
+    {
+        "model":"forum.Section",
+        "pk":8,
+        "fields":{
+            "name":"人文学院",
+            "type":"CL",
+            "admin":"1"
+        }
+    },
+    {
+        "model":"forum.Section",
+        "pk":9,
+        "fields":{
+            "name":"艺术学院",
+            "type":"CL",
+            "admin":"1"
+        }
+    },
+    {
+        "model":"forum.Section",
+        "pk":10,
+        "fields":{
+            "name":"医学院",
+            "type":"CL",
+            "admin":"1"
+        }
     }
 ]
