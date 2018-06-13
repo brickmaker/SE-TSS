@@ -2287,5 +2287,55 @@
     "历史最高在线数": 9999,
     "今日注册数": 29,
     "版块数": 2000
+  },
+  "userinfo": {
+    "uid": 5,
+    "username": "用户名字",
+    "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+    "signature": "♀遈什麼濛蔽叻鉨ㄖㄅ雙yаη，讓鉨看不菿誐る鉨ィ寸cんù。♀",
+    "registrationTime": "2012-04-24T18:25:43.511Z",
+    "replyNum": 10,
+    "postNum": 2,
+    "subscriptionNum": 5,
+    "posts": [
+      {
+        "postId": "111",
+        "title": "一个帖子的标题",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      },
+      {
+        "postId": "111",
+        "title": "一个帖子的标题",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      }
+    ]
   }
 }

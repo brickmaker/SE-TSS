@@ -17,7 +17,7 @@ import SearchBar from '../../components/searchbar';
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("uid"); // todo: get uid
+        this.props.getSubscriptions("1"); // todo: get uid
     }
 
     render() {
@@ -26,7 +26,6 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain/>
-                    <SearchBar history={this.props.history}/>
                     <Grid container xs={12}>
                         <Grid container xs={8}>
                             {

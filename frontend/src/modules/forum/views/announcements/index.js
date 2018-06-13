@@ -46,7 +46,7 @@ class Announcements extends Component {
         const { classes, type, match, anncNum, anncs, pageSize, isFetching } = this.props;
         const { collegeid, courseid, teacherid,pageNum } = match.params;
         const sectionPath = {};
-        console.log("render annc", anncs);
+        // console.log("render annc", anncs);
         var link = '/forum/announcements';
         if (match) {
             if (anncs.length) {
@@ -70,7 +70,7 @@ class Announcements extends Component {
         }
         if (type != 'main' && type != 'section') {
             return (
-                <div>
+                // <div>
                     <MainBody>
                         {Object.keys(match.params).length > 1 ? <Path path={sectionPath} /> :
                             <Path isMain path={sectionPath} />}
@@ -104,17 +104,17 @@ class Announcements extends Component {
                             </Grid>
                         </Grid>
                     </MainBody>
-                </div>
+                // </div>
             )
         }
         else return (
-            <div>
+            // <div>
                 <Grid container justify="center">
                     <Grid item xs={12}>
                         <AnncPanel type={type} match={match} />
                     </Grid>
                 </Grid>
-            </div>
+            // </div>
         );
     }
 }

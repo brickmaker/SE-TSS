@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import { List, CircularProgress, withStyles } from 'material-ui';
 import MsgEntry from '../../components/msgentry';
 import { getMsgEntries,selectEntry } from '../../views/messages/actions';
+import moment from 'moment';
 
 
 const styles = {

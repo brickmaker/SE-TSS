@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
+import { SELECT_ENTRY, GET_MSGCONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -38,7 +38,7 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 msgEnd: action.msgEnd,
             }));
-        case GET_CONTENT:
+        case GET_MSGCONTENT:
             return (Object.assign({}, state, {
                 content: action.content,
             }));

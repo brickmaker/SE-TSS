@@ -20,25 +20,28 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
         `${ROOT_URL}/api/forum/course_newpost`,
         {
             method: 'POST',
-            // todo: token header
-            body: {
-                uid: uid,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uid: "1", // todo: remove uid
                 collegeId: collegeId,
                 courseId: courseId,
                 title: title,
                 content: content,
                 fileId: fileId
-            }
+            })
         }
     )
         .then(res => res.json())
         .then((data) => {
-            console.log(data)
-            // todo: post test
-            dispatch({
-                type: POST_SUCCESS
-            })
-            // todo: fail check
+            if (data.error) {
+                console.log(data)
+            } else {
+                dispatch({
+                    type: POST_SUCCESS
+                })
+            }
         })
 }
 
@@ -46,10 +49,14 @@ export const subscribe = (uid, collegeId, courseId) => (dispatch, getState) => {
     fetch(`${ROOT_URL}/api/forum/course_subscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
         .then(res => res.json())
         .then((data) => {
-            dispatch({
-                type: SUBSCRIBE_COURSE,
-                subscribed: data.subscribed
-            })
+            if (data.error) {
+                // todo: deal with error
+            } else {
+                dispatch({
+                    type: SUBSCRIBE_COURSE,
+                    subscribed: data.subscribed
+                })
+            }
         })
 }
 
@@ -57,10 +64,14 @@ export const unsubscribe = (uid, collegeId, courseId) => (dispatch, getState) =>
     fetch(`${ROOT_URL}/api/forum/course_unsubscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
         .then(res => res.json())
         .then((data) => {
-            dispatch({
-                type: UNSUBSCRIBE_COURSE,
-                subscribed: data.subscribed
-            })
+            if (data.error) {
+                // todo: deal with error
+            } else {
+                dispatch({
+                    type: UNSUBSCRIBE_COURSE,
+                    subscribed: data.subscribed
+                })
+            }
         })
 }
 
@@ -68,32 +79,44 @@ export const checkSubscribed = (uid, collegeId, courseId) => (dispatch, getState
     fetch(`${ROOT_URL}/api/forum/course_subscribed${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
         .then(res => res.json())
         .then((data) => {
-            dispatch({
-                type: CHECKED_SUBSCRIBED,
-                subscribed: data.subscribed
-            })
+            if (data.error) {
+                // todo: deal with error
+            } else {
+                dispatch({
+                    type: CHECKED_SUBSCRIBED,
+                    subscribed: data.subscribed
+                })
+            }
         })
 }
 
 export const getCourseInfo = (collegeId, courseId) => (dispatch, getState) => {
     fetchCourseInfo(collegeId, courseId)
         .then((data) => {
-            dispatch({
-                type: GOT_COURSE_INFO,
-                courseInfo: data
-            })
-            dispatch(getPosts(collegeId, courseId, getState().forum.course.currPage))
+            if (data.error) {
+                // todo: error handle
+            } else {
+                dispatch({
+                    type: GOT_COURSE_INFO,
+                    courseInfo: data
+                })
+                dispatch(getPosts(collegeId, courseId, getState().forum.course.currPage))
+            }
         })
 }
 
 export const getPosts = (collegeId, courseId, pageId) => (dispatch, getState) => {
     fetchPosts(collegeId, courseId, pageId)
         .then((data) => {
-            dispatch({
-                type: GOT_COURSE_POSTS,
-                currPage: pageId,
-                posts: data.data
-            })
+            if (data.error) {
+                // todo: deal with error
+            } else {
+                dispatch({
+                    type: GOT_COURSE_POSTS,
+                    currPage: pageId,
+                    posts: data.data
+                })
+            }
         })
 }
 

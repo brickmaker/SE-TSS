@@ -23,7 +23,7 @@ class Management extends Component {
         const { classes } = this.props;
         const path = {'management': {'name': "管理", 'link':'/forum/management'}};
         return (
-            <div>
+            // <div>
                 <MainBody>
                     <Path isMain path={path}/>
                     <Grid container justify="center">
@@ -60,7 +60,7 @@ class Management extends Component {
                         </Grid>
                     </Grid>
                 </MainBody>
-            </div>
+            // </div>
         );
     };
 }

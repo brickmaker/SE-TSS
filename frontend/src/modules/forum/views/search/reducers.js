@@ -1,4 +1,4 @@
-import { SELECT_SEARCHTYPE, ANCHOR_MENU, GET_CONTENT, SEARCH, SET_PAGENUM } from './actions';
+import { SELECT_SEARCHTYPE, ANCHOR_MENU, GET_SEARCHCONTENT, SEARCH, SET_PAGENUM } from './actions';
 import { SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE } from './actions';
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
 }
 
 export function searchReducer(state = initialState, action) {
-    console.log(state, action);
+    // console.log(state, action);
     switch (action.type) {
         case SELECT_SEARCHTYPE:
             return (Object.assign({}, state, {
@@ -25,7 +25,7 @@ export function searchReducer(state = initialState, action) {
 
                 anchorEl: action.anchorEl,
             }));
-        case GET_CONTENT:
+        case GET_SEARCHCONTENT:
             return (Object.assign({}, state, {
                 content: action.content,
             }));

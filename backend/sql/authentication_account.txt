@@ -1,7 +1,0 @@
-"pbkdf2_sha256$100000$WqS1twWDTE5c$ka1f+aT1Z7a5qxRjM7Sr20IlOF9GeADJQc7Qs7eg/1E="	"2018-05-23 12:54:36.728654"	"xixi"	"123456789123000000"	"1"	"1"	"1"	"4"
-"pbkdf2_sha256$100000$emgHGM6nWDMF$g/zn7A1vM0nwHbehTJ6ITTFBcMzoROz/d3wse9zrckI="	""	"stu1"	"123456789123000001"	"0"	"0"	"0"	"1"
-"pbkdf2_sha256$100000$8zHPkQQk1rqx$7qStghXql/TTplercpWmJ1YpMxuAbiBto9b0dAzfmHA="	""	"stu2"	"123456789123000002"	"0"	"0"	"0"	"1"
-"pbkdf2_sha256$100000$TAiHFwaRVviQ$Kvfaaxjt08hW7kFDbuL+wVCbHfJ7BXx5Vh3YZZ19dXw="	"2018-05-23 07:00:22.855833"	"fac1"	"123456789123000003"	"0"	"0"	"0"	"2"
-"pbkdf2_sha256$100000$khUv2If6CDDd$6xFi1MaGWOXmEpUmP0I+HyZhh1FSzsIqeBLqs5GpcZs="	""	"fac2"	"123456789123000004"	"0"	"0"	"0"	"2"
-"pbkdf2_sha256$100000$XaEDJS7IysB9$L5Vwms3E66DgrfnAA9dwA+Q7bKd0spcVTZv14e/gckM="	""	"staff1"	"123456789123000005"	"0"	"0"	"0"	"3"
-"pbkdf2_sha256$100000$1zuG6WOeJg34$nylbs3kz/olrugu5IzMJ16BmXLNnIyA4MorTAYd99Rs="	""	"staff2"	"123456789123000006"	"0"	"0"	"0"	"3"

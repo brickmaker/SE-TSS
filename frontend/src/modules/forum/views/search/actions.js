@@ -17,10 +17,10 @@ export function anchorMenu(anchorEl) {
     });
 }
 
-export const GET_CONTENT = "get_content";
+export const GET_SEARCHCONTENT = "get_searchcontent";
 export function getContent(content) {
     return ({
-        type: GET_CONTENT,
+        type: GET_SEARCHCONTENT,
         content: content,
     });
 }
@@ -34,7 +34,7 @@ export const SEARCH_FAILURE = "search_failure";
 export function search(searchType, query, pageNum, pageSize) {
     console.log("action search", searchType, query, pageNum, pageSize);
     return (dispatch, getState) => {
-        const { isFetching } = getState();
+        const { isFetching } = getState().forum.search;
         if (isFetching) {
             return;
         }
