@@ -472,7 +472,7 @@ POST /api/forum/comment
 ##### 请求
 
 ```
-POST /api/forum//upload_file
+POST /api/forum/upload_file
 ```
 
 ##### 参数

@@ -40,6 +40,7 @@ class PostBody extends Component {
                                 postNum={reply.user.postNum}
                                 content={reply.content}
                                 time={reply.time}
+                                file={reply.file}
                                 replies={reply.replies}
                                 history={history}
                             />
