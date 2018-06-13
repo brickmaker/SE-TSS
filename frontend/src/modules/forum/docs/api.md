@@ -27,6 +27,21 @@ success: 参照`subscriptions`
 
 error: ..
 
+#### 所有学院
+
+##### 请求
+
+```
+GET /api/forum/colleges
+```
+
+##### 响应
+
+success:
+
+参照`colleges`
+静态数据，请保持格式，相应的数据填充
+
 
 #### 课程列表
 
