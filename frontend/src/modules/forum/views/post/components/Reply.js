@@ -109,10 +109,19 @@ class Reply extends Component {
                                         回复
                                     </Button>
                             }
-                            发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
-                            {
-                                file ? file : null
-                            }
+                            <p>
+                                发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
+                            </p>
+                            <div>
+                                {
+                                    file ?
+                                        <Button
+                                            href={`${ROOT_URL}${file}`}
+                                            color={'primary'}
+                                            size={'small'}>下载附件</Button>
+                                        : null
+                                }
+                            </div>
                         </div>
                         {
                             replies.length === 0 ? null :
