@@ -761,7 +761,7 @@ class messages(APIView):
 
         raw_datas = models.Message.objects.filter(Q(sender_id=uid1, receiver_id=uid2)
                                            | Q(sender_id=uid2, receiver_id=uid1))\
-                                            .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
+                                            .order_by('-date')[(pagenum-1)*pagesize:(pagenum)*pagesize]
         res = [
             {
                 'from':rr.sender.id.username,
@@ -860,7 +860,7 @@ class announcements(APIView):
         res['anncNum'] = anncNum
         res['anncs'] = []
         ann_num = announcements.count()
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
@@ -891,7 +891,7 @@ class announcements(APIView):
         res = {}
         res['anncNum'] = anncNum
         res['anncs'] = []
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
