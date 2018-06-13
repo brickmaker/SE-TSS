@@ -51,9 +51,17 @@ class QuestionViewSet(viewsets.ModelViewSet):
     def tags_and_teachers(self, request):
         course_id = request.query_params.get('course_id', None)
         if course_id:
-            course = Course.objects().get(course_id=course_id)
-            for faculty in course.teacher_course:
-                print(faculty)
+            course = Course.objects.all().get(course_id=course_id)
+            teacher_list = []
+            for faculty in course.faculty.all():
+                teacher_list.append({
+                    'teacher_name': faculty.name,
+                    'teacher_id': faculty.username.username
+                })
+            s = set()
+            for question in Question.objects.all():
+                s.add(question.tag)
+            return Response({'is_ok': True, 'teacher_list': teacher_list, 'tag_list': list(s)})
         return Response({'is_ok':False, 'message': 'course_id is needed'},
                         status=status.HTTP_400_BAD_REQUEST)
 

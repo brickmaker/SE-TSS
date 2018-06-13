@@ -20,6 +20,20 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
+d = datetime.datetime.now()
+response = c.post('/api/online_testing/paper/', {
+    "paper_name": "Java Technology Final Exam",
+    'auto': True,
+    'tag_list': [],
+    'start_time': d,
+    'deadline': d + datetime.timedelta(days=7),
+    'duration': 120,
+    'num_choice': 15,
+    'num_judge': 10,
+    'course': '2000',
+}, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
 response = c.get('/api/online_testing/question/tags_and_teachers/?course_id=2000', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
