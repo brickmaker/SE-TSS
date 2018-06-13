@@ -26,7 +26,7 @@ export function getMsgs(uid, nextPageNum, pageSize) {
             pagenum: nextPageNum,
             pagesize: pageSize,
         };
-
+console.log("params", params);
         axios.get(`${ROOT_URL}/api/forum/messages`, {
             params,
             headers: withAuthHeader(),
@@ -131,7 +131,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
         })
             .then((response) => {
                 var entries = response.data;
-                console.log("entry", uid, selectedId);
+                console.log("entry", uid, selectedId, entries);
                 if (Boolean(selectedId) && selectedId != uid) {
                     var idx = -1;
                     entries.forEach((entry, index) => {
@@ -145,6 +145,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                         entries = [entries[idx]].concat(entries.slice(0, idx), entries.slice(idx + 1));
                     }
                 };
+                console.log("entries", entries);
                 if (entries.length > 0) {
                     dispatch({
                         type: SELECT_ENTRY,
@@ -154,6 +155,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                     dispatch({
                         type: CLEAR_MSGS,
                     });
+                    console.log("entries[0][id]", entries[0]["id"]);
                     dispatch(getMsgs(entries[0]["id"], 1, pageSize));
                 }
                 dispatch({
@@ -183,7 +185,9 @@ export function postMsg(from, to, content, pageSize) {
             {
                 from, to, content,
             };
-        axios.post(`${ROOT_URL}/api/forum/messages`, params)
+        axios.post(`${ROOT_URL}/api/forum/messages`, params, {
+            headers: withAuthHeader()
+        })
             .then((response) => {
                 dispatch(getMsgEntries(from, undefined, pageSize));
             })

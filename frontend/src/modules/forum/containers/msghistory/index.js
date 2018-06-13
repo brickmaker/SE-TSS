@@ -82,7 +82,7 @@ MsgHistory.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    selectedId: state.forum.messages.selectedId,
+    selectedId: state.forum.forumpersist.selectedId,
     msgs: state.forum.messages.msgs,
     isFetchingMsgs: state.forum.messages.isFetchingMsgs,
     currentPageNum: state.forum.messages.currentPageNum,

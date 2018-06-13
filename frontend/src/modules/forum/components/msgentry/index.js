@@ -39,6 +39,7 @@ class MsgEntry extends Component {
                         onClick={(event) => { event.preventDefault(); 
                             selectEntry(id, avatar, username);
                             clearMsgs();
+                            console.log("msgentry click", id, avatar, username);
                             getMsgs(id, 1, pageSize); 
                              }}
                         fullWidth={true}>
@@ -64,7 +65,7 @@ MsgEntry.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    selectedId: state.forum.messages.selectedId,
+    selectedId: state.forum.forumpersist.selectedId,
     pageSize: state.forum.messages.pageSize,
 });
 
