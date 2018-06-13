@@ -3,6 +3,7 @@ import { Card, Grid, Avatar, CardContent, Typography, withStyles } from 'materia
 import PropTypes from 'prop-types';
 import moment, { now } from 'moment';
 import Link from 'react-router-dom/Link';
+import { ROOT_URL } from '../../configs/config';
 
 const styles = {
     left: {
@@ -48,7 +49,7 @@ class Msg extends Component {
         if (isLeft) {
             return (
                 <div className={classes.left}>
-                    <Avatar alt="avatar" src={from.avatar}
+                    <Avatar alt="avatar" src={`${ROOT_URL}${from.avatar}`}
                         component={Link} to={`/forum/usercenter/${from.id}`}
                     ></Avatar>
                     <Card className={classes.leftCard}>
@@ -77,7 +78,7 @@ class Msg extends Component {
                             </Typography>
                         </div>
                     </Card>
-                    <Avatar alt="avatar" src={from.avatar}
+                    <Avatar alt="avatar" src={`${ROOT_URL}${from.avatar}`}
                         component={Link} to={`/forum/usercenter/${from.id}`}>
                     </Avatar>
                 </div>

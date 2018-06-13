@@ -189,7 +189,7 @@ export function postMsg(from, to, content, pageSize) {
             headers: withAuthHeader()
         })
             .then((response) => {
-                dispatch(getMsgEntries(from, undefined, pageSize));
+                dispatch(getMsgEntries(from, to, pageSize));
             })
             .catch((errors) => {
                 console.log("postMsg errors", errors.response);
