@@ -765,8 +765,14 @@ class messages(APIView):
                                             .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
             {
-                'from':rr.sender.id.username,
-                'to':rr.receiver.id.username,
+                'from':{
+                    'id':rr.sender.id.username,
+                    'avatar':rr.sender.avatar.url
+                },
+                'to':{
+                    'id':rr.receiver.id.username,
+                    'avatar':rr.receiver.avatar.url
+                },
                 'content':rr.content,
                 'time':{
                     'year':rr.date.year,
@@ -834,8 +840,10 @@ class announcements(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid)
         except Exception as e:
             return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
-        
-        if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
+
+        if user not in teacher.section.admin.all():
+
+        #if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
             return Response({'error':'no permission'},status=status.HTTP_400_BAD_REQUEST)
         try:
             models.Announcement.objects.create(user_id=uid.username,title=title,content=content,section_id=teacher.section_id)
@@ -848,7 +856,7 @@ class announcements(APIView):
         #uid = request.GET.get('uid', None)
         uid = request.user
         pagenum = int(request.GET.get('pagenum', None))
-        pagenum -= 1
+        #pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
@@ -877,7 +885,7 @@ class announcements(APIView):
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
         pagenum = int(request.GET.get('pagenum', None))
-        pagenum -= 1
+        #pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (collegeid,courseid,teacherid,pagenum,pagesize):
@@ -1195,7 +1203,7 @@ class userinfo(APIView):
         #imgfile = request.POST.get('imagefile',None)
         imgfile = request.data.get('imagefile',None)
 
-        print(username,signature)
+        print(username,signature,imgfile)
 
         try:
             u = models.User.objects.get(pk=request.user)
