@@ -68,7 +68,8 @@ const mapStateToProps = (state) => ({
     // testval: state.forum.messages.test,
     entries: state.forum.messages.entries,
     isFetchingEntries: state.forum.messages.isFetchingEntries,
-    selectedId: state.forum.messages.selectedId,
+    // selectedId: state.forum.messages.selectedId,
+    selectedId: state.forum.forumpersist.selectedId,
     pageSize: state.forum.messages.pageSize,
 });
 
