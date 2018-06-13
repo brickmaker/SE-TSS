@@ -1025,8 +1025,9 @@ class upload_file(APIView):
         
         return Response(res, status=status.HTTP_200_OK)
 
+
 class userinfo(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
     parser_classes = (MultiPartParser,)
     def get(self,request,format=None):
         uid = request.GET.get('uid',None)

@@ -185,3 +185,6 @@ class Subscribe(models.Model):
     
     def __str__(self):
         return '%s subscribed %s'(self.uid,self.section_id)
+
+class Section_User(models.Model):
+    user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
