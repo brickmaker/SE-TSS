@@ -91,9 +91,9 @@ class SearchResult extends Component {
                                 {title}
                             </Typography>
                             <div className={classes.item}>
-                                <Link to={sectionPath["college"]["link"]} className={classes.link}>{sectionPath['college']["name"]} > </Link>
-                                <Link to={sectionPath["course"]["link"]} className={classes.link}>{sectionPath['course']["name"]} > </Link>
-                                <Link to={sectionPath["teacher"]["link"]} className={classes.link}>{sectionPath['teacher']["name"]}</Link>
+                                <Link to={sectionPath["college"]["link"]} className={classes.link}>{sectionPath['college']["name"]}</Link>
+                                {sectionPath["course"] && <Link to={sectionPath["course"]["link"]} className={classes.link}> > {sectionPath['course']["name"]}</Link>}
+                                {sectionPath["teacher"] && <Link to={sectionPath["teacher"]["link"]} className={classes.link}> > {sectionPath['teacher']["name"]}</Link>}
                             </div>
                             {/* <Path path={sectionPath} /> */}
                         </div>
@@ -131,9 +131,9 @@ class SearchResult extends Component {
                     >
                         <div className={classes.line2}>
                             <div className={classes.item}>
-                                <Link to={sectionPath["college"]["link"]} className={classes.link2}>{sectionPath['college']["name"]} ></Link>
-                                <Link to={sectionPath["course"]["link"]} className={classes.link2}> {sectionPath['course']["name"]} > </Link>
-                                <Link to={sectionPath["teacher"]["link"]} className={classes.link2}> {sectionPath['teacher']["name"]}</Link>
+                                <Link to={sectionPath["college"]["link"]} className={classes.link2}>{sectionPath['college']["name"]}</Link>
+                                {sectionPath["course"] && <Link to={sectionPath["course"]["link"]} className={classes.link2}> {sectionPath['course']["name"]}</Link>}
+                                {sectionPath["teacher"] && <Link to={sectionPath["teacher"]["link"]} className={classes.link2}> {sectionPath['teacher']["name"]}</Link>}
                             </div>
                         </div>
 

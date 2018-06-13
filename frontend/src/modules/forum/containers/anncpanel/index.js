@@ -76,7 +76,7 @@ class AnncPanel extends Component {
                             </div>
                         </div>
                         {type != 'main' && type != 'section' && anncNum &&
-                            <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                            <PageNums pageNum={(anncNum-1) / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                 const page = parseInt(event.target.innerText);
                                 //TODO: 
                                 const uid = 5;

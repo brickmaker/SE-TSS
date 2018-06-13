@@ -75,7 +75,7 @@ class SearchResultPanel extends Component {
                                         )
                                     }
                                 </div>
-                                <PageNums pageNum={resultNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                                <PageNums pageNum={(resultNum-1) / pageSize + 1} currPage={pageNum} clickPage={(event) => {
                                     const page = parseInt(event.target.innerText);
                                     this.props.search(searchType, query, pageNum, pageSize);
                                     this.props.history.push(`/forum/search/${searchType}/${query}/${page}`);
