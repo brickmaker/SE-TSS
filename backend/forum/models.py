@@ -176,7 +176,6 @@ class Message(models.Model):
     
     def __str__(self):
         return 'From %s to %s: %s'%(self.sender_id,self.receiver_id,self.content)
-
         
 class Subscribe(models.Model):
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='user')
@@ -184,4 +183,11 @@ class Subscribe(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return '%s subscribed %s'(self.uid,self.section_id)
+        return '%s subscribed %s'(self.user,self.section_id)
+        
+class section_admin_relation(models.Model):
+    user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='adminuser')
+    section = models.ForeignKey('Section',on_delete=models.CASCADE,related_name='adminsection')
+    
+    def __str__(self):
+        return 'Admin of %s is %s'(self.section_id,self.user.name)
