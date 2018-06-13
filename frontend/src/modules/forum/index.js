@@ -38,7 +38,7 @@ class Forum extends Component {
                     <ListItemText primary="主页"/>
                 </ListItem>
                 <Divider/>
-                <ListItem component={Link} to={`${match.url}/search/`} button>
+                <ListItem component={Link} to={`${match.url}/search`} button>
                     <ListItemIcon>
                         <SearchIcon/>
                     </ListItemIcon>
@@ -52,7 +52,7 @@ class Forum extends Component {
                     <ListItemText primary="消息"/>
                 </ListItem>
                 <Divider/>
-                <ListItem component={Link} to={`${match.url}/announcements/user/0`} button>
+                <ListItem component={Link} to={`${match.url}/announcements/user/1`} button>
                     <ListItemIcon>
                         <MessageIcon/>
                     </ListItemIcon>
