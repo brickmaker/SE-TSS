@@ -16,7 +16,7 @@ export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageS
         var params = {};
         if (!DEBUG) {
             if (uid) {
-                params["uid"] = uid;
+                params["user_wise"] = uid;
             }
             else {
                 if (collegeId)
