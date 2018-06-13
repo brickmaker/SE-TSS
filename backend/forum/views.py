@@ -642,7 +642,7 @@ class reply(APIView):
         res = {}
         res['error'] = None
         datas = models.Reply.objects.filter(post_id=post_id).order_by('date')[
-                page * post_per_page:(page + 1) * post_per_page]
+                (page-1) * post_per_page:(page) * post_per_page]
         res['data'] = []
         for data in datas:
             t_data = {}
