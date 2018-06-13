@@ -5,8 +5,13 @@
 ```bash
 # 1. 建立自己的python3虚拟环境（你要想用全局环境我也没有意见）不同平台不同
 
-pip install -r requirements.txt
-python manage.py runserver
+$ pip install -r requirements.txt
+针对每个app
+$ python makemigrations --empty APP_NAME
+$ python manage.py migrate authentication
+$ python manage.py migrate
+$ python manage.py runserver
+
 ```
 
 ## 代码结构
