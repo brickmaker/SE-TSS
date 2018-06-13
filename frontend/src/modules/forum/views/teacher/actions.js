@@ -23,7 +23,6 @@ export const newPost = (uid, collegeId, courseId, teacherId, title, content, fil
             method: 'POST',
             headers: withAuthHeader(),
             body: JSON.stringify({
-                uid: uid,
                 collegeId: collegeId,
                 courseId: courseId,
                 teacherId: teacherId,
@@ -40,6 +39,7 @@ export const newPost = (uid, collegeId, courseId, teacherId, title, content, fil
             dispatch({
                 type: POST_SUCCESS
             })
+            dispatch(getPosts(collegeId, courseId, teacherId, getState().forum.teacher.currPage))
             // todo: fail check
         })
 }
