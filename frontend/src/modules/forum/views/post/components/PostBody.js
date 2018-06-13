@@ -26,9 +26,10 @@ class PostBody extends Component {
         return (
             <div>
                 {
-                    replies.map((reply) => {
+                    replies.map((reply, index) => {
                         return (
                             <Reply
+                                disableComment={index === 0}
                                 postId={postId}
                                 key={reply.id}
                                 id={reply.id}

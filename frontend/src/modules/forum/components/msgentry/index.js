@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { selectEntry, getMsgs, clearMsgs } from '../../views/messages/actions';
+import { ROOT_URL } from '../../configs/config';
 
 const styles = {
     entry: {
@@ -41,7 +42,7 @@ class MsgEntry extends Component {
                             getMsgs(id, 1, pageSize); 
                              }}
                         fullWidth={true}>
-                        <Avatar alt={username} src={avatar}>
+                        <Avatar alt={username} src={`${ROOT_URL}${avatar}`}>
                         </Avatar>
                         <div className={classes.item}>
                             <Typography variant='subheading' align="left">

@@ -519,6 +519,7 @@ class comment(APIView):
         
 class sectionnames(APIView):
     def get(self, request, format=None):
+
         sectionids = request.GET.getlist('sectionids[]', None)
         
         if None in (sectionids,):
@@ -579,7 +580,7 @@ class newmsgs(APIView):
         if None in (uid,pagesize):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
-        msg_set = models.Message.objects.filter(receiver_id=uid).order_by('-date')
+        msg_set = models.Message.objects.filter(receiver_id=uid.username).order_by('-date')
         msg_num = msg_set.count()
         if msg_num > pagesize:
             msg_set = msg_set[:pagesize]
@@ -588,7 +589,7 @@ class newmsgs(APIView):
         for msg in msg_set:
             item = {}
             sender = models.User.objects.get(pk=msg.sender_id)
-            item['from'] = {'id':sender.id,'username':sender.name,'avatar':"https://api.adorable.io/avatars/144/userpic.png"}
+            item['from'] = {'id':sender.id.username,'username':sender.name,'avatar':sender.avatar.url}
             item['content'] = msg.content
             res.append(item)
         

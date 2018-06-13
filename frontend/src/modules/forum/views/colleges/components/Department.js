@@ -30,7 +30,7 @@ const Department = ({name, colleges, history, match}) => (
                             key={c.collegeId}
                         >
                             <Avatar
-                                src={c.pic}
+                                src={`${ROOT_URL}${c.pic}`}
                                 style={{
                                     width: 40,
                                     height: 40

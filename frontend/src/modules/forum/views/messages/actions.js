@@ -9,7 +9,7 @@ export const MSGS_SUCCESS = "msgs_success";
 export const MSGS_FAILURE = "msgs_failure";
 export function getMsgs(uid, nextPageNum, pageSize) {
     console.log("parse", new Date("2012-04-23T18:25:43.511Z"));
-    console.log("getmsgs", nextPageNum);
+    console.log("getmsgs", uid, nextPageNum, pageSize);
     return (dispatch, getState) => {
         const { isFetchingMsgs } = getState();
         if (isFetchingMsgs) {
@@ -154,7 +154,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                     dispatch({
                         type: CLEAR_MSGS,
                     });
-                    dispatch(getMsgs(uid, entries[0]["id"], 1, pageSize));
+                    dispatch(getMsgs(entries[0]["id"], 1, pageSize));
                 }
                 dispatch({
                     type: MSGENTRIES_SUCCESS,
