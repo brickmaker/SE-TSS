@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
+import ReactHtmlParser, {processNodes, convertNodeToElement, htmlparser2} from 'react-html-parser';
 import {
     Avatar,
     Button,
@@ -87,7 +88,7 @@ class Reply extends Component {
                     flexDirection: 'column',
                     justifyContent: 'space-between'
                 }}>
-                    <div>{content}</div>
+                    <div>{ReactHtmlParser(content)}</div>
                     <div>
                         <div style={{
                             fontSize: '0.8em',
