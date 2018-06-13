@@ -183,7 +183,7 @@ class Subscribe(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return '%s subscribed %s'(self.user,self.section_id)
+        return '%s subscribed %s'(self.uid,self.section_id)
         
 class section_admin_relation(models.Model):
     user = models.ForeignKey('User',on_delete=models.CASCADE,related_name='adminuser')
