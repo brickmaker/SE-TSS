@@ -95,6 +95,7 @@ CORS_ALLOW_HEADERS = (
     'origin',
     'user-agent',
     'x-csrftoken',
+    'Content-Disposition',
     'x-requested-with',
     'Pragma',
 )
@@ -113,8 +114,8 @@ WEBPACK_LOADER = {
 REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
-        #'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',

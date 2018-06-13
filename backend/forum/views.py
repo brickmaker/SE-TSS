@@ -46,13 +46,14 @@ def index(request):
 
 class subscriptions(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        # uid = request.GET.get('uid', None)
         #token = request.GET.get('token', None)
-        if None in (uid,):
-            return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
+
+        #if None in (uid,):
+        #    return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            user = models.User.objects.get(pk=uid)
+            user = models.User.objects.get(pk=request.user)
         except:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -152,10 +153,12 @@ class course(APIView):
 
 class course_subscribed(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
+        # print(type(uid))
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
-        if None in (uid,collegeid,courseid):
+        if None in (collegeid,courseid):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
@@ -164,7 +167,7 @@ class course_subscribed(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
         
         res = {'subscribed':True}
-        sub_set = models.Subscribe.objects.filter(user_id=uid,section=course.section)
+        sub_set = models.Subscribe.objects.filter(user_id=uid.username,section=course.section)
         if sub_set.count() == 0:
             res['subscribed'] = False
 
@@ -173,7 +176,8 @@ class course_subscribed(APIView):
 
 class teacher_subscribed(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid',None)
@@ -186,7 +190,7 @@ class teacher_subscribed(APIView):
             return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
         
         res = {'subscribed':True}
-        sub_set = models.Subscribe.objects.filter(user_id=uid,section=teacher.section)
+        sub_set = models.Subscribe.objects.filter(user_id=uid.username,section=teacher.section)
         if sub_set.count() == 0:
             res['subscribed'] = False
 
@@ -194,7 +198,8 @@ class teacher_subscribed(APIView):
 
 class course_subscribe(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        # uid = request.GET.get('uid', None)
+        uid = request.user
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         if None in (uid,collegeid,courseid):
@@ -206,7 +211,7 @@ class course_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid,section=course.section)
+            models.Subscribe.objects.create(user_id=uid.username,section=course.section)
         except:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':True}
@@ -214,7 +219,8 @@ class course_subscribe(APIView):
 
 class teacher_subscribe(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
@@ -227,7 +233,7 @@ class teacher_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid,section=teacher.section)
+            models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
         except Exception as e:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
             
@@ -237,7 +243,8 @@ class teacher_subscribe(APIView):
   
 class course_unsubscribe(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         if None in (uid,collegeid,courseid):
@@ -249,7 +256,7 @@ class course_unsubscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.filter(user_id=uid,section=course.section).delete()
+            models.Subscribe.objects.filter(user_id=uid.username,section=course.section).delete()
         except:
             return Response({'error':'Fail to unsubscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':False}
@@ -257,7 +264,8 @@ class course_unsubscribe(APIView):
         
 class teacher_unsubscribe(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         collegeid = request.GET.get('collegeid', None)
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
@@ -270,7 +278,7 @@ class teacher_unsubscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.filter(user_id=uid,section=teacher.section).delete()
+            models.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).delete()
         except:
             return Response({'error':'Fail to unsubscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':False}
@@ -317,7 +325,8 @@ class course_newpost(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            uid = raw['uid']
+            #uid = raw['uid']
+            uid = request.user
             collegeId = int(raw['collegeId'])
             courseId = int(raw['courseId'])
             title = raw['title']
@@ -332,7 +341,9 @@ class course_newpost(APIView):
         except Exception as e:
             fileId = "Empty"
         
-        
+        if fileId is None:
+            fileId = "Empty"
+
         try:
             course = models.Course.objects.get(pk=courseId)
         except Exception as e:
@@ -341,7 +352,8 @@ class course_newpost(APIView):
         try:
             models.Thread.objects.create(poster_id=uid,title=title,content=content,section_id=course.section_id,
                                             attachment_md5=fileId)
-        except:
+        except Exception as e:
+            print(e)
             return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -411,7 +423,8 @@ class teacher_newpost(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            uid = raw['uid']
+            #uid = raw['uid']
+            uid = request.user
             collegeId = int(raw['collegeId'])
             courseId = int(raw['courseId'])
             teacherId = int(raw['teacherId'])
@@ -447,7 +460,8 @@ class post_newreply(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            uid = raw['uid']
+            #uid = raw['uid']
+            uid = request.user
             postId = int(raw['postId'])
             content = raw['content']
             fileId = raw['fileId']
@@ -647,36 +661,36 @@ class reply(APIView):
 class msgentries(APIView):
     permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
-        u = models.User.objects.get(uid=request.user)
+        u = models.User.objects.get(pk=request.user)
 
         raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
         #print(raw_datas)
         d = {}
         for rd in raw_datas:
-            if rd.sender_id == u:
-                if rd.receiver_id.id.username in d:
-                    if d[rd.receiver_id.id.username].date < rd.date:
-                        d[rd.receiver_id.id.username] = rd
+            if rd.sender.id == u:
+                if rd.receiver.id.username in d:
+                    if d[rd.receiver.id.username].date < rd.date:
+                        d[rd.receiver.id.username] = rd
                 else:
-                    d[rd.receiver_id.id.username] = rd
+                    d[rd.receiver.id.username] = rd
             else:
-                if rd.sender_id.id.username in d:
-                    if d[rd.sender_id.id.username].date < rd.date:
-                        d[rd.sender_id.id.username] = rd
+                if rd.sender.id.username in d:
+                    if d[rd.sender.id.username].date < rd.date:
+                        d[rd.sender.id.username] = rd
                 else:
-                    d[rd.sender_id.id.username] = rd
+                    d[rd.sender.id.username] = rd
         print(d)
         res = []
         for k, v in d.items():
             t = {}
-            if v.sender_id == u:
-                t['uid'] = v.receiver_id.id.username
-                t['username'] = v.receiver_id.name
-                t['avatarurl']=v.receiver_id.avatar.url
+            if v.sender.id == u:
+                t['uid'] = v.receiver.id.username
+                t['username'] = v.receiver.name
+                t['avatarurl']=v.receiver.avatar.url
             else:
-                t['uid'] = v.sender_id.id.username
-                t['username'] = v.sender_id.name
-                t['avatarurl'] = v.sender_id.avatar.url
+                t['uid'] = v.sender.id.username
+                t['username'] = v.sender.name
+                t['avatarurl'] = v.sender.avatar.url
             t['lastMsgContent'] = v.content
             t['time'] = v.date
             res.append(t)
@@ -707,8 +721,8 @@ class messages(APIView):
                                             .order_by('-date')[pagenum*pagesize:(pagenum+1)*pagesize]
         res = [
             {
-                'from':rr.sender_id.id.username,
-                'to':rr.receiver_id.id.username,
+                'from':rr.sender.id.username,
+                'to':rr.receiver.id.username,
                 'content':rr.content,
                 'time':{
                     'year':rr.date.year,
@@ -723,24 +737,30 @@ class messages(APIView):
         return Response(res,status=status.HTTP_200_OK)
 
     def post(self,request,format=None):
-        from_id = request.data.get('from',None)
-        to_id = request.data.get('to',None)
+        #from_id = request.data.get('from',None)
+        toid = request.data.get('to',None)
         content = request.data.get('content',None)
-        if None in (from_id,to_id,content):
+        if None in (toid,content):
             return Response({'error':'Parameter errors'},status=status.HTTP_400_BAD_REQUEST)
-
+        from_id = request.user
         try:
-            res = models.Message.objects.create(sender_id=models.User.objects.get(pk=from_id),receiver_id=models.User.objects.get(pk=to_id),content=content)
+            to_id = Account.objects.get(pk=toid)
+        except Exception as e:
+            print(e)
+            return Response({'error':'no such user'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            res = models.Message.objects.create(sender=models.User.objects.get(pk=from_id),receiver=models.User.objects.get(pk=to_id),content=content)
         except Exception as e:
             print(e)
             return Response({'errors':'send message fail'},status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response({'from':res.sender_id.id.username,'to':res.receiver_id.id.username,'content':res.content,'date':res.date},status=status.HTTP_200_OK)
+        return Response({'from':res.sender.id.username,'to':res.receiver.id.username,'content':res.content,'date':res.date},status=status.HTTP_200_OK)
 
         
 class announcements(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         if uid is None:
             return self.section_wise(request,format)
         return self.user_wise(request,format)
@@ -753,7 +773,8 @@ class announcements(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            uid = raw['uid']
+            #uid = raw['uid']
+            uid = request.user
             collegeid = raw['path']['collegeid']
             courseid = raw['path']['courseid']
             teacherid = raw['path']['teacherid']
@@ -770,21 +791,22 @@ class announcements(APIView):
             return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Announcement.objects.create(user_id=uid,title=title,content=content,section_id=teacher.section_id)
+            models.Announcement.objects.create(user_id=uid.username,title=title,content=content,section_id=teacher.section_id)
         except:
             return Response({'error':'Fail to release announcement'}, status=status.HTTP_403_FORBIDDEN)
         
         return Response(raw, status=status.HTTP_200_OK)
         
     def user_wise(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         pagenum = int(request.GET.get('pagenum', None))
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_403_FORBIDDEN)
         
-        subs = models.Subscribe.objects.filter(user_id = uid)
+        subs = models.Subscribe.objects.filter(user_id = uid.username)
         subs = [sub.section for sub in subs]
         announcements = models.Announcement.objects.filter(section__in=subs).order_by('-date')
         anncNum = len(announcements)   
@@ -856,7 +878,7 @@ class userstates(APIView):
         res = []
         
         for user in models.User.objects.filter(name__contains=username):
-            item = {"uid":user.id.username,"name":user.name}
+            item = {"uid":user.id.username,"username":user.name}
             reply_num = models.Reply.objects.filter(user=user).count()
             item['replyNum'] = reply_num
             post_num = models.Thread.objects.filter(poster=user).count()
