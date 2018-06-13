@@ -15,7 +15,7 @@ def score_list(request):
     List all student scores according to course id
     """
 
-    takes = Take.objects.filter(course__course_id=request.data["cid"])
+    takes = Take.objects.filter(course__course_id=request.data["cid"],teacher__username=request.data["pid"])
     serializer = TakeSerializer(takes, many=True)
     return Response(serializer.data)
 
