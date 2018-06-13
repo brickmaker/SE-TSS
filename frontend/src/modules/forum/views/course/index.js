@@ -54,7 +54,7 @@ class Course extends Component {
 
     goToPost() {
         if (this.state.isLogin)
-            goBottom()
+            window.scrollTo(0, document.body.scrollHeight);
         else {
             // todo: redirect to login
         }
