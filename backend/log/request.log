@@ -4326,3 +4326,378 @@ django.db.utils.IntegrityError: UNIQUE constraint failed: authentication_account
 2018-06-05 23:28:13,236 [Thread-12:6444] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/online_testing/question/ HTTP/1.1" 401 9601
 2018-06-05 23:28:15,927 [Thread-13:2044] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/users/
 2018-06-05 23:28:15,927 [Thread-13:2044] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/users/ HTTP/1.1" 404 2304
+2018-06-12 09:19:59,311 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/get_token HTTP/1.1" 200 0
+2018-06-12 09:19:59,319 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/get_token
+2018-06-12 09:19:59,319 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/get_token HTTP/1.1" 404 2423
+2018-06-12 12:40:50,926 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/get_token HTTP/1.1" 200 0
+2018-06-12 12:40:50,941 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/get_token
+2018-06-12 12:40:50,942 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/get_token HTTP/1.1" 404 2423
+2018-06-12 12:41:37,939 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/info/student/ HTTP/1.1" 200 0
+2018-06-12 12:41:38,043 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/student/ HTTP/1.1" 401 38
+2018-06-12 12:42:56,792 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/student/ HTTP/1.1" 401 38
+2018-06-12 12:43:10,967 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/info/get_token HTTP/1.1" 200 0
+2018-06-12 12:43:11,308 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/info/get_token HTTP/1.1" 200 199
+2018-06-12 12:43:11,314 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/info/user HTTP/1.1" 200 0
+2018-06-12 12:43:11,322 [Thread-14:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/user HTTP/1.1" 200 170
+2018-06-12 12:43:15,749 [Thread-15:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/info/get_token HTTP/1.1" 200 199
+2018-06-12 12:43:15,758 [Thread-16:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/user HTTP/1.1" 200 170
+2018-06-12 12:43:18,373 [Thread-17:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /api/info/student/ HTTP/1.1" 200 5998
+2018-06-12 12:43:22,148 [Thread-18:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "OPTIONS /api/info/course/ HTTP/1.1" 200 0
+2018-06-12 12:43:22,210 [Thread-19:123145312813056] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/info/course/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: authentication_course.semester
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/viewsets.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/mixins.py", line 48, in list
+    return Response(serializer.data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 272, in __iter__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1063, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: authentication_course.semester
+2018-06-12 12:43:22,254 [Thread-19:123145312813056] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/info/course/ HTTP/1.1" 500 22033
+2018-06-12 12:43:42,278 [Thread-20:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: //api/info/course/
+2018-06-12 12:43:42,279 [Thread-20:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET //api/info/course/ HTTP/1.1" 404 2434
+2018-06-12 12:43:42,444 [Thread-21:123145318068224] [django.request:93] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-06-12 12:43:42,445 [Thread-21:123145318068224] [django.server:124] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2416
+2018-06-12 12:43:46,130 [Thread-22:123145323323392] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/info/course/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: authentication_course.semester
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/viewsets.py", line 103, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/mixins.py", line 48, in list
+    return Response(serializer.data)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/rest_framework/serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 272, in __iter__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1063, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: authentication_course.semester
+2018-06-12 12:43:46,204 [Thread-22:123145323323392] [django.server:124] [basehttp:log_message] [ERROR]- "GET /api/info/course/ HTTP/1.1" 500 167486
+2018-06-12 12:45:24,350 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin HTTP/1.1" 301 0
+2018-06-12 12:45:24,415 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 302 0
+2018-06-12 12:45:24,449 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1856
+2018-06-12 12:45:24,464 [Thread-6:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/login.css HTTP/1.1" 200 1203
+2018-06-12 12:45:24,466 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/base.css HTTP/1.1" 200 16106
+2018-06-12 12:45:24,467 [Thread-7:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/responsive.css HTTP/1.1" 200 17894
+2018-06-12 12:45:24,476 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+2018-06-12 12:45:24,597 [Thread-9:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /favicon.ico
+2018-06-12 12:45:24,598 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /favicon.ico HTTP/1.1" 404 2416
+2018-06-12 12:45:24,660 [Thread-12:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+2018-06-12 12:45:24,662 [Thread-11:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+2018-06-12 12:45:24,663 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+2018-06-12 12:45:32,265 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+2018-06-12 12:45:32,312 [Thread-14:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/ HTTP/1.1" 200 9047
+2018-06-12 12:45:32,346 [Thread-15:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/dashboard.css HTTP/1.1" 200 412
+2018-06-12 12:45:32,368 [Thread-16:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+2018-06-12 12:45:32,370 [Thread-17:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+2018-06-12 12:45:32,411 [Thread-18:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 304 0
+2018-06-12 12:45:33,976 [Thread-19:123145312813056] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/authentication/course/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: authentication_course.semester
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 574, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 223, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 62, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 58, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 1685, in changelist_view
+    selection_note=_('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 254, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1063, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: authentication_course.semester
+2018-06-12 12:45:34,064 [Thread-19:123145312813056] [django.server:124] [basehttp:log_message] [ERROR]- "GET /admin/authentication/course/ HTTP/1.1" 500 168037
+2018-06-12 12:46:58,609 [Thread-1:123145312813056] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/authentication/course/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: authentication_course.semester
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 574, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 223, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 62, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 58, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 1685, in changelist_view
+    selection_note=_('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 254, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1063, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: authentication_course.semester
+2018-06-12 12:46:58,681 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [ERROR]- "GET /admin/authentication/course/ HTTP/1.1" 500 167890
+2018-06-12 12:47:02,744 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/ HTTP/1.1" 200 5089
+2018-06-12 12:47:03,411 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/ HTTP/1.1" 200 5089
+2018-06-12 12:47:04,868 [Thread-5:123145312813056] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/authentication/course/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such column: authentication_course.semester
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/exception.py", line 35, in inner
+    response = get_response(request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/core/handlers/base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 574, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/views/decorators/cache.py", line 44, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/sites.py", line 223, in inner
+    return view(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 62, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 142, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/utils/decorators.py", line 58, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/contrib/admin/options.py", line 1685, in changelist_view
+    selection_note=_('0 of %(cnt)s selected') % {'cnt': len(cl.result_list)},
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 254, in __len__
+    self._fetch_all()
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 1179, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py", line 54, in __iter__
+    results = compiler.execute_sql(chunked_fetch=self.chunked_fetch, chunk_size=self.chunk_size)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/sql/compiler.py", line 1063, in execute_sql
+    cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 100, in execute
+    return super().execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 68, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 77, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/utils.py", line 89, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/utils.py", line 85, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/backends/sqlite3/base.py", line 303, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such column: authentication_course.semester
+2018-06-12 12:47:04,947 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [ERROR]- "GET /admin/authentication/course/ HTTP/1.1" 500 168050
+2018-06-12 13:13:28,188 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/course/ HTTP/1.1" 302 0
+2018-06-12 13:13:28,221 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/login/?next=/admin/authentication/course/ HTTP/1.1" 200 1900
+2018-06-12 13:13:35,061 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /admin/login/?next=/admin/authentication/course/ HTTP/1.1" 200 2060
+2018-06-12 13:13:44,291 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /admin/login/?next=/admin/authentication/course/ HTTP/1.1" 200 2061
+2018-06-12 13:13:49,179 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "POST /admin/login/?next=/admin/authentication/course/ HTTP/1.1" 302 0
+2018-06-12 13:13:49,254 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/course/ HTTP/1.1" 200 4435
+2018-06-12 13:13:49,320 [Thread-11:123145328578560] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/admin/RelatedObjectLookups.js HTTP/1.1" 200 6897
+2018-06-12 13:13:49,329 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/changelists.css HTTP/1.1" 200 6170
+2018-06-12 13:13:49,334 [Thread-12:123145333833728] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/jquery.init.js HTTP/1.1" 200 363
+2018-06-12 13:13:49,351 [Thread-13:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/core.js HTTP/1.1" 200 7134
+2018-06-12 13:13:49,357 [Thread-9:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+2018-06-12 13:13:49,371 [Thread-10:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/vendor/jquery/jquery.js HTTP/1.1" 200 258648
+2018-06-12 13:13:49,375 [Thread-14:123145328578560] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/urlify.js HTTP/1.1" 200 8729
+2018-06-12 13:13:49,378 [Thread-15:123145333833728] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/prepopulate.js HTTP/1.1" 200 1538
+2018-06-12 13:13:49,381 [Thread-16:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/vendor/xregexp/xregexp.js HTTP/1.1" 200 128820
+2018-06-12 13:13:49,385 [Thread-17:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/actions.js HTTP/1.1" 200 6502
+2018-06-12 13:13:49,423 [Thread-18:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/img/tooltag-add.svg HTTP/1.1" 200 331
+2018-06-12 13:13:50,939 [Thread-19:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/authentication/course/2000/change/ HTTP/1.1" 200 10709
+2018-06-12 13:13:50,978 [Thread-20:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/forms.css HTTP/1.1" 200 8173
+2018-06-12 13:13:50,982 [Thread-23:123145328578560] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/prepopulate_init.js HTTP/1.1" 200 495
+2018-06-12 13:13:50,985 [Thread-22:123145323323392] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/js/change_form.js HTTP/1.1" 200 712
+2018-06-12 13:13:50,989 [Thread-21:123145318068224] [django.server:124] [basehttp:log_message] [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3185
+2018-06-12 13:13:50,991 [Thread-24:123145312813056] [django.server:124] [basehttp:log_message] [INFO]- "GET /static/admin/css/widgets.css HTTP/1.1" 200 10340
+2018-06-12 16:13:05,776 [Thread-1:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-06-12 16:13:05,777 [Thread-1:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2018-06-12 16:13:06,880 [Thread-3:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /cust_word/
+2018-06-12 16:13:06,880 [Thread-3:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /cust_word/ HTTP/1.1" 404 2413
+2018-06-12 16:13:09,097 [Thread-4:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /
+2018-06-12 16:13:09,097 [Thread-4:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET / HTTP/1.1" 404 2365
+2018-06-12 16:13:10,642 [Thread-5:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /students/
+2018-06-12 16:13:10,642 [Thread-5:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /students/ HTTP/1.1" 404 2410
+2018-06-12 16:13:16,784 [Thread-6:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/students/
+2018-06-12 16:13:16,785 [Thread-6:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/students/ HTTP/1.1" 404 2422
+2018-06-12 16:13:18,305 [Thread-7:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/
+2018-06-12 16:13:18,305 [Thread-7:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/ HTTP/1.1" 404 12309
+2018-06-12 16:13:32,752 [Thread-8:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/username
+2018-06-12 16:13:32,753 [Thread-8:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/username HTTP/1.1" 404 12333
+2018-06-12 16:14:35,772 [Thread-9:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/username
+2018-06-12 16:14:35,773 [Thread-9:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/username HTTP/1.1" 404 12333
+2018-06-12 16:14:39,266 [Thread-10:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/username/
+2018-06-12 16:14:39,266 [Thread-10:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/username/ HTTP/1.1" 404 12336
+2018-06-12 16:14:43,018 [Thread-11:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/
+2018-06-12 16:14:43,019 [Thread-11:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/ HTTP/1.1" 404 12309
+2018-06-12 16:15:01,551 [Thread-12:123145312813056] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/info/students/3150104638
+2018-06-12 16:15:01,552 [Thread-12:123145312813056] [django.server:124] [basehttp:log_message] [WARNING]- "GET /api/info/students/3150104638 HTTP/1.1" 404 12339

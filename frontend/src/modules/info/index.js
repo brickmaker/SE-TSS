@@ -11,7 +11,7 @@ class Info extends Component {
         return (
             <div>
                 <Switch>
-                    <Route exact path="/info" component={Main}/>
+                    <Route exact path="/info/" component={Main}/>
                     <Route exact path="/info/staff" component={StaffView}/>
                     <Route path="/info/staff/accounts" component={StaffAccountInfo}/>
                     <Route path="/info/staff/lessons" component={StaffLessonInfo}/>
