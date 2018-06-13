@@ -965,7 +965,7 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Thread).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
             item = {'relatedContent':"还没实现"}
             post = models.Thread.objects.get(pk=result.post)
@@ -1201,10 +1201,10 @@ class colleges(APIView):
             todayPostsNum = 0
             totalPostsNum = 0 
             
-            for course in models.Course.object.filter(college=area.college):
+            for course in models.Course.objects.filter(college=area.college):
                 todayPostsNum += models.Thread.objects.filter(section=course.section,date__range=(today_min, today_max)).count()
                 totalPostsNum += models.Thread.objects.filter(section=course.section).count()
-            for teacher in models.Teacher.object.filter(college=area.college):
+            for teacher in models.Teacher.objects.filter(college=area.college):
                 todayPostsNum += models.Thread.objects.filter(section=teacher.section,date__range=(today_min, today_max)).count()
                 totalPostsNum += models.Thread.objects.filter(section=teacher.section).count()
             
