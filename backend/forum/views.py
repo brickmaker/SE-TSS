@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.decorators import parser_classes
-from rest_framework.parsers import FileUploadParser,MultiPartParser
+from rest_framework.parsers import FileUploadParser,MultiPartParser,FormParser
 from rest_framework.response import Response
 from rest_framework import status
 from forum import models
@@ -1190,10 +1190,11 @@ class userinfo(APIView):
     
     def post(self,request,format=None):
         # uid = request.data.get('uid',None)
-        username = request.data.get('username',None)
-        signature = request.data.get('signature',None)
-        imgfile = request.data.get('imagefile',None)
+        username = request.POST.get('username',None)
+        signature = request.POST.get('signature',None)
+        imgfile = request.POST.get('imagefile',None)
 
+        print(username,signature,imgfile)
         try:
             u = models.User.objects.get(pk=request.user)
         except Exception as e:
