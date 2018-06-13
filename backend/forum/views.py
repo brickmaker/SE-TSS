@@ -692,7 +692,7 @@ class reply(APIView):
                 for rr in data.replyreply.all().order_by('create_time')
             ]
             try:
-                attr = models.Attachment.objects.get(attachment_md5=thread.attachment_md5)
+                attr = models.Attachment.objects.get(attachment_md5=data.attachment_md5)
                 t_data['file'] = attr.file.url
             except:
                 t_data['file'] = None
