@@ -534,8 +534,8 @@ class college_list(APIView):
     permission_classes = (AllowAny,)
     def get(self, request, format=None):
         res = []
-        for colledge in models.College.objects.all():
-            item = {'id':colledge.id,'name':colledge.name}
+        for college in models.College.objects.all():
+            item = {'id':college.id,'name':college.name}
             res.append(item)
         return Response(res, status=status.HTTP_200_OK)
       
@@ -1192,11 +1192,11 @@ class colleges(APIView):
         for area in areas:
             if area.name not in res:
                 res[area.name] = []
-            item = {'collegeId':area.college.id,'name':area.colledge.name,'pic':area.avatar.url}
+            item = {'collegeId':area.college.id,'name':area.college.name,'pic':area.avatar.url}
             today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
             today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
-            todayPostsNum = models.Thread.objects.filter(section=area.colledge.section,date__range=(today_min, today_max)).count()
-            totalPostsNum = models.Thread.objects.filter(section=area.colledge.section).count()
+            todayPostsNum = models.Thread.objects.filter(section=area.college.section,date__range=(today_min, today_max)).count()
+            totalPostsNum = models.Thread.objects.filter(section=area.college.section).count()
             item['todayPostsNum'] = todayPostsNum
             item['totalPostsNum'] = totalPostsNum
             res[area.name].append(item)
