@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from score_management.models import Take
-from authentication.models import Course,Student,Faculty
+from authentication.models import Course,Student,Faculty,Account
 from score_management.serializers import TakeSerializer
 from django.db.models import Avg
 from django.db.models import Max
@@ -16,7 +16,7 @@ def score_list_teacher(request):
     List all student scores according to course id
     """
 
-    takes = Take.objects.filter(course__course_id=request.data["cid"],teacher__username=request.data["pid"])
+    takes = Take.objects.filter(teacher__username=request.data["pid"])
     #takes_list=[]
     #for take in takes:
     #    dict={}
@@ -106,13 +106,17 @@ def insert_score(request):
     r=0
     for d in request.data:
         course=Course.objects.get(course_id=d["cid"])
-        r=d["sid"]
-        #student=Student.objects.get(username=d["sid"])
-        #teacher=Faculty.objects.get(username=d["pid"])
-        #score=d["score"]
-        #take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
-        #take.score=score
-        #take.save()
+        #r=d["sid"]
+        student_account=Account.objects.get_by_natural_key("3150100003")
+        student=Student.objects.get(username=student_account)
+        teacher_account = Account.objects.get_by_natural_key(d["pid"])
+        teacher=Faculty.objects.get(username=teacher_account)
+        score=d["score"]
+        test_date=d["test_date"]
+        take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
+        #print(take.score)
+        take.score=score
+        take.save()
 
     #serializer=TakeSerializer(data=take,many=True)
     #if serializer.is_valid():
