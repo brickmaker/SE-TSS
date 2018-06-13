@@ -61,7 +61,9 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
         body.append('uid', uid);
         body.append('username', newUsername);
         body.append('signature', newSignature);
+        if(imageFile){
         body.append('imagefile', imageFile, {type: 'image/*'});
+        }
 
         console.log(body);
         const token = localStorage.getItem("token");
