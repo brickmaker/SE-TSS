@@ -478,10 +478,6 @@ class post_newreply(APIView):
         if fileId is None:
             fileId = "Empty"
         
-        print("##DEBUG####NODE 1###########")
-        print(fileId)
-        print("##DEBUG##################")
-        
         try:
             post = models.Thread.objects.get(pk=postId)
         except Exception as e:
@@ -670,7 +666,7 @@ class reply(APIView):
         t_data['replies'] = []
         
         try:
-            attr = models.Attachment.objects.get(attachment_md5=thread.attachment_md5)
+            attr = models.Attachment.objects.get(md5sum=thread.attachment_md5)
             t_data['file'] = attr.file.url
         except:
             t_data['file'] = None
@@ -695,11 +691,8 @@ class reply(APIView):
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
-            print("##DEBUG####NODE 1###########")
-            print(data.attachment_md5)
-            print("##DEBUG##################")
             try:
-                attr = models.Attachment.objects.get(attachment_md5=data.attachment_md5)
+                attr = models.Attachment.objects.get(md5sum=data.attachment_md5)
                 t_data['file'] = attr.file.url
             except:
                 t_data['file'] = None
