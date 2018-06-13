@@ -497,7 +497,8 @@ class comment(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            from_id = raw['from']
+            #from_id = raw['from']
+            from_id = request.user
             to_id = raw['to']
             postId = int(raw['postId'])
             replyId = int(raw['replyId'])
@@ -507,7 +508,7 @@ class comment(APIView):
             
     
         try:
-            models.Reply_reply.objects.create(from_uid_id=from_id,to_uid_id=to_id,content=content,reply_id_id=replyId)
+            models.Reply_reply.objects.create(from_uid_id=from_id.username,to_uid_id=to_id,content=content,reply_id_id=replyId)
         except:
             return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -569,7 +570,8 @@ class teacher_list(APIView):
    
 class newmsgs(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         pagesize = int(request.GET.get('pagesize',None))
         
         if None in (uid,pagesize):
