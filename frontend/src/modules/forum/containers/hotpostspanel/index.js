@@ -267,7 +267,7 @@ class HotPostsPanel extends Component {
                                             </TableCell>
                                             <TableCell>{hotPost.author.username}</TableCell>
                                             <TableCell>{moment(hotPost.time).format("YYYY-MM-DD")}</TableCell>
-                                            <TableCell>{moment(hotPost.lastReplyTime).format("YYYY-MM-DD")}</TableCell>
+                                            <TableCell>{hotPost.lastReplyTime? moment(hotPost.lastReplyTime).format("YYYY-MM-DD"): "暂无回复"}</TableCell>
                                             <TableCell numeric>{hotPost.replyNum}</TableCell>
                                         </TableRow>)
                                     })}

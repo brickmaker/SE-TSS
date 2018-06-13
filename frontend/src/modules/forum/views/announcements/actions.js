@@ -84,6 +84,8 @@ export const postAnnc = (uid, title, content, collegeid, courseid, teacherid) =>
                 courseid,
                 teacherid,
             }
+        }, {
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({

@@ -518,7 +518,7 @@ class comment(APIView):
 class sectionnames(APIView):
     def get(self, request, format=None):
         sectionids = request.GET.getlist('sectionids', None)
-        
+        # print(sectionids)
         if None in (sectionids,):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
