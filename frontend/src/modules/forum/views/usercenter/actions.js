@@ -49,13 +49,20 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
             return;
         }
         dispatch({type: postUserInfo});
-        let body = {};
-        // body["uid"] = uid;
-        body["username"] = newUsername;
-        body["signature"] = newSignature;
-        if(imageFile){
-            body["imagefile"] = imageFile;
-        }
+        // let body = {};
+        // // body["uid"] = uid;
+        // body["username"] = newUsername;
+        // body["signature"] = newSignature;
+        // if(imageFile){
+        //     body["imagefile"] = imageFile;
+        // }
+
+        const body = new FormData();
+        body.append('uid', uid);
+        body.append('username', newUsername);
+        body.append('signature', newSignature);
+        body.append('imagefile', imageFile, {type: 'image/*'});
+
         console.log(body);
         const token = localStorage.getItem("token");
         console.log("token", token);
@@ -69,7 +76,7 @@ export const postUserInfo = (uid, newUsername, newSignature, imageFile)=>{
             // headers: headers,
             headers: {
                 Authorization: 'JWT ' + localStorage.getItem('token'),
-                //"content-type": "application/x-www-form-urlencoded",
+                // 'Content-Type': undefined,
                 //'Accept': 'application/json',
             }
         })

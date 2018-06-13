@@ -12,7 +12,7 @@ export const REPLY_FAIL = 'reply_fail'
 export const COMMENT_SUCCESS = 'comment_success'
 export const CLOSE_DIALOG = 'close_post_dialog'
 
-export const reply = (uid, postId, content, fileId) => (dispatch) => { // todo: delete uid
+export const reply = (uid, postId, content, fileId) => (dispatch, getState) => { // todo: delete uid
     fetch(
         `${ROOT_URL}/api/forum/post_newreply`,
         {
@@ -32,6 +32,7 @@ export const reply = (uid, postId, content, fileId) => (dispatch) => { // todo: 
             dispatch({
                 type: REPLY_SUCCESS
             })
+            dispatch(getPostReplies(postId, getState().forum.post.currPage))
             // todo: fail check
         })
 }

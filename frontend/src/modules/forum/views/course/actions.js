@@ -58,6 +58,7 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
                 dispatch({
                     type: POST_SUCCESS
                 })
+                dispatch(getPosts(collegeId, courseId, getState().forum.course.currPage))
             }
         })
 }
