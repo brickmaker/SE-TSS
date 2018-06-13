@@ -1224,7 +1224,7 @@ class courses_info(APIView):
             return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
         
         try:
-            college = models.College.objects.
+            college = models.College.objects.get(pk=collegeid)
         except:
             return Response({'error':'college is not exit'},status=status.HTTP_400_BAD_REQUEST)
         res = {
