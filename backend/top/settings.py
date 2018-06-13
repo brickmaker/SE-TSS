@@ -41,19 +41,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD
-    'rest_framework',
-    'information_management.apps.InformationManagementConfig',
-    'forum.apps.ForumConfig',
+    'django_filters',
+    #'django.utils.timezone.now',
+    #'rest_framework',
+    #'information_management.apps.InformationManagementConfig',
+    #'forum.apps.ForumConfig',
     'score_management.apps.ScoreManagementConfig',
     'corsheaders',
-=======
+
     'rest_framework.authtoken',  # 设置token
     'rest_framework',
 
     'forum.apps.ForumConfig',
     'online_testing.apps.OnlineTestingConfig',
->>>>>>> b5b0584b2332bbbd8f0e283f3b8a83cde916e9c9
+
 ]
 
 MIDDLEWARE = [
@@ -78,6 +79,7 @@ WEBPACK_LOADER = {
 
 
 #开启JWT验证
+"""
 REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
@@ -85,9 +87,11 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        
+
     ),
 }
+"""
+
 
 
 

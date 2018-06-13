@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from score_management.models import Take,Course
+from score_management.models import Take
 from score_management.serializers import TakeSerializer
 from django.db.models import Avg
 from django.db.models import Max
@@ -14,7 +14,8 @@ def score_list(request):
     """
     List all student scores according to course id
     """
-    takes = Take.objects.filter(course__cid=request.data["cid"])
+
+    takes = Take.objects.filter(course__course_id=request.data["cid"])
     serializer = TakeSerializer(takes, many=True)
     return Response(serializer.data)
 
@@ -47,7 +48,7 @@ def score_statistics(request):
     :param request.data["cid"]
     :return averageScore, medianScore, maxScore, minScore, deviant in a course.
     """
-    scores = Take.objects.filter(course__cid=request.data["cid"]).values_list('score', flat=True).order_by("score")
+    scores = Take.objects.filter(course__course_id=request.data["cid"]).values_list('score', flat=True).order_by("score")
     average_score = scores.aggregate(avg_score=Avg('score'))
     count = scores.count()
     if count % 2 == 1:
@@ -81,7 +82,7 @@ def score_distribution(request):
     :return number of all students in the course and date,
             number of students in each grade interval in the course and date
     """
-    scores = Take.objects.filter(course__cid=request.data["cid"], test_date=request.data["date"]).values_list('score', flat=True).order_by("score")
+    scores = Take.objects.filter(course__course_id=request.data["cid"], test_date=request.data["date"]).values_list('score', flat=True).order_by("score")
     count = scores.count()
     it = scores.iterator()
     numList = [0, 0, 0, 0, 0]
@@ -113,7 +114,7 @@ def score_teacher_history(request):
     :return number of all students in the course and teacher,
             average grade point in the course and teacher
     """
-    scores = Take.objects.filter(course__cid=request.data["cid"], teacher_id=request.data["pid"]).values_list('score', flat=True).order_by("score")
+    scores = Take.objects.filter(course__course_id=request.data["cid"], teacher_id=request.data["pid"]).values_list('score', flat=True).order_by("score")
     it = scores.iterator()
     count = scores.count()
     average_grade_point = 0
