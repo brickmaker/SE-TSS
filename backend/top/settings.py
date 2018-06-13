@@ -97,6 +97,7 @@ CORS_ALLOW_HEADERS = (
     'x-csrftoken',
     'Content-Disposition',
     'x-requested-with',
+    'Content-Disposition',
     'Pragma',
 )
 
