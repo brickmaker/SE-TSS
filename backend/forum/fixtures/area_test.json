@@ -1,28 +1,6 @@
 [
     {
         "model":"forum.Area",
-        "pk":1,
-        "name":"人文",
-        "college":2
-    },
-    {
-        "model":"forum.Area",
-        "pk":2,
-        "name":"人文",
-        "college":3
-    },
-    {
-        "model":"forum.Area",
-        "pk":3,
-        "name":"医",
-        "college":4
-    },
-    {
-        "model":"forum.Area",
-        "pk":,
-        "name":"医",
-        "college":4
-    },
-
-    
+        "pk":1
+    }
 ]
