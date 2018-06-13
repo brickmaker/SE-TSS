@@ -530,12 +530,15 @@ class sectionnames(APIView):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         res = []
-        for sectionid in sectionids:
-            try:
-                section = models.Section.objects.get(pk=int(sectionid))
-                res.append(section.name)
-            except:
-                return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            college = models.College.objects.get(pk=sectionids[0])
+            course = models.Course.objects.get(pk=sectionids[1])
+            teacher = models.Teacher.objects.get(pk=sectionids[2])
+            res.append(college.name)
+            res.append(course.name)
+            res.append(teacher.name)
+        except:
+            return Response({'error': "Section Not Found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(res, status=status.HTTP_200_OK)
    
 class college_list(APIView):
