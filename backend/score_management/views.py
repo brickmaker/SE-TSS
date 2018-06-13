@@ -103,10 +103,10 @@ def insert_score(request):
     :param request: Take List
     :return: Information of save state
     """
-    r=0
     takes=Take.objects.all()
     take_list=[]
-    for d in request.data:
+    data=request.data["test"]
+    for d in data:
         course=Course.objects.get(course_id=d["cid"])
         #r=d["sid"]
         student_account=Account.objects.get_by_natural_key(d["sid"])

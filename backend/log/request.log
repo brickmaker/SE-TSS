@@ -7683,3 +7683,4 @@ Traceback (most recent call last):
     self.child.to_representation(item) for item in iterable
 TypeError: 'Take' object is not iterable
 2018-06-14 01:31:14,180 [Thread-3:8408] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22485
+2018-06-14 01:31:45,858 [Thread-1:8184] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
