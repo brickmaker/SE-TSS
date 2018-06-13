@@ -517,7 +517,7 @@ class comment(APIView):
         
 class sectionnames(APIView):
     def get(self, request, format=None):
-        sectionids = request.GET.getlist('sectionids', None)
+        sectionids = request.GET.getlist('sectionids[]', None)
         
         if None in (sectionids,):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
@@ -525,7 +525,7 @@ class sectionnames(APIView):
         res = []
         for sectionid in sectionids:
             try:
-                section = models.Section.objects.get(pk=sectionid)
+                section = models.Section.objects.get(pk=int(sectionid))
                 res.append(section.name)
             except:
                 return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
@@ -941,7 +941,7 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Section).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
             item = {}
             section = models.Section.objects.get(pk=result.section)
@@ -969,7 +969,7 @@ class search(APIView):
         res = {'resultNum':results.count(),'results':[]}
         results = results[pagenum*pagesize:(pagenum+1)*pagesize]
         for result in results:
-            item = {'relatedContetn':"还没实现"}
+            item = {'relatedContent':"还没实现"}
             post = models.Thread.objects.get(pk=result.post)
             item['title'] = post.title
             item['postid'] = post.id
@@ -1199,8 +1199,17 @@ class colleges(APIView):
             item = {'collegeId':area.college.id,'name':area.college.name,'pic':area.avatar.url}
             today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
             today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
-            todayPostsNum = models.Thread.objects.filter(section=area.college.section,date__range=(today_min, today_max)).count()
-            totalPostsNum = models.Thread.objects.filter(section=area.college.section).count()
+            
+            todayPostsNum = 0
+            totalPostsNum = 0 
+            
+            for course in models.Course.object.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=course.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=course.section).count()
+            for teacher in models.Teacher.object.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=teacher.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=teacher.section).count()
+            
             item['todayPostsNum'] = todayPostsNum
             item['totalPostsNum'] = totalPostsNum
             res[area.name].append(item)
