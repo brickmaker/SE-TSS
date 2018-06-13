@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { List, CircularProgress, withStyles, Card, ListItem, ListItemText, Avatar, Typography } from 'material-ui';
 import { getNewMsgs, selectEntry } from '../../views/messages/actions';
-
+import { ROOT_URL } from '../../configs/config';
 const styles = {
 };
 
@@ -34,7 +34,7 @@ class NewMsgPanel extends Component {
                                         this.props.history.push(`/forum/messages`);
                                     }}
                                 >
-                                    <Avatar alt={msg.from.username} src={msg.from.avatar}></Avatar>
+                                    <Avatar alt={msg.from.username} src={`${ROOT_URL}${msg.from.avatar}`}></Avatar>
                                     <ListItemText primary={msg['from']['username']} secondary={msg["content"]} />
                                 </ListItem>
                             )
