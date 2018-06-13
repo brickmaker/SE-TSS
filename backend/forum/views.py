@@ -1228,6 +1228,6 @@ class courses_info(APIView):
             return Response({'error':'college is not exit'},status=status.HTTP_400_BAD_REQUEST)
         res = {
             'college':college.name,
-            'pageNum':college.course.all().count()
+            'pageNum':college.course.all().count()//15+1
         }
         return Response(res,status=status.HTTP_200_OK)
