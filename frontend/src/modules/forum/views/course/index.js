@@ -109,7 +109,7 @@ class Course extends Component {
                                         pic={sub.pic}
                                         lastUpdate={sub.lastUpdate}
                                         postsNum={sub.postsNum}
-                                        posts={sub.newestPosts}
+                                        posts={sub.newPosts} // todo: not compatible with API
                                     />
                                 </Grid>
                             ))}
