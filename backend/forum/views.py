@@ -644,6 +644,21 @@ class reply(APIView):
         datas = models.Reply.objects.filter(post_id=post_id).order_by('date')[
                 (page-1) * post_per_page:(page) * post_per_page]
         res['data'] = []
+        
+        thread = models.Thread.objects.get(pk=post_id)
+        t_data = {}
+        post_num = models.Thread.objects.filter(poster=thread.poster).count()
+        t_data['user'] = {'id':thread.poster.id_id,
+            'name': thread.poster.name,
+            'post_num':post_num,
+            "college":'TODO',
+            'pic': thread.poster.avatar.url,
+            }
+        t_data['content'] = thread.content
+        t_data['time'] = thread.date
+        t_data['replies'] = []
+        res['data'].append(t_data)
+        
         for data in datas:
             t_data = {}
             post_num = models.Thread.objects.filter(poster=data.user).count()
@@ -1165,3 +1180,16 @@ class userinfo(APIView):
         if imgfile is not None: u.avatar= imgfile
         u.save()
         return Response({'message':'success'}, status=status.HTTP_200_OK)
+
+class colleges(APIView):
+    # permission_classes=(AdminCheck,)
+    def get(self, request, format=None):
+        res = {}
+        user_count = models.User.objects.all().count()
+        thread_count = models.Thread.objects.all().count()
+        reply_count = models.Reply.objects.all().count()
+        res = {'用户总数':user_count,
+               '帖子总数':thread_count,
+               '回复总数':reply_count,
+        }
+        return Response(res, status=status.HTTP_200_OK)

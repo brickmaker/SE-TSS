@@ -36,4 +36,5 @@ urlpatterns = [
     path('hotposts',views.hotpost.as_view(),name='hotposts'),
     path('upload_file',views.upload_file.as_view(),name='upload_file'),
     path('userinfo',views.userinfo.as_view(),name='userinfo'),
+    path('colleges',views.colleges.as_view(),name='colleges'),
 ]
