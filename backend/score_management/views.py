@@ -11,20 +11,20 @@ from django.http import JsonResponse
 from itertools import chain
 
 @api_view(['GET','POST'])
-def score_list(request):
+def score_list_teacher(request):
     """
     List all student scores according to course id
     """
 
     takes = Take.objects.filter(course__course_id=request.data["cid"],teacher__username=request.data["pid"])
-    takes_list=[]
-    for take in takes:
-        dict={}
-        dict["stu_name"]=take.student.name
-        dict["score"]=take.score
-        takes_list.append(dict)
-    #serializer = TakeSerializer(takes, many=True)
-    return Response(takes_list)
+    #takes_list=[]
+    #for take in takes:
+    #    dict={}
+    #    dict["stu_name"]=take.student.name
+    #    dict["score"]=take.score
+    #    takes_list.append(dict)
+    serializer = TakeSerializer(takes, many=True)
+    return Response(serializer.data)
 
         #serializer = TakeSerializer(data=request.data)
         #if serializer.is_valid():
@@ -32,6 +32,67 @@ def score_list(request):
         #    return Response(serializer.data, status=status.HTTP_201_CREATED)
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET','POST'])
+def teacher_match(request):
+    """
+    List all student scores according to course id
+    """
+
+    takes = Take.objects.filter(teacher__username=request.data["pid"])
+    match_dict={}
+    #teacher=Faculty.objects.get(username=request.data["pid"])
+    #match_dict["tid"]=takes[0]
+    match_dict["tname"] = takes[0].teacher.name
+
+    match_dict["sid"]=[]
+    match_dict["sname"] = []
+    match_dict["cid"] = []
+    match_dict["cname"] = []
+    for take in takes:
+            #print(take.student.username)
+            #match_dict["sid"].append(take)
+        match_dict["sname"].append(take.student.name)
+            #print(take.course.course_id)
+            #match_dict["cid"].append(take)
+        match_dict["cname"].append(take.course.name)
+    return Response(match_dict)
+
+@api_view(['GET','POST'])
+def student_match(request):
+    """
+    List all student scores according to course id
+    """
+    takes = Take.objects.filter(student__username=request.data["sid"])
+    match_dict={}
+
+    student=Student.objects.get(username=request.data["sid"])
+    match_dict["sid"]=student.username
+    match_dict["sname"] = student.name
+
+    match_dict["tid"]=[]
+    match_dict["tname"] = []
+    match_dict["cid"] = []
+    match_dict["cname"] = []
+    for take in takes:
+        if take.teacher.username not in match_dict["tid"]:
+            print(take.teacher.username)
+            #match_dict["tid"].append(take.teacher.username)
+            #match_dict["tname"].append(take.teacher.name)
+        if take.course.course_id not in match_dict["cid"]:
+            print(take.course.name)
+            #match_dict["cid"].append(take.course.course_id)
+            #match_dict["cname"].append(take.course.name)
+    return Response(match_dict)
+
+@api_view(['GET','POST'])
+def score_list_student(request):
+    """
+    List all student scores according to course id
+    """
+
+    takes = Take.objects.filter(student__username=request.data["sid"])
+    serializer = TakeSerializer(takes, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET',"POST"])
 def insert_score(request):

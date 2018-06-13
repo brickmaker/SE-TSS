@@ -17,6 +17,7 @@ class Take(models.Model):
     test_date=models.DateField("考试时间",auto_now=True)
 
 
+
 class Application(models.Model):
     student=models.ForeignKey(Student,on_delete=models.CASCADE,null=False)
     course=models.ForeignKey(Course,on_delete = models.CASCADE,null=False)
