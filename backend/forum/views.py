@@ -601,7 +601,7 @@ class thread(APIView):
 
 
 class reply(APIView):
-    permission_classes = (IsAuthenticated,)
+    #permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         post_id = request.GET.get('postid', None)
         page = request.GET.get('page', None)
@@ -610,17 +610,24 @@ class reply(APIView):
         page = int(page)
         res = {}
         res['error'] = None
-        datas = models.Reply.objects.filter(post_id=post_id).order_by('create_time')[
+        datas = models.Reply.objects.filter(post_id=post_id).order_by('date')[
                 page * post_per_page:(page + 1) * post_per_page]
         res['data'] = []
         for data in datas:
             t_data = {}
-            t_data['user'] = {  # 'id':data.uid.id,
-                'name': data.uid.name}
+            post_num = models.Thread.objects.filter(poster=data.user).count()
+            t_data['user'] = {'id':data.user.id_id,
+                'name': data.user.name,
+                'post_num':post_num,
+                "college":'TODO',
+                'pic': data.user.avatar.url,
+                }
             t_data['content'] = data.content
-            t_data['time'] = data.create_time
+            t_data['time'] = data.date
             t_data['replies'] = [
-                {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time}
+                {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
+                 'pic': rr.from_uid.avatar.url,
+                }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
             res['data'].append(t_data)
