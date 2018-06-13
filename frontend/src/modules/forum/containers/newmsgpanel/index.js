@@ -23,6 +23,9 @@ class NewMsgPanel extends Component {
         if (isFetchingNewMsgs) {
             return <CircularProgress />;
         }
+        else if(newMsgs.length == 0){
+            return <div/>;
+        }
         else
             return (
                 <Card style={{ marginTop: 10, marginBottom: 30 }}>

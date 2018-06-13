@@ -1006,7 +1006,7 @@ class search(APIView):
             item['title'] = post.title
             item['postid'] = post.id
             author = models.User.objects.get(pk=post.poster_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             reply_num = models.Reply.objects.filter(post=post).count()
             item['replyNum'] = reply_num
             item['time'] = post.date
