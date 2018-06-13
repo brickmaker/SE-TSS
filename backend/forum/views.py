@@ -10,6 +10,7 @@ from forum import models
 from django.db.models import Q
 from haystack.query import SearchQuerySet
 from django.utils.dateparse import parse_datetime
+import datetime
 from django.db.models import Max
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser,IsAuthenticatedOrReadOnly
@@ -1183,11 +1184,17 @@ class colleges(APIView):
     # permission_classes=(AdminCheck,)
     def get(self, request, format=None):
         res = {}
-        user_count = models.User.objects.all().count()
-        thread_count = models.Thread.objects.all().count()
-        reply_count = models.Reply.objects.all().count()
-        res = {'用户总数':user_count,
-               '帖子总数':thread_count,
-               '回复总数':reply_count,
-        }
+        areas = models.Area.objects.all()
+        for area in areas:
+            if area.name not in res:
+                res[area.name] = []
+            item = {'collegeId':area.college.id,'name':area.colledge.name,'pic':area.avatar.url}
+            today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+            today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+            todayPostsNum = models.Thread.objects.filter(section=area.colledge.section,date__range=(today_min, today_max)).count()
+            totalPostsNum = models.Thread.objects.filter(section=area.colledge.section).count()
+            item['todayPostsNum'] = todayPostsNum
+            item['totalPostsNum'] = totalPostsNum
+            res[area.name].append(item)
+            
         return Response(res, status=status.HTTP_200_OK)
