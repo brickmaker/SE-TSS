@@ -69,6 +69,7 @@ export function anncReducer(state = initialState, action) {
         case CLEAR_ANNCS:
             return (Object.assign({}, state, {
                 anncs: {},
+                anncNum: 0,
             }));
         default: return state;
     };

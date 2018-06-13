@@ -97,7 +97,10 @@ class SearchBar extends Component {
                             else if (event.target.value.length > 20) {
                                 this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
                             }
-                            else this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
+                            else {
+                                clearAnncs();
+                                this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
+                            }
                         }
                         else getContent(event.target.value);
                     }}
@@ -155,7 +158,7 @@ const mapDispatchToProps = (dispatch) => ({
     selectSearchType: (searchType) => { dispatch(selectSearchType(searchType)); },
     anchorMenu: (anchorEl) => { dispatch(anchorMenu(anchorEl)); },
     getContent: (content) => { dispatch(getContent(content)); },
-    clearAnncs: ()=>{
+    clearAnncs: () => {
         dispatch(clearAnncs());
     },
 });
