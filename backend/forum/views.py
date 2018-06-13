@@ -78,7 +78,7 @@ class subscriptions(APIView):
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
 
             item['newPosts'] = []
-            for newPost in models.Thread.objects.filter(section=section).order_by('-date'):
+            for newPost in models.Thread.objects.filter(section=section).order_by('-date')[:5]:
                 subItem = {'id': newPost.id, 'title': newPost.title}
                 item['newPosts'].append(subItem)
             subscriptions.append(item)
@@ -322,11 +322,17 @@ class course_newpost(APIView):
             courseId = int(raw['courseId'])
             title = raw['title']
             content = raw['content']
-            fileId = raw['fileId']
+            
         except Exception as e:
             #print(e)
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        try:
+            fileId = raw['fileId']
+        except Exception as e:
+            fileId = "Empty"
+        
+        
         try:
             course = models.Course.objects.get(pk=courseId)
         except Exception as e:
@@ -411,10 +417,14 @@ class teacher_newpost(APIView):
             teacherId = int(raw['teacherId'])
             title = raw['title']
             content = raw['content']
-            fileId = raw['fileId']
         except Exception as e:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        try:
+            fileId = raw['fileId']
+        except Exception as e:
+            fileId = "Empty"
+        
         try:
             teacher = models.Teacher.objects.get(pk=teacherId)
         except Exception as e:
@@ -563,6 +573,7 @@ class newmsgs(APIView):
    
    
 class thread(APIView):
+    permission_classes = (IsAuthenticated, )
     def get(self, request, format=None):
         thread_id = request.GET.get('id', None)
         if thread_id is None:
@@ -600,6 +611,7 @@ class thread(APIView):
 
 
 class reply(APIView):
+    #permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         post_id = request.GET.get('postid', None)
         page = request.GET.get('page', None)
@@ -608,17 +620,24 @@ class reply(APIView):
         page = int(page)
         res = {}
         res['error'] = None
-        datas = models.Reply.objects.filter(post_id=post_id).order_by('create_time')[
+        datas = models.Reply.objects.filter(post_id=post_id).order_by('date')[
                 page * post_per_page:(page + 1) * post_per_page]
         res['data'] = []
         for data in datas:
             t_data = {}
-            t_data['user'] = {  # 'id':data.uid.id,
-                'name': data.uid.name}
+            post_num = models.Thread.objects.filter(poster=data.user).count()
+            t_data['user'] = {'id':data.user.id_id,
+                'name': data.user.name,
+                'post_num':post_num,
+                "college":'TODO',
+                'pic': data.user.avatar.url,
+                }
             t_data['content'] = data.content
-            t_data['time'] = data.create_time
+            t_data['time'] = data.date
             t_data['replies'] = [
-                {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time}
+                {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
+                 'pic': rr.from_uid.avatar.url,
+                }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
             res['data'].append(t_data)
@@ -666,7 +685,7 @@ class msgentries(APIView):
 
 
 class messages(APIView):
-    permission_classes=(IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         # 暂时 uid1 自己 uid2 对方
         # uid1 = request.GET.get('uid1', None)
