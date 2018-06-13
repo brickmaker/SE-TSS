@@ -322,11 +322,17 @@ class course_newpost(APIView):
             courseId = int(raw['courseId'])
             title = raw['title']
             content = raw['content']
-            fileId = raw['fileId']
+            
         except Exception as e:
             #print(e)
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        try:
+            fileId = raw['fileId']
+        except Exception as e:
+            fileId = "Empty"
+        
+        
         try:
             course = models.Course.objects.get(pk=courseId)
         except Exception as e:
@@ -411,10 +417,14 @@ class teacher_newpost(APIView):
             teacherId = int(raw['teacherId'])
             title = raw['title']
             content = raw['content']
-            fileId = raw['fileId']
         except Exception as e:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
-            
+        
+        try:
+            fileId = raw['fileId']
+        except Exception as e:
+            fileId = "Empty"
+        
         try:
             teacher = models.Teacher.objects.get(pk=teacherId)
         except Exception as e:
