@@ -7,10 +7,15 @@ export const getSubscriptions = (userId) => {
     return dispatch => {
         fetchSubscriptions(userId)
             .then((data) => {
-                dispatch({
-                    type: GOT_SUBSCRIPTIONS,
-                    subscriptions: data
-                })
+                if (data.error) {
+                    // todo...
+                }
+                else {
+                    dispatch({
+                        type: GOT_SUBSCRIPTIONS,
+                        subscriptions: data
+                    })
+                }
             })
     }
 };

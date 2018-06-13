@@ -17,7 +17,7 @@ import SearchBar from '../../components/searchbar';
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("uid"); // todo: get uid
+        this.props.getSubscriptions("1"); // todo: get uid
     }
 
     render() {

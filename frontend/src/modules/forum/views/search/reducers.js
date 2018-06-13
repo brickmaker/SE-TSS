@@ -14,7 +14,7 @@ const initialState = {
 }
 
 export function searchReducer(state = initialState, action) {
-    console.log(state, action);
+    // console.log(state, action);
     switch (action.type) {
         case SELECT_SEARCHTYPE:
             return (Object.assign({}, state, {

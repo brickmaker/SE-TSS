@@ -9,7 +9,7 @@ import {
 } from '../constants/index';
 
 
-import {BACKEND_SERVER_URL, BACKEND_API} from "../config";
+import {BACKEND_SERVER_URL, BACKEND_API, DEBUG_API} from "../config";
 
 
 export function loginUserSuccess(token, type, name, status) {
@@ -63,7 +63,7 @@ function get_token(username, password) {
     let data = {};
     data.username = username;
     data.password = password;
-    return postRes(BACKEND_API.get_token, data);
+    return postRes(DEBUG_API.get_token, data);
 }
 
 
@@ -73,7 +73,7 @@ export function login(username, password, type) {
         get_token(username, password)
             .then(response => {
                 try {
-                    getRes(BACKEND_API.get_user, response.token)
+                    getRes(DEBUG_API.get_user, response.token)
                         .then((data) => {
                             let json = JSON.parse(data);
                             let user_type = json[0].user_type;

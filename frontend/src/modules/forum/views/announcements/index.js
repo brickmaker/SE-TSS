@@ -46,7 +46,7 @@ class Announcements extends Component {
         const { classes, type, match, anncNum, anncs, pageSize, isFetching } = this.props;
         const { collegeid, courseid, teacherid,pageNum } = match.params;
         const sectionPath = {};
-        console.log("render annc", anncs);
+        // console.log("render annc", anncs);
         var link = '/forum/announcements';
         if (match) {
             if (anncs.length) {
