@@ -68,6 +68,8 @@ class Announcements extends Component {
             }
             sectionPath["annc"] = { "name": "公告通知", "link": match.url };
         }
+        console.log("link", link);
+        
         if (type != 'main' && type != 'section') {
             return (
                 // <div>

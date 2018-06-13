@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
+import {withAuthHeader} from "../../utils/api"
 
 export const GOT_POST_INFO = 'got_post_info'
 export const GOT_POST_REPLIES = 'got_post_replies'
@@ -11,18 +12,17 @@ export const REPLY_FAIL = 'reply_fail'
 export const COMMENT_SUCCESS = 'comment_success'
 export const CLOSE_DIALOG = 'close_post_dialog'
 
-export const reply = (uid, postId, content, fileId) => (dispatch) => {
+export const reply = (uid, postId, content, fileId) => (dispatch) => { // todo: delete uid
     fetch(
         `${ROOT_URL}/api/forum/post_newreply`,
         {
             method: 'POST',
-            // todo: token header
-            body: {
-                uid: uid,
+            headers: withAuthHeader(),
+            body: JSON.stringify({
                 postId: postId,
                 content: content,
                 fileId: fileId
-            }
+            })
         }
     )
         .then(res => res.json())
@@ -41,7 +41,7 @@ export const comment = (postId, replyId, from, to, content) => (dispatch, getSta
         `${ROOT_URL}/api/forum/comment`,
         {
             method: 'POST',
-            // todo: token header
+            headers: withAuthHeader(),
             body: {
                 from: from,
                 to: to,
@@ -86,12 +86,16 @@ export const getPostReplies = (postId, pageId) => dispatch => {
 }
 
 function fetchPostInfo(postId) {
-    return fetch(`${ROOT_URL}/api/forum/post?id=${postId}`)
+    return fetch(`${ROOT_URL}/api/forum/post?id=${postId}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }
 
 function fetchPostReplies(postId, pageId) {
     // todo: what a suck for this ridiculous compromise
-    return fetch(`${ROOT_URL}/api/forum/post_reply${DEBUG ? '' : `?postid=${postId}&page=${pageId}`}`)
+    return fetch(`${ROOT_URL}/api/forum/post_reply${DEBUG ? '' : `?postid=${postId}&page=${pageId}`}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }

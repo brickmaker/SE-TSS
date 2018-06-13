@@ -1,5 +1,6 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
 import axios from "axios"
+import {withAuthHeader} from "../../utils/api"
 
 export const GET_COURSE_INFO = 'get_course_info'
 export const GOT_COURSE_INFO = 'got_course_info'
@@ -43,9 +44,9 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
         `${ROOT_URL}/api/forum/course_newpost`,
         {
             method: 'POST',
-            headers: {
+            headers: withAuthHeader({
                 'Content-Type': 'application/json'
-            },
+            }),
             body: JSON.stringify(postData)
         }
     )
@@ -62,7 +63,9 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
 }
 
 export const subscribe = (uid, collegeId, courseId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/course_subscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
+    fetch(`${ROOT_URL}/api/forum/course_subscribe${DEBUG ? '' : `?&collegeid=${collegeId}&courseid=${courseId}`}`, {
+        headers: withAuthHeader()
+    })
         .then(res => res.json())
         .then((data) => {
             if (data.error) {
@@ -77,7 +80,9 @@ export const subscribe = (uid, collegeId, courseId) => (dispatch, getState) => {
 }
 
 export const unsubscribe = (uid, collegeId, courseId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/course_unsubscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
+    fetch(`${ROOT_URL}/api/forum/course_unsubscribe${DEBUG ? '' : `?&collegeid=${collegeId}&courseid=${courseId}`}`, {
+        headers: withAuthHeader()
+    })
         .then(res => res.json())
         .then((data) => {
             if (data.error) {
@@ -92,8 +97,16 @@ export const unsubscribe = (uid, collegeId, courseId) => (dispatch, getState) =>
 }
 
 export const checkSubscribed = (uid, collegeId, courseId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/course_subscribed${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}`}`)
-        .then(res => res.json())
+    fetch(`${ROOT_URL}/api/forum/course_subscribed${DEBUG ? '' : `?&collegeid=${collegeId}&courseid=${courseId}`}`, {
+        headers: withAuthHeader()
+    })
+        .then(res => {
+            if (!res.ok) {
+                console.log(res)
+            }
+            else
+                return res.json()
+        })
         .then((data) => {
             if (data.error) {
                 // todo: deal with error
@@ -137,12 +150,30 @@ export const getPosts = (collegeId, courseId, pageId) => (dispatch, getState) =>
 }
 
 function fetchCourseInfo(collegeId, courseId) {
-    return fetch(`${ROOT_URL}/api/forum/course${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}`}`)
-        .then((response) => (response.json()))
+    return fetch(`${ROOT_URL}/api/forum/course${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}`}`,
+        {
+            headers: withAuthHeader()
+        }
+    )
+        .then((response) => {
+            if (!response.ok)
+                console.log(response)
+            else
+                return response.json()
+        })
 }
 
 
 function fetchPosts(collegeId, courseId, pageId) {
-    return fetch(`${ROOT_URL}/api/forum/course_posts${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&pageid=${pageId}`}`)
-        .then((response) => (response.json()))
+    return fetch(`${ROOT_URL}/api/forum/course_posts${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&pageid=${pageId}`}`,
+        {
+            headers: withAuthHeader()
+        }
+    )
+        .then((response) => {
+            if (!response.ok)
+                console.log(response)
+            else
+                return response.json()
+        })
 }
