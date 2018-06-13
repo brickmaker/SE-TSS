@@ -862,7 +862,7 @@ class announcements(APIView):
         res['anncNum'] = anncNum
         res['anncs'] = []
         ann_num = announcements.count()
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
@@ -893,7 +893,7 @@ class announcements(APIView):
         res = {}
         res['anncNum'] = anncNum
         res['anncs'] = []
-        announcements = announcements[pagenum*pagesize:(pagenum+1)*pagesize]
+        announcements = announcements[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)

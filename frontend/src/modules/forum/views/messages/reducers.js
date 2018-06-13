@@ -8,9 +8,9 @@ const initialState = {
     isFetchingEntries: false,
     msgs: [],
     isFetchingMsgs: false,
-    selectedId: undefined,
-    selectedAvatar: "",
-    selectedUsername: "",
+    // selectedId: undefined,
+    // selectedAvatar: "",
+    // selectedUsername: "",
     currentPageNum: 1,
     pageSize: 10,
     errors: {},
@@ -24,12 +24,12 @@ const initialState = {
 
 export function messageReducer(state = initialState, action) {
     switch (action.type) {
-        case SELECT_ENTRY:
-            return (Object.assign({}, state, {
-                selectedId: action.selectedId,
-                selectedAvatar: action.selectedAvatar,
-                selectedUsername: action.selectedUsername,
-            }));
+        // case SELECT_ENTRY:
+        //     return (Object.assign({}, state, {
+        //         selectedId: action.selectedId,
+        //         selectedAvatar: action.selectedAvatar,
+        //         selectedUsername: action.selectedUsername,
+        //     }));
         case CLEAR_MSGS:
             return (Object.assign({}, state, {
                 msgs: [],
