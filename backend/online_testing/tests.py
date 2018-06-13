@@ -20,10 +20,41 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
+#response = c.get('/api/online_testing/analysis/testList/?course_id=061B0170',
+#                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+response = c.get('/api/online_testing/analysis/questionTypeList/?course_id=061B0170',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+data = json.loads(response.content.decode('utf-8'))
+print(data)
 
-response = c.get('/api/online_testing/question/tags_and_teachers/?course_id=2000', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+exit(0)
+
+course_list = []
+
+faculty = Faculty.objects.all().get(username='2110100000')
+for course in faculty.teacher_course.all():
+    course_list.append(course.course_id)
+
+
+for i in range(10):
+    d = datetime.datetime.now()
+    response = c.post('/api/online_testing/paper/', {
+        "paper_name": "Paper Exam %d" % i,
+        'auto': True,
+        'tag_list': [],
+        'start_time': d,
+        'deadline': d + datetime.timedelta(days=7),
+        'duration': 120,
+        'num_choice': 15,
+        'num_judge': 10,
+        'course': random.choice(course_list),
+    }, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+    print(response.content.decode('utf-8'))
+
+exit(0)
+
+response = c.get('/api/online_testing/question/tags_and_teachers/?course_id=211G0200', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
-
 
 response = c.get('/api/online_testing/question/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
@@ -34,8 +65,9 @@ print(response.content.decode('utf-8'))
 response = c.get('/api/online_testing/paper/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
-response = c.get('/api/online_testing/paper/f9758434-6729-11e8-b335-c48e8f7f190e/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+response = c.get('/api/online_testing/paper/743ab0a4-6efc-11e8-aaae-c48e8f7f190e/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
+
 exit(0)
 
 d = datetime.datetime.now()

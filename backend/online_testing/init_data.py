@@ -8,7 +8,20 @@ import random
 from authentication.models import *
 from online_testing.models import *
 
-if False:
+for question in Question.objects.all():
+    if question.course.name == 'Python程序设计':
+        print(question.question_id, question.tag, question.provider.name,
+          question.course.course_id, question.course.name)
+    #l = [f for f in question.course.faculty.all()]
+    #question.provider = random.choice(l)
+    #question.save()
+
+for course in Course.objects.all():
+    print(course.name, [f.name for f in course.faculty.all()])
+
+exit(0)
+
+if True:
     faculty_list = []
 
     for faculty in Faculty.objects.all():
@@ -23,6 +36,10 @@ if False:
         {'course_id': '211C0010', 'name': '面向对象程序设计', 'credit': 2.5},
     ]
 
+    course_to_techear = {
+
+    }
+
     department_list = []
 
     for department in Department.objects.all():
@@ -34,7 +51,8 @@ if False:
                         department=random.choice(department_list), assessment='考试',
                         state=2)
         course.save()
-        course.faculty.set(random.sample(faculty_list, 2))
+        course_to_techear[d['course_id']] = random.sample(faculty_list, 2)
+        course.faculty.set(course_to_techear[d['course_id']])
         course.save()
 
 c = Client()
@@ -58,6 +76,7 @@ faculty_list = ['2110100000', '2110100001', '2110100002', '2110100003']
 
 
 for i in range(100):
+    course_id = random.choice(course_list)
     if random.randint(0, 1) == 1:
         response = c.post('/api/online_testing/question/', {
             "description": "This is description of a question.....",
@@ -67,8 +86,8 @@ for i in range(100):
                             'choice3', 'choice4'],
             "answer_list": [random.randint(0, 4)],
             'level': random.randint(0, 3),
-            'provider': random.choice(faculty_list),
-            'course': random.choice(course_list),
+            'provider': random.choice(course_to_techear[course_id]),
+            'course': course_id,
         }, HTTP_AUTHORIZATION='JWT ' + data['token'])
     else:
         response = c.post('/api/online_testing/question/', {
@@ -78,8 +97,8 @@ for i in range(100):
             "choice_list": ['T', 'F'],
             "answer_list": [1] if random.randint(0, 1) == 1 else [0],
             'level': random.randint(0, 4),
-            'provider': random.choice(faculty_list),
-            'course': random.choice(course_list),
+            'provider': random.choice(course_to_techear[course_id]),
+            'course': course_id,
         }, HTTP_AUTHORIZATION='JWT ' + data['token'])
     print(response.content.decode('utf-8'))
 
@@ -101,7 +120,7 @@ print(response.content.decode('utf-8'))
 response = c.post('/api/online_testing/paper/', {
         "paper_name": "Data Structure Final Exam",
         'auto': False,
-        'question_id_list': [i for i in range(2, 80)],
+        'question_id_list': [i for i in range(200, 280)],
         'start_time': d + datetime.timedelta(days=2),
         'deadline': d + datetime.timedelta(days=7),
         'duration': 120,

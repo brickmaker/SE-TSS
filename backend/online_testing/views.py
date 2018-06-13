@@ -49,7 +49,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def tags_and_teachers(self, request):
-        course_id = request.query_params.get('course_id', None)
+        course_id = request.query_params.get('course', None)
         if course_id:
             course = Course.objects.all().get(course_id=course_id)
             teacher_list = []
@@ -59,7 +59,7 @@ class QuestionViewSet(viewsets.ModelViewSet):
                     'teacher_id': faculty.username.username
                 })
             s = set()
-            for question in Question.objects.all():
+            for question in Question.objects.all().filter(course=course_id):
                 s.add(question.tag)
             return Response({'is_ok': True, 'teacher_list': teacher_list, 'tag_list': list(s)})
         return Response({'is_ok':False, 'message': 'course_id is needed'},
@@ -294,7 +294,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             answers = json.loads(exam.answers.replace('\'', '\"'))
 
             total_score = 0
-            #print(exam.paper.paper_question)
+            #print(exam.answers)
             exam_serializer = PaperDetailSerializer(exam.paper)
             for question_id, score in zip(exam_serializer.data['question_id_list'],
                                           exam_serializer.data['score_list']):
@@ -328,81 +328,90 @@ class AnalysisViewSet(GenericViewSet):
     permission_classes = (IsAuthenticated,)
 
     @action(methods=['get'], detail=False)
-    def student(self, request):
-        student_id_list = request.query_params.getlist('student_id_list')
-        data = {
-            'students_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        papers = Paper.objects.filter(course=course)
-        q = Q()
-        for paper in papers:
-            q = q | Q(paper=paper)
-        exams = Examination.objects.filter(q)
-        for student_id in student_id_list:
-            student_score = []
-            student_exams = exams.filter(student=student_id)
-            for exam in student_exams:
-                student_score.append({
-                    'paper_id': exam.paper.paper_id,
-                    'score': exam.score
+    def testList(self, request):
+        course_id = request.query_params.get('course_id')
+        data = []
+        for paper in Paper.objects.all().filter(course=course_id):
+            d = {
+                'paperID': paper.paper_id,
+                'testName': paper.paper_name,
+                'testAuthor': paper.teacher.name,
+                'whoTakeThisTest': [],
+            }
+            for exam in Examination.objects.all().filter(paper=paper):
+                d['whoTakeThisTest'].append({
+                    'studentName': exam.student.name,
+                    'studentScore': exam.score
                 })
-            data['students_scores_list'].append({
-                'student_id': student_id,
-                'student_score': student_score
-            })
+            data.append(d)
         return Response(data)
 
     @action(methods=['get'], detail=False)
-    def paper(self, request):
-        paper_id_list = request.query_params.getlist('paper_id_list')
-        data = {
-            'papers_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        q = Q()
-        for paper_id in paper_id_list:
-            q = q | Q(paper_id=paper_id)
-        papers = Paper.objects.filter(course=course).filter(q)
-
-        for paper in papers:
-            exams = Examination.objects.filter(paper=paper)
-            paper_score = []
-            for exam in exams:
-                paper_score.append({
-                    'student_id': exam.student.username.username,
-                    'score': exam.score,
+    def studentList(self, request):
+        data = []
+        for student in Student.objects.all():
+            d = {
+                'studentID': student.username.username,
+                'studentName': student.name,
+                'takenTest': [],
+            }
+            for exam in Examination.objects.all().filter(student=student):
+                d['takenTest'].append({
+                    'exam': exam.paper.paper_name,
+                    'testScore': exam.score,
                 })
-            data['papers_scores_list'].append({
-                'paper_id': paper.paper_id,
-                'paper_score': paper_score,
-            })
+            data.append(d)
         return Response(data)
 
     @action(methods=['get'], detail=False)
-    def type(self, request):
-        paper_id_list = request.query_params.getlist('paper_id_list')
-        question_type = request.query_params.get('type')
-        data = {
-            'papers_type_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        q = Q()
-        for paper_id in paper_id_list:
-            q = q | Q(paper_id=paper_id)
-        papers = Paper.objects.filter(course=course).filter(q)
-        # TODO:
-        pass
+    def tagList(self, request):
+        course_id = request.query_params.get('course_id')
+        data = []
+        tags = {}
+        for question in Question.objects.all().filter(course=course_id):
+            if tags.get(question.tag) is None:
+                tags[question.tag] = []
+            tags[question.tag].append(question)
+
+        for tag, question_list in tags.items():
+            d = {
+                'tag': tag,
+                'relevantTest': [],
+            }
+            for i in range(0, 5):
+                d['relevantTest'].append({
+                    'testName': 'Exam %d' % i,
+                    'testScore': [
+                        {'studentName': 'jack', 'score': 100},
+                        {'studentName': 'mary', 'score': 90},
+                        {'studentName': 'dean', 'score': 85},
+                    ]
+                })
+            data.append(d)
+        return Response(data)
+
+
 
     @action(methods=['get'], detail=False)
-    def tag(self, request):
-        # TODO:
-        pass
+    def questionTypeList(self, request):
+        course_id = request.query_params.get('course_id')
+        teacher = request.user.username
+        data = {
+            'multiChoices': [],
+            'judge': [],
+        }
+        for paper in Paper.objects.all().filter(course=course_id, teacher=teacher):
+            d = {
+                'testName': paper.paper_name,
+                'content': []
+            }
+            for i in range(0, 5):
+                d['content'].append({
+                    'questionID': int(np.random.randint(100, 300)),
+                    'answerRate': '%d%%' % int(np.random.randint(0, 100))
+                })
+            data['multiChoices'].append(d)
+            data['judge'].append(d)
+        return Response(data)
 
 
