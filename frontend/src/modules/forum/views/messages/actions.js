@@ -9,6 +9,7 @@ export const MSGS_SUCCESS = "msgs_success";
 export const MSGS_FAILURE = "msgs_failure";
 export function getMsgs(uid, nextPageNum, pageSize) {
     console.log("parse", new Date("2012-04-23T18:25:43.511Z"));
+    console.log("getmsgs", nextPageNum);
     return (dispatch, getState) => {
         const { isFetchingMsgs } = getState();
         if (isFetchingMsgs) {
