@@ -434,11 +434,15 @@ class teacher_newpost(APIView):
             title = raw['title']
             content = raw['content']
         except Exception as e:
+            
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
         
         try:
             fileId = raw['fileId']
         except Exception as e:
+            fileId = "Empty"
+        
+        if fileId is None:
             fileId = "Empty"
         
         try:
@@ -449,7 +453,7 @@ class teacher_newpost(APIView):
         try:
             models.Thread.objects.create(poster_id=uid,title=title,content=content,section=teacher.section,
                                         attachment_md5=fileId)
-        except:
+        except Exception as e:
             return Response({'error':'Fail to start a new post'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -526,12 +530,15 @@ class sectionnames(APIView):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
 
         res = []
-        for sectionid in sectionids:
-            try:
-                section = models.Section.objects.get(pk=int(sectionid))
-                res.append(section.name)
-            except:
-                return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            college = models.College.objects.get(pk=sectionids[0])
+            course = models.Course.objects.get(pk=sectionids[1])
+            teacher = models.Teacher.objects.get(pk=sectionids[2])
+            res.append(college.name)
+            res.append(course.name)
+            res.append(teacher.name)
+        except:
+            return Response({'error': "Section Not Found"}, status=status.HTTP_404_NOT_FOUND)
         return Response(res, status=status.HTTP_200_OK)
    
 class college_list(APIView):
@@ -657,8 +664,8 @@ class reply(APIView):
         post_num = models.Thread.objects.filter(poster=thread.poster).count()
         t_data['user'] = {'id':thread.poster.id_id,
             'name': thread.poster.name,
-            'post_num':post_num,
-            "college":'TODO',
+            'postNum':post_num,
+            "college":'计算机学院',
             'pic': thread.poster.avatar.url,
             }
         t_data['content'] = thread.content
@@ -679,8 +686,8 @@ class reply(APIView):
             post_num = models.Thread.objects.filter(poster=data.user).count()
             t_data['user'] = {'id':data.user.id_id,
                 'name': data.user.name,
-                'post_num':post_num,
-                "college":'TODO',
+                'postNum':post_num,
+                "college":'计算机学院',
                 'pic': data.user.avatar.url,
                 }
             t_data['content'] = data.content
@@ -722,7 +729,7 @@ class msgentries(APIView):
                         d[rd.sender.id.username] = rd
                 else:
                     d[rd.sender.id.username] = rd
-        print(d)
+        #print(d)
         res = []
         for k, v in d.items():
             t = {}
@@ -1034,9 +1041,9 @@ class hotpost(APIView):
             return Response({'error':'section not exist'},status=status.HTTP_400_BAD_REQUEST)
 
         section = ss.section
-        print(section.id)
+        #print(section.id)
         posts = models.Thread.objects.filter(section=section,date__range=(begin,end))
-        print(len(posts))
+        #print(len(posts))
         filter_posts = sorted(posts, key = lambda x:x.reply.count(),reverse=True)[:100]
         res = []
         for p in filter_posts:

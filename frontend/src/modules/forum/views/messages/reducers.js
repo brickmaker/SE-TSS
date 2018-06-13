@@ -12,7 +12,7 @@ const initialState = {
     // selectedAvatar: "",
     // selectedUsername: "",
     currentPageNum: 1,
-    pageSize: 10,
+    pageSize: 5,
     errors: {},
     content: "",
     noMoreMsgs: false,
