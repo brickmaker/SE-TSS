@@ -563,6 +563,7 @@ class newmsgs(APIView):
    
    
 class thread(APIView):
+    permission_classes = (IsAuthenticated, )
     def get(self, request, format=None):
         thread_id = request.GET.get('id', None)
         if thread_id is None:
@@ -600,6 +601,7 @@ class thread(APIView):
 
 
 class reply(APIView):
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         post_id = request.GET.get('postid', None)
         page = request.GET.get('page', None)
@@ -666,7 +668,7 @@ class msgentries(APIView):
 
 
 class messages(APIView):
-    permission_classes=(IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
     def get(self, request, format=None):
         # 暂时 uid1 自己 uid2 对方
         # uid1 = request.GET.get('uid1', None)
