@@ -36,22 +36,27 @@ export const reply = (uid, postId, content, fileId) => (dispatch) => { // todo: 
         })
 }
 
-export const comment = (postId, replyId, from, to, content) => (dispatch, getState) => {
+export const comment = (postId, replyId, from, to, content) => (dispatch, getState) => { // todo: delete from
     fetch(
         `${ROOT_URL}/api/forum/comment`,
         {
             method: 'POST',
             headers: withAuthHeader(),
-            body: {
-                from: from,
+            body: JSON.stringify({
                 to: to,
                 postId: postId,
                 replyId: replyId,
                 content: content
-            }
+            })
         }
     )
-        .then(res => res.json())
+        .then(res => {
+            if (!res.ok) {
+                console.log(res)
+            } else {
+                return res.json()
+            }
+        })
         .then((data) => {
             console.log(data)
             // todo: post test

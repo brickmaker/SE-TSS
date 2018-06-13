@@ -121,7 +121,7 @@ class Reply extends Component {
                                             replies.map(rr => (
                                                 <ListItem>
                                                     <Avatar
-                                                        src={pic}
+                                                        src={`${ROOT_URL}${pic}`}
                                                         style={{
                                                             width: 30,
                                                             height: 30,
