@@ -1,11 +1,31 @@
 import React, {Component} from 'react'
 import {Grid} from "material-ui"
 import SubSystem from "./SubSystem"
-
+import Bar from "../../modules/info/components/Bar"
+import AppBar from '@material-ui/core/AppBar';
+import classNames from 'classnames';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import {
+    Button,
+    Menu,
+    MenuItem,
+} from '@material-ui/core';
 class Top extends Component {
     constructor(props) {
-        super(props)
-    }
+        super(props);
+        
+    };
+    state = {
+        anchor: 'left',
+        anchorEl: null,
+    };
 
     render() {
         return (
@@ -17,7 +37,7 @@ class Top extends Component {
                     marginTop: 120
                 }}>
                     <Grid container>
-                        <SubSystem name={'基础信息'} uri={''}/>
+                        <SubSystem name={'基础信息'} uri={'info'}/>
                         <SubSystem name={'subsystem2'} uri={''}/>
                         <SubSystem name={'subsystem3'} uri={''}/>
                         <SubSystem name={'论坛'} uri={'forum'}/>
@@ -26,6 +46,12 @@ class Top extends Component {
                     </Grid>
                 </div>
             </div>
+                
+
+
+            
+
+            
         )
     }
 }
