@@ -767,8 +767,8 @@ class messages(APIView):
         
 class announcements(APIView):
     def get(self, request, format=None):
-        #uid = request.GET.get('uid', None)
-        uid = request.user
+        uid = request.GET.get('user_wise', None)
+        #uid = request.user
         if uid is None:
             return self.section_wise(request,format)
         return self.user_wise(request,format)
@@ -809,6 +809,7 @@ class announcements(APIView):
         #uid = request.GET.get('uid', None)
         uid = request.user
         pagenum = int(request.GET.get('pagenum', None))
+        pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
@@ -826,7 +827,7 @@ class announcements(APIView):
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             section = models.Section.objects.get(pk=ann.section_id)
             item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)
@@ -837,6 +838,7 @@ class announcements(APIView):
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
         pagenum = int(request.GET.get('pagenum', None))
+        pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (collegeid,courseid,teacherid,pagenum,pagesize):
@@ -856,7 +858,7 @@ class announcements(APIView):
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             section = models.Section.objects.get(pk=ann.section_id)
             item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)

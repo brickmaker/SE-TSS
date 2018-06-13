@@ -4,7 +4,7 @@ import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_HASFINISHED, NEWANNC_R
 
 const initialState = {
     //TODO:  
-    pageSize: 10,
+    pageSize: 2,
     anncNum: 0,
     // pageNum: 1,
     anncs: {},

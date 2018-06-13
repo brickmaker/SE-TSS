@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { ROOT_URL, DEBUG } from '../../configs/config';
 import { Title } from '@material-ui/icons/es';
+import { withAuthHeader } from '../../utils/api';
 
 export const ANNCS_REQUEST = "anncs_request";
 export const ANNCS_SUCCESS = "anncs_success";
@@ -25,11 +26,14 @@ export function getAnncs(uid, collegeId, courseId, teacherId, nextPageNum, pageS
                 if (teacherId)
                     params["teacherid"] = teacherId;
             };
+            params["pagenum"] = nextPageNum;
+            params["pagesize"] = pageSize;
         }
         // console.log("params", params, collegeId);
 
         axios.get(`${ROOT_URL}/api/forum/announcements`, {
-            params
+            params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 console.log("anncs", response.data[0]);
@@ -102,7 +106,8 @@ export const getSectionNames = (sectionids) => {
         axios.get(`${ROOT_URL}/api/forum/sectionnames`, {
             params: {
                 sectionids,
-            }
+            },
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({

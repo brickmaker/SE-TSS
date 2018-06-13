@@ -133,8 +133,8 @@ export const getColleges = () => {
 
 export const COURSES_SUCCESS = 'courses_success';
 export const COURSES_FAILURE = 'courses_failure';
-export const getCourses = (collegeid) => {
-    console.log("getcourses", collegeid);
+export const getCourseList = (collegeid) => {
+    console.log("getcourse_list", collegeid);
     return (dispatch, getState) => {
         axios.get(`${ROOT_URL}/api/forum/course_list`, {
             params: {
