@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { selectSearchType, anchorMenu, search, getContent, fillQuery } from '../../views/search/actions';
+import { clearAnncs } from '../../views/announcements/actions';
 
 const styles = {
     item: {
@@ -62,7 +63,7 @@ class SearchBar extends Component {
 
     render() {
         const typeMapping = { post: "帖子", section: "版块" };
-        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent } = this.props;
+        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent, clearAnncs } = this.props;
         const { isDialogOpen, dialogContent } = this.state;
         return (
             <Card className={classes.container}>
@@ -109,8 +110,10 @@ class SearchBar extends Component {
                     else if (content.length > 20) {
                         this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
                     }
-                    else this.props.history.push(`/forum/search/${searchType}/${content}/1`);
-
+                    else {
+                        clearAnncs();
+                        this.props.history.push(`/forum/search/${searchType}/${content}/1`);
+                    }
                 }} />
                 <Dialog open={isDialogOpen}
                     aria-labelledby="alert-dialog-title"
@@ -152,6 +155,9 @@ const mapDispatchToProps = (dispatch) => ({
     selectSearchType: (searchType) => { dispatch(selectSearchType(searchType)); },
     anchorMenu: (anchorEl) => { dispatch(anchorMenu(anchorEl)); },
     getContent: (content) => { dispatch(getContent(content)); },
+    clearAnncs: ()=>{
+        dispatch(clearAnncs());
+    },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(SearchBar);
