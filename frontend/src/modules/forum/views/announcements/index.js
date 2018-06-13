@@ -48,6 +48,7 @@ class Announcements extends Component {
         const sectionPath = {};
         // console.log("render annc", anncs);
         var link = '/forum/announcements';
+        console.log(match);
         if (match) {
             if (anncs.length) {
                 if (match.params["collegeid"]) {
