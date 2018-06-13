@@ -19,7 +19,7 @@ import {
 import {
     AccountCircle,
 } from '@material-ui/icons';
-import * as actionCreators from "../actions/auth";
+import * as actionCreators from "../../modules/info/actions/auth";
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 
@@ -29,10 +29,10 @@ const drawerWidth = 240;
 const styles = theme => ({
     root: {
         flexGrow: 1,
-        height: '90%',
+        height: '100%',
         zIndex: 1,
         overflow: 'hidden',
-        position: 'relative',
+        position: 'absolute',
         display: 'flex',
         width: '100%',
     },
@@ -57,9 +57,9 @@ const styles = theme => ({
         },
     },
     content: {
+        overflow: 'scroll',
         flexGrow: 1,
         backgroundColor: theme.palette.background.default,
-        padding: theme.spacing.unit * 3,
     },
     flex: {
         flex: 1,
@@ -109,6 +109,8 @@ class Bar extends React.Component {
                 <div className={classes.toolbar}/>
                 <Divider/>
                 <List>{listItems}</List>
+                <Divider/>
+                <List>{otherItems}</List>
             </div>
         );
 
