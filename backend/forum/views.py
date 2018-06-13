@@ -664,8 +664,8 @@ class reply(APIView):
         post_num = models.Thread.objects.filter(poster=thread.poster).count()
         t_data['user'] = {'id':thread.poster.id_id,
             'name': thread.poster.name,
-            'post_num':post_num,
-            "college":'TODO',
+            'postNum':post_num,
+            "college":'计算机学院',
             'pic': thread.poster.avatar.url,
             }
         t_data['content'] = thread.content
@@ -686,8 +686,8 @@ class reply(APIView):
             post_num = models.Thread.objects.filter(poster=data.user).count()
             t_data['user'] = {'id':data.user.id_id,
                 'name': data.user.name,
-                'post_num':post_num,
-                "college":'TODO',
+                'postNum':post_num,
+                "college":'计算机学院',
                 'pic': data.user.avatar.url,
                 }
             t_data['content'] = data.content
