@@ -97,15 +97,18 @@ class Reply extends Component {
                             alignItems: 'center',
                             color: '#9E9E9E'
                         }}>
-                            <Button
-                                size={'small'}
-                                onClick={() => {
-                                    this.props.openComment(postId, id, uid)
-                                }}
-                            >
-                                <ReplyIcon/>
-                                回复
-                            </Button>
+                            {
+                                this.props.disableComment ? null :
+                                    <Button
+                                        size={'small'}
+                                        onClick={() => {
+                                            this.props.openComment(postId, id, uid)
+                                        }}
+                                    >
+                                        <ReplyIcon/>
+                                        回复
+                                    </Button>
+                            }
                             发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
                         </div>
                         {

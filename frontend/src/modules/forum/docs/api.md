@@ -42,6 +42,23 @@ success:
 参照`colleges`
 静态数据，请保持格式，相应的数据填充
 
+#### 学院的课程信息
+
+##### 请求
+
+```
+GET /api/forum/courses_info
+```
+
+##### params
+
+```
+collegeid: String
+```
+
+##### 回复
+
+参见courses_info
 
 #### 课程列表
 
@@ -54,11 +71,13 @@ GET /api/forum/courses
 
 ```
 collegeid: String
+pageid: Integer
 ```
 
 ##### response
 
 success: 参照`courses`
+每页15条
 
 error: ..
 
