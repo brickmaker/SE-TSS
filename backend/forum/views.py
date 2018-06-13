@@ -10,6 +10,7 @@ from forum import models
 from django.db.models import Q
 from haystack.query import SearchQuerySet
 from django.utils.dateparse import parse_datetime
+import datetime
 from django.db.models import Max
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser,IsAuthenticatedOrReadOnly
@@ -496,7 +497,8 @@ class comment(APIView):
             return Response({'error': 'Invalid json format'}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            from_id = raw['from']
+            #from_id = raw['from']
+            from_id = request.user
             to_id = raw['to']
             postId = int(raw['postId'])
             replyId = int(raw['replyId'])
@@ -506,7 +508,7 @@ class comment(APIView):
             
     
         try:
-            models.Reply_reply.objects.create(from_uid_id=from_id,to_uid_id=to_id,content=content,reply_id_id=replyId)
+            models.Reply_reply.objects.create(from_uid_id=from_id.username,to_uid_id=to_id,content=content,reply_id_id=replyId)
         except:
             return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -515,7 +517,8 @@ class comment(APIView):
         
 class sectionnames(APIView):
     def get(self, request, format=None):
-        sectionids = request.GET.getlist('sectionids', None)
+
+        sectionids = request.GET.getlist('sectionids[]', None)
         
         if None in (sectionids,):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
@@ -523,7 +526,7 @@ class sectionnames(APIView):
         res = []
         for sectionid in sectionids:
             try:
-                section = models.Section.objects.get(pk=sectionid)
+                section = models.Section.objects.get(pk=int(sectionid))
                 res.append(section.name)
             except:
                 return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
@@ -533,8 +536,8 @@ class college_list(APIView):
     permission_classes = (AllowAny,)
     def get(self, request, format=None):
         res = []
-        for colledge in models.College.objects.all():
-            item = {'id':colledge.id,'name':colledge.name}
+        for college in models.College.objects.all():
+            item = {'id':college.id,'name':college.name}
             res.append(item)
         return Response(res, status=status.HTTP_200_OK)
       
@@ -568,13 +571,14 @@ class teacher_list(APIView):
    
 class newmsgs(APIView):
     def get(self, request, format=None):
-        uid = request.GET.get('uid', None)
+        #uid = request.GET.get('uid', None)
+        uid = request.user
         pagesize = int(request.GET.get('pagesize',None))
         
         if None in (uid,pagesize):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
         
-        msg_set = models.Message.objects.filter(receiver_id=uid).order_by('-date')
+        msg_set = models.Message.objects.filter(receiver_id=uid.username).order_by('-date')
         msg_num = msg_set.count()
         if msg_num > pagesize:
             msg_set = msg_set[:pagesize]
@@ -583,7 +587,7 @@ class newmsgs(APIView):
         for msg in msg_set:
             item = {}
             sender = models.User.objects.get(pk=msg.sender_id)
-            item['from'] = {'id':sender.id,'username':sender.name,'avatar':"https://api.adorable.io/avatars/144/userpic.png"}
+            item['from'] = {'id':sender.id.username,'username':sender.name,'avatar':sender.avatar.url}
             item['content'] = msg.content
             res.append(item)
         
@@ -647,6 +651,7 @@ class reply(APIView):
         
         thread = models.Thread.objects.get(pk=post_id)
         t_data = {}
+        t_data['id'] = 'poster'
         post_num = models.Thread.objects.filter(poster=thread.poster).count()
         t_data['user'] = {'id':thread.poster.id_id,
             'name': thread.poster.name,
@@ -661,6 +666,7 @@ class reply(APIView):
         
         for data in datas:
             t_data = {}
+            t_data['id'] = data.id
             post_num = models.Thread.objects.filter(poster=data.user).count()
             t_data['user'] = {'id':data.user.id_id,
                 'name': data.user.name,
@@ -782,8 +788,8 @@ class messages(APIView):
         
 class announcements(APIView):
     def get(self, request, format=None):
-        #uid = request.GET.get('uid', None)
-        uid = request.user
+        uid = request.GET.get('user_wise', None)
+        #uid = request.user
         if uid is None:
             return self.section_wise(request,format)
         return self.user_wise(request,format)
@@ -812,7 +818,9 @@ class announcements(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid)
         except Exception as e:
             return Response({'error': "User or Section doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
-            
+        
+        if models.section_admin_relation.objects.filter(user=user,section=teacher.section).count()==0:
+            return Response({'error':'no permission'},status=status.HTTP_400_BAD_REQUEST)
         try:
             models.Announcement.objects.create(user_id=uid.username,title=title,content=content,section_id=teacher.section_id)
         except:
@@ -824,6 +832,7 @@ class announcements(APIView):
         #uid = request.GET.get('uid', None)
         uid = request.user
         pagenum = int(request.GET.get('pagenum', None))
+        pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (uid,pagenum,pagesize):
@@ -841,7 +850,7 @@ class announcements(APIView):
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             section = models.Section.objects.get(pk=ann.section_id)
             item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)
@@ -852,6 +861,7 @@ class announcements(APIView):
         courseid = request.GET.get('courseid', None)
         teacherid = request.GET.get('teacherid', None)
         pagenum = int(request.GET.get('pagenum', None))
+        pagenum -= 1
         pagesize = int(request.GET.get('pagesize', None))
         
         if None in (collegeid,courseid,teacherid,pagenum,pagesize):
@@ -871,7 +881,7 @@ class announcements(APIView):
         for ann in announcements:
             item = {'title':ann.title,'content':ann.content,'time':ann.date}
             author = models.User.objects.get(pk=ann.user_id)
-            item['author'] = {'username':author.name,'uid':author.id}
+            item['author'] = {'username':author.name,'uid':author.id.username}
             section = models.Section.objects.get(pk=ann.section_id)
             item['path'] = fetch_path_dict(section)
             res['anncs'].append(item)
@@ -932,7 +942,7 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Section).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
             item = {}
             section = models.Section.objects.get(pk=result.section)
@@ -958,9 +968,9 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Thread).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
-            item = {'relatedContetn':"还没实现"}
+            item = {'relatedContent':"还没实现"}
             post = models.Thread.objects.get(pk=result.post)
             item['title'] = post.title
             item['postid'] = post.id
@@ -1183,11 +1193,42 @@ class colleges(APIView):
     # permission_classes=(AdminCheck,)
     def get(self, request, format=None):
         res = {}
-        user_count = models.User.objects.all().count()
-        thread_count = models.Thread.objects.all().count()
-        reply_count = models.Reply.objects.all().count()
-        res = {'用户总数':user_count,
-               '帖子总数':thread_count,
-               '回复总数':reply_count,
-        }
+        areas = models.Area.objects.all()
+        for area in areas:
+            if area.name not in res:
+                res[area.name] = []
+            item = {'collegeId':area.college.id,'name':area.college.name,'pic':area.avatar.url}
+            today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+            today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+            
+            todayPostsNum = 0
+            totalPostsNum = 0 
+            
+            for course in models.Course.objects.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=course.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=course.section).count()
+            for teacher in models.Teacher.objects.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=teacher.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=teacher.section).count()
+            
+            item['todayPostsNum'] = todayPostsNum
+            item['totalPostsNum'] = totalPostsNum
+            res[area.name].append(item)
+            
         return Response(res, status=status.HTTP_200_OK)
+
+class courses_info(APIView):
+    def get(self,request,format=None):
+        collegeid = request.GET.get('collegeid',None)
+        if collegeid is None:
+            return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            college = models.College.objects.
+        except:
+            return Response({'error':'college is not exit'},status=status.HTTP_400_BAD_REQUEST)
+        res = {
+            'college':college.name,
+            'pageNum':college.course.all().count()//15+1
+        }
+        return Response(res,status=status.HTTP_200_OK)

@@ -29,7 +29,7 @@ import { usercenterReducer } from "./views/usercenter/reducers";
 // });
 
 
-const persistedFilter = createFilter('messages', ['selectedId','selectedAvatar', 'selectedUsername']);
+const persistedFilter = createFilter('messages', ['selectedId','selectedAvatar', 'selectedUsername', 'currentPageNum']);
 
 export const forumReducer = persistReducer(
     {

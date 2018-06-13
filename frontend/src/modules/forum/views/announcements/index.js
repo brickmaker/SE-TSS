@@ -48,6 +48,7 @@ class Announcements extends Component {
         const sectionPath = {};
         // console.log("render annc", anncs);
         var link = '/forum/announcements';
+        console.log(match);
         if (match) {
             if (anncs.length) {
                 if (match.params["collegeid"]) {
@@ -68,6 +69,8 @@ class Announcements extends Component {
             }
             sectionPath["annc"] = { "name": "公告通知", "link": match.url };
         }
+        console.log("link", link);
+        
         if (type != 'main' && type != 'section') {
             return (
                 // <div>
