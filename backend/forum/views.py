@@ -664,6 +664,13 @@ class reply(APIView):
         t_data['content'] = thread.content
         t_data['time'] = thread.date
         t_data['replies'] = []
+        
+        try:
+            attr = models.Attachment.objects.get(attachment_md5=thread.attachment_md5)
+            t_data['file'] = attr.file.url
+        except:
+            t_data['file'] = None
+        
         res['data'].append(t_data)
         
         for data in datas:
@@ -684,6 +691,11 @@ class reply(APIView):
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
+            try:
+                attr = models.Attachment.objects.get(attachment_md5=thread.attachment_md5)
+                t_data['file'] = attr.file.url
+            except:
+                t_data['file'] = None
             res['data'].append(t_data)
         #res['data'].insert(0,)
         return Response(res, status=status.HTTP_200_OK)
