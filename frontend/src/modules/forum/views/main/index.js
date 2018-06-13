@@ -26,7 +26,10 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain/>
-                    <Grid container xs={12}>
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'row'
+                    }}>
                         <Grid container xs={8}>
                             {
                                 subscriptions.map((sub) => (
@@ -86,7 +89,7 @@ class Main extends Component {
                                 </div>
                             </Grid>
                         </Grid>
-                    </Grid>
+                    </div>
                 </MainBody>
             </div>
         )
