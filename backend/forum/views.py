@@ -517,7 +517,7 @@ class comment(APIView):
         
 class sectionnames(APIView):
     def get(self, request, format=None):
-        sectionids = request.GET.getlist('sectionids', None)
+        sectionids = request.GET.getlist('sectionids[]', None)
         
         if None in (sectionids,):
             return Response({'error': 'Parameter Error'}, status=status.HTTP_400_BAD_REQUEST)
@@ -525,7 +525,7 @@ class sectionnames(APIView):
         res = []
         for sectionid in sectionids:
             try:
-                section = models.Section.objects.get(pk=sectionid)
+                section = models.Section.objects.get(pk=int(sectionid))
                 res.append(section.name)
             except:
                 return Response({'error': "Section {} Not Found".format(sectionid)}, status=status.HTTP_404_NOT_FOUND)
