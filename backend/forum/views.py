@@ -464,10 +464,17 @@ class post_newreply(APIView):
             uid = request.user
             postId = int(raw['postId'])
             content = raw['content']
-            fileId = raw['fileId']
         except Exception as e:
             return Response({'error': 'Parameter error'}, status=status.HTTP_400_BAD_REQUEST)
             
+        try:
+            fileId = raw['fileId']
+        except:
+            fileId = "Empty"
+            
+        if fileId is None:
+            fileId = "Empty"
+
         try:
             post = models.Thread.objects.get(pk=postId)
         except Exception as e:
