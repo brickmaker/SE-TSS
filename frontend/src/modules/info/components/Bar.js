@@ -109,8 +109,6 @@ class Bar extends React.Component {
                 <div className={classes.toolbar}/>
                 <Divider/>
                 <List>{listItems}</List>
-                <Divider/>
-                <List>{otherItems}</List>
             </div>
         );
 
