@@ -1121,7 +1121,7 @@ class upload_file(APIView):
 
 class userinfo(APIView):
     # permission_classes = (IsAuthenticatedOrReadOnly,)
-    parser_classes = (MultiPartParser,FormParser,)
+    parser_classes = (MultiPartParser,)
     def get(self,request,format=None):
         uid = request.GET.get('uid',None)
         if uid == None:
@@ -1194,9 +1194,9 @@ class userinfo(APIView):
     
     def post(self,request,format=None):
         # uid = request.data.get('uid',None)
-        username = request.data.get('username',None)
-        signature = request.data.get('signature',None)
-        imgfile = request.data.get('imagefile',None)
+        username = request.POST.get('username',None)
+        signature = request.POST.get('signature',None)
+        imgfile = request.POST.get('imagefile',None)
 
         print(username,signature,imgfile)
         try:
