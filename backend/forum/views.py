@@ -62,7 +62,7 @@ class subscriptions(APIView):
         for subscribe in models.Subscribe.objects.filter(user=user):
             section = models.Section.objects.get(pk=subscribe.section_id)
             item = {}
-            item['area'] = {'name': section.name, 'path': {}}
+            item['area'] = {'path': {}}
 
             assert section.type in (section.COLLEGE, section.TEACHER, section.COURSE)
 
@@ -73,11 +73,13 @@ class subscriptions(APIView):
                 item['area']['path']['college'] = {'id': college.id, 'name': college.name}
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
                 item['area']['path']['teacher'] = {'id': teacher.id, 'name': teacher.name}
+                item['area']['name'] = course.name + '-' + teacher.name
             elif section.type == section.COURSE:
                 course = models.Course.objects.get(section_id=section.id)
                 college = models.College.objects.get(pk=course.college_id)
                 item['area']['path']['college'] = {'id': college.id, 'name': college.name}
                 item['area']['path']['course'] = {'id': course.id, 'name': course.name}
+                item['area']['name'] = college.name + '-' + course.name
 
             item['newPosts'] = []
             for newPost in models.Thread.objects.filter(section=section).order_by('-date')[:5]:
