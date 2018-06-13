@@ -940,7 +940,7 @@ class search(APIView):
                 
         results = SearchQuerySet().models(models.Section).filter(content=query)
         res = {'resultNum':results.count(),'results':[]}
-        results = results[pagenum*pagesize:(pagenum+1)*pagesize]
+        results = results[(pagenum-1)*pagesize:(pagenum)*pagesize]
         for result in results:
             item = {}
             section = models.Section.objects.get(pk=result.section)
@@ -968,7 +968,7 @@ class search(APIView):
         res = {'resultNum':results.count(),'results':[]}
         results = results[pagenum*pagesize:(pagenum+1)*pagesize]
         for result in results:
-            item = {'relatedContetn':"还没实现"}
+            item = {'relatedContent':"还没实现"}
             post = models.Thread.objects.get(pk=result.post)
             item['title'] = post.title
             item['postid'] = post.id
@@ -1198,8 +1198,17 @@ class colleges(APIView):
             item = {'collegeId':area.college.id,'name':area.college.name,'pic':area.avatar.url}
             today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
             today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
-            todayPostsNum = models.Thread.objects.filter(section=area.college.section,date__range=(today_min, today_max)).count()
-            totalPostsNum = models.Thread.objects.filter(section=area.college.section).count()
+            
+            todayPostsNum = 0
+            totalPostsNum = 0 
+            
+            for course in models.Course.object.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=course.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=course.section).count()
+            for teacher in models.Teacher.object.filter(college=area.college):
+                todayPostsNum += models.Thread.objects.filter(section=teacher.section,date__range=(today_min, today_max)).count()
+                totalPostsNum += models.Thread.objects.filter(section=teacher.section).count()
+            
             item['todayPostsNum'] = todayPostsNum
             item['totalPostsNum'] = totalPostsNum
             res[area.name].append(item)
