@@ -727,11 +727,11 @@ class msgentries(APIView):
         for k, v in d.items():
             t = {}
             if v.sender.id == u:
-                t['uid'] = v.receiver.id.username
+                t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
                 t['avatarurl']=v.receiver.avatar.url
             else:
-                t['uid'] = v.sender.id.username
+                t['id'] = v.sender.id.username
                 t['username'] = v.sender.name
                 t['avatarurl'] = v.sender.avatar.url
             t['lastMsgContent'] = v.content
@@ -1187,10 +1187,10 @@ class userinfo(APIView):
     
     def post(self,request,format=None):
         # uid = request.data.get('uid',None)
-        username = request.DATA.get('username',None)
-        signature = request.DATA.get('signature',None)
+        username = request.data.get('username',None)
+        signature = request.data.get('signature',None)
         #imgfile = request.POST.get('imagefile',None)
-        imgfile = request.FILES.get('imagefile',None)
+        imgfile = request.data.get('imagefile',None)
 
         print(username,signature)
 
