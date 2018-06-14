@@ -24,6 +24,11 @@ class PaperPermission(permissions.BasePermission):
         t = request.user.user_type
         if t != 2 and t != 1:
             return False
+        if request.method not in permissions.SAFE_METHODS:
+            faculty = Faculty.objects.all().get(username=request.user)
+            cnt = faculty.teacher_course.all().filter(course_id=request.data['course']).count()
+            if cnt <= 0:
+                return False
         return True
 
     def has_object_permission(self, request, view, obj):
@@ -31,6 +36,9 @@ class PaperPermission(permissions.BasePermission):
         if t == 2:
             faculty = Faculty.objects.all().get(username=request.user)
             cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
+            print('cnt is ---------------------------', cnt, faculty.username.username)
+            for course in faculty.teacher_course.all():
+                print(course.name)
             if cnt <= 0:
                 return False
         if t == 1:  # must check if this student has taken this course
