@@ -42,7 +42,7 @@ class Main extends Component {
                         <Grid container xs={1}></Grid>
                         <Grid container xs={3}>
                             <Grid item xs={12}>
-                                <div>
+                                <div style={{padding: '0 20px'}}>
                                     <div
                                         onClick={() => {
                                             this.props.history.push('/forum/announcements/user/1')
@@ -65,7 +65,7 @@ class Main extends Component {
                                 </div>
                             </Grid>
                             <Grid item xs={12}>
-                                <div>
+                                <div style={{padding: '0 20px'}}>
                                     <div
                                         onClick={() => {
                                             this.props.history.push('/forum/messages')

@@ -191,7 +191,7 @@ class Bar extends React.Component {
                     </Drawer>
                 </Hidden>
                 <main className={classes.content}>
-                    <div className={classes.toolbar}/>
+                    <div className={classes.toolbar} id={'top-content-container'}/>
                     {children}
                 </main>
             </div>

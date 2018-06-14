@@ -53,8 +53,14 @@ class Course extends Component {
     }
 
     goToPost() {
-        if (this.state.isLogin)
-            window.scrollTo(0, document.body.scrollHeight);
+        if (this.state.isLogin) {
+            // window.scrollTo(0, document.body.scrollHeight);
+            const editor = document.getElementById('forum-editor')
+            editor.scrollIntoView()
+            // console.log(div.scrollHeight)
+            // div.scrollTop = div.scrollHeight
+            // console.log(div.scrollTop)
+        }
         else {
             // todo: redirect to login
         }
@@ -84,7 +90,10 @@ class Course extends Component {
         }
 
         return (
-            <div>
+            <div id={'coursePage'} style={{
+                height: '100%',
+                overflow: 'scroll'
+            }}>
                 <MainBody>
                     <div>
                         <Path path={path}/>
