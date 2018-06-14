@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -160,7 +160,7 @@ class PaperViewSet(mixins.CreateModelMixin,
                     data['score_list'] = score_list
                     data['question_id_list'] = question_id_list
             except BaseException as e:
-                print(type(data))
+                #print(type(data))
                 print(e)
                 return Response("??????", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
@@ -169,7 +169,7 @@ class PaperViewSet(mixins.CreateModelMixin,
                 question_id_list = request.data.getlist('question_id_list')
             else:
                 question_id_list = request.data['question_id_list']
-            print(question_id_list)
+            #print(question_id_list)
             score_list = []
             for question_id in question_id_list:
                 question = Question.objects.get(question_id=question_id)
@@ -233,7 +233,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             exam = Examination.objects.get(paper=request.data['paper']
                                     , student=request.user.username)
             return Response({'message': 'already done.', 'is_ok': False, 'submit': exam.submit,
-                             'exam_id': exam.exam_id},
+                             'exam_id': exam.exam_id, 'left_time': self.get_left_time(exam)},
                             status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             data = request.data.copy()
@@ -255,9 +255,10 @@ class ExaminationViewSet(mixins.CreateModelMixin,
 
     @staticmethod
     def get_left_time(exam):
+        if exam.submit:
+            return 0
         left_time = exam.paper.duration * 60 - \
                     (datetime.now() - exam.start_time.replace(tzinfo=None)).total_seconds()
-        #print(datetime.now() - exam.start_time.replace(tzinfo=None))
         if left_time < 0:
             left_time = 0
         if left_time == 0 and not exam.submit:
@@ -297,11 +298,13 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        answers = request.data.get('answers')
+        answers = str(request.data.get('answers'))
+        print('myAns: ', answers)
         exam.answers = answers
         serializer = self.get_serializer(exam, data={'answers': answers}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print('after saving', serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
@@ -313,6 +316,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         if exam.submit:
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
+        print(exam.answers)
         if exam.answers:
             answers = json.loads(exam.answers.replace('\'', '\"'))
 
@@ -338,17 +342,32 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         serializer = self.get_serializer(exam, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
+        print(serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
-        return Response({'message': 'submit successfully', 'is_ok': True}, status=status.HTTP_200_OK)
+        return Response({'message': 'submit successfully', 'is_ok': True, 'score': exam.score}, status=status.HTTP_200_OK)
 
 
 class AnalysisViewSet(GenericViewSet):
     queryset = Examination.objects.all()
     serializer_class = ExaminationSerializer
     permission_classes = (IsAuthenticated,)
+
+    @action(methods=['get'], detail=False)
+    def studentGradeList(self, request):
+        data = []
+        for exam in Examination.objects.all().filter(student=request.user.username):
+            s = PaperDetailSerializer(exam.paper)
+            d = {
+                'paperName': exam.paper.paper_name,
+                'testScore': exam.score,
+                'totalScore': np.sum(s.data['score_list']),
+                'avgScore': Examination.objects.all().filter(paper=exam.paper)\
+                .aggregate(Avg('score'))["score__avg"],
+            }
+            data.append(d)
+        return Response(data)
 
     @action(methods=['get'], detail=False)
     def testList(self, request):
