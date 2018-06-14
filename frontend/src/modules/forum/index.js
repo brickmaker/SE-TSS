@@ -16,7 +16,11 @@ import AnncEditor from './views/annceditor';
 import Usercenter from './views/usercenter';
 import Bar from "../../top/components/Bar"
 import {Divider, ListItem, ListItemIcon, ListItemText} from "material-ui"
-import {Home, Search as SearchIcon, Message as MessageIcon} from "@material-ui/icons/es/index"
+import {
+    Home, Search as SearchIcon, Message as MessageIcon,
+    Announcement as AnnouncementIcon,
+    Extension as ExtensionIcon
+} from "@material-ui/icons/es/index"
 
 const styles = {
     backgroundColor: '#f0f0ee',
@@ -54,9 +58,16 @@ class Forum extends Component {
                 <Divider/>
                 <ListItem component={Link} to={`${match.url}/announcements/user/1`} button>
                     <ListItemIcon>
-                        <MessageIcon/>
+                        <AnnouncementIcon/>
                     </ListItemIcon>
                     <ListItemText primary="公告"/>
+                </ListItem>
+                <Divider/>
+                <ListItem component={Link} to={`${match.url}/management`} button>
+                    <ListItemIcon>
+                        <ExtensionIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="管理"/>
                 </ListItem>
             </div>
         );

@@ -37,12 +37,13 @@ const styles = theme => ({
         width: '100%',
     },
     appBar: {
-        flexGrow: 1,
-        position: 'absolute',
-        marginLeft: drawerWidth,
-        [theme.breakpoints.up('md')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
-        },
+        zIndex: 10000
+        // flexGrow: 1,
+        // position: 'absolute',
+        // marginLeft: drawerWidth,
+        // [theme.breakpoints.up('md')]: {
+        //     width: `calc(100% - ${drawerWidth}px)`,
+        // },
     },
     navIconHide: {
         [theme.breakpoints.up('md')]: {
