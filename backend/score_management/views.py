@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from score_management.models import Take
-from authentication.models import Course,Student,Faculty,Account
+from authentication.models import Course,Student,Faculty,Account,StudentAnalysis
 from score_management.serializers import TakeSerializer
 from django.db.models import Avg
 from django.db.models import Max
@@ -214,14 +214,7 @@ def score_teacher_history(request):
     while True:
         try:
             score = next(it)
-            if score >= 95:
-                grade_point = 5.0
-            elif score < 60:
-                grade_point = 0.0
-            elif score == 60:
-                grade_point = 1.5
-            else:
-                grade_point = (score - 60) / 10.0 + 1.5
+            grade_point = convert_to_grade_point(score)
             average_grade_point += grade_point
         except StopIteration:
             average_grade_point /= count
@@ -231,3 +224,93 @@ def score_teacher_history(request):
     resp['averageGradePoint'] = average_grade_point
     return JsonResponse(resp)
 
+@api_view(['GET','POST'])
+def student_gpa_every_year(request):
+    """
+    :param request.data["sid"]
+    :return GPAs of each year
+    """
+    try:
+        items = Take.objects.filter(student_id=request.data["sid"]).values_list('score', 'test_date').order_by("test_date")
+        it = items.iterator()
+        resp = {}
+        counts = {}
+        while True:
+            try:
+                item = next(it)
+                grade_point = convert_to_grade_point(item[0])
+                if item[1].year in resp:
+                    resp[item[1].year] += grade_point
+                    counts[item[1].year] += 1
+                else:
+                    resp[item[1].year] = grade_point
+                    counts[item[1].year] = 1
+            except StopIteration:
+                for year in resp.keys():
+                    resp[year] = resp[year] / counts[year]
+                break
+    except Exception as err:
+        print("Exception:", err)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    return JsonResponse(resp)
+
+@api_view(['GET','POST'])
+def student_rank(request):
+    """
+    :param request.data["sid"]
+    :return your rank this year
+    """
+    try:
+        items = StudentAnalysis.objects.filter(id_number=request.data["sid"]).values_list('rank', flat=True)
+        it = items.iterator()
+        resp = {}
+        try:
+            resp['rank'] = next(it)
+        except StopIteration:
+            Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    except Exception as err:
+        print("Exception:", err)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    return JsonResponse(resp)
+
+@api_view(['GET','POST'])
+def update_student_rank(request):
+    """
+    :param
+    :return
+    """
+    try:
+        items = Take.objects.all().values_list('student_id', 'score').order_by("test_date")
+        it = items.iterator()
+        counts = {}
+        gpa_list = {}
+        try:
+            item = next(it)
+            if item[0] in gpa_list:
+                counts[item[0]] += 1
+                gpa_list[item[0]] += convert_to_grade_point(item[1])
+            else:
+                counts[item[0]] = 1
+                gpa_list[item[0]] = convert_to_grade_point(item[1])
+        except StopIteration:
+            for id in gpa_list.keys():
+                gpa_list[id] = gpa_list[id] / counts[id]
+            gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
+            for i in range(len(gpa_sorted_list)):
+                gpa_sorted_list[i][1] = i + 1
+            for item in gpa_sorted_list:
+                record = StudentAnalysis.objects.get(id_number=item[0])
+                record.rank = item[1]
+                record.save()
+            Response(status=status.HTTP_200_OK)
+    except Exception as err:
+        print("Exception:", err)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+def convert_to_grade_point(score):
+    if score >= 95:
+        return 5.0
+    elif score < 60:
+        return 0.0
+    else:
+        return (score - 60) / 10.0 + 1.5

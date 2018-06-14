@@ -174,6 +174,10 @@ class Student(People):
     class_name = models.ForeignKey(Major_Class, verbose_name="所在班级", on_delete=models.CASCADE, null=True)
 
 
+class StudentAnalysis(Student):
+    rank = models.IntegerField("排名", null=True)
+
+
 # Professor
 class Faculty(People):
     title = models.CharField("职称", max_length=50, blank=True, null=False)  # eg: lecturer,associate professor ....
