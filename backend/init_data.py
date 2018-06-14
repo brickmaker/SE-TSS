@@ -154,11 +154,11 @@ def main():
 	t_filename='teacher.xlsx'
 	st_filename='staff.xlsx'
 	c_filename="course.xlsx"
-	#createDepartment(d_filename)
-	#createStudent(s_filename)
-	#createTeacher(t_filename)
-	#createStaff(st_filename)
-	#createCourse(c_filename)
+	createDepartment(d_filename)
+	createStudent(s_filename)
+	createTeacher(t_filename)
+	createStaff(st_filename)
+	createCourse(c_filename)
 	createTake()
 
  
