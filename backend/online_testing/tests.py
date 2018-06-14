@@ -22,9 +22,13 @@ HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
 #response = c.get('/api/online_testing/analysis/testList/?course_id=061B0170',
 #                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
-response = c.get('/api/online_testing/analysis/questionTypeList/?course_id=061B0170',
-                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
-data = json.loads(response.content.decode('utf-8'))
+d = datetime.datetime.now()
+response = c.post('/api/online_testing/paper/', {
+    'teacher': '2110100000', 'duration': 120, 'num_judge': 6, 'num_choice': 5, 'course': '211B0010',
+    'tag_list': ['Game Theory', 'DataBase'], 'paper_name': '风骚', 'start_time': '2017-05-24T10:30',
+    'auto': True, 'deadline': '2019-05-24T10:30'
+}, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
 print(data)
 
 exit(0)

@@ -70,7 +70,11 @@ class QuestionViewSet(viewsets.ModelViewSet):
         data['provider'] = request.user.username
         if isinstance(data['level'], str):
             data['level'] = int(data['level'])
-            data.setlist('answer_list', [int(i) for i in data.getlist('answer_list')])
+            from django.http import QueryDict
+            if isinstance(data, QueryDict):
+                data.setlist('answer_list', [int(i) for i in data.getlist('answer_list')])
+            else:
+                data['answer_list'] = [int(i) for i in data['answer_list']]
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -146,18 +150,36 @@ class PaperViewSet(mixins.CreateModelMixin,
             l = l1[0: num_choice] + l2[0: num_judge]
             question_id_list = [li[0] for li in l]
             score_list = np.array(np.around(100 * softmax([li[1] for li in l])), dtype='int32')
-            score_list[score_list == 0] = 1
-            data.setlist('score_list', score_list)
-            data.setlist('question_id_list', question_id_list)
+            try:
+                score_list[score_list == 0] = 1
+                from django.http import QueryDict
+                if isinstance(data, QueryDict):
+                    data.setlist('score_list', score_list)
+                    data.setlist('question_id_list', question_id_list)
+                else:
+                    data['score_list'] = score_list
+                    data['question_id_list'] = question_id_list
+            except BaseException as e:
+                print(type(data))
+                print(e)
+                return Response("??????", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            question_id_list = request.data.getlist('question_id_list')
+            from django.http import QueryDict
+            if isinstance(request.data, QueryDict):
+                question_id_list = request.data.getlist('question_id_list')
+            else:
+                question_id_list = request.data['question_id_list']
+            print(question_id_list)
             score_list = []
             for question_id in question_id_list:
                 question = Question.objects.get(question_id=question_id)
                 score_list.append(question.level)
             score_list = np.array(np.around(100 * softmax(score_list)), dtype='int32')
             score_list[score_list == 0] = 1
-            data.setlist('score_list', score_list)
+            if isinstance(data, QueryDict):
+                data.setlist('score_list', score_list)
+            else:
+                data['score_list'] = score_list
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -210,8 +232,9 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         try:
             exam = Examination.objects.get(paper=request.data['paper']
                                     , student=request.user.username)
-            return Response({'message': 'already done.', 'is_ok': False},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'already done.', 'is_ok': False, 'submit': exam.submit,
+                             'exam_id': exam.exam_id},
+                            status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             data = request.data.copy()
             data['student'] = request.user.username
@@ -389,8 +412,6 @@ class AnalysisViewSet(GenericViewSet):
                 })
             data.append(d)
         return Response(data)
-
-
 
     @action(methods=['get'], detail=False)
     def questionTypeList(self, request):
