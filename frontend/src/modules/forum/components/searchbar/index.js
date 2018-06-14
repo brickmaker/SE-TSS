@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { selectSearchType, anchorMenu, search, getContent, fillQuery } from '../../views/search/actions';
+import { clearAnncs } from '../../views/announcements/actions';
 
 const styles = {
     item: {
@@ -43,11 +44,12 @@ const styles = {
         display: "flex",
         // verticalAlign: "middle",
         alignItems: "center",
-        marginLeft: 20,
+        height: 48,
+        // marginLeft: 20,
         paddingRight: 20,
         paddingLeft: 20,
         marginBottom: 30,
-    }
+    },
 }
 
 class SearchBar extends Component {
@@ -61,12 +63,12 @@ class SearchBar extends Component {
 
     render() {
         const typeMapping = { post: "帖子", section: "版块" };
-        const { classes, searchType, selectSearchType, anchorEl, anchorMenu, content, getContent } = this.props;
+        const { classes, searchType, pageSize, selectSearchType,search, anchorEl, anchorMenu, content, getContent, clearAnncs } = this.props;
         const { isDialogOpen, dialogContent } = this.state;
         return (
             <Card className={classes.container}>
                 {/* <div  styles={{backgroundColor: "#3f51b5"}}> */}
-                <Typography className={classes.type} style={{ cursor: "pointer" }}
+                <Typography variant="subheading" className={classes.type} style={{ cursor: "pointer" }}
                     onClick={(event) => { event.preventDefault(); anchorMenu(event.currentTarget); }}>
                     {typeMapping[searchType]}
                     {Boolean(anchorEl) ? <KeyboardArrowUpIcon className={classes.item} /> : <KeyboardArrowDownIcon className={classes.item} />}
@@ -79,8 +81,8 @@ class SearchBar extends Component {
                     }} transformOrigin={{ vertical: "top", horizontal: "left", }}
                     onClose={(event) => { anchorMenu(null); }}
                 >
-                    <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("section"); }}>版块</MenuItem>
                     <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("post"); }}>帖子</MenuItem>
+                    <MenuItem onClick={(event) => { event.preventDefault(); anchorMenu(null); selectSearchType("section"); }}>版块</MenuItem>
                 </Menu>
                 <Input className={classes.input} disableUnderline={true} placeholder="请输入搜索内容"
                     inputProps={{ style: { width: "100%" } }}
@@ -95,7 +97,12 @@ class SearchBar extends Component {
                             else if (event.target.value.length > 20) {
                                 this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
                             }
-                            else this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
+                            else {
+                                clearAnncs();
+                                this.props.search(searchType, event.target.value, 1, pageSize);
+                            
+                                this.props.history.push(`/forum/search/${searchType}/${event.target.value}/1`);
+                            }
                         }
                         else getContent(event.target.value);
                     }}
@@ -108,8 +115,10 @@ class SearchBar extends Component {
                     else if (content.length > 20) {
                         this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
                     }
-                    else this.props.history.push(`/forum/search/${searchType}/${content}/1`);
-
+                    else {
+                        clearAnncs();
+                        this.props.history.push(`/forum/search/${searchType}/${content}/1`);
+                    }
                 }} />
                 <Dialog open={isDialogOpen}
                     aria-labelledby="alert-dialog-title"
@@ -144,6 +153,7 @@ const mapStateToProps = (state) => ({
     searchType: state.forum.search.searchType,
     results: state.forum.search.results,
     anchorEl: state.forum.search.anchorEl,
+    pageSize: state.forum.search.pageSize,
     content: state.forum.search.content,
 });
 
@@ -151,6 +161,12 @@ const mapDispatchToProps = (dispatch) => ({
     selectSearchType: (searchType) => { dispatch(selectSearchType(searchType)); },
     anchorMenu: (anchorEl) => { dispatch(anchorMenu(anchorEl)); },
     getContent: (content) => { dispatch(getContent(content)); },
+    clearAnncs: () => {
+        dispatch(clearAnncs());
+    },
+    search: (searchType, query, pageNum, pageSize) => {
+        dispatch(search(searchType, query, pageNum, pageSize));
+    },
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(SearchBar);

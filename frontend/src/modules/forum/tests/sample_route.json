@@ -23,5 +23,6 @@
   "/api/forum/announcements": "/announcements",
   "/api/forum/hotposts": "/hotpost",
   "/api/forum/userstates": "/userstates",
-  "/api/forum/info": "/info"
+  "/api/forum/info": "/info",
+  "/api/forum/userinfo": "/userinfo"
 }

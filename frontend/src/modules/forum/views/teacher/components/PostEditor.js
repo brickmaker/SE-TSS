@@ -95,12 +95,14 @@ export default class PostEditor extends Component {
     render() {
         const {editorState} = this.state;
         return (
-            <div style={{
-                paddingBottom: 80,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center'
-            }}>
+            <div
+                id={'forum-editor'}
+                style={{
+                    paddingBottom: 80,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
                 <input
                     style={{
                         margin: '10px 0',

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_URL, DEBUG } from '../../configs/config';
+import { withAuthHeader } from '../../utils/api';
 
 export const FORUMINFO_REQUEST = 'foruminfo_request';
 export const FORUMINFO_SUCCESS = 'foruminfo_success';
@@ -11,7 +12,9 @@ export const getForumInfo = () => {
         if (isFetchingInfo)
             return;
         dispatch({ type: FORUMINFO_REQUEST });
-        axios.get(`${ROOT_URL}/api/forum/info`)
+        axios.get(`${ROOT_URL}/api/forum/info`, {
+            headers: withAuthHeader(),
+        })
             .then((response) => {
                 console.log('foruminfo_success', response);
                 dispatch({
@@ -41,7 +44,8 @@ export const getUserStates = (username) => {
         });
         let params = DEBUG? {}: {username,};
         axios.get(`${ROOT_URL}/api/forum/userstates`, {
-            params
+            params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 console.log('userstates_success', response);
@@ -80,7 +84,8 @@ export const getHotPosts = (collegeid, courseid, teacherid, startTime, endTime) 
                 teacherid,
                 start_time: startTime.format(),
                 end_time: endTime.format(),
-            }
+            },
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 console.log("hotpost_success", response);
@@ -102,7 +107,9 @@ export const COLLEGES_SUCCESS = 'colleges_success';
 export const COLLEGES_FAILURE = 'colleges_failure';
 export const getColleges = () => {
     return (dispatch, getState) => {
-        axios.get(`${ROOT_URL}/api/forum/college_list`)
+        axios.get(`${ROOT_URL}/api/forum/college_list`,{
+            headers: withAuthHeader(),
+        })
             .then((response) => {
                 //TODO:
                 var collegeItems = new Array();
@@ -126,13 +133,14 @@ export const getColleges = () => {
 
 export const COURSES_SUCCESS = 'courses_success';
 export const COURSES_FAILURE = 'courses_failure';
-export const getCourses = (collegeid) => {
-    console.log("getcourses", collegeid);
+export const getCourseList = (collegeid) => {
+    console.log("getcourse_list", collegeid);
     return (dispatch, getState) => {
         axios.get(`${ROOT_URL}/api/forum/course_list`, {
             params: {
                 collegeid: collegeid,
-            }
+            },
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({
@@ -158,7 +166,8 @@ export const getTeachers = (collegeid, courseid) => {
             params: {
                 collegeid: collegeid,
                 courseid: courseid,
-            }
+            },
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({

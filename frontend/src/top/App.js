@@ -6,7 +6,6 @@ import './App.css';
 import store from './stores'
 
 
-
 import AppBar from '@material-ui/core/AppBar';
 import classNames from 'classnames';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,7 +23,6 @@ import {
 } from '@material-ui/core';
 
 
-
 import Info from "../modules/info";
 import Forum from "../modules/forum";
 import Xkxt from "../modules/xkxt";
@@ -34,15 +32,12 @@ import Main from "./components/Top";
 const topStyles = {};
 
 
-
-
-
-
 class App extends Component {
     state = {
         mobileOpen: false,
         anchorEl: null,
     };
+
     render() {
 
         return (
@@ -50,54 +45,6 @@ class App extends Component {
             <Provider store={store}>
                 <BrowserRouter>
                     <div style={topStyles}>
-
-                    <AppBar >
-                    <Toolbar>
-                       
-                        
-                        <Typography 
-                            component={Link}
-                            to="/"
-                            variant="title" color="inherit">
-                            教学管理系统B组
-                        </Typography>
-
-                        <Button 
-                            component={Link}
-                            raised
-                            to="/info"
-                            color="inherit">信息系统</Button>
-                        <Button 
-                            component={Link}
-                            raised
-                            to=""
-                            color="inherit">排课系统</Button>
-                        <Button 
-                            component={Link}
-                            raised
-                            to="/xkxt"
-                            color="inherit">选课系统</Button>
-                        <Button 
-                            component={Link}
-                            raised
-                            to="/forum"
-                            color="inherit">论坛交流</Button>
-                        <Button 
-                            component={Link}
-                            raised
-                            to=""
-                            color="inherit">在线测试</Button>
-                        <Button 
-                            component={Link}
-                            raised
-                            to=""
-                            color="inherit">成绩管理</Button>
-                        
-
-                    </Toolbar>
-                </AppBar>
-
-
                         <div>
                             <Route exact path={'/'} component={Login}/>
                             <Route path={'/main'} component={Main}/>

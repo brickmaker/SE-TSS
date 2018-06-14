@@ -1,10 +1,10 @@
-import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_HASFINISHED, NEWANNC_REQUEST, NEWANNC_SUCCESS, NEWANNC_FAILURE, SECTIONNAMES_SUCCESS, SECTIONNAMES_FAILURE } from "./actions";
+import { ANNCS_REQUEST, ANNCS_SUCCESS, ANNCS_FAILURE, SET_HASFINISHED, NEWANNC_REQUEST, NEWANNC_SUCCESS, NEWANNC_FAILURE, SECTIONNAMES_SUCCESS, SECTIONNAMES_FAILURE, CLEAR_ANNCS } from "./actions";
 
 // import {} from
 
 const initialState = {
     //TODO:  
-    pageSize: 10,
+    pageSize: 2,
     anncNum: 0,
     // pageNum: 1,
     anncs: {},
@@ -65,6 +65,11 @@ export function anncReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 sectionNames: undefined,
                 errors: action.errors,
+            }));
+        case CLEAR_ANNCS:
+            return (Object.assign({}, state, {
+                anncs: {},
+                anncNum: 0,
             }));
         default: return state;
     };

@@ -52,8 +52,11 @@ class Teacher extends Component {
     }
 
     goToPost() {
-        if (this.state.isLogin)
-            goBottom()
+        if (this.state.isLogin) {
+            // goBottom()
+            const editor = document.getElementById('forum-editor')
+            editor.scrollIntoView()
+        }
         else {
             // todo: redirect to login
         }

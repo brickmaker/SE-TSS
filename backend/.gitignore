@@ -1,2 +1,2 @@
-log/
-db.sqlite3
+*.log
+media/

@@ -54,7 +54,7 @@ class MsgHistory extends Component {
                                 <Typography align="center" className={classes.more}
                                     onClick={(event) => {
                                         event.preventDefault();
-                                        getMsgs(uid, selectedId, currentPageNum + 1, pageSize);
+                                        getMsgs(selectedId, currentPageNum + 1, pageSize);
                                     }}
                                 >
                                     更多消息
@@ -82,7 +82,7 @@ MsgHistory.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    selectedId: state.forum.messages.selectedId,
+    selectedId: state.forum.forumpersist.selectedId,
     msgs: state.forum.messages.msgs,
     isFetchingMsgs: state.forum.messages.isFetchingMsgs,
     currentPageNum: state.forum.messages.currentPageNum,
@@ -91,8 +91,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    getMsgs: (uid1, uid2, nextPageNum, pageSize) => {
-        dispatch(getMsgs(uid1, uid2, nextPageNum, pageSize));
+    getMsgs: (uid, nextPageNum, pageSize) => {
+        dispatch(getMsgs(uid, nextPageNum, pageSize));
     },
     setMsgEnd: (msgEnd) => {
         dispatch(setMsgEnd(msgEnd));

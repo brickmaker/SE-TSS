@@ -93,7 +93,7 @@ class UserStatusPanel extends Component {
                     <div className={classes.selectBar}>
                         <div  className={classes.input}>
                             <TextField
-                                label="用户名"
+                                label="昵称"
                                 name="username"
                                 // className={classes.textField}
                                 value={this.state.name}
@@ -112,10 +112,10 @@ class UserStatusPanel extends Component {
                                     // console.log("management userstate", username);
                                     event.preventDefault();
                                     if (!username || username.length == 0) {
-                                        this.setState({ dialogContent: "用户名不得为空", isDialogOpen: true });
+                                        this.setState({ dialogContent: "昵称不得为空", isDialogOpen: true });
                                     }
                                     else if (username.length > 20) {
-                                        this.setState({ dialogContent: "用户名长度不得超过20", isDialogOpen: true });
+                                        this.setState({ dialogContent: "昵称长度不得超过20", isDialogOpen: true });
                                     }
                                     else getUserStates(username);
                                 }}
