@@ -32,3 +32,15 @@ pip freeze > requirement.txt
 ```
 
 数据库的问题再议，没想好 //:~
+
+## 数据库初始化
+
+init_data.sh
+
+
+init_data_1.py
+到
+init_data_6.py
+
+### migrate
+
