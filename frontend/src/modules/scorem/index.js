@@ -13,7 +13,7 @@ import LeftMenu from './component/LeftMenu';
 import AnalysisTabs from './component/analyse';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
-import {Take} from "./utils";
+import {Take,newTake} from "./utils";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -41,56 +41,148 @@ class ScoreManagement extends Component {
   constructor(props) {
     super(props);
     this.data = [];
-    this.user={
-      name:"学生A",
-      id:"3150000000",
-      type:"s",
-      // name:"教师A",
-      // id:"000001",
-      // type:"t",
+    this.user = {
+      // name: "学生A",
+      // id: "3150100000",
+      // type: "s",
+      name:"教师A",
+      id:"2110100001",
+      type:"t",
     };
-    this.database={
-      student:[],
-      course:[],
-      teacher:[],
+    this.database = {
+      student: [],
+      course: [],
+      teacher: [],
     };
-    this.database.student[0]={sid:"3150000000",sname:"学生A"};
-    this.database.student[1]={sid:"3150000001",sname:"学生B"};
-    this.database.student[2]={sid:"3150000002",sname:"学生C"};
-    this.database.student[3]={sid:"3150000003",sname:"学生D"};
-    this.database.student[4]={sid:"3150000004",sname:"学生E"};
-    this.database.student[5]={sid:"3150000005",sname:"学生F"};
 
-    this.database.teacher[0]={tid:"000001",tname:"教师A"};
-    this.database.teacher[1]={tid:"000002",tname:"John Smith"};
-    this.database.teacher[2]={tid:"000003",tname:"Randal White"};
-    this.database.teacher[3]={tid:"000004",tname:"Steve Brown"};
-    this.database.teacher[4]={tid:"000005",tname:"Christopher Nolan"};
 
-    this.database.course[0]={cid:"1",cname:"计算机网络",tid:"000002"};
-    this.database.course[1]={cid:"2",cname:"操作系统",tid:"000003"};
-    this.database.course[2]={cid:"3",cname:"C程序设计",tid:"000004"};
-    this.database.course[3]={cid:"4",cname:"编译原理",tid:"000005"};
-    this.database.course[4]={cid:"5",cname:"软件工程",tid:"000001"};
-    this.database.course[5]={cid:"6",cname:"软工实习",tid:"000001"};
-    this.initialGrades();
+    if(this.user.type==='s'){
+      fetch("http://127.0.0.1:8000/api/score/scoreliststudent/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: 'sid='+this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        data.map(s => {
+          this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
+          this.addTeacher(s['teacher'],s['faculty_name']);
+          this.addCourse(s['course'],s['course_name'],s['test_date']);
+
+        });
+        this.forceUpdate();
+      });
+    }else if(this.user.type==='t'){
+      fetch("http://127.0.0.1:8000/api/score/scorelistteacher/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: 'pid='+this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        data.map(s => {
+          this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
+          this.addStudent(s['student'],s['student_name']);
+          this.addCourse(s['course'],s['course_name'],s['test_date']);
+
+        });
+        this.forceUpdate();
+      });
+    }
   }
 
-  initialGrades = () => {
-    this.data[0] = new Take("1", "000002", '3150000000', 88);
-    this.data[1] = new Take("2", "000003", '3150000000', 88);
-    this.data[2] = new Take("3", "000004", '3150000000', 88);
-    this.data[3] = new Take("4", "000005", '3150000000', 88);
-    this.data[4] = new Take("5", "000001", '3150000000', 100);
-  };
+  addStudent(id,name){
+    if(!this.findsname(id)){
+      this.database.student.push({sid: id, sname: name});
+    }
+  }
+  addTeacher(id,name){
+    if(!this.findtname(id)){
+      this.database.teacher.push({tid: id, tname: name});
+    }
+  }
+  addCourse(id,name,test_date){
+    if(!this.findcname(id)){
+      this.database.course.push({cid: id, cname: name, test_date:test_date});
+    }
+  }
+
+  pushDatas(takes){
+    const newtake=[];
+    takes.map(take=>{
+      newtake.push(newTake(take.cid,take.tid,take.sid,take.score,take.test_date))
+    });
+    console.log(newtake);
+    fetch("http://127.0.0.1:8000/api/score/insertscore/", {
+      method: "POST",
+      // mode: "no-cors",
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
+      body: 'test='+JSON.stringify(newtake)
+    }).then(function (res) {
+      if (res.ok) {
+        alert("批量录入成功");
+        this.forceUpdate();
+        return res.json();
+      } else {
+        alert("服务器回应异常，状态码：" + res.status);
+      }
+    }, function (e) {
+      alert("对不起，服务器产生错误");
+    }).then(res=>{
+      console.log(res);
+    })
+
+  }
 
   pushData(take) {
-    this.data.push(take);
+    const newtake=[];
+    newtake[0] = new newTake(take.cid,take.tid,take.sid,take.score,take.test_date);
+    console.log(newtake);
+    fetch("http://127.0.0.1:8000/api/score/insertscore/", {
+      method: "POST",
+      // mode: "no-cors",
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
+      body: 'test='+JSON.stringify(newtake)
+
+    }).then(function (res) {
+      if (res.ok) {
+        alert("录入成功");
+        this.forceUpdate();
+      } else {
+        alert("服务器回应异常，状态码：" + res.status);
+      }
+    }, function (e) {
+      alert("对不起，服务器产生错误");
+    })
   }
 
-  deleteData(index){
-    const rest = this.data.slice(index+1);
-    this.data.length =  index;
+  deleteData(index) {
+    const rest = this.data.slice(index + 1);
+    this.data.length = index;
     return this.data.push.apply(this.data, rest);
   }
 
@@ -105,20 +197,21 @@ class ScoreManagement extends Component {
       case ENTER_SCORE: {
         right = (
           <EnterScore
-          pushData={take => this.pushData(take)}
-          deleteData={(from,to) => this.deleteData(from,to)}
-          user={this.user}
-          data={this.data}
-          database={this.database}
+            pushData={take => this.pushData(take)}
+            pushDatas={take => this.pushDatas(take)}
+            deleteData={(index) => this.deleteData(index)}
+            user={this.user}
+            data={this.data}
+            database={this.database}
           />);
         break;
       }
       case SEARCH_SCORE: {
         right = (
           <SearchScore
-          data={this.data}
-          user={this.user}
-          database={this.database}
+            data={this.data}
+            user={this.user}
+            database={this.database}
           />);
         break;
       }
@@ -133,12 +226,12 @@ class ScoreManagement extends Component {
     }
     return (
       <div>
-        <AppBar  position={"static"}>
+        <AppBar position={"static"}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
+              <MenuIcon/>
             </IconButton>
-            <Typography color={"inherit"} variant="title"  style={{flex:1}}>
+            <Typography color={"inherit"} variant="title" style={{flex: 1}}>
               成绩管理
             </Typography>
             <Button color="inherit">您好！{this.user.name}</Button>
@@ -151,6 +244,28 @@ class ScoreManagement extends Component {
       </div>
     );
   }
+
+  findcname(id){
+    const entity =  this.database.course.find(ele=>{
+      return ele.cid===id;
+    });
+    return entity!== undefined;
+  };
+
+  findtname (id){
+    const entity =  this.database.teacher.find(ele=>{
+      return ele.tid===id;
+    });
+    return entity!== undefined;
+
+  };
+
+  findsname (id){
+    const entity =  this.database.student.find(ele=>{
+      return ele.sid===id;
+    });
+    return entity!== undefined;
+  };
 }
 
 
