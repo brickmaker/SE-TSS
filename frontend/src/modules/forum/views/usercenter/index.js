@@ -104,7 +104,7 @@ class Usercenter extends Component {
         const { avatar, uid, username, signature, replyNum, postNum,
             posts, registrationTime, subscriptionNum } = userInfo;
         //TODO:
-        const currentLoginUid = '3';
+        const currentLoginUid = '1';
         var path = {};
         path['settings'] = { "name": `个人中心`, "link": `${match.url}` };
 

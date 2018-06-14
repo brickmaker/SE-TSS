@@ -69,6 +69,13 @@ class Forum extends Component {
                     </ListItemIcon>
                     <ListItemText primary="管理"/>
                 </ListItem>
+                <Divider/>
+                <ListItem component={Link} to={`${match.url}/usercenter/1`} button>
+                    <ListItemIcon>
+                        <ExtensionIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="主页"/>
+                </ListItem>
             </div>
         );
         return (
