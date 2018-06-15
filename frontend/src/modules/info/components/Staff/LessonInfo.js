@@ -3,37 +3,35 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {bindActionCreators} from 'redux';
 import * as actionCreators from "../../actions/auth";
+import {getRes} from "../../actions/auth";
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 
-import Bar from "../Bar";
-import {listItems, otherItems, ranges, credit, lessonColumnData} from "./StaffData";
+import Bar from "../../../../top/components/Bar";
+import {credit, lessonColumnData, listItems, otherItems, ranges, ranges_term} from "./StaffData";
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 import EnhancedTableHead from './EnhancedTable';
-import {getRes, postRes} from "../../actions/auth"
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TablePagination,
-    TableRow,
-    TableSortLabel,
-    Toolbar,
-    Typography,
-    Paper,
+    Button,
     Checkbox,
-    IconButton,
-    Tooltip,
-    TextField,
+    Chip,
     Dialog,
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
-    Button,
+    IconButton,
     MenuItem,
-    Chip,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TablePagination,
+    TableRow,
+    TextField,
+    Toolbar,
+    Tooltip,
+    Typography,
 } from '@material-ui/core';
 
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -191,7 +189,7 @@ class LessonInfo extends React.Component {
             selected: [],
             allowSelected: true,
             anchor: 'left',
-            userName: '',
+            username: '',
             open: true,
             add: false,
             filter: false,
@@ -204,15 +202,16 @@ class LessonInfo extends React.Component {
             course_name: '',
             course_credit: -1,
             course_cap: -1,
-            course_room: '',
+            // course_room: '',
             course_assessment: '',
             course_teacher: '',
             course_type: -1,
+            course_term: -1,
             id_error: false,
             name_error: false,
             credit_error: false,
             cap_error: false,
-            room_error: false,
+            // room_error: false,
             dialogText: '',
             disabled: true,
             chipData: [],
@@ -229,13 +228,16 @@ class LessonInfo extends React.Component {
             type_filter_state: false,
             faculty_filter_state: false,
             faculty_filter: '',
+            department_data: '',
+            department_list: [],
+            department: '',
         };
     }
 
     componentDidMount() {
         // 获取初始课程数据
         this.handleInitData();
-        this.setState({userName: localStorage.getItem('userName')});
+        this.setState({username: localStorage.getItem('username')});
     };
 
 
@@ -245,22 +247,24 @@ class LessonInfo extends React.Component {
         let name_valid = (this.state.course_name !== '' && this.state.course_name.length < 40);
         let credit_valid = (this.state.course_credit !== -1 && (this.state.course_credit <= 10 && this.state.course_credit > 0));
         let cap_valid = (this.state.course_cap !== -1 && (this.state.course_cap <= 300 && this.state.course_cap > 0));
-        let room_valid = (this.state.course_room !== '');
+        // let room_valid = (this.state.course_room !== '');
+        let term_valid = (this.state.course_term !== '');
 
         this.setState({
             id_error: !id_valid,
             name_error: !name_valid,
             credit_error: !credit_valid,
             cap_error: !cap_valid,
-            room_error: !room_valid,
-            disabled: !(id_valid && name_valid && credit_valid && room_valid && cap_valid)
+            // room_error: !room_valid,
+            disabled: !(id_valid && name_valid && credit_valid && cap_valid && term_valid)
         });
-        return !(id_valid && name_valid && credit_valid && room_valid && cap_valid);
+        return !(id_valid && name_valid && credit_valid && cap_valid && term_valid);
     };
 
 
     // 添加课程窗口打开
     handleAddOpen = () => {
+        this.handleDepartData();
         this.setState({add: true});
     };
 
@@ -274,11 +278,12 @@ class LessonInfo extends React.Component {
         const chipLabel = [...this.state.chipLabel];
         chipLabel.splice(0, chipLabel.length);
         this.setState({chipLabel});
-        this.setState({course_type: -1});
+        this.setState({course_type: -1, course_term: -1});
     };
 
 
     // 添加课程提交
+    //TODO:
     handleAddSubmit = () => {
         // 这句话很关键
         let true_state = this.isDisabled();
@@ -289,11 +294,14 @@ class LessonInfo extends React.Component {
             data.credit = this.state.course_credit;
             data.capacity = this.state.course_cap;
             data.course_type = this.state.course_type;
-            data.classroom = this.state.course_room;
+            // data.classroom = this.state.course_room;
             data.assessment = this.state.course_assessment;
             data.state = 2;
             data.faculty = this.state.chipLabel;
-            fetch('/api/register_course', {
+            data.semester = this.state.course_term;
+            data.department = this.state.department;
+            let url = BACKEND_SERVER_URL + 'api/register_course';
+            fetch(url, {
                 method: 'post',
                 headers: {
                     'Authorization': 'JWT ' + localStorage.getItem('token'),
@@ -336,7 +344,36 @@ class LessonInfo extends React.Component {
         this.handleAddClose();
     };
 
+    handleDepartData = () => {
 
+        fetch(BACKEND_SERVER_URL + BACKEND_API.get_department, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                this.setState({department_data: data}, () => {
+                    let s = [];
+                    data.forEach((value, index) => {
+                        let t = {};
+                        t.value = value.name;
+                        t.label = value.name;
+                        s.push(t);
+                    });
+                    this.setState({department_list: s});
+                });
+            })
+            .catch(() => {
+                this.setState({
+                    dialogState: true,
+                    dialogText: "服务器无响应",
+                });
+                // browserHistory.push("/login");
+            });
+    };
     // 过滤窗口打开
     handleFilterOpen = () => {
         this.setState({filter: true});
@@ -524,9 +561,6 @@ class LessonInfo extends React.Component {
         this.setState({rowsPerPage: event.target.value});
     };
 
-    handleChange = prop => event => {
-        this.setState({[prop]: event.target.value});
-    };
 
     handleCheckChange = name => event => {
         if (!event.target.checked) {
@@ -612,6 +646,9 @@ class LessonInfo extends React.Component {
                 });
         });
     };
+    handleChange = name => event => {
+        this.setState({[name]: event.target.value});
+    };
 
     // 删除课程
     handleDelete = () => {
@@ -652,10 +689,28 @@ class LessonInfo extends React.Component {
         });
     };
 
+    handleDepartmentChange = prop => event => {
+        this.setState({[prop]: event.target.value});
+        let department = this.state.department_data.filter(item => item.name === event.target.value)[0];
+        let s = [];
+        department.major_for.forEach((value, index) => {
+            let t = {};
+            t.value = value;
+            t.label = value;
+            s.push(t);
+        });
+        this.setState({
+            major_list: s,
+            class_list: [],
+            major: '',
+            class_name: ''
+        });
+    };
+
     isSelected = id => this.state.selected.indexOf(id) !== -1;
 
     render() {
-        const {classes, theme,  history} = this.props;
+        const {classes, theme, history} = this.props;
         const {data, order, orderBy, selected, rowsPerPage, page, anchor, open, tableState,} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
@@ -774,6 +829,20 @@ class LessonInfo extends React.Component {
                             </TextField>
                             <TextField
                                 fullWidth
+                                select='true'
+                                label="学期类型"
+                                margin="normal"
+                                value={this.state.course_term}
+                                onChange={this.handleChange('course_term')}
+                            >
+                                {ranges_term.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
                                 label="学分"
                                 onChange={this.handleChange('course_credit')}
                                 margin="normal"
@@ -785,13 +854,6 @@ class LessonInfo extends React.Component {
                                 onChange={this.handleChange('course_cap')}
                                 margin="normal"
                                 error={this.state.cap_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="教室"
-                                onChange={this.handleChange('course_room')}
-                                margin="normal"
-                                error={this.state.room_error}
                             />
                             <TextField
                                 fullWidth
@@ -818,6 +880,21 @@ class LessonInfo extends React.Component {
                                     />
                                 );
                             })}
+
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="开课学院"
+                                margin="normal"
+                                value={this.state.department}
+                                onChange={this.handleDepartmentChange('department')}
+                            >
+                                {this.state.department_list.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={(e) => this.handleFacultySearch(e)} color="primary">
@@ -925,6 +1002,7 @@ class LessonInfo extends React.Component {
                                     disabled={!this.state.classroom_filter_state}
                                 />
                             </div>
+
                             <div>
                                 <Checkbox
                                     checked={this.state.faculty_filter_state}

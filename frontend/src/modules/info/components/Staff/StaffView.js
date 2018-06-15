@@ -1,28 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import {bindActionCreators} from 'redux';
 import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/auth';
 import Typography from '@material-ui/core/Typography';
 
-import {Link} from "react-router-dom";
-import {
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-} from '@material-ui/core';
-
-import {
-    Home,
-    AccountBox,
-    SupervisorAccount,
-    Class,
-    Star,
-} from '@material-ui/icons';
-
-import Bar from "../Bar";
+import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StaffData";
 
 function mapStateToProps(state) {
