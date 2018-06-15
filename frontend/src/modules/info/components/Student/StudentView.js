@@ -7,7 +7,9 @@ import * as actionCreators from '../../actions/auth';
 import Typography from '@material-ui/core/Typography';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StudentData";
-
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 function mapStateToProps(state) {
     return {
 
@@ -19,7 +21,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
-
+    card:{
+      margin: '50px',
+      position: 'relative',
+      overflow:  'auto',
+      height: '50%',
+      width: '90%',
+    },
 });
 
 class StudentView extends React.Component {
@@ -39,7 +47,11 @@ class StudentView extends React.Component {
                 listItems={listItems}
                 otherItems={otherItems}
                 children={
-                    <Typography>{'欢迎来到教务管理系统吸吸'}</Typography>
+                    <Card className={classes.card}>
+                    <CardContent>
+                    <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统,'+localStorage.getItem('name')}</Typography>
+                    </CardContent>
+                    </Card>
                 }
                 history = {history}
             />

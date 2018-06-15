@@ -86,9 +86,11 @@ class BatchStudentView(APIView):
         row=table.nrows
         manager=AccountManager()
         
-        
+        if os.path.exists(file_obj.name):
+            os.remove(file_obj.name)
         for i in range(1,row):
             try:
+
                 department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
                 major=Major.objects.get(major=table.row_values(i)[col_dict['专业']],depart=department)
                 class_name=Major_Class.objects.get(major=major,class_name=table.row_values(i)[col_dict['班级']])
@@ -102,18 +104,21 @@ class BatchStudentView(APIView):
                             major=major,
                             class_name=class_name,  
                             ) 
-                if os.path.exists(file_obj.name):
-                    os.remove(file_obj.name)
-            except ValueError as err:
-                print(err)
-
+                
+            except :
+               
                 print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                return Response({'detail': '创建失败，请检查表格第'+str(i)+'行'},status=400)
+                
+                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
+                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
+                json_data = json.dumps(total, ensure_ascii=False)
+                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
 
+        total='Excel上传成功'
+        json_data = json.dumps(total, ensure_ascii=False)
+        return Response(json_data, status=status.HTTP_200_OK)
 
-        return Response({'detail': 'success'}, status=200)
-
-class BatchFacultyView(APIView):
+class BatchStaffView(APIView):
     #parser_classes = (FileUploadParser,)
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
@@ -144,6 +149,65 @@ class BatchFacultyView(APIView):
         row=table.nrows
         manager=AccountManager()
         
+        if os.path.exists(file_obj.name):
+            os.remove(file_obj.name)
+        for i in range(1,row):
+            try:
+                department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
+                manager.create_user(username=str(table.row_values(i)[col_dict['教工号']]),id_number=table.row_values(i)[col_dict['身份证号']],
+                            email=table.row_values(i)[col_dict['电子邮件']],
+                            user_type=3,
+                            name=table.row_values(i)[col_dict['姓名']], 
+                            gender  =table.row_values(i)[col_dict['性别']], 
+                            department=department,
+                            ) 
+            except :
+                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
+                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
+                json_data = json.dumps(total, ensure_ascii=False)
+                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
+
+        total='Excel上传成功'
+        json_data = json.dumps(total, ensure_ascii=False)
+        return Response(json_data, status=status.HTTP_200_OK)
+
+
+
+
+
+
+class BatchFacultyView(APIView):
+    #parser_classes = (FileUploadParser,)
+    parser_classes = (MultiPartParser, FormParser,)
+    permission_classes = (IsAuthenticated,)
+    @transaction.atomic
+    def post(self, request, format=None):
+        #file_obj = request.FILES['file']
+        #logger.info(file_obj.read())
+        file_obj=self.request.data.get('file')
+        
+        
+        f1=open(file_obj.name,"wb")
+
+        for i in file_obj.chunks():
+            f1.write(i)
+
+        f1.close()
+
+        try :
+            wb=xlrd.open_workbook(filename=file_obj.name)
+           
+        except e as err:
+            logger.info(err)
+
+        table=wb.sheets()[0]
+
+        col_dict=getColumnTitle(table)
+        logger.info(col_dict)
+        row=table.nrows
+        manager=AccountManager()
+        if os.path.exists(file_obj.name):
+            os.remove(file_obj.name)
         
         for i in range(1,row):
             try:
@@ -158,15 +222,18 @@ class BatchFacultyView(APIView):
                             ) 
                 if os.path.exists(file_obj.name):
                     os.remove(file_obj.name)
-            except ValueError as err:
-                print(err)
+            except :
+               
                 print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
                 
                 print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                return Response({'detail': '创建失败，请检查表格第'+str(i)+'行'},status=400)
+                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
+                json_data = json.dumps(total, ensure_ascii=False)
+                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
 
-
-        return Response({'detail': 'success'}, status=200)
+        total='Excel上传成功'
+        json_data = json.dumps(total, ensure_ascii=False)
+        return Response(json_data, status=status.HTTP_200_OK)
 
 
 class FacultyRegister(APIView):

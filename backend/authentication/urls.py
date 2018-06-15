@@ -30,7 +30,8 @@ urlpatterns = [
     url(r'^user$', UserViewSet.as_view()),
     url(r'^login$', Login.as_view()),
     url(r'^batch_student$', BatchStudentView.as_view()),
-    url(r'^batch_faculty$', BatchStudentView.as_view()),
+    url(r'^batch_faculty$', BatchFacultyView.as_view()),
+    url(r'^batch_staff$', BatchStaffView.as_view()),
     url(r'^course_faculty$', CourseFacultyViewSet.as_view()),
     url(r'^upload_image$', UploadImageView.as_view()),
     url(r'^', include(router.urls)),  # list/detail all account infomation

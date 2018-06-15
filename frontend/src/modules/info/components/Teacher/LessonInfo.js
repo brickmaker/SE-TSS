@@ -54,6 +54,13 @@ const styles = theme => ({
     chip: {
         margin: theme.spacing.unit / 2,
     },
+    Card:{
+      margin: '20px',
+      position: 'relative',
+      overflow:  'auto',
+      height: '50%',
+      width: '90%',
+    },
 });
 
 function mapDispatchToProps(dispatch) {

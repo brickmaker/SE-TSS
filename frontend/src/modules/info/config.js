@@ -17,7 +17,8 @@ export const BACKEND_API = {
     get_admin_info: 'api/info/admin/',
     update_password: 'api/info/update_password',
     batch_add_student: 'api/info/batch_student',
-    batch_add_student: 'api/info/batch_faculty',
+    batch_add_faculty: 'api/info/batch_faculty',
+    batch_add_staff: 'api/info/batch_staff',
     upload_image: 'api/info/upload_image',
 };
 
@@ -38,6 +39,7 @@ export const DEBUG_API = {
     get_admin_info: 'api/admin/',
     update_password: 'api/update_password',
     batch_add_student: 'api/batch_student',
-    batch_add_student: 'api/batch_faculty',
+    batch_add_faculty: 'api/batch_faculty',
+    batch_add_staff: 'api/batch_staff',
     upload_image: 'api/upload_image',
 };

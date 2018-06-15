@@ -42,10 +42,19 @@ function mapStateToProps(state) {
 const styles = theme => ({
     base: {
         width: '100%',
+        overflow:  'auto',
         marginTop: theme.spacing.unit * 3,
     },
     chip: {
         margin: theme.spacing.unit / 2,
+        overflow:  'auto',
+    },
+    Card:{
+      margin: '20px',
+      position: 'relative',
+      overflow:  'auto',
+      height: '50%',
+      width: '90%',
     },
 });
 
@@ -75,6 +84,7 @@ const toolbarStyles = theme => ({
     title: {
         flex: '0 0 auto',
     },
+    overflow:  'auto',
 });
 let EnhancedTableToolbar = props => {
     const {numSelected, classes, handleDelete, handleFilterOpen} = props;
