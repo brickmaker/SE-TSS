@@ -132,8 +132,8 @@ class SearchResult extends Component {
                         <div className={classes.line2}>
                             <div className={classes.item}>
                                 <Link to={sectionPath["college"]["link"]} className={classes.link2}>{sectionPath['college']["name"]}</Link>
-                                {sectionPath["course"] && <Link to={sectionPath["course"]["link"]} className={classes.link2}> {sectionPath['course']["name"]}</Link>}
-                                {sectionPath["teacher"] && <Link to={sectionPath["teacher"]["link"]} className={classes.link2}> {sectionPath['teacher']["name"]}</Link>}
+                                {sectionPath["course"] && <Link to={sectionPath["course"]["link"]} className={classes.link2}> > {sectionPath['course']["name"]}</Link>}
+                                {sectionPath["teacher"] && <Link to={sectionPath["teacher"]["link"]} className={classes.link2}> > {sectionPath['teacher']["name"]}</Link>}
                             </div>
                         </div>
 

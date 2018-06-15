@@ -16,7 +16,11 @@ import AnncEditor from './views/annceditor';
 import Usercenter from './views/usercenter';
 import Bar from "../../top/components/Bar"
 import {Divider, ListItem, ListItemIcon, ListItemText} from "material-ui"
-import {Home, Search as SearchIcon, Message as MessageIcon} from "@material-ui/icons/es/index"
+import {
+    Home, Search as SearchIcon, Message as MessageIcon,
+    Announcement as AnnouncementIcon,
+    Extension as ExtensionIcon
+} from "@material-ui/icons/es/index"
 
 const styles = {
     backgroundColor: '#f0f0ee',
@@ -38,7 +42,7 @@ class Forum extends Component {
                     <ListItemText primary="主页"/>
                 </ListItem>
                 <Divider/>
-                <ListItem component={Link} to={`${match.url}/search/`} button>
+                <ListItem component={Link} to={`${match.url}/search`} button>
                     <ListItemIcon>
                         <SearchIcon/>
                     </ListItemIcon>
@@ -52,11 +56,25 @@ class Forum extends Component {
                     <ListItemText primary="消息"/>
                 </ListItem>
                 <Divider/>
-                <ListItem component={Link} to={`${match.url}/announcements/user/0`} button>
+                <ListItem component={Link} to={`${match.url}/announcements/user/1`} button>
                     <ListItemIcon>
-                        <MessageIcon/>
+                        <AnnouncementIcon/>
                     </ListItemIcon>
                     <ListItemText primary="公告"/>
+                </ListItem>
+                <Divider/>
+                <ListItem component={Link} to={`${match.url}/management`} button>
+                    <ListItemIcon>
+                        <ExtensionIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="管理"/>
+                </ListItem>
+                <Divider/>
+                <ListItem component={Link} to={`${match.url}/usercenter/1`} button>
+                    <ListItemIcon>
+                        <ExtensionIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="主页"/>
                 </ListItem>
             </div>
         );

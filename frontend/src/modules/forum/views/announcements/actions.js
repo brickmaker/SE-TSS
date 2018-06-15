@@ -125,3 +125,11 @@ export const getSectionNames = (sectionids) => {
             })
     }
 }
+
+
+export const CLEAR_ANNCS = "clear_anncs";
+export const clearAnncs = ()=>{
+    return ({
+        type: CLEAR_ANNCS,
+    });
+}

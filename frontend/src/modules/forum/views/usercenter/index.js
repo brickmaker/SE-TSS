@@ -65,6 +65,7 @@ class Usercenter extends Component {
 
         let reader = new FileReader();
         let file = event.target.files[0];
+        console.log("file", file);
         if (file.type.slice(0, 6) !== "image/") {
             this.setState({
                 isDialogOpen: true,
@@ -103,7 +104,7 @@ class Usercenter extends Component {
         const { avatar, uid, username, signature, replyNum, postNum,
             posts, registrationTime, subscriptionNum } = userInfo;
         //TODO:
-        const currentLoginUid = '3';
+        const currentLoginUid = '1';
         var path = {};
         path['settings'] = { "name": `个人中心`, "link": `${match.url}` };
 

@@ -65,6 +65,7 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetchingMsgs: true,
                 isEntering: action.isEntering,
+                noMoreMsgs:false,
             }));
         case MSGS_SUCCESS:
             return (Object.assign({}, state, {
@@ -73,6 +74,7 @@ export function messageReducer(state = initialState, action) {
                 currentPageNum: action.currentPageNum,
                 isEntering: false,
                 pageSize: action.pageSize,
+                noMoreMsgs: action.newMsgs.length ===0
             }));
         case MSGS_FAILURE:
             return (Object.assign({}, state), {
