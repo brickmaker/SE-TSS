@@ -22,13 +22,12 @@ import {
     Star,
 } from '@material-ui/icons';
 
-import Bar from "../Bar";
+import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./TeacherData";
 
 function mapStateToProps(state) {
     return {
-        userName: state.auth.userName,
-        data: state.auth.data,
+
     };
 }
 
@@ -56,7 +55,7 @@ class TeacherView extends React.Component {
     }
 
     render() {
-        const {classes, theme} = this.props;
+        const {classes, theme,history} = this.props;
         return (
             <Bar
                 listItems={listItems}
@@ -64,6 +63,7 @@ class TeacherView extends React.Component {
                 children={
                     <Typography>{'欢迎来到教务管理系统吸吸'}</Typography>
                 }
+                history = {history}
             />
 
         );

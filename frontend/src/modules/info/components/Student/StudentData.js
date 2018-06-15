@@ -18,36 +18,24 @@ import {
 
 export const listItems = (
     <div>
-        <Link to={'/student'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Home/>
-                </ListItemIcon>
-                <ListItemText primary="主页"/>
-            </ListItem>
-        </Link>
-        <Link to={'/student/basicInfo'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <AccountBox/>
-                </ListItemIcon>
-                <ListItemText primary="个人信息"/>
-            </ListItem>
-        </Link>
-        <Link to={'/student/lessons'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Class/>
-                </ListItemIcon>
-                <ListItemText primary="课程信息"/>
-            </ListItem>
-        </Link>
+        <ListItem component={Link} to={"/info/student"} button>
+            <ListItemIcon>
+                <Home/>
+            </ListItemIcon>
+            <ListItemText primary="主页"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/student/basicInfo"} button>
+            <ListItemIcon>
+                <Home/>
+            </ListItemIcon>
+            <ListItemText primary="个人信息"/>
+        </ListItem>
     </div>
 );
 
 export const otherItems = (
     <div>
-        <ListItem button>
+        <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
                 <Star/>
             </ListItemIcon>

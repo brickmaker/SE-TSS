@@ -5,10 +5,21 @@ import {bindActionCreators} from 'redux';
 import * as actionCreators from "../../actions/auth";
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
-
-import Bar from "../Bar";
-import {listItems, otherItems, gender, ranges, credit, grade} from "./StaffData";
+import DropZone from "./DropZone"
+import Bar from "../../../../top/components/Bar";
+import {gender, listItems, otherItems, grade, ranges} from "./StaffData";
 import {
+    Button,
+    Checkbox,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    IconButton,
+    Menu,
+    MenuItem,
+    Paper,
     Table,
     TableBody,
     TableCell,
@@ -16,27 +27,10 @@ import {
     TablePagination,
     TableRow,
     TableSortLabel,
-    Toolbar,
-    Typography,
-    Paper,
-    Checkbox,
-    IconButton,
-    Tooltip,
-    Card,
     TextField,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-    Button,
-    MenuItem,
-    Chip,
-    FormControlLabel,
-    FormGroup,
-    Input,
-    FormControl,
-    Menu,
+    Toolbar,
+    Tooltip,
+    Typography,
 } from '@material-ui/core';
 
 
@@ -44,11 +38,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import AddIcon from '@material-ui/icons/Add';
 import SelectIcon from '@material-ui/icons/SelectAll';
-import StarIcon from '@material-ui/icons/Star';
-import DoneIcon from '@material-ui/icons/Done';
-import ClearIcon from '@material-ui/icons/Clear';
+import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import {lighten} from '@material-ui/core/styles/colorManipulator';
-import {BACKEND_SERVER_URL, BACKEND_API} from "../../config";
+import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 
 class EnhancedTableHead extends React.Component {
@@ -140,7 +132,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
+    const {numSelected, classes, handleAddOpen, handleAddStudentBatchOpen, handleAddBatch, Open, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
 
     return (
         <Toolbar
@@ -201,6 +193,13 @@ let EnhancedTableToolbar = props => {
                         <AddIcon/>
                     </IconButton>
                 </Tooltip>
+            </div>
+            <div className={classes.actions}>
+            <Tooltip title="批量添加">
+            <IconButton aria-label="Add Batch" onClick={handleAddStudentBatchOpen}>
+            <GroupAddIcon/>
+            </IconButton>
+            </Tooltip>
             </div>
         </Toolbar>
     );
@@ -272,7 +271,7 @@ const styles = theme => ({
 
 function mapStateToProps(state) {
     return {
-        userName: state.info.auth.userName,
+        username: state.info.auth.username,
         data: state.info.auth.data,
     };
 }
@@ -280,7 +279,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(actionCreators, dispatch);
 }
-
 
 
 class AccountInfo extends React.Component {
@@ -292,9 +290,10 @@ class AccountInfo extends React.Component {
             selected: [],
             allowSelected: true,
             anchor: 'left',
-            userName: '',
+            username: '',
             open: true,
             addStudent: false,
+            addStudentBatch: false,
             addFaculty: false,
             filter: false,
             dialogState: false,
@@ -391,7 +390,7 @@ class AccountInfo extends React.Component {
                 });
                 // browserHistory.push("/login");
             });
-        fetch(BACKEND_SERVER_URL + BACKEND_API.get_major , {
+        fetch(BACKEND_SERVER_URL + BACKEND_API.get_major, {
             method: 'GET',
             headers: {
                 'Authorization': 'JWT ' + localStorage.getItem('token'),
@@ -417,12 +416,13 @@ class AccountInfo extends React.Component {
         if (this.state.account_type === 0) {
             this.handleAddStudentOpen();
         } else {
-        if(this.state.account_type === 1){
-            this.handleAddFacultyOpen();
-        }
+            if (this.state.account_type === 1) {
+                this.handleAddFacultyOpen();
+            }
 
         }
     };
+
 
     handleAddClose = () => {
         if (this.state.account_type === 0) {
@@ -434,12 +434,12 @@ class AccountInfo extends React.Component {
             });
             console.log(this.state.department);
         } else {
-            if(this.state.account_type === 1){
-            this.handleAddFacultyClose();
-            this.setState({
-                department: '',
-            });
-        }
+            if (this.state.account_type === 1) {
+                this.handleAddFacultyClose();
+                this.setState({
+                    department: '',
+                });
+            }
 
         }
     };
@@ -569,6 +569,15 @@ class AccountInfo extends React.Component {
         this.setState({addStudent: false});
     };
 
+    handleAddStudentBatchOpen = () => {
+        this.setState({addStudentBatch: true});
+    };
+
+    handleAddStudentBatchClose = () => {
+        this.setState({addStudentBatch: false});
+    };
+
+
     handleAddFacultyOpen = () => {
         this.setState({addFaculty: true});
     };
@@ -644,17 +653,17 @@ class AccountInfo extends React.Component {
         });
     };
 
-
+//TODO:
     handleInitData = () => {
-        let url = 'api/info/student/';
+        let url = BACKEND_API.get_student_info;
         if (this.state.account_type === 0) {
-            url = 'api/info/student/';
+            url = BACKEND_API.get_student_info;
         } else if (this.state.account_type === 1) {
-            url = 'api/info/faculty/';
+            url = BACKEND_API.get_faculty_info;
         } else if (this.state.account_type === 2) {
-            url = 'api/info/staff/';
+            url = BACKEND_API.get_staff_info;
         } else if (this.state.account_type === 3) {
-            url = 'api/info/admin/';
+            url = BACKEND_API.get_admin_info;
         }
         url = BACKEND_SERVER_URL + url;
         fetch(url, {
@@ -681,7 +690,7 @@ class AccountInfo extends React.Component {
     componentDidMount() {
         // 获取初始课程数据
         this.handleInitData();
-        this.setState({userName: localStorage.getItem('userName')});
+        this.setState({username: localStorage.getItem('username')});
     };
 
 
@@ -760,7 +769,7 @@ class AccountInfo extends React.Component {
         this.setState({[prop]: event.target.value});
         let department = this.state.department_data.filter(item => item.name === event.target.value)[0];
         let s = [];
-        department.major.forEach((value, index) => {
+        department.major_for.forEach((value, index) => {
             let t = {};
             t.value = value;
             t.label = value;
@@ -778,7 +787,7 @@ class AccountInfo extends React.Component {
         this.setState({[prop]: event.target.value});
         let department = this.state.major_data.filter(item => item.major === event.target.value)[0];
         let s = [];
-        department.class_name.forEach((value, index) => {
+        department.class_name_for.forEach((value, index) => {
             let t = {};
             t.value = value;
             t.label = value;
@@ -843,7 +852,7 @@ class AccountInfo extends React.Component {
     isSelected = id => this.state.selected.indexOf(id) !== -1;
 
     render() {
-        const {classes, theme} = this.props;
+        const {classes, theme, history} = this.props;
         const {data, order, orderBy, selected, rowsPerPage, page, anchor, open, tableState} = this.state;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
         const children = (
@@ -852,6 +861,8 @@ class AccountInfo extends React.Component {
                     <EnhancedTableToolbar numSelected={selected.length}
                                           handleAddOpen={this.handleAddOpen.bind(this)}
                                           handleAddClose={this.handleAddClose.bind(this)}
+                                          handleAddStudentBatchOpen={this.handleAddStudentBatchOpen.bind(this)}
+
                                           handleFilterOpen={this.handleFilterOpen.bind(this)}
                                           handleFilterClose={this.handleFilterClose.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
@@ -1030,11 +1041,105 @@ class AccountInfo extends React.Component {
                         </DialogActions>
                     </Dialog>
                 </div>
+
+                <div>
+                    <Dialog
+                        open={this.state.addStudentBatch}
+                        onClose={this.handleAddStudentBatchClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册学生</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                上传表格文件
+                                <DropZone/>
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+                <div>
+                    <Dialog
+                        open={this.state.addFaculty}
+                        onClose={this.handleAddFacultyClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册教师</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                请输入用户信息
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                fullWidth
+                                label="用户名"
+                                onChange={this.handleChange('username')}
+                                margin="normal"
+                                error={this.state.username_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="身份证号"
+                                onChange={this.handleChange('id_number')}
+                                margin="normal"
+                                error={this.state.id_number_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="姓名"
+                                onChange={this.handleChange('name')}
+                                margin="normal"
+                                error={this.state.name_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="邮箱"
+                                onChange={this.handleChange('email')}
+                                margin="normal"
+                                error={this.state.email_error}
+                            />
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="性别"
+                                margin="normal"
+                                value={this.state.gender}
+                                onChange={this.handleChange('gender')}
+                            >
+                                {gender.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="学院"
+                                margin="normal"
+                                value={this.state.department}
+                                onChange={this.handleDepartmentChange('department')}
+                            >
+                                {this.state.department_list.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleAddClose} color="primary">
+                                关闭
+                            </Button>
+                            <Button onClick={(e) => this.handleAddFacultySubmit(e)} color="primary">
+                                提交
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
                 <div>
                     <Dialog
                         open={this.state.addStudent}
                         onClose={this.handleAddStudentClose}
-                        aria-labelledby="form-dialog-title"
                     >
                         <DialogTitle id="form-dialog-title">注册学生</DialogTitle>
                         <DialogContent>
@@ -1151,85 +1256,6 @@ class AccountInfo extends React.Component {
                         </DialogActions>
                     </Dialog>
                 </div>
-                <div>
-                    <Dialog
-                        open={this.state.addFaculty}
-                        onClose={this.handleAddFacultyClose}
-                        aria-labelledby="form-dialog-title"
-                    >
-                        <DialogTitle id="form-dialog-title">注册教师</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                请输入用户信息
-                            </DialogContentText>
-                            <TextField
-                                autoFocus
-                                fullWidth
-                                label="用户名"
-                                onChange={this.handleChange('username')}
-                                margin="normal"
-                                error={this.state.username_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="身份证号"
-                                onChange={this.handleChange('id_number')}
-                                margin="normal"
-                                error={this.state.id_number_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="姓名"
-                                onChange={this.handleChange('name')}
-                                margin="normal"
-                                error={this.state.name_error}
-                            />
-                            <TextField
-                                fullWidth
-                                label="邮箱"
-                                onChange={this.handleChange('email')}
-                                margin="normal"
-                                error={this.state.email_error}
-                            />
-                            <TextField
-                                fullWidth
-                                select='true'
-                                label="性别"
-                                margin="normal"
-                                value={this.state.gender}
-                                onChange={this.handleChange('gender')}
-                            >
-                                {gender.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField
-                                fullWidth
-                                select='true'
-                                label="学院"
-                                margin="normal"
-                                value={this.state.department}
-                                onChange={this.handleDepartmentChange('department')}
-                            >
-                                {this.state.department_list.map(option => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={this.handleAddClose} color="primary">
-                                关闭
-                            </Button>
-                            <Button onClick={(e) => this.handleAddFacultySubmit(e)} color="primary">
-                                提交
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                </div>
 
                 <div>
                     <Dialog
@@ -1257,6 +1283,7 @@ class AccountInfo extends React.Component {
             <Bar
                 listItems={listItems}
                 otherItems={otherItems}
+                history={history}
                 children={
                     children
                 }
