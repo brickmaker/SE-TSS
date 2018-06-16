@@ -12,7 +12,7 @@ class DropZone extends Component{
     var reader = new FormData();
     const file=files[0];
     reader.append("file",file);
-    let url=BACKEND_SERVER_URL+ {url_send};
+    let url=BACKEND_SERVER_URL+ url_send;
     var reg = /^.*\.(?:xls|xlsx)$/i;//文件名可以带空格
     if (!reg.test(file.name)) {//校验不通过
       alert("请上传excel格式的文件!");
