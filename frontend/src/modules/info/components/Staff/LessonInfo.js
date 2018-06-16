@@ -168,6 +168,13 @@ const styles = theme => ({
     chip: {
         margin: theme.spacing.unit / 2,
     },
+    card:{
+      margin: '20px',
+      position: 'relative',
+      overflow:  'auto',
+      height: '50%',
+      width: '90%',
+    },
 });
 
 

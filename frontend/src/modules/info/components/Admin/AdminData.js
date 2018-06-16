@@ -9,10 +9,10 @@ export const listItems = (
     <div>
 
         <ListItem component={Link} to={"/info/admin"} button>
-            <ListItemIcon>
-                <Home/>
+             <ListItemIcon>
+                <Star/>
             </ListItemIcon>
-            <ListItemText primary="主页"/>
+            <ListItemText primary="欢迎页"/>
         </ListItem>
         <ListItem component={Link} to={"/info/admin/basicInfo"} button>
             <ListItemIcon>
@@ -33,9 +33,9 @@ export const otherItems = (
     <div>
         <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
-                <Star/>
+                <Home/>
             </ListItemIcon>
-            <ListItemText primary="退出"/>
+            <ListItemText primary="返回系统主页"/>
         </ListItem>
     </div>
 );

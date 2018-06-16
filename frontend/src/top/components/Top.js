@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import {Grid} from "material-ui"
 import SubSystem from "./SubSystem"
-import Bar from "../../modules/info/components/Bar"
+import Bar from "./Bar"
 import AppBar from '@material-ui/core/AppBar';
+import {BrowserRouter, Route, Link, withRouter} from 'react-router-dom';
 import classNames from 'classnames';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -20,32 +21,46 @@ import {
 class Top extends Component {
     constructor(props) {
         super(props);
-        
-    };
-    state = {
-        anchor: 'left',
-        anchorEl: null,
-    };
-
+        this.state = {
+            anchor: 'left',
+            anchorEl: null,
+        };
+    }
     render() {
+        const {classes, theme, history} = this.props;
         return (
-            <div style={{
-                maxWidth: 1200,
-                margin: 'auto'
-            }}>
-                <div style={{
-                    marginTop: 120
-                }}>
-                    <Grid container>
-                        <SubSystem name={'基础信息'} uri={'info'}/>
-                        <SubSystem name={'subsystem2'} uri={''}/>
-                        <SubSystem name={'subsystem3'} uri={''}/>
-                        <SubSystem name={'论坛'} uri={'forum'}/>
-                        <SubSystem name={'subsystem5'} uri={''}/>
-                        <SubSystem name={'subsystem6'} uri={''}/>
-                    </Grid>
-                </div>
-            </div>
+
+            <Bar 
+                history={history}
+                children={
+
+                    <div style={{
+                        maxWidth: 1200,
+                        margin: 'auto'
+                    }}>
+                        <div style={{
+                            marginTop: 120
+                        }}>
+                            <Grid container>
+                                <SubSystem name={'基础信息'} uri={'info'}/>
+                                <SubSystem name={'subsystem2'} uri={''}/>
+                                <SubSystem name={'subsystem3'} uri={''}/>
+                                <SubSystem name={'论坛'} uri={'forum'}/>
+                                <SubSystem name={'subsystem5'} uri={''}/>
+                                <SubSystem name={'subsystem6'} uri={''}/>
+                            </Grid>
+                        </div>
+                    </div>
+            
+                }
+            />
+
+           
+            
+
+
+
+            
                 
 
 

@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom'
 import {
     Button,
     Menu,
@@ -127,15 +128,47 @@ class Bar extends React.Component {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <Typography className={classes.flex} variant="title" color="inherit">
-                            InfoSys
+
+                        
+                        <Typography 
+                            component={Link}
+                            to="/main"
+                            variant="title" color="inherit">
+                            教学管理系统
                         </Typography>
-                        <Button color="inherit">信息系统</Button>
-                        <Button color="inherit">排课系统</Button>
-                        <Button color="inherit">选课系统</Button>
-                        <Button color="inherit">论坛交流</Button>
-                        <Button color="inherit">在线测试</Button>
-                        <Button color="inherit">成绩管理</Button>
+
+                        <Button 
+                            component={Link}
+                            raised
+                            to="/info"
+                            color="inherit">信息系统</Button>
+                        <Button 
+                            component={Link}
+                            raised
+                            to=""
+                            color="inherit">排课系统</Button>
+                        <Button 
+                            component={Link}
+                            raised
+                            to="/xkxt"
+                            color="inherit">选课系统</Button>
+                        <Button 
+                            component={Link}
+                            raised
+                            to="/forum"
+                            color="inherit">论坛交流</Button>
+                        <Button 
+                            component={Link}
+                            raised
+                            to=""
+                            color="inherit">在线测试</Button>
+                        <Button 
+                            component={Link}
+                            raised
+                            to=""
+                            color="inherit">成绩管理</Button>
+                    
+
                         <div>
                             <IconButton
                                 aria-owns={Boolean(anchorEl) ? 'menu-appbar' : null}

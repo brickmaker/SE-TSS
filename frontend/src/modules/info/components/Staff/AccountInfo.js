@@ -5,7 +5,7 @@ import {bindActionCreators} from 'redux';
 import * as actionCreators from "../../actions/auth";
 import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
-import DropZone from "./DropZone"
+import DropZone from "../DropZone"
 import Bar from "../../../../top/components/Bar";
 import {gender, listItems, otherItems, grade, ranges} from "./StaffData";
 import {
@@ -132,7 +132,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, handleAddStudentBatchOpen, handleAddBatch, Open, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
+    const {numSelected, classes, handleAddOpen, handleAddStudentBatchOpen, handleAddFacultyBatchOpen,handleBatchAddOpen, Open, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
 
     return (
         <Toolbar
@@ -196,7 +196,7 @@ let EnhancedTableToolbar = props => {
             </div>
             <div className={classes.actions}>
             <Tooltip title="批量添加">
-            <IconButton aria-label="Add Batch" onClick={handleAddStudentBatchOpen}>
+            <IconButton aria-label="Add Batch" onClick={handleBatchAddOpen}>
             <GroupAddIcon/>
             </IconButton>
             </Tooltip>
@@ -294,6 +294,7 @@ class AccountInfo extends React.Component {
             open: true,
             addStudent: false,
             addStudentBatch: false,
+            addFacultyBatch: false,
             addFaculty: false,
             filter: false,
             dialogState: false,
@@ -423,6 +424,16 @@ class AccountInfo extends React.Component {
         }
     };
 
+     handleBatchAddOpen =()=>{
+        if (this.state.account_type === 0) {
+            this.handleAddStudentBatchOpen();
+        } else {
+            if (this.state.account_type === 1) {
+                this.handleAddFacultyBatchOpen();
+            }
+
+        }
+     }
 
     handleAddClose = () => {
         if (this.state.account_type === 0) {
@@ -572,11 +583,18 @@ class AccountInfo extends React.Component {
     handleAddStudentBatchOpen = () => {
         this.setState({addStudentBatch: true});
     };
+    handleAddFacultyBatchOpen = () => {
+        this.setState({addFacultyBatch: true});
+    };
 
     handleAddStudentBatchClose = () => {
         this.setState({addStudentBatch: false});
     };
+    handleAddFacultyBatchClose = () => {
+        this.setState({addFacultyBatch: false});
+    };
 
+    
 
     handleAddFacultyOpen = () => {
         this.setState({addFaculty: true});
@@ -862,7 +880,11 @@ class AccountInfo extends React.Component {
                                           handleAddOpen={this.handleAddOpen.bind(this)}
                                           handleAddClose={this.handleAddClose.bind(this)}
                                           handleAddStudentBatchOpen={this.handleAddStudentBatchOpen.bind(this)}
+                                          handleAddFacultyBatchOpen={this.handleAddFacultyBatchOpen.bind(this)}
+                                          
+                                          handleBatchAddOpen={this.handleBatchAddOpen.bind(this)}
 
+                                          
                                           handleFilterOpen={this.handleFilterOpen.bind(this)}
                                           handleFilterClose={this.handleFilterClose.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
@@ -1051,12 +1073,35 @@ class AccountInfo extends React.Component {
                         <DialogTitle id="form-dialog-title">注册学生</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                                上传表格文件
-                                <DropZone/>
+                                上传表格文件，
+                                注意表格第一列的表头名称必须含有
+                                "学号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"入学年份"、 "专业" 、"学院" 、"班级"字段
+                                <DropZone 
+                                    url_send={BACKEND_API.batch_add_student}
+                                />
                             </DialogContentText>
                         </DialogContent>
                     </Dialog>
                 </div>
+                <div>
+                    <Dialog
+                        open={this.state.addFacultyBatch}
+                        onClose={this.handleAddStudentBatchClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册教师</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                注意表格第一列的表头名称必须含有
+                                "教工号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"学院" 、"职称"字段
+                                 
+                                <DropZone 
+                                    url_send={BACKEND_API.batch_add_faculty}/>
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </div>
+
                 <div>
                     <Dialog
                         open={this.state.addFaculty}
