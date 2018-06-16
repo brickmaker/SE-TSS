@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROOT_URL, DEBUG } from '../../configs/config';
+import { withAuthHeader } from '../../utils/api';
 export const SELECT_SEARCHTYPE = "select_type";
 
 export function selectSearchType(searchType) {
@@ -17,10 +18,10 @@ export function anchorMenu(anchorEl) {
     });
 }
 
-export const GET_CONTENT = "get_content";
+export const GET_SEARCHCONTENT = "get_searchcontent";
 export function getContent(content) {
     return ({
-        type: GET_CONTENT,
+        type: GET_SEARCHCONTENT,
         content: content,
     });
 }
@@ -34,7 +35,7 @@ export const SEARCH_FAILURE = "search_failure";
 export function search(searchType, query, pageNum, pageSize) {
     console.log("action search", searchType, query, pageNum, pageSize);
     return (dispatch, getState) => {
-        const { isFetching } = getState();
+        const { isFetching } = getState().forum.search;
         if (isFetching) {
             return;
         }
@@ -52,13 +53,14 @@ export function search(searchType, query, pageNum, pageSize) {
 
         axios.get(`${ROOT_URL}/api/forum/search`, {
             params,
+            headers: withAuthHeader(),
         })
             .then((response) => {
                 dispatch({
                     type: SEARCH_SUCCESS,
                     //TODO: correct response
-                    results: response.data[0].results,
-                    resultNum: response.data[0].resultNum,
+                    results: response.data.results,
+                    resultNum: response.data.resultNum,
                 });
             })
             .catch((errors) => {

@@ -26,9 +26,10 @@ class PostBody extends Component {
         return (
             <div>
                 {
-                    replies.map((reply) => {
+                    replies.map((reply, index) => {
                         return (
                             <Reply
+                                disableComment={index === 0}
                                 postId={postId}
                                 key={reply.id}
                                 id={reply.id}
@@ -39,6 +40,7 @@ class PostBody extends Component {
                                 postNum={reply.user.postNum}
                                 content={reply.content}
                                 time={reply.time}
+                                file={reply.file}
                                 replies={reply.replies}
                                 history={history}
                             />

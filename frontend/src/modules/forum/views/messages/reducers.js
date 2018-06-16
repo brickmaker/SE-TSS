@@ -1,4 +1,4 @@
-import { SELECT_ENTRY, GET_CONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
+import { SELECT_ENTRY, GET_MSGCONTENT, CLEAR_MSGS, SET_MSGEND, NEWMSGS_REQUEST, NEWMSGS_SUCCESS, NEWMSGS_FAILURE,  SELECT_AVATAR_USERNAME } from './actions';
 import { MSGENTRIES_REQUEST, MSGENTRIES_SUCCESS, MSGENTRIES_FAILURE } from './actions';
 import { MSGS_REQUEST, MSGS_SUCCESS, MSGS_FAILURE } from "./actions";
 
@@ -8,11 +8,11 @@ const initialState = {
     isFetchingEntries: false,
     msgs: [],
     isFetchingMsgs: false,
-    selectedId: undefined,
-    selectedAvatar: "",
-    selectedUsername: "",
+    // selectedId: undefined,
+    // selectedAvatar: "",
+    // selectedUsername: "",
     currentPageNum: 1,
-    pageSize: 10,
+    pageSize: 5,
     errors: {},
     content: "",
     noMoreMsgs: false,
@@ -24,12 +24,12 @@ const initialState = {
 
 export function messageReducer(state = initialState, action) {
     switch (action.type) {
-        case SELECT_ENTRY:
-            return (Object.assign({}, state, {
-                selectedId: action.selectedId,
-                selectedAvatar: action.selectedAvatar,
-                selectedUsername: action.selectedUsername,
-            }));
+        // case SELECT_ENTRY:
+        //     return (Object.assign({}, state, {
+        //         selectedId: action.selectedId,
+        //         selectedAvatar: action.selectedAvatar,
+        //         selectedUsername: action.selectedUsername,
+        //     }));
         case CLEAR_MSGS:
             return (Object.assign({}, state, {
                 msgs: [],
@@ -38,7 +38,7 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 msgEnd: action.msgEnd,
             }));
-        case GET_CONTENT:
+        case GET_MSGCONTENT:
             return (Object.assign({}, state, {
                 content: action.content,
             }));
@@ -65,6 +65,7 @@ export function messageReducer(state = initialState, action) {
             return (Object.assign({}, state, {
                 isFetchingMsgs: true,
                 isEntering: action.isEntering,
+                noMoreMsgs:false,
             }));
         case MSGS_SUCCESS:
             return (Object.assign({}, state, {
@@ -73,6 +74,7 @@ export function messageReducer(state = initialState, action) {
                 currentPageNum: action.currentPageNum,
                 isEntering: false,
                 pageSize: action.pageSize,
+                noMoreMsgs: action.newMsgs.length ===0
             }));
         case MSGS_FAILURE:
             return (Object.assign({}, state), {

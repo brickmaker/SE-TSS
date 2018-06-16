@@ -19,7 +19,6 @@ import {
 
 function mapStateToProps(state) {
     return {
-        isAuthenticating: state.info.auth.isAuthenticating,
         isAuthenticated: state.info.auth.isAuthenticated,
         statusText: state.info.auth.statusText,
     };
@@ -51,7 +50,6 @@ const styles = theme => ({
         marginTop: 30,
     },
     card: {
-        // minWidth: 275,
         'background-color': '#3f51b5',
     },
     title: {
@@ -68,40 +66,16 @@ class LoginView extends React.Component {
             username: '',
             password: '',
             user_type: 'Student',
-            username_error_text: null,
-            password_error_text: null,
             disabled: true,
         };
     }
 
     isDisabled() {
-        let username_is_valid = false;
-        let password_is_valid = false;
-
-        if (this.state.username === '') {
-            this.setState({
-                username_error_text: null,
-            });
-        }
-        else {
-            username_is_valid = true;
-        }
-
-        if (this.state.password === '' || !this.state.password) {
-            this.setState({
-                password_error_text: null,
-            });
-        } else {
-            password_is_valid = true;
-        }
-
-        if (username_is_valid && password_is_valid) {
+        if (this.state.username !== '' && this.state.password !== '') {
             this.setState({
                 disabled: false,
             });
         }
-
-
     }
 
     changeValue(e, type) {
@@ -113,7 +87,7 @@ class LoginView extends React.Component {
         });
     }
 
-    _handleKeyPress(e) {
+    handleKeyPress(e) {
         if (e.key === 'Enter') {
             if (!this.state.disabled) {
                 this.login(e);
@@ -136,7 +110,7 @@ class LoginView extends React.Component {
             this.props.history.push('/main');
         }
         return (
-            <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this._handleKeyPress(e)}>
+            <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this.handleKeyPress(e)}>
                 <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
                 <Paper className={classes.Paper}>
                     <form role="form">
@@ -159,7 +133,6 @@ class LoginView extends React.Component {
                                     floatingLabelText="账户"
                                     onChange={(e) => this.changeValue(e, 'username')}
                                     margin="normal"
-                                    errorText={this.state.username_error_text}
                                 />
                             </div>
                             <div>
@@ -170,7 +143,6 @@ class LoginView extends React.Component {
                                     type="password"
                                     onChange={(e) => this.changeValue(e, 'password')}
                                     margin="normal"
-                                    errorText={this.state.password_error_text}
                                 />
 
                             </div>

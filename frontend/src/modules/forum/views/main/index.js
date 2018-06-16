@@ -17,7 +17,7 @@ import SearchBar from '../../components/searchbar';
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("uid"); // todo: get uid
+        this.props.getSubscriptions("1"); // todo: get uid
     }
 
     render() {
@@ -26,8 +26,7 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain/>
-                    <SearchBar history={this.props.history}/>
-                    <Grid container xs={12}>
+                    <Grid container alignItems={'flex-start'}>
                         <Grid container xs={8}>
                             {
                                 subscriptions.map((sub) => (
@@ -43,7 +42,7 @@ class Main extends Component {
                         <Grid container xs={1}></Grid>
                         <Grid container xs={3}>
                             <Grid item xs={12}>
-                                <div>
+                                <div style={{padding: '0 20px'}}>
                                     <div
                                         onClick={() => {
                                             this.props.history.push('/forum/announcements/user/1')
@@ -66,7 +65,7 @@ class Main extends Component {
                                 </div>
                             </Grid>
                             <Grid item xs={12}>
-                                <div>
+                                <div style={{padding: '0 20px'}}>
                                     <div
                                         onClick={() => {
                                             this.props.history.push('/forum/messages')

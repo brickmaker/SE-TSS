@@ -9,7 +9,7 @@ import * as actionCreators from '../actions/auth';
 function mapStateToProps(state) {
     return {
         status: state.info.auth.status,
-        userType: state.info.auth.userType,
+        type: state.info.auth.type,
     };
 }
 
@@ -45,8 +45,6 @@ const styles = theme => ({
         fontSize: 18,
         color: "#2196F3",
     }
-
-
 });
 
 
@@ -55,24 +53,26 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: '',
-            userType: -1,
+            type: -1,
         };
     }
 
     componentDidMount() {
-        this.setState({userType: localStorage.getItem('type')}, () => {
+        this.setState({type: this.props.type}, () => {
             let route = '';
-            if (this.state.userType === '3')
+            if (this.state.type === 'Staff')
                 route = '/info/staff';
+            else if (this.state.type === 'Teacher')
+                route = '/info/teacher';
+            else if (this.state.type === 'Student')
+                route = '/info/student';
+            else if (this.state.type === 'Admin')
+                route = '/info/admin';
             this.props.history.push(route);
         });
-        this.setState({userName: localStorage.getItem('name')});
-
     }
 
     render() {
-        const {classes, theme} = this.props;
         return (
             <div>
 

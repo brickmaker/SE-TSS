@@ -72,6 +72,7 @@ class AnncEditor extends Component {
             path["teacher"] = { "name": sectionNames[2], "link": `/forum/${collegeid}/${courseid}/${teacherid}` };
         }
         path["annceditor"] = { "name": "新公告", "link": `/forum/annceditor/${collegeid}/${courseid}/${teacherid}` };
+        console.log("sectionnames", sectionNames);
         return (
             <MainBody>
                 <Path path={path} />

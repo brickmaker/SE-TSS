@@ -10,16 +10,12 @@ import {
 
 const initialState = {
     token: null,
-    userName: null,
-    userType: null,
-    name: null,
+    username: null,
+    type: null,
     isAuthenticated: false,
     isAuthenticating: false,
     status: null,
     statusText: null,
-    isRegistering: false,
-    isRegistered: false,
-    registerStatusText: null,
 };
 
 export default createReducer(initialState, {
@@ -33,25 +29,26 @@ export default createReducer(initialState, {
             isAuthenticating: false,
             isAuthenticated: true,
             token: payload.token,
-            userName: jwtDecode(payload.token).username,
-            userType: payload.user_type,
+            username: jwtDecode(payload.token).username,
             status: payload.status,
-            name: payload.name,
-            statusText: '您已成功登录',
+            type: payload.type,
+            statusText: '成功登录',
         }),
     [LOGIN_USER_FAILURE]: (state, payload) =>
         Object.assign({}, state, {
             isAuthenticating: false,
             isAuthenticated: false,
             token: null,
-            userName: null,
+            username: null,
+            type: null,
             statusText: `登录失败: ${payload.status} ${payload.statusText}`,
         }),
     [LOGOUT_USER]: (state) =>
         Object.assign({}, state, {
             isAuthenticated: false,
             token: null,
-            userName: null,
-            statusText: '您已成功注销',
+            username: null,
+            type: null,
+            statusText: '成功注销',
         }),
 });

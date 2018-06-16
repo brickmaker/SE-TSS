@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "material-ui"
 import {ROOT_URL, DEBUG, MAX_FILE_SIZE} from "../../configs/config"
+import {withAuthHeader} from "../../utils/api"
 
 class FileUploader extends Component {
     constructor(props) {
@@ -54,6 +55,11 @@ class FileUploader extends Component {
         fetch(
             `${ROOT_URL}/api/forum/upload_file`,
             {
+                headers: {
+                    Authorization: 'JWT ' + localStorage.getItem('token'),
+                    'Content-Type': 'multipart/form-data',
+                    'Content-Disposition': `attachment; filename=${files[0].name}`
+                },
                 method: 'POST',
                 body: files[0]
             }

@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
+import {withAuthHeader} from "../../utils/api"
 
 export const GET_TEACHER_INFO = 'get_teacher_info'
 export const GOT_TEACHER_INFO = 'got_teacher_info'
@@ -20,16 +21,15 @@ export const newPost = (uid, collegeId, courseId, teacherId, title, content, fil
         `${ROOT_URL}/api/forum/teacher_newpost`,
         {
             method: 'POST',
-            // todo: token header
-            body: {
-                uid: uid,
+            headers: withAuthHeader(),
+            body: JSON.stringify({
                 collegeId: collegeId,
                 courseId: courseId,
                 teacherId: teacherId,
                 title: title,
                 content: content,
                 fileId: fileId
-            }
+            })
         }
     )
         .then(res => res.json())
@@ -39,12 +39,15 @@ export const newPost = (uid, collegeId, courseId, teacherId, title, content, fil
             dispatch({
                 type: POST_SUCCESS
             })
+            dispatch(getPosts(collegeId, courseId, teacherId, getState().forum.teacher.currPage))
             // todo: fail check
         })
 }
 
 export const subscribe = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/teacher_subscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+    fetch(`${ROOT_URL}/api/forum/teacher_subscribe${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`, {
+        headers: withAuthHeader()
+    })
         .then(res => res.json())
         .then((data) => {
             dispatch({
@@ -55,7 +58,9 @@ export const subscribe = (uid, collegeId, courseId, teacherId) => (dispatch, get
 }
 
 export const unsubscribe = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/teacher_unsubscribe${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+    fetch(`${ROOT_URL}/api/forum/teacher_unsubscribe${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`, {
+        headers: withAuthHeader()
+    })
         .then(res => res.json())
         .then((data) => {
             dispatch({
@@ -66,7 +71,9 @@ export const unsubscribe = (uid, collegeId, courseId, teacherId) => (dispatch, g
 }
 
 export const checkSubscribed = (uid, collegeId, courseId, teacherId) => (dispatch, getState) => {
-    fetch(`${ROOT_URL}/api/forum/teacher_subscribed${DEBUG ? '' : `?uid=${uid}&collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`)
+    fetch(`${ROOT_URL}/api/forum/teacher_subscribed${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`}`, {
+        headers: withAuthHeader()
+    })
         .then(res => res.json())
         .then((data) => {
             dispatch({
@@ -98,11 +105,15 @@ export const getPosts = (collegeId, courseId, teacherId, pageId) => dispatch => 
 }
 
 function fetchTeacherInfo(collegeId, courseId, teacherId) {
-    return fetch(`${ROOT_URL}/api/forum/teacher?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`)
+    return fetch(`${ROOT_URL}/api/forum/teacher?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }
 
 function fetchPosts(collegeId, courseId, teacherId, pageId) {
-    return fetch(`${ROOT_URL}/api/forum/teacher_posts${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}&pageid=${pageId}`}`)
+    return fetch(`${ROOT_URL}/api/forum/teacher_posts${DEBUG ? '' : `?collegeid=${collegeId}&courseid=${courseId}&teacherid=${teacherId}&pageid=${pageId}`}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }

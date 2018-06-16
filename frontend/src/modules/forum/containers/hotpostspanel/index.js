@@ -9,7 +9,7 @@ import { Flag } from '@material-ui/icons';
 import { SectionText, SectionTitle } from "../../components/util/SectionTitle"
 import Link from 'react-router-dom/Link';
 import { PageNums } from '../../components/util/PageNums';
-import { getColleges, getCourses, getTeachers, getHotPosts } from '../../views/management/actions';
+import { getColleges, getCourseList, getTeachers, getHotPosts } from '../../views/management/actions';
 
 // import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
 // import DatePicker from 'rc-calendar/lib/Picker';
@@ -124,7 +124,7 @@ class HotPostsPanel extends Component {
 
 
     render() {
-        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, getCourses, getTeachers, getHotPosts, startTime, endTime} = this.props;
+        const { classes, hotPosts, isFetchingHotPosts, collegeItems, courseItems, teacherItems, getCourseList, getTeachers, getHotPosts, startTime, endTime} = this.props;
         const { collegeid, courseid, teacherid, year, week, month, pageNum, pageSize } = this.state;
         return (
             <div className={classes.container}>
@@ -142,7 +142,7 @@ class HotPostsPanel extends Component {
                                                 'courseid': "",
                                                 'teacherid': "",
                                             });
-                                            getCourses(collegeid);
+                                            getCourseList(event.target.value);
                                         }}
                                         inputProps={{
                                             name: 'collegeid', id: 'college',
@@ -167,7 +167,7 @@ class HotPostsPanel extends Component {
                                                 [event.target.name]: event.target.value,
                                                 "teacherid": "",
                                             });
-                                            getTeachers(collegeid, courseid);
+                                            getTeachers(collegeid, event.target.value);
                                         }}
                                         inputProps={{
                                             name: 'courseid', id: 'course',
@@ -267,7 +267,7 @@ class HotPostsPanel extends Component {
                                             </TableCell>
                                             <TableCell>{hotPost.author.username}</TableCell>
                                             <TableCell>{moment(hotPost.time).format("YYYY-MM-DD")}</TableCell>
-                                            <TableCell>{moment(hotPost.lastReplyTime).format("YYYY-MM-DD")}</TableCell>
+                                            <TableCell>{hotPost.lastReplyTime? moment(hotPost.lastReplyTime).format("YYYY-MM-DD"): "暂无回复"}</TableCell>
                                             <TableCell numeric>{hotPost.replyNum}</TableCell>
                                         </TableRow>)
                                     })}
@@ -331,8 +331,8 @@ const mapDispatchToProps = (dispatch) => ({
     getColleges: () => {
         dispatch(getColleges());
     },
-    getCourses: (collegeid) => {
-        dispatch(getCourses(collegeid));
+    getCourseList: (collegeid) => {
+        dispatch(getCourseList(collegeid));
     },
     getTeachers: (collegeid, courseid) => {
         dispatch(getTeachers(collegeid, courseid));

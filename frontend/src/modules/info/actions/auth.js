@@ -12,17 +12,16 @@ import {
 import {BACKEND_SERVER_URL, BACKEND_API} from "../config";
 
 
-export function loginUserSuccess(token, type, name, status) {
+export function loginUserSuccess(token, username,type, status) {
     localStorage.setItem('token', token);
-    localStorage.setItem('type', type);
-    localStorage.setItem('name', name);
+    localStorage.setItem('username', username);
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {
             token: token,
-            user_type: type,
             status: status,
-            name: name,
+            type: type,
+            username: username,
         },
     };
 }
@@ -37,7 +36,6 @@ export function loginUserFailure(error) {
         },
     };
 }
-
 
 export function loginUserRequest() {
     return {
@@ -86,12 +84,11 @@ export function login(username, password, type) {
                                 }));
                             } else {
                                 let id_number = json[0].id_number;
-                                let name = json[0].name;
                                 let cut_id_number = id_number.substr(id_number.length - 6);
                                 if (cut_id_number === password) {
-                                    dispatch(loginUserSuccess(response.token, user_type, name, 200));
+                                    dispatch(loginUserSuccess(response.token, username, type, 200));
                                 } else {
-                                    dispatch(loginUserSuccess(response.token, user_type, name, 201));
+                                    dispatch(loginUserSuccess(response.token, username, type, 201));
                                 }
                             }
                         })

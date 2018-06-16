@@ -13,6 +13,8 @@ import { managementReducer } from './views/management/reducers';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
 import { createFilter } from 'redux-persist-transform-filter';
+import { usercenterReducer } from "./views/usercenter/reducers";
+import { forumPersistReducer } from "./components/forumpersist/reducers";
 
 // export const forumReducer = combineReducers({
 //     main: mainReducer,
@@ -28,13 +30,13 @@ import { createFilter } from 'redux-persist-transform-filter';
 // });
 
 
-const persistedFilter = createFilter('messages', ['selectedId','selectedAvatar', 'selectedUsername']);
+const persistedFilter = createFilter('forumpersit', ['selectedId','selectedAvatar', 'selectedUsername']);
 
 export const forumReducer = persistReducer(
     {
         key: 'forumPersist',
         storage: storage,
-        whitelist: ['messages'],
+        whitelist: ['forumpersist'],
         transforms: [persistedFilter]
     },
     combineReducers({
@@ -48,5 +50,7 @@ export const forumReducer = persistReducer(
         search: searchReducer,
         annc: anncReducer,
         management: managementReducer,
+        usercenter: usercenterReducer,
+        forumpersist: forumPersistReducer,
     })
 );

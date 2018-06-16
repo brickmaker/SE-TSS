@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { selectEntry, getMsgs, clearMsgs } from '../../views/messages/actions';
+import { ROOT_URL } from '../../configs/config';
 
 const styles = {
     entry: {
@@ -38,10 +39,11 @@ class MsgEntry extends Component {
                         onClick={(event) => { event.preventDefault(); 
                             selectEntry(id, avatar, username);
                             clearMsgs();
-                            getMsgs(uid, id, 1, pageSize); 
+                            console.log("msgentry click", id, avatar, username);
+                            getMsgs(id, 1, pageSize); 
                              }}
                         fullWidth={true}>
-                        <Avatar alt={username} src={avatar}>
+                        <Avatar alt={username} src={`${ROOT_URL}${avatar}`}>
                         </Avatar>
                         <div className={classes.item}>
                             <Typography variant='subheading' align="left">
@@ -63,7 +65,7 @@ MsgEntry.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-    selectedId: state.forum.messages.selectedId,
+    selectedId: state.forum.forumpersist.selectedId,
     pageSize: state.forum.messages.pageSize,
 });
 
@@ -71,8 +73,8 @@ const mapDispatchToProps = (dispatch) => ({
     selectEntry: (selectedId,selectedAvatar, selectedUsername) => { 
         dispatch(selectEntry( selectedId, selectedAvatar, selectedUsername)); 
     },
-    getMsgs: (uid1, uid2, nextPageNum, pageSize) => {
-        dispatch(getMsgs(uid1, uid2, nextPageNum, pageSize));
+    getMsgs: (uid, nextPageNum, pageSize) => {
+        dispatch(getMsgs(uid, nextPageNum, pageSize));
     },
     clearMsgs:()=>{
         dispatch(clearMsgs());

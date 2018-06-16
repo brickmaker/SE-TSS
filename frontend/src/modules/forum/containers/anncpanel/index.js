@@ -63,35 +63,38 @@ class AnncPanel extends Component {
         const { classes, match, type, anncs, pageSize, anncNum, isFetching, link } = this.props;
         const { pageNum, collegeid, courseid, teacherid } = match.params;
 
-        return (
-            <div>
-                {isFetching ? <CircularProgress />
-                    :
-                    <div>
-                        <div className={type === "main" ? classes.outterPanelmain : classes.outterPanelsection}>
-                            <div className={classes.mainpanel}>
-                                {anncs && Object.values(anncs).map((annc) => {
-                                    return (<Annc annc={annc} key={annc["title"] + annc["path"]} type={type} />)
-                                })}
+        if (isFetching) {
+            return <CircularProgress />;
+        }
+        else
+            return (
+                <div>
+                    {/* {isFetching ? <CircularProgress />: */}
+                        <div>
+                            <div className={type === "main" ? classes.outterPanelmain : classes.outterPanelsection}>
+                                <div className={classes.mainpanel}>
+                                    {anncs && Object.values(anncs).map((annc) => {
+                                        return (<Annc annc={annc} key={annc["title"] + annc["path"]} type={type} />)
+                                    })}
+                                </div>
                             </div>
-                        </div>
-                        {type != 'main' && type != 'section' && anncNum &&
-                            <PageNums pageNum={anncNum / pageSize + 1} currPage={pageNum} clickPage={(event) => {
-                                const page = parseInt(event.target.innerText);
-                                //TODO: 
-                                const uid = 5;
-                                if (collegeid)
-                                    this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
-                                else
-                                    this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
+                            {type != 'main' && type != 'section' && anncNum &&
+                                <PageNums pageNum={(anncNum - 1) / pageSize + 1} currPage={pageNum} clickPage={(event) => {
+                                    const page = parseInt(event.target.innerText);
+                                    //TODO: 
+                                    const uid = 5;
+                                    if (collegeid)
+                                        this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
+                                    else
+                                        this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
 
-                                this.props.history.push(`${link}/${page}`);
-                            }
-                            } />}
-                    </div>
-                }
-            </div>
-        )
+                                    this.props.history.push(`${link}/${page}`);
+                                }
+                                } />}
+                        </div>
+                    {/* } */}
+                </div>
+            )
     }
 };
 

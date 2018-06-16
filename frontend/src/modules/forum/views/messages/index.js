@@ -95,7 +95,7 @@ class Messages extends Component {
         //TODO: uid
         const uid = 5;
         return (
-            <div>
+            // <div>
                 <MainBody>
                     <Path isMain path={path} />
                     <Grid container className={classes.container}>
@@ -179,7 +179,7 @@ class Messages extends Component {
                         </Grid>
                     </Grid>
                 </MainBody>
-            </div>
+            // </div>
         );
     }
 
@@ -197,8 +197,10 @@ const mapStateToProps = (state) => ({
     entries: state.forum.messages.entries,
     isFetchingEntries: state.forum.messages.isFetchingEntries,
     isFetchingMsgs: state.forum.messages.isFetchingMsgs,
-    selectedId: state.forum.messages.selectedId,
-    selectedUsername: state.forum.messages.selectedUsername,
+    selectedId: state.forum.forumpersist.selectedId,
+    // selectedId: state.forum.messages.selectedId,
+    // selectedUsername: state.forum.messages.selectedUsername,
+    selectedUsername: state.forum.forumpersist.selectedUsername,
     content: state.forum.messages.content,
     isEntering: state.forum.messages.isEntering,
     pageSize: state.forum.messages.pageSize,
