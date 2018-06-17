@@ -49,7 +49,6 @@ function mapStateToProps(state) {
 const styles = theme => ({
     base: {
         width: '100%',
-        marginTop: theme.spacing.unit * 3,
     },
     chip: {
         margin: theme.spacing.unit / 2,

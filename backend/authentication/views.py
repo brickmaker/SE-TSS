@@ -56,7 +56,7 @@ def getColumnTitle(sheet):
     return col_dict  
 
 class BatchStudentView(APIView):
-    #parser_classes = (FileUploadParser,)
+
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
     @transaction.atomic
@@ -119,7 +119,7 @@ class BatchStudentView(APIView):
         return Response(json_data, status=status.HTTP_200_OK)
 
 class BatchStaffView(APIView):
-    #parser_classes = (FileUploadParser,)
+
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
     @transaction.atomic
@@ -315,20 +315,20 @@ class CourseRegister(APIView):
 
 
 class StudentViewSet(viewsets.ModelViewSet):
-   # permission_classes = (IsAuthenticated, StudentCheck,)
+    permission_classes = (IsAuthenticated, StudentCheck,)
     queryset = Student.objects.all()
     serializer_class = StudentQuerySerializer
 
 
 class FacultyViewSet(viewsets.ModelViewSet):
-    #permission_classes = (IsAuthenticated, FacultyCheck,)
+    permission_classes = (IsAuthenticated, FacultyCheck,)
     queryset = Faculty.objects.all()
     serializer_class = FacultyQuerySerializer
 
 
 class StaffViewSet(viewsets.ModelViewSet):
     queryset = Staff.objects.all()
-  #  permission_classes = (IsAuthenticated, StaffCheck,)
+    permission_classes = (IsAuthenticated, StaffCheck,)
     serializer_class = StaffQuerySerializer
 
 
@@ -357,7 +357,7 @@ class LogViewSet(viewsets.ModelViewSet):
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-   # permission_classes = (IsAuthenticated, CourseCheck,)
+    permission_classes = (IsAuthenticated, CourseCheck,)
     queryset = Course.objects.all()
     serializer_class = CourseQuerySerializer
 

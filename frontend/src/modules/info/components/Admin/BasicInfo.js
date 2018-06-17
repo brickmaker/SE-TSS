@@ -22,7 +22,7 @@ import {
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./AdminData";
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
-import DefaultImage from '../image/2.jpg';
+import DefaultImage from '../image/user.jpg';
 import {message, Upload} from 'antd';
 
 function getBase64(img, callback) {
@@ -58,7 +58,6 @@ function mapDispatchToProps(dispatch) {
 const styles = theme => ({
     base: {
         width: '100%',
-        marginTop: theme.spacing.unit * 3,
     },
     Card: {
         width: '100%',

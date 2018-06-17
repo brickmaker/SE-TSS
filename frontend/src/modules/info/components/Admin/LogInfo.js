@@ -43,7 +43,6 @@ const styles = theme => ({
     base: {
         width: '100%',
         overflow:  'auto',
-        marginTop: theme.spacing.unit * 3,
     },
     chip: {
         margin: theme.spacing.unit / 2,

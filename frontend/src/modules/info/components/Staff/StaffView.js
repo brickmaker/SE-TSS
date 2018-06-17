@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StaffData";
+import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 function mapStateToProps(state) {
     return {};
@@ -20,12 +21,15 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
-    card:{
-      margin: '50px',
-      position: 'relative',
-      overflow:  'auto',
-      height: '50%',
-      width: '90%',
+    Card: {
+        width: '80%',
+        marginLeft: '30px',
+        marginRight: '30px',
+        height: '50%',
+        margin: '30px',
+        position: 'relative',
+        overflow:  'auto',
+
     },
 });
 
@@ -34,23 +38,49 @@ class StaffView extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            name: null,
+        };
     }
+
+    componentDidMount() {
+        let url = BACKEND_SERVER_URL + BACKEND_API.get_staff_info + localStorage.getItem('username') + '/';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({
+                    name: data.name,
+                });
+            })
+            .catch(() => {
+            });
+    }
+
 
     render() {
         const {classes, theme, history} = this.props;
+        const {name} = this.state;
         return (
             <Bar
                 listItems={listItems}
                 otherItems={otherItems}
-                history={history}
                 children={
-                    <Card className={classes.card}>
-                    <CardContent>
-                    <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统,'+localStorage.getItem('name')}</Typography>
-                    </CardContent>
+
+                    <Card className={classes.Card}>
+                        <CardContent>
+                            <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统, ' + name}</Typography>
+                        </CardContent>
                     </Card>
                 }
+                history={history}
             />
 
         );

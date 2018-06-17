@@ -226,5 +226,5 @@ class Course(models.Model):
 
 
 class Log(models.Model):
-    time = models.TimeField('时间', auto_now_add=True)
+    time = models.DateTimeField('时间', auto_now_add=True)
     content = models.CharField("内容", max_length=100)

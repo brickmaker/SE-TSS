@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {
     Button,
     Menu,
@@ -103,8 +103,14 @@ class Bar extends React.Component {
 
 
     render() {
-        const {classes, theme, listItems, otherItems, children} = this.props;
+        const {classes, theme, listItems, otherItems, children, open} = this.props;
         const {anchorEl} = this.state;
+
+        let drawerOpen = open;
+
+        if (open === undefined) {
+            drawerOpen = true;
+        }
 
         const drawer = (
             <div>
@@ -129,45 +135,46 @@ class Bar extends React.Component {
                             <MenuIcon/>
                         </IconButton>
 
-                        
-                        <Typography 
+
+                        <Typography
+                            className={classes.flex}
                             component={Link}
                             to="/main"
                             variant="title" color="inherit">
                             教学管理系统
                         </Typography>
 
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to="/info"
                             color="inherit">信息系统</Button>
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to=""
                             color="inherit">排课系统</Button>
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to="/xkxt"
                             color="inherit">选课系统</Button>
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to="/forum"
                             color="inherit">论坛交流</Button>
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to=""
                             color="inherit">在线测试</Button>
-                        <Button 
+                        <Button
                             component={Link}
                             raised
                             to=""
                             color="inherit">成绩管理</Button>
-                    
+
 
                         <div>
                             <IconButton
@@ -200,7 +207,7 @@ class Bar extends React.Component {
                     <Drawer
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={this.state.mobileOpen}
+                        open={this.state.mobileOpen && drawerOpen}
                         onClose={this.handleDrawerToggle}
                         classes={{
                             paper: classes.drawerPaper,
@@ -213,7 +220,7 @@ class Bar extends React.Component {
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
-                    <Drawer
+                    {drawerOpen && <Drawer
                         variant="permanent"
                         open
                         classes={{
@@ -221,7 +228,7 @@ class Bar extends React.Component {
                         }}
                     >
                         {drawer}
-                    </Drawer>
+                    </Drawer>}
                 </Hidden>
                 <main className={classes.content}>
                     <div className={classes.toolbar} id={'top-content-container'}/>

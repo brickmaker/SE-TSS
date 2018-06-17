@@ -30,7 +30,8 @@ class Top extends Component {
         const {classes, theme, history} = this.props;
         return (
 
-            <Bar 
+            <Bar
+                open={false}
                 history={history}
                 children={
 
