@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StaffData";
 import Image from '../image/main.jpg';
+import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 function mapStateToProps(state) {
     return {};
@@ -35,16 +36,40 @@ class StaffView extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            name: null,
+        };
     }
+
+    componentDidMount() {
+        let url = BACKEND_SERVER_URL + BACKEND_API.get_staff_info + localStorage.getItem('username') + '/';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({
+                    name: data.name,
+                });
+            })
+            .catch(() => {
+            });
+    }
+
 
     render() {
         const {classes, theme, history} = this.props;
+        const {name} = this.state;
         return (
             <Bar
                 listItems={listItems}
                 otherItems={otherItems}
-                history={history}
                 children={
                     <Card className={classes.card}>
                     <CardMedia
@@ -59,6 +84,7 @@ class StaffView extends React.Component {
                     </CardContent>
                     </Card>
                 }
+                history={history}
             />
 
         );

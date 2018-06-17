@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 import DropZone from "../DropZone"
 import Bar from "../../../../top/components/Bar";
-import {gender, listItems, otherItems, grade, ranges} from "./StaffData";
+import {gender, listItems, otherItems, grade, ranges} from "./AdminData";
 import {
     Button,
     Checkbox,
@@ -132,7 +132,7 @@ const toolbarStyles = theme => ({
 });
 
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, handleAddStudentBatchOpen, handleAddFacultyBatchOpen,handleBatchAddOpen, Open, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeOpen} = props;
+    const {numSelected, classes, handleAddOpen, handleAddStudentBatchOpen, handleAddFacultyBatchOpen, handleAddStaffBatchOpen, handleBatchAddOpen, Open, handleFilterOpen, handleDelete, type_anchorEl, handleTypeNormalClose, handleTypeStudentClose, handleTypeFacultyClose, handleTypeStaffClose, handleTypeOpen} = props;
 
     return (
         <Toolbar
@@ -161,6 +161,7 @@ let EnhancedTableToolbar = props => {
                 >
                     <MenuItem onClick={handleTypeStudentClose}>学生</MenuItem>
                     <MenuItem onClick={handleTypeFacultyClose}>教师</MenuItem>
+                    <MenuItem onClick={handleTypeStaffClose}>教务</MenuItem>
                 </Menu>
 
 
@@ -195,11 +196,11 @@ let EnhancedTableToolbar = props => {
                 </Tooltip>
             </div>
             <div className={classes.actions}>
-            <Tooltip title="批量添加">
-            <IconButton aria-label="Add Batch" onClick={handleBatchAddOpen}>
-            <GroupAddIcon/>
-            </IconButton>
-            </Tooltip>
+                <Tooltip title="批量添加">
+                    <IconButton aria-label="Add Batch" onClick={handleBatchAddOpen}>
+                        <GroupAddIcon/>
+                    </IconButton>
+                </Tooltip>
             </div>
         </Toolbar>
     );
@@ -229,7 +230,7 @@ const styles = theme => ({
     appFrame: {
         height: '90%',
         zIndex: 1,
-        overflow: 'auto',
+        overflow: 'hidden',
         position: 'relative',
         display: 'flex',
         width: '100%',
@@ -292,6 +293,8 @@ class AccountInfo extends React.Component {
             username: '',
             open: true,
             addStudent: false,
+            addStaff: false,
+            addStaffBatch: false,
             addStudentBatch: false,
             addFacultyBatch: false,
             addFaculty: false,
@@ -415,24 +418,29 @@ class AccountInfo extends React.Component {
         this.handleDepartData();
         if (this.state.account_type === 0) {
             this.handleAddStudentOpen();
-        } else {
-            if (this.state.account_type === 1) {
-                this.handleAddFacultyOpen();
+        }
+        if (this.state.account_type === 1) {
+            this.handleAddFacultyOpen();
+        }
+        if (this.state.account_type === 2) {
+            this.handleAddStaffOpen();
+        }
+
+
+    };
+
+    handleBatchAddOpen = () => {
+        if (this.state.account_type === 0) {
+            this.handleAddStudentBatchOpen();
+        } 
+         else   if (this.state.account_type === 1) {
+                this.handleAddFacultyBatchOpen();
             }
+            else{
+                this.handleAddStaffBatchOpen();
 
         }
     };
-
-     handleBatchAddOpen =()=>{
-        if (this.state.account_type === 0) {
-            this.handleAddStudentBatchOpen();
-        } else {
-            if (this.state.account_type === 1) {
-                this.handleAddFacultyBatchOpen();
-            }
-
-        }
-     }
 
     handleAddClose = () => {
         if (this.state.account_type === 0) {
@@ -442,16 +450,20 @@ class AccountInfo extends React.Component {
                 major: '',
                 class_name: '',
             });
-            console.log(this.state.department);
-        } else {
-            if (this.state.account_type === 1) {
-                this.handleAddFacultyClose();
-                this.setState({
-                    department: '',
-                });
-            }
-
         }
+        if (this.state.account_type === 1) {
+            this.handleAddFacultyClose();
+            this.setState({
+                department: '',
+            });
+        }
+        if (this.state.account_type === 2) {
+            this.handleAddStaffClose();
+            this.setState({
+                department: '',
+            });
+        }
+
     };
 
     handleAddStudentSubmit = () => {
@@ -571,6 +583,62 @@ class AccountInfo extends React.Component {
         }
     };
 
+    handleAddStaffSubmit = () => {
+        // 这句话很关键
+        let true_state = this.isDisabled();
+        if (!true_state) {
+            let data = {};
+            data.username = this.state.username;
+            data.id_number = this.state.id_number;
+            data.email = this.state.email;
+            data.name = this.state.name;
+            data.gender = this.state.gender;
+            data.department = this.state.department;
+            data.user_type = this.state.account_type + 1;
+            data.img = this.state.img;
+            fetch(BACKEND_SERVER_URL + BACKEND_API.register_staff, {
+                method: 'post',
+                headers: {
+                    'Authorization': 'JWT ' + localStorage.getItem('token'),
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    let status = response.status;
+                    if (status === 201) {
+                        this.handleInitData();
+                        this.setState({
+                            dialogState: true,
+                            dialogText: "教务管理员添加成功",
+                        });
+                    } else {
+                        this.setState({
+                            dialogState: true,
+                            dialogText: "教务管理员添加失败"
+                        });
+                    }
+                    return response.json;
+                })
+                .catch(() => {
+                    this.setState({
+                        dialogState: true,
+                        dialogText: "服务器无响应",
+                    });
+                    // browserHistory.push("/login");
+                });
+            this.handleAddClose();
+        }
+        else {
+            this.setState({
+                dialogState: true,
+                dialogText: "教务管理员信息参数错误",
+            });
+        }
+    };
+
     handleAddStudentOpen = () => {
         this.setState({addStudent: true});
     };
@@ -578,6 +646,23 @@ class AccountInfo extends React.Component {
     handleAddStudentClose = () => {
         this.setState({addStudent: false});
     };
+
+    handleAddStaffOpen = () => {
+        this.setState({addStaff: true});
+    };
+
+    handleAddStaffClose = () => {
+        this.setState({addStaff: false});
+    };
+
+    handleAddStaffBatchOpen = () => {
+        this.setState({addStaffBatch: true});
+    };
+
+    handleAddStaffBatchClose = () => {
+        this.setState({addStaffBatch: true});
+    };
+
 
     handleAddStudentBatchOpen = () => {
         this.setState({addStudentBatch: true});
@@ -593,7 +678,9 @@ class AccountInfo extends React.Component {
         this.setState({addFacultyBatch: false});
     };
 
-    
+    handleAddStaffBatchClose = () => {
+        this.setState({addStaffBatch: false});
+    };
 
     handleAddFacultyOpen = () => {
         this.setState({addFaculty: true});
@@ -624,7 +711,6 @@ class AccountInfo extends React.Component {
         if (this.state.name_filter_state) {
             filterData = filterData.filter(item => item.name.indexOf(this.state.name_filter) !== -1);
         }
-        console.log(filterData);
         if (this.state.gender_filter_state) {
             filterData = filterData.filter(item => item.gender.toString() === this.state.gender_filter.toString());
         }
@@ -666,6 +752,13 @@ class AccountInfo extends React.Component {
     handleTypeFacultyClose = () => {
         this.setState({type_anchorEl: null});
         this.setState({account_type: 1}, () => {
+            this.handleInitData();
+        });
+    };
+
+    handleTypeStaffClose = () => {
+        this.setState({type_anchorEl: null});
+        this.setState({account_type: 2}, () => {
             this.handleInitData();
         });
     };
@@ -826,6 +919,7 @@ class AccountInfo extends React.Component {
     };
 
 
+    // 处理删除用户
     handleDelete = () => {
         let selected = this.state.selected;
         let base = BACKEND_API.get_student_info;
@@ -889,10 +983,10 @@ class AccountInfo extends React.Component {
                                           handleAddClose={this.handleAddClose.bind(this)}
                                           handleAddStudentBatchOpen={this.handleAddStudentBatchOpen.bind(this)}
                                           handleAddFacultyBatchOpen={this.handleAddFacultyBatchOpen.bind(this)}
-                                          
+                                          handleAddStaffBatchOpen={this.handleAddStaffBatchOpen.bind(this)}
                                           handleBatchAddOpen={this.handleBatchAddOpen.bind(this)}
 
-                                          
+
                                           handleFilterOpen={this.handleFilterOpen.bind(this)}
                                           handleFilterClose={this.handleFilterClose.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
@@ -900,6 +994,7 @@ class AccountInfo extends React.Component {
                                           handleTypeNormalClose={this.handleTypeNormalClose.bind(this)}
                                           handleTypeStudentClose={this.handleTypeStudentClose.bind(this)}
                                           handleTypeFacultyClose={this.handleTypeFacultyClose.bind(this)}
+                                          handleTypeStaffClose={this.handleTypeStaffClose.bind(this)}
                                           handleTypeOpen={this.handleTypeOpen.bind(this)}/>
                     <div className={classes.tableWrapper}>
                         <Table className={classes.table} aria-labelledby="tableTitle">
@@ -1084,7 +1179,7 @@ class AccountInfo extends React.Component {
                                 上传表格文件，
                                 注意表格第一列的表头名称必须含有
                                 "学号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"入学年份"、 "专业" 、"学院" 、"班级"字段
-                                <DropZone 
+                                <DropZone
                                     url_send={BACKEND_API.batch_add_student}
                                 />
                             </DialogContentText>
@@ -1094,7 +1189,7 @@ class AccountInfo extends React.Component {
                 <div>
                     <Dialog
                         open={this.state.addFacultyBatch}
-                        onClose={this.handleAddStudentBatchClose}
+                        onClose={this.handleAddFacultyBatchClose}
                         aria-labelledby="form-dialog-title"
                     >
                         <DialogTitle id="form-dialog-title">注册教师</DialogTitle>
@@ -1102,14 +1197,30 @@ class AccountInfo extends React.Component {
                             <DialogContentText>
                                 注意表格第一列的表头名称必须含有
                                 "教工号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"学院" 、"职称"字段
-                                 
-                                <DropZone 
+
+                                <DropZone
                                     url_send={BACKEND_API.batch_add_faculty}/>
                             </DialogContentText>
                         </DialogContent>
                     </Dialog>
                 </div>
-
+                <div>
+                    <Dialog
+                        open={this.state.addStaffBatch}
+                        onClose={this.handleAddStaffBatchClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册教务管理人员</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                注意表格第一列的表头名称必须含有
+                                "教工号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"学院" 字段
+                                <DropZone
+                                    url_send={BACKEND_API.batch_add_staff}/>
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </div>
                 <div>
                     <Dialog
                         open={this.state.addFaculty}
@@ -1184,6 +1295,85 @@ class AccountInfo extends React.Component {
                                 关闭
                             </Button>
                             <Button onClick={(e) => this.handleAddFacultySubmit(e)} color="primary">
+                                提交
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div>
+                <div>
+                    <Dialog
+                        open={this.state.addStaff}
+                        onClose={this.handleAddStaffClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册教务管理员</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                请输入用户信息
+                            </DialogContentText>
+                            <TextField
+                                autoFocus
+                                fullWidth
+                                label="用户名"
+                                onChange={this.handleChange('username')}
+                                margin="normal"
+                                error={this.state.username_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="身份证号"
+                                onChange={this.handleChange('id_number')}
+                                margin="normal"
+                                error={this.state.id_number_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="姓名"
+                                onChange={this.handleChange('name')}
+                                margin="normal"
+                                error={this.state.name_error}
+                            />
+                            <TextField
+                                fullWidth
+                                label="邮箱"
+                                onChange={this.handleChange('email')}
+                                margin="normal"
+                                error={this.state.email_error}
+                            />
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="性别"
+                                margin="normal"
+                                value={this.state.gender}
+                                onChange={this.handleChange('gender')}
+                            >
+                                {gender.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="学院"
+                                margin="normal"
+                                value={this.state.department}
+                                onChange={this.handleDepartmentChange('department')}
+                            >
+                                {this.state.department_list.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleAddClose} color="primary">
+                                关闭
+                            </Button>
+                            <Button onClick={(e) => this.handleAddStaffSubmit(e)} color="primary">
                                 提交
                             </Button>
                         </DialogActions>

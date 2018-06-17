@@ -13,10 +13,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./AdminData";
 import Image from '../image/main.jpg';
+import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 function mapStateToProps(state) {
-    return {
-    };
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -34,22 +34,39 @@ const styles = theme => ({
 });
 
 
-
-
 class AdminView extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            name: null,
         };
     }
 
     componentDidMount() {
-
+        let url = BACKEND_SERVER_URL + BACKEND_API.get_admin_info + localStorage.getItem('username') + '/';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({
+                    name: data.name,
+                });
+            })
+            .catch(() => {
+            });
     }
 
     render() {
         const {classes, theme, history} = this.props;
+        const {name} = this.state;
         return (
             <Bar
                 listItems={listItems}
@@ -69,7 +86,7 @@ class AdminView extends React.Component {
                     </Card>
 
                 }
-                history = {history}
+                history={history}
             />
 
         );

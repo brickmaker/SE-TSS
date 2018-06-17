@@ -11,10 +11,10 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Image from '../image/main.jpg';
-function mapStateToProps(state) {
-    return {
+import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
-    };
+function mapStateToProps(state) {
+    return {};
 }
 
 function mapDispatchToProps(dispatch) {
@@ -35,14 +35,35 @@ class StudentView extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            name: null,
+        };
     }
 
     componentDidMount() {
-
+        let url = BACKEND_SERVER_URL + BACKEND_API.get_student_info + localStorage.getItem('username') + '/';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                return response.json();
+            })
+            .then((data) => {
+                this.setState({
+                    name: data.name,
+                });
+            })
+            .catch(() => {
+            });
     }
 
     render() {
-        const {classes, theme,history} = this.props;
+        const {classes, theme, history} = this.props;
+        const {name} = this.state;
         return (
             <Bar
                 listItems={listItems}
@@ -61,7 +82,7 @@ class StudentView extends React.Component {
                     </CardContent>
                     </Card>
                 }
-                history = {history}
+                history={history}
             />
 
         );
