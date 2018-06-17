@@ -2,7 +2,7 @@ import React from 'react';
 import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 
 import {Link} from 'react-router-dom'
-import {AccountBox, Home, Star, SupervisorAccount,} from '@material-ui/icons';
+import {AccountBox, Home, Star, SupervisorAccount,AccessAlarm} from '@material-ui/icons';
 
 
 export const listItems = (
@@ -28,7 +28,7 @@ export const listItems = (
         </ListItem>
         <ListItem component={Link} to={"/info/admin/logInfo"} button>
             <ListItemIcon>
-                <Star/>
+                <AccessAlarm/>
             </ListItemIcon>
             <ListItemText primary="日志信息"/>
         </ListItem>

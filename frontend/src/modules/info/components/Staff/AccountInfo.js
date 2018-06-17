@@ -229,7 +229,7 @@ const styles = theme => ({
     appFrame: {
         height: '90%',
         zIndex: 1,
-        overflow: 'hidden',
+        overflow: 'auto',
         position: 'relative',
         display: 'flex',
         width: '100%',

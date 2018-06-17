@@ -22,10 +22,14 @@ function mapDispatchToProps(dispatch) {
 
 const styles = theme => ({
     Card: {
-        width: '100%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        width: '80%',
+        marginLeft: '30px',
+        marginRight: '30px',
         height: '50%',
+        margin: '30px',
+        position: 'relative',
+        overflow:  'auto',
+
     },
 });
 
