@@ -13,6 +13,9 @@ import LeftMenu from './component/LeftMenu';
 import AnalysisTabs from './component/analyse';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
+
+import AnaScore from './component/AnaScore';
+
 import {Take,newTake} from "./utils";
 
 import AppBar from '@material-ui/core/AppBar';
@@ -21,6 +24,48 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+
+const testAna = {
+  topicList : ["个人分析", "软件工程", "编译原理"],
+  scoreListName : ["课程名称", "学号", "学号"],
+  data : [
+    [
+      {name:"编译原理", score:59},
+      {name:"软件工程", score:66},
+      {name:"课程A", score:79},
+      {name:"课程B", score:100},
+      {name:"课程C", score:88},
+      {name:"课程D", score:22},
+      {name:"课程E", score:33},
+      {name:"课程F", score:55},
+      {name:"课程G", score:59}
+    ],
+    [
+      {name:"A", score:59},
+      {name:"B", score:66},
+      {name:"C", score:79},
+      {name:"D", score:100},
+      {name:"E", score:88},
+      {name:"F", score:100},
+      {name:"G", score:100},
+      {name:"H", score:100},
+      {name:"I", score:100}
+    ],
+    [
+      {name:"J", score:59},
+      {name:"K", score:66},
+      {name:"L", score:79},
+      {name:"M", score:100},
+      {name:"N", score:88},
+      {name:"O", score:88},
+      {name:"P", score:88},
+      {name:"Q", score:88},
+      {name:"R", score:88}
+    ]
+  ]
+};
+
+
 
 const style = {
   leftMenu: {
@@ -216,11 +261,11 @@ class ScoreManagement extends Component {
         break;
       }
       case ANALYSIS_SCORE: {
-        right = (<AnalysisTabs/>);
+        right = (<AnaScore topicList={testAna.topicList} data={testAna.data} scoreListName={testAna.scoreListName} />);
         break;
       }
       default: {
-        right = (<AnalysisTabs/>);
+        right = (<AnaScore topicList={testAna.topicList} data={testAna.data} scoreListName={testAna.scoreListName} />);
         break;
       }
     }
