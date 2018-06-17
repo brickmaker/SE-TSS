@@ -432,10 +432,12 @@ class AccountInfo extends React.Component {
     handleBatchAddOpen = () => {
         if (this.state.account_type === 0) {
             this.handleAddStudentBatchOpen();
-        } else {
-            if (this.state.account_type === 1) {
+        } 
+         else   if (this.state.account_type === 1) {
                 this.handleAddFacultyBatchOpen();
             }
+            else{
+                this.handleAddStaffBatchOpen();
 
         }
     };
@@ -658,7 +660,7 @@ class AccountInfo extends React.Component {
     };
 
     handleAddStaffBatchClose = () => {
-        this.setState({addStaffBatch: false});
+        this.setState({addStaffBatch: true});
     };
 
 
@@ -676,6 +678,9 @@ class AccountInfo extends React.Component {
         this.setState({addFacultyBatch: false});
     };
 
+    handleAddStaffBatchClose = () => {
+        this.setState({addStaffBatch: false});
+    };
 
     handleAddFacultyOpen = () => {
         this.setState({addFaculty: true});
@@ -1184,7 +1189,7 @@ class AccountInfo extends React.Component {
                 <div>
                     <Dialog
                         open={this.state.addFacultyBatch}
-                        onClose={this.handleAddStudentBatchClose}
+                        onClose={this.handleAddFacultyBatchClose}
                         aria-labelledby="form-dialog-title"
                     >
                         <DialogTitle id="form-dialog-title">注册教师</DialogTitle>
@@ -1199,7 +1204,23 @@ class AccountInfo extends React.Component {
                         </DialogContent>
                     </Dialog>
                 </div>
-
+                <div>
+                    <Dialog
+                        open={this.state.addStaffBatch}
+                        onClose={this.handleAddStaffBatchClose}
+                        aria-labelledby="form-dialog-title"
+                    >
+                        <DialogTitle id="form-dialog-title">注册教务管理人员</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                注意表格第一列的表头名称必须含有
+                                "教工号"、"身份证号"、 "姓名" 、"电子邮件" 、"性别" 、"学院" 字段
+                                <DropZone
+                                    url_send={BACKEND_API.batch_add_staff}/>
+                            </DialogContentText>
+                        </DialogContent>
+                    </Dialog>
+                </div>
                 <div>
                     <Dialog
                         open={this.state.addFaculty}
