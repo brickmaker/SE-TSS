@@ -10,6 +10,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StaffData";
+import Image from '../image/main.jpg';
 
 function mapStateToProps(state) {
     return {};
@@ -20,12 +21,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
-    card:{
-      margin: '50px',
-      position: 'relative',
-      overflow:  'auto',
-      height: '50%',
-      width: '90%',
+    card: {
+        maxWidth: 1200,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
     },
 });
 
@@ -46,8 +47,15 @@ class StaffView extends React.Component {
                 history={history}
                 children={
                     <Card className={classes.card}>
+                    <CardMedia
+                    className={classes.media}
+                    image={Image}
+                    />
                     <CardContent>
-                    <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统,'+localStorage.getItem('name')}</Typography>
+                    <Typography gutterBottom variant="headline" component="h2">
+                    {'欢迎来到教务管理系统, '+localStorage.getItem('name')}
+                    </Typography>
+
                     </CardContent>
                     </Card>
                 }

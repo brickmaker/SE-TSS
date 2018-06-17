@@ -10,6 +10,7 @@ import {listItems, otherItems} from "./StudentData";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Image from '../image/main.jpg';
 function mapStateToProps(state) {
     return {
 
@@ -21,12 +22,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
-    card:{
-      margin: '50px',
-      position: 'relative',
-      overflow:  'auto',
-      height: '50%',
-      width: '90%',
+    card: {
+        maxWidth: 1200,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
     },
 });
 
@@ -48,8 +49,15 @@ class StudentView extends React.Component {
                 otherItems={otherItems}
                 children={
                     <Card className={classes.card}>
+                    <CardMedia
+                    className={classes.media}
+                    image={Image}
+                    />
                     <CardContent>
-                    <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统,'+localStorage.getItem('name')}</Typography>
+                    <Typography gutterBottom variant="headline" component="h2">
+                    {'欢迎来到教务管理系统, '+localStorage.getItem('name')}
+                    </Typography>
+
                     </CardContent>
                     </Card>
                 }
