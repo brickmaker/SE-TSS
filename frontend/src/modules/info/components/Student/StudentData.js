@@ -1,19 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-    ListItem,
-    ListItemIcon,
-    ListItemText
-} from '@material-ui/core';
-import {browserHistory} from "react-router";
-import { Link } from 'react-router-dom'
-import {
-    Home,
-    AccountBox,
-    SupervisorAccount,
-    Class,
-    Star,
-} from '@material-ui/icons';
+import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import {Link} from 'react-router-dom'
+import {Home, Star,} from '@material-ui/icons';
 
 
 export const listItems = (

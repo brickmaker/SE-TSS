@@ -26,6 +26,7 @@
     "react-dom": "^16.2.0",
     "react-draft-wysiwyg": "^1.12.13",
     "react-dropzone": "^4.2.11",
+    "react-html-parser": "^2.0.2",
     "react-quill": "^1.2.7",
     "react-redux": "^5.0.7",
     "react-router": "^4.2.0",
