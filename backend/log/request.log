@@ -7729,3 +7729,6 @@ TypeError: 'Take' object is not iterable
 2018-06-17 18:33:00,049 [Thread-49:3620] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 93527
 2018-06-17 18:34:11,251 [Thread-50:10708] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 93527
 2018-06-17 18:34:28,650 [Thread-51:9992] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 93527
+2018-06-17 18:39:17,014 [Thread-3:7024] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 93527
+2018-06-17 18:39:17,043 [Thread-3:7024] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 59
+2018-06-18 20:09:50,843 [Thread-1:12104] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 93527
