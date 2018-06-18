@@ -22,20 +22,27 @@ class PostBody extends Component {
     }
 
     render() {
-        const {replies, pageNum, currPage} = this.props
+        const {replies, pageNum, currPage, postId, history} = this.props
         return (
             <div>
                 {
-                    replies.map((reply) => {
+                    replies.map((reply, index) => {
                         return (
                             <Reply
+                                disableComment={index === 0}
+                                postId={postId}
+                                key={reply.id}
+                                id={reply.id}
+                                uid={reply.user.id}
                                 pic={reply.user.pic}
                                 name={reply.user.name}
                                 college={reply.user.college}
                                 postNum={reply.user.postNum}
                                 content={reply.content}
                                 time={reply.time}
+                                file={reply.file}
                                 replies={reply.replies}
+                                history={history}
                             />
                         )
                     })

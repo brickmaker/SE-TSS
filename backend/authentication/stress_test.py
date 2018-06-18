@@ -12,7 +12,7 @@ def create_to_do(l):
     'department': '计算机',
     'grade': '2015',    
     'major': '计算机', 
-    'class_name': '混合1503', 
+    'class_name': '', 
     'img':      
     }
     l.client.post("/api/to-do/", data=json.dumps(data))

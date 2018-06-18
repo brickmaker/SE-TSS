@@ -145,8 +145,8 @@ class EnterScore extends Component {
                     inputProps={{name: 'reader_cid',}}
                   >
                     <option value=""/>
-                    {this.props.database.course.map(c => {
-                        return <option value={c.cid}>{c.cname}</option>
+                    {this.props.database.course.map((c,i) => {
+                        return <option key={i} value={c.cid}>{c.cname}</option>
                     })}
                   </Select>
                 </FormControl>

@@ -62,6 +62,7 @@ class SearchScore extends Component {
     }
   };
 
+
   render() {
     if(this.props.user.type==="t"){
       return <Paper >

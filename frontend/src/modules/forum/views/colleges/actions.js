@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
+import {withAuthHeader} from "../../utils/api"
 
 export const GET_COLLEGES = 'get_colleges';
 export const GOT_COLLEGES = 'got_colleges';
@@ -16,6 +17,8 @@ export const getColleges = () => {
 };
 
 function fetchColleges() {
-    return fetch(`${ROOT_URL}/api/forum/colleges`)
+    return fetch(`${ROOT_URL}/api/forum/colleges`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }
