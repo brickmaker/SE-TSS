@@ -79,7 +79,7 @@ WEBPACK_LOADER = {
 
 
 #开启JWT验证
-"""
+
 REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
@@ -90,7 +90,7 @@ REST_FRAMEWORK = {
 
     ),
 }
-"""
+
 
 
 

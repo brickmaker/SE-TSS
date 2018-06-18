@@ -1473,3 +1473,5 @@
 2018-06-14 01:31:45,858 [Thread-1:8184] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
 2018-06-14 02:21:23,909 [Thread-1:17272] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
 2018-06-14 02:21:49,327 [Thread-3:11952] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
+2018-06-14 15:47:23,456 [Thread-1:15524] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 21833
+2018-06-14 15:48:45,434 [Thread-3:5656] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 92381
