@@ -357,14 +357,17 @@ class AnalysisViewSet(GenericViewSet):
     @action(methods=['get'], detail=False)
     def studentGradeList(self, request):
         data = []
+        map = {}
         for exam in Examination.objects.all().filter(student=request.user.username):
             s = PaperDetailSerializer(exam.paper)
+            if map.get(exam.paper) is None:
+                map[exam.paper] = Examination.objects.all().\
+                filter(paper=exam.paper).aggregate(Avg('score'))["score__avg"]
             d = {
                 'paperName': exam.paper.paper_name,
                 'testScore': exam.score,
                 'totalScore': np.sum(s.data['score_list']),
-                'avgScore': Examination.objects.all().filter(paper=exam.paper)\
-                .aggregate(Avg('score'))["score__avg"],
+                'avgScore': map[exam.paper],
             }
             data.append(d)
         return Response(data)
@@ -414,19 +417,23 @@ class AnalysisViewSet(GenericViewSet):
             if tags.get(question.tag) is None:
                 tags[question.tag] = []
             tags[question.tag].append(question)
-
         for tag, question_list in tags.items():
             d = {
                 'tag': tag,
                 'relevantTest': [],
             }
-            for i in range(0, 5):
+            papers = None
+            for question in question_list:
+                if papers is None:
+                    papers = question.paper_question.all()
+                else:
+                    papers = papers | question.paper_question.all()
+            for paper in papers:
                 d['relevantTest'].append({
-                    'testName': 'Exam %d' % i,
+                    'testName': paper.paper_name,
                     'testScore': [
-                        {'studentName': 'jack', 'score': 100},
-                        {'studentName': 'mary', 'score': 90},
-                        {'studentName': 'dean', 'score': 85},
+                        {'studentName': exam.student.name, 'score': exam.score}
+                        for exam in Examination.objects.all().filter(paper=paper)
                     ]
                 })
             data.append(d)

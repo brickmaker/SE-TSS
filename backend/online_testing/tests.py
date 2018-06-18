@@ -20,8 +20,10 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
-#response = c.get('/api/online_testing/analysis/testList/?course_id=061B0170',
-#                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+response = c.get('/api/online_testing/analysis/tagList/?course_id=061B0170',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+exit(0)
 d = datetime.datetime.now()
 response = c.post('/api/online_testing/paper/', {
     'teacher': '2110100000', 'duration': 120, 'num_judge': 6, 'num_choice': 5, 'course': '211B0010',
