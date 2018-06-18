@@ -10,11 +10,11 @@ import {ENTER_SCORE, SEARCH_SCORE, ANALYSIS_SCORE} from "./reducers";
 
 // Component
 import LeftMenu from './component/LeftMenu';
-import AnalysisTabs from './component/analyse';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
-
 import AnaScore from './component/AnaScore';
+import ApplicationPage from './component/Application';
+import ScoreRequest from './component/ScoreRequest';
 
 import {Take,newTake} from "./utils";
 
@@ -64,6 +64,29 @@ const testAna = {
     ]
   ]
 };
+//{编号 aid, 申请人 applicant, 申请时间 time，课程 className，学生 student，原成绩 oriScore，新成绩 newScore, 理由 reason，同意或不同意按钮}
+const testApp = [
+  {
+    aid : "AID000001",
+    applicant : "teacherA",
+    time : "2018-06-18",
+    className : "classA",
+    student : "studentA",
+    oriScore : 100,
+    newScore : 60,
+    reason : "happy"
+  },
+  {
+    aid : "AID000002",
+    applicant : "teacherB",
+    time : "2018-09-11",
+    className : "classB",
+    student : "studentB",
+    oriScore : 59,
+    newScore : 61,
+    reason : "sad"
+  }
+];
 
 
 
@@ -261,7 +284,9 @@ class ScoreManagement extends Component {
         break;
       }
       case ANALYSIS_SCORE: {
-        right = (<AnaScore topicList={testAna.topicList} data={testAna.data} scoreListName={testAna.scoreListName} />);
+        right = (<ScoreRequest database={this.database}/>);
+        //right = (<ApplicationPage data={testApp}/>)
+        //right = (<AnaScore topicList={testAna.topicList} data={testAna.data} scoreListName={testAna.scoreListName} />);
         break;
       }
       default: {
