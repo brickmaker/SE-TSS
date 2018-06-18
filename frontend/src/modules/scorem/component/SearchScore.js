@@ -62,6 +62,7 @@ class SearchScore extends Component {
     }
   };
 
+
   render() {
     if(this.props.user.type==="t"){
       return <Paper >
@@ -77,10 +78,8 @@ class SearchScore extends Component {
                     inputProps={{name: 'cid',}}
                   >
                     <option value="unselected">全部课程</option>
-                    {this.props.database.course.map(c => {
-                      if (c.tid === this.props.user.id) {
-                        return <option value={c.cid}>{c.cname}</option>
-                      }
+                    {this.props.database.course.map((c,i) => {
+                        return <option key= {i} value={c.cid}>{c.cname}</option>
                     })}
                   </Select>
                 </FormControl>
@@ -90,11 +89,11 @@ class SearchScore extends Component {
             </TableRow>
           </TableHead>
           <TableBody >
-            {this.props.data.map(onetake=>{
-                if(onetake.tid === this.props.user.id &&(onetake.cid===this.state.cid||this.state.cid==="unselected")){
-                  return(<TableRow>
-                    <TableCell>{this.findcname(onetake.cid)}</TableCell>
-                    <TableCell>{this.findsname(onetake.sid)}</TableCell>
+            {this.props.data.map((onetake,i)=>{
+                if((onetake.cid===this.state.cid||this.state.cid==="unselected")){
+                  return(<TableRow key={i}>
+                    <TableCell>{onetake.cname}</TableCell>
+                    <TableCell>{onetake.sname}</TableCell>
                     <TableCell>{onetake.score}</TableCell>
                   </TableRow>)}
               }
@@ -114,14 +113,12 @@ class SearchScore extends Component {
               </TableRow>
             </TableHead>
             <TableBody >
-              {this.props.data.map((onetake=>{
-                if(onetake.sid === this.props.user.id){
-                  return(<TableRow>
-                    <TableCell>{this.findcname(onetake.cid)}</TableCell>
-                    <TableCell>{this.findtname(onetake.tid)}</TableCell>
+              {this.props.data.map(((onetake,i)=>{
+                  return(<TableRow key={i}>
+                    <TableCell>{onetake.cname}</TableCell>
+                    <TableCell>{onetake.tname}</TableCell>
                     <TableCell>{onetake.score}</TableCell>
                   </TableRow>)}
-                }
               ))}
             </TableBody>
           </Table>

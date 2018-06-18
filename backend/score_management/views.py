@@ -109,24 +109,29 @@ def insert_score(request):
     :param request: Take List
     :return: Information of save state
     """
-    takes=Take.objects.all()
+    score_relations=Score_Relation.objects.all()
+    # takes=Take.objects.all()
     take_list=[]
     data =json.load(request.data["test"])
 
     for d in data:
-        course=Course.objects.get(course_id=d["cid"])
+        #course=Course.objects.get(course_id=d["cid"])
         #r=d["sid"]
-        student_account=Account.objects.get_by_natural_key(d["sid"])
+        #student_account=Account.objects.get_by_natural_key(d["sid"])
         student=Student.objects.get(username=student_account)
-        teacher_account = Account.objects.get_by_natural_key(d["pid"])
+        #teacher_account = Account.objects.get_by_natural_key(d["pid"])
         teacher=Faculty.objects.get(username=teacher_account)
         score=d["score"]
         test_date=d["test_date"]
-
-        take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+        score_relation=score_relations.get(course_select_info__student__username=d["sid"],
+                                           course_select_info__course__teacher__username=d["pid"],
+                                           course_select_info__course__course_course_id=d["cid"])
+        #take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
         #print(take.score)
-        take.score=score
-        take_list.append(take)
+        score_relation.score=score
+        
+        #take.score=score
+        #take_list.append(take)
         #take.save()
 
     serializer=TakeSerializer(data=take_list,many=True)

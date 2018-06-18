@@ -23,10 +23,11 @@ class ScoreRelationSerializer(serializers.ModelSerializer):
     student_name=serializers.SerializerMethodField()
     faculty_name=serializers.SerializerMethodField()
     course_name = serializers.SerializerMethodField()
+    course_cid=serializers.SerializerMethodField()
 
     class Meta:
         model=Score_Relation
-        fields=('score','test_date','student_name','faculty_name','course_name')
+        fields=('course_cid','score','test_date','student_name','faculty_name','course_name')
 
     def get_student_name(self, obj):
         return obj.course_select_info.student.name
@@ -36,5 +37,9 @@ class ScoreRelationSerializer(serializers.ModelSerializer):
 
     def get_course_name(self, obj):
         return obj.course_select_info.course.course.name
+
+    def get_course_cid(self,obj):
+        return obj.course_select_info.course.course.course_id
+
 
 

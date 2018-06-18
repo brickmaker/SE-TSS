@@ -25,7 +25,7 @@ import Select from '@material-ui/core/Select';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 // Util
-import {Take} from '../utils'
+import {Take, newTake} from '../utils'
 import {changePage, changeTab_enter} from "../actions";
 import {connect} from "react-redux";
 import ScoreManagement from "../index";
@@ -42,6 +42,50 @@ class EnterScore extends Component {
     this.fileobj = null;
   }
 
+  findcname(id) {
+    const entity = this.props.database.course.find(ele => {
+      return ele.cid === id;
+    });
+    if (entity !== undefined) {
+      return entity.cname
+    } else {
+      return "not found";
+    }
+  };
+
+  findcdate(id) {
+    const entity = this.props.database.course.find(ele => {
+      return ele.cid === id;
+    });
+    if (entity !== undefined) {
+      return entity.test_date;
+    } else {
+      return "not found";
+    }
+  };
+
+  findtname(id) {
+    const entity = this.props.database.teacher.find(ele => {
+      return ele.tid === id;
+    });
+    if (entity !== undefined) {
+      return entity.tname;
+    } else {
+      return "not found";
+    }
+
+  };
+
+  findsname(id) {
+    const entity = this.props.database.student.find(ele => {
+      return ele.sid === id;
+    });
+    if (entity !== undefined) {
+      return entity.sname;
+    } else {
+      return "not found";
+    }
+  };
 
   render() {
     const {tab, changeTab_enter} = this.props;
@@ -66,10 +110,8 @@ class EnterScore extends Component {
                     inputProps={{name: 'enter_cid',}}
                   >
                     <option value=""/>
-                    {this.props.database.course.map(c => {
-                      if (c.tid === this.props.user.id) {
-                        return <option value={c.cid}>{c.cname}</option>
-                      }
+                    {this.props.database.course.map((c,i) => {
+                        return <option key={i} value={c.cid}>{c.cname}</option>
                     })}
                   </Select>
                 </FormControl>
@@ -87,7 +129,7 @@ class EnterScore extends Component {
                               onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
               <Button variant={"contained"}
                       onClick={() => {
-                        this.props.pushData(new Take(this.state.enter_cid, this.props.user.id, this.state.enter_sid, parseInt(this.state.enter_score, 10)));
+                        this.props.pushData(new Take(this.state.enter_cid, this.findcname(this.state.enter_cid), this.props.user.id, this.findtname(this.props.user.id), this.state.enter_sid, this.findsname(this.state.enter_sid), parseInt(this.state.enter_score, 10),this.findcdate(this.state.enter_cid)));
                         alert("录入成功-学号：" + this.state.enter_sid + " 课程号：" + this.state.enter_cid + " 教师：" + this.props.user.name + " 分数：" + this.state.enter_score)
                       }}>提交</Button></div>}
 
@@ -103,10 +145,8 @@ class EnterScore extends Component {
                     inputProps={{name: 'reader_cid',}}
                   >
                     <option value=""/>
-                    {this.props.database.course.map(c => {
-                      if (c.tid === this.props.user.id) {
-                        return <option value={c.cid}>{c.cname}</option>
-                      }
+                    {this.props.database.course.map((c,i) => {
+                        return <option key={i} value={c.cid}>{c.cname}</option>
                     })}
                   </Select>
                 </FormControl>
@@ -154,13 +194,15 @@ class EnterScore extends Component {
                               onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
               <Button variant={"contained"}
                       onClick={() => {
-                        const item=this.props.data.find(ele=>{return(ele.cid===this.state.enter_cid&&ele.sid===this.state.enter_sid)});
-                        if(item!==undefined){
+                        const item = this.props.data.find(ele => {
+                          return (ele.cid === this.state.enter_cid && ele.sid === this.state.enter_sid)
+                        });
+                        if (item !== undefined) {
                           const index = this.props.data.indexOf(item);
                           this.props.deleteData(index);
                           this.props.pushData(new Take(this.state.enter_cid, this.props.user.id, this.state.enter_sid, parseInt(this.state.enter_score, 10)));
                           alert("修改成功-学号：" + this.state.enter_sid + " 课程号：" + this.state.enter_cid + " 教师：" + this.props.user.name + " 分数：" + this.state.enter_score)
-                        }else{
+                        } else {
                           alert("您修改的条目尚未录入");
                         }
                       }}>提交</Button></div>}
@@ -182,9 +224,12 @@ class EnterScore extends Component {
     const ws = workbook.Sheets[wsname];
     const dataArray = XLSX.utils.sheet_to_json(ws, {header: 1});
     let i;
+    let data = [];
     for (i in dataArray) {
-      this.props.pushData(new Take(this.state.reader_cid, this.props.user.id, dataArray[i][0], parseInt(dataArray[i][1], 10)))
+      data.push(new Take(this.state.reader_cid,this.findcname(this.state.reader_cid),this.props.user.id,this.props.user.name,dataArray[i][0],this.findsname(dataArray[i][0]),parseInt(dataArray[i][1],10),this.findcdate(this.state.reader_cid)));
+      // this.props.pushData(new Take(this.state.reader_cid, this.props.user.id, dataArray[i][0], parseInt(dataArray[i][1], 10)))
     }
+    this.props.pushDatas(data);
     alert('录入完毕！')
   };
 
