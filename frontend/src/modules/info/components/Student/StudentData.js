@@ -1,57 +1,33 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-    ListItem,
-    ListItemIcon,
-    ListItemText
-} from '@material-ui/core';
-import {browserHistory} from "react-router";
-import { Link } from 'react-router-dom'
-import {
-    Home,
-    AccountBox,
-    SupervisorAccount,
-    Class,
-    Star,
-} from '@material-ui/icons';
+import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import {Link} from 'react-router-dom'
+import {Home, Star,} from '@material-ui/icons';
 
 
 export const listItems = (
     <div>
-        <Link to={'/student'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Home/>
-                </ListItemIcon>
-                <ListItemText primary="主页"/>
-            </ListItem>
-        </Link>
-        <Link to={'/student/basicInfo'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <AccountBox/>
-                </ListItemIcon>
-                <ListItemText primary="个人信息"/>
-            </ListItem>
-        </Link>
-        <Link to={'/student/lessons'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Class/>
-                </ListItemIcon>
-                <ListItemText primary="课程信息"/>
-            </ListItem>
-        </Link>
+        <ListItem component={Link} to={"/info/student"} button>
+            <ListItemIcon>
+                <Star/>
+            </ListItemIcon>
+            <ListItemText primary="欢迎页"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/student/basicInfo"} button>
+            <ListItemIcon>
+                <Home/>
+            </ListItemIcon>
+            <ListItemText primary="个人信息"/>
+        </ListItem>
     </div>
 );
 
 export const otherItems = (
     <div>
-        <ListItem button>
+        <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
-                <Star/>
+                <Home/>
             </ListItemIcon>
-            <ListItemText primary="退出"/>
+            <ListItemText primary="返回系统主页"/>
         </ListItem>
     </div>
 );

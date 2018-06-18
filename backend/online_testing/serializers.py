@@ -15,7 +15,7 @@ class ListField(serializers.ListField):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('question_id', 'description', 'course', 'provider')
+        fields = ('question_id', 'description', 'course', 'provider', 'type')
 
 
 class QuestionDetailSerializer(serializers.ModelSerializer):

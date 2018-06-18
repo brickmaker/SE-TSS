@@ -14,15 +14,17 @@ from online_testing.models import *
 c = Client()
 
 response = c.post('/api/info/get_token', data={
-    'username': '3150100099',
-    'password': '000098',
+    'username': '3150100000',
+    'password': '000000',
 })
 data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
-response = c.get('/api/online_testing/question/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+response = c.get('/api/online_testing/analysis/studentGradeList/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
+
+exit(0)
 
 response = c.get('/api/online_testing/question/2/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
