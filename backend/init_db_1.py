@@ -24,6 +24,7 @@ def createDepartment(filename):
 		class_=Major_Class(major=major,class_name=table.row_values(i)[col_dict['班级']])
 		class_.save()
 
+
 def createStudent(filename):
 	from authentication.models import Student,AccountManager,Department,Major,Major_Class
 	wb=xlrd.open_workbook(filename=filename)
@@ -100,15 +101,13 @@ def createStaff(filename):
 			print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
 
 
-
-
-
 def main():
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "top.settings")
 	django.setup()
 	from authentication.models import Department
 	depart=Department(name='信息中心')
 	depart.save()
+
 	d_filename='./authentication/init_data/department.xlsx'
 	s_filename='./authentication/init_data/student.xlsx'
 	t_filename='./authentication/init_data/teacher.xlsx'
@@ -119,8 +118,7 @@ def main():
 	createTeacher(t_filename)
 	createStaff(st_filename)
 
- 
- 
+
 if __name__ == '__main__':
 	main()
 	print("data init successfully")
