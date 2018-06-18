@@ -10,6 +10,7 @@ import {listItems, otherItems} from "./StudentData";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
 import Image from '../image/main.jpg';
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
@@ -23,11 +24,13 @@ function mapDispatchToProps(dispatch) {
 
 const styles = theme => ({
     card: {
-        maxWidth: 1200,
+        width: '100%',
+        height: '100%'
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: '80%',
+        // height: 0,
+        // paddingTop: '56.25%', // 16:9
     },
 });
 
@@ -76,7 +79,7 @@ class StudentView extends React.Component {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
-                    {'欢迎来到教务管理系统, '+localStorage.getItem('name')}
+                    {'欢迎来到教务管理系统, '+ name}
                     </Typography>
 
                     </CardContent>

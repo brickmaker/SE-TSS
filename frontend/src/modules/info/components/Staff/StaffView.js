@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Bar from "../../../../top/components/Bar";
 import {listItems, otherItems} from "./StaffData";
 import Image from '../image/main.jpg';
+import CardMedia from '@material-ui/core/CardMedia';
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 function mapStateToProps(state) {
@@ -23,14 +24,15 @@ function mapDispatchToProps(dispatch) {
 
 const styles = theme => ({
     card: {
-        maxWidth: 1200,
+        width: '100%',
+        height: '100%'
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: '80%',
+        // height: 0,
+        // paddingTop: '56.25%', // 16:9
     },
 });
-
 
 class StaffView extends React.Component {
 
@@ -78,7 +80,7 @@ class StaffView extends React.Component {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
-                    {'欢迎来到教务管理系统, '+localStorage.getItem('name')}
+                    {'欢迎来到教务管理系统, '+name}
                     </Typography>
 
                     </CardContent>

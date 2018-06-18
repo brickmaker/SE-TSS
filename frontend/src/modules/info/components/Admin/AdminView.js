@@ -5,7 +5,7 @@ import {withStyles} from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 import * as actionCreators from '../../actions/auth';
 import Typography from '@material-ui/core/Typography';
-
+import CardMedia from '@material-ui/core/CardMedia';
 import {Link} from "react-router";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -25,11 +25,13 @@ function mapDispatchToProps(dispatch) {
 
 const styles = theme => ({
     card: {
-        maxWidth: 1200,
+        width: '100%',
+        height: '100%'
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: '80%',
+        // height: 0,
+        // paddingTop: '56.25%', // 16:9
     },
 });
 
@@ -79,7 +81,7 @@ class AdminView extends React.Component {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="headline" component="h2">
-                    {'欢迎来到教务管理系统, '+localStorage.getItem('name')}
+                    {'欢迎来到教务管理系统, '+ name}
                     </Typography>
 
                     </CardContent>
