@@ -231,6 +231,64 @@ def update_student_rank(request):
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@api_view(['GET','POST'])
+def student_score_list(request):
+    """
+    :param
+    :return
+    """
+    try:
+        scores = Take.objects.values_list('course_id', 'student_id', 'score')
+        resp = {}
+        it = items.iterator()
+        counts = {}
+        gpa_list = {}
+        try:
+            item = next(it)
+            if item[0] in gpa_list:
+                counts[item[0]] += 1
+                gpa_list[item[0]] += convert_to_grade_point(item[1])
+            else:
+                counts[item[0]] = 1
+                gpa_list[item[0]] = convert_to_grade_point(item[1])
+        except StopIteration:
+            for id in gpa_list.keys():
+                gpa_list[id] = gpa_list[id] / counts[id]
+            gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
+            for i in range(len(gpa_sorted_list)):
+                gpa_sorted_list[i][1] = i + 1
+            for item in gpa_sorted_list:
+                record = StudentAnalysis.objects.get(id_number=item[0])
+                record.rank = item[1]
+                record.save()
+            Response(status=status.HTTP_200_OK)
+    except Exception as err:
+        print("Exception:", err)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    """
+    :param request.data["cid"], request.data["pid"]
+    :return number of all students in the course and teacher,
+            average grade point in the course and teacher
+    """
+    scores = Take.objects.filter(course__course_id=request.data["cid"], teacher_id=request.data["pid"]).values_list('score', flat=True).order_by("score")
+    it = scores.iterator()
+    count = scores.count()
+    average_grade_point = 0
+    while True:
+        try:
+            score = next(it)
+            grade_point = convert_to_grade_point(score)
+            average_grade_point += grade_point
+        except StopIteration:
+            average_grade_point /= count
+            break
+    resp = {}
+    resp['totalNum'] = count
+    resp['averageGradePoint'] = average_grade_point
+    return JsonResponse(resp)
+
+
 def convert_to_grade_point(score):
     if score >= 95:
         return 5.0
@@ -238,3 +296,4 @@ def convert_to_grade_point(score):
         return 0.0
     else:
         return (score - 60) / 10.0 + 1.5
+
