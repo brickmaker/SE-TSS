@@ -17,6 +17,8 @@ import {
     NativeSelect,
 } from '@material-ui/core';
 
+import Image from "./image/login_zju.jpg";
+
 function mapStateToProps(state) {
     return {
         isAuthenticated: state.info.auth.isAuthenticated,
@@ -29,6 +31,20 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
+    Foreground:{
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        overflow: true,
+        'z-index': 2,
+    },
+    Background:{
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        overflow: true,
+        'z-index': 1,
+    },
     Paper: {
         marginTop: '10%',
         marginLeft: '25%',
@@ -110,8 +126,12 @@ class LoginView extends React.Component {
             this.props.history.push('/main');
         }
         return (
-            <div className="col-md-6 col-md-offset-3" onKeyPress={(e) => this.handleKeyPress(e)}>
-                <Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>
+            <div>
+                <div className={classes.Background}>
+                    <img src={Image} width="100%" height="100%"/>
+                </div>
+            <div className={classes.Foreground}>
+                {/*<Helmet bodyAttributes={{style: 'background-color : #EEEEEE'}}/>*/}
                 <Paper className={classes.Paper}>
                     <form role="form">
                         <div className="text-center">
@@ -172,6 +192,7 @@ class LoginView extends React.Component {
                         </div>
                     </form>
                 </Paper>
+            </div>
             </div>
         );
 
