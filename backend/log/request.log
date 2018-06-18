@@ -9345,3 +9345,688 @@ Traceback (most recent call last):
 AssertionError: The field 'faculty_pid' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
 2018-06-19 00:16:02,449 [Thread-4:11628] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
 2018-06-19 00:16:14,214 [Thread-1:10396] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 28906
+2018-06-19 00:53:48,829 [Thread-1:7184] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 00:53:48,841 [Thread-1:7184] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 00:56:08,084 [Thread-1:120] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 00:56:08,101 [Thread-1:120] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 00:56:26,625 [Thread-3:10764] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 00:56:26,627 [Thread-3:10764] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:00:02,389 [Thread-1:8184] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:00:02,403 [Thread-1:8184] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:01:34,489 [Thread-3:6544] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:01:34,491 [Thread-3:6544] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:01:49,046 [Thread-4:10068] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:01:49,048 [Thread-4:10068] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:07:31,943 [Thread-1:8144] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:07:31,952 [Thread-1:8144] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:07:32,976 [Thread-3:1936] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:07:32,978 [Thread-3:1936] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:07:35,471 [Thread-4:12576] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:07:35,474 [Thread-4:12576] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:08:37,314 [Thread-5:6384] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:08:37,316 [Thread-5:6384] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:08:52,012 [Thread-1:12668] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:08:52,023 [Thread-1:12668] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:08:53,855 [Thread-3:3024] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:08:53,856 [Thread-3:3024] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 27
+2018-06-19 01:13:36,994 [Thread-1:2532] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:13:37,033 [Thread-1:2532] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:14:31,217 [Thread-1:10616] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:14:31,272 [Thread-1:10616] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:15:33,447 [Thread-1:7668] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:15:33,479 [Thread-1:7668] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:16:09,714 [Thread-3:8308] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:16:09,744 [Thread-3:8308] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:16:17,522 [Thread-1:6556] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:16:17,563 [Thread-1:6556] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:17:00,115 [Thread-1:10044] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:17:00,142 [Thread-1:10044] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:17:01,770 [Thread-3:6204] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'list' object has no attribute 'read'
+2018-06-19 01:17:01,796 [Thread-3:6204] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:20:23,986 [Thread-1:5788] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.load(request.data)["test"]
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 296, in load
+    return loads(fp.read(),
+AttributeError: 'dict' object has no attribute 'read'
+2018-06-19 01:20:24,023 [Thread-1:5788] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22372
+2018-06-19 01:21:07,941 [Thread-1:10024] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.loads(request.data)["test"]
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 348, in loads
+    'not {!r}'.format(s.__class__.__name__))
+TypeError: the JSON object must be str, bytes or bytearray, not 'dict'
+2018-06-19 01:21:07,971 [Thread-1:10024] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22449
+2018-06-19 01:21:31,497 [Thread-1:7632] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =json.loads(request.data["test"])
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 348, in loads
+    'not {!r}'.format(s.__class__.__name__))
+TypeError: the JSON object must be str, bytes or bytearray, not 'list'
+2018-06-19 01:21:31,531 [Thread-1:7632] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22448
+2018-06-19 01:22:05,957 [Thread-3:12048] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 115, in insert_score
+    data =request.data["test"]
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 348, in loads
+    'not {!r}'.format(s.__class__.__name__))
+TypeError: the JSON object must be str, bytes or bytearray, not 'list'
+2018-06-19 01:22:05,981 [Thread-3:12048] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 22437
+2018-06-19 01:22:12,419 [Thread-1:2764] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 200 187
+2018-06-19 01:22:22,206 [Thread-3:6016] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 200 187
+2018-06-19 01:22:28,499 [Thread-1:7924] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-19 01:22:28,793 [Thread-1:7924] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 111906
+2018-06-19 01:23:27,166 [Thread-1:10984] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Faculty' is not JSON serializable
+2018-06-19 01:23:27,257 [Thread-1:10984] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 111687
+2018-06-19 01:23:45,490 [Thread-3:2532] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/insertscore/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Faculty' is not JSON serializable
+2018-06-19 01:23:45,597 [Thread-3:2532] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/insertscore/ HTTP/1.1" 500 111687
+2018-06-19 01:23:52,794 [Thread-1:9196] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 311

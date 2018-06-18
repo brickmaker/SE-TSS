@@ -26,7 +26,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 SECRET_KEY = 'r@bp4_$%=vm@f5l0a^z$$$&y@)l0x=ne3-rcdzbc=nka15^&+d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -122,7 +122,7 @@ WEBPACK_LOADER = {
 
 
 #开启JWT验证
-
+"""
 REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
@@ -135,7 +135,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-
+"""
 
 
 
