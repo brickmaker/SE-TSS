@@ -1,30 +1,31 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from score_management.models import Take
-from authentication.models import Course,Student,StudentAnalysis,Faculty
+from score_management.models import Take,StudentAnalysis
+from authentication.models import Course,Student,Faculty,Account
 from score_management.serializers import TakeSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
+import json
 from itertools import chain
 
 @api_view(['GET','POST'])
-def score_list(request):
+def score_list_teacher(request):
     """
     List all student scores according to course id
     """
 
-    takes = Take.objects.filter(course__course_id=request.data["cid"],teacher__username=request.data["pid"])
-    takes_list=[]
-    for take in takes:
-        dict={}
-        dict["stu_name"]=take.student.name
-        dict["score"]=take.score
-        takes_list.append(dict)
-    #serializer = TakeSerializer(takes, many=True)
-    return Response(takes_list)
+    takes = Take.objects.filter(teacher__username=request.data["pid"])
+    #takes_list=[]
+    #for take in takes:
+    #    dict={}
+    #    dict["stu_name"]=take.student.name
+    #    dict["score"]=take.score
+    #    takes_list.append(dict)
+    serializer = TakeSerializer(takes, many=True)
+    return Response(serializer.data)
 
         #serializer = TakeSerializer(data=request.data)
         #if serializer.is_valid():
@@ -32,6 +33,67 @@ def score_list(request):
         #    return Response(serializer.data, status=status.HTTP_201_CREATED)
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET','POST'])
+def teacher_match(request):
+    """
+    List all student scores according to course id
+    """
+
+    takes = Take.objects.filter(teacher__username=request.data["pid"])
+    match_dict={}
+    #teacher=Faculty.objects.get(username=request.data["pid"])
+    #match_dict["tid"]=takes[0]
+    match_dict["tname"] = takes[0].teacher.name
+
+    match_dict["sid"]=[]
+    match_dict["sname"] = []
+    match_dict["cid"] = []
+    match_dict["cname"] = []
+    for take in takes:
+            #print(take.student.username)
+            #match_dict["sid"].append(take)
+        match_dict["sname"].append(take.student.name)
+            #print(take.course.course_id)
+            #match_dict["cid"].append(take)
+        match_dict["cname"].append(take.course.name)
+    return Response(match_dict)
+
+@api_view(['GET','POST'])
+def student_match(request):
+    """
+    List all student scores according to course id
+    """
+    takes = Take.objects.filter(student__username=request.data["sid"])
+    match_dict={}
+
+    student=Student.objects.get(username=request.data["sid"])
+    match_dict["sid"]=student.username
+    match_dict["sname"] = student.name
+
+    match_dict["tid"]=[]
+    match_dict["tname"] = []
+    match_dict["cid"] = []
+    match_dict["cname"] = []
+    for take in takes:
+        if take.teacher.username not in match_dict["tid"]:
+            print(take.teacher.username)
+            #match_dict["tid"].append(take.teacher.username)
+            #match_dict["tname"].append(take.teacher.name)
+        if take.course.course_id not in match_dict["cid"]:
+            print(take.course.name)
+            #match_dict["cid"].append(take.course.course_id)
+            #match_dict["cname"].append(take.course.name)
+    return Response(match_dict)
+
+@api_view(['GET','POST'])
+def score_list_student(request):
+    """
+    List all student scores according to course id
+    """
+
+    takes = Take.objects.filter(student__username=request.data["sid"])
+    serializer = TakeSerializer(takes, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET',"POST"])
 def insert_score(request):
@@ -42,22 +104,36 @@ def insert_score(request):
     :param request: Take List
     :return: Information of save state
     """
-    r=0
-    for d in request.data:
+    takes=Take.objects.all()
+    take_list=[]
+    data =json.load(request.data["test"])
+
+    for d in data:
         course=Course.objects.get(course_id=d["cid"])
-        r=d["sid"]
-        #student=Student.objects.get(username=d["sid"])
-        #teacher=Faculty.objects.get(username=d["pid"])
-        #score=d["score"]
-        #take=Take.objects.get_or_create(student=student,course=course,teacher=teacher)[0]
-        #take.score=score
+        #r=d["sid"]
+        student_account=Account.objects.get_by_natural_key(d["sid"])
+        student=Student.objects.get(username=student_account)
+        teacher_account = Account.objects.get_by_natural_key(d["pid"])
+        teacher=Faculty.objects.get(username=teacher_account)
+        score=d["score"]
+        test_date=d["test_date"]
+
+        take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
+        #print(take.score)
+        take.score=score
+        take_list.append(take)
         #take.save()
 
-    #serializer=TakeSerializer(data=take,many=True)
-    #if serializer.is_valid():
-    #    serializer.save()
-    return Response(r, status=status.HTTP_201_CREATED)
+    serializer=TakeSerializer(data=take_list,many=True)
+    if serializer.is_valid():
+        serializer.save()
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
     #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET',"POST"])
+def apply_create(request):
+    pass
+
 
 @api_view(['GET','POST'])
 def score_statistics(request):
@@ -232,62 +308,54 @@ def update_student_rank(request):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET','POST'])
-def student_score_list(request):
+def list_all_score(request):
     """
     :param
     :return
     """
     try:
-        scores = Take.objects.values_list('course_id', 'student_id', 'score')
-        resp = {}
-        it = items.iterator()
-        counts = {}
-        gpa_list = {}
-        try:
-            item = next(it)
-            if item[0] in gpa_list:
-                counts[item[0]] += 1
-                gpa_list[item[0]] += convert_to_grade_point(item[1])
-            else:
-                counts[item[0]] = 1
-                gpa_list[item[0]] = convert_to_grade_point(item[1])
-        except StopIteration:
-            for id in gpa_list.keys():
-                gpa_list[id] = gpa_list[id] / counts[id]
-            gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
-            for i in range(len(gpa_sorted_list)):
-                gpa_sorted_list[i][1] = i + 1
-            for item in gpa_sorted_list:
-                record = StudentAnalysis.objects.get(id_number=item[0])
-                record.rank = item[1]
-                record.save()
-            Response(status=status.HTTP_200_OK)
+        resp = dict()
+        if request.data.__contains__('sid'):
+            resp['topicList'] = ['个人分析']
+            takes = Take.objects.filter(student_id=request.data['sid'])
+            iterator = takes.iterator()
+            list0 = list()
+            while True:
+                try:
+                    take = next(iterator)
+                    cname_and_score = dict()
+                    cname_and_score['name'] = take.course.name
+                    cname_and_score['score'] = take.score
+                    list0.append(cname_and_score)
+                except StopIteration:
+                    resp['data'] = [list0]
+                    return JsonResponse(resp)
+        elif request.data.__contains__('pid'):
+            takes = Take.objects.filter(teacher_id=request.data['pid'])
+            iterator = takes.iterator()
+            temp = dict()
+            while True:
+                try:
+                    take = next(iterator)
+                    if not temp.__contains__(take.course.name):
+                        temp[take.course.name] = list()
+                    sname_and_score = dict()
+                    sname_and_score['name'] = take.student.name
+                    sname_and_score['score'] = take.score
+                    temp[take.course.name].append(sname_and_score)
+                except StopIteration:
+                    resp = dict()
+                    resp['topicList'] = list()
+                    resp['data'] = list()
+                    for key, value in temp.items():
+                        resp['topicList'].append(key)
+                        resp['data'].append(value)
+                    return JsonResponse(resp)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-    """
-    :param request.data["cid"], request.data["pid"]
-    :return number of all students in the course and teacher,
-            average grade point in the course and teacher
-    """
-    scores = Take.objects.filter(course__course_id=request.data["cid"], teacher_id=request.data["pid"]).values_list('score', flat=True).order_by("score")
-    it = scores.iterator()
-    count = scores.count()
-    average_grade_point = 0
-    while True:
-        try:
-            score = next(it)
-            grade_point = convert_to_grade_point(score)
-            average_grade_point += grade_point
-        except StopIteration:
-            average_grade_point /= count
-            break
-    resp = {}
-    resp['totalNum'] = count
-    resp['averageGradePoint'] = average_grade_point
-    return JsonResponse(resp)
-
 
 def convert_to_grade_point(score):
     if score >= 95:
