@@ -1,6 +1,7 @@
 // React
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import {Route, Switch} from "react-router-dom"
 import {connect} from "react-redux";
 
 
@@ -9,18 +10,67 @@ import {changePage} from "./actions";
 import {ENTER_SCORE, SEARCH_SCORE, ANALYSIS_SCORE} from "./reducers";
 
 // Component
-import LeftMenu from './component/LeftMenu';
-import AnalysisTabs from './component/analyse';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
-import {Take} from "./utils";
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import AnaScore from './component/AnaScore';
+
+import {Take,newTake} from "./utils";
+
+import Bar from "../../top/components/Bar"
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import {
+  Home, Search as SearchIcon, Message as MessageIcon,
+  Announcement as AnnouncementIcon,
+  Extension as ExtensionIcon
+} from "@material-ui/icons/es/index"
+import {Link} from "react-router-dom";
+import store from "../../top/stores";
+
+const testAna = {
+  topicList : ["个人分析", "软件工程", "编译原理"],
+  scoreListName : ["课程名称", "学号", "学号"],
+  data : [
+    [
+      {name:"编译原理", score:59},
+      {name:"软件工程", score:66},
+      {name:"课程A", score:79},
+      {name:"课程B", score:100},
+      {name:"课程C", score:88},
+      {name:"课程D", score:22},
+      {name:"课程E", score:33},
+      {name:"课程F", score:55},
+      {name:"课程G", score:59}
+    ],
+    [
+      {name:"A", score:59},
+      {name:"B", score:66},
+      {name:"C", score:79},
+      {name:"D", score:100},
+      {name:"E", score:88},
+      {name:"F", score:100},
+      {name:"G", score:100},
+      {name:"H", score:100},
+      {name:"I", score:100}
+    ],
+    [
+      {name:"J", score:59},
+      {name:"K", score:66},
+      {name:"L", score:79},
+      {name:"M", score:100},
+      {name:"N", score:88},
+      {name:"O", score:88},
+      {name:"P", score:88},
+      {name:"Q", score:88},
+      {name:"R", score:88}
+    ]
+  ]
+};
+
+
 
 const style = {
   leftMenu: {
@@ -41,116 +91,230 @@ class ScoreManagement extends Component {
   constructor(props) {
     super(props);
     this.data = [];
-    this.user={
-      name:"学生A",
-      id:"3150000000",
-      type:"s",
-      // name:"教师A",
-      // id:"000001",
-      // type:"t",
-    };
-    this.database={
-      student:[],
-      course:[],
-      teacher:[],
-    };
-    this.database.student[0]={sid:"3150000000",sname:"学生A"};
-    this.database.student[1]={sid:"3150000001",sname:"学生B"};
-    this.database.student[2]={sid:"3150000002",sname:"学生C"};
-    this.database.student[3]={sid:"3150000003",sname:"学生D"};
-    this.database.student[4]={sid:"3150000004",sname:"学生E"};
-    this.database.student[5]={sid:"3150000005",sname:"学生F"};
 
-    this.database.teacher[0]={tid:"000001",tname:"教师A"};
-    this.database.teacher[1]={tid:"000002",tname:"John Smith"};
-    this.database.teacher[2]={tid:"000003",tname:"Randal White"};
-    this.database.teacher[3]={tid:"000004",tname:"Steve Brown"};
-    this.database.teacher[4]={tid:"000005",tname:"Christopher Nolan"};
+    this.user = {
+      // name: "学生A",
+      // id: "3150100000",
+      // type: "s",
+      name:"教师A",
+      id:"2110100001",
+      type:"t",
+    };
+    this.database = {
+      student: [],
+      course: [],
+      teacher: [],
+    };
 
-    this.database.course[0]={cid:"1",cname:"计算机网络",tid:"000002"};
-    this.database.course[1]={cid:"2",cname:"操作系统",tid:"000003"};
-    this.database.course[2]={cid:"3",cname:"C程序设计",tid:"000004"};
-    this.database.course[3]={cid:"4",cname:"编译原理",tid:"000005"};
-    this.database.course[4]={cid:"5",cname:"软件工程",tid:"000001"};
-    this.database.course[5]={cid:"6",cname:"软工实习",tid:"000001"};
-    this.initialGrades();
+
+    if(this.user.type==='s'){
+      fetch("http://127.0.0.1:8000/api/score/scoreliststudent/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: 'sid='+this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        data.map(s => {
+          this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
+          this.addTeacher(s['teacher'],s['faculty_name']);
+          this.addCourse(s['course'],s['course_name'],s['test_date']);
+
+        });
+        this.forceUpdate();
+      });
+    }else if(this.user.type==='t'){
+      fetch("http://127.0.0.1:8000/api/score/scorelistteacher/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        },
+        body: 'pid='+this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        if(data!==undefined){
+          data.map(s => {
+            this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
+            this.addStudent(s['student'],s['student_name']);
+            this.addCourse(s['course'],s['course_name'],s['test_date']);
+
+          });
+          this.forceUpdate();
+        }
+      });
+    }
   }
 
-  initialGrades = () => {
-    this.data[0] = new Take("1", "000002", '3150000000', 88);
-    this.data[1] = new Take("2", "000003", '3150000000', 88);
-    this.data[2] = new Take("3", "000004", '3150000000', 88);
-    this.data[3] = new Take("4", "000005", '3150000000', 88);
-    this.data[4] = new Take("5", "000001", '3150000000', 100);
-  };
+  addStudent(id,name){
+    if(!this.findsname(id)){
+      this.database.student.push({sid: id, sname: name});
+    }
+  }
+  addTeacher(id,name){
+    if(!this.findtname(id)){
+      this.database.teacher.push({tid: id, tname: name});
+    }
+  }
+  addCourse(id,name,test_date){
+    if(!this.findcname(id)){
+      this.database.course.push({cid: id, cname: name, test_date:test_date});
+    }
+  }
+
+  pushDatas(takes){
+    const newtake=[];
+    console.log(takes);
+    takes.map(take=>{
+      newtake.push(new newTake(take.cid,take.tid,take.sid+'.0',take.score,take.test_date))
+    });
+    console.log(newtake);
+    fetch("http://127.0.0.1:8000/api/score/insertscore/", {
+      method: "POST",
+      // mode: "no-cors",
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
+      body: 'test='+JSON.stringify(newtake)
+    }).then(function (res) {
+      if (res.ok) {
+        alert("批量录入成功");
+        return res.json();
+      } else {
+        alert("服务器回应异常，状态码：" + res.status);
+      }
+    }, function (e) {
+      alert("对不起，服务器产生错误");
+    }).then(res=>{
+      console.log(res);
+    })
+
+  }
 
   pushData(take) {
-    this.data.push(take);
+    const newtake=[];
+    newtake[0] = new newTake(take.cid,take.tid,take.sid+'.0',take.score,take.test_date);
+    console.log(newtake);
+    fetch("http://127.0.0.1:8000/api/score/insertscore/", {
+      method: "POST",
+      // mode: "no-cors",
+      headers: {
+        'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      },
+      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
+      body: 'test='+JSON.stringify(newtake)
+
+    }).then(function (res) {
+      if (res.ok) {
+        alert("录入成功");
+      } else {
+        alert("服务器回应异常，状态码：" + res.status);
+      }
+    }, function (e) {
+      alert("对不起，服务器产生错误");
+    })
   }
 
-  deleteData(index){
-    const rest = this.data.slice(index+1);
-    this.data.length =  index;
+  deleteData(index) {
+    const rest = this.data.slice(index + 1);
+    this.data.length = index;
     return this.data.push.apply(this.data, rest);
   }
 
-  render() {
-    const {page, changePage} = this.props;
-    let left = (
-      <div id="LeftMenu" style={style.leftMenu}>
-        <LeftMenu user={this.user}/>
-      </div>);
-    let right;
-    switch (page) {
-      case ENTER_SCORE: {
-        right = (
-          <EnterScore
-          pushData={take => this.pushData(take)}
-          deleteData={(from,to) => this.deleteData(from,to)}
-          user={this.user}
-          data={this.data}
-          database={this.database}
-          />);
-        break;
-      }
-      case SEARCH_SCORE: {
-        right = (
-          <SearchScore
-          data={this.data}
-          user={this.user}
-          database={this.database}
-          />);
-        break;
-      }
-      case ANALYSIS_SCORE: {
-        right = (<AnalysisTabs/>);
-        break;
-      }
-      default: {
-        right = (<AnalysisTabs/>);
-        break;
-      }
-    }
-    return (
+render() {
+  const {match} = this.props;
+  const listItems = (
+    <div>
+      <ListItem component={Link} to={`${match.url}/search`} button>
+        <ListItemIcon>
+          <SearchIcon/>
+        </ListItemIcon>
+        <ListItemText primary="成绩查询"/>
+      </ListItem>
+      <Divider/>
+      <ListItem component={Link} to={`${match.url}/enter`} button>
+        <ListItemIcon>
+          <MessageIcon/>
+        </ListItemIcon>
+        <ListItemText primary="成绩录入"/>
+      </ListItem>
+      <Divider/>
+      <ListItem component={Link} to={`${match.url}/analysis`} button>
+        <ListItemIcon>
+          <MessageIcon/>
+        </ListItemIcon>
+        <ListItemText primary="成绩分析"/>
+      </ListItem>
+    </div>
+  );
+
+  return (
+    <Bar listItems={listItems}>
       <div>
-        <AppBar  position={"static"}>
-          <Toolbar>
-            <IconButton color="inherit" aria-label="Menu">
-              <MenuIcon />
-            </IconButton>
-            <Typography color={"inherit"} variant="title"  style={{flex:1}}>
-              成绩管理
-            </Typography>
-            <Button color="inherit">您好！{this.user.name}</Button>
-          </Toolbar>
-        </AppBar>
-        {left}
-        <div id="content" style={style.content}>
-          {right}
-        </div>
+        <Switch>
+          <Route exact path={`${match.url}`} render={(props)=><SearchScore {...props}
+                                                                           data={this.data}
+                                                                           user={this.user}
+                                                                           database={this.database}/>}/>
+          <Route path={`${match.url}/search`} render={(props)=><SearchScore {...props}
+                                                                            data={this.data}
+                                                                            user={this.user}
+                                                                            database={this.database}/>}/>
+          <Route path={`${match.url}/enter`} render={(props)=><EnterScore {...props}
+                                                                          pushData={take => this.pushData(take)}
+                                                                          pushDatas={take => this.pushDatas(take)}
+                                                                          deleteData={(index) => this.deleteData(index)}
+                                                                          user={this.user}
+                                                                          data={this.data}
+                                                                          database={this.database}/>}/>
+          <Route path={`${match.url}/analysis`} render={(props)=><AnaScore {...props}
+                                                                           topicList={testAna.topicList}
+                                                                           data={testAna.data}
+                                                                           scoreListName={testAna.scoreListName} />}/>
+        </Switch>
       </div>
-    );
-  }
+    </Bar>
+  );}
+
+
+  findcname(id){
+    const entity =  this.database.course.find(ele=>{
+      return ele.cid===id;
+    });
+    return entity!== undefined;
+  };
+
+  findtname (id){
+    const entity =  this.database.teacher.find(ele=>{
+      return ele.tid===id;
+    });
+    return entity!== undefined;
+
+  };
+
+  findsname (id){
+    const entity =  this.database.student.find(ele=>{
+      return ele.sid===id;
+    });
+    return entity!== undefined;
+  };
 }
 
 

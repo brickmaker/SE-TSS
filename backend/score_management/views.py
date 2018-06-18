@@ -3,7 +3,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from score_management.models import Take,StudentAnalysis
 from authentication.models import Course,Student,Faculty,Account
+from score_management.models import Take
+from score_management.models import Score_Relation
+from authentication.models import Course,Student,Faculty,Account,StudentAnalysis
 from score_management.serializers import TakeSerializer
+from score_management.serializers import ScoreRelationSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
@@ -18,14 +22,12 @@ def score_list_teacher(request):
     List all student scores according to course id
     """
 
-    takes = Take.objects.filter(teacher__username=request.data["pid"])
-    #takes_list=[]
-    #for take in takes:
-    #    dict={}
-    #    dict["stu_name"]=take.student.name
-    #    dict["score"]=take.score
-    #    takes_list.append(dict)
-    serializer = TakeSerializer(takes, many=True)
+    #takes = Take.objects.filter(teacher__username=request.data["pid"])
+    #scores=Score_Relation.objects.all()
+    #print(scores[0])
+    score_relations=Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data["pid"])
+    #serializer = TakeSerializer(takes, many=True)
+    serializer=ScoreRelationSerializer(score_relations,many=True)
     return Response(serializer.data)
 
         #serializer = TakeSerializer(data=request.data)
@@ -33,6 +35,11 @@ def score_list_teacher(request):
         #    serializer.save()
         #    return Response(serializer.data, status=status.HTTP_201_CREATED)
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','POST'])
+def test(request):
+    return Response(1)
+
 
 @api_view(['GET','POST'])
 def teacher_match(request):
@@ -105,31 +112,29 @@ def insert_score(request):
     :param request: Take List
     :return: Information of save state
     """
-    takes=Take.objects.all()
+    score_relations=Score_Relation.objects.all()
+    # takes=Take.objects.all()
     take_list=[]
-    data =json.load(request.data["test"])
+    data =request.data["test"]
 
     for d in data:
-        course=Course.objects.get(course_id=d["cid"])
-        #r=d["sid"]
-        student_account=Account.objects.get_by_natural_key(d["sid"])
-        student=Student.objects.get(username=student_account)
-        teacher_account = Account.objects.get_by_natural_key(d["pid"])
-        teacher=Faculty.objects.get(username=teacher_account)
-        score=d["score"]
-        test_date=d["test_date"]
-
-        take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
-        #print(take.score)
-        take.score=score
-        take_list.append(take)
+        score_relation=score_relations.get(course_select_info__student__username_id=d["sid"],
+                                           course_select_info__course__teacher__username_id=d["pid"],
+                                           course_select_info__course__course__course_id=d["cid"],
+                                           test_date=d["test_date"])
+        if not score_relation.modify_state:
+            score_relation.score=d["score"]
+        else:
+            return Response("You have to apply !", status=status.HTTP_400_BAD_REQUEST)
+        take_list.append(score_relation)
         #take.save()
 
-    serializer=TakeSerializer(data=take_list,many=True)
+    #serializer=TakeSerializer(data=take_list,many=True)
+    serializer=ScoreRelationSerializer(data=take_list,many=True)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    #
 
 @api_view(['GET',"POST"])
 def apply_create(request):

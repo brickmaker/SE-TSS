@@ -1,4 +1,5 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
+import ReactHtmlParser, {processNodes, convertNodeToElement, htmlparser2} from 'react-html-parser';
 import {
     Avatar,
     Button,
@@ -11,19 +12,23 @@ import {
     ListItemText
 } from "material-ui"
 import {Reply as ReplyIcon} from '@material-ui/icons'
+import {connect} from "react-redux"
+import {OPEN_COMMENT} from "../actions"
+import {selectEntry} from "../../messages/actions";
+import {ROOT_URL} from "../../../configs/config"
 
 const style = {
     margin: '15px 0',
     display: 'flex'
 }
 
-export default class Reply extends Component {
+class Reply extends Component {
     constructor(props) {
         super(props)
     }
 
     render() {
-        const {pic, name, college, postNum, content, time, replies} = this.props
+        const {postId, id, uid, pic, name, college, postNum, content, time, file, replies} = this.props
         return (
             <Card style={style}>
                 <div style={{
@@ -38,10 +43,15 @@ export default class Reply extends Component {
                     color: 'white'
                 }}>
                     <Avatar
-                        src={pic}
+                        src={`${ROOT_URL}${pic}`}
                         style={{
                             width: 100,
-                            height: 100
+                            height: 100,
+                            cursor: "pointer",
+                        }}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            this.props.history.push(`/forum/usercenter/${uid}`);
                         }}
                     />
                     <span style={{
@@ -60,6 +70,12 @@ export default class Reply extends Component {
                     <Button
                         variant={'raised'}
                         color={'primary'}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            console.log("click msg", uid, pic, name);
+                            this.props.selectEntry(uid, pic, name);
+                            this.props.history.push(`/forum/messages`);
+                        }}
                         style={{
                             margin: 15,
                             backgroundColor: '#3949AB'
@@ -67,11 +83,12 @@ export default class Reply extends Component {
                 </div>
                 <div style={{
                     padding: 20,
+                    width: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between'
                 }}>
-                    <div>{content}</div>
+                    <div>{ReactHtmlParser(content)}</div>
                     <div>
                         <div style={{
                             fontSize: '0.8em',
@@ -80,42 +97,92 @@ export default class Reply extends Component {
                             alignItems: 'center',
                             color: '#9E9E9E'
                         }}>
-                            <Button size={'small'}>
-                                <ReplyIcon/>
-                                回复
-                            </Button>
-                            发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
-                        </div>
-                        <div style={{
-                            backgroundColor: '#f0f0f0'
-                        }}>
-                            <List dense={true}>
+                            {
+                                this.props.disableComment ? null :
+                                    <Button
+                                        size={'small'}
+                                        onClick={() => {
+                                            this.props.openComment(postId, id, uid)
+                                        }}
+                                    >
+                                        <ReplyIcon/>
+                                        回复
+                                    </Button>
+                            }
+                            <p>
+                                发布于：{new Date(time).toISOString().slice(0, 10)} {new Date(time).toLocaleTimeString()}
+                            </p>
+                            <div>
                                 {
-                                    replies.map(rr => (
-                                        <ListItem>
-                                            <Avatar
-                                                src={pic}
-                                                style={{
-                                                    width: 30,
-                                                    height: 30
-                                                }}
-                                            />
-                                            <ListItemText
-                                                primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`}
-                                                secondary={rr.content}/>
-                                            <ListItemSecondaryAction>
-                                                <IconButton aria-label="Reply">
-                                                    <ReplyIcon/>
-                                                </IconButton>
-                                            </ListItemSecondaryAction>
-                                        </ListItem>
-                                    ))
+                                    file ?
+                                        <Button
+                                            href={`${ROOT_URL}${file}`}
+                                            color={'primary'}
+                                            size={'small'}>下载附件</Button>
+                                        : null
                                 }
-                            </List>
+                            </div>
                         </div>
+                        {
+                            replies.length === 0 ? null :
+                                <div style={{
+                                    backgroundColor: '#f0f0f0'
+                                }}>
+                                    <List dense={true}>
+                                        {
+                                            replies.map(rr => (
+                                                <ListItem>
+                                                    <Avatar
+                                                        src={`${ROOT_URL}${pic}`}
+                                                        style={{
+                                                            width: 30,
+                                                            height: 30,
+                                                            cursor: "pointer",
+                                                        }}
+                                                        onClick={(event) => {
+                                                            event.preventDefault();
+                                                            this.props.history.push(`/forum/usercenter/${uid}`);
+                                                        }}
+                                                    />
+                                                    <ListItemText
+                                                        primary={`${rr.from} 回复 ${rr.to} (${new Date(rr.time).toISOString().slice(0, 10)} ${new Date(time).toLocaleTimeString()}):`}
+                                                        secondary={rr.content}/>
+                                                    <ListItemSecondaryAction>
+                                                        <IconButton
+                                                            onClick={() => {
+                                                                this.props.openComment(postId, id, rr.to)
+                                                            }}
+                                                            aria-label="Reply"
+                                                        >
+                                                            <ReplyIcon/>
+                                                        </IconButton>
+                                                    </ListItemSecondaryAction>
+                                                </ListItem>
+                                            ))
+                                        }
+                                    </List>
+                                </div>
+                        }
                     </div>
                 </div>
             </Card>
         )
     }
 }
+
+const mapStateToProps = (state) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    openComment: (postId, replyId, to) => {
+        dispatch({
+            type: OPEN_COMMENT,
+            postId: postId,
+            replyId: replyId,
+            to: to
+        })
+    },
+    selectEntry: (id, avatar, username) => {
+        dispatch(selectEntry(id, avatar, username));
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reply)

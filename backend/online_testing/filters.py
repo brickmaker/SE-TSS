@@ -21,7 +21,7 @@ class QuestionFilter(filters.BaseFilterBackend):
             return queryset
         q = Q()
         for teacher_id in teacher_list:
-            account = Account.objects.get(username=teacher_id)
-            teacher = Faculty.objects.get(username=account)
-            q = q | Q(provider=teacher)
+            #account = Account.objects.get(username=teacher_id)
+            #teacher = Faculty.objects.get(username=account)
+            q = q | Q(provider=teacher_id)
         return queryset.filter(q)

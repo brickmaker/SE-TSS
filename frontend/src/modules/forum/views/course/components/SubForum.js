@@ -17,7 +17,6 @@ class SubForum extends Component {
         return (
             <div
                 onClick={() => {
-                    console.log('click')
                     this.props.history.push(`${this.props.match.url}/${id}`)
                 }}
                 onMouseOver={() => {
