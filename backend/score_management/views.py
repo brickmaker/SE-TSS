@@ -8,6 +8,7 @@ from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
+import time
 import json
 from itertools import chain
 
@@ -261,48 +262,56 @@ def student_rank(request):
     :return your rank this year
     """
     try:
-        items = StudentAnalysis.objects.filter(id_number=request.data["sid"]).values_list('rank', flat=True)
-        it = items.iterator()
-        resp = {}
-        try:
-            resp['rank'] = next(it)
-        except StopIteration:
-            Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        student_analyses = StudentAnalysis.objects.filter(username=request.data['sid'])
+        iterator = student_analyses.iterator()
+        student_analysis = next(iterator)
+        rank = student_analysis.rank
+        resp = {'rank': rank}
+        return JsonResponse(resp)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    return JsonResponse(resp)
 
 @api_view(['GET','POST'])
 def update_student_rank(request):
     """
-    :param
-    :return
+    you need to clear data of table StudentAnalysis first
     """
     try:
-        items = Take.objects.all().values_list('student_id', 'score').order_by("test_date")
-        it = items.iterator()
+        takes = Take.objects.all()
+        iterator = takes.iterator()
         counts = {}
         gpa_list = {}
         try:
-            item = next(it)
-            if item[0] in gpa_list:
-                counts[item[0]] += 1
-                gpa_list[item[0]] += convert_to_grade_point(item[1])
-            else:
-                counts[item[0]] = 1
-                gpa_list[item[0]] = convert_to_grade_point(item[1])
+            while True:
+                take = next(iterator)
+                id_number = take.student.username_id
+                #pa = convert_to_grade_point(take.score)
+                pa = take.score
+                print(id_number)
+                if gpa_list.__contains__(id_number):
+                    counts[id_number] += 1
+                    gpa_list[id_number] += pa
+                else:
+                    counts[id_number] = 1
+                    gpa_list[id_number] = pa
         except StopIteration:
             for id in gpa_list.keys():
                 gpa_list[id] = gpa_list[id] / counts[id]
+            print(gpa_list)
             gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
-            for i in range(len(gpa_sorted_list)):
-                gpa_sorted_list[i][1] = i + 1
-            for item in gpa_sorted_list:
-                record = StudentAnalysis.objects.get(id_number=item[0])
-                record.rank = item[1]
-                record.save()
-            Response(status=status.HTTP_200_OK)
+            for i, tuple_i in enumerate(gpa_sorted_list):
+                try:
+                    create = StudentAnalysis.objects.create
+                    account = Account.objects.filter(username=tuple_i[0])[0]
+                    record = create(username=account, rank=i+1)
+                except Exception:
+                    get = StudentAnalysis.objects.get
+                    account = Account.objects.filter(username=tuple_i[0])[0]
+                    record = get(username=account)
+                    record.rank = i+1
+                    record.save()
+            return Response(status=status.HTTP_200_OK)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
