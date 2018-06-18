@@ -1475,3 +1475,10 @@
 2018-06-14 02:21:49,327 [Thread-3:11952] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/insertscore/ HTTP/1.1" 201 379
 2018-06-14 15:47:23,456 [Thread-1:15524] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 21833
 2018-06-14 15:48:45,434 [Thread-3:5656] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 92381
+2018-06-18 21:57:43,742 [Thread-1:6436] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/scorelist/ HTTP/1.1" 404 3619
+2018-06-18 22:00:14,420 [Thread-1:14232] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23350
+2018-06-18 22:01:01,204 [Thread-1:7784] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 148201
+2018-06-18 22:02:22,921 [Thread-1:6336] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 53755
+2018-06-18 22:04:06,976 [Thread-1:5260] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23442
+2018-06-18 22:04:30,053 [Thread-3:1608] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23444
+2018-06-18 22:04:37,540 [Thread-1:224] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 150492

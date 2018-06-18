@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from score_management.models import Take
+from score_management.models import Score_Relation
 from authentication.serializers import StudentSerializer,FacultySerializer,CourseSerializer
 class TakeSerializer(serializers.ModelSerializer):
     student_name=serializers.SerializerMethodField()
@@ -17,3 +18,33 @@ class TakeSerializer(serializers.ModelSerializer):
 
     def get_course_name(self, obj):
         return obj.course.name
+
+class ScoreRelationSerializer(serializers.ModelSerializer):
+    student_name=serializers.SerializerMethodField()
+    faculty_name=serializers.SerializerMethodField()
+    course_name = serializers.SerializerMethodField()
+    student_id=serializers.SerializerMethodField()
+    teacher_id=serializers.SerializerMethodField()
+    course_id=serializers.SerializerMethodField()
+    class Meta:
+        model=Score_Relation
+        fields=('student_id','course_id','teacher_id','score','test_date','student_name','faculty_name','course_name')
+
+    def get_student_name(self, obj):
+        return obj.course_select_info.student.name
+
+    def get_faculty_name(self, obj):
+        return obj.course_select_info.course.teacher.name
+
+    def get_course_name(self, obj):
+        return obj.course_select_info.course.course.name
+
+
+    def get_student_id(self, obj):
+        return obj.course_select_info.student.username
+
+    def get_teacher_id(self, obj):
+        return obj.course_select_info.course.teacher.username
+
+    def get_course_id(self, obj):
+        return obj.course_select_info.course.course.course_id

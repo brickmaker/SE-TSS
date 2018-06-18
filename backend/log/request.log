@@ -7711,3 +7711,174 @@ Traceback (most recent call last):
 KeyError: 'pid'
 2018-06-14 15:47:23,456 [Thread-1:15524] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 21833
 2018-06-14 15:48:45,434 [Thread-3:5656] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 92381
+2018-06-18 21:57:43,741 [Thread-1:6436] [django.request:93] [base:get_response] [WARNING]- Not Found: /api/score/scorelist/
+2018-06-18 21:57:43,742 [Thread-1:6436] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/scorelist/ HTTP/1.1" 404 3619
+2018-06-18 22:00:14,184 [Thread-1:14232] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\fields.py", line 1854, in to_representation
+    method = getattr(self.parent, self.method_name)
+AttributeError: 'ScoreRelationSerializer' object has no attribute 'get_teacher_id'
+2018-06-18 22:00:14,420 [Thread-1:14232] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23350
+2018-06-18 22:01:00,658 [Thread-1:7784] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Student' is not JSON serializable
+2018-06-18 22:01:01,204 [Thread-1:7784] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 148201
+2018-06-18 22:02:22,921 [Thread-1:6336] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 53755
+2018-06-18 22:04:06,920 [Thread-1:5260] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\fields.py", line 1855, in to_representation
+    return method(value)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\serializers.py", line 50, in get_course_id
+    return obj.course_select_info.course.course.username
+AttributeError: 'Course' object has no attribute 'username'
+2018-06-18 22:04:06,976 [Thread-1:5260] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23442
+2018-06-18 22:04:30,034 [Thread-3:1608] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 527, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\fields.py", line 1855, in to_representation
+    return method(value)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\serializers.py", line 50, in get_course_id
+    return obj.course_select_info.course.course.course_id
+AttributeError: 'Course' object has no attribute 'username'
+2018-06-18 22:04:30,053 [Thread-3:1608] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 23444
+2018-06-18 22:04:37,461 [Thread-1:224] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Account' is not JSON serializable
+2018-06-18 22:04:37,540 [Thread-1:224] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 150492

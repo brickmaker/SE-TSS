@@ -2,8 +2,10 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from score_management.models import Take
+from score_management.models import Score_Relation
 from authentication.models import Course,Student,Faculty,Account
 from score_management.serializers import TakeSerializer
+from score_management.serializers import ScoreRelationSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
@@ -17,14 +19,10 @@ def score_list_teacher(request):
     List all student scores according to course id
     """
 
-    takes = Take.objects.filter(teacher__username=request.data["pid"])
-    #takes_list=[]
-    #for take in takes:
-    #    dict={}
-    #    dict["stu_name"]=take.student.name
-    #    dict["score"]=take.score
-    #    takes_list.append(dict)
-    serializer = TakeSerializer(takes, many=True)
+    #takes = Take.objects.filter(teacher__username=request.data["pid"])
+    score_relations=Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data["pid"])
+    #serializer = TakeSerializer(takes, many=True)
+    serializer=ScoreRelationSerializer(score_relations,many=True)
     return Response(serializer.data)
 
         #serializer = TakeSerializer(data=request.data)
