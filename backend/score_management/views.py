@@ -129,7 +129,7 @@ def insert_score(request):
         #take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
         #print(take.score)
         score_relation.score=score
-        
+
         #take.score=score
         #take_list.append(take)
         #take.save()
