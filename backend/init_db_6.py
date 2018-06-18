@@ -104,7 +104,7 @@ def main():
 
     course_filename = "score_management/course.xlsx"
 
-    #createCourse(course_filename)
+    createCourse(course_filename)
     #createTake()
     createAllOtherData()
     createScore()

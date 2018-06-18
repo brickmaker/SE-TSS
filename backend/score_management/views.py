@@ -20,6 +20,8 @@ def score_list_teacher(request):
     """
 
     #takes = Take.objects.filter(teacher__username=request.data["pid"])
+    #scores=Score_Relation.objects.all()
+    #print(scores[0])
     score_relations=Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data["pid"])
     #serializer = TakeSerializer(takes, many=True)
     serializer=ScoreRelationSerializer(score_relations,many=True)
@@ -30,6 +32,11 @@ def score_list_teacher(request):
         #    serializer.save()
         #    return Response(serializer.data, status=status.HTTP_201_CREATED)
         #return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET','POST'])
+def test(request):
+    return Response(1)
+
 
 @api_view(['GET','POST'])
 def teacher_match(request):

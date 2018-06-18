@@ -7882,3 +7882,675 @@ Traceback (most recent call last):
     o.__class__.__name__)
 TypeError: Object of type 'Account' is not JSON serializable
 2018-06-18 22:04:37,540 [Thread-1:224] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 150492
+2018-06-18 22:27:45,040 [Thread-1:4592] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'teacher_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:27:45,213 [Thread-1:4592] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:27:46,808 [Thread-3:6384] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'teacher_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:27:46,810 [Thread-3:6384] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:27:58,995 [Thread-1:14696] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'teacher_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:27:59,003 [Thread-1:14696] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:29:03,301 [Thread-3:10952] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'teacher_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:29:03,303 [Thread-3:10952] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:39:11,715 [Thread-1:11356] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:39:11,725 [Thread-1:11356] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:39:12,985 [Thread-3:10052] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:39:12,987 [Thread-3:10052] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:39:14,599 [Thread-4:12836] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:39:14,601 [Thread-4:12836] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:51:48,361 [Thread-1:1332] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:51:48,370 [Thread-1:1332] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:51:52,921 [Thread-3:13460] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/test/ HTTP/1.1" 200 1
+2018-06-18 22:52:24,334 [Thread-4:11764] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:52:24,336 [Thread-4:11764] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:53:09,316 [Thread-5:14304] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 26, in score_list_teacher
+    serializer=ScoreRelationSerializer(score_relations,many=True)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:53:09,319 [Thread-5:14304] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:53:12,995 [Thread-1:13108] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-18 22:53:13,005 [Thread-1:13108] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:53:14,237 [Thread-3:10752] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-18 22:53:14,239 [Thread-3:10752] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:55:13,716 [Thread-1:10648] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-18 22:55:13,727 [Thread-1:10648] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:55:15,830 [Thread-3:1464] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-18 22:55:15,831 [Thread-3:1464] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:55:20,068 [Thread-4:9232] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/test/ HTTP/1.1" 200 1
+2018-06-18 22:55:39,066 [Thread-1:9768] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 1
+2018-06-18 22:56:12,256 [Thread-1:10348] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 158, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 156, in _get_response
+    response = response.render()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\template\response.py", line 106, in render
+    self.content = self.rendered_content
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\response.py", line 72, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\renderers.py", line 105, in render
+    allow_nan=not self.strict, separators=separators
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\json.py", line 28, in dumps
+    return json.dumps(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\utils\encoders.py", line 68, in default
+    return super(JSONEncoder, self).default(obj)
+  File "C:\Users\37187\Anaconda3\lib\json\encoder.py", line 180, in default
+    o.__class__.__name__)
+TypeError: Object of type 'Score_Relation' is not JSON serializable
+2018-06-18 22:56:12,264 [Thread-1:10348] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 22:56:46,008 [Thread-1:7364] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 27, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 22:56:46,016 [Thread-1:7364] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 23:27:30,602 [Thread-1:5416] [django.request:118] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /api/score/scorelistteacher/
+Traceback (most recent call last):
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\views\generic\base.py", line 69, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 483, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 443, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\views.py", line 480, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\decorators.py", line 53, in handler
+    return func(*args, **kwargs)
+  File "D:\课程\软件工程\TSS\SE-TSS\backend\score_management\views.py", line 28, in score_list_teacher
+    return Response(serializer.data)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 765, in data
+    ret = super(ListSerializer, self).data
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 262, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in to_representation
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 683, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 510, in to_representation
+    fields = self._readable_fields
+  File "C:\Users\37187\Anaconda3\lib\site-packages\django\utils\functional.py", line 36, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 376, in _readable_fields
+    field for field in self.fields.values()
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 363, in fields
+    for key, value in self.get_fields().items():
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1020, in get_fields
+    field_names = self.get_field_names(declared_fields, info)
+  File "C:\Users\37187\Anaconda3\lib\site-packages\rest_framework\serializers.py", line 1121, in get_field_names
+    serializer_class=self.__class__.__name__
+AssertionError: The field 'student_id' was declared on serializer ScoreRelationSerializer, but has not been included in the 'fields' option.
+2018-06-18 23:27:31,002 [Thread-1:5416] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/scorelistteacher/ HTTP/1.1" 500 27
+2018-06-18 23:30:23,778 [Thread-1:10256] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/scorelistteacher/ HTTP/1.1" 200 24106

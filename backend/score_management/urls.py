@@ -2,6 +2,7 @@ from django.conf.urls import url
 from score_management import views
 
 urlpatterns=[
+    url(r'^test/',views.test),
     url(r'^scorelistteacher/', views.score_list_teacher),
     url(r'^scoreliststudent/', views.score_list_student),
     url(r'^insertscore/',views.insert_score),
