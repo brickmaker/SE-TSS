@@ -10,6 +10,7 @@ class RegisterCheck(permissions.BasePermission):
             return True
 
 
+
 class StudentCheck(permissions.BasePermission):
     def has_permission(self, request, view):
         url = "/api/student/"
@@ -54,7 +55,7 @@ class FacultyCheck(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         type = request.user.user_type
         if type == 2:
-            if request.user.username == obj.name:
+            if request.user.username == obj.username.username:
                 return True
             else:
                 return False
@@ -80,7 +81,7 @@ class StaffCheck(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         type = request.user.user_type
         if type == 3:
-            if request.user.username == obj.name:
+            if request.user.username == obj.username.username:
                 return True
             else:
                 return False
@@ -100,13 +101,14 @@ class AdminCheck(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         type = request.user.user_type
-        if type == 4:
-            if request.user.username == obj.name:
-                return True
-            else:
-                return False
-        else:
-            return True
+
+        # if type == 4:
+        #    if request.user.username == obj.username:
+        #        return True
+        #    else:
+        #        return False
+        #else
+        return True
 
 
 class CourseCheck(permissions.BasePermission):
@@ -117,6 +119,11 @@ class CourseCheck(permissions.BasePermission):
         return False
 
     def has_object_permission(self, request, view, obj):
-        print(request)
-        print('1')
         return True
+
+class LogCheck(permissions.BasePermission):
+    def has_permission(self, request, view):
+        type = request.user.user_type
+        if type == 4:
+            return True
+        return False

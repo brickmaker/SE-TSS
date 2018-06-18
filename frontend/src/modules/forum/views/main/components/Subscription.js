@@ -5,7 +5,7 @@ import {SectionText, SectionTitle} from "../../../components/util/SectionTitle"
 import {Avatar, Card, Grid, List, ListItem, ListItemAvatar, ListItemIcon, ListItemText} from "material-ui"
 
 const Subscription = ({name, path, posts, history, match}) => {
-    const url = `/forum/${path.college.id}/${path.course.id}${path.teacher ? path.teacher.id : ''}`
+    const url = `/forum/${path.college.id}/${path.course.id}/${path.teacher ? path.teacher.id : ''}`
     return (
         <Grid item xs={6}
               style={{

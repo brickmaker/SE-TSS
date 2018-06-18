@@ -125,7 +125,6 @@
       {
         "collegeId": "collegeid1",
         "pic": "https://api.adorable.io/avatars/144/userpic.png",
-        "pic": "https://api.adorable.io/avatars/144/userpic.png",
         "name": "人文学院",
         "todayPostsNum": 27,
         "totalPostsNum": 3237
@@ -727,6 +726,15 @@
       }
     ]
   },
+  "course_subscribe": {
+    "subscribed": true
+  },
+  "course_unsubscribe": {
+    "subscribed": false
+  },
+  "course_subscribed": {
+    "subscribed": true
+  },
   "course_posts": {
     "data": [
       {
@@ -1011,6 +1019,15 @@
       }
     ]
   },
+  "teacher_subscribe": {
+    "subscribed": true
+  },
+  "teacher_unsubscribe": {
+    "subscribed": false
+  },
+  "teacher_subscribed": {
+    "subscribed": true
+  },
   "post": {
     "id": "pid",
     "path": {
@@ -1034,6 +1051,93 @@
     "error": null,
     "data": [
       {
+        "id": "reply2",
+        "user": {
+          "id": "uid",
+          "name": "梅骨竹心",
+          "college": "计算机科学与技术",
+          "postNum": 37,
+          "pic": "https://api.adorable.io/avatars/144/userpic.png"
+        },
+        "content": "滚滚长江东逝水 浪花淘尽英雄\n是非成败转头空 青山依旧在 几度夕阳红 白发渔樵江渚上 惯看秋月春风 一壶浊酒喜相逢 古今多少事 都付笑谈中\n是非成败转头空 青山依旧在\n几度夕阳红 白发渔樵江渚上\n惯看秋月春风 一壶浊酒喜相逢\n古今多少事 都付笑谈中",
+        "time": "2012-04-23T18:25:43.511Z",
+        "file": "fileurl",
+        "replies": [
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "id": "reply3",
+        "user": {
+          "id": "uid",
+          "name": "梅骨竹心",
+          "college": "计算机科学与技术",
+          "postNum": 37,
+          "pic": "https://api.adorable.io/avatars/144/userpic.png"
+        },
+        "content": "滚滚长江东逝水 浪花淘尽英雄\n是非成败转头空 青山依旧在 几度夕阳红 白发渔樵江渚上 惯看秋月春风 一壶浊酒喜相逢 古今多少事 都付笑谈中\n是非成败转头空 青山依旧在\n几度夕阳红 白发渔樵江渚上\n惯看秋月春风 一壶浊酒喜相逢\n古今多少事 都付笑谈中",
+        "time": "2012-04-23T18:25:43.511Z",
+        "file": null,
+        "replies": [
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          },
+          {
+            "pic": "https://api.adorable.io/avatars/144/userpic.png",
+            "from": "梅骨",
+            "to": "竹心",
+            "content": "滚滚长江东逝水，浪花淘尽英雄…",
+            "time": "2012-04-23T18:25:43.511Z"
+          }
+        ]
+      },
+      {
+        "id": "reply4",
         "user": {
           "id": "uid",
           "name": "梅骨竹心",
@@ -1075,6 +1179,7 @@
         ]
       },
       {
+        "id": "reply5",
         "user": {
           "id": "uid",
           "name": "梅骨竹心",
@@ -1116,6 +1221,7 @@
         ]
       },
       {
+        "id": "reply6",
         "user": {
           "id": "uid",
           "name": "梅骨竹心",
@@ -1157,88 +1263,7 @@
         ]
       },
       {
-        "user": {
-          "id": "uid",
-          "name": "梅骨竹心",
-          "college": "计算机科学与技术",
-          "postNum": 37,
-          "pic": "https://api.adorable.io/avatars/144/userpic.png"
-        },
-        "content": "滚滚长江东逝水 浪花淘尽英雄\n是非成败转头空 青山依旧在 几度夕阳红 白发渔樵江渚上 惯看秋月春风 一壶浊酒喜相逢 古今多少事 都付笑谈中\n是非成败转头空 青山依旧在\n几度夕阳红 白发渔樵江渚上\n惯看秋月春风 一壶浊酒喜相逢\n古今多少事 都付笑谈中",
-        "time": "2012-04-23T18:25:43.511Z",
-        "replies": [
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          }
-        ]
-      },
-      {
-        "user": {
-          "id": "uid",
-          "name": "梅骨竹心",
-          "college": "计算机科学与技术",
-          "postNum": 37,
-          "pic": "https://api.adorable.io/avatars/144/userpic.png"
-        },
-        "content": "滚滚长江东逝水 浪花淘尽英雄\n是非成败转头空 青山依旧在 几度夕阳红 白发渔樵江渚上 惯看秋月春风 一壶浊酒喜相逢 古今多少事 都付笑谈中\n是非成败转头空 青山依旧在\n几度夕阳红 白发渔樵江渚上\n惯看秋月春风 一壶浊酒喜相逢\n古今多少事 都付笑谈中",
-        "time": "2012-04-23T18:25:43.511Z",
-        "replies": [
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          },
-          {
-            "pic": "https://api.adorable.io/avatars/144/userpic.png",
-            "from": "梅骨",
-            "to": "竹心",
-            "content": "滚滚长江东逝水，浪花淘尽英雄…",
-            "time": "2012-04-23T18:25:43.511Z"
-          }
-        ]
-      },
-      {
+        "id": "reply7",
         "user": {
           "id": "uid",
           "name": "梅骨竹心",
@@ -1281,87 +1306,182 @@
       }
     ]
   },
+  "teacher_list": [
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "施青松"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    },
+    {
+      "id": "xxx",
+      "name": "王章野"
+    }
+  ],
+  "course_list": [
+    {
+      "id": 123,
+      "name": "软件工程"
+    },
+    {
+      "id": 234,
+      "name": "编译原理"
+    }
+  ],
+  "college_list": [
+    {
+      "id": 123,
+      "name": "计算机科学与技术学院"
+    },
+    {
+      "id": 456,
+      "name": "xx学院"
+    }
+  ],
   "msgEntries": [
     {
-      "uid": 5,
-      "entries": [
-        {
-          "id": 1,
-          "username": "user1",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 0,
-          "username": "user0",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 2,
-          "username": "user2",
-          "lastMsgContent": "hey"
-        },
-        {
-          "id": 3,
-          "username": "user3",
-          "lastMsgContent": "hey"
-        }
-      ]
+      "id": 1,
+      "username": "user1",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 0,
+      "username": "user0",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 2,
+      "username": "user2",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
+    },
+    {
+      "id": 3,
+      "username": "user3",
+      "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+      "lastMsgContent": "hey"
     }
   ],
   "messages": [
     {
-      "from": 1,
+      "id": "gg",
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 2,
-      "content": "hey sent by 1",
-      "time": "4.30"
+      "content": "一条消息 sent by 1",
+      "time": "2012-04-24T18:25:43.511Z"
     },
     {
-      "from": 0,
-      "to": 4,
-      "content": "hey sent by 0",
-      "time": "4.30"
+      "id": "啊啊",
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "to": 5,
+      "content": "一条消息 sent by 2",
+      "time": "2012-04-24T18:25:43.511Z"
     },
     {
-      "from": 2,
-      "to": 1,
-      "content": "hey sent by 2",
-      "time": "4.30"
-    },
-    {
-      "from": 3,
-      "to": 0,
-      "content": "hey sent by 3",
-      "time": "4.30"
-    },
-    {
-      "from": 4,
-      "to": 2,
-      "content": "hey sent by 4",
-      "time": "4.30"
-    },
-    {
-      "from": 5,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 6,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 5,
-      "to": 2,
-      "content": "hey sent by 5",
-      "time": "4.30"
-    },
-    {
-      "from": 1,
+      "id": "啊啊啊",
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
       "to": 3,
-      "content": "hey sent by 1",
-      "time": "4.30"
+      "content": "一条消息 sent by 5",
+      "time": "2012-04-24T18:25:43.511Z"
+    },
+    {
+      "id": "好吧",
+      "from": {
+        "id": 2,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "to": 5,
+      "content": "一条消息 sent by 2",
+      "time": "2012-04-24T18:25:43.511Z"
+    },
+    {
+      "id": "我也",
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "to": 1,
+      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
+      "time": "2012-04-24T18:25:43.511Z"
+    },
+    {
+      "id": "我也",
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "to": 1,
+      "content": "这是一条很长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长的信息",
+      "time": "2018-06-04T18:25:43.511Z"
+    },
+    {
+      "id": "我也",
+      "from": {
+        "id": 5,
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "to": 1,
+      "content": "一条消息 sent by 5",
+      "time": "2018-06-04T18:30:43.511Z"
+    }
+  ],
+  "newmsgs": [
+    {
+      "from": {
+        "id": 30,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": 2,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": 2,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "content": "一条新消息"
+    },
+    {
+      "from": {
+        "id": 2,
+        "username": "友人A",
+        "avatar": "https://api.adorable.io/avatars/144/userpic.png"
+      },
+      "content": "一条新消息"
     }
   ],
   "search": [
@@ -1370,53 +1490,179 @@
       "resultNum": 54,
       "results": [
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         },
         {
-          "title": "tttttt",
-          "author": "xx",
-          "time": "4.30",
-          "replyCnt": 10,
-          "path": "/ff/fff/fff"
+          "title": "一个帖子的标题",
+          "author": {
+            "username": "王章野",
+            "uid": "uid"
+          },
+          "time": "2012-04-24T18:25:43.511Z",
+          "replyNum": 10,
+          "postid": "postid",
+          "relatedContent": "相关内容",
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          }
         }
       ]
     },
@@ -1425,146 +1671,673 @@
       "resultNum": 54,
       "results": [
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         },
         {
-          "sectionName": "section",
-          "path": "path"
-        },
-        {
-          "sectionName": "section",
-          "path": "path"
+          "path": {
+            "college": {
+              "id": "collegeid",
+              "name": "计算机科学与技术学院"
+            },
+            "course": {
+              "id": "courseid",
+              "name": "软件工程"
+            },
+            "teacher": {
+              "id": "teacherid",
+              "name": "王章野"
+            }
+          },
+          "postNum": 1000,
+          "lastReplyTime": "2012-04-24T18:25:43.511Z"
         }
       ]
     }
   ],
-  "announcements": [
+  "announcements": {
+    "anncNum": 1000,
+    "anncs": [
+      {
+        "title": "提交测试报告",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        },
+        "author": {
+          "username": "王章野"
+        },
+        "content": "提交测试报告",
+        "time": "2012-04-24T18:25:43.511Z"
+      },
+      {
+        "title": "提交测试报告",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        },
+        "author": {
+          "username": "王章野"
+        },
+        "content": "提交测试报告",
+        "time": "2012-04-24T18:25:43.511Z"
+      },
+      {
+        "title": "提交测试报告",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        },
+        "author": {
+          "username": "王章野"
+        },
+        "content": "提交测试报告",
+        "time": "2012-04-24T18:25:43.511Z"
+      },
+      {
+        "title": "提交测试报告",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        },
+        "author": {
+          "username": "王章野"
+        },
+        "content": "提交测试报告",
+        "time": "2012-04-24T18:25:43.511Z"
+      }
+    ]
+  },
+  "hotposts": [
     {
-      "anncNum": 24,
-      "anncs": [
-        {
-          "title": "titttttttttttttle",
-          "path": "sttttttttttttttttts",
-          "author": "teatttttttttttttttttttttcher",
-          "time": "tttttttttttttttt5.2",
-          "content": "contentdddddddtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttddddddddddd"
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
         },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
         },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
-        },
-        {
-          "title": "title",
-          "path": "ss",
-          "author": "teacher",
-          "time": "5.2",
-          "content": "contentdddddddddddddddddd"
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
         }
-      ]
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
+    },
+    {
+      "title": "一个帖子的标题",
+      "author": {
+        "username": "王章野",
+        "uid": "uid"
+      },
+      "time": "2012-04-24T18:25:43.511Z",
+      "lastReplyTime": "2012-04-24T18:25:43.511Z",
+      "replyNum": 10,
+      "postid": "postid",
+      "path": {
+        "college": {
+          "id": "collegeid",
+          "name": "计算机科学与技术学院"
+        },
+        "course": {
+          "id": "courseid",
+          "name": "软件工程"
+        },
+        "teacher": {
+          "id": "teacherid",
+          "name": "王章野"
+        }
+      }
     }
-  ]
+  ],
+  "userStates": [
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    },
+    {
+      "uid": "uid",
+      "username": "Alice",
+      "replyNum": 23,
+      "postNum": 2,
+      "type": "学生"
+    }
+  ],
+  "info": {
+    "用户数": 10000,
+    "历史最高在线数": 9999,
+    "今日注册数": 29,
+    "版块数": 2000
+  },
+  "userinfo": {
+    "uid": 5,
+    "username": "用户名字",
+    "avatar": "https://api.adorable.io/avatars/144/userpic.png",
+    "signature": "♀遈什麼濛蔽叻鉨ㄖㄅ雙yаη，讓鉨看不菿誐る鉨ィ寸cんù。♀",
+    "registrationTime": "2012-04-24T18:25:43.511Z",
+    "replyNum": 10,
+    "postNum": 2,
+    "subscriptionNum": 5,
+    "posts": [
+      {
+        "postId": "111",
+        "title": "一个帖子的标题",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      },
+      {
+        "postId": "111",
+        "title": "一个帖子的标题",
+        "postTime": "2012-04-23T18:25:43.511Z",
+        "path": {
+          "college": {
+            "id": "collegeid",
+            "name": "计算机科学与技术学院"
+          },
+          "course": {
+            "id": "courseid",
+            "name": "软件工程"
+          },
+          "teacher": {
+            "id": "teacherid",
+            "name": "王章野"
+          }
+        }
+      }
+    ]
+  }
 }

@@ -11,11 +11,13 @@ import MoreForums from "./components/MoreForums"
 import {SectionText, SectionTitle} from "../../components/util/SectionTitle"
 import {Announcement as AnnouncementIcon} from '@material-ui/icons'
 import {Message} from "@material-ui/icons/es/index"
+import NewMsgPanel from '../../containers/newmsgpanel';
+import SearchBar from '../../components/searchbar';
 
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("uid");
+        this.props.getSubscriptions("1"); // todo: get uid
     }
 
     render() {
@@ -24,7 +26,7 @@ class Main extends Component {
             <div>
                 <MainBody>
                     <Path isMain/>
-                    <Grid container xs={12}>
+                    <Grid container alignItems={'flex-start'}>
                         <Grid container xs={8}>
                             {
                                 subscriptions.map((sub) => (
@@ -39,35 +41,50 @@ class Main extends Component {
                         </Grid>
                         <Grid container xs={1}></Grid>
                         <Grid container xs={3}>
-                            <div>
-                                <SectionTitle>
-                                    <SectionText
+                            <Grid item xs={12}>
+                                <div style={{padding: '0 20px'}}>
+                                    <div
                                         onClick={() => {
-                                            // history.push('forum/colleges')
+                                            this.props.history.push('/forum/announcements/user/1')
                                         }}
-                                        text={'公告通知'}
                                     >
-                                        <AnnouncementIcon color={'primary'} style={{fontSize: 40}}/>
-                                    </SectionText>
-                                </SectionTitle>
-                                <div style={{
-                                    overflow: 'hidden'
-                                }}>
-                                    <Announcements type="main"/>
+                                        <SectionTitle>
+                                            <SectionText
+                                                onClick={() => {
+                                                    // event.preventDefault();
+                                                    console.log('main click', this.props.history);
+                                                    this.props.history.push('/forum/announcements/user/1')
+                                                }}
+                                                text={'公告通知'}
+                                            >
+                                                <AnnouncementIcon color={'primary'} style={{fontSize: 40}}/>
+                                            </SectionText>
+                                        </SectionTitle>
+                                    </div>
+                                    <Announcements type="main" match={{'params': {"pageNum": 1}}}/>
                                 </div>
-                            </div>
-                            <div>
-                                <SectionTitle>
-                                    <SectionText
+                            </Grid>
+                            <Grid item xs={12}>
+                                <div style={{padding: '0 20px'}}>
+                                    <div
                                         onClick={() => {
-                                            // history.push('forum/colleges')
+                                            this.props.history.push('/forum/messages')
                                         }}
-                                        text={'消息留言'}
                                     >
-                                        <Message color={'primary'} style={{fontSize: 40}}/>
-                                    </SectionText>
-                                </SectionTitle>
-                            </div>
+                                        <SectionTitle>
+                                            <SectionText
+                                                onClick={() => {
+                                                    this.props.history.push('/forum/messages')
+                                                }}
+                                                text={'消息留言'}
+                                            >
+                                                <Message color={'primary'} style={{fontSize: 40}}/>
+                                            </SectionText>
+                                        </SectionTitle>
+                                    </div>
+                                    <NewMsgPanel history={this.props.history}/>
+                                </div>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </MainBody>
@@ -82,8 +99,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getSubscriptions: (uid, token) => {
-            dispatch(getSubscriptions(uid, token));
+        getSubscriptions: (uid) => {
+            dispatch(getSubscriptions(uid));
         },
     }
 };

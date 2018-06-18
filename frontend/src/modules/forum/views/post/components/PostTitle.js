@@ -19,7 +19,10 @@ export const PostTitle = ({title}) => {
                 <Typography variant="title" style={{lineHeight: '36px'}}>
                     {title}
                 </Typography>
-                <Button color={'primary'} onClick={goBottom} variant={'raised'}>回帖</Button>
+                <Button color={'primary'} onClick={() => {
+                    const editor = document.getElementById('forum-editor')
+                    editor.scrollIntoView()
+                }} variant={'raised'}>回帖</Button>
             </CardContent>
         </Card>
     )

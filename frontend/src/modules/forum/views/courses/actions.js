@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config"
+import {withAuthHeader} from "../../utils/api"
 
 export const GET_COURSES_INFO = 'get_courses_info';
 export const GOT_COURSES_INFO = 'got_courses_info';
@@ -32,11 +33,15 @@ export const getCourses = (collegeId, pageId) => {
 }
 
 function fetchCoursesInfo(collegeId) {
-    return fetch(`${ROOT_URL}/api/forum/courses_info?collegeid=${collegeId}`)
+    return fetch(`${ROOT_URL}/api/forum/courses_info?collegeid=${collegeId}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }
 
 function fetchCourses(collegeId, pageId) {
-    return fetch(`${ROOT_URL}/api/forum/courses${DEBUG ? '' : `?collegeid=${collegeId}&pageid=${pageId}`}`)
+    return fetch(`${ROOT_URL}/api/forum/courses${DEBUG ? '' : `?collegeid=${collegeId}&pageid=${pageId}`}`, {
+        headers: withAuthHeader()
+    })
         .then((response) => (response.json()))
 }

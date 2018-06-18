@@ -15,7 +15,7 @@ class ListField(serializers.ListField):
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('question_id', 'description', 'course', 'provider')
+        fields = ('question_id', 'description', 'course', 'provider', 'type')
 
 
 class QuestionDetailSerializer(serializers.ModelSerializer):
@@ -39,6 +39,7 @@ class PaperSerializer(serializers.ModelSerializer):
 
 class PaperDetailSerializer(serializers.ModelSerializer):
     score_list = ListField(child=serializers.IntegerField())
+    #question_id_list = serializers.ManyRelatedField()
 
     class Meta:
         model = Paper
@@ -46,15 +47,6 @@ class PaperDetailSerializer(serializers.ModelSerializer):
 
 
 class ExaminationSerializer(serializers.ModelSerializer):
-    answers = serializers.SerializerMethodField()
-
     class Meta:
         model = Examination
         fields = '__all__'
-
-    def get_answers(self, obj):
-        #print('obj.answers', obj.answers)
-        if obj.answers:
-            import json
-            return json.loads(obj.answers.replace('\'', '\"'))
-        return None

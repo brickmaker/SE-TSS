@@ -5,6 +5,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 from rest_framework.routers import DefaultRouter
 
+
 router = DefaultRouter()
 
 router.register(r'student', StudentViewSet, base_name="student")
@@ -14,6 +15,7 @@ router.register(r'admin', AdminViewSet, base_name='admin')
 router.register(r'course', CourseViewSet, base_name='course')
 router.register(r'department', DepartmentViewSet, base_name='department')
 router.register(r'major', MajorViewSet, base_name='major')
+router.register(r'log', LogViewSet, base_name='log')
 
 urlpatterns = [
     url(r'^get_token$', obtain_jwt_token),
@@ -28,6 +30,9 @@ urlpatterns = [
     url(r'^user$', UserViewSet.as_view()),
     url(r'^login$', Login.as_view()),
     url(r'^batch_student$', BatchStudentView.as_view()),
+    url(r'^batch_faculty$', BatchFacultyView.as_view()),
+    url(r'^batch_staff$', BatchStaffView.as_view()),
     url(r'^course_faculty$', CourseFacultyViewSet.as_view()),
+    url(r'^upload_image$', UploadImageView.as_view()),
     url(r'^', include(router.urls)),  # list/detail all account infomation
 ]
