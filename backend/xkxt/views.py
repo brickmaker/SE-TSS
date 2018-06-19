@@ -178,6 +178,18 @@ class course(APIView):
 
     def get(self, request, format=None):
         if 'uid' in request.GET:
+            uid = request.GET['uid']
+            if(Account.objects.get(username=uid).user_type == 2):
+                teacher = Faculty.objects.get(username=uid)
+                courses = course_teacher_time_classroom_relation.objects.filter(teacher=teacher)
+                ret = []
+                for c in courses:
+                    tmp = {}
+                    tmp['name'] = c.course.name
+                    tmp['time'] = c.time
+                    tmp['id'] = c.id
+                    ret.append(tmp)
+                return JsonResponse(ret, safe=False)
             return JsonResponse(self.get_sched_from_uid(request.GET['uid']), safe=False)
         else:
             userid = request.GET['userid']
@@ -227,7 +239,6 @@ class course(APIView):
                 course_select_relation.objects.filter(student=student).get(course=course).delete()
                 return JsonResponse({'if_ok': True})
         except:
-            print(data)
             return JsonResponse({'if_ok': False})
 
 class course_info(APIView):
@@ -278,7 +289,6 @@ class management(APIView):
             name = request.GET['coursename']
             if 'uid' in request.GET:
                 userid = request.GET['uid']
-                print(userid)
                 student=Student.objects.get(username=userid)
             else:
                 userid = "noflag"
