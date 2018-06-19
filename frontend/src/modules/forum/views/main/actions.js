@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {ROOT_URL} from "../../configs/config"
 import {withAuthHeader} from "../../utils/api"
 
@@ -20,7 +21,7 @@ export const getSubscriptions = (userId) => {
 };
 
 function fetchSubscriptions(userId) {
-    return fetch(`${ROOT_URL}/api/forum/subscriptions`,
+    return axios.get(`${ROOT_URL}/api/forum/subscriptions`,
         {
             headers: withAuthHeader()
         }
