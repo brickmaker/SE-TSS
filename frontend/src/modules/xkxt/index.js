@@ -38,7 +38,7 @@ class Xkxt extends React.Component {
 			this.props.quit();
 			console.log(111);
 		}, 1000*10*60);
-		this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
+		//this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
 	}
 
 	unLoad(e){
