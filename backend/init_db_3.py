@@ -72,17 +72,36 @@ def createProgramRequirement(filename):
 		)
 		prog.save()
 
+def createEvent(filename):
+	from xkxt.models import course_selecting_event
+	wb=xlrd.open_workbook(filename=filename)
+	table=wb.sheets()[0]
+	col_dict=getColumnTitle(table)
+	row=table.nrows
+	for i in range(1,row):
+		event=course_selecting_event(
+			begin_time=table.row_values(i)[col_dict['初选开始']][1:],
+			end_time=table.row_values(i)[col_dict['初选结束']][1:],
+			sec_begin=table.row_values(i)[col_dict['补选开始']][1:],
+			sec_end=table.row_values(i)[col_dict['补选结束']][1:],
+			connection_meanwhile=int(table.row_values(i)[col_dict['最大连接数']][1:])
+		)
+		event.save()
+
 def main():
 	os.environ.setdefault("DJANGO_SETTINGS_MODULE", "top.settings")
 	django.setup()
 
-	c_filename='./xkxt/init_data/course.xlsx'
+	#c_filename='./xkxt/init_data/course.xlsx'
 	p_filename='./xkxt/init_data/program.xlsx'
 	pr_filename='./xkxt/init_data/program_requirement.xlsx'
+	e_filename='./xkxt/init_data/event.xlsx'
 
 	#createCourse(c_filename)
+
 	createProgramForMajor(p_filename)
 	createProgramRequirement(pr_filename)
+	createEvent(e_filename)
  
 if __name__ == '__main__':
 	main()
