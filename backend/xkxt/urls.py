@@ -9,11 +9,12 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
-    url(r'^testdb', testdb.test2),
-    url(r'^courseInfo/$', views.course_info),
-    url(r'^management/$', views.management),
-    url(r'^courseStudent/$', views.course_student),
-    url(r'^course/$', views.course),
+    # url(r'^testdb', testdb.test2),
+    url(r'^courseInfo/$', views.course_info.as_view()),
+    url(r'^management/$', views.management.as_view()),
+    url(r'^courseStudent/$', views.course_student.as_view()),
+    url(r'^course/$', views.course.as_view()),
 	# url(r'^schedule/$', views.schedule),
-    url(r'^program/$', views.cul_prog),	#(?P<uid>[0-9]+)/
+    # url(r'^program/$', views.cul_prog),	#(?P<uid>[0-9]+)/
+    url(r'^program/$', views.cul_prog.as_view()),
 ]

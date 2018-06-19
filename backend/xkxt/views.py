@@ -11,6 +11,9 @@ import json
 from django.db.models import Count, Max
 from datetime import date, datetime  
 from django.db import transaction
+from rest_framework.views import APIView
+from rest_framework import permissions
+# from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck, LogCheck
 
 '''
 class UserViewSet(viewsets.ModelViewSet):
@@ -38,73 +41,7 @@ class MyEncoder(json.JSONEncoder):
         else:  
             s = json.JSONEncoder.default(self, obj)
         return s
-
-def get_prog_from_uid(getuid):
-    is_form=True
-    student = Student.objects.get(username=getuid)
-    culs = student_cul_prog.objects.filter(student=student)
-    s = student_cul_prog_serializer(culs, many=True)
-    if not culs:
-        is_form=False
-        major = Student.objects.get(username=getuid).major
-        culs = major_cul_prog.objects.filter(major=major)
-        s = major_cul_prog_serializer(culs, many=True)
-        req = major_requirement.objects.get(major=major)
-        mmin = req.major_optional_mincredit
-        pmin = req.public_course_mincredit
-
-    dic={'is_form': True, 'public': [], 'major_op': [], 'major_comp': []}
-    dic['is_form']=is_form
-    for var in list(s.data):
-        newdict={}
-        if is_form:
-            newdict['selected']=var['selected']
-        newdict['term']=var['term']
-        newdict.update(var['course'])
-
-        if newdict['course_type'] == 0:
-            dic['public'].append(newdict)
-        elif newdict['course_type'] == 1:
-            dic['major_op'].append(newdict)
-        elif newdict['course_type'] == 2:
-            dic['major_comp'].append(newdict)
-    if not is_form:
-        dic['pmin'] = pmin
-        dic['mmin'] = mmin
-    return dic
-
-def get_sched_from_uid(getuid):
-    student = Student.objects.get(username=getuid)
-    retlist=[]
-    selects = course_select_relation.objects.filter(student=student)
-    for var in selects:
-        newdict={}
-        s = course_select_relation_serializer(var)
-        newdict['state'] = s.data['pass_state']
-        # newdict.update(s.data['course'])
-        newdict['teacher'] = s.data['course']['teacher']['name']
-        newdict['classroom'] = s.data['course']['classroom']['classroom_location']
-        newdict['time'] = s.data['course']['time']
-        newdict['name'] = s.data['course']['course']['name']
-        newdict['credit'] = s.data['course']['course']['credit']
-        newdict['capacity'] = s.data['course']['classroom']['classroom_capacity']
-        newdict['remain'] = get_remain_of_course(var.course)
-        newdict['course_id'] = s.data['course']['id']
-        retlist.append(newdict)
-    return retlist
-
-def get_stu_list_from_cid(courseid):
-    course = course_teacher_time_classroom_relation.objects.get(id=courseid)
-    retlist=[]
-    selects = course_select_relation.objects.filter(course=course)
-    for var in selects:
-        newdict={}
-        s = course_select_relation_serializer(var)
-        newdict['state']=s.data['pass_state']
-        newdict.update(s.data['student'])
-        retlist.append(newdict)
-    return retlist
-
+        
 def get_remain_of_arrage_id(cid):
     course = course_teacher_time_classroom_relation.objects.get(id=cid)
     # courses = course_teacher_time_classroom_relation.objects.filter(course__in=course)
@@ -155,13 +92,46 @@ def make_course_list(rest, userid):
         ret.append(tmp)
     return ret
 
+class cul_prog(APIView):
+    def get_prog_from_uid(self, getuid):
+        is_form=True
+        student = Student.objects.get(username=getuid)
+        culs = student_cul_prog.objects.filter(student=student)
+        s = student_cul_prog_serializer(culs, many=True)
+        if not culs:
+            is_form=False
+            major = Student.objects.get(username=getuid).major
+            culs = major_cul_prog.objects.filter(major=major)
+            s = major_cul_prog_serializer(culs, many=True)
+            req = major_requirement.objects.get(major=major)
+            mmin = req.major_optional_mincredit
+            pmin = req.public_course_mincredit
 
-@csrf_exempt
-def cul_prog(request):
-    if request.method == 'GET': 
-        return JsonResponse(get_prog_from_uid(request.GET['uid']))
+        dic={'is_form': True, 'public': [], 'major_op': [], 'major_comp': []}
+        dic['is_form']=is_form
+        for var in list(s.data):
+            newdict={}
+            if is_form:
+                newdict['selected']=var['selected']
+            newdict['term']=var['term']
+            newdict.update(var['course'])
 
-    elif request.method == 'POST':
+            if newdict['course_type'] == 0:
+                dic['public'].append(newdict)
+            elif newdict['course_type'] == 1:
+                dic['major_op'].append(newdict)
+            elif newdict['course_type'] == 2:
+                dic['major_comp'].append(newdict)
+        if not is_form:
+            dic['pmin'] = pmin
+            dic['mmin'] = mmin
+        return dic
+
+    def get(self, request, format=None):
+        return JsonResponse(self.get_prog_from_uid(request.GET['uid']))
+
+    @transaction.atomic
+    def post(self, request, format=None):
         data=json.loads(request.body.decode('utf-8'))
         uid=data['uid']
         for c in data['courses']:
@@ -174,13 +144,33 @@ def cul_prog(request):
             except:
                 print('unique constrain failed')
 
-        return JsonResponse(get_prog_from_uid(uid))
+        return JsonResponse(self.get_prog_from_uid(uid))
 
-@csrf_exempt
-def course(request):
-    if request.method == 'GET':
+
+class course(APIView):
+    def get_sched_from_uid(self, getuid):
+        student = Student.objects.get(username=getuid)
+        retlist=[]
+        selects = course_select_relation.objects.filter(student=student)
+        for var in selects:
+            newdict={}
+            s = course_select_relation_serializer(var)
+            newdict['state'] = s.data['pass_state']
+            # newdict.update(s.data['course'])
+            newdict['teacher'] = s.data['course']['teacher']['name']
+            newdict['classroom'] = s.data['course']['classroom']['classroom_location']
+            newdict['time'] = s.data['course']['time']
+            newdict['name'] = s.data['course']['course']['name']
+            newdict['credit'] = s.data['course']['course']['credit']
+            newdict['capacity'] = s.data['course']['classroom']['classroom_capacity']
+            newdict['remain'] = get_remain_of_course(var.course)
+            newdict['course_id'] = s.data['course']['id']
+            retlist.append(newdict)
+        return retlist
+
+    def get(self, request, format=None):
         if 'uid' in request.GET:
-            return JsonResponse(get_sched_from_uid(request.GET['uid']), safe=False)
+            return JsonResponse(self.get_sched_from_uid(request.GET['uid']), safe=False)
         else:
             userid = request.GET['userid']
             rest = course_teacher_time_classroom_relation.objects.all()
@@ -198,12 +188,12 @@ def course(request):
                     elif i==3:
                         teachers = Faculty.objects.filter(name__iregex=reg)
                         rest = rest.filter(teacher__in=teachers)
-
                     elif i==4:
                         rest = rest.filter(time__iregex=reg)
             return JsonResponse(make_course_list(rest, userid), safe=False)
 
-    elif request.method == 'POST':
+    @transaction.atomic      
+    def post(self, request, format=None):
         if not is_in_normal_last():
             return JsonResponse({'if_ok': False, 'reason': 'not in normal selecting period'})
         data=json.loads(request.body.decode('utf-8'))
@@ -228,9 +218,8 @@ def course(request):
             print(data)
             return JsonResponse({'if_ok': False})
 
-@csrf_exempt
-def course_info(request):
-    if request.method == 'GET':
+class course_info(APIView):
+    def get(self, request, format=None):
         try:
             chosen = course_teacher_time_classroom_relation.objects.get(id=request.GET['courseid'])
             s = CourseArrangedSerializer(chosen)
@@ -246,15 +235,23 @@ def course_info(request):
             ret['course_exist'] = False
         return JsonResponse(ret, safe=False)
 
-@csrf_exempt
-def course_student(request):
-    if request.method == 'GET':
-        return JsonResponse(get_stu_list_from_cid(int(request.GET['courseid'])), safe=False)
+class course_student(APIView):
+    def get_stu_list_from_cid(self, courseid):
+        course = course_teacher_time_classroom_relation.objects.get(id=courseid)
+        retlist=[]
+        selects = course_select_relation.objects.filter(course=course)
+        for var in selects:
+            newdict={}
+            s = course_select_relation_serializer(var)
+            newdict['state']=s.data['pass_state']
+            newdict.update(s.data['student'])
+            retlist.append(newdict)
+        return retlist
+    def get(self, request, format=None):
+        return JsonResponse(self.get_stu_list_from_cid(int(request.GET['courseid'])), safe=False)
 
-@csrf_exempt
-@transaction.atomic
-def management(request):
-    if request.method == 'GET':
+class management(APIView):
+    def get(self, request, format=None):
         if request.GET['type'] == '0':
             id = course_selecting_event.objects.aggregate(Max('event_id'))['event_id__max']
             event = course_selecting_event.objects.get(event_id=id)
@@ -322,7 +319,9 @@ def management(request):
 
             ret['is_busy'] = is_busy
             return JsonResponse(ret)
-    elif request.method == 'POST':
+
+    @transaction.atomic      
+    def post(self, request, format=None):
         data=json.loads(request.body.decode('utf-8'))
         if data['type'] == 0:
             try:
@@ -355,10 +354,3 @@ def management(request):
             ret['max'] = event.connection_meanwhile
             ret['now'] = event.connection_now
             return JsonResponse(ret)
-        
-
-
-
-
-
-
