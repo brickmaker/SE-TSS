@@ -20,7 +20,7 @@ const styles = theme => ({
 	},
 });
 
-const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes }) => {
+const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes, uid }) => {
 	return (
 		<div className={classes.divStyle}>
 			<Paper elevation={4}>
@@ -37,7 +37,7 @@ const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes }) => {
 					</Tabs>
 				</AppBar>
 				<Typography component="div"  style={{ padding: 8 * 3 }}>
-					{tabsSVValue === 0 && <CourseViewer query={"&uid=0002"}/>}
+					{tabsSVValue === 0 && <CourseViewer query={"&uid="+uid}/>}
 					{tabsSVValue === 1 && <ScheduleTableViewer />}
 				</Typography>
 			</Paper>
@@ -48,6 +48,7 @@ const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes }) => {
 const mapStateToProps = (state, props) => ({
 	tabsSVValue: state.xkxt.tabsSVValue,
 	classes: props.classes,
+	uid: state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

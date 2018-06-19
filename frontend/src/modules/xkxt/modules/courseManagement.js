@@ -25,7 +25,7 @@ const styles0 = theme => ({
 	  width: 200,
 	},
 });
-const DateAndTimePickers = withStyles(styles0)(({ label, value, classes }) => {
+const DateAndTimePickers = withStyles(styles0)(({ label, value, classes, change }) => {
 	return (
 	  <form className={classes.container} noValidate>
 		<TextField
@@ -34,6 +34,7 @@ const DateAndTimePickers = withStyles(styles0)(({ label, value, classes }) => {
 		  type="datetime-local"
 		  defaultValue={value}
 		  className={classes.textField}
+		  onChange={(e) => change(e.target.value)}
 		  InputLabelProps={{
 			shrink: true,
 		  }}
@@ -59,12 +60,32 @@ const styles = theme => ({
 	}
 });
 
+const convertFrom = (s) => {
+	var res;
+	res = s.substr(0,10) + "T" + s.substr(11,5);
+	return res;
+};
+
+const convertTo = (s) => {
+	var res;
+	res = s.substr(0,10) + " " + s.substr(11,5) + ":00";
+	return res;
+};
+
 class CourseManagement extends React.Component {
 	componentWillMount() {
-		this.props.getManagement("type=0", this.props.tabsCMValue);
+		this.props.getManagement("type=0", 0);
+		this.props.getManagement("type=2", 2);
 	}
 	render() {
 		let { tabsCMValue, tabsCMFunc, classes } = this.props;
+		let f_t0, f_t1, s_t0, s_t1;
+		if(Boolean(this.props.time)){
+			this.f_t0 = convertFrom(this.props.time.begin_time);
+			this.f_t1 = convertFrom(this.props.time.end_time);
+			this.s_t0 = convertFrom(this.props.time.sec_begin);
+			this.s_t1 = convertFrom(this.props.time.sec_end);
+		}
 
 		return (
 			<div className={classes.divStyle}>
@@ -83,21 +104,31 @@ class CourseManagement extends React.Component {
 						</Tabs>
 					</AppBar>
 					<Typography component="div"  style={{ padding: 8 * 3 }}>
-						<Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto'}}>
+						<Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto', textAlign:'center'}}>
 							{(tabsCMValue === 0 && Boolean(this.props.time)) && <div>
 								<div className={classes.divStyle2}>
 									<Typography style={{padding:20}}>初选时间</Typography>
-									<DateAndTimePickers label="开始时间" value="2018-05-11T10:30" />
-									<DateAndTimePickers label="结束时间" value="2018-05-16T10:30" />
-									<Button variant="raised" className={classes.buttonStyle}>设定</Button>
+									<DateAndTimePickers label="开始时间" value={this.f_t0} change={v => this.f_t0=v} />
+									<DateAndTimePickers label="结束时间" value={this.f_t1} change={v => this.f_t1=v} />
 								</div>
 								<Divider />
 								<div className={classes.divStyle2}>
 									<Typography style={{padding:20}}>补选时间</Typography>
-									<DateAndTimePickers label="开始时间" value="2018-05-20T10:30" />
-									<DateAndTimePickers label="结束时间" value="2018-05-23T10:30" />
-									<Button variant="raised" className={classes.buttonStyle}>设定</Button>
+									<DateAndTimePickers label="开始时间" value={this.s_t0} change={v => this.s_t0=v} />
+									<DateAndTimePickers label="结束时间" value={this.s_t1} change={v => this.s_t1=v} />
 								</div>
+								<Divider />
+								<Button variant="raised" className={classes.buttonStyle}
+									onClick={() => {
+										this.props.postManagement({
+											type:0, 
+											begin_time:convertTo(this.f_t0), 
+											end_time:convertTo(this.f_t1),
+											sec_begin:convertTo(this.s_t0), 
+											sec_end:convertTo(this.s_t1),
+										}, 0);
+									}}
+								>设定</Button>
 							</div>}
 							{tabsCMValue === 1 && <div>
 								<div className={classes.divStyle2}>
@@ -110,19 +141,24 @@ class CourseManagement extends React.Component {
 								<Divider />
 								<Typography component="div"  style={{ padding: 8 * 3 }}>
 								{Boolean(this.props.management1) &&
-									<CourseViewer data={this.props.management1} />
+									<CourseViewer data={this.props.management1} uuid={this.uid} />
 								}
 								</Typography>
 							</div>}
-							{tabsCMValue === 2 && <div>
+							{tabsCMValue === 2 && Boolean(this.props.management2) && <div>
 								<div className={classes.divStyle2}>
-									<Typography style={{padding:20, fontSize:20}}>当前连接数：120</Typography>
+									<Typography style={{padding:20, fontSize:20}}>当前连接数：{this.props.management2.now}</Typography>
 								</div>
 								<Divider />
 								<div className={classes.divStyle2}>
 									<Typography style={{padding:20}}>设置连接数最大值</Typography>
-									<TextField label="当前最大值：200" />
-									<Button variant="raised" className={classes.buttonStyle}>确定</Button>
+									<TextField 
+										label={"当前最大值："+this.props.management2.max} 
+										onChange={e => this.max=e.target.value}
+									/>
+									<Button variant="raised" className={classes.buttonStyle}
+										onClick={() => this.props.postManagement({type:2, max:this.max}, 2)}
+									>确定</Button>
 								</div>
 							</div>}
 						</Paper>

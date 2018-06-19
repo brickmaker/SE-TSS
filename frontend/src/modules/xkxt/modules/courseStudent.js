@@ -12,8 +12,9 @@ import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
+import Snackbar from '@material-ui/core/Snackbar';
 
-import {getCourseStudents} from '../actions';
+import {getCourseStudents, clearCourseStudent, changeSnackBar} from '../actions';
 
 const styles = theme => ({
 	buttonStyle: {
@@ -33,9 +34,21 @@ class CourseStudent extends React.Component {
 		super();
 	}
 
+	downlaodData(data){
+		var str = "学号,姓名,专业\n";  
+		data.forEach((d) => {
+			str += d.username+","+d.name+","+d.major+"\n";
+		});
+		str =  encodeURIComponent(str);  
+		this.aLink.href = "data:text/csv;charset=utf-8,\ufeff"+str; 
+		this.download = this.text+".csv";
+		this.aLink.click();
+		this.props.clearCourseStudent();
+	}
+
 	render() {
 		let { classes } = this.props;
-		
+
 		return (
 			<div className={classes.divStyle}>
 				<Paper elevation={4}>
@@ -47,17 +60,22 @@ class CourseStudent extends React.Component {
 					<Button variant="raised" className={classes.buttonStyle} onClick={() => {
 						if(this.text) {
 							this.props.getCourseStudents("courseid="+this.text)
-							var str = "学号,姓名,专业\n0002,bob,CS";  
-							str =  encodeURIComponent(str);  
-							this.aLink.href = "data:text/csv;charset=utf-8,\ufeff"+str; 
-							this.download = this.text+".csv";
-							this.aLink.click();
 						}
 					}}>导出</Button>
 					<a ref={n => this.aLink=n} download="downlaod.csv" href="#"></a>
-                    {Boolean(this.props.courseStudent) &&
-                        <Typography style={{padding:20}}>{JSON.stringify(this.props.courseStudent)}</Typography>
-                    }
+					{Boolean(this.props.courseStudent) &&
+						<Typography style={{padding:20}}
+							onChange={this.downlaodData(this.props.courseStudent)}
+						></Typography>
+					}
+					{Boolean(this.props.snackBarState) && <Snackbar
+						open={true}
+						onClose={() => this.props.changeSnackBar()}
+						ContentProps={{
+							'aria-describedby': 'message-id',
+						}}
+						message={<span id="message-id">错误课程ID</span>}
+					/>}
 				</Paper>
 			</div>
 		);
@@ -66,11 +84,14 @@ class CourseStudent extends React.Component {
 
 const mapStateToProps = (state, props) => ({
     classes: props.classes,
-    courseStudent: state.xkxt.courseStudent,
+	courseStudent: state.xkxt.courseStudent,
+	snackBarState: state.xkxt.snackBarState,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-    getCourseStudents: attr => getCourseStudents(dispatch, attr),
+	getCourseStudents: attr => getCourseStudents(dispatch, attr),
+	clearCourseStudent: () => dispatch(clearCourseStudent()),
+	changeSnackBar: () => dispatch(changeSnackBar(null)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(CourseStudent));

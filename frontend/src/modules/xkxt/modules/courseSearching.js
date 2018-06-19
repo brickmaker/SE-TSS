@@ -18,7 +18,7 @@ import CourseViewer from './courseViewer';
 import { changeCSFunc } from '../actions';
 
 
-const LABELS = ["eg.软件工程", "eg.周四7-8节", "eg.玉泉曹西-202", "eg.王章野"];
+const LABELS = ["eg.软件工程", "eg.周四12", "eg.玉泉曹西-202", "eg.王章野"];
 const KEYS = ['name', 'time', 'classroom', 'teacher'];
 
 class OneLine extends React.Component {
@@ -104,7 +104,7 @@ class CourseSearching extends React.Component {
 							<Divider />
 							<div style={{display:'flex', justifyContent:'center'}}>
 								<Button variant="raised" className={classes.buttonStyle} onClick={() => {
-									let query = '&userid=0002';
+									let query = "&userid="+this.props.uid;
 									for(let i in this.TEXT){
 										if(this.BOOLS[i]){
 											let t =  '&' + KEYS[i] + '=';
@@ -134,6 +134,7 @@ class CourseSearching extends React.Component {
 const mapStateToProps = (state, props) => ({
 	classes: props.classes,
 	CS_show: state.xkxt.CS_show,
+	uid: state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

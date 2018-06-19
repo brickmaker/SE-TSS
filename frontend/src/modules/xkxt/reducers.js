@@ -1,6 +1,12 @@
 const initState = {
+    //uid: "2010100003",
+    //uid: "2110100003",
+    //uid: "3150100000",
+    uid: localStorage.username,
+    userInfo: null,
+    toQuit: false,
     isAdmin: true,
-    utility: "主页",
+    utility: "培养方案",
     tabsCCValue: 2,
     tabsSVValue: 0,
     tabsCMValue: 0,
@@ -18,6 +24,7 @@ const initState = {
     time: null,
     management1: null,
     management2: null,
+    snackBarState: null,
 };
 
 export const xkxtReducer = (state = initState, action) => {
@@ -27,7 +34,6 @@ export const xkxtReducer = (state = initState, action) => {
                 utility: action.utility
             });
         case 'TOGGLE_DRAWER':
-            console.log(action.bool);
             return Object.assign({}, state, {
                 bottom: action.bool
             });
@@ -65,41 +71,70 @@ export const xkxtReducer = (state = initState, action) => {
             return Object.assign({}, state, {
                 checkedPFBools: JSON.parse(JSON.stringify(state.checkedPFBools))
             });
+        case 'CLEAR_COURSE_STUDENT':
+            state.courseStudent = null;
+            return state;
+        case 'CHANGE_SNACK_BAR':
+            return Object.assign({}, state, {
+                snackBarState: action.state
+            });
         case 'GET_PROGRAM':
             console.log(action.data);
+            if(!Boolean(action.data)) return state;
             return Object.assign({}, state, {
                 program: action.data
             });
         case 'GET_COURSE':
             console.log(action.data);
+            if(!Boolean(action.data)) return state;
             return Object.assign({}, state, {
                 course: action.data
             });
         case 'POST_COURSE':
             console.log(action.data);
-            if(action.data.if_ok===false)
-                return state;
+            if(!Boolean(action.data)) return state;
+            let con = 1;
+            if(action.data.state===undefined)
+                con=0;
+            if(action.data.if_ok===false){
+                return Object.assign({}, state, {
+                    snackBarState: {type:0, con:con}
+                });
+            }
             let newCourse;
             if(Boolean(state.management1))
                 newCourse = state.management1;
             else
                 newCourse = state.course;
+            console.log(newCourse[action.index])
             newCourse[action.index].state = action.data.state;
+            if(newCourse[action.index].state===undefined)
+                newCourse[action.index].remain += 1;
+            else
+                newCourse[action.index].remain -= 1;
             return Object.assign({}, state, {
-                course: JSON.parse(JSON.stringify(newCourse))
+                course: JSON.parse(JSON.stringify(newCourse)),
+                snackBarState: {type:1, con:con}
             });
         case 'GET_COURSE_INFO': 
             console.log(action.data);
+            if(!Boolean(action.data)) return state;
             return Object.assign({}, state, {
                 courseInfo: action.data
             });
         case 'GET_COURSE_STUDENT': 
             console.log(action.data);
+            if(!Boolean(action.data)) return state;
+            if(action.data===undefined)
+                return Object.assign({}, state, {
+                    snackBarState: 1
+                });
             return Object.assign({}, state, {
                 courseStudent: action.data
             });
         case 'GET_MANAGEMENT': 
             console.log(action.data);
+            if(!Boolean(action.data)) return state;
             if(action.typ===0){
                 return Object.assign({}, state, {
                     time: action.data
@@ -115,8 +150,19 @@ export const xkxtReducer = (state = initState, action) => {
                     management2: action.data
                 });
             }
+            else if(action.typ===3){
+                return Object.assign({}, state, {
+                    userInfo: action.data
+                });
+            }
             else
                 return state;
+        case 'QUIT': 
+            if(Boolean(state.userInfo) && state.userInfo.auth===0)
+                return Object.assign({}, state, {
+                    toQuit: true
+                });
+            return state;
         default:
             return state;
     }

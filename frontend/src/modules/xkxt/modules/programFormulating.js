@@ -10,8 +10,9 @@ import ExpansionPanel, {ExpansionPanelSummary, ExpansionPanelDetails} from 'mate
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from 'material-ui/Button';
 import Checkbox from 'material-ui/Checkbox';
+import Snackbar from '@material-ui/core/Snackbar';
 
-import { checkedPFFunc, postProgram } from '../actions';
+import { checkedPFFunc, postProgram, changeSnackBar } from '../actions';
 
 const CustomTableCell = withStyles(theme => ({
 	head: {
@@ -89,7 +90,7 @@ class ProgramFormulating extends React.Component{
 			<Paper elevation={0} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto'}}>
 				<ExpansionPanel>
 					<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-						<Typography className={classes.heading}>公共课</Typography>
+						<Typography className={classes.heading}>公共课{Boolean(program) && "(最低学分:"+program.pmin+")"}</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						{Boolean(program)?getTable(program.public, 'public'):''}
@@ -102,7 +103,7 @@ class ProgramFormulating extends React.Component{
 				</ExpansionPanel> 
 				<ExpansionPanel>
 					<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-						<Typography className={classes.heading}>专业选修课</Typography>
+						<Typography className={classes.heading}>专业选修课{Boolean(program) && "(最低学分:"+program.mmin+")"}</Typography>
 					</ExpansionPanelSummary>
 					<ExpansionPanelDetails>
 						{Boolean(program)?getTable(program.major_op, 'major_op'):''}
@@ -110,16 +111,33 @@ class ProgramFormulating extends React.Component{
 				</ExpansionPanel> 
 				<Button variant="raised" className={classes.buttonStyle} onClick={() => {
 					let bools = [];
+					let psum=0, msum=0;
 					for(let type in checkedPFBools){
 						for(let key in checkedPFBools[type]){
-							if(checkedPFBools[type][key]) bools.push([program[type][parseInt(key)].course_id, program[type][parseInt(key)].term]);
+							if(checkedPFBools[type][key]){
+								bools.push([program[type][parseInt(key)].course_id, program[type][parseInt(key)].term]);
+								if(type==="public") psum+=program[type][parseInt(key)].credit;
+								if(type==="major_op") msum+=program[type][parseInt(key)].credit;
+							}
 						}
+					}
+					if(psum<program.pmin||msum<program.min){
+						this.props.changeSnackBar(1);
+						return;
 					}
 					for(let item in program['major_comp']) {
 						bools.push([program['major_comp'][item].course_id, program['major_comp'][item].term]);
 					}
-					postProgram({uid:'0002', courses: bools});
+					postProgram({uid:this.props.uid, courses: bools});
 				}}>提交</Button>
+				{Boolean(this.props.snackBarState) && <Snackbar
+					open={true}
+					onClose={() => this.props.changeSnackBar(null)}
+					ContentProps={{
+						'aria-describedby': 'message-id',
+					}}
+					message={<span id="message-id">培养方案制定失败，低于最低学分</span>}
+				/>}
 			</Paper>
 		);
 	}
@@ -129,11 +147,14 @@ const mapStateToProps = (state, props) => ({
     checkedPFBools: state.xkxt.checkedPFBools,
 	classes: props.classes,
 	program: state.xkxt.program,
+	uid: state.xkxt.uid,
+	snackBarState: state.xkxt.snackBarState,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
 	checkedPFFunc: i => event => dispatch(checkedPFFunc(i)),
 	postProgram: (data) => postProgram(dispatch, data),
+	changeSnackBar: (v) => dispatch(changeSnackBar(v)),
 });
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ProgramFormulating));

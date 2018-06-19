@@ -71,7 +71,7 @@ const ProgramViewing = ({ classes, program }) => {
         <Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto', textAlign:'center'}}>
             <Typography className={classes.title0}>培养方案</Typography>
             <Typography className={classes.title2}>
-                计算机科学与技术1502班 李朋洋 3150104666
+                {/*计算机科学与技术1502班 李朋洋 3150104666*/}
             </Typography>
             <Divider />
             <div className={classes.innerDiv}>
