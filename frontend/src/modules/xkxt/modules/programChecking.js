@@ -50,7 +50,7 @@ class ProgramChecking extends React.Component {
 const mapStateToProps = (state, props) => ({
 	classes: props.classes,
 	program: state.xkxt.program,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

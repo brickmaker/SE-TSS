@@ -94,8 +94,9 @@ export const xkxtReducer = (state = initState, action) => {
             console.log(action.data);
             if(!Boolean(action.data)) return state;
             let con = 1;
-            if(action.data.state===undefined)
+            if(action.data.state===undefined){
                 con=0;
+            }
             if(action.data.if_ok===false){
                 return Object.assign({}, state, {
                     snackBarState: {type:0, con:con}

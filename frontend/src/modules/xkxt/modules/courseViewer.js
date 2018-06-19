@@ -135,7 +135,7 @@ const mapStateToProps = (state, props) => ({
 	bottom: state.xkxt.bottom,
 	courseInfo: state.xkxt.courseInfo,
 	snackBarState: state.xkxt.snackBarState,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 	//data: props.data
 });
 

@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from authentication.models import *
 from xkxt.models import *
 from xkxt.serializers import *
 import json
@@ -59,8 +60,15 @@ def is_in_normal_last():
     nowtime = datetime.now()
     if event.begin_time.replace(tzinfo=None) < nowtime and event.end_time.replace(tzinfo=None) > nowtime:
         return True
+    elif event.sec_begin.replace(tzinfo=None) < nowtime and event.sec_end.replace(tzinfo=None) > nowtime:
+        return True
     else:
         return False
+
+CAMPUS = ["紫金港", "玉泉", "西溪", "华家池"]
+def convert_to_classroom(a, b, c):
+    return CAMPUS[a] + b + str(c)
+    
 
 def make_course_list(rest, userid):
     if userid != "noflag":
@@ -75,7 +83,7 @@ def make_course_list(rest, userid):
         tmp['time'] = s['time']
         tmp['teacher'] = s['teacher']['name']
         tmp['course_id'] = str(s['id'])
-        tmp['classroom'] = tmp['classroom_location']
+        tmp['classroom'] = convert_to_classroom(tmp['campus'], tmp['building'], tmp['room'])
         tmp['capacity'] = tmp['classroom_capacity']
         if userid != "noflag":
             # whether in the prog
@@ -158,7 +166,7 @@ class course(APIView):
             newdict['state'] = s.data['pass_state']
             # newdict.update(s.data['course'])
             newdict['teacher'] = s.data['course']['teacher']['name']
-            newdict['classroom'] = s.data['course']['classroom']['classroom_location']
+            newdict['classroom'] = convert_to_classroom(s.data['course']['classroom']['campus'], s.data['course']['classroom']['building'], s.data['course']['classroom']['room'])
             newdict['time'] = s.data['course']['time']
             newdict['name'] = s.data['course']['course']['name']
             newdict['credit'] = s.data['course']['course']['credit']
@@ -194,8 +202,8 @@ class course(APIView):
 
     @transaction.atomic      
     def post(self, request, format=None):
-        if not is_in_normal_last():
-            return JsonResponse({'if_ok': False, 'reason': 'not in normal selecting period'})
+        #if not is_in_normal_last():
+        #    return JsonResponse({'if_ok': False, 'reason': 'not in normal selecting period'})
         data=json.loads(request.body.decode('utf-8'))
         try:
             uid=data['uid']
@@ -206,12 +214,16 @@ class course(APIView):
             related_students = course_select_relation.objects.filter(course=course)
             remain = get_remain_of_course(course)
             if if_select:
+                if not is_in_normal_last():
+                    return JsonResponse({'if_ok': False, 'state': 0, 'reason': 'not in normal selecting period'})
                 if remain > 0 or 'compul' in data:
                     course_select_relation(student=student, course=course).save()
                     return JsonResponse({'if_ok': True, 'state': 0})
                 else:
                     return JsonResponse({'if_ok': False, 'state': 0})
             else:           # 暂时假设随便退课
+                if not is_in_normal_last():
+                    return JsonResponse({'if_ok': False, 'reason': 'not in normal selecting period'})
                 course_select_relation.objects.filter(student=student).get(course=course).delete()
                 return JsonResponse({'if_ok': True})
         except:
@@ -286,6 +298,11 @@ class management(APIView):
             id = course_selecting_event.objects.aggregate(Max('event_id'))['event_id__max']
             event = course_selecting_event.objects.get(event_id=id)
             username = request.GET['uid']
+            usr = Account.objects.get(username=username)
+            if not usr:
+                return JsonResponse({})
+            auth = usr.user_type
+            '''
             student = Student.objects.filter(username=username)
             if student:
                 student = student.get()
@@ -298,23 +315,26 @@ class management(APIView):
                 auth = 2
             else:
                 auth = 3
-            ret['auth'] = auth
-            if request.GET['log'] == '0' and auth == 0:
+            '''
+            #ret['auth'] = auth
+            if request.GET['log'] == '0' and auth == 1:
                 if event.connection_now < event.connection_meanwhile: # and not already_login:
                     event.connection_now += 1
                     event.save()
                     is_busy = False
+                    ret['auth'] = auth
                 else:
                     is_busy = True
-            elif request.GET['log'] == '1' and auth == 0:
+            elif request.GET['log'] == '1' and auth == 1:
                 event.connection_now -= 1
                 event.save()
                 is_busy = False
                 # record.is_login == False
                 # record.save()
-            elif auth == 3:
-                is_busy = True
+            #elif auth == 3:
+            #    is_busy = True
             else:
+                ret['auth'] = auth
                 is_busy = False
 
             ret['is_busy'] = is_busy
@@ -350,7 +370,7 @@ class management(APIView):
             id = course_selecting_event.objects.aggregate(Max('event_id'))['event_id__max']
             event = course_selecting_event.objects.get(event_id=id)
             event.connection_meanwhile = int(data['max'])
-            event.save
+            event.save()
             ret['max'] = event.connection_meanwhile
             ret['now'] = event.connection_now
             return JsonResponse(ret)

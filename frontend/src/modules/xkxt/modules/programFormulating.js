@@ -147,7 +147,7 @@ const mapStateToProps = (state, props) => ({
     checkedPFBools: state.xkxt.checkedPFBools,
 	classes: props.classes,
 	program: state.xkxt.program,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 	snackBarState: state.xkxt.snackBarState,
 });
 

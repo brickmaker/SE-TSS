@@ -56,7 +56,7 @@ const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes, uid }) => {
 const mapStateToProps = (state, props) => ({
 	tabsCCValue: state.xkxt.tabsCCValue,
 	classes: props.classes,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

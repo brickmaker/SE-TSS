@@ -48,7 +48,7 @@ const ScheduleViewing = ({ tabsSVValue, tabsSVFunc, classes, uid }) => {
 const mapStateToProps = (state, props) => ({
 	tabsSVValue: state.xkxt.tabsSVValue,
 	classes: props.classes,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

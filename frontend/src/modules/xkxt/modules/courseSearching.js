@@ -18,8 +18,8 @@ import CourseViewer from './courseViewer';
 import { changeCSFunc } from '../actions';
 
 
-const LABELS = ["eg.软件工程", "eg.周四12", "eg.玉泉曹西-202", "eg.王章野"];
-const KEYS = ['name', 'time', 'classroom', 'teacher'];
+const LABELS = ["eg.软件工程", "eg.周四第1, 2节", "eg.王章野"];//"eg.玉泉曹西-202",
+const KEYS = ['name', 'time', 'teacher'];//'classroom',
 
 class OneLine extends React.Component {
 	constructor() {
@@ -98,9 +98,9 @@ class CourseSearching extends React.Component {
 							<Divider />
 							<OneLine index={1} label={'课程时间'} BOOLS={this.BOOLS} TEXT={this.TEXT} />
 							<Divider />
-							<OneLine index={2} label={'上课地点'} BOOLS={this.BOOLS} TEXT={this.TEXT} />
-							<Divider />
-							<OneLine index={3} label={'授课教师'} BOOLS={this.BOOLS} TEXT={this.TEXT} />
+							{/*<OneLine index={2} label={'上课地点'} BOOLS={this.BOOLS} TEXT={this.TEXT} />
+							<Divider />*/}
+							<OneLine index={2} label={'授课教师'} BOOLS={this.BOOLS} TEXT={this.TEXT} />
 							<Divider />
 							<div style={{display:'flex', justifyContent:'center'}}>
 								<Button variant="raised" className={classes.buttonStyle} onClick={() => {
@@ -134,7 +134,7 @@ class CourseSearching extends React.Component {
 const mapStateToProps = (state, props) => ({
 	classes: props.classes,
 	CS_show: state.xkxt.CS_show,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

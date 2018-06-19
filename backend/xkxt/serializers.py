@@ -14,6 +14,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
+
 class DepartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Department
@@ -32,7 +33,8 @@ class FacultySerializer(serializers.ModelSerializer):
 class ClassroomSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClassRoom
-        fields = ('classroom_location', 'classroom_capacity')
+        #fields = ('classroom_location', 'classroom_capacity')
+        fields = ('classroom_id', 'campus', 'building', 'room', 'classroom_capacity')
 
 class CourseDetailSerializer(serializers.ModelSerializer):
     class Meta:

@@ -38,7 +38,7 @@ class Xkxt extends React.Component {
 			this.props.quit();
 			console.log(111);
 		}, 1000*10*60);
-		//this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
+		this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
 	}
 
 	unLoad(e){
@@ -48,8 +48,8 @@ class Xkxt extends React.Component {
 
 	render(){
 		let { isAdmin, utility, switchUtility, classes, changeCSFunc, tabsSVFunc, tabsCMFunc, program } = this.props;
-		//let userInfo = this.props.userInfo;
-		let userInfo = {auth: parseInt(localStorage.type)};
+		let userInfo = this.props.userInfo;
+		//let userInfo = {auth: parseInt(localStorage.type)};
 		var whatToShow = (<ProgramChecking />);
 		switch(utility){
 			case "培养方案":	
@@ -123,7 +123,7 @@ const mapStateToProps = (state, props) => ({
 	isAdmin: state.xkxt.isAdmin,
 	classes: props.classes,
 	program: state.xkxt.program,
-	uid: state.xkxt.uid,
+	uid: localStorage.username,//state.xkxt.uid,
 	userInfo: state.xkxt.userInfo,
 	toQuit: state.xkxt.toQuit,
 });
