@@ -47,7 +47,9 @@ class Xkxt extends React.Component {
 	}
 
 	render(){
-		let { isAdmin, utility, switchUtility, classes, changeCSFunc, tabsSVFunc, tabsCMFunc, program, userInfo } = this.props;
+		let { isAdmin, utility, switchUtility, classes, changeCSFunc, tabsSVFunc, tabsCMFunc, program } = this.props;
+		//let userInfo = this.props.userInfo;
+		let userInfo = {auth: parseInt(localStorage.type)};
 		var whatToShow = (<ProgramChecking />);
 		switch(utility){
 			case "培养方案":	
@@ -66,16 +68,16 @@ class Xkxt extends React.Component {
 				//whatToShow = ('');
 		}
 		if(Boolean(userInfo)){
-			if(userInfo.auth===1)
+			if(userInfo.auth===2)
 				whatToShow = (<CourseStudent />);
-			else if(userInfo.auth===2)
+			else if(userInfo.auth===3)
 				whatToShow = (<CourseManagement />);
 		}
 
 		const listItems = (
             <div>
                 {Boolean(userInfo) && <List>
-					{userInfo.auth===0 && <div>
+					{userInfo.auth===1 && <div>
 						<ListItem button onClick={() => {tabsCMFunc();switchUtility("培养方案")}} className={classes.listItem}>
 							<ListItemText primary="培养方案" />
 						</ListItem>
@@ -91,12 +93,12 @@ class Xkxt extends React.Component {
 						</ListItem>
 						</div>}
 					</div>}
-					{userInfo.auth===2 &&
+					{userInfo.auth===3 &&
 					<ListItem button onClick={() => {tabsCMFunc();switchUtility("选课管理")}} className={classes.listItem}>
 						<ListItemText primary="选课管理" />
 					</ListItem>
 					}
-					{userInfo.auth===1 &&
+					{userInfo.auth===2 &&
 					<ListItem button onClick={() => {tabsCMFunc();tabsSVFunc();switchUtility("课程导出学生")}} className={classes.listItem}>
 						<ListItemText primary="课程导出学生" />
 					</ListItem>
