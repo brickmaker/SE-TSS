@@ -46,9 +46,9 @@ class PostItem extends Component {
                         display: "inline-block",
                         width: 350,
                     }}>
-                        <Link to={sectionPath["college"]["link"]} style={styles.link}>{sectionPath['college']["name"]} > </Link>
-                        <Link to={sectionPath["course"]["link"]} style={styles.link}>{sectionPath['course']["name"]} > </Link>
-                        <Link to={sectionPath["teacher"]["link"]} style={styles.link}>{sectionPath['teacher']["name"]}</Link>
+                        <Link to={sectionPath["college"]["link"]} style={styles.link}>{sectionPath['college']["name"]}</Link>
+                        <Link to={sectionPath["course"]["link"]} style={styles.link}> > {sectionPath['course']["name"]}</Link>
+                        {sectionPath["teacher"] && <Link to={sectionPath["teacher"]["link"]} style={styles.link}> > {sectionPath['teacher']["name"]}</Link>}
                     </div>
                     <Typography style={{display:"inline-block"}}>{moment(postTime).format("YYYY-MM-DD HH:mm")}</Typography>
                 </div>
