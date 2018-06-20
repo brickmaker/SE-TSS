@@ -9,22 +9,36 @@ from authentication.models import *
 from online_testing.models import *
 from xkxt.models import *
 
+course_data = [
+    {'course_id': '211G0200', 'name': 'Python程序设计', 'credit': 3.0},
+    {'course_id': '061B0170', 'name': '微积分Ⅰ', 'credit': 4.5},
+    {'course_id': '211B0010', 'name': '离散数学及其应用', 'credit': 4.0},
+    {'course_id': '211C0010', 'name': '面向对象程序设计', 'credit': 2.5},
+]
 
 tag_list = ['tree', 'list', 'array', 'set', 'graph', 'queue', 'hash', 'stack']
 faculty_list = []
 course_list = []
 student_list = []
+department_list = []
 
 for faculty in Faculty.objects.all():
     faculty_list.append(faculty)
-    #print(faculty.teacher_course.all())
 
 for course in Course.objects.all():
     course_list.append(course)
-    #print(random.choice(course.faculty.all()))
 
 for student in Student.objects.all():
     student_list.append(student)
+
+def papare_course():
+    for d in course_data:
+        course = Course(course_id=d['course_id'], name=d['name'], course_type=2, credit=d['credit'],
+                        capacity=100, semester=random.randint(0, 6),
+                        department=Department.objects.all().get(name='计算机学院'), assessment='考试',
+                        state=2)
+        course.save()
+        course.faculty.set(random.sample(faculty_list, 2))
 
 s = 'it has been a long day without you my friend, and i will talk ' \
     'you all about it when I see you again. we have come a long day from ' \
@@ -57,8 +71,7 @@ def insert_question():
         )
         question_list.append(question)
 
-    for question in question_list:
-        question.save()
+    Question.objects.bulk_create(question_list)
 
 
 # insert paper
@@ -128,6 +141,7 @@ def insert_exam():
                 print(response.content.decode('utf-8'))
 
 if __name__ == '__main__':
+    papare_course()
     insert_question()
     insert_paper()
     insert_exam()
