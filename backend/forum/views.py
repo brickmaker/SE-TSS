@@ -374,12 +374,14 @@ class teacher(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid, college=collegeid, course=courseid)
             college = models.College.objects.get(pk=collegeid)
             course = models.Course.objects.get(pk=courseid)
+            u = models.User.objects.get(pk=request.user)
         except:
             return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
 
         res = {'college': college.name, 'course': course.name, 'teacher': teacher.name}
         post_num = models.Thread.objects.filter(section=teacher.section).count()
         res['pageNum'] = post_num // post_per_page + 1
+        res['anncPermission'] = True if len(u.admin.filter(id=teacher.section)) else False
         return Response(res, status=status.HTTP_200_OK)
 
         
