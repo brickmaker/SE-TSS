@@ -65,6 +65,23 @@ export const ranges = [
         label: '专业必修课',
     },
 ];
+
+export const titleData = [
+    {
+        value: '教授',
+        label: '教授',
+    },
+    {
+        value: '副教授',
+        label: '副教授',
+    },
+    {
+        value: '讲师',
+        label: '讲师',
+    },
+];
+
+
 export const ranges_term = [
     {
         value: 0,

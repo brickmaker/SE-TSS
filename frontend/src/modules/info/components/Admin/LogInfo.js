@@ -263,7 +263,7 @@ class LogInfo extends React.Component {
                                         <TableRow
                                             hover
                                         >
-                                            <TableCell>{'日期: ' + n.time.substring(0, n.time.indexOf('T')) + ' 时间:' + n.time.substring(n.time.indexOf('T')+1, n.time.indexOf('Z'))}</TableCell>
+                                            <TableCell>{'日期: ' + n.time.substring(0, n.time.indexOf('T')) + ' 时间: ' + n.time.substring(n.time.indexOf('T')+1, n.time.indexOf('Z'))}</TableCell>
                                             <TableCell>{'用户: ' + n.content.substr(n.content.indexOf(': ') + 2, n.content.substring(n.content.indexOf(': ')+2).indexOf(' ')) + ' 内容: ' + n.content.substr(n.content.indexOf(': ') + 2 + n.content.substring(n.content.indexOf(': ') + 2).indexOf(': ') + 2,) }</TableCell>
                                         </TableRow>
                                     );

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 import DropZone from "../DropZone"
 import Bar from "../../../../top/components/Bar";
-import {gender, listItems, otherItems, grade, ranges} from "./StaffData";
+import {gender, listItems, otherItems, grade, ranges, titleData} from "./StaffData";
 import {
     Button,
     Checkbox,
@@ -321,6 +321,7 @@ class AccountInfo extends React.Component {
             account_type: 0,
             type_anchorEl: null,
             username: '',
+            title: '',
             id_number: '',
             email: '',
             name: '',
@@ -432,7 +433,7 @@ class AccountInfo extends React.Component {
             }
 
         }
-     }
+     };
 
     handleAddClose = () => {
         if (this.state.account_type === 0) {
@@ -442,12 +443,12 @@ class AccountInfo extends React.Component {
                 major: '',
                 class_name: '',
             });
-            console.log(this.state.department);
         } else {
             if (this.state.account_type === 1) {
                 this.handleAddFacultyClose();
                 this.setState({
                     department: '',
+                    title: '',
                 });
             }
 
@@ -469,8 +470,6 @@ class AccountInfo extends React.Component {
             data.major = this.state.major;
             data.class_name = this.state.class_name;
             data.user_type = this.state.account_type + 1;
-            data.img = this.state.img;
-            console.log(data);
             fetch(BACKEND_SERVER_URL + BACKEND_API.register_student, {
                 method: 'POST',
                 headers: {
@@ -526,8 +525,7 @@ class AccountInfo extends React.Component {
             data.gender = this.state.gender;
             data.department = this.state.department;
             data.user_type = this.state.account_type + 1;
-            data.img = this.state.img;
-            console.log(data);
+            data.title = this.state.title;
             fetch(BACKEND_SERVER_URL + BACKEND_API.register_faculty, {
                 method: 'post',
                 headers: {
@@ -1173,6 +1171,20 @@ class AccountInfo extends React.Component {
                                 onChange={this.handleDepartmentChange('department')}
                             >
                                 {this.state.department_list.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="职称"
+                                margin="normal"
+                                value={this.state.title}
+                                onChange={this.handleChange('title')}
+                            >
+                                {titleData.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>
