@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 
 import Bar from "../../../../top/components/Bar";
-import {lessonColumnData, listItems, otherItems, ranges, ranges_term} from "./TeacherData";
+import {lessonColumnData, listItems, otherItems, ranges, ranges_term, stateChoices} from "./TeacherData";
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 import Teacher_EnhancedTableHead from './EnhancedTable';
 import {
@@ -199,9 +199,10 @@ class LessonInfo extends React.Component {
     }
     handleInitData = () => {
         // TODO
-        getRes(BACKEND_API.get_course)
+        getRes(BACKEND_API.get_course_faculty)
             .then((data) => {
-                this.setState({originData: data, data: data});
+                let json = JSON.parse(data);
+                this.setState({originData: json, data: json});
             })
             .catch(() => {
                 this.setState({
@@ -311,7 +312,7 @@ class LessonInfo extends React.Component {
             data.faculty = this.state.chipLabel;
             data.semester = this.state.course_term;
             data.department = this.state.department;
-            let url = BACKEND_SERVER_URL + 'api/register_course';
+            let url = BACKEND_SERVER_URL + BACKEND_API.register_course;
             fetch(url,
                 {
                 method: 'post',
@@ -505,7 +506,7 @@ class LessonInfo extends React.Component {
         let selected = this.state.selected;
         this.setState({selected: []});
         selected.forEach((value, index) => {
-            let url = BACKEND_SERVER_URL + 'api/course/' + value + '/';
+            let url = BACKEND_SERVER_URL + BACKEND_API.get_course + value + '/';
             fetch(url, {
                 method: 'delete',
                 headers: {
@@ -586,7 +587,7 @@ class LessonInfo extends React.Component {
                                             </TableCell>
                                             <TableCell>{n.name}</TableCell>
                                             <TableCell>{n.credit}</TableCell>
-                                            <TableCell>{n.state}</TableCell>
+                                            <TableCell>{stateChoices[n.state]}</TableCell>
                                         </TableRow>
                                     );
                                 })}

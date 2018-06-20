@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'forum.apps.ForumConfig',
     'online_testing.apps.OnlineTestingConfig',
     'xkxt.apps.XkxtConfig',
+    'auto_course.apps.AutoCourseConfig',
     
 ]
 

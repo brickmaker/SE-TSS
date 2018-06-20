@@ -12,6 +12,7 @@ export const BACKEND_API = {
     register_student: 'api/info/register_student',
     register_faculty: 'api/info/register_faculty',
     register_staff: 'api/info/register_staff',
+    register_course: 'api/info/register_course',
     get_staff_info: 'api/info/staff/',
     get_student_info: 'api/info/student/',
     get_faculty_info: 'api/info/faculty/',
@@ -35,6 +36,7 @@ export const DEBUG_API = {
     register_student: 'api/register_student',
     register_faculty: 'api/register_faculty',
     register_staff: 'api/register_staff',
+    register_course: 'api/register_course',
     get_staff_info: 'api/staff/',
     get_student_info: 'api/student/',
     get_faculty_info: 'api/faculty/',
@@ -44,4 +46,5 @@ export const DEBUG_API = {
     batch_add_faculty: 'api/batch_faculty',
     batch_add_staff: 'api/batch_staff',
     upload_image: 'api/upload_image',
+
 };
