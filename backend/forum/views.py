@@ -718,7 +718,7 @@ class msgentries(APIView):
     def get(self, request, format=None):
         u = models.User.objects.get(pk=request.user)
 
-        raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
+        raw_datas = models.Message.objects.filter(Q(sender=u) | Q(receiver=u)).order_by('-date')
         #print(raw_datas)
         d = {}
         for rd in raw_datas:

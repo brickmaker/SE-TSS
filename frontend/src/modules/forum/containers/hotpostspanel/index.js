@@ -153,7 +153,7 @@ class HotPostsPanel extends Component {
                                         </MenuItem>
                                         {collegeItems &&
                                             Object.values(collegeItems).map((college) => {
-                                                return <MenuItem value={college.id}>{college.name}</MenuItem>
+                                                return <MenuItem value={college.id} key={college.id}>{college.name}</MenuItem>
                                             })
                                         }
                                     </Select>
@@ -178,7 +178,7 @@ class HotPostsPanel extends Component {
                                         </MenuItem>
                                         {courseItems &&
                                             Object.values(courseItems).map((course) => {
-                                                return (<MenuItem value={course.id}>{course.name}</MenuItem>)
+                                                return (<MenuItem value={course.id} key={course.id}>{course.name}</MenuItem>)
                                             })
                                         }
                                     </Select>
@@ -197,7 +197,7 @@ class HotPostsPanel extends Component {
                                         </MenuItem>
                                         {teacherItems &&
                                             Object.values(teacherItems).map((teacher) => {
-                                                return (<MenuItem value={teacher.id}>{teacher.name}</MenuItem>)
+                                                return (<MenuItem value={teacher.id} key={teacher.id}>{teacher.name}</MenuItem>)
                                             })}
                                     </Select>
                                 </FormControl>
@@ -259,10 +259,10 @@ class HotPostsPanel extends Component {
                                             <TableCell>
                                                 <Link to={sectionPath["college"]["link"]} className={classes.link}>
                                                     {sectionPath['college']["name"]} </Link>
-                                                <Link to={sectionPath["course"]["link"]} className={classes.link}>
-                                                    > {sectionPath['course']["name"]} </Link>
-                                                <Link to={sectionPath["teacher"]["link"]} className={classes.link}>
-                                                    > {sectionPath['teacher']["name"]} </Link>
+                                                {sectionPath['course'] && <Link to={sectionPath["course"]["link"]} className={classes.link}>
+                                                    > {sectionPath['course']["name"]} </Link>}
+                                                {sectionPath['teacher'] && <Link to={sectionPath["teacher"]["link"]} className={classes.link}>
+                                                    > {sectionPath['teacher']["name"]} </Link>}
 
                                             </TableCell>
                                             <TableCell>{hotPost.author.username}</TableCell>

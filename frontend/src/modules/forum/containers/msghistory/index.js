@@ -63,7 +63,7 @@ class MsgHistory extends Component {
                     <div>
                         {msgs &&
                             Object.values(msgs).map((msg) => {
-                                return (<Msg isLeft={selectedId ==msg.from.id} key={msg.from.id + msg.to.id + msg["time"]} message={msg} />);
+                                return (<Msg isLeft={selectedId ==msg.from.id} key={msg.from.id + msg.to.id + msg["time"]+msg.content} message={msg} />);
                             })
                         }
                     </div>

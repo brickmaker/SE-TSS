@@ -11,6 +11,7 @@ import ForumInfoPanel from '../../containers/foruminfopanel';
 import { MainBody } from '../../components/util/MainBody';
 import { Path } from '../../components/util/Path';
 import Redirect from 'react-router/Redirect';
+import { leaveMgr } from './actions';
 
 const styles = {
     container: {
@@ -20,6 +21,10 @@ const styles = {
 };
 
 class Management extends Component {
+    componentWillUnmount(){
+        this.props.leaveMgr();
+    }
+
     render() {
         const { classes } = this.props;
         const path = { 'management': { 'name': "管理", 'link': '/forum/management' } };
@@ -83,6 +88,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    leaveMgr: ()=>{
+        dispatch(leaveMgr());
+    }
 });
 
 export default compose(connect(mapStateToProps, mapDispatchToProps), withStyles(styles))(Management);
