@@ -517,7 +517,8 @@ class comment(APIView):
     
         try:
             models.Reply_reply.objects.create(from_uid_id=from_id.username,to_uid_id=to_id,content=content,reply_id_id=replyId)
-        except:
+        except Exception as e:
+            print(e)
             return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -696,7 +697,7 @@ class reply(APIView):
             t_data['time'] = data.date
             t_data['replies'] = [
                 {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
-                 'pic': rr.from_uid.avatar.url,
+                 'pic': rr.from_uid.avatar.url, 'toId': rr.to_uid.id.username
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
