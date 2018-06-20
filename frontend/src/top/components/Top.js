@@ -45,7 +45,7 @@ class Top extends Component {
                             <Grid container>
                                 <SubSystem name={'基础信息'} uri={'info'}/>
                                 <SubSystem name={'自动排课'} uri={'autoCourse'}/>
-                                <SubSystem name={'subsystem3'} uri={''}/>
+                                <SubSystem name={'选课系统'} uri={'xkxt'}/>
                                 <SubSystem name={'论坛'} uri={'forum'}/>
                                 <SubSystem name={'subsystem5'} uri={''}/>
                                 <SubSystem name={'subsystem6'} uri={''}/>
