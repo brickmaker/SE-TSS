@@ -98,14 +98,14 @@ def init_course():
     models.Course.objects.all().delete()
     
     objs = []    
-    def create(id,name,section_id,college_id):
-        objs.append(models.Course(id=id,name=name,section_id=section_id,college_id=college_id))
+    def create(id,name,section_id,college_id,code):
+        objs.append(models.Course(id=id,name=name,section_id=section_id,college_id=college_id,code=code))
        
-    create(id=1, name='软件工程', section_id=36, college_id=34)
-    create(id=2, name='计算理论', section_id=37, college_id=34)
-    create(id=3, name='计算机图形学', section_id=38, college_id=34)
-    create(id=4, name='汇编语言', section_id=39, college_id=34)
-    create(id=5, name='密码学', section_id=40, college_id=34)
+    create(id=1, name='软件工程', section_id=36, college_id=34,code="051F0600")
+    create(id=2, name='计算理论', section_id=37, college_id=34,code="211G0220")
+    create(id=3, name='计算机图形学', section_id=38, college_id=34,code="061B0180")
+    create(id=4, name='汇编语言', section_id=39, college_id=34,code="211B0010")
+    create(id=5, name='密码学', section_id=40, college_id=34,code="21191790")
     
     models.Course.objects.bulk_create(objs)
 
