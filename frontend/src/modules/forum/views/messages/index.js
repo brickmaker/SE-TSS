@@ -135,7 +135,7 @@ class Messages extends Component {
                                                     </div>
                                                 </div>
                                                 <div className={classes.send}>
-                                                    <Button variant="raised" onClick={
+                                                    <Button variant="raised"color="primary" onClick={
                                                         (event) => {
                                                             event.preventDefault();
                                                             if (!content || content.length == 0) {

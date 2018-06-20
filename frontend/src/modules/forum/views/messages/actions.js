@@ -121,6 +121,7 @@ export function getMsgEntries(uid, selectedId, pageSize) {
         dispatch({ type: MSGENTRIES_REQUEST });
         // const headers = withAuthHeader();
         // console.log("msgentries", headers);
+        uid = localStorage.getItem('username');
         axios.get(`${ROOT_URL}/api/forum/msgentries`, {
             params: {
                 uid: uid,
