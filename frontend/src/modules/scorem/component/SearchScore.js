@@ -64,7 +64,7 @@ class SearchScore extends Component {
 
 
   render() {
-    if(this.props.user.type==="t"){
+    if(this.props.user.type==="Teacher"){
       return <Paper >
         <Table >
           <TableHead >
@@ -101,7 +101,7 @@ class SearchScore extends Component {
           </TableBody>
         </Table>
       </Paper>;
-    }else if(this.props.user.type==="s"){
+    }else if(this.props.user.type==="Student"){
       return (
         <Paper >
           <Table >

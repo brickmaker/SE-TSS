@@ -48,7 +48,7 @@ class Top extends Component {
                                 <SubSystem name={'subsystem3'} uri={''}/>
                                 <SubSystem name={'论坛'} uri={'forum'}/>
                                 <SubSystem name={'subsystem5'} uri={''}/>
-                                <SubSystem name={'subsystem6'} uri={''}/>
+                                <SubSystem name={'成绩管理'} uri={'scorem'}/>
                             </Grid>
                         </div>
                     </div>

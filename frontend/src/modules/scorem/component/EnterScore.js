@@ -64,38 +64,14 @@ class EnterScore extends Component {
     }
   };
 
-  findtname(id) {
-    const entity = this.props.database.teacher.find(ele => {
-      return ele.tid === id;
-    });
-    if (entity !== undefined) {
-      return entity.tname;
-    } else {
-      return "not found";
-    }
-
-  };
-
-  findsname(id) {
-    const entity = this.props.database.student.find(ele => {
-      return ele.sid === id;
-    });
-    if (entity !== undefined) {
-      return entity.sname;
-    } else {
-      return "not found";
-    }
-  };
-
   render() {
     const {tab, changeTab_enter} = this.props;
-    if (this.props.user.type === 't') {
+    if (this.props.user.type === 'Teacher') {
       return <div>
         <Paper>
           <Tabs value={tab} onChange={changeTab_enter}>
             <Tab value={1} label="逐条录入"/>
             <Tab value={2} label="批量录入"/>
-            <Tab value={3} label="修改成绩"/>
           </Tabs>
           <div style={{margin: "inline-block"}}>
             {tab === 1 && <div style={{textAlign: 'center'}}>
@@ -129,7 +105,7 @@ class EnterScore extends Component {
                               onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
               <Button variant={"contained"}
                       onClick={() => {
-                        this.props.pushData(new Take(this.state.enter_cid, this.findcname(this.state.enter_cid), this.props.user.id, this.findtname(this.props.user.id), this.state.enter_sid, this.findsname(this.state.enter_sid), parseInt(this.state.enter_score, 10),this.findcdate(this.state.enter_cid)));
+                        this.props.pushData(new Take(this.state.enter_cid, this.findcname(this.state.enter_cid), this.props.user.id, null, this.state.enter_sid, null, parseInt(this.state.enter_score, 10),this.findcdate(this.state.enter_cid)));
                         alert("录入成功-学号：" + this.state.enter_sid + " 课程号：" + this.state.enter_cid + " 教师：" + this.props.user.name + " 分数：" + this.state.enter_score)
                       }}>提交</Button></div>}
 
@@ -161,59 +137,11 @@ class EnterScore extends Component {
                       onClick={this.submitFile.bind(this)}>提交</Button>
             </div>}
 
-            {tab === 3 && <div style={{textAlign: 'center'}}>
-              <div>
-                <FormControl>
-                  <InputLabel>课程</InputLabel>
-                  <Select
-                    native
-                    style={{width: "120"}}
-                    value={this.state.enter_cid}
-                    onChange={(e) => this.setState({[e.target.name]: e.target.value})}
-                    inputProps={{name: 'enter_cid',}}
-                  >
-                    <option value=""/>
-                    {this.props.database.course.map(c => {
-                      if (c.tid === this.props.user.id) {
-                        return <option value={c.cid}>{c.cname}</option>
-                      }
-                    })}
-                  </Select>
-                </FormControl>
-              </div>
-
-              <div><TextField name={"enter_sid"}
-                              helperText={"必填"}
-                              label={"学号"}
-                              value={this.state.enter_sid}
-                              onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
-              <div><TextField name={"enter_score"}
-                              helperText={"必填"}
-                              label={"分数"}
-                              value={this.state.enter_score}
-                              onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
-              <Button variant={"contained"}
-                      onClick={() => {
-                        const item = this.props.data.find(ele => {
-                          return (ele.cid === this.state.enter_cid && ele.sid === this.state.enter_sid)
-                        });
-                        if (item !== undefined) {
-                          const index = this.props.data.indexOf(item);
-                          this.props.deleteData(index);
-                          this.props.pushData(new Take(this.state.enter_cid, this.props.user.id, this.state.enter_sid, parseInt(this.state.enter_score, 10)));
-                          alert("修改成功-学号：" + this.state.enter_sid + " 课程号：" + this.state.enter_cid + " 教师：" + this.props.user.name + " 分数：" + this.state.enter_score)
-                        } else {
-                          alert("您修改的条目尚未录入");
-                        }
-                      }}>提交</Button></div>}
-
             <div style={{height: "10px", width: "10px"}}/>
           </div>
         </Paper>
       </div>
-    } else if (this.props.user.type === 's') {
-      return <div><Paper>请先登录</Paper></div>
-    } else {
+    } else  {
       return <div><Paper>请先登录</Paper></div>
     }
   }

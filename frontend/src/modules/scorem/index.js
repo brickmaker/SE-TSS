@@ -16,7 +16,7 @@ import AnaScore from './component/AnaScore';
 import ApplicationPage from './component/Application';
 import ScoreRequest from './component/ScoreRequest';
 
-import {Take, newTake} from "./utils";
+import {Take, newTake, Course} from "./utils";
 
 import Bar from "../../top/components/Bar"
 import ListItem from '@material-ui/core/ListItem';
@@ -116,26 +116,27 @@ class ScoreManagement extends Component {
   constructor(props) {
     super(props);
     this.data = [];
-
     this.user = {
-      // name: "学生A",
-      // id: "3150100001",
-      // type: "s",
-      name: "教师A",
-      id: "2110100001",
-      type: "t",
+      type: store.getState().info.auth.type,
+      id: store.getState().info.auth.username,
     };
     this.database = {
       course: [],
     };
+  }
 
+  componentDidMount() {
+    this.getInitData();
+  }
 
-    if (this.user.type === 's') {
+  getInitData() {
+    if (this.user.type === 'Student') {
       fetch("http://127.0.0.1:8000/api/score/scoreliststudent/", {
         method: "POST",
         // mode: "no-cors",
         headers: {
           'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
         },
         body: 'sid=' + this.user.id
       }).then(function (res) {
@@ -147,19 +148,21 @@ class ScoreManagement extends Component {
       }, function (e) {
         alert("对不起，服务器产生错误");
       }).then(data => {
-        data.map(s => {
-          this.data.push(new Take(s['course_cid'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
-          this.addCourse(s['course'], s['course_name'], s['test_date']);
-
-        });
-        this.forceUpdate();
+        if (data !== undefined) {
+          data.map(s => {
+            this.data.push(new Take(s['course_cid'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
+            this.addCourse(s['course_cid'], s['course_name'], s['test_date']);
+          });
+          this.props.history.push('/scorem/search');
+        }
       });
-    } else if (this.user.type === 't') {
+    } else if (this.user.type === 'Teacher') {
       fetch("http://127.0.0.1:8000/api/score/scorelistteacher/", {
         method: "POST",
         // mode: "no-cors",
         headers: {
           'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
         },
         body: 'pid=' + this.user.id
       }).then(function (res) {
@@ -173,19 +176,26 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           data.map(s => {
-            this.data.push(new Take(s['course'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
-            this.addCourse(s['course'], s['course_name'], s['test_date']);
+            console.log(s);
+            this.data.push(new Take(s['course_cid'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
+            this.addCourse(s['course_cid'], s['course_name'], s['test_date']);
           });
-          this.forceUpdate();
+          this.props.history.push('/scorem/search');
         }
       });
+    } else {
+      this.props.history.push('/');
     }
   }
 
 
   addCourse(id, name, test_date) {
-    if (!this.findcname(id)) {
-      this.database.course.push({cid: id, cname: name, test_date: test_date});
+    const entity = this.database.course.find(ele => {
+      return ele.cid === id;
+    });
+    // console.log("try " + id + ',find ' + entity);
+    if (entity === undefined) {
+      this.database.course.push(new Course(id,name,test_date));
     }
   }
 
@@ -201,21 +211,19 @@ class ScoreManagement extends Component {
       // mode: "no-cors",
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        Authorization: 'JWT ' + localStorage.getItem('token'),
       },
       // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
       body: 'test=' + JSON.stringify(newtake)
     }).then(function (res) {
       if (res.ok) {
         alert("批量录入成功");
-        this.forceUpdate();
-        return res.json();
+        this.props.history.push(`${this.props.url}/enter`);
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
       alert("对不起，服务器产生错误");
-    }).then(res => {
-      console.log(res);
     })
 
   }
@@ -229,6 +237,7 @@ class ScoreManagement extends Component {
       // mode: "no-cors",
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        Authorization: 'JWT ' + localStorage.getItem('token'),
       },
       // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
       body: 'test=' + JSON.stringify(newtake)
@@ -236,7 +245,7 @@ class ScoreManagement extends Component {
     }).then(function (res) {
       if (res.ok) {
         alert("录入成功");
-        this.forceUpdate();
+        this.props.history.push(`${this.props.url}/enter`);
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }
@@ -255,19 +264,24 @@ class ScoreManagement extends Component {
     const {match} = this.props;
     const listItems = (
       <div>
+        {(this.user.type === 'Student' || this.user.type === 'Teacher') &&
         <ListItem component={Link} to={`${match.url}/search`} button>
           <ListItemIcon>
             <SearchIcon/>
           </ListItemIcon>
           <ListItemText primary="成绩查询"/>
         </ListItem>
-        <Divider/>
+        }
+        {this.user.type === 'Teacher' &&
+        <Divider/>}
+        {this.user.type === 'Teacher' &&
         <ListItem component={Link} to={`${match.url}/enter`} button>
           <ListItemIcon>
             <MessageIcon/>
           </ListItemIcon>
           <ListItemText primary="成绩录入"/>
         </ListItem>
+        }
         <Divider/>
         <ListItem component={Link} to={`${match.url}/analysis`} button>
           <ListItemIcon>
@@ -275,20 +289,26 @@ class ScoreManagement extends Component {
           </ListItemIcon>
           <ListItemText primary="成绩分析"/>
         </ListItem>
-        <Divider/>
+        {this.user.type === 'Teacher' &&
+        <Divider/>}
+        {this.user.type === 'Teacher' &&
         <ListItem component={Link} to={`${match.url}/request`} button>
           <ListItemIcon>
             <MessageIcon/>
           </ListItemIcon>
           <ListItemText primary="成绩修改"/>
         </ListItem>
-        <Divider/>
+        }
+        {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
+        <Divider/>}
+        {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
         <ListItem component={Link} to={`${match.url}/apply`} button>
           <ListItemIcon>
             <MessageIcon/>
           </ListItemIcon>
           <ListItemText primary="修改审批"/>
         </ListItem>
+        }
       </div>
     );
 
@@ -304,6 +324,7 @@ class ScoreManagement extends Component {
                                                                                 data={this.data}
                                                                                 user={this.user}
                                                                                 database={this.database}/>}/>
+            {this.user.type === 'Teacher' &&
             <Route path={`${match.url}/enter`} render={(props) => <EnterScore {...props}
                                                                               pushData={take => this.pushData(take)}
                                                                               pushDatas={take => this.pushDatas(take)}
@@ -311,27 +332,25 @@ class ScoreManagement extends Component {
                                                                               user={this.user}
                                                                               data={this.data}
                                                                               database={this.database}/>}/>
+            }
             <Route path={`${match.url}/analysis`} render={(props) => <AnaScore {...props}
                                                                                topicList={testAna.topicList}
                                                                                data={testAna.data}
                                                                                scoreListName={testAna.scoreListName}/>}/>
+            {this.user.type === 'Teacher' &&
             <Route path={`${match.url}/request`} render={(props) => <ScoreRequest {...props}
-                                                                                  database={this.database}/>}/>
+                                                                                  database={this.database}
+                                                                                  user={this.user}/>}/>
+            }
+            {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
             <Route path={`${match.url}/apply`} render={(props) => <ApplicationPage {...props}
                                                                                    data={testApp}/>}/>
+            }
           </Switch>
         </div>
       </Bar>
     );
   }
-
-
-  findcname(id) {
-    const entity = this.database.course.find(ele => {
-      return ele.cid === id;
-    });
-    return entity !== undefined;
-  };
 }
 
 

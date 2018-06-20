@@ -50,7 +50,7 @@ def createScore():
 
     course_select_relations=models.course_select_relation.objects.all()
     for i in range(course_select_relations.count()):
-        create(course_select_info=course_select_relations[i],score=i%100)
+        create(course_select_info=course_select_relations[i],score=0)
 
 def createCourse(filename):
     from authentication.models import Course, Department, Faculty
