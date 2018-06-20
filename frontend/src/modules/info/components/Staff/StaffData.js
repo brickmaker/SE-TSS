@@ -55,6 +55,12 @@ export const otherItems = (
     </div>
 );
 
+export const stateChoices =  {
+    0: '不通过',
+    1: '待审批',
+    2: '已通过'
+};
+
 export const lessonColumnData = [
     {value: 'course_id', label: '课程号'},
     {value: 'name', label: '课程名'},
