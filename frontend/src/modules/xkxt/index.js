@@ -37,7 +37,7 @@ class Xkxt extends React.Component {
 		setTimeout(()=>{
 			this.props.quit();
 			console.log(111);
-		}, 1000*10*60);
+		}, 1000*1*60);
 		this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
 	}
 
@@ -109,11 +109,27 @@ class Xkxt extends React.Component {
 
 		return (
 			<div>
-				{Boolean(localStorage.username) && <Bar listItems={listItems}>
+			{Boolean(localStorage.username) && !this.props.toQuit &&
+				<Bar listItems={listItems}>
 					<div>
 						{Boolean(userInfo) && whatToShow}
 					</div>
-				</Bar>}
+				</Bar>
+			}
+			{Boolean(localStorage.username) && this.props.toQuit && 
+				<Typography variant="title" color="inherit"
+					style={{marginTop:100, marginLeft:100}} 
+				>
+					您的登录时间太久，请重新登录
+				</Typography>
+			}
+			{!Boolean(localStorage.username) &&
+				<Typography variant="title" color="inherit"
+					style={{marginTop:100, marginLeft:100}} 
+				>
+					您还没有登录，请您先登录
+				</Typography>
+			}
 			</div>
         );
 	}
