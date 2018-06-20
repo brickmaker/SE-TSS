@@ -381,7 +381,7 @@ class teacher(APIView):
         res = {'college': college.name, 'course': course.name, 'teacher': teacher.name}
         post_num = models.Thread.objects.filter(section=teacher.section).count()
         res['pageNum'] = post_num // post_per_page + 1
-        res['anncPermission'] = True if len(u.admin.filter(id=teacher.section)) else False
+        res['anncPermission'] = True if len(u.admin.filter(id=teacher.section.id)) else False
         return Response(res, status=status.HTTP_200_OK)
 
         
