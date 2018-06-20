@@ -39,6 +39,13 @@ export const listItems = (
     </div>
 );
 
+export const stateChoices =  {
+    0: '不通过',
+    1: '待审批',
+    2: '已通过'
+};
+
+
 export const otherItems = (
     <div>
         <ListItem component={Link} to={"/main"} button>
