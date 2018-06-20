@@ -8,7 +8,7 @@ const initialState = {
     results: {},
     resultNum: 0,
     isFetching: false,
-    pageSize: 1,
+    pageSize: 5,
     pageNum: undefined,
     errors: {},
 }
