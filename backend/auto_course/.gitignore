@@ -1,0 +1,4 @@
+__pycache__/
+migrations/
+*.py[cod]
+.DS_Store

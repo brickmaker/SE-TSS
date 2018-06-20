@@ -878,7 +878,8 @@
     "college": "计算机科学与技术学院",
     "course": "软件工程",
     "teacher": "王章野",
-    "pageNum": 4
+    "pageNum": 4,
+    "anncPermission": true
   },
   "teacher_posts": {
     "data": [

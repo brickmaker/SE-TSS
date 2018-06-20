@@ -64,7 +64,7 @@ const getCourse = (d, id) => {
         case 7: return d["111213"] ? d["111213"] : (d["1112"] ? d["1112"].concat(["——————"]) : "");
         default: return "";
     }
-}
+};
 var idt=0;
 const getCourseCell = (course) => {
     return (
@@ -77,59 +77,72 @@ const getCourseCell = (course) => {
             );})}
         </CustomTableCell>
     );
-}
+};
+const convertFrom = (s) => {
+    let res = {};
+    s.forEach((d) => {
+        if(Boolean(d.time)){
+            let day = d.time.substr(1, 1);//周一
+            let t = d.time.substr(3, d.time.length-4).replace(', ', '').replace(', ', '');//周一第3, 4, 5节
+            if(!(day in res))
+                res[day] = {};
+            res[day][t] = [d.name, d.classroom];
+        }
+    });
+    return res;
+};
 
-const ScheduleTableViewer = ({ classes }) => {
-    var courses = {
-        "一": {
-            "345": ["编译原理", "玉泉曹西-201"],
-        },
-        "二": {
-            "345": ["计算机网络", "玉泉教7-308"],
-        },
-        "四": {
-            "78": ["软件工程", "玉泉曹西-202"],
-        },
-    };
+class ScheduleTableViewer extends React.Component {
+    render(){
+        let { classes } = this.props;
+        /*let courses = convertFrom([
+            {name:"编译原理", classroom:"玉泉曹西-201", time:"周一345节"},
+            {name:"计算机网络", classroom:"玉泉教7-308", time:"周二345节"},
+            {name:"软件工程", classroom:"玉泉曹西-202", time:"周四78节"},
+        ]);*/
+        let courses = convertFrom(this.props.course);
+        console.log(courses);
 
-    return (
-        <Paper elevation={2} className={classes.root}>
-            <Table styles={{border:1}}>
-				<TableHead>
-					<TableRow key="0">
-                        <CustomTableCell style={{width:30}}>时间</CustomTableCell>
-						<CustomTableCell className={classes.cell0}>星期一</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期二</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期三</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期四</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期五</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期六</CustomTableCell>
-                        <CustomTableCell className={classes.cell0}>星期日</CustomTableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{data.map(n => {
-					return (
-                        <TableRow className={classes.row} key={n.id} style={{fontStyle:{color:'red'}}}>
-                            { n.id===3||n.id===6||n.id===8 ? <CustomTableCell>{n.label}</CustomTableCell>
-                             : <CustomTableCell className={classes.cell}>{n.label}</CustomTableCell>}
-                            {getCourseCell(courses["一"] ? getCourse(courses["一"], n.id) : "")}
-                            {getCourseCell(courses["二"] ? getCourse(courses["二"], n.id) : "")}
-                            {getCourseCell(courses["三"] ? getCourse(courses["三"], n.id) : "")}
-                            {getCourseCell(courses["四"] ? getCourse(courses["四"], n.id) : "")}
-                            {getCourseCell(courses["五"] ? getCourse(courses["五"], n.id) : "")}
-                            {getCourseCell(courses["六"] ? getCourse(courses["六"], n.id) : "")}
-                            {getCourseCell(courses["日"] ? getCourse(courses["七"], n.id) : "")}
+        return (
+            <Paper elevation={2} className={classes.root}>
+                <Table styles={{border:1}}>
+                    <TableHead>
+                        <TableRow key="0">
+                            <CustomTableCell style={{width:30}}>时间</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期一</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期二</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期三</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期四</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期五</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期六</CustomTableCell>
+                            <CustomTableCell className={classes.cell0}>星期日</CustomTableCell>
                         </TableRow>
-					);})}
-				</TableBody>
-			</Table>
-        </Paper>
-    );
+                    </TableHead>
+                    <TableBody>
+                        {data.map(n => {
+                        return (
+                            <TableRow className={classes.row} key={n.id} style={{fontStyle:{color:'red'}}}>
+                                { n.id===3||n.id===6||n.id===8 ? <CustomTableCell>{n.label}</CustomTableCell>
+                                : <CustomTableCell className={classes.cell}>{n.label}</CustomTableCell>}
+                                {getCourseCell(courses["一"] ? getCourse(courses["一"], n.id) : "")}
+                                {getCourseCell(courses["二"] ? getCourse(courses["二"], n.id) : "")}
+                                {getCourseCell(courses["三"] ? getCourse(courses["三"], n.id) : "")}
+                                {getCourseCell(courses["四"] ? getCourse(courses["四"], n.id) : "")}
+                                {getCourseCell(courses["五"] ? getCourse(courses["五"], n.id) : "")}
+                                {getCourseCell(courses["六"] ? getCourse(courses["六"], n.id) : "")}
+                                {getCourseCell(courses["日"] ? getCourse(courses["日"], n.id) : "")}
+                            </TableRow>
+                        );})}
+                    </TableBody>
+                </Table>
+            </Paper>
+        );
+    }
 };
 
 const mapStateToProps = (state, props) => ({
-	classes: props.classes,
+    classes: props.classes,
+    course: state.xkxt.course,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
