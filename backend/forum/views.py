@@ -699,7 +699,7 @@ class reply(APIView):
             t_data['time'] = data.date
             t_data['replies'] = [
                 {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
-                 'pic': rr.from_uid.avatar.url,
+                 'pic': rr.from_uid.avatar.url, 'toId': rr.to_uid.id.username
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]

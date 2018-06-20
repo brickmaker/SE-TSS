@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getSubscriptions} from "./actions";
@@ -13,11 +14,23 @@ import {Announcement as AnnouncementIcon} from '@material-ui/icons'
 import {Message} from "@material-ui/icons/es/index"
 import NewMsgPanel from '../../containers/newmsgpanel';
 import SearchBar from '../../components/searchbar';
+import {withAuthHeader} from "../../utils/api"
+import {ROOT_URL} from "../../configs/config"
 
 class Main extends Component {
 
     componentDidMount() {
-        this.props.getSubscriptions("1"); // todo: get uid
+        const uid = localStorage.getItem("username")
+        axios.get(`${ROOT_URL}/api/forum/userinfo`, {
+            params: {
+                uid: uid,
+            },
+            headers: withAuthHeader(),
+        })
+            .then(() => {
+                console.log("got user info")
+                this.props.getSubscriptions("1"); // todo: get uid
+            })
     }
 
     render() {
