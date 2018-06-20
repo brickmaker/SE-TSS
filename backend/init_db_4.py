@@ -189,6 +189,12 @@ def init_thread():
         objs.append(models.Thread(title=title,poster_id=poster_id,section_id=section_id,content=content))
         
     create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
     create(title="文章02", poster_id="2", section_id=36, content="这是搜索锚点")
     create(title="文章03", poster_id="1", section_id=41, content="这是标记锚点")
     create(title="文章04", poster_id="2", section_id=36, content="这是标记锚点")
@@ -201,6 +207,10 @@ def init_thread():
     create(title="文章11", poster_id="1", section_id=41, content="汗滴禾下土")
     create(title="文章12", poster_id="2", section_id=41, content="汗滴禾下土")
     create(title="文章13", poster_id="2", section_id=41, content="谁知盘中餐")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
     create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
 
     models.Thread.objects.bulk_create(objs)
