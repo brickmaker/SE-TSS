@@ -48,7 +48,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     course_name = serializers.SerializerMethodField()
     class Meta:
         model=Application
-        fields=('student','course','teacher','title','apply_des','state','create_time','student_name','faculty_name','course_name')
+        fields=('student','course','teacher','title','apply_des','state','score','create_time','student_name','faculty_name','course_name')
 
     def get_student_name(self, obj):
         return obj.student.name
