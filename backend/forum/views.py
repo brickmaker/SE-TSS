@@ -699,7 +699,7 @@ class reply(APIView):
             t_data['time'] = data.date
             t_data['replies'] = [
                 {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
-                 'pic': rr.from_uid.avatar.url,
+                 'pic': rr.from_uid.avatar.url, 'toId': rr.to_uid.id.username
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
@@ -925,7 +925,7 @@ class announcements(APIView):
         
         
 class info(APIView):
-    # permission_classes=(AdminCheck,)
+    permission_classes=(AdminCheck,StaffCheck,)
     def get(self, request, format=None):
         res = {}
         user_count = models.User.objects.all().count()
@@ -938,7 +938,7 @@ class info(APIView):
         return Response(res, status=status.HTTP_200_OK)
 
 class userstates(APIView):
-    # permission_classes=(AdminCheck,)
+    permission_classes=(AdminCheck,StaffCheck,)
     def get(self, request, format=None):
         username = request.GET.get('username', None)
         if None in (username,):
@@ -1023,6 +1023,7 @@ class search(APIView):
 
 
 class hotpost(APIView):
+    permission_classes = (AdminCheck,StaffCheck,)
     def get(self,request,format=None):
         collegeid = request.GET.get('collegeid',None)
         courseid = request.GET.get('courseid',None)

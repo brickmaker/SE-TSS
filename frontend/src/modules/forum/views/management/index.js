@@ -10,6 +10,7 @@ import UserStatusPanel from '../../containers/userstatuspanel';
 import ForumInfoPanel from '../../containers/foruminfopanel';
 import { MainBody } from '../../components/util/MainBody';
 import { Path } from '../../components/util/Path';
+import Redirect from 'react-router/Redirect';
 
 const styles = {
     container: {
@@ -21,11 +22,17 @@ const styles = {
 class Management extends Component {
     render() {
         const { classes } = this.props;
-        const path = {'management': {'name': "管理", 'link':'/forum/management'}};
-        return (
-            // <div>
+        const path = { 'management': { 'name': "管理", 'link': '/forum/management' } };
+        const type = localStorage.getItem('type');
+        if (type !== "3" && type !== "4") {
+            return (
+                <Redirect to={'/forum'} />
+            )
+        }
+        else {
+            return (
                 <MainBody>
-                    <Path isMain path={path}/>
+                    <Path isMain path={path} />
                     <Grid container justify="center">
                         <Grid item xs={12} sm={12} md={12} lg={3} className={classes.container}>
                             <SectionTitle>
@@ -60,8 +67,10 @@ class Management extends Component {
                         </Grid>
                     </Grid>
                 </MainBody>
-            // </div>
-        );
+                // </div>
+
+            );
+        }
     };
 }
 
