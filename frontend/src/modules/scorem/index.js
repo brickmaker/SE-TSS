@@ -10,7 +10,6 @@ import {changePage} from "./actions";
 import {ENTER_SCORE, SEARCH_SCORE, ANALYSIS_SCORE} from "./reducers";
 
 // Component
-import LeftMenu from './component/LeftMenu';
 import EnterScore from "./component/EnterScore";
 import SearchScore from './component/SearchScore';
 import AnaScore from './component/AnaScore';
@@ -28,7 +27,8 @@ import {
   Home, Search as SearchIcon, Message as MessageIcon,
   Announcement as AnnouncementIcon,
   Extension as ExtensionIcon
-} from "@material-ui/icons/es/index"
+} from "@material-ui/icons/es/index";
+
 import {Link} from "react-router-dom";
 import store from "../../top/stores";
 
@@ -119,16 +119,14 @@ class ScoreManagement extends Component {
 
     this.user = {
       // name: "学生A",
-      // id: "3150100000",
+      // id: "3150100001",
       // type: "s",
       name: "教师A",
       id: "2110100001",
       type: "t",
     };
     this.database = {
-      student: [],
       course: [],
-      teacher: [],
     };
 
 
@@ -150,8 +148,7 @@ class ScoreManagement extends Component {
         alert("对不起，服务器产生错误");
       }).then(data => {
         data.map(s => {
-          this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
-          this.addTeacher(s['teacher'], s['faculty_name']);
+          this.data.push(new Take(s['course_cid'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
           this.addCourse(s['course'], s['course_name'], s['test_date']);
 
         });
@@ -176,10 +173,8 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           data.map(s => {
-            this.data.push(new Take(s['course'], s['course_name'], s['teacher'], s['faculty_name'], s['student'], s['student_name'], s['score'], s['test_date']));
-            this.addStudent(s['student'], s['student_name']);
+            this.data.push(new Take(s['course'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
             this.addCourse(s['course'], s['course_name'], s['test_date']);
-
           });
           this.forceUpdate();
         }
@@ -187,17 +182,6 @@ class ScoreManagement extends Component {
     }
   }
 
-  addStudent(id, name) {
-    if (!this.findsname(id)) {
-      this.database.student.push({sid: id, sname: name});
-    }
-  }
-
-  addTeacher(id, name) {
-    if (!this.findtname(id)) {
-      this.database.teacher.push({tid: id, tname: name});
-    }
-  }
 
   addCourse(id, name, test_date) {
     if (!this.findcname(id)) {
@@ -209,7 +193,7 @@ class ScoreManagement extends Component {
     const newtake = [];
     console.log(takes);
     takes.map(take => {
-      newtake.push(new newTake(take.cid, take.tid, take.sid + '.0', take.score, take.test_date))
+      newtake.push(new newTake(take.cid, take.tid, take.sid, take.score, take.test_date))
     });
     console.log(newtake);
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
@@ -238,7 +222,7 @@ class ScoreManagement extends Component {
 
   pushData(take) {
     const newtake = [];
-    newtake[0] = new newTake(take.cid, take.tid, take.sid + '.0', take.score, take.test_date);
+    newtake[0] = new newTake(take.cid, take.tid, take.sid, take.score, take.test_date);
     console.log(newtake);
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
       method: "POST",
@@ -345,21 +329,6 @@ class ScoreManagement extends Component {
   findcname(id) {
     const entity = this.database.course.find(ele => {
       return ele.cid === id;
-    });
-    return entity !== undefined;
-  };
-
-  findtname(id) {
-    const entity = this.database.teacher.find(ele => {
-      return ele.tid === id;
-    });
-    return entity !== undefined;
-
-  };
-
-  findsname(id) {
-    const entity = this.database.student.find(ele => {
-      return ele.sid === id;
     });
     return entity !== undefined;
   };

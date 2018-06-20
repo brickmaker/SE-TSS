@@ -16,3 +16,4 @@ export function newTake(cid,tid, sid, score,test_date) {
   this.score = score;
   this.test_date = test_date;
 }
+

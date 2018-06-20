@@ -100,45 +100,37 @@ def score_list_student(request):
     serializer = TakeSerializer(takes, many=True)
     return Response(serializer.data)
 
-@api_view(['GET',"POST"])
+@api_view(['GET', "POST"])
 def insert_score(request):
     """
     For teachers, insert every student score for the first time
-    according to course id
-
+    according to course id
     :param request: Take List
     :return: Information of save state
     """
-    score_relations=Score_Relation.objects.all()
+    score_relations = Score_Relation.objects.all()
     # takes=Take.objects.all()
-    take_list=[]
-    data =json.load(request.data["test"])
-
+    take_list = []
+    data = request.data["test"]
     for d in data:
-        #course=Course.objects.get(course_id=d["cid"])
-        #r=d["sid"]
-        #student_account=Account.objects.get_by_natural_key(d["sid"])
-        student=Student.objects.get(username=student_account)
-        #teacher_account = Account.objects.get_by_natural_key(d["pid"])
-        teacher=Faculty.objects.get(username=teacher_account)
-        score=d["score"]
-        test_date=d["test_date"]
-        score_relation=score_relations.get(course_select_info__student__username=d["sid"],
-                                           course_select_info__course__teacher__username=d["pid"],
-                                           course_select_info__course__course_course_id=d["cid"])
-        #take=takes.get(student=student,course=course,teacher=teacher,test_date=test_date)
-        #print(take.score)
-        score_relation.score=score
+        score_relation = score_relations.get(course_select_info__student__username_id=d["sid"],
+                                             course_select_info__course__teacher__username_id=d["pid"],
+                                             course_select_info__course__course__course_id=d["cid"],
+                                             test_date=d["test_date"])
+        print(score_relation.modify_state)
+        if not score_relation.modify_state:
+            score_relation.score = d["score"]
+            score_relation.modify_state = True
+        else:
+            return Response(False, status=status.HTTP_400_BAD_REQUEST)
+        take_list.append(score_relation)
+        score_relation.save()
 
-        #take.score=score
-        #take_list.append(take)
-        #take.save()
-
-    serializer=TakeSerializer(data=take_list,many=True)
+    serializer = ScoreRelationSerializer(data=take_list, many=True)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data, status=status.HTTP_201_CREATED)
-    #return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET',"POST"])
 def apply_create(request):
