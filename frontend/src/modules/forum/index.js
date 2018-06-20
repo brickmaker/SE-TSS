@@ -33,6 +33,7 @@ class Forum extends Component {
 
     render() {
         const {match} = this.props;
+        const uid = localStorage.getItem('username');
         const listItems = (
             <div>
                 <ListItem component={Link} to={`${match.url}`} button>
@@ -70,7 +71,7 @@ class Forum extends Component {
                     <ListItemText primary="管理"/>
                 </ListItem>
                 <Divider/>
-                <ListItem component={Link} to={`${match.url}/usercenter/1`} button>
+                <ListItem component={Link} to={`${match.url}/usercenter/${uid}`} button>
                     <ListItemIcon>
                         <ExtensionIcon/>
                     </ListItemIcon>

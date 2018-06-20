@@ -12,7 +12,7 @@ export const requestUserInfo = (uid)=>{
             return;
         }
         dispatch({
-            type: requestUserInfo,
+            type: REQUEST_USERINFO,
         });
 
         const token = localStorage.getItem("token");
