@@ -1,20 +1,15 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from score_management.models import Take,StudentAnalysis
-from authentication.models import Course,Student,Faculty,Account
-from score_management.models import Take
+from score_management.models import Take, StudentAnalysis
 from score_management.models import Score_Relation
-from authentication.models import Course,Student,Faculty,Account,StudentAnalysis
+from authentication.models import Course,Student,Faculty,Account
 from score_management.serializers import TakeSerializer
 from score_management.serializers import ScoreRelationSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
-import time
-import json
-from itertools import chain
 
 @api_view(['GET','POST'])
 def score_list_teacher(request):
@@ -283,16 +278,16 @@ def update_student_rank(request):
     you need to clear data of table StudentAnalysis first
     """
     try:
-        takes = Take.objects.all()
-        iterator = takes.iterator()
+        score_relations = Score_Relation.objects.all()
+        iterator = score_relations.iterator()
         counts = {}
         gpa_list = {}
         try:
             while True:
-                take = next(iterator)
-                id_number = take.student.username_id
+                score_relation = next(iterator)
+                id_number = score_relation.course_select_info.student.username
                 #pa = convert_to_grade_point(take.score)
-                pa = take.score
+                pa = score_relation.score
                 print(id_number)
                 if gpa_list.__contains__(id_number):
                     counts[id_number] += 1
@@ -331,32 +326,32 @@ def list_all_score(request):
         resp = dict()
         if request.data.__contains__('sid'):
             resp['topicList'] = ['个人分析']
-            takes = Take.objects.filter(student_id=request.data['sid'])
-            iterator = takes.iterator()
+            score_relations = Score_Relation.objects.filter(course_select_info__student__username=request.data['sid'])
+            iterator = score_relations.iterator()
             list0 = list()
             while True:
                 try:
-                    take = next(iterator)
+                    score_relation = next(iterator)
                     cname_and_score = dict()
-                    cname_and_score['name'] = take.course.name
-                    cname_and_score['score'] = take.score
+                    cname_and_score['name'] = score_relation.course_select_info.course.course.name
+                    cname_and_score['score'] = score_relation.score
                     list0.append(cname_and_score)
                 except StopIteration:
                     resp['data'] = [list0]
                     return JsonResponse(resp)
         elif request.data.__contains__('pid'):
-            takes = Take.objects.filter(teacher_id=request.data['pid'])
-            iterator = takes.iterator()
+            score_relations = Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data['pid'])
+            iterator = score_relations.iterator()
             temp = dict()
             while True:
                 try:
-                    take = next(iterator)
-                    if not temp.__contains__(take.course.name):
-                        temp[take.course.name] = list()
+                    score_relation = next(iterator)
+                    if not temp.__contains__(score_relation.course_select_info.course.course.name):
+                        temp[score_relation.course_select_info.course.course.name] = list()
                     sname_and_score = dict()
-                    sname_and_score['name'] = take.student.name
-                    sname_and_score['score'] = take.score
-                    temp[take.course.name].append(sname_and_score)
+                    sname_and_score['name'] = score_relation.course_select_info.student.name
+                    sname_and_score['score'] = score_relation.score
+                    temp[score_relation.course_select_info.course.course.name].append(sname_and_score)
                 except StopIteration:
                     resp = dict()
                     resp['topicList'] = list()

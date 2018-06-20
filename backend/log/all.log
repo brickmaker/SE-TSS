@@ -74,3 +74,11 @@
 2018-06-19 02:09:40,452 [Thread-1:13088] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/updatestudentrank/ HTTP/1.1" 200 0
 2018-06-19 02:11:08,404 [Thread-1:4972] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/updatestudentrank/ HTTP/1.1" 200 0
 2018-06-19 02:13:11,919 [Thread-1:7660] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/updatestudentrank/ HTTP/1.1" 200 0
+2018-06-20 23:18:14,470 [Thread-1:8656] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/listallscore/ HTTP/1.1" 200 57
+2018-06-20 23:27:42,505 [Thread-1:2536] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/listallscore/ HTTP/1.1" 200 57
+2018-06-20 23:29:49,946 [Thread-3:9480] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/listallscore/ HTTP/1.1" 500 0
+2018-06-20 23:29:53,445 [Thread-4:380] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/listallscore/ HTTP/1.1" 500 0
+2018-06-20 23:30:06,038 [Thread-1:10568] [django.server:124] [basehttp:log_message] [ERROR]- "POST /api/score/listallscore/ HTTP/1.1" 500 0
+2018-06-20 23:33:10,047 [Thread-1:14816] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/listallscore/ HTTP/1.1" 200 199
+2018-06-20 23:36:50,260 [Thread-3:4196] [django.server:124] [basehttp:log_message] [INFO]- "POST /api/score/listallscore/ HTTP/1.1" 200 205
+2018-06-20 23:38:55,133 [Thread-4:1080] [django.server:124] [basehttp:log_message] [WARNING]- "POST /api/score/updaterank/ HTTP/1.1" 404 4317
