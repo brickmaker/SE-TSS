@@ -92,7 +92,8 @@ def apply_create(request):
                                                course=course,
                                                teacher=teacher,
                                                student=student,
-                                               apply_des=request.data["apply_des"])
+                                               apply_des=request.data["apply_des"],
+                                               score=request.data['score'])
         return Response(application.title, status=status.HTTP_201_CREATED)
     return Response(False)
 
@@ -100,7 +101,14 @@ def apply_create(request):
 def apply_modify(request):
     application=Application.objects.get(title=request.data["title"])
     application.state=request.data["state"]
+    if request.data["state"]==1:
+        score_relation=Score_Relation.objects.get(course_select_info__student=application.student,
+                                                  course_select_info__course__teacher=application.teacher,
+                                                  course_select_info__course__course=application.course)
+        score_relation.score=application.score
+        score_relation.save()
     application.save()
+
     return Response(application.state)
 
 

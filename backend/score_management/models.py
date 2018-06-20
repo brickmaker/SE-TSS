@@ -69,6 +69,7 @@ class Application(models.Model):
     apply_des=models.CharField("申请说明",null=False,max_length=32)
     state=models.IntegerField("申请状态",default=0)  # -1表示删除或者拒绝，0表示申请中，1表示通过
     create_time=models.DateField("申请时间",auto_now=True)
+    score=models.IntegerField("分数",null=False)
 
 
 

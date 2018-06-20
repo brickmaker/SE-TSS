@@ -104,3 +104,12 @@ venv.bak/
 .mypy_cache/
 
 package-lock.json
+# log
+*.log
+
+# migrations
+migrations/
+
+# database
+backend/db.sqlite3
+
