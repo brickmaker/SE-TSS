@@ -675,7 +675,7 @@ class reply(APIView):
         t_data['replies'] = []
         
         try:
-            attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
+            attr = models.Attachment.objects.filter(md5sum=thread.attachment_md5)[0]
             t_data['file'] = attr.file.url
         except:
             t_data['file'] = None
