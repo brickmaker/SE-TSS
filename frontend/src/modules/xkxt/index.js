@@ -108,11 +108,13 @@ class Xkxt extends React.Component {
         );
 
 		return (
-            <Bar listItems={listItems}>
-				<div>
-					{Boolean(userInfo) && whatToShow}
-                </div>
-            </Bar>
+			<div>
+				{Boolean(localStorage.username) && <Bar listItems={listItems}>
+					<div>
+						{Boolean(userInfo) && whatToShow}
+					</div>
+				</Bar>}
+			</div>
         );
 	}
 

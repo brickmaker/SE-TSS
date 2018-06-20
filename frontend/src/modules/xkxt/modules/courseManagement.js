@@ -147,13 +147,13 @@ class CourseManagement extends React.Component {
 							</div>}
 							{tabsCMValue === 2 && Boolean(this.props.management2) && <div>
 								<div className={classes.divStyle2}>
-									<Typography style={{padding:20, fontSize:20}}>当前连接数：{this.props.management2.now}</Typography>
+									<Typography style={{padding:20, fontSize:20}}>当前最大连接数：{this.props.management2.max}</Typography>
 								</div>
 								<Divider />
 								<div className={classes.divStyle2}>
 									<Typography style={{padding:20}}>设置连接数最大值</Typography>
 									<TextField 
-										label={"当前最大值："+this.props.management2.max} 
+										label={"修改连接数最大值"} 
 										onChange={e => this.max=e.target.value}
 									/>
 									<Button variant="raised" className={classes.buttonStyle}
