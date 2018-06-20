@@ -1,9 +1,9 @@
-scorelist接口说明：根据课程id，教师id返回该老师该门课程所有学生的成绩信息
-curl -H "Content-Type:application/json" -X POST --data '{"cid":"010A0000","pid":"2110100000"}' "http://127.0.0.1:8000/api/score/scorelist/"
+﻿scorelist接口说明：根据课程id，教师id返回该老师该门课程所有学生的成绩信息
+ curl -H "Content-Type:application/json" -X POST --data '{"pid":"2110100000"}' "http://127.0.0.1:8000/api/score/scorelistteacher/"
 [{"student":"3150100000","course":"010A0000","teacher":"2110100000","score":80,"test_date":"2018-06-13"},{"student":"3150100000","course":"010A0000","teacher":"2110100000","score":0,"test_date":"2018-06-13"},{"student":"3150100001.0","course":"010A0000","teacher":"2110100000","score":1,"test_date":"2018-06-13"},{"student":"3150100002.0","course":"010A0000","teacher":"2110100000","score":2,"test_date":"2018-06-13"},{"student":"3150100003.0","course":"010A0000","teacher":"2110100000","score":3,"test_date":"2018-06-13"},{"student":"3150100004.0","course":"010A0000","teacher":"2110100000","score":4,"test_date":"2018-06-13"},{"student":"3150100005.0","course":"010A0000","teacher":"2110100000","score":5,"test_date":"2018-06-13"},{"student":"3150100006.0","course":"010A0000","teacher":"2110100000","score":6,"test_date":"2018-06-13"},{"student":"3150100007.0","course":"010A0000","teacher":"2110100000","score":7,"test_date":"2018-06-13"},{"student":"3150100008.0","course":"010A0000","teacher":"2110100000","score":8,"test_date":"2018-06-13"},{"student":"3150100009.0","course":"010A0000","teacher":"2110100000","score":9,"test_date":"2018-06-13"},{"student":"3150100010.0","course":"010A0000","teacher":"2110100000","score":10,"test_date":"2018-06-13"},{"student":"3150100011.0","course":"010A0000","teacher":"2110100000","score":11,"test_date":"2018-06-13"},{"student":"3150100012.0","course":"010A0000","teacher":"2110100000","score":12,"test_date":"2018-06-13"},{"student":"3150100013.0","course":"010A0000","teacher":"2110100000","score":13,"test_date":"2018-06-13"},{"student":"3150100014.0","course":"010A0000","teacher":"2110100000","score":14,"test_date":"2018-06-13"},{"student":"3150100015.0","course":"010A0000","teacher":"2110100000","score":15,"test_date":"2018-06-13"},{"student":"3150100016.0","course":"010A0000","teacher":"2110100000","score":16,"test_date":"2018-06-13"},{"student":"3150100017.0","course":"010A0000","teacher":"2110100000","score":17,"test_date":"2018-06-13"},{"student":"3150100018.0","course":"010A0000","teacher":"2110100000","score":18,"test_date":"2018-06-13"},{"student":"3150100019.0","course":"010A0000","teacher":"2110100000","score":19,"test_date":"2018-06-13"},{"student":"3150100020.0","course":"010A0000","teacher":"2110100000","score":20,"test_date":"2018-06-13"},{"student":"3150100021.0","course":"010A0000","teacher":"2110100000","score":21,"test_date":"2018-06-13"},{"student":"3150100022.0","course":"010A0000","teacher":"2110100000","score":22,"test_date":"2018-06-13"},{"student":"3150100023.0","course":"010A0000","teacher":"2110100000","score":23,"test_date":"2018-06-13"},{"student":"3150100024.0","course":"010A0000","teacher":"2110100000","score":24,"test_date":"2018-06-13"},{"student":"3150100025.0","course":"010A0000","teacher":"2110100000","score":25,"test_date":"2018-06-13"}]
 
 insertscore接口说明：根据课程cid，pid，sid，score，存入数据库
-curl -H "Content-Type:application/json" -X POST --data '{"test":[{"cid":"010A0001","pid":"2110100001","sid":"3150100005.0","score":75,"test_date":"2018-06-14"},{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":75,"test_date":"2018-06-14"}]}' "http://127.0.0.1:8000/api/score/insertscore/"
+curl -H "Content-Type:application/json" -X POST --data '{"test":[{"cid":"010A0001","pid":"2110100001","sid":"3150100005","score":75,"test_date":"2018-07-01"},{"cid":"010A0001","pid":"2110100001","sid":"3150100001","score":75,"test_date":"2018-07-01"}]}' "http://127.0.0.1:8000/api/score/insertscore/"
 
 
 statistics接口说明：根据课程id分析整门课程所有成绩的平均值，中值，最大值，最小值，方差
@@ -17,3 +17,18 @@ curl -H "Content-Type:application/json" -X POST --data '{"date":"2018-06-13","ci
 scoreteacherhistory接口：根据课程id和教师id分析学生的总人数和平均绩点
 curl -H "Content-Type:application/json" -X POST --data '{"pid":"2110100000","cid":"010A0000"}' "http://127.0.0.1:8000/api/score/scoreteacherhistory/"
 {"totalNum": 27, "averageGradePoint": 0.12962962962962962}
+
+applyliststaff接口：获取所有申请信息
+curl -H "Content-Type:application/json" -X POST --data '{}' "http://127.0.0.1:8000/api/score/applyliststaff/"
+[{"student":"3150100006","course":"010A0001","teacher":"2110100001","title":"test1","apply_des":"test_des1","state":1,"create_time":"2018-06-19","student_name":"李一","faculty_name":"教师B","course_name":"数据结构与算法分析"}]
+
+applylistteacher接口：根据pid获取教师的申请信息
+curl -H "Content-Type:application/json" -X POST --data '{"pid":"2110100001"}' "http://127.0.0.1:8000/api/score/applylistteacher/"
+[{"student":"3150100006","course":"010A0001","teacher":"2110100001","title":"test1","apply_des":"test_des1","state":1,"create_time":"2018-06-19","student_name":"李一","faculty_name":"教师B","course_name":"数据结构与算法分析"}]
+
+createapplication接口：创建application，这里主键设为了title
+curl -H "Content-Type:application/json" -X POST --data '{"cid":"010A0001","pid":"2110100001","sid":"3150100006","title":"test1","apply_des":"test_des1"}' "http://127.0.0.1:8000/api/score/createapplication/"
+如果title重复了，返回false，如果没重复，返回title
+
+applymodify接口：根据title和state，审核application，返回审核状态
+curl -H "Content-Type:application/json" -X POST --data '{"title":"test1","state":-1}' "http://127.0.0.1:8000/api/score/applymodify/"

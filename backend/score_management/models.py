@@ -61,10 +61,11 @@ class Score_Relation(models.Model):
 
 
 class Application(models.Model):
+
     student=models.ForeignKey(Student,on_delete=models.CASCADE,null=False)
     course=models.ForeignKey(Course,on_delete = models.CASCADE,null=False)
     teacher=models.ForeignKey(Faculty,on_delete = models.CASCADE,null=False)
-    title=models.CharField("标题",null=False,max_length=32)
+    title=models.CharField("标题",null=False,primary_key=True,max_length=32)
     apply_des=models.CharField("申请说明",null=False,max_length=32)
     state=models.IntegerField("申请状态",default=0)  # -1表示删除或者拒绝，0表示申请中，1表示通过
     create_time=models.DateField("申请时间",auto_now=True)
