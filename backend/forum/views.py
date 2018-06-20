@@ -214,7 +214,8 @@ class course_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=course.section)
+            if model.Subscribe.objects.filter(user_id=uid.username,section=course.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=course.section)
         except:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':True}
@@ -236,7 +237,8 @@ class teacher_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
+            if model.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
         except Exception as e:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
             
