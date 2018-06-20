@@ -30,14 +30,14 @@ import { forumPersistReducer } from "./components/forumpersist/reducers";
 // });
 
 
-const persistedFilter = createFilter('forumpersit', ['selectedId','selectedAvatar', 'selectedUsername']);
+// const persistedFilter = createFilter('forumpersit', ['selectedId','selectedAvatar', 'selectedUsername']);
 
 export const forumReducer = persistReducer(
     {
         key: 'forumPersist',
         storage: storage,
         whitelist: ['forumpersist'],
-        transforms: [persistedFilter]
+        // transforms: [persistedFilter]
     },
     combineReducers({
         main: mainReducer,
