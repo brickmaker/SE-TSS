@@ -184,7 +184,7 @@ class ScoreManagement extends Component {
         }
       });
     } else {
-      this.props.history.push('/');
+
     }
   }
 
@@ -239,7 +239,7 @@ class ScoreManagement extends Component {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
         Authorization: 'JWT ' + localStorage.getItem('token'),
       },
-      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001.0","score":50,"test_date":"2018-06-14"}]'
+      // body: 'test=[{"cid":"010A0001","pid":"2110100001","sid":"3150100001","score":50,"test_date":"2018-07-01"}]'
       body: 'test=' + JSON.stringify(newtake)
 
     }).then(function (res) {

@@ -57,13 +57,15 @@ def insert_score(request):
     # takes=Take.objects.all()
     take_list = []
     data = request.data["test"]
+    data=json.loads(data)
 
     for d in data:
+        #print(d)
         score_relation = score_relations.get(course_select_info__student__username_id=d["sid"],
                                              course_select_info__course__teacher__username_id=d["pid"],
                                              course_select_info__course__course__course_id=d["cid"],
                                              test_date=d["test_date"])
-        print(score_relation.modify_state)
+        #print(score_relation.modify_state)
         if not score_relation.modify_state:
             score_relation.score = d["score"]
             score_relation.modify_state = True
