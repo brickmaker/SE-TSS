@@ -1,52 +1,55 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-    ListItem,
-    ListItemIcon,
-    ListItemText
-} from '@material-ui/core';
+import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 
-import { Link } from 'react-router-dom'
-import {
-    Home,
-    AccountBox,
-    SupervisorAccount,
-    Class,
-    Star,
-} from '@material-ui/icons';
+import {Link} from 'react-router-dom'
+import {AccountBox, Home, Star, SupervisorAccount,AccessAlarm} from '@material-ui/icons';
 
 
 export const listItems = (
     <div>
-        <Link to={'/admin'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Home/>
-                </ListItemIcon>
-                <ListItemText primary="主页"/>
-            </ListItem>
-        </Link>
-        <Link to={'/admin/basicInfo'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <AccountBox/>
-                </ListItemIcon>
-                <ListItemText primary="个人信息"/>
-            </ListItem>
-        </Link>
+
+        <ListItem component={Link} to={"/info/admin"} button>
+             <ListItemIcon>
+                <Star/>
+            </ListItemIcon>
+            <ListItemText primary="欢迎页"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/admin/basicInfo"} button>
+            <ListItemIcon>
+                <AccountBox/>
+            </ListItemIcon>
+            <ListItemText primary="个人信息"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/admin/accounts"} button>
+            <ListItemIcon>
+                <SupervisorAccount/>
+            </ListItemIcon>
+            <ListItemText primary="用户管理"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/admin/logInfo"} button>
+            <ListItemIcon>
+                <AccessAlarm/>
+            </ListItemIcon>
+            <ListItemText primary="日志信息"/>
+        </ListItem>
     </div>
 );
 
 export const otherItems = (
     <div>
-        <ListItem button>
+        <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
-                <Star/>
+                <Home/>
             </ListItemIcon>
-            <ListItemText primary="退出"/>
+            <ListItemText primary="返回系统主页"/>
         </ListItem>
     </div>
 );
+export const ColumnData = [
+    {value: 'time', label: '时间'},
+    {value: 'content', label: '日志内容'},
+
+];
 
 export const ranges = [
     {
@@ -60,6 +63,36 @@ export const ranges = [
     {
         value: 2,
         label: '专业必修课',
+    },
+];
+export const ranges_term = [
+    {
+        value: 0,
+        label: '春',
+    },
+    {
+        value: 1,
+        label: '夏',
+    },
+    {
+        value: 2,
+        label: '春夏',
+    },
+    {
+        value: 3,
+        label: '秋',
+    },
+    {
+        value: 4,
+        label: '冬',
+    },
+    {
+        value: 5,
+        label: '秋冬',
+    },
+    {
+        value: 6,
+        label: '短',
     },
 ];
 export const gender = [

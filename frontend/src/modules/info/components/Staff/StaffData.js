@@ -19,11 +19,11 @@ export const listItems = (
     <div>
         <ListItem component={Link} to={"/info/staff"} button>
             <ListItemIcon>
-                <Home/>
+                <Star/>
             </ListItemIcon>
-            <ListItemText primary="主页"/>
+            <ListItemText primary="欢迎页"/>
         </ListItem>
-        <ListItem component={Link} to={"/info/staff/accounts"} button>
+        <ListItem component={Link} to={"/info/staff/basicInfo"} button>
             <ListItemIcon>
                 <AccountBox/>
             </ListItemIcon>
@@ -33,7 +33,7 @@ export const listItems = (
             <ListItemIcon>
                 <SupervisorAccount/>
             </ListItemIcon>
-            <ListItemText primary="用户信息管理"/>
+            <ListItemText primary="用户信息"/>
         </ListItem>
         <ListItem component={Link} to={"/info/staff/lessons"} button>
             <ListItemIcon>
@@ -46,11 +46,11 @@ export const listItems = (
 
 export const otherItems = (
     <div>
-        <ListItem button>
+        <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
-                <Star/>
+                <Home/>
             </ListItemIcon>
-            <ListItemText primary="退出"/>
+            <ListItemText primary="返回系统主页"/>
         </ListItem>
     </div>
 );
@@ -74,6 +74,36 @@ export const ranges = [
     {
         value: 2,
         label: '专业必修课',
+    },
+];
+export const ranges_term = [
+    {
+        value: 0,
+        label: '春',
+    },
+    {
+        value: 1,
+        label: '夏',
+    },
+    {
+        value: 2,
+        label: '春夏',
+    },
+    {
+        value: 3,
+        label: '秋',
+    },
+    {
+        value: 4,
+        label: '冬',
+    },
+    {
+        value: 5,
+        label: '秋冬',
+    },
+    {
+        value: 6,
+        label: '短',
     },
 ];
 export const gender = [

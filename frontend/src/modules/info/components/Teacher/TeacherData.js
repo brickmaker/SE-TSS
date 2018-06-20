@@ -18,40 +18,34 @@ import {
 
 export const listItems = (
     <div>
-        <Link to={'/teacher'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Home/>
-                </ListItemIcon>
-                <ListItemText primary="主页"/>
-            </ListItem>
-        </Link>
-        <Link to={'/teacher/basicInfo'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <AccountBox/>
-                </ListItemIcon>
-                <ListItemText primary="个人信息"/>
-            </ListItem>
-        </Link>
-        <Link to={'/teacher/lessons'}>
-            <ListItem button>
-                <ListItemIcon>
-                    <Class/>
-                </ListItemIcon>
-                <ListItemText primary="课程信息"/>
-            </ListItem>
-        </Link>
+        <ListItem component={Link} to={"/info/teacher"} button>
+            <ListItemIcon>
+                <Star/>
+            </ListItemIcon>
+            <ListItemText primary="欢迎页"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/teacher/basicInfo"} button>
+            <ListItemIcon>
+                <AccountBox/>
+            </ListItemIcon>
+            <ListItemText primary="个人信息"/>
+        </ListItem>
+        <ListItem component={Link} to={"/info/teacher/lessons"} button>
+            <ListItemIcon>
+                <Class/>
+            </ListItemIcon>
+            <ListItemText primary="课程信息"/>
+        </ListItem>
     </div>
 );
 
 export const otherItems = (
     <div>
-        <ListItem button>
+        <ListItem component={Link} to={"/main"} button>
             <ListItemIcon>
-                <Star/>
+                <Home/>
             </ListItemIcon>
-            <ListItemText primary="退出"/>
+            <ListItemText primary="返回主页"/>
         </ListItem>
     </div>
 );
@@ -80,7 +74,42 @@ export const gender = [
         label: '女',
     },
 ];
-
+export const ranges_term = [
+    {
+        value: 0,
+        label: '春',
+    },
+    {
+        value: 1,
+        label: '夏',
+    },
+    {
+        value: 2,
+        label: '春夏',
+    },
+    {
+        value: 3,
+        label: '秋',
+    },
+    {
+        value: 4,
+        label: '冬',
+    },
+    {
+        value: 5,
+        label: '秋冬',
+    },
+    {
+        value: 6,
+        label: '短',
+    },
+];
+export const lessonColumnData = [
+    {value: 'course_id', label: '课程号'},
+    {value: 'name', label: '课程名'},
+    {value: 'credit', label: '学分'},
+    {value: 'state', label: '状态'},
+];
 export const grade = [
     {
         value: 2000,

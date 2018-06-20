@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -47,12 +47,34 @@ class QuestionViewSet(viewsets.ModelViewSet):
         return Response({'question_list': question_id_list, 'is_ok': True,
                          'message': 'delete successfully'})
 
+    @action(methods=['get'], detail=False)
+    def tags_and_teachers(self, request):
+        course_id = request.query_params.get('course', None)
+        if course_id:
+            course = Course.objects.all().get(course_id=course_id)
+            teacher_list = []
+            for faculty in course.faculty.all():
+                teacher_list.append({
+                    'teacher_name': faculty.name,
+                    'teacher_id': faculty.username.username
+                })
+            s = set()
+            for question in Question.objects.all().filter(course=course_id):
+                s.add(question.tag)
+            return Response({'is_ok': True, 'teacher_list': teacher_list, 'tag_list': list(s)})
+        return Response({'is_ok':False, 'message': 'course_id is needed'},
+                        status=status.HTTP_400_BAD_REQUEST)
+
     def create(self, request, *args, **kwargs):
         data = request.data.copy()
         data['provider'] = request.user.username
         if isinstance(data['level'], str):
             data['level'] = int(data['level'])
-            data.setlist('answer_list', [int(i) for i in data.getlist('answer_list')])
+            from django.http import QueryDict
+            if isinstance(data, QueryDict):
+                data.setlist('answer_list', [int(i) for i in data.getlist('answer_list')])
+            else:
+                data['answer_list'] = [int(i) for i in data['answer_list']]
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -128,18 +150,36 @@ class PaperViewSet(mixins.CreateModelMixin,
             l = l1[0: num_choice] + l2[0: num_judge]
             question_id_list = [li[0] for li in l]
             score_list = np.array(np.around(100 * softmax([li[1] for li in l])), dtype='int32')
-            score_list[score_list == 0] = 1
-            data.setlist('score_list', score_list)
-            data.setlist('question_id_list', question_id_list)
+            try:
+                score_list[score_list == 0] = 1
+                from django.http import QueryDict
+                if isinstance(data, QueryDict):
+                    data.setlist('score_list', score_list)
+                    data.setlist('question_id_list', question_id_list)
+                else:
+                    data['score_list'] = score_list
+                    data['question_id_list'] = question_id_list
+            except BaseException as e:
+                #print(type(data))
+                print(e)
+                return Response("??????", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         else:
-            question_id_list = request.data.getlist('question_id_list')
+            from django.http import QueryDict
+            if isinstance(request.data, QueryDict):
+                question_id_list = request.data.getlist('question_id_list')
+            else:
+                question_id_list = request.data['question_id_list']
+            #print(question_id_list)
             score_list = []
             for question_id in question_id_list:
                 question = Question.objects.get(question_id=question_id)
                 score_list.append(question.level)
             score_list = np.array(np.around(100 * softmax(score_list)), dtype='int32')
             score_list[score_list == 0] = 1
-            data.setlist('score_list', score_list)
+            if isinstance(data, QueryDict):
+                data.setlist('score_list', score_list)
+            else:
+                data['score_list'] = score_list
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
@@ -192,8 +232,9 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         try:
             exam = Examination.objects.get(paper=request.data['paper']
                                     , student=request.user.username)
-            return Response({'message': 'already done.', 'is_ok': False},
-                            status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'already done.', 'is_ok': False, 'submit': exam.submit,
+                             'exam_id': exam.exam_id, 'left_time': self.get_left_time(exam)},
+                            status=status.HTTP_200_OK)
         except ObjectDoesNotExist:
             data = request.data.copy()
             data['student'] = request.user.username
@@ -214,9 +255,10 @@ class ExaminationViewSet(mixins.CreateModelMixin,
 
     @staticmethod
     def get_left_time(exam):
+        if exam.submit:
+            return 0
         left_time = exam.paper.duration * 60 - \
                     (datetime.now() - exam.start_time.replace(tzinfo=None)).total_seconds()
-        #print(datetime.now() - exam.start_time.replace(tzinfo=None))
         if left_time < 0:
             left_time = 0
         if left_time == 0 and not exam.submit:
@@ -256,11 +298,13 @@ class ExaminationViewSet(mixins.CreateModelMixin,
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        answers = request.data.get('answers')
+        answers = str(request.data.get('answers'))
+        print('myAns: ', answers)
         exam.answers = answers
         serializer = self.get_serializer(exam, data={'answers': answers}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        print('after saving', serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
@@ -272,11 +316,12 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         if exam.submit:
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
+        print(exam.answers)
         if exam.answers:
             answers = json.loads(exam.answers.replace('\'', '\"'))
 
             total_score = 0
-            #print(exam.paper.paper_question)
+            #print(exam.answers)
             exam_serializer = PaperDetailSerializer(exam.paper)
             for question_id, score in zip(exam_serializer.data['question_id_list'],
                                           exam_serializer.data['score_list']):
@@ -297,11 +342,11 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         serializer = self.get_serializer(exam, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
+        print(serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
-        return Response({'message': 'submit successfully', 'is_ok': True}, status=status.HTTP_200_OK)
+        return Response({'message': 'submit successfully', 'is_ok': True, 'score': exam.score}, status=status.HTTP_200_OK)
 
 
 class AnalysisViewSet(GenericViewSet):
@@ -310,81 +355,110 @@ class AnalysisViewSet(GenericViewSet):
     permission_classes = (IsAuthenticated,)
 
     @action(methods=['get'], detail=False)
-    def student(self, request):
-        student_id_list = request.query_params.getlist('student_id_list')
-        data = {
-            'students_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        papers = Paper.objects.filter(course=course)
-        q = Q()
-        for paper in papers:
-            q = q | Q(paper=paper)
-        exams = Examination.objects.filter(q)
-        for student_id in student_id_list:
-            student_score = []
-            student_exams = exams.filter(student=student_id)
-            for exam in student_exams:
-                student_score.append({
-                    'paper_id': exam.paper.paper_id,
-                    'score': exam.score
-                })
-            data['students_scores_list'].append({
-                'student_id': student_id,
-                'student_score': student_score
-            })
+    def studentGradeList(self, request):
+        data = []
+        map = {}
+        for exam in Examination.objects.all().filter(student=request.user.username):
+            s = PaperDetailSerializer(exam.paper)
+            if map.get(exam.paper) is None:
+                map[exam.paper] = Examination.objects.all().\
+                filter(paper=exam.paper).aggregate(Avg('score'))["score__avg"]
+            d = {
+                'paperName': exam.paper.paper_name,
+                'testScore': exam.score,
+                'totalScore': np.sum(s.data['score_list']),
+                'avgScore': map[exam.paper],
+            }
+            data.append(d)
         return Response(data)
 
     @action(methods=['get'], detail=False)
-    def paper(self, request):
-        paper_id_list = request.query_params.getlist('paper_id_list')
-        data = {
-            'papers_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        q = Q()
-        for paper_id in paper_id_list:
-            q = q | Q(paper_id=paper_id)
-        papers = Paper.objects.filter(course=course).filter(q)
-
-        for paper in papers:
-            exams = Examination.objects.filter(paper=paper)
-            paper_score = []
-            for exam in exams:
-                paper_score.append({
-                    'student_id': exam.student.username.username,
-                    'score': exam.score,
+    def testList(self, request):
+        course_id = request.query_params.get('course_id')
+        data = []
+        for paper in Paper.objects.all().filter(course=course_id):
+            d = {
+                'paperID': paper.paper_id,
+                'testName': paper.paper_name,
+                'testAuthor': paper.teacher.name,
+                'whoTakeThisTest': [],
+            }
+            for exam in Examination.objects.all().filter(paper=paper):
+                d['whoTakeThisTest'].append({
+                    'studentName': exam.student.name,
+                    'studentScore': exam.score
                 })
-            data['papers_scores_list'].append({
-                'paper_id': paper.paper_id,
-                'paper_score': paper_score,
-            })
+            data.append(d)
         return Response(data)
 
     @action(methods=['get'], detail=False)
-    def type(self, request):
-        paper_id_list = request.query_params.getlist('paper_id_list')
-        question_type = request.query_params.get('type')
-        data = {
-            'papers_type_scores_list': [],
-            'is_ok': True,
-            'message': 'query by student id',
-        }
-        course = Course.objects.get(course_id=request.query_params.get('course'))
-        q = Q()
-        for paper_id in paper_id_list:
-            q = q | Q(paper_id=paper_id)
-        papers = Paper.objects.filter(course=course).filter(q)
-        # TODO:
-        pass
+    def studentList(self, request):
+        data = []
+        for student in Student.objects.all():
+            d = {
+                'studentID': student.username.username,
+                'studentName': student.name,
+                'takenTest': [],
+            }
+            for exam in Examination.objects.all().filter(student=student):
+                d['takenTest'].append({
+                    'exam': exam.paper.paper_name,
+                    'testScore': exam.score,
+                })
+            data.append(d)
+        return Response(data)
 
     @action(methods=['get'], detail=False)
-    def tag(self, request):
-        # TODO:
-        pass
+    def tagList(self, request):
+        course_id = request.query_params.get('course_id')
+        data = []
+        tags = {}
+        for question in Question.objects.all().filter(course=course_id):
+            if tags.get(question.tag) is None:
+                tags[question.tag] = []
+            tags[question.tag].append(question)
+        for tag, question_list in tags.items():
+            d = {
+                'tag': tag,
+                'relevantTest': [],
+            }
+            papers = None
+            for question in question_list:
+                if papers is None:
+                    papers = question.paper_question.all()
+                else:
+                    papers = papers | question.paper_question.all()
+            for paper in papers:
+                d['relevantTest'].append({
+                    'testName': paper.paper_name,
+                    'testScore': [
+                        {'studentName': exam.student.name, 'score': exam.score}
+                        for exam in Examination.objects.all().filter(paper=paper)
+                    ]
+                })
+            data.append(d)
+        return Response(data)
+
+    @action(methods=['get'], detail=False)
+    def questionTypeList(self, request):
+        course_id = request.query_params.get('course_id')
+        teacher = request.user.username
+        data = {
+            'multiChoices': [],
+            'judge': [],
+        }
+        for paper in Paper.objects.all().filter(course=course_id, teacher=teacher):
+            d = {
+                'testName': paper.paper_name,
+                'content': []
+            }
+            for i in range(0, 5):
+                d['content'].append({
+                    'questionID': int(np.random.randint(100, 300)),
+                    'answerRate': '%d%%' % int(np.random.randint(0, 100))
+                })
+            data['multiChoices'].append(d)
+            data['judge'].append(d)
+        return Response(data)
 
 
