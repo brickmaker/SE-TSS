@@ -150,7 +150,7 @@ class Reply extends Component {
                                                     <ListItemSecondaryAction>
                                                         <IconButton
                                                             onClick={() => {
-                                                                this.props.openComment(postId, id, rr.to)
+                                                                this.props.openComment(postId, id, rr.toId)
                                                             }}
                                                             aria-label="Reply"
                                                         >
