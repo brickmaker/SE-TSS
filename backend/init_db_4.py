@@ -160,8 +160,8 @@ def init_area():
     print("Init 4-Forum Area...")
     models.Area.objects.all().delete()
     objs = []
-    def create(name,college_id):
-        objs.append(models.Area(name=name,college_id=college_id))
+    def create(name,college_id,avatar='forum/img/zju.png'):
+        objs.append(models.Area(name=name,college_id=college_id,avatar=avatar))
     
     for id in range(1, 4):
         create(name="人文", college_id=id)
