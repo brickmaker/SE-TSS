@@ -82,6 +82,7 @@ export function getNewMsgs(uid, pageSize) {
 
 export const SELECT_ENTRY = "select_entry";
 export function selectEntry(selectedId, selectedAvatar, selectedUsername) {
+    console.log("selectEntry", selectedId, selectedAvatar, selectedUsername);
     return (dispatch, getState) => {
         dispatch({
             type: SELECT_ENTRY,

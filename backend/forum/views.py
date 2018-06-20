@@ -722,7 +722,7 @@ class msgentries(APIView):
         #print(raw_datas)
         d = {}
         for rd in raw_datas:
-            if rd.sender.id == u:
+            if rd.sender.id.username == u.id.username:
                 if rd.receiver.id.username in d:
                     if d[rd.receiver.id.username].date < rd.date:
                         d[rd.receiver.id.username] = rd
@@ -738,7 +738,7 @@ class msgentries(APIView):
         res = []
         for k, v in d.items():
             t = {}
-            if v.sender.id == u:
+            if v.sender.id.username == u.id.username:
                 t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
                 t['avatar']=v.receiver.avatar.url

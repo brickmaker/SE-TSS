@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { List, CircularProgress, withStyles } from 'material-ui';
+import { List, CircularProgress, withStyles, Typography } from 'material-ui';
 import MsgEntry from '../../components/msgentry';
 import { getMsgEntries,selectEntry } from '../../views/messages/actions';
 import moment from 'moment';
@@ -45,13 +45,17 @@ class MsgEntryPanel extends Component {
                         <CircularProgress className={classes.pending} />
                     </div>
                     :
-                    entries && entries.length && <div className={classes.listcontainer}>
+                    entries &&( entries.length ? <div className={classes.listcontainer}>
                         <List className={classes.list}>
                             {Object.values(entries).map((entry, index) => {
                                 return (<MsgEntry entry={entry} key={entry.id} />);
                             })}
-                        </List>
+                        </List> 
                     </div>
+                        :
+                        <Typography>无联系人</Typography>
+                        )
+                        
                 }
 
             </div>
