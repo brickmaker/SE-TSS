@@ -16,7 +16,8 @@ import {
     DialogContentText,
     DialogTitle,
     Paper,
-    TextField
+    TextField,
+    Typography
 } from '@material-ui/core';
 
 import Bar from "../../../../top/components/Bar";
@@ -365,6 +366,11 @@ class StaffBasicInfo extends React.Component {
                                                 rotate={0}
                                             />
                                         </Upload>
+                                    </div>
+                                    <div className={classes.img}>
+                                        <Typography>
+                                            点击可上传头像
+                                        </Typography>
                                     </div>
 
 
