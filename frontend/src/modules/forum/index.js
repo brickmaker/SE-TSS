@@ -19,7 +19,8 @@ import { Divider, ListItem, ListItemIcon, ListItemText } from "material-ui"
 import {
     Home, Search as SearchIcon, Message as MessageIcon,
     Announcement as AnnouncementIcon,
-    Extension as ExtensionIcon
+    Extension as ExtensionIcon,
+    Memory as MemoryIcon
 } from "@material-ui/icons/es/index"
 
 const styles = {
@@ -76,7 +77,7 @@ class Forum extends Component {
                         <Divider />
                         <ListItem component={Link} to={`${match.url}/management`} button>
                             <ListItemIcon>
-                                <ExtensionIcon />
+                                <MemoryIcon />
                             </ListItemIcon>
                             <ListItemText primary="管理" />
                         </ListItem>
