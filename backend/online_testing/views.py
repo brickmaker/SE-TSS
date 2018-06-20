@@ -9,9 +9,10 @@ from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 import numpy as np
+from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet, mixins
 
-from authentication.models import Student, Course
+from authentication.models import Student, Course, Faculty
 from online_testing.models import Question, Paper, Examination
 from online_testing.serializers import QuestionSerializer, QuestionDetailSerializer, \
     PaperSerializer, ExaminationSerializer, PaperDetailSerializer
@@ -19,6 +20,13 @@ from online_testing.filters import QuestionFilter
 from online_testing.permissions import ExamInfoAccessPermission, QuestionPermission, PaperPermission
 from rest_framework import permissions
 
+class CourseQuery(APIView):
+    def get(self, request):
+        if request.user.user_type == 1:
+            return Response(Course.objects.all().values_list('course_id', 'name'))
+        elif request.user.user_type == 2:
+            faculty = Faculty.objects.all().get(username=request.user.username)
+            return Response(faculty.teacher_course.all().values_list('course_id', 'name'))
 
 class QuestionViewSet(viewsets.ModelViewSet):
     # not safe: update(object), partial_update(object), delete(object), insert,
@@ -219,6 +227,7 @@ class PaperViewSet(mixins.CreateModelMixin,
                         paper['done'] = False
                 except ObjectDoesNotExist:
                     paper['done'] = False
+                print(paper)
         return Response({'paper_list': data})
 
 
@@ -459,13 +468,15 @@ class AnalysisViewSet(GenericViewSet):
                 'testName': paper.paper_name,
                 'content': []
             }
-            for i in range(0, 5):
+            for question in paper.question_id_list.all():
                 d['content'].append({
-                    'questionID': int(np.random.randint(100, 300)),
+                    'questionID': question.question_id,
                     'answerRate': '%d%%' % int(np.random.randint(0, 100))
                 })
-            data['multiChoices'].append(d)
-            data['judge'].append(d)
+                if question.type == 'Choice':
+                    data['multiChoices'].append(d)
+                else:
+                    data['judge'].append(d)
         return Response(data)
 
 
