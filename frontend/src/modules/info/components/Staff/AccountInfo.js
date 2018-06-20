@@ -1094,7 +1094,7 @@ class AccountInfo extends React.Component {
                 <div>
                     <Dialog
                         open={this.state.addFacultyBatch}
-                        onClose={this.handleAddStudentBatchClose}
+                        onClose={this.handleAddFacultyBatchClose}
                         aria-labelledby="form-dialog-title"
                     >
                         <DialogTitle id="form-dialog-title">注册教师</DialogTitle>

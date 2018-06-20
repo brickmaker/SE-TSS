@@ -419,9 +419,12 @@ class CourseFacultyViewSet(APIView):
             data = {}
             data['course_id'] = course.course_id
             data['name'] = course.name
+            data['course_type'] = course.course_type
+            data['department'] = str(course.department)
+            data['faculty'] = str(course.faculty)
             data['credit'] = course.credit
             data['capacity'] = course.capacity
-            data['classroom'] = course.classroom
+            data['semester'] = course.semester
             data['assessment'] = course.assessment
             data['state'] = course.state
             total.append(data)

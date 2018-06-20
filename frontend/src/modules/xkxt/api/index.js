@@ -2,6 +2,9 @@
 export const BACKEND_SERVER_URL = "http://localhost:8000/";
 //export const BACKEND_SERVER_URL = "http://192.168.1.154:8000/";
 
+//export const BACKEND_SERVER_URL = "10.180.41.209:8000/";
+
+
 export const BACKEND_API = {
     root: 'api/xkxt/',
     program: 'api/xkxt/program/',

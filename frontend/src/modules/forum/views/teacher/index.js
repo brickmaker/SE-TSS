@@ -72,7 +72,7 @@ class Teacher extends Component {
     }
 
     render() {
-        const {college, course, teacher, match, subscribed} = this.props
+        const {college, course, teacher, match, subscribed, anncPermission} = this.props
         const {collegeid, courseid, teacherid} = this.props.match.params
         const path = {
             college: {
@@ -105,13 +105,17 @@ class Teacher extends Component {
                                 }}
                             >全部</Button>
                             <span style={{width: 10}}> </span>
-                            <Button
-                                color={'primary'}
-                                variant={'raised'}
-                                onClick={() => {
-                                    this.props.history.push(`/forum/annceditor/${collegeid}/${courseid}/${teacherid}`)
-                                }}
-                            >发布公告</Button>
+                            {
+                                anncPermission ?
+                                    <Button
+                                        color={'primary'}
+                                        variant={'raised'}
+                                        onClick={() => {
+                                            this.props.history.push(`/forum/annceditor/${collegeid}/${courseid}/${teacherid}`)
+                                        }}>
+                                        发布公告</Button>
+                                    : null
+                            }
                         </div>
                     </SectionTitle>
                     {/* <TopAnnouncement/> */}
@@ -179,6 +183,7 @@ const mapStateToProps = (state) => ({
     college: state.forum.teacher.college,
     course: state.forum.teacher.course,
     teacher: state.forum.teacher.teacher,
+    anncPermission: state.forum.teacher.anncPermission,
     announcements: state.forum.teacher.announcements,
     subscribed: state.forum.teacher.subscribed,
     posts: state.forum.teacher.posts,

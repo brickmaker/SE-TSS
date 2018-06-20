@@ -55,7 +55,7 @@ class FacultyCheck(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         type = request.user.user_type
         if type == 2:
-            if request.user.username == obj.name:
+            if request.user.username == obj.username.username:
                 return True
             else:
                 return False
@@ -81,7 +81,7 @@ class StaffCheck(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         type = request.user.user_type
         if type == 3:
-            if request.user.username == obj.name:
+            if request.user.username == obj.username.username:
                 return True
             else:
                 return False
