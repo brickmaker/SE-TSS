@@ -1,4 +1,4 @@
-export const BACKEND_SERVER_URL = "http://10.180.31.226:8000/";
+export const BACKEND_SERVER_URL = "http://localhost:8000/";
 
 export const BACKEND_API = {
     get_token: 'api/info/get_token',

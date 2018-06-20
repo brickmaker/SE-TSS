@@ -21,7 +21,7 @@ export const getSubscriptions = (userId) => {
 };
 
 function fetchSubscriptions(userId) {
-    return axios.get(`${ROOT_URL}/api/forum/subscriptions`,
+    return fetch(`${ROOT_URL}/api/forum/subscriptions`,
         {
             headers: withAuthHeader()
         }
