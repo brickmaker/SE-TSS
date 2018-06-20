@@ -29,11 +29,11 @@ def init_section():
     print("Init 4-Forum Section...")
     models.Section.objects.all().delete()
    
+    objs = []
     def create(id, name, type, admin="1"):
         section = models.Section(id=id, name=name, type=type)
-        section.save()
-        section.admin.set(admin)
-
+        objs.append(section)
+        
     create(1, "人文学院", "CL")
     create(2, "外国语言文化与国际交流学院", "CL")
     create(3, "传媒与国际文化学院", "CL")
@@ -80,7 +80,9 @@ def init_section():
     create(44, "白洪欢", "TR")
     create(45, "白洪欢", "TR")
     create(46, "陈越", "TR")
-
+    models.Section.objects.bulk_create(objs)
+    for section in models.Section.objects.all():
+        section.admin.set("1")
 
 def init_college():
     print("Init 4-Forum College...")
