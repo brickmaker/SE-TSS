@@ -214,7 +214,8 @@ class course_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=course.section)
+            if model.Subscribe.objects.filter(user_id=uid.username,section=course.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=course.section)
         except:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':True}
@@ -236,7 +237,8 @@ class teacher_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
+            if model.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
         except Exception as e:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
             
@@ -517,7 +519,8 @@ class comment(APIView):
     
         try:
             models.Reply_reply.objects.create(from_uid_id=from_id.username,to_uid_id=to_id,content=content,reply_id_id=replyId)
-        except:
+        except Exception as e:
+            print(e)
             return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -675,7 +678,7 @@ class reply(APIView):
         t_data['replies'] = []
         
         try:
-            attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
+            attr = models.Attachment.objects.filter(md5sum=thread.attachment_md5)[0]
             t_data['file'] = attr.file.url
         except:
             t_data['file'] = None

@@ -7,11 +7,13 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "top.settings")
 django.setup()
 from forum import models
 
-
 def init_user():
     print("Init 4-Forum User...")
     models.User.objects.all().delete()
-    create = models.User.objects.create
+        
+    objs = []
+    def create(name,id_id):
+        objs.append(models.User(name=name,id_id=id_id))
     create(name="张一", id_id="1")
     create(name="张二", id_id="2")
     create(name="张三", id_id="3")
@@ -21,18 +23,17 @@ def init_user():
     create(name="张七", id_id="3150100004")
     create(name="张八", id_id="3150100005")
     create(name="张九", id_id="3150100006")
-
+    models.User.objects.bulk_create(objs)
 
 def init_section():
     print("Init 4-Forum Section...")
     models.Section.objects.all().delete()
-
+   
+    objs = []
     def create(id, name, type, admin="1"):
-        Section = models.Section.objects.create
-        section = Section(id=id, name=name, type=type)
-        section.save()
-        section.admin.set(admin)
-
+        section = models.Section(id=id, name=name, type=type)
+        objs.append(section)
+        
     create(1, "人文学院", "CL")
     create(2, "外国语言文化与国际交流学院", "CL")
     create(3, "传媒与国际文化学院", "CL")
@@ -79,38 +80,51 @@ def init_section():
     create(44, "白洪欢", "TR")
     create(45, "白洪欢", "TR")
     create(46, "陈越", "TR")
-
+    models.Section.objects.bulk_create(objs)
+    for section in models.Section.objects.all():
+        section.admin.set("1")
 
 def init_college():
     print("Init 4-Forum College...")
     models.College.objects.all().delete()
-    create = models.College.objects.create
+    objs = []
     for section in models.Section.objects.filter(type='CL'):
-        create(id=section.id, name=section.name, section=section)
-
+        objs.append(models.College(id=section.id, name=section.name, section=section))
+    models.College.objects.bulk_create(objs)
+    
 
 def init_course():
     print("Init 4-Forum Course...")
     models.Course.objects.all().delete()
-    create = models.Course.objects.create
-    create(id=1, name='软件工程', section_id=36, college_id=34)
-    create(id=2, name='计算理论', section_id=37, college_id=34)
-    create(id=3, name='计算机图形学', section_id=38, college_id=34)
-    create(id=4, name='汇编语言', section_id=39, college_id=34)
-    create(id=5, name='密码学', section_id=40, college_id=34)
-
+    
+    objs = []    
+    def create(id,name,section_id,college_id,code):
+        objs.append(models.Course(id=id,name=name,section_id=section_id,college_id=college_id,code=code))
+       
+    create(id=1, name='软件工程', section_id=36, college_id=34,code="051F0600")
+    create(id=2, name='计算理论', section_id=37, college_id=34,code="211G0220")
+    create(id=3, name='计算机图形学', section_id=38, college_id=34,code="061B0180")
+    create(id=4, name='汇编语言', section_id=39, college_id=34,code="211B0010")
+    create(id=5, name='密码学', section_id=40, college_id=34,code="21191790")
+    
+    models.Course.objects.bulk_create(objs)
 
 def init_teacher():
     print("Init 4-Forum Teacher...")
     models.Teacher.objects.all().delete()
-    create = models.Teacher.objects.create
+    
+    objs = []
+    def create(id,name,section_id,college_id,course_id):
+        objs.append(models.Teacher(id=id,name=name,section_id=section_id,college_id=college_id,course_id=course_id))
+    
     create(id=1, name="王章野", section_id=41, college_id=34, course_id=1)
     create(id=2, name="金小刚", section_id=42, college_id=34, course_id=2)
     create(id=3, name="周昆", section_id=43, college_id=34, course_id=3)
     create(id=4, name="白洪欢", section_id=44, college_id=34, course_id=4)
     create(id=5, name="白洪欢", section_id=45, college_id=34, course_id=5)
     create(id=6, name="陈越", section_id=46, college_id=34, course_id=1)
-
+    
+    models.Teacher.objects.bulk_create(objs)
 
 def init_subscription():
     print("Init 4-Forum Subscription...")
@@ -145,7 +159,10 @@ def init_announcement():
 def init_area():
     print("Init 4-Forum Area...")
     models.Area.objects.all().delete()
-    create = models.Area.objects.create
+    objs = []
+    def create(name,college_id):
+        objs.append(models.Area(name=name,college_id=college_id))
+    
     for id in range(1, 4):
         create(name="人文", college_id=id)
     for id in range(4, 9):
@@ -160,12 +177,23 @@ def init_area():
         create(name="社会科学", college_id=id)
     for id in range(31, 36):
         create(name="信息", college_id=id)
-
+    
+    models.Area.objects.bulk_create(objs)
 
 def init_thread():
     print("Init 4-Forum Thread...")
     models.Thread.objects.all().delete()
-    create = models.Thread.objects.create
+    
+    objs = []
+    def create(title,poster_id,section_id,content):
+        objs.append(models.Thread(title=title,poster_id=poster_id,section_id=section_id,content=content))
+        
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
+    create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
     create(title="文章01", poster_id="1", section_id=36, content="这是搜索锚点")
     create(title="文章02", poster_id="2", section_id=36, content="这是搜索锚点")
     create(title="文章03", poster_id="1", section_id=41, content="这是标记锚点")
@@ -180,8 +208,14 @@ def init_thread():
     create(title="文章12", poster_id="2", section_id=41, content="汗滴禾下土")
     create(title="文章13", poster_id="2", section_id=41, content="谁知盘中餐")
     create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
+    create(title="文章14", poster_id="2", section_id=41, content="粒粒皆辛苦")
 
-
+    models.Thread.objects.bulk_create(objs)
+    
+    
 def init_search():
     print("4-Forum: build index...")
     os.system("python manage.py update_index")
