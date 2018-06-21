@@ -6,14 +6,32 @@ import { withStyles,
     ListItemSecondaryAction,
     ListItemText,
     Checkbox,
-    Avatar
+    Avatar,
+    Table,
+    TableBody,
+    TableHead,
+    TableCell,
+    TableRow
 } from 'material-ui'
+import green from '@material-ui/core/colors/green'
+import AssignmentIcon from '@material-ui/icons/Assignment'
+import InfoIcon  from '@material-ui/icons/Info'
+
 
 const styles = theme => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.paper,
     },
+    greenAvatar: {
+        margin: 10,
+        color: '#fff',
+        backgroundColor:green[500],
+    },
+    infoAvatar: {
+        margin: 10,
+    }
+
 });
 
 class CheckboxListSecondary extends React.Component {
@@ -21,39 +39,49 @@ class CheckboxListSecondary extends React.Component {
         checked: [1],
     };
 
-    handleToggle = value => () => {
-        const { checked } = this.state;
-        const currentIndex = checked.indexOf(value);
-        const newChecked = [...checked];
-
-        if (currentIndex === -1) {
-            newChecked.push(value);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        this.setState({
-            checked: newChecked,
-        });
-    };
-
     render() {
         const { classes } = this.props;
-
         return (
             <div className={classes.root}>
-                <List>
-                    {[0, 1, 2, 3].map(value => (
-                        <ListItem key={value} dense button className={classes.listItem}>
-                            <Avatar alt="Remy Sharp" src="/static/images/remy.jpg" />
-                            <ListItemText primary={`Test ${value + 1}`} />
-                            <ListItemText primary={`Average Grade`}/>
-                            <ListItemText primary={`10/${value + 1}`}/>
-                            <ListItemSecondaryAction>
-                            </ListItemSecondaryAction>
-                        </ListItem>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell style={{textAlign:"center"}}>
+                                <Avatar className={classes.infoAvatar}>
+                                    <InfoIcon />
+                                </Avatar>
+                            </TableCell>
+                            <TableCell>试题名称</TableCell>
+                            <TableCell>平均成绩</TableCell>
+                            <TableCell>你的成绩</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.props.studentGrade.map((item,index) => (
+                            <TableRow key={index}>
+                                <TableCell>
+                                    <Avatar className={classes.greenAvatar}>
+                                        <AssignmentIcon/>
+                                    </Avatar>
+                                </TableCell>
+                                <TableCell>
+                                    {`${item.paperName}`}
+                                </TableCell>
+                                <TableCell>
+                                    {`${item.avgScore}`.substring(0,4)}
+                                </TableCell>
+                                <TableCell>
+                                    {`${item.testScore}`+"/"+`${item.totalScore}`}
+                                </TableCell>
+
+                                {/*<ListItem key={index} dense button className={classes.listItem}>*/}
+                                {/*<ListItemText style={{maxWidth:"350px"}} primary={`${item.paperName}`} />*/}
+                                {/*<ListItemText style={{maxWidth:"200px"}}  primary={`${item.avgScore}`.substring(0,4)}/>*/}
+                                {/*<ListItemText style={{maxWidth:"200px"}}  primary={`${item.testScore}`+"/"+`${item.totalScore}`}/>*/}
+                            </TableRow>
                     ))}
-                </List>
+                    </TableBody>
+                </Table>
             </div>
         );
     }

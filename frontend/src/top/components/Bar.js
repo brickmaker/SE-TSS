@@ -89,7 +89,6 @@ class Bar extends React.Component {
     };
 
     handleMenu = event => {
-        console.log("ff");
         this.setState({anchorEl: event.currentTarget});
     };
 
@@ -182,7 +181,6 @@ class Bar extends React.Component {
                                 aria-owns={Boolean(anchorEl) ? 'menu-appbar' : null}
                                 aria-haspopup="true"
                                 onClick={this.handleMenu}
-                                // onClick={this.logout}
                                 color="inherit"
                             >
                                 <AccountCircle/>

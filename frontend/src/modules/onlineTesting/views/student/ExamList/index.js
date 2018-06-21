@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux"
-
+import PropTypes from "prop-types"
 import {
     Button,
     Paper,
@@ -15,7 +15,8 @@ import {
     DialogTitle,
     DialogContent,
     DialogActions,
-    DialogContentText
+    DialogContentText,
+    CircularProgress
 } from "material-ui"
 
 import {getStudentPaperList} from "./actions";
@@ -34,27 +35,61 @@ function timestampToTime(timestamp) {
 
 
 class ExamList extends Component{
-    componentWillMount(){
-        this.props.getStudentPaperList(0,0);
+    state = Object.assign({}, this.state, {open:false});
+
+    static propTypes ={
+        token:PropTypes.string,
+    };
+
+    last_course_id="";
+
+    componentDidUpdate(prevProps, prevState) {
+        const {course_id} = this.props.match.params;
+        if(course_id != this.last_course_id){
+            this.last_course_id = course_id;
+
+            this.update();
+        }
     }
 
+    update=()=>{
+        const{token} = this.props;
+        const{course_id} = this.props.match.params;
+        this.props.getStudentPaperList(course_id,token);
+    }
+
+    componentDidMount(){
+       this.update();
+    }
+
+    handleClickOpen = () => {
+        this.setState(Object.assign({}, this.state, {open:true}));
+    };
+
+    handleClose = () => {
+        this.setState(Object.assign({}, this.state, {open:false})) ;
+    };
 
     render(){
         const {match, student_paper_list} = this.props;
+        if(student_paper_list.length===0){
+            return  <CircularProgress />
+        }
         const currentDate = new Date();
-        const stamp = parseInt(Number(currentDate)/1000);
+        const stamp = new Date().valueOf();
+
         const paperListItems = student_paper_list.map(
             (paperInfo, index)=>{
-                const start_time = paperInfo.start_time, deadline = paperInfo.deadline;
+                const start_time = new Date(paperInfo.start_time).valueOf(), deadline = new Date(paperInfo.deadline).valueOf();
                 const flag1 = start_time < stamp, flag2 = deadline > stamp;
-
                 const renderName = ()=>{
-                    if(flag1 && flag2){
+                    if(flag1 && flag2 && !paperInfo.done){
                         return (
                             <Button
                                 color="primary"
                                 onClick={(e)=>{
-                                    this.props.history.push(`${match.url}/exam/${paperInfo.paper_id}`);
+                                    this.state.temp_paper_id = paperInfo.paper_id;
+                                    this.handleClickOpen();
                                 }
                                 }
                             >
@@ -62,7 +97,13 @@ class ExamList extends Component{
                             </Button>)
                     }
                     else{
-                        return paperInfo.paper_name;
+                        return (
+                            <Button
+                                color="default"
+                            >
+                                {paperInfo.paper_name}
+                            </Button>
+                        );
                     }
                 };
 
@@ -73,6 +114,9 @@ class ExamList extends Component{
                     else if (!flag2){
                         return "已结束";
                     }
+                    else if(paperInfo.done) {
+                        return "已作答";
+                    }
                     else {
                         return "进行中";
                     }
@@ -82,8 +126,8 @@ class ExamList extends Component{
                 return(
                     <TableRow key={index} >
                         <TableCell>{renderName()}</TableCell>
-                        <TableCell>{timestampToTime(paperInfo.start_time)}</TableCell>
-                        <TableCell>{timestampToTime(paperInfo.deadline)}</TableCell>
+                        <TableCell>{(paperInfo.start_time)}</TableCell>
+                        <TableCell>{(paperInfo.deadline)}</TableCell>
                         <TableCell>{ Math.ceil(paperInfo.duration/60)}minutes</TableCell>
 
                         <TableCell>
@@ -112,6 +156,30 @@ class ExamList extends Component{
                         {paperListItems}
                     </TableBody>
                 </Table>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"确定要开始作答？"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {"点击确定后开始计时"}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={()=>{this.handleClose();}} color="primary">
+                            {"否"}
+                        </Button>
+                        <Button onClick={()=>{
+                            this.handleClose();
+                            this.props.history.push(`${match.url}/exam/${this.state.temp_paper_id}`);
+                        }} color="primary" autoFocus>
+                            {"是"}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Paper>
         )
     }
@@ -123,12 +191,13 @@ class ExamList extends Component{
 
 const mapStateToProps = (state) => ({
     student_paper_list: state.online_testing.exam_list.student_paper_list,
+    token:state.online_testing.student_main.token,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getStudentPaperList: (teacherID, courseId, token)=>{
-            return dispatch(getStudentPaperList(teacherID,courseId, token));
+        getStudentPaperList: (courseId, token)=>{
+            return dispatch(getStudentPaperList(courseId, token));
         },
     }
 };

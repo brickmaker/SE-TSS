@@ -1,7 +1,7 @@
-import {GET_STUDENT_PAPER_LIST} from "./actions";
+import {GET_CURRENT_PAPER_ID, GET_STUDENT_PAPER_LIST} from "./actions";
 
 const initState = {
-    student_paper_list: []
+    student_paper_list: [],
 };
 
 export function examListReducer(state = initState, action) {

@@ -11,7 +11,7 @@ import { withStyles,
     Icon,
 } from 'material-ui';
 import echarts from 'echarts'
-import 'echarts/lib/component/titleData'
+import 'echarts/lib/component/title'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/toolbox'
@@ -34,22 +34,14 @@ const styles = {
 
 class CheckboxLabels extends React.Component {
     state = {
-        checkedA: true,
-        checkedB: true,
-        checkedC: true,
-        checkedD: true,
-        checkedE: true,
-        checkedF: true,
-        checkedG: true,
     };
-
     componentDidMount(){
         var myChart = echarts.init(document.getElementById('main'));
         myChart.setOption(
             {
                 title : {
                     text: '考卷考察点分布',
-                    subtext: 'XX班级'
+                    subtext: 'XX考卷'
                 },
                 grid: {
                     left: '3%',
@@ -100,7 +92,7 @@ class CheckboxLabels extends React.Component {
                         type : 'value',
                         scale:true,
                         axisLabel : {
-                            formatter: '{value} cm'
+                            formatter: '{value} '
                         },
                         splitLine: {
                             show: false
@@ -112,7 +104,7 @@ class CheckboxLabels extends React.Component {
                         type : 'value',
                         scale:true,
                         axisLabel : {
-                            formatter: '{value} kg'
+                            formatter: '{value} 分'
                         },
                         splitLine: {
                             show: false
@@ -208,7 +200,7 @@ class CheckboxLabels extends React.Component {
                             },
                             data : [
                                 {type : 'average', name: '平均值'},
-                                { xAxis: 160 }
+                                { xAxis: 50 }
                             ]
                         }
                     },
@@ -298,13 +290,79 @@ class CheckboxLabels extends React.Component {
                             },
                             data : [
                                 {type : 'average', name: '平均值'},
-                                { xAxis: 170 }
+                                { xAxis: 60 }
                             ]
                         }
                     }
                 ]
             }
         );
+
+
+        const {tagList} = this.props;
+
+        // let serialData=[];
+        // let scoreData=[];
+        // let markAreaData=[];
+        // let markLineData={};
+        // let myOption={};
+        // tagList.map(tag =>{
+        //     this.state[tag.tag] = true;
+        //     let testNameDatas=[];
+        //     let reTestData=[];
+        //     tag.relevantTest.map(eachReTest=>{
+        //        testNameDatas.push(eachReTest.testName);
+        //        let preReTestData = [];
+        //        for(let i = 0;i<eachReTest.testScore.length;i++){
+        //            let tmpData = [eachReTest.testScore[i].score,i];
+        //            preReTestData.push(tmpData);
+        //        }
+        //        reTestData.push(preReTestData);
+        //     });
+        //     //testNameDatas = 所有名字array
+        //     //reTestData多次考試需要的data
+        //     this.reTestData.forEach((t,i,arr)=>{
+        //         let scoreTmp = [];
+        //         let sumScore = 0.0;
+        //         let scoreNumber = 0.0;
+        //         t.score.forEach((score,j,k)=>{
+        //             let prescoreTmp = [score,k.length*i + j];
+        //             scoreTmp.push(prescoreTmp);
+        //             sumScore = sumScore + score;
+        //             scoreNumber = scoreNumber + 1;
+        //         });
+        //         //準備好了scoreData
+        //
+        //         let tmp = {
+        //             name:this.testNameDatas[i],
+        //             data:scoreTmp,
+        //         };
+        //         let tmpM = [{
+        //                 name: this.testNameDatas[i].toString()+"分布區間",
+        //                 xAxis: 'min',
+        //                 yAxis: 'min'
+        //             }, {
+        //                 xAxis: 'max',
+        //                 yAxis: 'max'
+        //         }];
+        //         this.markAreaData.push(tmpM);//markAreaData準備好了
+        //         let tmpML = [
+        //                         {type : 'average', name: '平均值'},
+        //                         { xAxis: sumScore/scoreNumber }
+        //                     ];
+        //         this.markLineData["data"] = tmpML;//marLine準備好了
+        //         this.myOption["name"] =t.name;
+        //         this.myOption["data"] =scoreTmp;
+        //         this.myOption["markArea"] =this.markAreaData;
+        //         this.myOption["markLine"] =this.markLineData;
+        //
+        //         this.serialData.push(this.myOption);
+        //     })
+        // });
+        // let outMyOption = {};
+        // outMyOption["legend"]["data"] = this.testNameDatas;//data1    data: ['考卷一','考卷二'],
+        // outMyOption["series"] = this.serialData;
+        // // myChart.setOption(outMyOption);
     }
 
     handleChange = name => event => {
@@ -312,68 +370,27 @@ class CheckboxLabels extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-
+        const { classes,tagList } = this.props;
         return (
             <div>
             <Card className={classes.card}>
                 <CardContent>
             <FormGroup row>
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.checkedA}
-                            onChange={this.handleChange('checkedA')}
-                            value="checkedA"
-                            color="primary"
-                        />
-                    }
-                    label="tag1"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.checkedB}
-                            onChange={this.handleChange('checkedB')}
-                            value="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="tag2"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.checkedC}
-                            onChange={this.handleChange('checkedC')}
-                            value="checkedC"
-                            color="primary"
-                        />
-                    }
-                    label="tag3"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.checkedD}
-                            onChange={this.handleChange('checkedD')}
-                            value="checkedD"
-                            color="primary"
-                        />
-                    }
-                    label="tag4"
-                />
-                <FormControlLabel
-                    control={
-                        <Checkbox
-                            checked={this.state.checkedE}
-                            onChange={this.handleChange('checkedE')}
-                            value="checkedE"
-                            color="primary"
-                        />
-                    }
-                    label="tag5"
-                />
+                {tagList.map((tag,index)=>(
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                checked={this.state[tag.tag]}
+                                onChange={this.handleChange(tag.tag.toString())}
+                                value={tag.tag}
+                                color="primary"
+                            />
+                        }
+                        label={tag.tag}
+                    />
+                ))
+
+                }
             </FormGroup>
                 </CardContent>
                 <CardActions>

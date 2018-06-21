@@ -28,7 +28,9 @@ import {
     Tabs,
     List,
     Typography,
-    AppBar
+    AppBar,
+    CircularProgress
+
 } from "material-ui"
 
 import {getTeacherPaper, changeRenderTab} from './actions'
@@ -49,14 +51,6 @@ const styles = {
     },
 };
 
-function TabContainer(props) {
-    return (
-        <Typography component="div" style={{ padding: 8 * 3 }}>
-            {props.children}
-        </Typography>
-    );
-}
-
 class PaperView extends Component{
     constructor(props){
         super(props);
@@ -65,22 +59,28 @@ class PaperView extends Component{
         });
     }
 
-    componentWillMount(){
-        this.props.getTeacherPaper(0,0,0,0);
+    componentDidMount(){
+        const {match, paper_info, selection, token} = this.props;
+        const {paper_id} = match.params;
+        this.props.getTeacherPaper(paper_id, token);
     }
 
     render(){
-        const {match, paper_info, selection} = this.props;
-        if(paper_info.question_list){
-            let judgeCount = 0, choiceCount = 0;
-            const choiceProblemListItems = paper_info.question_list.map(
-                (problem, index)=>{
-                    if (problem.question_type === 'Choice'){
+        const {match, paper_info, selection, token} = this.props;
+        const {paper_id} = match.params;
+        if(paper_info.course === undefined){
+            return < CircularProgress/>
+        }
+
+        let judgeCount = 0, choiceCount = 0;
+        const choiceProblemListItems = paper_info.question_list.map(
+            (problem, index)=>{
+                    if (problem.type === 'Choice'){
                         choiceCount += 1;
                         const choiceListItems = problem.choice_list.map(
                             (choice, i)=>{
                                 return (
-                                    <FormControlLabel key={i} value={`${i}`} control={<Radio />} label={choice} />
+                                    <FormControlLabel key={i} value={i.toString()} control={<Radio />} label={choice} />
                                 )
                             }
                         );
@@ -91,13 +91,13 @@ class PaperView extends Component{
                                    <tbody>
                                    <TableRow >
                                        <TableCell>{choiceCount}</TableCell>
-                                       <TableCell>
+                                       <TableCell style={{maxWidth: "300px", fontSize: 15}}>
                                            <Card>
                                                <CardHeader
                                                    title={problem.description}
                                                />
                                                <FormControl component="fieldset" required >
-                                                   <RadioGroup value={`${problem.answer_list[0] - 1}`}>
+                                                   <RadioGroup value={(problem.answer_list[0] - 1).toString()}>
                                                        {choiceListItems}
                                                    </RadioGroup>
                                                </FormControl>
@@ -105,7 +105,20 @@ class PaperView extends Component{
 
 
                                        </TableCell>
-                                       <TableCell>作者：{problem.teacher_name}</TableCell>
+                                       <TableCell style={{maxWidth: "100px"}}>
+                                           <div>
+                                               作者:{problem.teacher_name}
+                                           </div>
+                                           <div>
+                                               分值:{paper_info.score_list[index]}
+                                           </div>
+                                           <div>
+                                                难度系数:{problem.level}
+                                           </div>
+                                           <div>
+                                               考察范围:{problem.tag}
+                                           </div>
+                                       </TableCell>
                                    </TableRow>
                                    </tbody>
                                 </Table>
@@ -114,12 +127,12 @@ class PaperView extends Component{
                         )
                     }
                 }
-            );
+        );
 
 
-            const judgeProblemList = paper_info.question_list.map(
-                (problem, index)=>{
-                    if (problem.question_type === 'Judge'){
+        const judgeProblemList = paper_info.question_list.map(
+            (problem, index)=>{
+                    if (problem.type === 'Judge'){
                         judgeCount += 1;
                         return (
                             <Paper key={index}>
@@ -127,13 +140,13 @@ class PaperView extends Component{
                                    <tbody>
                                    <TableRow >
                                        <TableCell>{judgeCount}</TableCell>
-                                       <TableCell>
+                                       <TableCell style={{maxWidth: "300px", fontSize: 15}}>
                                            <Card>
                                                <CardHeader
                                                    title={problem.description}
                                                />
                                                <FormControl component="fieldset" required >
-                                                   <RadioGroup value={`${problem.answer_list[0] - 1}`}>
+                                                   <RadioGroup value={problem.answer_list[0].toString()}>
                                                        <FormControlLabel value={"0"} control={<Radio />} label={"true"} />
                                                        <FormControlLabel value={"1"} control={<Radio />} label={"false"} />
                                                    </RadioGroup>
@@ -142,8 +155,20 @@ class PaperView extends Component{
 
 
                                        </TableCell>
-                                       <TableCell>作者：{problem.teacher_name}</TableCell>
-                                   </TableRow>
+                                       <TableCell style={{maxWidth: "100px"}}>
+                                           <div>
+                                               作者:{problem.teacher_name}
+                                           </div>
+                                           <div>
+                                               分值:{paper_info.score_list[index]}
+                                           </div>
+                                           <div>
+                                               难度系数:{problem.level}
+                                           </div>
+                                           <div>
+                                               考察范围:{problem.tag}
+                                           </div>
+                                       </TableCell>                                   </TableRow>
                                    </tbody>
                                 </Table>
                                 <Divider/>
@@ -153,15 +178,14 @@ class PaperView extends Component{
 
                     }
                 }
-            );
+        );
 
-
-            const renderTabs = ()=>{
+        const renderTabs = ()=>{
                 if(judgeCount === 0){
                     return (
                         <AppBar position="static" color="default">
                             <Tabs
-                                value={'1'}
+                                value="1"
                                 indicatorColor="primary"
                                 textColor="primary"
                             >
@@ -174,7 +198,7 @@ class PaperView extends Component{
                     return (
                         <AppBar position="static" color="default">
                             <Tabs
-                                value={'0'}
+                                value="0"
                                 indicatorColor="primary"
                                 textColor="primary"
                             >
@@ -187,35 +211,34 @@ class PaperView extends Component{
                     return (
                         <AppBar position="static" color="default">
                             <Tabs
-                                value={`${selection}`}
+                                value={selection.toString()}
                                 indicatorColor="primary"
                                 textColor="primary"
                                 onChange={(e, value)=>{
                                     this.props.changeRenderTab(value);
                                 }}
                             >
-                                <Tab value={"0"} label="判断题" />
-                                <Tab value={"1"} label="选择题" />
+                                <Tab value="0" label="判断题" />
+                                <Tab value="1" label="选择题" />
                             </Tabs>
                         </AppBar>
                     )
                 }
             };
 
-
-            return (
-                <Paper>
+        return (
+            <Paper>
                     <div style={styles.title}>
-                        hello
+                        <h2>{paper_info.paper_name}</h2>
                     </div>
                     <Divider inset />
-                    <div style={styles.info_1}>
-                        试卷概述
-                    </div>
+
                     <Divider inset />
+
                     <div style={styles.info_2}>
-                        开放，结束，考试长度
+                        <h3> {"考试时长 : " + `${ Math.ceil(paper_info.duration)}` + ' 分钟'}</h3>
                     </div>
+
                     <Divider inset />
                     <div style={styles.question_block}>
                         {renderTabs()}
@@ -224,24 +247,20 @@ class PaperView extends Component{
 
                     </div>
                 </Paper>
-
-            )
-        }
-        else{
-            return <div></div>
-        }
+        )
     }
 }
 
 const mapStateToProps = (state) => ({
     paper_info: state.online_testing.paper_view.paper_info,
     selection: state.online_testing.paper_view.selection,
+    token: state.online_testing.teacher_main.token,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTeacherPaper: (teacherID, courseId, paperID, token)=>{
-            return dispatch(getTeacherPaper(teacherID,courseId, paperID, token));
+        getTeacherPaper: (paper_id, token)=>{
+            return dispatch(getTeacherPaper(paper_id, token));
         },
         changeRenderTab: (selection)=>{
             return dispatch(changeRenderTab(selection));

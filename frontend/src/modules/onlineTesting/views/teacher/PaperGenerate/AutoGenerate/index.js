@@ -44,18 +44,6 @@ import {
 } from "material-ui"
 
 
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-];
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -78,7 +66,6 @@ const initState = {
         exam_time:"120"
     },
     paras: "",
-    tags: names,
     choice_num: "0",
     judge_num: "0",
     select_tags:[],
@@ -86,15 +73,47 @@ const initState = {
 
 export default class AutoGenerate extends React.Component {
 
-    constructor(props){
-        super();
-        this.state = Object.assign({}, initState,{paras: props.paras});
-    }
+    state = initState;
+
 
     handleNext = () => {
         const {stepIndex} = this.state;
-        if(stepIndex >= 2){
-          //
+        if(stepIndex === 2){
+            let headers = new Headers();
+            headers.append(
+                'Content-Type', 'application/json'
+            )
+            headers.append(
+                'Authorization','JWT '+ localStorage.getItem('token')
+
+            );
+            const paper_info = {
+                'auto': true,
+                'start_time': this.state.paper_info_input.start_time,
+                'deadline': this.state.paper_info_input.end_time,
+                'duration': parseInt(this.state.paper_info_input.exam_time),
+                'paper_name': this.state.paper_info_input.title,
+                'tag_list': this.state.select_tags,
+                'num_choice': parseInt(this.state.choice_num),
+                'num_judge': parseInt(this.state.judge_num),
+                'course': this.props.course_id
+            };
+            console.log('233', paper_info);
+            fetch(`http://47.100.233.129:8080/api/online_testing/paper/`, {
+                method: 'POST',
+                headers: headers,
+                body:JSON.stringify(paper_info)
+            })
+                .then(response => {
+                    console.log(response);
+                    this.setState(Object.assign({}, this.state, {
+                        stepIndex: stepIndex + 1,
+                        finished: true,
+                    }));
+                })
+                .catch(err => console.log(err));
+
+            return;
         }
 
         this.setState(Object.assign({}, this.state, {
@@ -121,7 +140,7 @@ export default class AutoGenerate extends React.Component {
                             label="标题"
                             defaultValue={this.state.paper_info_input.title}
                             onChange={(event)=>{
-                                this.state.paper_info_input.titleData = event.target.value
+                                this.state.paper_info_input.title = event.target.value
                             }
                             }
                         />
@@ -167,7 +186,7 @@ export default class AutoGenerate extends React.Component {
 
                 );
             case 1:
-                const tags = this.state.tags;
+                const tags = this.props.tag_list;
                 return (
                     <div>
                         <FormControl styles={{
@@ -229,7 +248,6 @@ export default class AutoGenerate extends React.Component {
     render() {
         const {finished, stepIndex} = this.state;
         const contentStyle = {margin: '0 16px'};
-        console.log("temp state",this.state);
         return (
             <div style={{width: '100%', maxWidth: 700, margin: 'auto'}}>
                 <Stepper activeStep={stepIndex}>
@@ -250,9 +268,7 @@ export default class AutoGenerate extends React.Component {
                                 href="#"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    this.setState(Object.assign(
-                                        {}, initState, {params:this.state.params}
-                                    ));
+                                    this.setState(initState);
                                 }}
                             >
                                 Click here

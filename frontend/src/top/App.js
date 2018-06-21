@@ -26,10 +26,10 @@ import {
 import Info from "../modules/info";
 import Forum from "../modules/forum";
 import Xkxt from "../modules/xkxt";
-import Login from "../modules/info/components/LoginView"
+import Login from "../modules/info/components/LoginView";
 import Main from "./components/Top";
-import ScoreManagement from "../modules/scorem"
-
+import ScoreManagement from "../modules/scorem";
+import OnlineTesting from "../modules/onlineTesting";
 const topStyles = {};
 
 
@@ -42,7 +42,6 @@ class App extends Component {
     render() {
 
         return (
-
             <Provider store={store}>
                 <BrowserRouter>
                     <div style={topStyles}>
@@ -53,6 +52,7 @@ class App extends Component {
                             <Route path={'/forum'} component={Forum}/>
                             <Route path={'/xkxt'} component={Xkxt}/>
                             <Route path={'/scorem'} component={ScoreManagement}/>
+                            <Route path={'/online_testing'} component={OnlineTesting}/>
                         </div>
                     </div>
                 </BrowserRouter>

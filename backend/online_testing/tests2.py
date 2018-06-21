@@ -21,10 +21,15 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
-response = c.get('/api/online_testing/analysis/studentGradeList/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+response = c.get('/api/online_testing/paper/?course=211G0200', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
+response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
 exit(0)
+
+response = c.get('/api/online_testing/analysis/studentGradeList/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
 
 response = c.get('/api/online_testing/question/2/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))

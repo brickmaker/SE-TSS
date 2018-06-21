@@ -1,23 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AddIcon from '@material-ui/icons/Add';
 import { withStyles,
     Switch,
     Paper,
     Zoom,
     Button,
     IconButton,
-    Icon,
     Divider,
+    Icon,
     Typography
 } from 'material-ui'
 import SortIcon from '@material-ui/icons/Sort'
 import Dns from '@material-ui/icons/Dns'
+import Description from '@material-ui/icons/Description'
 import PieChart from '@material-ui/icons/PieChart'
-import {
-   Route
-} from 'react-router-dom'
-
 const testCourseList = [
     {
         course_id: 0,
@@ -75,25 +71,34 @@ class SimpleZoom extends React.Component {
                     <SortIcon/>
                 </IconButton>
                 <div className={classes.container}>
-                    <Zoom in={checked}>
-                        <IconButton className={classes.button} title={"试题列表"}
-                            onClick={(e)=>{
-                            this.props.history.push(`${this.props.match.url}/exam_list/${this.props.course_id}`);
-                        }
-                        }
+                    <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
+                        <IconButton className={classes.button} title={"题库管理"}
+                                onClick={() => {
+                                    console.log(this);
+                                    const pathname = `${this.props.match.url}/question_manage/${this.props.courseInfo.course_id}`;
+                                    this.props.history.push(pathname);
+                                }}
 
                         ><Dns/></IconButton>
                     </Zoom>
                     <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
-                        <IconButton className={classes.button} title={"历史成绩"}
-                                onClick={(e)=>{
-                                    this.props.history.push(`${this.props.match.url}/history_grade/${this.props.course_id}`);
-                                }
-                                }
+                        <IconButton className={classes.button} title={"试卷管理"}
+                                onClick={() => {
+                                    const pathname = `${this.props.match.url}/paper_manage/${this.props.courseInfo.course_id}`;
+                                    this.props.history.push(pathname);
+                                }}
+                        > <Description/></IconButton>
+                    </Zoom>
+                    <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
+                        <IconButton className={classes.button} title={"成绩统计"}
+                                onClick={() => {
+                                    const pathname = `${this.props.match.url}/grade_statistics/${this.props.courseInfo.course_id}`;
+                                    this.props.history.push(pathname);
+                                }}
                         > <PieChart/></IconButton>
                     </Zoom>
                 </div>
-               <Divider/>
+            <Divider/>
             </div>
 
         );
