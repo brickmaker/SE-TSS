@@ -374,7 +374,10 @@ class AnalysisViewSet(GenericViewSet):
     def studentGradeList(self, request):
         data = []
         map = {}
+        course_id = request.query_params.get('course_id')
         for exam in Examination.objects.all().filter(student=request.user.username):
+            if exam.paper.course.course_id != course_id:
+                continue
             s = PaperDetailSerializer(exam.paper)
             if map.get(exam.paper) is None:
                 map[exam.paper] = Examination.objects.all().\
@@ -401,6 +404,7 @@ class AnalysisViewSet(GenericViewSet):
             }
             for exam in Examination.objects.all().filter(paper=paper):
                 d['whoTakeThisTest'].append({
+                    'studentID': exam.student.username.username,
                     'studentName': exam.student.name,
                     'studentScore': exam.score
                 })
@@ -410,6 +414,7 @@ class AnalysisViewSet(GenericViewSet):
     @action(methods=['get'], detail=False)
     def studentList(self, request):
         data = []
+        # should change
         for student in Student.objects.all():
             d = {
                 'studentID': student.username.username,
@@ -468,7 +473,9 @@ class AnalysisViewSet(GenericViewSet):
                 'testName': paper.paper_name,
                 'content': []
             }
-            for question in paper.question_id_list.all():
+            for i, question in enumerate(paper.question_id_list.all()):
+                if i > 10:
+                    break
                 d['content'].append({
                     'questionID': question.question_id,
                     'answerRate': '%d%%' % int(np.random.randint(0, 100))

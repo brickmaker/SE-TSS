@@ -8,14 +8,20 @@ class QuestionPermission(permissions.BasePermission):
         t = request.user.user_type
         if t != 2:
             return False
+        if request.method not in permissions.SAFE_METHODS:
+            faculty = Faculty.objects.all().get(username=request.user)
+            cnt = faculty.teacher_course.all().filter(course_id=request.data['course']).count()
+            if cnt <= 0:
+                return False
         return True
 
     # if you want details of questions, you must be the teacher of this course.
     def has_object_permission(self, request, view, obj):
         faculty = Faculty.objects.all().get(username=request.user)
-        cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
-        if cnt <= 0:
-            return False
+        if request.method not in permissions.SAFE_METHODS:
+            cnt = faculty.teacher_course.all().filter(course_id=obj.course.course_id).count()
+            if cnt <= 0:
+                return False        
         return True
 
 
