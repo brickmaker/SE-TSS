@@ -113,6 +113,10 @@ class ScoreManagement extends Component {
     this.database = {
       course: [],
     };
+
+    this.anaData = {topicList : [], data : []};
+    this.scoreListName = [];
+    this.rank = 0;
   }
 
   componentDidMount() {
@@ -121,6 +125,105 @@ class ScoreManagement extends Component {
 
   getInitData() {
     this.data.splice(0,this.data.length);
+
+    //anadata start
+
+   
+    if (this.user.type == "Student"){
+      fetch("http://127.0.0.1:8000/api/score/updatestudentrank/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
+        },
+        body: ''
+      }).then(function (res) {
+        if (res.ok) {
+          return;
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      });
+    }
+
+    if (this.user.type == "Student"){
+      fetch("http://127.0.0.1:8000/api/score/studentrank/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
+        },
+        body: 'sid=' + this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        if (data !== undefined) {
+          this.rank = data.rank;
+        }
+      });
+    }
+
+
+    if (this.user.type == "Student"){
+      fetch("http://127.0.0.1:8000/api/score/listallscore/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
+        },
+        body: 'sid=' + this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        if (data !== undefined) {
+          this.anaData = data;
+          for (var i=0; i<data.data.length; i++) this.scoreListName.push("个人分析");
+        }
+      });
+    } else if (this.user.type === "Teacher"){
+      fetch("http://127.0.0.1:8000/api/score/listallscore/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
+        },
+        body: 'pid=' + this.user.id
+      }).then(function (res) {
+        if (res.ok) {
+          return res.json();
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      }).then(data => {
+        if (data !== undefined) {
+          this.anaData = data;
+          for (var i=0; i<data.data.length; i++) this.scoreListName.push("学生姓名");
+        }
+      });
+    }
+
+    //anadata end
+
     if (this.user.type === 'Student') {
       fetch("http://127.0.0.1:8000/api/score/scoreliststudent/", {
         method: "POST",
@@ -328,9 +431,11 @@ class ScoreManagement extends Component {
                                                                               database={this.database}/>}/>
             }
             <Route path={`${match.url}/analysis`} render={(props) => <AnaScore {...props}
-                                                                               topicList={testAna.topicList}
-                                                                               data={testAna.data}
-                                                                               scoreListName={testAna.scoreListName}/>}/>
+                                                                               topicList={this.anaData.topicList}
+                                                                               data={this.anaData.data}
+                                                                               scoreListName={this.scoreListName}
+                                                                               user={this.user}
+                                                                               rank={this.rank}/>}/>
             {this.user.type === 'Teacher' &&
             <Route path={`${match.url}/request`} render={(props) => <ScoreRequest {...props}
                                                                                   database={this.database}
