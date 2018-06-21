@@ -11,6 +11,7 @@ from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
+import json
 
 @api_view(['GET', 'POST'])
 def score_list_teacher(request):
@@ -100,7 +101,8 @@ def apply_create(request):
 def apply_modify(request):
     application=Application.objects.get(title=request.data["title"])
     application.state=request.data["state"]
-    if request.data["state"]==1:
+    
+    if request.data["state"]=="1":
         score_relation=Score_Relation.objects.get(course_select_info__student=application.student,
                                                   course_select_info__course__teacher=application.teacher,
                                                   course_select_info__course__course=application.course)

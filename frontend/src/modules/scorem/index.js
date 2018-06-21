@@ -237,7 +237,7 @@ class ScoreManagement extends Component {
     }).then(function (res) {
       if (res.ok) {
         alert("录入成功");
-        this.props.history.push(`${this.props.url}/enter`);
+        this.props.history.push(`${this.props.match.url}/enter`);
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }
