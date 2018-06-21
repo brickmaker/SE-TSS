@@ -21,3 +21,4 @@ whoosh_index
 #Vim support file
 *.swp
 *.un~
+*.bat~
