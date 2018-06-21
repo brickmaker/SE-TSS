@@ -42,7 +42,7 @@ export const getUserStates = (username) => {
         dispatch({
             type: USERSTATES_REQUEST,
         });
-        let params = DEBUG? {}: {username,};
+        let params = DEBUG ? {} : { username, };
         axios.get(`${ROOT_URL}/api/forum/userstates`, {
             params,
             headers: withAuthHeader(),
@@ -77,14 +77,28 @@ export const getHotPosts = (collegeid, courseid, teacherid, startTime, endTime) 
         dispatch({
             type: HOTPOSTS_REQUEST,
         })
+        var params = {};
+        if (collegeid) {
+            params['collegeid'] = collegeid;
+        }
+        if (courseid) {
+            params['courseid'] = courseid;
+        }
+        if (teacherid) {
+            params['teacherid'] = teacherid;
+        }
+        params['start_time'] = startTime.format();
+        params['end_time'] = endTime.format();
+
         axios.get(`${ROOT_URL}/api/forum/hotposts`, {
-            params: {
-                collegeid,
-                courseid,
-                teacherid,
-                start_time: startTime.format(),
-                end_time: endTime.format(),
-            },
+            params: params,
+            // params: {
+            //     collegeid,
+            //     courseid,
+            //     teacherid,
+            //     start_time: startTime.format(),
+            //     end_time: endTime.format(),
+            // },
             headers: withAuthHeader(),
         })
             .then((response) => {
@@ -107,7 +121,7 @@ export const COLLEGES_SUCCESS = 'colleges_success';
 export const COLLEGES_FAILURE = 'colleges_failure';
 export const getColleges = () => {
     return (dispatch, getState) => {
-        axios.get(`${ROOT_URL}/api/forum/college_list`,{
+        axios.get(`${ROOT_URL}/api/forum/college_list`, {
             headers: withAuthHeader(),
         })
             .then((response) => {
@@ -190,7 +204,7 @@ export const SET_ENDTIME = 'set_endtime';
 export const setStartTime = (startTime) => {
     return ({
         type: SET_STARTTIME,
-        startTime: startTime    ,
+        startTime: startTime,
     });
 }
 export const setEndTime = (endTime) => {
@@ -198,4 +212,9 @@ export const setEndTime = (endTime) => {
         type: SET_ENDTIME,
         endTime: endTime,
     });
+}
+
+export const LEAVE_MGR = 'leave_mgr';
+export const leaveMgr = () => {
+    return ({ type: LEAVE_MGR });
 }

@@ -147,7 +147,7 @@ class Usercenter extends Component {
                                                     selectEntry(uid, avatar, username);
                                                     history.push('/forum/messages');
                                                 }}
-                                            >私信</Button>
+                                            >发送消息</Button>
                                         </div>
                                         <Typography variant="subheading" style={{
                                             marginTop: 20,
