@@ -10,7 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
 import MenuIcon from '@material-ui/icons/Menu';
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import {
     Button,
     Menu,
@@ -89,6 +89,7 @@ class Bar extends React.Component {
     };
 
     handleMenu = event => {
+        console.log("ff");
         this.setState({anchorEl: event.currentTarget});
     };
 
@@ -181,6 +182,7 @@ class Bar extends React.Component {
                                 aria-owns={Boolean(anchorEl) ? 'menu-appbar' : null}
                                 aria-haspopup="true"
                                 onClick={this.handleMenu}
+                                // onClick={this.logout}
                                 color="inherit"
                             >
                                 <AccountCircle/>
@@ -245,4 +247,4 @@ Bar.propTypes = {
 };
 
 
-export default withStyles(styles, {withTheme: true})(connect(mapStateToProps, mapDispatchToProps)(Bar));
+export default withRouter(withStyles(styles, {withTheme: true})(connect(mapStateToProps, mapDispatchToProps)(Bar)));

@@ -84,9 +84,9 @@ class AnncPanel extends Component {
                                     //TODO: 
                                     const uid = 5;
                                     if (collegeid)
-                                        this.props.getAnncs(undefined, collegeid, courseid, teacherid, pageNum, pageSize);
+                                        this.props.getAnncs(undefined, collegeid, courseid, teacherid, page, pageSize);
                                     else
-                                        this.props.getAnncs(uid, undefined, undefined, undefined, pageNum, pageSize);
+                                        this.props.getAnncs(uid, undefined, undefined, undefined, page, pageSize);
 
                                     this.props.history.push(`${link}/${page}`);
                                 }
