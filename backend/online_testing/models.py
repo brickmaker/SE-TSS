@@ -1,8 +1,10 @@
 import ast
 import uuid
+from datetime import datetime
 
 from django.db import models
 from django.utils import timezone
+from pytz import utc
 
 from authentication.models import Faculty, Course, Student
 
@@ -72,5 +74,5 @@ class Examination(models.Model):
     student = models.ForeignKey(Student, verbose_name='学生', on_delete=models.CASCADE, null=True, default=None)
     answers = models.TextField('答案', null=True, default=None)
     score = models.SmallIntegerField('分数', null=False, default=-1)
-    start_time = models.DateTimeField('开始时间', default=timezone.now())
+    start_time = models.DateTimeField('开始时间', default=datetime.now().replace(tzinfo=utc))
     submit = models.BooleanField('提交状态', default=False)
