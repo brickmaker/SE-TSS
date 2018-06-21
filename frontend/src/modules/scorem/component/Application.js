@@ -41,6 +41,7 @@ class ApplicationButton extends Component {
   }
 
   sendResult(title, state) {
+    const flush = this.props.flush;
     fetch("http://127.0.0.1:8000/api/score/applymodify/", {
       method: "POST",
       // mode: "no-cors",
@@ -56,6 +57,7 @@ class ApplicationButton extends Component {
         }else{
           alert('已拒绝申请：' + title);
         }
+        flush();
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }

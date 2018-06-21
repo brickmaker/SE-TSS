@@ -82,7 +82,7 @@ const testApp = [
     student_id: "studentB",
     score: 59,
     apply_des: "sad",
-    state:'0',
+    state: '0',
   }
 ];
 
@@ -114,7 +114,7 @@ class ScoreManagement extends Component {
       course: [],
     };
 
-    this.anaData = {topicList : [], data : []};
+    this.anaData = {topicList: [], data: []};
     this.scoreListName = [];
     this.rank = 0;
   }
@@ -124,12 +124,12 @@ class ScoreManagement extends Component {
   }
 
   getInitData() {
-    this.data.splice(0,this.data.length);
+    this.data.splice(0, this.data.length);
 
     //anadata start
 
-   
-    if (this.user.type == "Student"){
+
+    if (this.user.type == "Student") {
       fetch("http://127.0.0.1:8000/api/score/updatestudentrank/", {
         method: "POST",
         // mode: "no-cors",
@@ -149,7 +149,7 @@ class ScoreManagement extends Component {
       });
     }
 
-    if (this.user.type == "Student"){
+    if (this.user.type == "Student") {
       fetch("http://127.0.0.1:8000/api/score/studentrank/", {
         method: "POST",
         // mode: "no-cors",
@@ -174,7 +174,7 @@ class ScoreManagement extends Component {
     }
 
 
-    if (this.user.type == "Student"){
+    if (this.user.type == "Student") {
       fetch("http://127.0.0.1:8000/api/score/listallscore/", {
         method: "POST",
         // mode: "no-cors",
@@ -194,10 +194,10 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
-          for (var i=0; i<data.data.length; i++) this.scoreListName.push("个人分析");
+          for (var i = 0; i < data.data.length; i++) this.scoreListName.push("个人分析");
         }
       });
-    } else if (this.user.type === "Teacher"){
+    } else if (this.user.type === "Teacher") {
       fetch("http://127.0.0.1:8000/api/score/listallscore/", {
         method: "POST",
         // mode: "no-cors",
@@ -217,7 +217,7 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
-          for (var i=0; i<data.data.length; i++) this.scoreListName.push("学生姓名");
+          for (var i = 0; i < data.data.length; i++) this.scoreListName.push("学生姓名");
         }
       });
     }
@@ -278,7 +278,7 @@ class ScoreManagement extends Component {
         }
       });
     } else {
-      if (this.user.type !== 'Staff'&&this.user.type !=='Admin'){
+      if (this.user.type !== 'Staff' && this.user.type !== 'Admin') {
         this.props.history.push('/');
       }
     }
@@ -291,7 +291,7 @@ class ScoreManagement extends Component {
     });
     // console.log("try " + id + ',find ' + entity);
     if (entity === undefined) {
-      this.database.course.push(new Course(id,name,test_date));
+      this.database.course.push(new Course(id, name, test_date));
     }
   }
 
@@ -379,13 +379,16 @@ class ScoreManagement extends Component {
           <ListItemText primary="成绩录入"/>
         </ListItem>
         }
-        <Divider/>
+        {(this.user.type === 'Student' || this.user.type === 'Teacher') &&
+        <Divider/>}
+        {(this.user.type === 'Student' || this.user.type === 'Teacher') &&
         <ListItem component={Link} to={`${match.url}/analysis`} button>
           <ListItemIcon>
             <MessageIcon/>
           </ListItemIcon>
           <ListItemText primary="成绩分析"/>
         </ListItem>
+        }
         {this.user.type === 'Teacher' &&
         <Divider/>}
         {this.user.type === 'Teacher' &&
@@ -396,9 +399,9 @@ class ScoreManagement extends Component {
           <ListItemText primary="成绩修改"/>
         </ListItem>
         }
-        {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
+        {(this.user.type === 'Staff' || this.user.type === 'Admin') &&
         <Divider/>}
-        {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
+        {(this.user.type === 'Staff' || this.user.type === 'Admin') &&
         <ListItem component={Link} to={`${match.url}/apply`} button>
           <ListItemIcon>
             <MessageIcon/>
@@ -413,10 +416,17 @@ class ScoreManagement extends Component {
       <Bar listItems={listItems}>
         <div>
           <Switch>
-            <Route exact path={`${match.url}`} render={(props) => <SearchScore {...props}
-                                                                               data={this.data}
-                                                                               user={this.user}
-                                                                               database={this.database}/>}/>
+            <Route exact path={`${match.url}`} render={(props) => {
+              if (this.user.type === 'Staff' || this.user.type === 'Admin') {
+                return <ApplicationPage {...props}/>
+              }
+              else {
+                return <SearchScore {...props}
+                                    data={this.data}
+                                    user={this.user}
+                                    database={this.database}/>
+              }
+            }}/>
             <Route path={`${match.url}/search`} render={(props) => <SearchScore {...props}
                                                                                 data={this.data}
                                                                                 user={this.user}
@@ -441,9 +451,8 @@ class ScoreManagement extends Component {
                                                                                   database={this.database}
                                                                                   user={this.user}/>}/>
             }
-            {(this.user.type === 'Staff' ||this.user.type === 'Admin')&&
-            <Route path={`${match.url}/apply`} render={(props) => <ApplicationPage {...props}
-                                                                                   data={testApp}/>}/>
+            {(this.user.type === 'Staff' || this.user.type === 'Admin') &&
+            <Route path={`${match.url}/apply`} render={(props) => <ApplicationPage {...props}/>}/>
             }
           </Switch>
         </div>
