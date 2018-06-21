@@ -20,9 +20,25 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
-response = c.get('/api/online_testing/analysis/tagList/?course_id=061B0170',
+response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/analysis/tagList/?course_id=211G0200',
                  HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/analysis/questionTypeList/?course_id=211G0200',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/analysis/testList/?course_id=211G0200',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/analysis/studentList/',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
 exit(0)
 d = datetime.datetime.now()
 response = c.post('/api/online_testing/paper/', {
