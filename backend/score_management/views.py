@@ -1,17 +1,16 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from score_management.models import Take, StudentAnalysis
-from score_management.models import Take
-from score_management.models import Score_Relation,Application
+from score_management.models import StudentAnalysis
+from score_management.models import Score_Relation, Application
 from authentication.models import Course, Student, Faculty, Account
-from score_management.serializers import TakeSerializer
-from score_management.serializers import ScoreRelationSerializer,ApplicationSerializer
+from score_management.serializers import ScoreRelationSerializer, ApplicationSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
 import json
+
 
 @api_view(['GET', 'POST'])
 def score_list_teacher(request):
@@ -40,9 +39,10 @@ def score_list_student(request):
     List all student scores according to course id
     """
     score_relations = Score_Relation.objects.filter(course_select_info__student__username=request.data["sid"])
-    #takes = Take.objects.filter(student__username=request.data["sid"])
+    # takes = Take.objects.filter(student__username=request.data["sid"])
     serializer = ScoreRelationSerializer(score_relations, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET', "POST"])
 def insert_score(request):
@@ -57,15 +57,15 @@ def insert_score(request):
     # takes=Take.objects.all()
     take_list = []
     data = request.data["test"]
-    data=json.loads(data)
+    data = json.loads(data)
 
     for d in data:
-        #print(d)
+        # print(d)
         score_relation = score_relations.get(course_select_info__student__username_id=d["sid"],
                                              course_select_info__course__teacher__username_id=d["pid"],
                                              course_select_info__course__course__course_id=d["cid"],
                                              test_date=d["test_date"])
-        #print(score_relation.modify_state)
+        # print(score_relation.modify_state)
         if not score_relation.modify_state:
             score_relation.score = d["score"]
             score_relation.modify_state = True
@@ -83,50 +83,49 @@ def insert_score(request):
 
 @api_view(['GET', "POST"])
 def apply_create(request):
-    student=Student.objects.get(username_id=request.data["sid"])
-    teacher=Faculty.objects.get(username_id=request.data["pid"])
-    course=Course.objects.get(course_id=request.data["cid"])
-    application=Application.objects.filter(title=request.data["title"])
+    student = Student.objects.get(username_id=request.data["sid"])
+    teacher = Faculty.objects.get(username_id=request.data["pid"])
+    course = Course.objects.get(course_id=request.data["cid"])
+    application = Application.objects.filter(title=request.data["title"])
     if not application.exists():
-        application=Application.objects.create(title=request.data["title"],
-                                               course=course,
-                                               teacher=teacher,
-                                               student=student,
-                                               apply_des=request.data["apply_des"],
-                                               score=request.data['score'])
+        application = Application.objects.create(title=request.data["title"],
+                                                 course=course,
+                                                 teacher=teacher,
+                                                 student=student,
+                                                 apply_des=request.data["apply_des"],
+                                                 score=request.data['score'])
         return Response(application.title, status=status.HTTP_201_CREATED)
     return Response(False)
 
+
 @api_view(['GET', "POST"])
 def apply_modify(request):
-    application=Application.objects.get(title=request.data["title"])
-    application.state=request.data["state"]
-    
-    if request.data["state"]=="1":
-        score_relation=Score_Relation.objects.get(course_select_info__student=application.student,
-                                                  course_select_info__course__teacher=application.teacher,
-                                                  course_select_info__course__course=application.course)
-        score_relation.score=application.score
+    application = Application.objects.get(title=request.data["title"])
+    application.state = request.data["state"]
+
+    if request.data["state"] == "1":
+        score_relation = Score_Relation.objects.get(course_select_info__student=application.student,
+                                                    course_select_info__course__teacher=application.teacher,
+                                                    course_select_info__course__course=application.course)
+        score_relation.score = application.score
         score_relation.save()
     application.save()
 
     return Response(application.state)
 
 
-
-
 @api_view(['GET', "POST"])
 def apply_list_staff(request):
-    applications=Application.objects.all()
-    serializer=ApplicationSerializer(applications,many=True)
+    applications = Application.objects.all()
+    serializer = ApplicationSerializer(applications, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET', "POST"])
 def apply_list_teacher(request):
-    applications=Application.objects.filter(teacher__username_id=request.data["pid"])
-    serializer=ApplicationSerializer(applications,many=True)
+    applications = Application.objects.filter(teacher__username_id=request.data["pid"])
+    serializer = ApplicationSerializer(applications, many=True)
     return Response(serializer.data)
-
 
 
 @api_view(['GET', 'POST'])
@@ -288,7 +287,7 @@ def update_student_rank(request):
             while True:
                 score_relation = next(iterator)
                 id_number = score_relation.course_select_info.student.username
-                #pa = convert_to_grade_point(take.score)
+                # pa = convert_to_grade_point(take.score)
                 pa = score_relation.score
                 print(id_number)
                 if gpa_list.__contains__(id_number):
@@ -306,19 +305,20 @@ def update_student_rank(request):
                 try:
                     create = StudentAnalysis.objects.create
                     account = Account.objects.filter(username=tuple_i[0])[0]
-                    record = create(username=account, rank=i+1)
+                    record = create(username=account, rank=i + 1)
                 except Exception:
                     get = StudentAnalysis.objects.get
                     account = Account.objects.filter(username=tuple_i[0])[0]
                     record = get(username=account)
-                    record.rank = i+1
+                    record.rank = i + 1
                     record.save()
             return Response(status=status.HTTP_200_OK)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['GET','POST'])
+
+@api_view(['GET', 'POST'])
 def list_all_score(request):
     """
     :param
@@ -342,7 +342,8 @@ def list_all_score(request):
                     resp['data'] = [list0]
                     return JsonResponse(resp)
         elif request.data.__contains__('pid'):
-            score_relations = Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data['pid'])
+            score_relations = Score_Relation.objects.filter(
+                course_select_info__course__teacher__username=request.data['pid'])
             iterator = score_relations.iterator()
             temp = dict()
             while True:

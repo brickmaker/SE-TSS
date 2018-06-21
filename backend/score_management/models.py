@@ -8,9 +8,11 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 
 from authentication.models import Student,Course,Faculty,Account
-
+from xkxt.models import course_select_relation
 
 ### 这里是copy了第三组和第二组的model，由于他们没PR，所以暂时这样
+
+"""
 class ClassRoom(models.Model):
     classroom_id = models.AutoField(primary_key=True)
     classroom_location = models.CharField("地点", max_length=50, unique=True)
@@ -49,6 +51,9 @@ class Take(models.Model):
     score=models.IntegerField("分数",null=True,default=0)
     test_date=models.DateField("考试时间",auto_now=True)
 
+
+"""
+
 class StudentAnalysis(models.Model):
     username = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
     rank = models.IntegerField("排名", null=True)
@@ -62,7 +67,6 @@ class Score_Relation(models.Model):
 
 
 class Application(models.Model):
-
     student=models.ForeignKey(Student,on_delete=models.CASCADE,null=False)
     course=models.ForeignKey(Course,on_delete = models.CASCADE,null=False)
     teacher=models.ForeignKey(Faculty,on_delete = models.CASCADE,null=False)

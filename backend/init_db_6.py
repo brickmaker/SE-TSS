@@ -13,14 +13,15 @@ def getColumnTitle(sheet):
 
 
 def createAllOtherData():
-    import score_management.models as models
+    from auto_course.models import ClassRoom,course_teacher_time_classroom_relation
+    from xkxt.models import course_select_relation
     print("Init classroom...")
-    models.ClassRoom.objects.all().delete()
-    create = models.ClassRoom.objects.create
-    classroom=create(classroom_location="紫金港西1-503", classroom_capacity=100)
+    ClassRoom.objects.all().delete()
+    create = ClassRoom.objects.create
+    classroom=create(building="西区",room="513", classroom_capacity=100)
     print("Init course_teacher_time_classroom_relation...")
-    models.course_teacher_time_classroom_relation.objects.all().delete()
-    create = models.course_teacher_time_classroom_relation.objects.create
+    course_teacher_time_classroom_relation.objects.all().delete()
+    create = course_teacher_time_classroom_relation.objects.create
     from authentication.models import Course, Student, Faculty
     students = Student.objects.all()
     courses = Course.objects.all()
@@ -33,9 +34,9 @@ def createAllOtherData():
             create(teacher=t, course=c, classroom=classroom,time="")
 
     print("Init course_select_relation...")
-    models.course_select_relation.objects.all().delete()
-    create = models.course_select_relation.objects.create
-    course_teacher_time_classroom_relations=models.course_teacher_time_classroom_relation.objects.all()
+    course_select_relation.objects.all().delete()
+    create = course_select_relation.objects.create
+    course_teacher_time_classroom_relations=course_teacher_time_classroom_relation.objects.all()
     for i in range (students.count()):
         s=students[i]
         for j in range(course_teacher_time_classroom_relations.count()):
@@ -43,12 +44,13 @@ def createAllOtherData():
             create(student=s,course=c)
 
 def createScore():
-    import score_management.models as models
+    from xkxt.models import course_select_relation
+    from score_management.models import Score_Relation
     print("Init Score_relation...")
-    models.Score_Relation.objects.all().delete()
-    create = models.Score_Relation.objects.create
+    Score_Relation.objects.all().delete()
+    create = Score_Relation.objects.create
 
-    course_select_relations=models.course_select_relation.objects.all()
+    course_select_relations=course_select_relation.objects.all()
     for i in range(course_select_relations.count()):
         create(course_select_info=course_select_relations[i],score=0)
 
