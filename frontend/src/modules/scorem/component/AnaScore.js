@@ -56,7 +56,8 @@ var getJfromS = (score) => {
     else if (score >= 65) jScore = 2.1;
     else if (score >= 62) jScore = 1.8;
     else if (score >= 60) jScore = 1.5;
-    else jScore = 0.0;
+    else if (score > 0) jScore = 0.0;
+    else jScore = -1;
 
     return jScore;
 };
@@ -98,7 +99,7 @@ class MyChart extends Component{
             legend : {
                 orient : 'vertical',
                 x : 'left',
-                data : ['0-59', '60-90', '70-79', '80-89', '90-100']
+                data : ['无成绩', '0-59', '60-90', '70-79', '80-89', '90-100']
             },
 
             series : [{
@@ -149,6 +150,7 @@ class ScoreStatistics extends Component{
      */
     constructor(props){
         super(props);
+        
     }
     render(){
         return (
@@ -163,16 +165,26 @@ class ScoreStatistics extends Component{
                     <TableBody displayRowCheckbox={false} >
                         <TableRow>
                             <TableCell>平均分</TableCell>
-                            <TableCell>{this.props.avgS.toFixed(2)}</TableCell>
+                            <TableCell>{this.props.avgS}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>平均绩点</TableCell>
-                            <TableCell>{this.props.avgJ.toFixed(2)}</TableCell>
+                            <TableCell>{this.props.avgJ}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell>挂科率</TableCell>
-                            <TableCell>{(this.props.failR * 100).toFixed(2)}%</TableCell>
+                            <TableCell>{this.props.failR}</TableCell>
                         </TableRow>
+                        {this.props.user.type === "Student" && this.props.rank == 0 &&
+                        <TableRow>
+                            <TableCell>排名</TableCell>
+                            <TableCell>暂无排名</TableCell>
+                        </TableRow>}
+                        {this.props.user.type === "Student" && this.props.rank > 0 &&
+                        <TableRow>
+                            <TableCell>排名</TableCell>
+                            <TableCell>{this.props.rank}</TableCell>
+                        </TableRow>}
                     </TableBody>
                 </Table>
             </Paper>
@@ -202,11 +214,19 @@ class ScoreList extends Component{
         var tableList = [];
         var data = this.props.data;
         for (var i=0; i<data.length; i++){
+            var a, b;
+            if (data[i].score == 0) a = b = "暂无成绩";
+            else{
+                a = data[i].score.toFixed(0);
+                b = getJfromS(data[i].score).toFixed(1);
+            }
+
+
             var a = (
                 <TableRow>
                     <TableCell>{data[i].name}</TableCell>
-                    <TableCell>{data[i].score.toFixed(0)}</TableCell>
-                    <TableCell>{getJfromS(data[i].score).toFixed(1)}</TableCell>
+                    <TableCell>{a}</TableCell>
+                    <TableCell>{b}</TableCell>
                 </TableRow>
             );
             tableList.push(a);
@@ -250,6 +270,8 @@ class AnaScore extends Component{
 
     constructor(props){
         super(props);
+        this.user = this.props.user;
+        this.rank = this.props.rank;
     }
 
     handleChange = (event, value) => {
@@ -268,6 +290,7 @@ class AnaScore extends Component{
         //console.log(this.props.data, id);
         var data = this.props.data[id];
         var res = [
+            {value : 0, name : '无成绩'},
             {value : 0, name : "0-59"},
             {value : 0, name : "60-69"},
             {value : 0, name : "70-79"},
@@ -275,20 +298,23 @@ class AnaScore extends Component{
             {value : 0, name : "90-100"}
         ];
         for (var i=0; i<data.length; i++){
-            if (data[i].score < 60){
+            if (data[i].score == 0){
                 res[0].value ++;
             }
-            else if (data[i].score < 70){
+            else if (data[i].score < 60){
                 res[1].value ++;
             }
-            else if (data[i].score < 80){
+            else if (data[i].score < 70){
                 res[2].value ++;
             }
-            else if (data[i].score < 90){
+            else if (data[i].score < 80){
                 res[3].value ++;
             }
-            else{
+            else if (data[i].score < 90){
                 res[4].value ++;
+            }
+            else{
+                res[5].value ++;
             }
         }
         return res;
@@ -303,18 +329,31 @@ class AnaScore extends Component{
             avgJ : 0,
             failR : 0
         };
+        var resLength = 0;
         for (var i=0; i<data.length; i++){
-            res.avgS += data[i].score;
-            res.avgJ += getJfromS(data[i].score);
-            if (data[i].score < 60){
-                res.failR ++;
+            if (data[i].score != 0){
+                res.avgS += data[i].score;
+                resLength ++;
+                res.avgJ += getJfromS(data[i].score);
+                if (data[i].score < 60){
+                    res.failR ++;
+                }
             }
+            
         }
-        res.avgS /= data.length;
-        res.avgJ /= data.length;
-        res.failR /= data.length;
+        if (resLength != 0){
+            res.avgS = (res.avgS / resLength).toFixed(2);
+            res.avgJ = (res.avgJ / resLength).toFixed(2);
+            res.failR = (res.failR / resLength * 100).toFixed(2) + "%";
+        }
+        else{
+            res.avgS = "暂时无成绩";
+            res.avgJ = "暂时无成绩";
+            res.failR = "暂时无成绩";
+        }
+        
 
-        return <ScoreStatistics key={"statisticPageID_"+id} avgS={res.avgS} avgJ={res.avgJ} failR={res.failR} />;
+        return <ScoreStatistics key={"statisticPageID_"+id} avgS={res.avgS} avgJ={res.avgJ} failR={res.failR} rank={this.rank} user={this.user}/>;
     }; 
 
     getPage = (id) =>{
