@@ -48,7 +48,7 @@ if True:
     for d in course_list:
         course = Course(course_id=d['course_id'], name=d['name'], course_type=2, credit=d['credit'],
                         capacity=100, semester=random.randint(0, 6),
-                        department=random.choice(department_list), assessment='考试',
+                        department='计算机学院', assessment='考试',
                         state=2)
         course.save()
         course_to_techear[d['course_id']] = random.sample(faculty_list, 2)
