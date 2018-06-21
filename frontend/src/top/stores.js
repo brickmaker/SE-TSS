@@ -4,15 +4,16 @@ import thunk from "redux-thunk";
 import {persistStore} from 'redux-persist';
 
 import {infoReducer} from '../modules/info/reducers';
-
 import {forumReducer} from '../modules/forum/reducers';
+import {scoreReducer} from "../modules/scorem/reducers";
 import {xkxtReducer} from '../modules/xkxt/reducers';
 
 
 const rootReducer = combineReducers({
     info : infoReducer,
     xkxt: xkxtReducer,
-    forum: forumReducer
+    forum: forumReducer,
+    score: scoreReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

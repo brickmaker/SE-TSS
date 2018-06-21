@@ -102,3 +102,13 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# log
+*.log
+
+# migrations
+migrations/
+
+# database
+backend/db.sqlite3
+
