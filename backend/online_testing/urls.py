@@ -9,5 +9,6 @@ router.register(r'analysis', views.AnalysisViewSet)
 router.register(r'examination', views.ExaminationViewSet)
 
 urlpatterns = [
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    url(r'^course/$', views.CourseQuery.as_view())
 ]

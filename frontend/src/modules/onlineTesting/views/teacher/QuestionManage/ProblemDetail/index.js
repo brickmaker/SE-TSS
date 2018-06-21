@@ -1,4 +1,6 @@
 import React, {Component} from "react"
+import {teacher_info} from "../../../../fakeData/index";
+
 
 import {
     Button,
@@ -39,7 +41,8 @@ import {
     Checkbox,
     ListItemText,
     Input,
-    Icon
+    Icon,
+    CircularProgress
 
 } from "material-ui"
 
@@ -53,12 +56,16 @@ export class ProblemAdd extends Component{
         open: false,
         type: 'Choice',
         description: "default_description",
-        choices: ["a","b","c","d"],
+        choice_list: ["a","b","c","d"],
         answer_list: [0],
+        level: 0,
         teacher_name: "default_name",
+        provider: this.props.teacher_id,
         tag:"default_tag",
-        paras: this.props.paras,
+        token: this.props.token,
+        course_id: this.props.course_id
     };
+
 
     handleClickOpen = () => {
         this.setState(Object.assign({}, this.state, {open:true}));
@@ -69,10 +76,10 @@ export class ProblemAdd extends Component{
     };
 
     render() {
-        const {type, description, choices, answer_list, teacher_name, tag} = this.state;
+        const {type, description, choice_list, answer_list, teacher_name, tag} = this.state;
 
 
-        const choicesField = choices.map(
+        const choicesField = choice_list.map(
             (choice, index)=>{
                 return(
                         <TextField key={index}
@@ -81,9 +88,10 @@ export class ProblemAdd extends Component{
                             margin="normal"
                             onChange={
                                 (e)=>{
-                                    let new_choices = choices.slice(0);
+                                    console.log("edit ing")
+                                    let new_choices = choice_list.slice(0);
                                     new_choices[index] = e.target.value;
-                                    this.setState(Object.assign({}, this.state, {choices:new_choices}));
+                                    this.setState(Object.assign({}, this.state, {choice_list:new_choices}));
                                 }
                             }
                         />
@@ -133,9 +141,11 @@ export class ProblemAdd extends Component{
 
         return (
             <div>
-                <Button variant="fab" color="secondary" aria-label="add"
+                <Button color="primary"
+                        variant="raised"
                         onClick={this.handleClickOpen}>
-                    <AddIcon/>
+
+                    {"添加题目"}
                 </Button>
                 <Dialog
                     open={this.state.open}
@@ -160,16 +170,14 @@ export class ProblemAdd extends Component{
                                 </Select>
                             </FormControl>
                             <TextField
-                                id="teacher_name"
-                                label="出题人"
-                                value={teacher_name}
+                                label="难度系数"
+                                value={`${this.state.level}`}
                                 margin="normal"
                                 onChange={(e)=>{
-                                    this.setState(Object.assign({}, this.state, {teacher_name:  e.target.value}));
+                                    this.setState(Object.assign({}, this.state, {level: parseInt(e.target.value)}));
                                 }}
                             />
                             <TextField
-                                id="tag"
                                 label="考察范围"
                                 value={tag}
                                 margin="normal"
@@ -198,7 +206,47 @@ export class ProblemAdd extends Component{
                         <Button
                             color="primary"
                             onClick={()=>{
-                                // to to
+                                let headers = new Headers();
+                                headers.append(
+                                    'Content-Type', 'application/json'
+                                );
+                                headers.append(
+                                    'Authorization','JWT '+ localStorage.getItem('token')
+
+                                );
+                                console.log("problem ", this.state);
+                                fetch(`http://47.100.233.129:8080/api/online_testing/question/`, {
+                                    method: 'POST',
+                                    headers:headers,
+                                    body:JSON.stringify({
+                                        type: this.state.type,
+                                        description: this.state.description,
+                                        choice_list: this.state.choice_list,
+                                        answer_list: this.state.answer_list,
+                                        level: this.state.level,
+                                        provider: this.state.provider,
+                                        tag:this.state.tag,
+                                        course: this.state.course_id
+                                    }),
+                                })
+                                    .then(response => response.json())
+                                    .then(response => {
+                                        console.log(response);
+                                        this.setState(Object.assign({}, this.state, {
+                                            type:response.type,
+                                            description:response.description,
+                                            choice_list:response.choice_list,
+                                            answer_list: response.answer_list,
+                                            teacher_name: "to add",
+                                            provider: response.provider,
+                                            tag:response.tag,
+                                            level:response.level,
+                                            ready: true,
+                                        }));
+                                    })
+                                    .catch(err => console.log(err));
+
+
                                 this.handleClose();
                             }}
 
@@ -216,48 +264,122 @@ export class ProblemAdd extends Component{
 }
 
 export class ProblemView extends Component{
-    constructor(props){
-        super();
-        this.state = {
-            type: props.problem.type,
-            description: props.problem.description,
-            choices: props.problem.choices.slice(0),
-            answer_list: props.problem.answer.slice(0),
-            teacher_name: props.problem.teacher_name,
-            tag:props.problem.tag,
+
+    state = {
+            open:false,
+            ready:false,
+            type:"",
+            description:"",
+            choice_list:[],
+            answer_list: [],
+            teacher_name: "",
+            provider:"",
+            tag:"",
+            level: 0,
             edit_flag: false,
-        }
+            token: this.props.token,
+            course_id:this.props.coursse_id,
+            question_id: this.props.question_id,
+            enable: this.props.enable
+    };
+
+    componentDidMount(){
+        let headers = new Headers();
+        headers.append(
+            'Content-Type', 'application/json'
+        );
+        headers.append(
+            'Authorization','JWT '+ localStorage.getItem('token')
+
+        );
+        fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+            method: 'GET',
+            headers:headers
+        })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                this.setState(Object.assign({}, this.state, {
+                    type:response.type,
+                    description:response.description,
+                    choice_list:response.choice_list,
+                    answer_list: response.answer_list,
+                    teacher_name: "to add",
+                    provider: response.provider,
+                    tag:response.tag,
+                    level:response.level,
+                    course_id:response.course,
+                    ready: true,
+                }));
+            })
+            .catch(err => console.log(err));
+
 
     }
+
 
     handleCancel = () => {
         this.setState(Object.assign({}, this.state, {edit_flag:false}));
     };
 
+    handleClickOpen = () => {
+        this.setState(Object.assign({}, this.state, {open:true}));
+    };
+
+    handleClose = () => {
+        this.setState(Object.assign({}, this.state, {open:false})) ;
+    };
+
+
+
     render(){
-        const {edit_flag, type, description, choices, answer_list, teacher_name, tag} = this.state;
+        const {open, level, ready, edit_flag, type, description, choice_list, answer_list, teacher_name, tag, token, question_id} = this.state;
+        if(!ready){
+            return <CircularProgress/>
+        }
 
         const answerField = type =="Choice" ?
-            (
-                   <FormControl component="fieldset" required >
-                       <RadioGroup value={`${answer_list[0]}`}
-                            onChange={(e)=>{
-                                let tempAnswerList = answer_list.slice(0);
-                                tempAnswerList[0] = e.target.value;
-                                this.setState(Object.assign({}, this.state, {answer_list:tempAnswerList}));
-                            }}
+            (   <div>
+                    {
+                        choice_list.map(
+                            (choice, i)=>{
+                                return(
+                                    <TextField
+                                        disabled={!edit_flag} key={i}
+                                        label= {`选项${i+1}`}
+                                        value={choice}
+                                        margin="normal"
+                                        onChange={
+                                            (e)=>{
+                                                let new_choices = choice_list.slice(0);
+                                                new_choices[i] = e.target.value;
+                                                this.setState(Object.assign({}, this.state, {choice_list:new_choices}));
+                                            }
+                                        }
+                                    />
+                                )
+                            }
+                        )
+                    }
+                    <FormControl disabled={!edit_flag}>
+                       <InputLabel>答案</InputLabel>
+                       <Select
+                           value={`${answer_list[0]}`}
+                           name="type"
+                           onChange={(e)=>{
+                               let new_answer_list = answer_list.slice(0);
+                               new_answer_list[0] = e.target.value;
+                               this.setState(Object.assign({}, this.state, {answer_list:new_answer_list}));
+
+                           }}
                        >
-                           {
-                               choices.map(
-                                   (choice, i)=>{
-                                       return (
-                                           <FormControlLabel  disabled={!edit_flag} key={i} value={`${i}`} control={<Radio />} label={choice} />
-                                       );
-                                   }
-                               )
-                           }
-                       </RadioGroup>
-                   </FormControl>
+                           <MenuItem  value={'0'}>{'1'}</MenuItem>
+                           <MenuItem value={'1'}>{'2'}</MenuItem>
+                           <MenuItem value={'2'}>{'3'}</MenuItem>
+                           <MenuItem value={'3'}>{'4'}</MenuItem>
+                       </Select>
+                    </FormControl>
+                </div>
             ):
             (
                 <FormControl component="fieldset" required >
@@ -281,22 +403,25 @@ export class ProblemView extends Component{
             <div>
                 <div>
                     <TextField
-                        id="type"
                         label="类型"
                         value={type}
                         disabled={true}
                         margin="normal"
-
                     />
                     <TextField
-                        id="teacher_name"
                         label="出题人"
                         value={teacher_name}
                         disabled={true}
                         margin="normal"
                     />
+
                     <TextField
-                        id="tag"
+                        label="难度系数"
+                        value={`${level}`}
+                        disabled={!edit_flag}
+                        margin="normal"
+                    />
+                    <TextField
                         label="考察范围"
                         value={tag}
                         disabled={!edit_flag}
@@ -307,7 +432,6 @@ export class ProblemView extends Component{
                     />
                     <FormControl fullWidth >
                         <TextField
-                            id="description"
                             label="题目描述"
                             multiline = {true}
                             value={description}
@@ -324,8 +448,35 @@ export class ProblemView extends Component{
                     <Button
                         color="primary"
                         onClick={()=>{
-                            // to to
-                            this.handleCancel();
+                            let headers = new Headers();
+                            headers.append(
+                                'Content-Type', 'application/json'
+                            );
+                            headers.append(
+                                'Authorization','JWT '+ localStorage.getItem('token')
+
+                            );
+                            fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+                                method: 'PUT',
+                                headers:headers,
+                                body:JSON.stringify({
+                                    type: this.state.type,
+                                    description: this.state.description,
+                                    choice_list: this.state.choice_list,
+                                    answer_list: this.state.answer_list,
+                                    level: this.state.level,
+                                    provider: this.state.provider,
+                                    tag:this.state.tag,
+                                    course: this.state.course_id
+                                })
+                            })
+                                .then(response => response.json())
+                                .then(response => {
+                                    console.log(response);
+                                    this.handleCancel();
+
+                                })
+                                .catch(err => console.log(err));
                         }}
 
                     >
@@ -336,7 +487,7 @@ export class ProblemView extends Component{
                     </Button>
                     </div>
                     :  <div>
-                    <Button variant="fab" color="secondary" aria-label="edit"
+                    <Button variant="fab" color="secondary" aria-label="edit" disabled={!this.state.enable}
                             onClick={(e)=>{
                                 // to revise
                                 this.setState(Object.assign({}, this.state, {
@@ -346,14 +497,55 @@ export class ProblemView extends Component{
                     >
                         <EditIcon/>
                     </Button>
-                    <Button variant="fab" color="secondary" aria-label="delete"
-                            onClick={(e)=>{
-                                // to delete
+                    <Button variant="fab" color="secondary" aria-label="delete" disabled={!this.state.enable}
+                             onClick={(e)=>{
+                                 this.handleClickOpen();
                             }}>
                         <DeleteIcon/>
                     </Button>
                 </div>}
+                <Dialog
+                    open={open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"确定要删除吗？"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {"删除后不可恢复"}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={()=>{this.handleClose();}} color="primary">
+                            {"否"}
+                        </Button>
+                        <Button onClick={()=>{
+                            this.handleClose();
+                                let headers = new Headers();
+                                headers.append(
+                                    'Content-Type', 'application/json'
+                                );
+                                headers.append(
+                                    'Authorization','JWT '+ localStorage.getItem('token')
 
+                                );
+                                fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+                                    method: 'DELETE',
+                                    headers:headers
+                                })
+                                    .then(response => {
+                                        console.log(response);
+                                        this.props.refresh();
+                                    })
+                                    .catch(err => console.log(err));
+
+
+                        }} color="primary" autoFocus>
+                            {"是"}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }

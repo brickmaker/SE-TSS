@@ -1,99 +1,82 @@
+import {teacher_info} from "../../../fakeData/index";
+import 'isomorphic-fetch'
+
 export const GET_TEACHER_AND_TAG_LIST = 'get_teacher_and_tag_list';
 export const GET_PROBLEM_LIST = 'get_problem_list';
-export const ADD_PROBLEM_TEACHER = 'add_problem_teacher';
-export const DELETE_PROBLEMS_TEACHER = 'delete_problems_teacher';
-
-const testTeacherList = [
-    "fucker_1", "fucker_2", "fucker_3"
-];
-const testTagList = [
-    "fuck_1", "fuck_2", "fuck_3"
-];
-
-const description = 'how are you i am fine thank you and you  '+'how are you i am fine thank you and you  '+'how are you i am fine thank you and you  ';
-const choices = [
-    'hello', 'fuck', '2333', '6666'
-];
+export const CHANGE_PROBLEM_SHOW_LIST = 'change_problem_shou_list';
 
 
-let testProblemLists = [];
 
-for(let i = 0; i != 3; i += 1) {
-    for(let j = 0; j != 3; j += 1) {
-        let teacher_name = testTeacherList[i], tag = testTagList[j], question_id = 1000 + i * 100 + j*10;
-        testProblemLists.push( {
-                question_id: question_id ,
-                type : 'Choice',
-                description: description + question_id.toString(),
-                choices: choices,
-                answer : [0],
-                teacher_name: teacher_name,
-                tag: tag
-            }
+export const getTeacherAndTagList = (courseId, token) =>{
+    return dispatch=>{
+        let   headers = new Headers();
+        headers.append(
+            'Content-Type', 'application/json'
         );
-        testProblemLists.push( {
-                question_id: question_id + j,
-                type : 'Judge',
-                description: description + question_id.toString(),
-                choices: choices,
-                answer : [0],
-                teacher_name: teacher_name,
-                tag: tag
-            }
-        )
-    }
-}
+        headers.append(
+            'Authorization','JWT '+ localStorage.getItem('token')
+        );
+        fetch(`http://47.100.233.129:8080/api/online_testing/question/tags_and_teachers/?course=${courseId}`, {
+            method: 'GET',
+            headers:headers
+        })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                dispatch({
+                    type: GET_TEACHER_AND_TAG_LIST,
+                    teacher_list: response.teacher_list,
+                    tag_list : response.tag_list,
+                })
+            })
+            .catch(err => console.log(err));
+    };
+};
 
-function tempDelete(teacherID, courseID, problemID) {
-    console.log("tempDelete", teacherID, courseID, problemID);
-    return testProblemLists;
-}
-
-function tempAdd(teacherID, courseID, problem) {
-    console.log("tempAdd", teacherID, courseID, problem);
-    return testProblemLists;
-}
-
-function tempGet(teacherId, courseId, teacherList, tagList) {
-    console.log("tempGet", teacherId, courseId, teacherList, tagList);
-    return testProblemLists;
-}
-
-
-export const getTeacherAndTagList = (teacherId, courseId, token) =>{
+export const changeProblemShowList = (problem_show_list) =>{
     return dispatch=>{
         dispatch({
-            type: GET_TEACHER_AND_TAG_LIST,
-            teacher_list: testTeacherList,
-            tag_list : testTagList,
+            type: CHANGE_PROBLEM_SHOW_LIST,
+            problem_should_show:problem_show_list
         })
     };
 };
 
-export const getProblemList = (teacherId, courseId, teacherList, tagList)=>{
+export const getProblemList =  (courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
     return dispatch=>{
-        dispatch({
-            type: GET_PROBLEM_LIST,
-            problem_list: tempGet(teacherId, courseId, teacherList, tagList),
-        })
+        let url = `http://47.100.233.129:8080/api/online_testing/question/`;
+        url += `?course=${courseId}`;
+        console.log(teacher_list, teacher_list_selected, "rua ");
+        teacher_list.forEach((teacher_detail, index)=>{
+           if(teacher_list_selected.indexOf(teacher_detail.teacher_name) > -1){
+               url+= `&teacher_list=${teacher_detail.teacher_id}`;
+           }
+        });
+        tag_list_selected.forEach((tag, index)=>{
+            url += `&tag_list=${tag}`
+        });
+
+        console.log(url);
+             let   headers = new Headers();
+                headers.append(
+                    'Content-Type', 'application/json'
+                )
+                headers.append(
+                    'Authorization','JWT '+ localStorage.getItem('token')
+
+                )
+                fetch(url, {
+                    method: 'GET',
+                    headers:headers
+                })
+                    .then(response => response.json())
+                    .then(response => dispatch({
+                        type: GET_PROBLEM_LIST,
+                        problem_list: response.question_list,
+                        problem_should_show: Array(response.question_list.length).fill(false)
+                    }))
+                    .catch(err => console.log(err));
     }
 };
 
-export const addProblemTeacher = (teacherID, courseID, problem)=>{
-    return dispatch=>{
-        dispatch({
-            type: ADD_PROBLEM_TEACHER,
-            problem_list: tempAdd(teacherID, courseID, problem),
-        })
-    }
 
-};
-
-export const deleteProblemTeacher = (teacherID, courseID, problemID)=>{
-    return dispatch=>{
-        dispatch({
-            type: DELETE_PROBLEMS_TEACHER,
-            problem_list: tempDelete(teacherID, courseID, problemID),
-    })
-    }
-};

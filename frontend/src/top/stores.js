@@ -7,12 +7,14 @@ import {infoReducer} from '../modules/info/reducers';
 
 import {forumReducer} from '../modules/forum/reducers';
 import {xkxtReducer} from '../modules/xkxt/reducers';
+import {onlineTestingReducer} from "../modules/onlineTesting/reducers";
 
 
 const rootReducer = combineReducers({
     info : infoReducer,
     xkxt: xkxtReducer,
-    forum: forumReducer
+    forum: forumReducer,
+    online_testing: onlineTestingReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

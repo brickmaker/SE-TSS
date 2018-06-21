@@ -28,7 +28,7 @@ import Forum from "../modules/forum";
 import Xkxt from "../modules/xkxt";
 import Login from "../modules/info/components/LoginView"
 import Main from "./components/Top";
-
+import OnlineTesting from "../modules/onlineTesting"
 const topStyles = {};
 
 
@@ -51,6 +51,7 @@ class App extends Component {
                             <Route path={'/info'} component={Info}/>
                             <Route path={'/forum'} component={Forum}/>
                             <Route path={'/xkxt'} component={Xkxt}/>
+                            <Route path={'/online_testing'} component={OnlineTesting}/>
                         </div>
                     </div>
                 </BrowserRouter>

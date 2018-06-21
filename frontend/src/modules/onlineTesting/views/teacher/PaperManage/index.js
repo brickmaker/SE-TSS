@@ -24,14 +24,7 @@ import {getTeacherPaperList, deletePaper} from './actions'
 
 
 function timestampToTime(timestamp) {
-    let date = new Date(timestamp * 1000);
-    let Y = date.getFullYear() + '-';
-    let M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-    let D = date.getDate() + ' ';
-    let h = date.getHours() + ':';
-    let  m = date.getMinutes() + ':';
-    let s = date.getSeconds();
-    return Y+M+D+h+m+s;
+    return timestamp.toString().replace(/T/g, " ").split('.')[0];
 }
 
 class DeleteButton extends React.Component {
@@ -79,15 +72,33 @@ class DeleteButton extends React.Component {
 
 
 class PaperManager extends Component{
-    componentWillMount(){
-        this.props.getTeacherPaperList(0, 0, 0);
+    last_course_id=""
+
+    componentDidUpdate(prevProps, prevState) {
+        const {course_id} = this.props.match.params;
+        if(course_id != this.last_course_id){
+            this.last_course_id = course_id;
+            this.update();
+        }
+    }
+
+
+
+    update = ()=>{
+        const {course_id} = this.props.match.params;
+        const {token} = this.props;
+        this.props.getTeacherPaperList(course_id, token);
+    }
+
+    componentDidMount(){
+        this.update();
     }
 
 
     render(){
         const {match, teacher_paper_list} = this.props;
-        const {course_id} = match;
-
+        const {course_id} = this.props.match.params;
+        const {token} = this.props;
         const paperListItems = teacher_paper_list.map(
             (paperInfo, index)=>{
                 return (
@@ -95,22 +106,41 @@ class PaperManager extends Component{
                         <TableCell>{paperInfo.paper_name}</TableCell>
                         <TableCell>{timestampToTime(paperInfo.start_time)}</TableCell>
                         <TableCell>{timestampToTime(paperInfo.deadline)}</TableCell>
-                        <TableCell>{ Math.ceil(paperInfo.duration/60)}minutes</TableCell>
+                        <TableCell>{ paperInfo.duration}minutes</TableCell>
 
                         <TableCell>
                             <Button
                                 onClick={
                                     ()=>{
-                                       const path = `${match.url}/paper_view/${paperInfo.paper_id}`;
-                                       this.props.history.push(path);
+                                        const pathname = `${match.url}/paper_view/${paperInfo.paper_id}`;
+                                        this.props.history.push(pathname);
                                     }
                                 }
                             >
                                 {"查看"}
                             </Button>
                             <DeleteButton   act={
-                                (e)=>{
-                                    this.props.deletePaper(0, 0, paperInfo.paper_id, 0);
+                                ()=>{
+
+                                    let headers = new Headers();
+                                    headers.append(
+                                        'Content-Type', 'application/json'
+                                    )
+                                    headers.append(
+                                        'Authorization','JWT '+ localStorage.getItem('token')
+
+                                    )
+                                    fetch(`http://47.100.233.129:8080/api/online_testing/paper/${paperInfo.paper_id}/`, {
+                                        method: 'DELETE',
+                                        headers: headers
+                                    })
+                                        .then(response => {
+                                            this.props.getTeacherPaperList(course_id, token);
+                                        })
+                                        .catch(err => console.log(err));
+
+
+
                                 }
                             }/>
                         </TableCell>
@@ -141,8 +171,8 @@ class PaperManager extends Component{
                                 <Button
                                     onClick = {
                                         (e)=>{
-                                            const path = `${match.url}/paper_generate`;
-                                            this.props.history.push(path);
+                                            const pathname = `${match.url}/paper_generate`;
+                                            this.props.history.push(pathname);
                                         }
 
                                     }
@@ -162,18 +192,14 @@ class PaperManager extends Component{
 
 const mapStateToProps = (state) => ({
     teacher_paper_list: state.online_testing.paper_manage.teacher_paper_list,
+    token: state.online_testing.teacher_main.token,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getTeacherPaperList: (teacherID, courseId, token)=>{
-            return dispatch(getTeacherPaperList(teacherID,courseId, token));
+        getTeacherPaperList: (courseId, token)=>{
+            return dispatch(getTeacherPaperList(courseId, token));
         },
-        deletePaper:(teacherID, courseID, paperID, token)=>{
-            return dispatch(deletePaper(teacherID, courseID, paperID, token));
-        }
-
-
     }
 };
 

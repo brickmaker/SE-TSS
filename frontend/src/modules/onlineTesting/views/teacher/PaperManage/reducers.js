@@ -1,4 +1,4 @@
-import {DELETE_PAPER, GET_TEACHER_PAPER_LIST} from "./actions";
+import {GET_TEACHER_PAPER_LIST} from "./actions";
 
 const initState = {
     teacher_paper_list: []
@@ -7,10 +7,6 @@ const initState = {
 export function paperManageReducer(state = initState, action) {
     switch (action.type) {
         case GET_TEACHER_PAPER_LIST:
-            return Object.assign({}, state, {
-                teacher_paper_list: action.teacher_paper_list
-            });
-        case DELETE_PAPER:
             return Object.assign({}, state, {
                 teacher_paper_list: action.teacher_paper_list
             });

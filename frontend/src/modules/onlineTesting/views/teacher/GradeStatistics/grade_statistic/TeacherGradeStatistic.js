@@ -35,8 +35,10 @@ class CenteredTabs extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes,testList,studentList,tagList,questionTypeList } = this.props;
         const { value } = this.state;
+        console.log("test");
+        console.log(tagList);
         return (
             <Paper className={classes.root}>
                 <Tabs
@@ -51,10 +53,10 @@ class CenteredTabs extends React.Component {
                     <Tab label="考察点" />
                     <Tab label="题型" />
                 </Tabs>
-                {value === 0 && <SL/>}
-                {value === 1 && <PL/>}
-                {value === 2 && <TL/>}
-                {value === 3 && <TypeList/>}
+                {value === 0 && <SL testList={testList}/>}
+                {value === 1 && <PL studentList={studentList}/>}
+                {value === 2 && <TL tagList={tagList}/>}
+                {value === 3 && <TypeList questionTypeList={questionTypeList}/>}
             </Paper>
         );
     }

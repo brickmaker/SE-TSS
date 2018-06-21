@@ -44,7 +44,7 @@ import {
     ExpansionPanelDetails,
     ExpansionPanelActions,
     ExpansionPanel,
-
+    CircularProgress
 } from "material-ui"
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -53,14 +53,14 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import {
     getProblemList,
     getTeacherAndTagList,
-    addProblemTeacher,
-    deleteProblemTeacher
+    changeProblemShowList
 } from './actions'
 
 import {
     ProblemAdd,
     ProblemView
 } from "./ProblemDetail/index";
+import {teacher_info} from "../../../fakeData/index";
 
 const CUT_LENTH = 20;
 
@@ -76,24 +76,51 @@ const MenuProps = {
 };
 
 
-
 class QuestionManage extends Component{
-    componentWillMount(){
-        this.props.getTeacherAndTagList(0,0,0);
+    last_course_id="";
+
+    componentDidUpdate(prevProps, prevState) {
+        const {course_id} = this.props.match.params;
+        if(course_id != this.last_course_id){
+            this.last_course_id = course_id;
+            this.update();
+        }
+    }
+
+    update=()=>{
+        const {course_id} = this.props.match.params;
+        const {token} = this.props;
+        console.log("token ", token);
+        this.props.getTeacherAndTagList(course_id,token);
+        this.setState(Object.assign({}, this.state, {
+            teacher_list_selected:[],
+            tag_list_selected:[],
+            problem_should_show:[],
+            open:false
+        }));
+    };
+
+
+
+    componentDidMount(){
+        this.update();
     }
 
     constructor(props){
         super(props);
         this.state = Object.assign({}, this.state, {
             teacher_list_selected:[],
-            tag_list_selected:[]
+            tag_list_selected:[],
+            problem_should_show:[],
+            open:false
         });
     }
 
 
     render(){
-        const {match,teacher_list, tag_list, problem_list} = this.props;
-        const {teacher_list_selected, tag_list_selected} = this.state;
+        const {token, match,teacher_list, tag_list, problem_list, problem_should_show} = this.props;
+        const {open, teacher_list_selected, tag_list_selected} = this.state;
+        const {course_id} = this.props.match.params;
         return (
             <div>
 
@@ -143,22 +170,22 @@ class QuestionManage extends Component{
                            renderValue={selected => selected.join(', ')}
                            MenuProps={MenuProps}
                        >
-                           {teacher_list.map(tag => (
-                               <MenuItem key={tag} value={tag}>
-                                   <Checkbox checked={teacher_list_selected.indexOf(tag) > -1} />
-                                   <ListItemText primary={tag} />
+                           {teacher_list.map((teacher_info, index) => (
+                               <MenuItem key={teacher_info.teacher_id} value={teacher_info.teacher_name}>
+                                   <Checkbox checked={teacher_list_selected.indexOf(teacher_info.teacher_name) > -1} />
+                                   <ListItemText primary={teacher_info.teacher_name} />
                                </MenuItem>
                            ))}
                        </Select>
                    </FormControl>
                 </div>
                 <div>
-                    <button
+                    <Button
                         onClick={()=>{
-                            this.props.getProblemList(0, 0, teacher_list_selected, tag_list_selected);
+                            this.props.getProblemList(course_id, teacher_list_selected, teacher_list, tag_list_selected, token);
                         }}
                     > {"查看试题列表"}
-                    </button>
+                    </Button>
                 </div>
                 <div>
                     {
@@ -167,13 +194,25 @@ class QuestionManage extends Component{
                                 return (
                                     <div key={index}>
                                         <Divider inset />
-                                        <ExpansionPanel>
+                                        <ExpansionPanel onChange={(event, expanded)=>{
+                                            let temp_problem_should_show =  problem_should_show.slice(0);
+                                            temp_problem_should_show[index] = expanded;
+                                            this.props.changeProblemShowList(temp_problem_should_show);
+                                        }}>
                                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                                 <div >{`${problem.question_id}.\t ${problem.description.substr(0, CUT_LENTH)}......`}</div>
                                             </ExpansionPanelSummary>
                                             <ExpansionPanelDetails>
                                                 <div>
-                                                    <ProblemView problem = {problem}/>
+                                                    {problem_should_show[index]&& <ProblemView
+                                                            token={token}
+                                                            question_id={problem.question_id}
+                                                            course_id={course_id}
+                                                            refresh={()=>{
+                                                                this.props.getProblemList(course_id, teacher_list_selected, teacher_list, tag_list_selected, token);
+                                                            }}
+                                                            enable={problem.provider == teacher_info.username}
+                                                    />}
                                                 </div>
                                             </ExpansionPanelDetails>
                                         </ExpansionPanel>
@@ -184,7 +223,14 @@ class QuestionManage extends Component{
                         )
                     }
                 </div>
-                <div><ProblemAdd/></div>
+                <div><ProblemAdd
+                    teacher_id={teacher_info.username}
+                    token={token}
+                    course_id={course_id}
+                    refresh={()=>{
+                        this.props.getProblemList(course_id, teacher_list_selected, teacher_list, tag_list_selected, token);
+                    }}
+                /></div>
             </div>
         )
     }
@@ -194,23 +240,22 @@ const mapStateToProps = (state) => ({
     tag_list: state.online_testing.question_manage.tag_list,
     teacher_list: state.online_testing.question_manage.teacher_list,
     problem_list: state.online_testing.question_manage.problem_list,
+    problem_should_show: state.online_testing.question_manage.problem_should_show,
+    token: state.online_testing.teacher_main.token,
 });
 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getProblemList: (teacherId, courseId, teacherList, tagList)=>{
-            return dispatch(getProblemList(teacherId, courseId, teacherList, tagList));
+        getProblemList: ( courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
+            return dispatch(getProblemList(courseId, teacher_list_selected, teacher_list, tag_list_selected, token));
         },
-        getTeacherAndTagList: (teacherId, courseId, token)=>{
-            return dispatch(getTeacherAndTagList(teacherId, courseId, token));
+        getTeacherAndTagList: (courseId, token)=>{
+            return dispatch(getTeacherAndTagList(courseId, token));
         },
-        addProblemTeacher: (teacherID, courseID, problem)=>{
-            return dispatch(addProblemTeacher(teacherID, courseID, problem));
-        },
-        deleteProblemTeacher: (teacherID, courseID, problemID)=>{
-            return dispatch(deleteProblemTeacher(teacherID, courseID, problemID));
-        },
+        changeProblemShowList:(problem_show_list)=>{
+            return dispatch(changeProblemShowList(problem_show_list));
+        }
     }
 };
 
