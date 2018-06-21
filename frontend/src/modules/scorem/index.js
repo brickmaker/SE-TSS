@@ -75,24 +75,14 @@ const testAna = {
 //{编号 aid, 申请人 applicant, 申请时间 time，课程 className，学生 student，原成绩 oriScore，新成绩 newScore, 理由 reason，同意或不同意按钮}
 const testApp = [
   {
-    aid: "AID000001",
-    applicant: "teacherA",
-    time: "2018-06-18",
-    className: "classA",
-    student: "studentA",
-    oriScore: 100,
-    newScore: 60,
-    reason: "happy"
-  },
-  {
-    aid: "AID000002",
-    applicant: "teacherB",
-    time: "2018-09-11",
-    className: "classB",
-    student: "studentB",
-    oriScore: 59,
-    newScore: 61,
-    reason: "sad"
+    title: "AID000002",
+    techer_id: "teacherB",
+    create_time: "2018-09-11",
+    course_id: "classB",
+    student_id: "studentB",
+    score: 59,
+    apply_des: "sad",
+    state:'0',
   }
 ];
 
@@ -184,7 +174,9 @@ class ScoreManagement extends Component {
         }
       });
     } else {
-
+      if (this.user.type !== 'Staff'&&this.user.type !=='Admin'){
+        this.props.history.push('/');
+      }
     }
   }
 
