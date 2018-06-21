@@ -12,7 +12,6 @@ import { managementReducer } from './views/management/reducers';
 
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/es/storage';
-import { createFilter } from 'redux-persist-transform-filter';
 import { usercenterReducer } from "./views/usercenter/reducers";
 import { forumPersistReducer } from "./components/forumpersist/reducers";
 

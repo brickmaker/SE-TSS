@@ -41,7 +41,6 @@
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
     "redux-persist": "^5.10.0",
-    "redux-persist-transform-filter": "0.0.18",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
