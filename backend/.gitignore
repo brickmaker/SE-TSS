@@ -18,3 +18,7 @@ media/
 # End of https://www.gitignore.io/api/django
 
 whoosh_index
+
+#Vim support file
+*.swp
+*.un~
