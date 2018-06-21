@@ -55,6 +55,25 @@ export const otherItems = (
     </div>
 );
 
+<<<<<<< HEAD
+=======
+export const titleData = [
+    {
+        value: '教授',
+        label: '教授',
+    },
+    {
+        value: '副教授',
+        label: '副教授',
+    },
+    {
+        value: '讲师',
+        label: '讲师',
+    },
+];
+
+
+>>>>>>> ec2d92fd54794314b05fdfa6dcfdcb0aef2fbb0a
 export const stateChoices =  {
     0: '不通过',
     1: '待审批',

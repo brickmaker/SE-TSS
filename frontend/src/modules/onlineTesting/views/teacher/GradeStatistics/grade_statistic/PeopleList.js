@@ -38,7 +38,7 @@ const styles = theme => ({
  * const tileData = [
  *   {
  *     img: image,
- *     title: 'Image',
+ *     titleData: 'Image',
  *     author: 'author',
  *   },
  *   {
