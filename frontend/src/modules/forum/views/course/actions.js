@@ -25,7 +25,7 @@ export const newPost = (uid, collegeId, courseId, title, content, fileId) => (di
             uid: "1", // todo: remove uid
             collegeId: collegeId,
             courseId: courseId,
-            title: title,
+            titleData: titleData,
             content: content,
             fileId: fileId
         }

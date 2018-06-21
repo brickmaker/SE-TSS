@@ -69,10 +69,10 @@ export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(C
 /*
 			<div style={divStyle}>
 				<Paper style={style} zDepth={2}>
-					<AppBar title='课程列表' iconElementRight={<FlatButton label='显示已选课程' onClick={openFunc}/>} />
+					<AppBar titleData='课程列表' iconElementRight={<FlatButton label='显示已选课程' onClick={openFunc}/>} />
 				</Paper>
 			</div>
 			<Drawer width="20%" openSecondary={true} open={openValue} >
-				<AppBar title="已选课程" iconElementRight={<FlatButton label='隐藏' onClick={closeFunc}/>} />
+				<AppBar titleData="已选课程" iconElementRight={<FlatButton label='隐藏' onClick={closeFunc}/>} />
 			</Drawer>
 			*/

@@ -246,8 +246,7 @@ class StudentQuerySerializer(PeopleSerializer):
             return instance
         else:
             if validated_data.get('name') != instance.name or validated_data.get('gender') != instance.gender or \
-                    validated_data.get('grade') != instance.grade or validated_data.get('major') != instance.major or \
-                    validated_data.get('class_name') != instance.class_name or depart != instance.department:
+                    validated_data.get('grade') != instance.grade:
                 raise ParseError(detail='permission denied')
             instance.save()
             return instance
@@ -363,7 +362,6 @@ class AdminQuerySerializer(PeopleSerializer):
             raise ParseError(detail='department not exists')
 
         instance.email = validated_data.get('email', instance.email)
-        instance.img = validated_data.get('img', instance.img)
         instance.name = validated_data.get('name', instance.name)
         instance.gender = validated_data.get('gender', instance.gender)
         instance.department = depart

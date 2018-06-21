@@ -120,7 +120,7 @@ let EnhancedTableToolbar = props => {
                         </IconButton>
                     </Tooltip>
                 ) : (
-                    <Tooltip title="普通">
+                    <Tooltip title="收起">
                         <IconButton aria-label="Normal" onClick={handleTableData}>
                             <StarIcon/>
                         </IconButton>

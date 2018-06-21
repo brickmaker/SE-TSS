@@ -90,7 +90,7 @@ const toolbarStyles = theme => ({
     },
 });
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, applyState, handleTableData, handleAccept, handleRefuse, handleDelete} = props;
+    const {numSelected, classes, handleAddOpen, applyState, handleAccept, handleRefuse, handleDelete} = props;
 
     return (
         <Toolbar
@@ -111,21 +111,21 @@ let EnhancedTableToolbar = props => {
             </div>
             <div className={classes.spacer}/>
 
-            <div className={classes.actions}>
-                {!applyState ? (
-                    <Tooltip title="申请课程列表">
+            {/* <div className={classes.actions}> */}
+                {/* {!applyState ? ( */}
+                    {/* <Tooltip title="申请课程列表">
                         <IconButton aria-label="Process" onClick={handleTableData}>
                             <SelectIcon/>
                         </IconButton>
-                    </Tooltip>
-                ) : (
+                    </Tooltip> */}
+                {/* ) : (
                     <Tooltip title="普通">
                         <IconButton aria-label="Normal" onClick={handleTableData}>
                             <StarIcon/>
                         </IconButton>
                     </Tooltip>
-                )}
-            </div>
+                )} */}
+            {/* </div> */}
 
             <div className={classes.actions}>
             <Tooltip title="申请">
@@ -135,13 +135,13 @@ let EnhancedTableToolbar = props => {
             </Tooltip>
             </div>
             <div className={classes.actions}>
-                { applyState &&
+                {/* { applyState && */}
                     <Tooltip title="删除">
                         <IconButton aria-label="Add Course" onClick={handleDelete}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
-                }
+                {/* } */}
             </div>
 
         </Toolbar>
@@ -191,7 +191,7 @@ class LessonInfo extends React.Component {
             disabled: true,
             chipData:[],
             chipLabel: [],
-            applyState:false,
+            applyState: true,
             department_data: '',
             department_list: [],
             department: '',
@@ -203,6 +203,10 @@ class LessonInfo extends React.Component {
             .then((data) => {
                 let json = JSON.parse(data);
                 this.setState({originData: json, data: json});
+                this.setState({
+                            data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+                            allowSelected: false
+                });
             })
             .catch(() => {
                 this.setState({
@@ -219,18 +223,18 @@ class LessonInfo extends React.Component {
     }
 
     // 处理表数据，审批状态和非审配状态
-    handleTableData = () => {
-        if (!this.state.applyState) {
-            this.setState({
-                data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
-                allowSelected: false
-            });
-        } else {
-            this.setState({data: this.state.originData, allowSelected: true});
-        }
-        this.setState({applyState: !this.state.applyState});
-        this.setState({selected: []});
-    };
+    // handleTableData = () => {
+    //     if (!this.state.applyState) {
+    //         this.setState({
+    //             data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+    //             allowSelected: false
+    //         });
+    //     } else {
+    //         this.setState({data: this.state.originData, allowSelected: true});
+    //     }
+    //     this.setState({applyState: !this.state.applyState});
+    //     this.setState({selected: []});
+    // };
 
     // 添加课程窗口打开
     handleAddOpen = () => {
@@ -552,7 +556,7 @@ class LessonInfo extends React.Component {
                     <EnhancedTableToolbar numSelected={selected.length}
                                           handleAddOpen={this.handleAddOpen.bind(this)}
                                           handleAddClose={this.handleAddClose.bind(this)}
-                                          handleTableData={this.handleTableData.bind(this)}
+                                        //   handleTableData={this.handleTableData.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
                                           applyState = {applyState}
                                          />

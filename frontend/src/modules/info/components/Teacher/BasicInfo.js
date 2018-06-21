@@ -16,7 +16,8 @@ import {
     DialogContentText,
     DialogTitle,
     Paper,
-    TextField
+    TextField,
+    Typography
 } from '@material-ui/core';
 
 import Bar from "../../../../top/components/Bar";
@@ -93,6 +94,7 @@ class StaffBasicInfo extends React.Component {
             email: '',
             name: '',
             gender: '',
+            title: '',
             department: '',
             imageUrl: null,
             dialogState: false,
@@ -141,6 +143,7 @@ class StaffBasicInfo extends React.Component {
                 const gender = data.gender;
                 const department = data.department;
                 const img = data.img;
+                const title = data.title;
                 this.setState({
                     username: username,
                     id_number: id_number,
@@ -148,6 +151,7 @@ class StaffBasicInfo extends React.Component {
                     name: name,
                     gender: gender,
                     department: department,
+                    title: title,
                 });
                 fetch(img, {
                     method: 'GET',
@@ -270,7 +274,7 @@ class StaffBasicInfo extends React.Component {
         data.name = this.state.name;
         data.gender = this.state.gender;
         data.department = this.state.department;
-        data.img = this.state.img;
+        data.title = this.state.title;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -365,6 +369,11 @@ class StaffBasicInfo extends React.Component {
                                             />
                                         </Upload>
                                     </div>
+                                    <div className={classes.img}>
+                                        <Typography>
+                                            点击可上传头像
+                                        </Typography>
+                                    </div>
 
 
                                     <div>
@@ -414,6 +423,16 @@ class StaffBasicInfo extends React.Component {
                                             label="学院"
                                             value={this.state.department}
                                             floatingLabelText="学院"
+                                            margin="normal"
+                                        />
+                                    </div>
+                                    <div>
+                                        <TextField
+                                            disabled={true}
+                                            className={classes.TextField}
+                                            label="职称"
+                                            value={this.state.title}
+                                            floatingLabelText="职称"
                                             margin="normal"
                                         />
                                     </div>
