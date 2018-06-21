@@ -140,7 +140,7 @@ export default class AutoGenerate extends React.Component {
                             label="标题"
                             defaultValue={this.state.paper_info_input.title}
                             onChange={(event)=>{
-                                this.state.paper_info_input.titleData = event.target.value
+                                this.state.paper_info_input.title = event.target.value
                             }
                             }
                         />
