@@ -127,7 +127,29 @@ class ScoreManagement extends Component {
 
 
     //anadata start
-    /*if (this.user.type == "Student"){
+
+   
+    if (this.user.type == "Student"){
+      fetch("http://127.0.0.1:8000/api/score/updatestudentrank/", {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+          Authorization: 'JWT ' + localStorage.getItem('token'),
+        },
+        body: ''
+      }).then(function (res) {
+        if (res.ok) {
+          return;
+        } else {
+          alert("服务器回应异常，状态码：" + res.status);
+        }
+      }, function (e) {
+        alert("对不起，服务器产生错误");
+      });
+    }
+
+    if (this.user.type == "Student"){
       fetch("http://127.0.0.1:8000/api/score/studentrank/", {
         method: "POST",
         // mode: "no-cors",
@@ -149,7 +171,7 @@ class ScoreManagement extends Component {
           this.rank = data.rank;
         }
       });
-    }*/
+    }
 
 
     if (this.user.type == "Student"){
