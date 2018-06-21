@@ -9,10 +9,11 @@ urlpatterns=[
     url(r'^applymodify', views.apply_modify),
     url(r'^applyliststaff',views.apply_list_staff),
     url(r'^applylistteacher', views.apply_list_teacher),
-    url(r'^scorestatistics/', views.score_statistics),
-    url(r'^scoredistribution/', views.score_distribution),
-    url(r'^scoreteacherhistory/', views.score_teacher_history),
-    url(r'^studentgpaeveryyear/', views.student_gpa_every_year),
+    url(r'^scorestatistics/', views.score_statistics),#unused
+    url(r'^scoredistribution/', views.score_distribution),#unused
+    url(r'^scoreteacherhistory/', views.score_teacher_history),#unused
+    url(r'^studentgpaeveryyear/', views.student_gpa_every_year),#unused
+    url(r'^listallscore/', views.list_all_score),
     url(r'^studentrank/', views.student_rank),
     url(r'^updatestudentrank/', views.update_student_rank),
 ]
