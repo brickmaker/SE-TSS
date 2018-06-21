@@ -120,6 +120,7 @@ class ScoreManagement extends Component {
   }
 
   getInitData() {
+    this.data.splice(0,this.data.length);
     if (this.user.type === 'Student') {
       fetch("http://127.0.0.1:8000/api/score/scoreliststudent/", {
         method: "POST",
@@ -193,11 +194,11 @@ class ScoreManagement extends Component {
 
   pushDatas(takes) {
     const newtake = [];
-    console.log(takes);
+    const update = this.getInitData.bind(this);
     takes.map(take => {
       newtake.push(new newTake(take.cid, take.tid, take.sid, take.score, take.test_date))
     });
-    console.log(newtake);
+
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
       method: "POST",
       // mode: "no-cors",
@@ -210,7 +211,7 @@ class ScoreManagement extends Component {
     }).then(function (res) {
       if (res.ok) {
         alert("批量录入成功");
-        this.props.history.push(`${this.props.url}/enter`);
+        update();
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }
@@ -223,7 +224,8 @@ class ScoreManagement extends Component {
   pushData(take) {
     const newtake = [];
     newtake[0] = new newTake(take.cid, take.tid, take.sid, take.score, take.test_date);
-    console.log(newtake);
+    const update = this.getInitData.bind(this);
+
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
       method: "POST",
       // mode: "no-cors",
@@ -237,7 +239,7 @@ class ScoreManagement extends Component {
     }).then(function (res) {
       if (res.ok) {
         alert("录入成功");
-        this.props.history.push(`${this.props.match.url}/enter`);
+        update();
       } else {
         alert("服务器回应异常，状态码：" + res.status);
       }
