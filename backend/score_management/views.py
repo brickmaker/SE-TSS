@@ -1,17 +1,16 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from score_management.models import Take, StudentAnalysis
 from score_management.models import Take
 from score_management.models import Score_Relation,Application
-from authentication.models import Course, Student, Faculty, Account, StudentAnalysis
+from authentication.models import Course, Student, Faculty, Account
 from score_management.serializers import TakeSerializer
 from score_management.serializers import ScoreRelationSerializer,ApplicationSerializer
 from django.db.models import Avg
 from django.db.models import Max
 from django.db.models import Min
 from django.http import JsonResponse
-import json
-from itertools import chain
 
 
 @api_view(['GET', 'POST'])
@@ -263,49 +262,107 @@ def student_rank(request):
     :return your rank this year
     """
     try:
-        items = StudentAnalysis.objects.filter(id_number=request.data["sid"]).values_list('rank', flat=True)
-        it = items.iterator()
-        resp = {}
-        try:
-            resp['rank'] = next(it)
-        except StopIteration:
-            Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        student_analyses = StudentAnalysis.objects.filter(username=request.data['sid'])
+        iterator = student_analyses.iterator()
+        student_analysis = next(iterator)
+        rank = student_analysis.rank
+        resp = {'rank': rank}
+        return JsonResponse(resp)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    return JsonResponse(resp)
 
 
 @api_view(['GET', 'POST'])
 def update_student_rank(request):
     """
+    you need to clear data of table StudentAnalysis first
+    """
+    try:
+        score_relations = Score_Relation.objects.all()
+        iterator = score_relations.iterator()
+        counts = {}
+        gpa_list = {}
+        try:
+            while True:
+                score_relation = next(iterator)
+                id_number = score_relation.course_select_info.student.username
+                #pa = convert_to_grade_point(take.score)
+                pa = score_relation.score
+                print(id_number)
+                if gpa_list.__contains__(id_number):
+                    counts[id_number] += 1
+                    gpa_list[id_number] += pa
+                else:
+                    counts[id_number] = 1
+                    gpa_list[id_number] = pa
+        except StopIteration:
+            for id in gpa_list.keys():
+                gpa_list[id] = gpa_list[id] / counts[id]
+            print(gpa_list)
+            gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
+            for i, tuple_i in enumerate(gpa_sorted_list):
+                try:
+                    create = StudentAnalysis.objects.create
+                    account = Account.objects.filter(username=tuple_i[0])[0]
+                    record = create(username=account, rank=i+1)
+                except Exception:
+                    get = StudentAnalysis.objects.get
+                    account = Account.objects.filter(username=tuple_i[0])[0]
+                    record = get(username=account)
+                    record.rank = i+1
+                    record.save()
+            return Response(status=status.HTTP_200_OK)
+    except Exception as err:
+        print("Exception:", err)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET','POST'])
+def list_all_score(request):
+    """
     :param
     :return
     """
     try:
-        items = Take.objects.all().values_list('student_id', 'score').order_by("test_date")
-        it = items.iterator()
-        counts = {}
-        gpa_list = {}
-        try:
-            item = next(it)
-            if item[0] in gpa_list:
-                counts[item[0]] += 1
-                gpa_list[item[0]] += convert_to_grade_point(item[1])
-            else:
-                counts[item[0]] = 1
-                gpa_list[item[0]] = convert_to_grade_point(item[1])
-        except StopIteration:
-            for id in gpa_list.keys():
-                gpa_list[id] = gpa_list[id] / counts[id]
-            gpa_sorted_list = sorted(gpa_list.items(), key=lambda d: d[1], reverse=True)
-            for i in range(len(gpa_sorted_list)):
-                gpa_sorted_list[i][1] = i + 1
-            for item in gpa_sorted_list:
-                record = StudentAnalysis.objects.get(id_number=item[0])
-                record.rank = item[1]
-                record.save()
-            Response(status=status.HTTP_200_OK)
+        resp = dict()
+        if request.data.__contains__('sid'):
+            resp['topicList'] = ['个人分析']
+            score_relations = Score_Relation.objects.filter(course_select_info__student__username=request.data['sid'])
+            iterator = score_relations.iterator()
+            list0 = list()
+            while True:
+                try:
+                    score_relation = next(iterator)
+                    cname_and_score = dict()
+                    cname_and_score['name'] = score_relation.course_select_info.course.course.name
+                    cname_and_score['score'] = score_relation.score
+                    list0.append(cname_and_score)
+                except StopIteration:
+                    resp['data'] = [list0]
+                    return JsonResponse(resp)
+        elif request.data.__contains__('pid'):
+            score_relations = Score_Relation.objects.filter(course_select_info__course__teacher__username=request.data['pid'])
+            iterator = score_relations.iterator()
+            temp = dict()
+            while True:
+                try:
+                    score_relation = next(iterator)
+                    if not temp.__contains__(score_relation.course_select_info.course.course.name):
+                        temp[score_relation.course_select_info.course.course.name] = list()
+                    sname_and_score = dict()
+                    sname_and_score['name'] = score_relation.course_select_info.student.name
+                    sname_and_score['score'] = score_relation.score
+                    temp[score_relation.course_select_info.course.course.name].append(sname_and_score)
+                except StopIteration:
+                    resp = dict()
+                    resp['topicList'] = list()
+                    resp['data'] = list()
+                    for key, value in temp.items():
+                        resp['topicList'].append(key)
+                        resp['data'].append(value)
+                    return JsonResponse(resp)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     except Exception as err:
         print("Exception:", err)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -318,3 +375,4 @@ def convert_to_grade_point(score):
         return 0.0
     else:
         return (score - 60) / 10.0 + 1.5
+

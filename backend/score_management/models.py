@@ -7,8 +7,7 @@ from rest_framework.exceptions import APIException, ParseError, NotFound
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 
-
-from authentication.models import Student,Course,Faculty
+from authentication.models import Student,Course,Faculty,Account
 
 
 ### 这里是copy了第三组和第二组的model，由于他们没PR，所以暂时这样
@@ -50,7 +49,9 @@ class Take(models.Model):
     score=models.IntegerField("分数",null=True,default=0)
     test_date=models.DateField("考试时间",auto_now=True)
 
-
+class StudentAnalysis(models.Model):
+    username = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+    rank = models.IntegerField("排名", null=True)
 
 ### 实际用model
 class Score_Relation(models.Model):
