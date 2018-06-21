@@ -90,7 +90,7 @@ const toolbarStyles = theme => ({
     },
 });
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, applyState, handleTableData, handleAccept, handleRefuse, handleDelete} = props;
+    const {numSelected, classes, handleAddOpen, applyState, handleAccept, handleRefuse, handleDelete} = props;
 
     return (
         <Toolbar
@@ -191,7 +191,7 @@ class LessonInfo extends React.Component {
             disabled: true,
             chipData:[],
             chipLabel: [],
-            applyState:true,
+            applyState: true,
             department_data: '',
             department_list: [],
             department: '',
@@ -203,6 +203,10 @@ class LessonInfo extends React.Component {
             .then((data) => {
                 let json = JSON.parse(data);
                 this.setState({originData: json, data: json});
+                this.setState({
+                            data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+                            allowSelected: false
+                });
             })
             .catch(() => {
                 this.setState({
@@ -552,7 +556,7 @@ class LessonInfo extends React.Component {
                     <EnhancedTableToolbar numSelected={selected.length}
                                           handleAddOpen={this.handleAddOpen.bind(this)}
                                           handleAddClose={this.handleAddClose.bind(this)}
-                                          handleTableData={this.handleTableData.bind(this)}
+                                        //   handleTableData={this.handleTableData.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
                                           applyState = {applyState}
                                          />
