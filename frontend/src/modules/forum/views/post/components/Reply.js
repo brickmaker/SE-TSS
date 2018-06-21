@@ -72,7 +72,6 @@ class Reply extends Component {
                         color={'primary'}
                         onClick={(event) => {
                             event.preventDefault();
-                            console.log("click msg", uid, pic, name);
                             this.props.selectEntry(uid, pic, name);
                             this.props.history.push(`/forum/messages`);
                         }}

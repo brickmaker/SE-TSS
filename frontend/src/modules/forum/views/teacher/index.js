@@ -29,6 +29,7 @@ class Teacher extends Component {
     componentDidMount() {
         const {collegeid, courseid, teacherid} = this.props.match.params
         this.props.getTeacherInfo(collegeid, courseid, teacherid)
+        this.props.checkSubscribed("uid", collegeid, courseid, teacherid)
     }
 
     subscribe() {

@@ -214,9 +214,11 @@ class course_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            if model.Subscribe.objects.filter(user_id=uid.username,section=course.section).count() == 0:
+            if models.Subscribe.objects.filter(user_id=uid.username,section=course.section).count() == 0:
                 models.Subscribe.objects.create(user_id=uid.username,section=course.section)
-        except:
+        except Exception as e:
+            print("Exception:")
+            print(e)
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':True}
         return Response(res, status=status.HTTP_200_OK)         
@@ -237,7 +239,7 @@ class teacher_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            if model.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).count() == 0:
+            if models.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).count() == 0:
                 models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
         except Exception as e:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
@@ -718,11 +720,11 @@ class msgentries(APIView):
     def get(self, request, format=None):
         u = models.User.objects.get(pk=request.user)
 
-        raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
+        raw_datas = models.Message.objects.filter(Q(sender=u) | Q(receiver=u)).order_by('-date')
         #print(raw_datas)
         d = {}
         for rd in raw_datas:
-            if rd.sender.id == u:
+            if rd.sender.id.username == u.id.username:
                 if rd.receiver.id.username in d:
                     if d[rd.receiver.id.username].date < rd.date:
                         d[rd.receiver.id.username] = rd
@@ -738,7 +740,7 @@ class msgentries(APIView):
         res = []
         for k, v in d.items():
             t = {}
-            if v.sender.id == u:
+            if v.sender.id.username == u.id.username:
                 t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
                 t['avatar']=v.receiver.avatar.url
@@ -786,13 +788,14 @@ class messages(APIView):
                     'avatar':rr.receiver.avatar.url
                 },
                 'content':rr.content,
-                'time':{
-                    'year':rr.date.year,
-                    'month':rr.date.month,
-                    'day':rr.date.day,
-                    'hour':rr.date.hour,
-                    'minute':rr.date.minute
-                }
+                'time': rr.date,
+                # 'time':{
+                #     'year':rr.date.year,
+                #     'month':rr.date.month,
+                #     'day':rr.date.day,
+                #     'hour':rr.date.hour,
+                #     'minute':rr.date.minute
+                # }
             }
             for rr in raw_datas
         ]
