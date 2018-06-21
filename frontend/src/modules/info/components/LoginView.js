@@ -67,10 +67,11 @@ const styles = theme => ({
         marginTop: 30,
     },
     card: {
-        opacity: 0.5,
+        opacity: 1.0,
         'background-color': '#3f51b5',
     },
     title: {
+        opacity: 1.0,
         fontSize: 15,
     },
 });
