@@ -26,7 +26,6 @@ export function getMsgs(uid, nextPageNum, pageSize) {
             pagenum: nextPageNum,
             pagesize: pageSize,
         };
-console.log("params", params);
         axios.get(`${ROOT_URL}/api/forum/messages`, {
             params,
             headers: withAuthHeader(),
@@ -82,14 +81,13 @@ export function getNewMsgs(uid, pageSize) {
 
 export const SELECT_ENTRY = "select_entry";
 export function selectEntry(selectedId, selectedAvatar, selectedUsername) {
-    return (dispatch, getState) => {
-        dispatch({
-            type: SELECT_ENTRY,
-            selectedId: selectedId,
-            selectedAvatar: selectedAvatar,
-            selectedUsername: selectedUsername,
-        });
-    }
+    console.log("selectEntry", selectedId, selectedAvatar, selectedUsername);
+    return ({
+        type: SELECT_ENTRY,
+        selectedId: selectedId,
+        selectedAvatar: selectedAvatar,
+        selectedUsername: selectedUsername,
+    })
 }
 
 
@@ -116,13 +114,14 @@ export const MSGENTRIES_FAILURE = "entries_failure";
 
 export function getMsgEntries(uid, selectedId, pageSize) {
     return (dispatch, getState) => {
-        const { isFetchingEntries, selectedAvatar, selectedUsername } = getState().forum.messages;
+        const { isFetchingEntries, selectedAvatar, selectedUsername } = getState().forum.forumpersist;
         if (isFetchingEntries) {
             return;
         }
         dispatch({ type: MSGENTRIES_REQUEST });
         // const headers = withAuthHeader();
         // console.log("msgentries", headers);
+        uid = localStorage.getItem('username');
         axios.get(`${ROOT_URL}/api/forum/msgentries`, {
             params: {
                 uid: uid,
@@ -131,7 +130,6 @@ export function getMsgEntries(uid, selectedId, pageSize) {
         })
             .then((response) => {
                 var entries = response.data;
-                console.log("entry", uid, selectedId, entries);
                 if (Boolean(selectedId) && selectedId != uid) {
                     var idx = -1;
                     entries.forEach((entry, index) => {
@@ -145,17 +143,16 @@ export function getMsgEntries(uid, selectedId, pageSize) {
                         entries = [entries[idx]].concat(entries.slice(0, idx), entries.slice(idx + 1));
                     }
                 };
-                console.log("entries", entries);
                 if (entries.length > 0) {
                     dispatch({
                         type: SELECT_ENTRY,
                         selectedId: entries[0]["id"],
                         selectedUsername: entries[0]['username'],
+                        selectedAvatar: entries[0]['avatar'],
                     });
                     dispatch({
                         type: CLEAR_MSGS,
                     });
-                    console.log("entries[0][id]", entries[0]["id"]);
                     dispatch(getMsgs(entries[0]["id"], 1, pageSize));
                 }
                 dispatch({

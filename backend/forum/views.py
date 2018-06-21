@@ -214,8 +214,11 @@ class course_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=course.section)
-        except:
+            if models.Subscribe.objects.filter(user_id=uid.username,section=course.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=course.section)
+        except Exception as e:
+            print("Exception:")
+            print(e)
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
         res = {'subscribed':True}
         return Response(res, status=status.HTTP_200_OK)         
@@ -236,7 +239,8 @@ class teacher_subscribe(APIView):
             return Response({'error': 'Course not found'}, status=status.HTTP_404_NOT_FOUND)
             
         try:
-            models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
+            if models.Subscribe.objects.filter(user_id=uid.username,section=teacher.section).count() == 0:
+                models.Subscribe.objects.create(user_id=uid.username,section=teacher.section)
         except Exception as e:
             return Response({'error':'Fail to subscribe'}, status=status.HTTP_400_BAD_REQUEST)
             
@@ -374,12 +378,14 @@ class teacher(APIView):
             teacher = models.Teacher.objects.get(pk=teacherid, college=collegeid, course=courseid)
             college = models.College.objects.get(pk=collegeid)
             course = models.Course.objects.get(pk=courseid)
+            u = models.User.objects.get(pk=request.user)
         except:
             return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)
 
         res = {'college': college.name, 'course': course.name, 'teacher': teacher.name}
         post_num = models.Thread.objects.filter(section=teacher.section).count()
         res['pageNum'] = post_num // post_per_page + 1
+        res['anncPermission'] = True if len(u.admin.filter(id=teacher.section.id)) else False
         return Response(res, status=status.HTTP_200_OK)
 
         
@@ -515,7 +521,8 @@ class comment(APIView):
     
         try:
             models.Reply_reply.objects.create(from_uid_id=from_id.username,to_uid_id=to_id,content=content,reply_id_id=replyId)
-        except:
+        except Exception as e:
+            print(e)
             return Response({'error':'Fail to comment'}, status=status.HTTP_400_BAD_REQUEST)
         
         res = {'error':None}
@@ -673,7 +680,7 @@ class reply(APIView):
         t_data['replies'] = []
         
         try:
-            attr = models.Attachment.objects.filter(md5sum=data.attachment_md5)[0]
+            attr = models.Attachment.objects.filter(md5sum=thread.attachment_md5)[0]
             t_data['file'] = attr.file.url
         except:
             t_data['file'] = None
@@ -694,7 +701,7 @@ class reply(APIView):
             t_data['time'] = data.date
             t_data['replies'] = [
                 {'from': rr.from_uid.name, 'to': rr.to_uid.name, 'content': rr.content, 'time': rr.create_time,
-                 'pic': rr.from_uid.avatar.url,
+                 'pic': rr.from_uid.avatar.url, 'toId': rr.to_uid.id.username
                 }
                 for rr in data.replyreply.all().order_by('create_time')
             ]
@@ -713,11 +720,11 @@ class msgentries(APIView):
     def get(self, request, format=None):
         u = models.User.objects.get(pk=request.user)
 
-        raw_datas = models.Message.objects.filter(Q(sender_id=u) | Q(receiver_id=u)).order_by('-date')
+        raw_datas = models.Message.objects.filter(Q(sender=u) | Q(receiver=u)).order_by('-date')
         #print(raw_datas)
         d = {}
         for rd in raw_datas:
-            if rd.sender.id == u:
+            if rd.sender.id.username == u.id.username:
                 if rd.receiver.id.username in d:
                     if d[rd.receiver.id.username].date < rd.date:
                         d[rd.receiver.id.username] = rd
@@ -733,7 +740,7 @@ class msgentries(APIView):
         res = []
         for k, v in d.items():
             t = {}
-            if v.sender.id == u:
+            if v.sender.id.username == u.id.username:
                 t['id'] = v.receiver.id.username
                 t['username'] = v.receiver.name
                 t['avatar']=v.receiver.avatar.url
@@ -781,13 +788,14 @@ class messages(APIView):
                     'avatar':rr.receiver.avatar.url
                 },
                 'content':rr.content,
-                'time':{
-                    'year':rr.date.year,
-                    'month':rr.date.month,
-                    'day':rr.date.day,
-                    'hour':rr.date.hour,
-                    'minute':rr.date.minute
-                }
+                'time': rr.date,
+                # 'time':{
+                #     'year':rr.date.year,
+                #     'month':rr.date.month,
+                #     'day':rr.date.day,
+                #     'hour':rr.date.hour,
+                #     'minute':rr.date.minute
+                # }
             }
             for rr in raw_datas
         ]
@@ -920,7 +928,7 @@ class announcements(APIView):
         
         
 class info(APIView):
-    # permission_classes=(AdminCheck,)
+    permission_classes=(StaffCheck,)
     def get(self, request, format=None):
         res = {}
         user_count = models.User.objects.all().count()
@@ -933,7 +941,7 @@ class info(APIView):
         return Response(res, status=status.HTTP_200_OK)
 
 class userstates(APIView):
-    # permission_classes=(AdminCheck,)
+    permission_classes=(StaffCheck,)
     def get(self, request, format=None):
         username = request.GET.get('username', None)
         if None in (username,):
@@ -1018,6 +1026,7 @@ class search(APIView):
 
 
 class hotpost(APIView):
+    permission_classes = (StaffCheck,)
     def get(self,request,format=None):
         collegeid = request.GET.get('collegeid',None)
         courseid = request.GET.get('courseid',None)

@@ -92,8 +92,8 @@ def main():
     cr_filename='./auto_course/init_data/classroom.xlsx'
     r_filename='./auto_course/init_data/relation.xlsx'
 
-    # createCourse(c_filename)
-    # createClassroom(cr_filename)
+    createCourse(c_filename)
+    createClassroom(cr_filename)
     createRelation(r_filename)
  
 if __name__ == '__main__':

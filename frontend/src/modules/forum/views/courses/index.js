@@ -99,7 +99,7 @@ class Courses extends Component {
                                                 <TableCell>{c.code}</TableCell>
                                                 <TableCell>{c.name}</TableCell>
                                                 <TableCell>{c.teachers.join('、')}</TableCell>
-                                                <TableCell numeric>{c.postsNum}</TableCell>
+                                                <TableCell numeric>{c.postNum}</TableCell>
                                                 <TableCell numeric>{dateFormat(new Date(c.lastUpdate))}</TableCell>
                                             </TableRow>
                                         ))

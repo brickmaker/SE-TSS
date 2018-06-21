@@ -11,7 +11,7 @@ import { selectEntry } from '../messages/actions';
 import moment from 'moment';
 import Link from 'react-router-dom/Link';
 import PostItem from '../../components/postitem';
-import {ROOT_URL} from '../../configs/config';
+import { ROOT_URL } from '../../configs/config';
 
 const styles = {
     container: {
@@ -57,6 +57,7 @@ class Usercenter extends Component {
     }
 
     componentWillMount() {
+        console.log("request");
         this.props.requestUserInfo(this.props.match.params.uid);
     }
 
@@ -103,8 +104,7 @@ class Usercenter extends Component {
             dialogContent, newUsername, newSignature } = this.state;
         const { avatar, uid, username, signature, replyNum, postNum,
             posts, registrationTime, subscriptionNum } = userInfo;
-        //TODO:
-        const currentLoginUid = '1';
+        const currentLoginUid = localStorage.getItem('username');
         var path = {};
         path['settings'] = { "name": `个人中心`, "link": `${match.url}` };
 
@@ -119,7 +119,9 @@ class Usercenter extends Component {
                                 } */}
                             <Grid container>
                                 <Grid item xs={6} sm={4} md={3}>
-                                    <Avatar alt={username} src={`${ROOT_URL}${avatar}`} className={classes.bigAvatar} />
+                                    <Grid container alignItems='center' justify='center' >
+                                        <Avatar alt={username} src={`${ROOT_URL}${avatar}`} className={classes.bigAvatar} />
+                                    </Grid>
                                 </Grid>
                                 <Grid item xs={6} sm={8} md={9}>
                                     <div style={{
@@ -145,7 +147,7 @@ class Usercenter extends Component {
                                                     selectEntry(uid, avatar, username);
                                                     history.push('/forum/messages');
                                                 }}
-                                            >私信</Button>
+                                            >发送消息</Button>
                                         </div>
                                         <Typography variant="subheading" style={{
                                             marginTop: 20,
@@ -375,7 +377,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    requestUserInfo: (uid) => { dispatch(requestUserInfo(uid)); },
+    requestUserInfo: (uid) => {
+        dispatch(requestUserInfo(uid));
+
+    },
     selectEntry: (selectedId, selectedAvatar, selectedUsername) => {
         dispatch(selectEntry(selectedId, selectedAvatar, selectedUsername));
     },

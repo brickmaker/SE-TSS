@@ -72,7 +72,6 @@ class Reply extends Component {
                         color={'primary'}
                         onClick={(event) => {
                             event.preventDefault();
-                            console.log("click msg", uid, pic, name);
                             this.props.selectEntry(uid, pic, name);
                             this.props.history.push(`/forum/messages`);
                         }}
@@ -150,7 +149,7 @@ class Reply extends Component {
                                                     <ListItemSecondaryAction>
                                                         <IconButton
                                                             onClick={() => {
-                                                                this.props.openComment(postId, id, rr.to)
+                                                                this.props.openComment(postId, id, rr.toId)
                                                             }}
                                                             aria-label="Reply"
                                                         >

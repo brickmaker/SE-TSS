@@ -12,6 +12,7 @@ const initState = {
     college: "",
     course: "",
     teacher: "",
+    anncPermission: false,
     announcements: [],
     subscribed: false,
     pageNum: 1,
@@ -31,7 +32,8 @@ export function teacherReducer(state = initState, action) {
                 college: action.teacherInfo.college,
                 course: action.teacherInfo.course,
                 teacher: action.teacherInfo.teacher,
-                pageNum: action.teacherInfo.pageNum
+                pageNum: action.teacherInfo.pageNum,
+                anncPermission: action.teacherInfo.anncPermission
             })
         case GOT_TEACHER_POSTS:
             return Object.assign({}, state, {
