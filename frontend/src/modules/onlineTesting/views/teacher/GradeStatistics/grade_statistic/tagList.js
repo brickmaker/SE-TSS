@@ -11,7 +11,7 @@ import { withStyles,
     Icon,
 } from 'material-ui';
 import echarts from 'echarts'
-import 'echarts/lib/component/title'
+import 'echarts/lib/component/titleData'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/tooltip'
 import 'echarts/lib/component/toolbox'

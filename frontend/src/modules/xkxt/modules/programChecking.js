@@ -26,7 +26,7 @@ class ProgramChecking extends React.Component {
 	}
 
 	componentWillMount() {
-		this.props.getProgram('uid=0002');
+		this.props.getProgram("uid="+this.props.uid);
 	}
 
 	render() {
@@ -50,6 +50,7 @@ class ProgramChecking extends React.Component {
 const mapStateToProps = (state, props) => ({
 	classes: props.classes,
 	program: state.xkxt.program,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

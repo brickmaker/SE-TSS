@@ -16,7 +16,8 @@ import {
     DialogContentText,
     DialogTitle,
     Paper,
-    TextField
+    TextField,
+    Typography
 } from '@material-ui/core';
 
 import Bar from "../../../../top/components/Bar";
@@ -269,7 +270,9 @@ class StaffBasicInfo extends React.Component {
         data.name = this.state.name;
         data.gender = this.state.gender;
         data.department = this.state.department;
-        data.img = this.state.img;
+        if (data.department === null) {
+            data.department = '信息中心';
+        }
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -363,6 +366,11 @@ class StaffBasicInfo extends React.Component {
                                                 rotate={0}
                                             />
                                         </Upload>
+                                    </div>
+                                    <div className={classes.img}>
+                                        <Typography>
+                                            点击可上传头像
+                                        </Typography>
                                     </div>
 
 
@@ -462,7 +470,6 @@ class StaffBasicInfo extends React.Component {
                                             fullWidth
                                             label="新邮箱"
                                             type="email"
-                                            value={this.state.new_email}
                                             onChange={this.handleChange('new_email')}
                                         />
                                     </div>

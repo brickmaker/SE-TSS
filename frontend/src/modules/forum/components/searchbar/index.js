@@ -105,21 +105,25 @@ class SearchBar extends Component {
                             }
                         }
                         else getContent(event.target.value);
+                        // console.log("value", event.target.value, content);
                     }}
                 />
-                <SearchIcon className={classes.item} style={{ cursor: "pointer" }} onClick={(event) => {
-                    event.preventDefault();
-                    if (content.length == 0) {
-                        this.setState({ isDialogOpen: true, dialogContent: "搜索内容不得为空" });
-                    }
-                    else if (content.length > 20) {
-                        this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
-                    }
-                    else {
-                        clearAnncs();
-                        this.props.history.push(`/forum/search/${searchType}/${content}/1`);
-                    }
-                }} />
+                <SearchIcon className={classes.item} 
+                // onClick={(event) => {
+                    // event.preventDefault();
+                    // if (content.length == 0) {
+                    //     this.setState({ isDialogOpen: true, dialogContent: "搜索内容不得为空" });
+                    // }
+                    // else if (content.length > 20) {
+                    //     this.setState({ isDialogOpen: true, dialogContent: "搜索长度不得超过20" });
+                    // }
+                    // else {
+                    //     clearAnncs();
+                    //     console.log("search", content)
+                    //     this.props.history.push(`/forum/search/${searchType}/${content}/1`);
+                    // }
+                // }}
+                 />
                 <Dialog open={isDialogOpen}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"

@@ -28,7 +28,7 @@ const styles = theme => ({
 	},
 });
 
-const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes }) => {
+const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes, uid }) => {
 	return (
 		<div className={classes.divStyle}>
 			<Paper elevation={4}>
@@ -45,9 +45,9 @@ const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes }) => {
 						<Tab label="专业选修课" />
 					</Tabs>
 				</AppBar>
-				{tabsCCValue === 0 && <TabContainer><CourseViewer query={"&userid=0001&course_type=0"} /></TabContainer>}
-				{tabsCCValue === 1 && <TabContainer><CourseViewer query={"&userid=0001&course_type=2"} /></TabContainer>}
-				{tabsCCValue === 2 && <TabContainer><CourseViewer query={"&userid=0001&course_type=1"} /></TabContainer>}
+				{tabsCCValue === 0 && <TabContainer><CourseViewer query={"&userid="+uid+"&course_type=0"} prog="1" /></TabContainer>}
+				{tabsCCValue === 1 && <TabContainer><CourseViewer query={"&userid="+uid+"&course_type=2"} prog="1" /></TabContainer>}
+				{tabsCCValue === 2 && <TabContainer><CourseViewer query={"&userid="+uid+"&course_type=1"} prog="1" /></TabContainer>}
 			</Paper>
 		</div>
 	);
@@ -56,6 +56,7 @@ const CourseChoosing = ({ tabsCCValue, tabsCCFunc, classes }) => {
 const mapStateToProps = (state, props) => ({
 	tabsCCValue: state.xkxt.tabsCCValue,
 	classes: props.classes,
+	uid: localStorage.username,//state.xkxt.uid,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -68,10 +69,10 @@ export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(C
 /*
 			<div style={divStyle}>
 				<Paper style={style} zDepth={2}>
-					<AppBar title='课程列表' iconElementRight={<FlatButton label='显示已选课程' onClick={openFunc}/>} />
+					<AppBar titleData='课程列表' iconElementRight={<FlatButton label='显示已选课程' onClick={openFunc}/>} />
 				</Paper>
 			</div>
 			<Drawer width="20%" openSecondary={true} open={openValue} >
-				<AppBar title="已选课程" iconElementRight={<FlatButton label='隐藏' onClick={closeFunc}/>} />
+				<AppBar titleData="已选课程" iconElementRight={<FlatButton label='隐藏' onClick={closeFunc}/>} />
 			</Drawer>
 			*/

@@ -30,6 +30,7 @@ function mapDispatchToProps(dispatch) {
 
 const styles = theme => ({
     Paper: {
+        opacity: 0.8,
         marginTop: '10%',
         marginLeft: '25%',
         paddingBottom: 50,
@@ -50,6 +51,7 @@ const styles = theme => ({
         marginTop: 30,
     },
     card: {
+        opacity: 0.5,
         'background-color': '#3f51b5',
     },
     title: {

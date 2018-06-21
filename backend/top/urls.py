@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/forum/', include('forum.urls')),
     path('api/score/',include('score_management.urls')),
     path('api/xkxt/', include('xkxt.urls')),
+    path('api/autocourse/', include('auto_course.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

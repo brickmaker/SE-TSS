@@ -113,11 +113,11 @@ class SearchResult extends Component {
                                 回复数：{replyNum}
                             </Typography>
                         </div>
-                        <div className={classes.related}>
+                        {/* <div className={classes.related}>
                             <Typography className={classes.item}>
                                 {relatedContent}
                             </Typography>
-                        </div>
+                        </div> */}
                     </div>
                     <Divider />
                 </Paper>

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 import DropZone from "../DropZone"
 import Bar from "../../../../top/components/Bar";
-import {gender, listItems, otherItems, grade, ranges} from "./AdminData";
+import {gender, listItems, otherItems, grade, ranges, titleData} from "./AdminData";
 import {
     Button,
     Checkbox,
@@ -329,6 +329,7 @@ class AccountInfo extends React.Component {
             name: '',
             gender: 'M',
             department: '',
+            title: '',
             grade: 2015,
             major: '',
             class_name: '',
@@ -538,7 +539,7 @@ class AccountInfo extends React.Component {
             data.gender = this.state.gender;
             data.department = this.state.department;
             data.user_type = this.state.account_type + 1;
-            data.img = this.state.img;
+            data.title = this.state.title;
             console.log(data);
             fetch(BACKEND_SERVER_URL + BACKEND_API.register_faculty, {
                 method: 'post',
@@ -1284,6 +1285,20 @@ class AccountInfo extends React.Component {
                                 onChange={this.handleDepartmentChange('department')}
                             >
                                 {this.state.department_list.map(option => (
+                                    <MenuItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                fullWidth
+                                select='true'
+                                label="职称"
+                                margin="normal"
+                                value={this.state.title}
+                                onChange={this.handleChange('title')}
+                            >
+                                {titleData.map(option => (
                                     <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                     </MenuItem>

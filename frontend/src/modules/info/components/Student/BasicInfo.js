@@ -16,7 +16,8 @@ import {
     DialogContentText,
     DialogTitle,
     Paper,
-    TextField
+    TextField,
+    Typography
 } from '@material-ui/core';
 
 import Bar from "../../../../top/components/Bar";
@@ -94,6 +95,9 @@ class StaffBasicInfo extends React.Component {
             name: '',
             gender: '',
             department: '',
+            grade: '',
+            major: '',
+            class_name: '',
             imageUrl: null,
             dialogState: false,
             dialogText: "",
@@ -141,6 +145,9 @@ class StaffBasicInfo extends React.Component {
                 const gender = data.gender;
                 const department = data.department;
                 const img = data.img;
+                const grade = data.grade;
+                const major = data.major;
+                const class_name = data.class_name;
                 this.setState({
                     username: username,
                     id_number: id_number,
@@ -148,6 +155,9 @@ class StaffBasicInfo extends React.Component {
                     name: name,
                     gender: gender,
                     department: department,
+                    grade: grade,
+                    major: major,
+                    class_name: class_name,
                 });
                 fetch(img, {
                     method: 'GET',
@@ -270,7 +280,9 @@ class StaffBasicInfo extends React.Component {
         data.name = this.state.name;
         data.gender = this.state.gender;
         data.department = this.state.department;
-        data.img = this.state.img;
+        data.grade = this.state.grade;
+        data.major = this.state.major;
+        data.class_name = this.state.class_name;
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -364,6 +376,11 @@ class StaffBasicInfo extends React.Component {
                                                 rotate={0}
                                             />
                                         </Upload>
+                                    </div>
+                                    <div className={classes.img}>
+                                        <Typography>
+                                            点击可上传头像
+                                        </Typography>
                                     </div>
 
 
@@ -463,7 +480,6 @@ class StaffBasicInfo extends React.Component {
                                             fullWidth
                                             label="新邮箱"
                                             type="email"
-                                            value={this.state.new_email}
                                             onChange={this.handleChange('new_email')}
                                         />
                                     </div>

@@ -34,7 +34,7 @@ class NewMsgPanel extends Component {
                         newMsgs && <List dense>
                             {newMsgs.map((msg) => {
                                 return (
-                                    <ListItem button
+                                    <ListItem button key={msg.from.username + msg.content}
                                         onClick={(event) => {
                                             event.preventDefault();
                                             selectEntry(msg.from.id, msg.from.avatar, msg.from.username);

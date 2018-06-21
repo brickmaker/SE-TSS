@@ -10,6 +10,8 @@ import {listItems, otherItems} from "./StudentData";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Image from '../image/main.jpg';
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 
 function mapStateToProps(state) {
@@ -21,15 +23,14 @@ function mapDispatchToProps(dispatch) {
 }
 
 const styles = theme => ({
-    Card: {
-        width: '80%',
-        marginLeft: '30px',
-        marginRight: '30px',
-        height: '50%',
-        margin: '30px',
-        position: 'relative',
-        overflow:  'auto',
-
+    card: {
+        width: '100%',
+        height: '100%'
+    },
+    media: {
+        height: '80%',
+        // height: 0,
+        // paddingTop: '56.25%', // 16:9
     },
 });
 
@@ -71,11 +72,17 @@ class StudentView extends React.Component {
                 listItems={listItems}
                 otherItems={otherItems}
                 children={
+                    <Card className={classes.card}>
+                    <CardMedia
+                    className={classes.media}
+                    image={Image}
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="headline" component="h2">
+                    {'欢迎来到教务管理系统, '+ name}
+                    </Typography>
 
-                    <Card className={classes.Card}>
-                        <CardContent>
-                            <Typography variant="display1" gutterBottom>{'欢迎来到教务管理系统, ' + name}</Typography>
-                        </CardContent>
+                    </CardContent>
                     </Card>
                 }
                 history={history}

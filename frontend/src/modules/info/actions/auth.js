@@ -15,6 +15,7 @@ import {BACKEND_SERVER_URL, BACKEND_API} from "../config";
 export function loginUserSuccess(token, username,type, status) {
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
+    localStorage.setItem('type', USER[type]);
     return {
         type: LOGIN_USER_SUCCESS,
         payload: {

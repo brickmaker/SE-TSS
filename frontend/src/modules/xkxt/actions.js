@@ -39,7 +39,6 @@ export const getCourseStudents = (dispatch, attr) => {
 
 export const getManagement = (dispatch, attr, type) => {
   getRes(BACKEND_API.management, attr).then(data => {//
-    console.log(123)
     dispatch({
       type: 'GET_MANAGEMENT',
       data: data,
@@ -52,7 +51,8 @@ export const postManagement = (dispatch, data, type) => {
   postRes(BACKEND_API.management, data).then(data => {//
     dispatch({
       type: 'GET_MANAGEMENT',
-      data: data
+      data: data,
+      typ: type,
     })
   });
 };
@@ -127,10 +127,24 @@ export const toggleDrawer = (b) => ({
   bool: b
 });
 
+export const changeSnackBar = (v) => ({
+  type: 'CHANGE_SNACK_BAR',
+  state: v
+});
+
+export const clearCourseStudent = () => ({
+  type: 'CLEAR_COURSE_STUDENT',
+});
+
+export const quit = () => ({
+  type: 'QUIT',
+});
+
 function getRes(resource, attr) {
   const opts = {
     method: 'GET',
     headers: {
+      'Authorization': 'JWT ' + localStorage.getItem('token'),
       'Content-Type': 'application/json; charset=UTF-8',
     },
   };
@@ -145,6 +159,7 @@ function postRes(resource, data) {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
+      'Authorization': 'JWT ' + localStorage.getItem('token'),
       'Accept': 'application/json',
       'Content-Type': 'application/json; charset=UTF-8',
     },

@@ -209,9 +209,16 @@ class PaperViewSet(mixins.CreateModelMixin,
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(queryset, many=True)
         data = serializer.data
-        '''if request.user.user_type == 1:
-            for question in data:
-                question.pop('answer_list', None)'''
+        if request.user.user_type == 1:
+            for paper in data:
+                try:
+                    exam = Examination.objects.get(paper=paper['paper_id'], student=request.user.username)
+                    if ExaminationViewSet.get_left_time(exam) == 0:
+                        paper['done'] = True
+                    else:
+                        paper['done'] = False
+                except ObjectDoesNotExist:
+                    paper['done'] = False
         return Response({'paper_list': data})
 
 

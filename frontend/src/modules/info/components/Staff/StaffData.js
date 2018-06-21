@@ -55,6 +55,28 @@ export const otherItems = (
     </div>
 );
 
+export const titleData = [
+    {
+        value: '教授',
+        label: '教授',
+    },
+    {
+        value: '副教授',
+        label: '副教授',
+    },
+    {
+        value: '讲师',
+        label: '讲师',
+    },
+];
+
+
+export const stateChoices =  {
+    0: '不通过',
+    1: '待审批',
+    2: '已通过'
+};
+
 export const lessonColumnData = [
     {value: 'course_id', label: '课程号'},
     {value: 'name', label: '课程名'},

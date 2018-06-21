@@ -4,7 +4,7 @@ from rest_framework import permissions
 class RegisterCheck(permissions.BasePermission):
     def has_permission(self, request, view):
         type = request.user.user_type
-        if not type == 4:
+        if type == 1 or type == 2:
             return False
         else:
             return True
@@ -13,7 +13,7 @@ class RegisterCheck(permissions.BasePermission):
 
 class StudentCheck(permissions.BasePermission):
     def has_permission(self, request, view):
-        url = "/api/student/"
+        url = "/api/info/student/"
         type = request.user.user_type
         path = request._request.path
         # all info
@@ -39,7 +39,7 @@ class StudentCheck(permissions.BasePermission):
 
 class FacultyCheck(permissions.BasePermission):
     def has_permission(self, request, view):
-        url = "/api/faculty/"
+        url = "/api/info/faculty/"
         type = request.user.user_type
         path = request._request.path
         # all info
@@ -65,7 +65,7 @@ class FacultyCheck(permissions.BasePermission):
 
 class StaffCheck(permissions.BasePermission):
     def has_permission(self, request, view):
-        url = "/api/staff/"
+        url = "/api/info/staff/"
         type = request.user.user_type
         path = request._request.path
         # all info

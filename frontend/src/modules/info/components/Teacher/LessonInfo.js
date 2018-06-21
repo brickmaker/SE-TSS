@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import {withStyles} from '@material-ui/core/styles';
 
 import Bar from "../../../../top/components/Bar";
-import {lessonColumnData, listItems, otherItems, ranges, ranges_term} from "./TeacherData";
+import {lessonColumnData, listItems, otherItems, ranges, ranges_term, stateChoices} from "./TeacherData";
 import {BACKEND_API, BACKEND_SERVER_URL} from "../../config";
 import Teacher_EnhancedTableHead from './EnhancedTable';
 import {
@@ -90,7 +90,7 @@ const toolbarStyles = theme => ({
     },
 });
 let EnhancedTableToolbar = props => {
-    const {numSelected, classes, handleAddOpen, applyState, handleTableData, handleAccept, handleRefuse, handleDelete} = props;
+    const {numSelected, classes, handleAddOpen, applyState, handleAccept, handleRefuse, handleDelete} = props;
 
     return (
         <Toolbar
@@ -111,21 +111,21 @@ let EnhancedTableToolbar = props => {
             </div>
             <div className={classes.spacer}/>
 
-            <div className={classes.actions}>
-                {!applyState ? (
-                    <Tooltip title="申请课程列表">
+            {/* <div className={classes.actions}> */}
+                {/* {!applyState ? ( */}
+                    {/* <Tooltip title="申请课程列表">
                         <IconButton aria-label="Process" onClick={handleTableData}>
                             <SelectIcon/>
                         </IconButton>
-                    </Tooltip>
-                ) : (
+                    </Tooltip> */}
+                {/* ) : (
                     <Tooltip title="普通">
                         <IconButton aria-label="Normal" onClick={handleTableData}>
                             <StarIcon/>
                         </IconButton>
                     </Tooltip>
-                )}
-            </div>
+                )} */}
+            {/* </div> */}
 
             <div className={classes.actions}>
             <Tooltip title="申请">
@@ -135,13 +135,13 @@ let EnhancedTableToolbar = props => {
             </Tooltip>
             </div>
             <div className={classes.actions}>
-                { applyState &&
+                {/* { applyState && */}
                     <Tooltip title="删除">
                         <IconButton aria-label="Add Course" onClick={handleDelete}>
                             <DeleteIcon/>
                         </IconButton>
                     </Tooltip>
-                }
+                {/* } */}
             </div>
 
         </Toolbar>
@@ -191,7 +191,7 @@ class LessonInfo extends React.Component {
             disabled: true,
             chipData:[],
             chipLabel: [],
-            applyState:false,
+            applyState: true,
             department_data: '',
             department_list: [],
             department: '',
@@ -199,9 +199,14 @@ class LessonInfo extends React.Component {
     }
     handleInitData = () => {
         // TODO
-        getRes(BACKEND_API.get_course)
+        getRes(BACKEND_API.get_course_faculty)
             .then((data) => {
-                this.setState({originData: data, data: data});
+                let json = JSON.parse(data);
+                this.setState({originData: json, data: json});
+                this.setState({
+                            data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+                            allowSelected: false
+                });
             })
             .catch(() => {
                 this.setState({
@@ -218,18 +223,18 @@ class LessonInfo extends React.Component {
     }
 
     // 处理表数据，审批状态和非审配状态
-    handleTableData = () => {
-        if (!this.state.applyState) {
-            this.setState({
-                data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
-                allowSelected: false
-            });
-        } else {
-            this.setState({data: this.state.originData, allowSelected: true});
-        }
-        this.setState({applyState: !this.state.applyState});
-        this.setState({selected: []});
-    };
+    // handleTableData = () => {
+    //     if (!this.state.applyState) {
+    //         this.setState({
+    //             data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+    //             allowSelected: false
+    //         });
+    //     } else {
+    //         this.setState({data: this.state.originData, allowSelected: true});
+    //     }
+    //     this.setState({applyState: !this.state.applyState});
+    //     this.setState({selected: []});
+    // };
 
     // 添加课程窗口打开
     handleAddOpen = () => {
@@ -311,7 +316,7 @@ class LessonInfo extends React.Component {
             data.faculty = this.state.chipLabel;
             data.semester = this.state.course_term;
             data.department = this.state.department;
-            let url = BACKEND_SERVER_URL + 'api/register_course';
+            let url = BACKEND_SERVER_URL + BACKEND_API.register_course;
             fetch(url,
                 {
                 method: 'post',
@@ -505,7 +510,7 @@ class LessonInfo extends React.Component {
         let selected = this.state.selected;
         this.setState({selected: []});
         selected.forEach((value, index) => {
-            let url = BACKEND_SERVER_URL + 'api/course/' + value + '/';
+            let url = BACKEND_SERVER_URL + BACKEND_API.get_course + value + '/';
             fetch(url, {
                 method: 'delete',
                 headers: {
@@ -551,7 +556,7 @@ class LessonInfo extends React.Component {
                     <EnhancedTableToolbar numSelected={selected.length}
                                           handleAddOpen={this.handleAddOpen.bind(this)}
                                           handleAddClose={this.handleAddClose.bind(this)}
-                                          handleTableData={this.handleTableData.bind(this)}
+                                        //   handleTableData={this.handleTableData.bind(this)}
                                           handleDelete={this.handleDelete.bind(this)}
                                           applyState = {applyState}
                                          />
@@ -586,7 +591,7 @@ class LessonInfo extends React.Component {
                                             </TableCell>
                                             <TableCell>{n.name}</TableCell>
                                             <TableCell>{n.credit}</TableCell>
-                                            <TableCell>{n.state}</TableCell>
+                                            <TableCell>{stateChoices[n.state]}</TableCell>
                                         </TableRow>
                                     );
                                 })}
