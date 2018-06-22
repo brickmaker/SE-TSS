@@ -17,7 +17,7 @@ const testCourseList = [
 
 export const getCourseList = (teacherId, token) =>{
     return dispatch=>{
-        fetch('http://47.100.233.129:8080/api/info/get_token', {
+        fetch('http://127.0.0.1:8000/api/info/get_token', {
             method: 'POST',
             headers: {Accept: 'application/json',
                 'Content-Type': 'application/json',},
@@ -36,7 +36,7 @@ export const getCourseList = (teacherId, token) =>{
                 headers.append(
                     'Authorization','JWT '+ localStorage.getItem('token')
                 );
-                fetch('http://47.100.233.129:8080/api/online_testing/course/', {
+                fetch('http://127.0.0.1:8000/api/online_testing/course/', {
                     method: 'GET',
                     headers: headers,
                     credentials:'include'

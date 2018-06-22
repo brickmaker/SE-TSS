@@ -10,7 +10,7 @@ export const getTeacherPaperList = (courseID, token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         )
-        fetch(`http://47.100.233.129:8080/api/online_testing/paper/?course=${courseID}`, {
+        fetch(`http://127.0.0.1:8000/api/online_testing/paper/?course=${courseID}`, {
             method: 'GET',
             headers:headers
         })

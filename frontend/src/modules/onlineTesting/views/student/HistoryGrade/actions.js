@@ -9,7 +9,7 @@ export const getStudentGrade = (course_id, token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://47.100.233.129:8080/api/online_testing/analysis/studentGradeList/?course_id=${course_id}`, {
+        fetch(`http://127.0.0.1:8000/api/online_testing/analysis/studentGradeList/?course_id=${course_id}`, {
             method: 'GET',
             headers:headers
         })

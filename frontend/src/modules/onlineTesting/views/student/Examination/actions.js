@@ -20,7 +20,7 @@ export const getStudentPaper = (studentId, courseID, paperID, token)=>{
                     'Authorization','JWT '+ localStorage.getItem('token')
 
                 );
-                fetch(`http://47.100.233.129:8080/api/online_testing/paper/${paperID}/`, {
+                fetch(`http://127.0.0.1:8000/api/online_testing/paper/${paperID}/`, {
                     method: 'GET',
                     headers:headers
                 })
@@ -36,7 +36,7 @@ export const getStudentPaper = (studentId, courseID, paperID, token)=>{
                             'Authorization','JWT '+ localStorage.getItem('token')
 
                         )
-                        fetch(`http://47.100.233.129:8080/api/online_testing/examination/`, {
+                        fetch(`http://127.0.0.1:8000/api/online_testing/examination/`, {
                             method: 'POST',
                             headers: headers,
                             body:JSON.stringify({
@@ -56,7 +56,7 @@ export const getStudentPaper = (studentId, courseID, paperID, token)=>{
                                 headers.append(
                                     'Authorization','JWT '+ localStorage.getItem('token')
                                 )
-                                fetch(`http://47.100.233.129:8080/api/online_testing/examination/${exam_id}/left_time/`, {
+                                fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/left_time/`, {
                                     method: 'GET',
                                     headers: headers,
                                     credentials:'include'
@@ -72,7 +72,7 @@ export const getStudentPaper = (studentId, courseID, paperID, token)=>{
                                         headers.append(
                                             'Authorization','JWT '+token
                                         );
-                                        fetch(`http://47.100.233.129:8080/api/online_testing/examination/${exam_id}/`, {
+                                        fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/`, {
                                             method: 'GET',
                                             headers:headers
                                         })
@@ -144,7 +144,7 @@ export const startExam=(paper_id, token)=>{
         'Authorization','JWT '+ localStorage.getItem('token')
 
        )
-       fetch(`http://47.100.233.129:8080/api/online_testing/examination/`, {
+       fetch(`http://127.0.0.1:8000/api/online_testing/examination/`, {
            method: 'POST',
            headers: headers,
            body:JSON.stringify({
@@ -163,7 +163,7 @@ export const startExam=(paper_id, token)=>{
                 'Authorization','JWT '+ localStorage.getItem('token')
 
                )
-               fetch(`http://47.100.233.129:8080/api/online_testing/examination/${exam_id}`, {
+               fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}`, {
                    method: 'GET',
                    headers: headers
                })
