@@ -159,7 +159,7 @@ export const xkxtReducer = (state = initState, action) => {
             else
                 return state;
         case 'QUIT': 
-            if(Boolean(state.userInfo) && state.userInfo.auth===0)
+            if(Boolean(state.userInfo) && state.userInfo.auth===1)
                 return Object.assign({}, state, {
                     toQuit: true
                 });

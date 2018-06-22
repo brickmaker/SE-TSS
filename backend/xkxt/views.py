@@ -252,7 +252,7 @@ class course_info(APIView):
             ret['time'] = s['time']
             ret['teacher'] = s['teacher']['name']
             ret['capacity'] = s['classroom']['classroom_capacity']
-            ret['classroom'] = s['classroom']['classroom_location']
+            ret['classroom'] = convert_to_classroom(s['classroom']['campus'], s['classroom']['building'], s['classroom']['room'])
         except:
             ret = {}
             ret['course_exist'] = False

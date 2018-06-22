@@ -1,4 +1,5 @@
 import {DEBUG, ROOT_URL} from "../../configs/config";
+import {withAuthHeader} from "../../utils/api";
 export const AGREE_REQUEST = 'agree_request';
 export const REJECT_REQUEST = 'reject_request';
 export const DISPLAY_REQUEST_ADMINISTRATOR= 'display_request_adm';
@@ -6,10 +7,7 @@ export const DISPLAY_REQUEST_ADMINISTRATOR= 'display_request_adm';
 export const HandleAgreeButtonClick = (n) => (dispatch, getState) => {
     fetch(`${ROOT_URL}/request/${n.id}/`, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: withAuthHeader(),
             body: JSON.stringify({
                     id: n.id,
                     teacherId: n.teacherId,
@@ -33,10 +31,7 @@ export const HandleAgreeButtonClick = (n) => (dispatch, getState) => {
 export const HandleRejectButtonClick = (n) => (dispatch, getState) => {
     fetch(`${ROOT_URL}/request/${n.id}/`, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: withAuthHeader(),
             body: JSON.stringify({
                     id: n.id,
                     teacherId: n.teacherId,
@@ -69,6 +64,9 @@ export const DisplayRequest = () => (dispatch, getState) => {
 };
 
 function fetchRequestInfo() {
-   return fetch(`${ROOT_URL}/request/?status=0`)
+   return fetch(`${ROOT_URL}/request/?status=0`, {
+       method: 'GET',
+       headers: withAuthHeader(),
+   })
         .then(response => response.json())
 }
