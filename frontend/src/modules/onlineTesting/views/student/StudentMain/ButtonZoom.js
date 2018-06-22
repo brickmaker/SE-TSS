@@ -69,7 +69,7 @@ class SimpleZoom extends React.Component {
         const { classes } = this.props;
         const { checked } = this.state;
         return (
-            <div className={classes.root}>
+            <div>
                 {this.props.courseName}
                 <IconButton checked={checked} onClick={this.handleChange}  color="primary">
                     <SortIcon/>

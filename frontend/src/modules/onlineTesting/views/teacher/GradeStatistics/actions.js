@@ -15,7 +15,7 @@ export const getTestList=(courseId,token)=>{
                 'Authorization','JWT '+ localStorage.getItem('token')
 
             );
-            fetch('http://47.100.233.129:8080/api/online_testing/analysis/testList/?course_id='+courseId.course_id, {
+            fetch('http://127.0.0.1:8000/api/online_testing/analysis/testList/?course_id='+courseId.course_id, {
                 method: 'GET',
                 headers:headers
             })
@@ -44,7 +44,7 @@ export const getStudentList=(teacherId,token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch('http://47.100.233.129:8080/api/online_testing/analysis/studentList/', {
+        fetch('http://127.0.0.1:8000/api/online_testing/analysis/studentList/', {
             method: 'GET',
             headers:headers
         })
@@ -71,7 +71,7 @@ export const getTagList=(courseId,token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch('http://47.100.233.129:8080/api/online_testing/analysis/tagList/?course_id='+courseId.course_id, {
+        fetch('http://127.0.0.1:8000/api/online_testing/analysis/tagList/?course_id='+courseId.course_id, {
             method: 'GET',
             headers:headers
         })
@@ -100,7 +100,7 @@ export const getQuestionTypeList=(teacherId,courseId,token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch('http://47.100.233.129:8080/api/online_testing/analysis/tagList/?course_id='+courseId.course_id, {
+        fetch('http://127.0.0.1:8000/api/online_testing/analysis/questionTypeList/?course_id='+courseId.course_id, {
             method: 'GET',
             headers:headers
         })

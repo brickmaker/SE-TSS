@@ -91,7 +91,7 @@ class ProblemView extends Component{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+        fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
             method: 'GET',
             headers:headers
         })
@@ -207,7 +207,7 @@ class ProblemView extends Component{
                                     'Authorization','JWT '+ localStorage.getItem('token')
 
                                 );
-                                fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+                                fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
                                     method: 'PUT',
                                     headers:headers,
                                     body:JSON.stringify({
@@ -281,7 +281,7 @@ class ProblemView extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             );
-                            fetch(`http://47.100.233.129:8080/api/online_testing/question/${this.state.question_id}/`, {
+                            fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
                                 method: 'DELETE',
                                 headers:headers
                             })
@@ -306,7 +306,7 @@ class ProblemView extends Component{
 
 export default class ManualGenerate extends Component{
     getProblemList= (courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
-        let url = `http://47.100.233.129:8080/api/online_testing/question/`;
+        let url = `http://127.0.0.1:8000/api/online_testing/question/`;
         url += `?course=${courseId}`;
         console.log(teacher_list, teacher_list_selected, "rua ");
         teacher_list.forEach((teacher_detail, index)=>{
@@ -578,7 +578,7 @@ export default class ManualGenerate extends Component{
                                     'question_id_list': this.state.problem_list_selected
                                 };
                                 console.log('233', paper_info);
-                                fetch(`http://47.100.233.129:8080/api/online_testing/paper/`, {
+                                fetch(`http://127.0.0.1:8000/api/online_testing/paper/`, {
                                     method: 'POST',
                                     headers: headers,
                                     body:JSON.stringify(paper_info)

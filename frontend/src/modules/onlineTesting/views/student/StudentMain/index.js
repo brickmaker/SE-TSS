@@ -20,9 +20,8 @@ const menuStyle = {
 };
 const windowStyle = {
     display: 'inline-block',
-    width: "100%",
-    height: "100%",
-    float: "left",
+    width: "95%",
+    height: "80%",
     margin: "20px"
 };
 
@@ -31,7 +30,7 @@ class StudentMain extends Component {
 
     componentDidMount() {
         var headers = new Headers();
-        fetch('http://47.100.233.129:8080/api/info/get_token', {
+        fetch('http://127.0.0.1:8000/api/info/get_token', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -64,15 +63,12 @@ class StudentMain extends Component {
         );
         return (
             <Bar listItems={courseListItems}>
-            <div>
                 <Paper style={windowStyle}>
                     <Route exact path={`${match.url}/exam_list/:course_id`} component={ExamList} />
                     <Route path={`${match.url}/exam_list/:course_id/exam/:paper_id`} component={Examination} />
                     <Route path={`${match.url}/history_grade/:course_id`} component={HistoryGrade} />
                     {/*<Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>*/}
-
                 </Paper>
-            </div>
             </Bar>
         );
     }
@@ -94,7 +90,7 @@ const mapDispatchToProps = (dispatch) => {
             headers.append(
                 'Authorization','JWT '+ localStorage.getItem('token')
             );
-            fetch('http://47.100.233.129:8080/api/online_testing/course/', {
+            fetch('http://127.0.0.1:8000/api/online_testing/course/', {
                 method: 'GET',
                 headers: headers,
                 credentials:'include'

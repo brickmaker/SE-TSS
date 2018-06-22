@@ -321,7 +321,7 @@ class Examination extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             )
-                            fetch(`http://47.100.233.129:8080/api/online_testing/examination/${exam_id}/conservation/`, {
+                            fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/conservation/`, {
                                 method: 'POST',
                                 headers: headers,
                                 body:JSON.stringify({
@@ -413,7 +413,7 @@ class Examination extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             )
-                            fetch(`http://47.100.233.129:8080/api/online_testing/examination/${exam_id}/submission/`, {
+                            fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/submission/`, {
                                 method: 'POST',
                                 headers: headers,
                             })

@@ -13,7 +13,7 @@ export const getStudentPaperList = (courseId, token) =>{
 
                 );
                 console.log(token);
-                fetch(`http://47.100.233.129:8080/api/online_testing/paper/?course=${courseId}`, {
+                fetch(`http://127.0.0.1:8000/api/online_testing/paper/?course=${courseId}`, {
                     method: 'GET',
                     headers:headers
                 })
