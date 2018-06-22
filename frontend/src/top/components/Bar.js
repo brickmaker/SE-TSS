@@ -167,7 +167,7 @@ class Bar extends React.Component {
                         <Button
                             component={Link}
                             raised
-                            to=""
+                            to="/online_testing"
                             color="inherit">在线测试</Button>
                         <Button
                             component={Link}
