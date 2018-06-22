@@ -469,21 +469,29 @@ class AnalysisViewSet(GenericViewSet):
             'judge': [],
         }
         for paper in Paper.objects.all().filter(course=course_id, teacher=teacher):
-            d = {
+            d1 = {
+                'testName': paper.paper_name,
+                'content': []
+            }
+            d2 = {
                 'testName': paper.paper_name,
                 'content': []
             }
             for i, question in enumerate(paper.question_id_list.all()):
                 if i > 10:
                     break
-                d['content'].append({
-                    'questionID': question.question_id,
-                    'answerRate': '%d%%' % int(np.random.randint(0, 100))
-                })
                 if question.type == 'Choice':
-                    data['multiChoices'].append(d)
+                    d1['content'].append({
+                        'questionID': question.question_id,
+                        'answerRate': '%d%%' % int(np.random.randint(0, 100))
+                    })
                 else:
-                    data['judge'].append(d)
+                    d2['content'].append({
+                        'questionID': question.question_id,
+                        'answerRate': '%d%%' % int(np.random.randint(0, 100))
+                    })
+            data['multiChoices'].append(d1)
+            data['judge'].append(d2)
         return Response(data)
 
 
