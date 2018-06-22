@@ -1,4 +1,5 @@
-import {DEBUG, ROOT_URL} from "../../configs/config";
+import {ROOT_URL} from "../../configs/config";
+import {withAuthHeader} from "../../utils/api";
 
 export const POST_CLASSROOM_INFO = 'post_Classroom_Info'
 export const GET_ALL_CLASSROOM_INFO = 'get_All_Classroom_Info'
@@ -12,10 +13,7 @@ export const addClassroom = (campus, building, room, capacity) => (dispatch, get
 function postClassroomInfo(campus, building, room, capacity) {
     fetch(`${ROOT_URL}/classroom/`,{
         method: 'POST',
-        headers:{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
+        headers: withAuthHeader(),
         credentials: 'same-origin',
         body: JSON.stringify({
             campus: campus,
@@ -41,11 +39,18 @@ export const getAllClassroomInfo = () => (dispatch, getState) => {
 };
 
 function fetchAllClassroomInfo() {
-    return fetch(`${ROOT_URL}/classroom/`)
+    return fetch(`${ROOT_URL}/classroom/`,{
+        method: 'GET',
+        headers: withAuthHeader(),
+        credentials: 'same-origin',
+    })
         .then(response => response.json())
+        .catch((errors)=>{
+            console.log("Post classroom errors", errors.response);
+        })
 }
 export const getClassroomInfoWithName = (campus, building, name) => (dispatch, getState) => {
-    console.log(campus, building, name)
+    console.log(campus, building, name);
     let campusKey = 0;
     if(campus === "紫金港") {
         campusKey = 0;
@@ -73,33 +78,40 @@ export const getClassroomInfoWithName = (campus, building, name) => (dispatch, g
 
 function fetchClassroomInfo(campus, building, name) {
     if (campus === 4) {
-        return fetch(`${ROOT_URL}/classroom/?campus=&&building=${building}&&room=${name}`)
+        return fetch(`${ROOT_URL}/classroom/?campus=&&building=${building}&&room=${name}`,
+            {
+                method: 'GET',
+                headers: withAuthHeader(),
+                credentials: 'same-origin',
+            })
             .then(response => response.json())
     }
     else {
-        return fetch(`${ROOT_URL}/classroom/?campus=${campus}&&building=${building}&&room=${name}`)
+        return fetch(`${ROOT_URL}/classroom/?campus=${campus}&&building=${building}&&room=${name}`,{
+            method: 'GET',
+            headers: withAuthHeader(),
+            credentials: 'same-origin',
+        })
             .then(response => response.json())
     }
 }
 
 export const modifyClassroom = (n) => (dispatch, getState) => {
     console.log("received array: ", n);
-    postModifiedClassroomInfo(n)
-        .then((data)=>{
-            dispatch({
-                type: POST_CLASSROOM_INFO
-            })
-        })
+    putClassroomInfo(n);
+    return fetch(`${ROOT_URL}/classroom/`, {
+        method: 'GET',
+        headers: withAuthHeader(),
+        credentials: 'same-origin',
+    })
+        .then(response => response.json())
 };
 
-function postModifiedClassroomInfo(arr) {
+function putClassroomInfo(arr) {
     arr.map(function(element, index, array) {
         fetch(`${ROOT_URL}/classroom/${element.id}/`, {
             method: 'PUT',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: withAuthHeader(),
             credentials: 'same-origin',
             body: JSON.stringify({
                 campus: element.campus,
@@ -113,13 +125,16 @@ function postModifiedClassroomInfo(arr) {
                 console.log("Put modified classroom errors", errors.response);
             })
     });
-    return fetch(`${ROOT_URL}/classroom/`)
-        .then(response => response.json())
+
 }
 
 export const deleteClassroomInfo = (arr) => (dispatch, getState) => {
     deleteClassroom(arr);
-    return fetch(`${ROOT_URL}/classroom/`)
+    return fetch(`${ROOT_URL}/classroom/`,{
+        method: 'GET',
+        headers: withAuthHeader(),
+        credentials: 'same-origin',
+    })
         .then(response => response.json())
 }
 
@@ -127,10 +142,7 @@ function deleteClassroom(arr) {
     arr.map(function (element, index, array) {
         fetch(`${ROOT_URL}/classroom/${element.id}/`, {
             method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: withAuthHeader(),
             credentials: 'same-origin',
         })
             .then(response => {

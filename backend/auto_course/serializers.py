@@ -82,7 +82,13 @@ class RequestSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         print(validated_data)
-        return Request.objects.create(validated_data)
+        teachers = Faculty.objects.all()
+        request_teacherid = validated_data['teacher']['username']
+        for everyteacher in teachers:
+            if request_teacherid == everyteacher.username.username:
+                request_teacher = everyteacher
+                break
+        return Request.objects.create(teacher=request_teacher, topic=validated_data['topic'], content=validated_data['content'])
 
     def update(self, instance, validated_data):
         instance.status = validated_data.get('status', instance.status)

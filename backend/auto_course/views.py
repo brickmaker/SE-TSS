@@ -10,6 +10,8 @@ from .models import *
 from rest_framework.generics import *
 from rest_framework.mixins import *
 from .filters import *
+from .permission import *
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 # Create your views here.
 
 @api_view(['GET','POST','PUT', 'DELETE'])
@@ -28,6 +30,7 @@ def teacher(request):
 class ClassroomList(ListCreateAPIView):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassroomSerializer
+    permission_classes = (IsAuthenticated, AdminCheck,)
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter)
     filter_class = ClassroomFilter
     search_fields = ('campus', 'building', 'room',)
@@ -72,7 +75,7 @@ class ClassroomList(ListCreateAPIView):
 class ClassroomUpdate(RetrieveUpdateDestroyAPIView):
     queryset = ClassRoom.objects.all()
     serializer_class = ClassroomSerializer
-
+    permission_classes = (IsAuthenticated, AdminCheck,)
     def put(self, request, pk):
         classroom = ClassRoom.objects.get(pk=pk)
         serializer = ClassroomSerializer(classroom, data=request.data)
@@ -87,6 +90,7 @@ class ClassroomUpdate(RetrieveUpdateDestroyAPIView):
 
 class CourseList(ListAPIView):
     queryset = Course.objects.all()
+    permission_classes = (IsAuthenticated, AdminCheck,)
     serializer_class = CourseSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter)
     filter_class = CourseFilter
@@ -94,14 +98,23 @@ class CourseList(ListAPIView):
 
 class RequestList(ListCreateAPIView):
     queryset = Request.objects.all()
+    #permission_classes = (IsAuthenticated, RequestCheck,)
     serializer_class = RequestSerializer
     filter_backends = (django_filters.rest_framework.DjangoFilterBackend, filters.SearchFilter)
     filter_class = RequestFilter
     search_fields = ('status',)
 
     def get(self, request, *args, **kwargs):
-        requstlist = self.filter_queryset(self.get_queryset())
-        serializer = RequestSerializer(requstlist, many=True)
+        requestlist = self.filter_queryset(self.get_queryset())
+        newrequestlist = []
+        if(request.user.user_type == 4):
+            newrequestlist = requestlist
+        if(request.user.user_type == 2):
+            for req in requestlist:
+                if req.teacher.username.username == request.user.username:
+                    print("add success")
+                    newrequestlist.append(req)
+        serializer = RequestSerializer(newrequestlist, many=True)
         response = {
             "name": "Notifications",
             "notifications": serializer.data
@@ -138,7 +151,14 @@ class TimetableList(ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         classrooms = self.filter_queryset(self.get_queryset())
-        serializer = TimetableSerializer(classrooms, many=True)
+        newclassrooms = []
+        if request.user.user_type == 4:
+            newclassrooms = classrooms
+        if request.user.user_type == 2:
+            for cla in classrooms:
+                if cla.teacher.username.username == request.user.username:
+                    newclassrooms.append(cla)
+        serializer = TimetableSerializer(newclassrooms, many=True)
         response = {
             "name": "CourseResources",
         }
@@ -214,89 +234,6 @@ class ArrangeList(ListCreateAPIView):
         
         if auto == False:
             newlist = []
-            for item in unassignset:
-                newdict={}
-                newdict['courseId'] = item[0].data['course_id']
-                newdict['courseName'] = item[0].data['name']
-                newdict['semester'] = item[0].data['semester']
-                newdict['capacity'] = item[0].data['capacity']
-                newdict['courseLen'] = 3
-                newdict['teacherName'] = TeacherSerializer(Faculty.objects.get(pk=item[2])).data['name']
-                newlist.append(newdict)
-            newdict = {}
-            newdict['courses'] = newlist
-            return Response(newdict)
-        
-        else:
-            #auto arrange
-            # for item in unassignset:
-            #     print((item[0].data, item[2]))
-            for unassign in unassignset:
-                flag = False
-
-                for room in classroomset:
-                    rs = ClassroomSerializer(room)
-                    
-                    for weekday in weekdayset:
-                        for classtime in classtimeset:
-                            newtime = weekday + '第' + classtime + '节'
-
-                            isConflict = False
-                            relationset = course_teacher_time_classroom_relation.objects.all()
-                            for relation in relationset:
-                                s2 = TimetableSerializer(relation)
-
-                                if (s2.data['teacher_username'] == unassign[2] or \
-                                    s2.data['room_id'] == rs.data['id']) and \
-                                    s2.data['time'] == newtime:
-                                    isConflict = True
-                                    break
-
-                                if ClassroomSerializer(ClassRoom.objects.get(pk=s2.data['room_id'])).data['capacity'] > rs.data['capacity']:
-                                    isConflict = True
-                                    break
-                                
-                            if not isConflict:
-                                expectRoomID = rs.data['id']
-                                expectTime = newtime
-                                flag = True
-                                break
-
-                        if flag:
-                            break
-                    
-                    if flag:
-                        break
-                
-                course_teacher_time_classroom_relation.objects.create(
-                    time = expectTime,
-                    teacher = Faculty.objects.get(pk=unassign[2]),
-                    course = Course.objects.get(pk=unassign[1]),
-                    classroom = ClassRoom.objects.get(pk=expectRoomID)
-                    )
-
-                # print((unassign[1], unassign[2], expectRoomID, expectTime))
-
-            courseset = Course.objects.all()
-            
-            unassignset = []
-
-            for cour in courseset:
-                s1 = CourseSerializer(cour)
-                flag = True
-
-                for teacher in s1.data['faculty']:
-                    
-                    for relation in relationset:
-                        s2 = TimetableSerializer(relation)
-                        if s1.data['course_id'] == s2.data['course_id'] and \
-                            teacher == s2.data['teacher_username']:
-                            flag = False
-                            break
-                    if flag:
-                        unassignset.append((s1, s1.data['course_id'], teacher))
-            
-            newlist = []
             id = 1
             for item in unassignset:
                 newdict={}
@@ -312,7 +249,138 @@ class ArrangeList(ListCreateAPIView):
             newdict = {}
             newdict['courses'] = newlist
             return Response(newdict)
-    
+
+        else:
+            # auto arrange
+            for unassign in unassignset:
+
+                flag = False
+
+                for room in classroomset:
+
+                    rs = ClassroomSerializer(room)
+
+                    for weekday in weekdayset:
+
+                        for classtime in classtimeset:
+
+                            newtime = weekday + '第' + classtime + '节'
+
+                            isConflict = False
+
+                            relationset = course_teacher_time_classroom_relation.objects.all()
+
+                            for relation in relationset:
+
+                                s2 = TimetableSerializer(relation)
+
+                                if (s2.data['room_id'] == str(rs.data['id']) and \
+             \
+                                        s2.data['time'] == newtime):
+                                    isConflict = True
+
+                                    break
+
+                                if (s2.data['teacher_username'] == unassign[2] and \
+             \
+                                        s2.data['time'] == newtime):
+                                    isConflict = True
+
+                                    break
+
+                                if (s2.data['teacher_username'] == unassign[2] and \
+             \
+                                        s2.data['course_id'] == unassign[1]):
+                                    isConflict = True
+
+                                    break
+
+                            if not isConflict:
+                                expectRoomID = rs.data['id']
+
+                                expectTime = newtime
+
+                                flag = True
+
+                                break
+
+                        if flag:
+                            break
+
+                    if flag:
+                        break
+
+                course_teacher_time_classroom_relation.objects.create(
+
+                    time=expectTime,
+
+                    teacher=Faculty.objects.get(pk=unassign[2]),
+
+                    course=Course.objects.get(pk=unassign[1]),
+
+                    classroom=ClassRoom.objects.get(pk=expectRoomID)
+
+                )
+
+                # print((unassign[1], unassign[2], expectRoomID, expectTime))
+
+            courseset = Course.objects.all()
+
+            unassignset = []
+
+            for cour in courseset:
+
+                s1 = CourseSerializer(cour)
+
+                flag = True
+
+                for teacher in s1.data['faculty']:
+
+                    for relation in relationset:
+
+                        s2 = TimetableSerializer(relation)
+
+                        if s1.data['course_id'] == s2.data['course_id'] and \
+             \
+                                teacher == s2.data['teacher_username']:
+                            flag = False
+
+                            break
+
+                    if flag:
+                        unassignset.append((s1, s1.data['course_id'], teacher))
+
+            newlist = []
+
+            id = 1
+
+            for item in unassignset:
+                newdict = {}
+
+                newdict['id'] = id
+
+                newdict['courseId'] = item[0].data['course_id']
+
+                newdict['courseName'] = item[0].data['name']
+
+                newdict['semester'] = item[0].data['semester']
+
+                newdict['capacity'] = item[0].data['capacity']
+
+                newdict['courseLen'] = 3
+
+                newdict['teacherName'] = TeacherSerializer(Faculty.objects.get(pk=item[2])).data['name']
+
+                newlist.append(newdict)
+
+                id += 1
+
+            newdict = {}
+
+            newdict['courses'] = newlist
+
+            return Response(newdict)
+
 
 class TimetableUpdate(RetrieveUpdateDestroyAPIView):
     queryset = course_teacher_time_classroom_relation.objects.all()
