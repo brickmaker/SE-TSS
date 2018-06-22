@@ -40,7 +40,6 @@
     "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-persist-transform-filter": "0.0.17",
     "superagent": "^3.8.3",
     "xlsx": "^0.12.12",
     "redux-persist": "^5.10.0",
