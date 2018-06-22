@@ -100,7 +100,8 @@ export const getQuestionTypeList=(teacherId,courseId,token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch('http://127.0.0.1:8000/api/online_testing/analysis/tagList/?course_id='+courseId.course_id, {
+
+        fetch('http://127.0.0.1:8000/api/online_testing/analysis/questionTypeList/?course_id='+courseId.course_id, {
             method: 'GET',
             headers:headers
         })

@@ -8,7 +8,6 @@ import {Button} from 'material-ui'
 const styles = {
     backgroundColor: '#f0f0ee',
     minHeight: '100vh',
-    paddingLeft: 20,
     paddingRight: 20
 };
 
@@ -26,8 +25,11 @@ class OnlineTesting extends Component {
         console.log(localStorage.getItem('type'));
         const routePath= (localStorage.getItem('type') === "2") ? (
             <Route path={`${match.url}`} component={TeacherMain}/>
-        ):(
-            <Route path={`${match.url}`} component={StudentMain}/>
+        ): (localStorage.getItem("type") === "1" ?
+                (
+                    <Route path={`${match.url}`} component={StudentMain}/>
+                ):
+                (<div/>)
         );
 
         return (

@@ -20,9 +20,8 @@ const menuStyle = {
 };
 const windowStyle = {
     display: 'inline-block',
-    width: "100%",
-    height: "100%",
-    float: "left",
+    width: "95%",
+    height: "80%",
     margin: "20px"
 };
 
@@ -64,15 +63,12 @@ class StudentMain extends Component {
         );
         return (
             <Bar listItems={courseListItems}>
-            <div>
                 <Paper style={windowStyle}>
                     <Route exact path={`${match.url}/exam_list/:course_id`} component={ExamList} />
                     <Route path={`${match.url}/exam_list/:course_id/exam/:paper_id`} component={Examination} />
                     <Route path={`${match.url}/history_grade/:course_id`} component={HistoryGrade} />
                     {/*<Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>*/}
-
                 </Paper>
-            </div>
             </Bar>
         );
     }

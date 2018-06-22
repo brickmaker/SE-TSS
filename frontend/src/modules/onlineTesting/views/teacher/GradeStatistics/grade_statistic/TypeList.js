@@ -7,6 +7,8 @@ import { withStyles,
     FormLabel,
     Radio
 } from 'material-ui'
+import ShowJudge from './shoJudge';
+import ShowChoose from './shoChoose'
 
 const styles = theme => ({
     root: {
@@ -22,6 +24,7 @@ const styles = theme => ({
 
 class RadioButtonsGroup extends React.Component {
     state = {
+        value:'a',
     };
 
     handleChange = event => {
@@ -29,7 +32,7 @@ class RadioButtonsGroup extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
+        const { classes ,questionTypeList} = this.props;
 
         return (
             <div className={classes.root}>
@@ -42,10 +45,21 @@ class RadioButtonsGroup extends React.Component {
                         value={this.state.value}
                         onChange={this.handleChange}
                     >
-                        <FormControlLabel value="female" control={<Radio />} label="判断题" />
-                        <FormControlLabel value="male" control={<Radio />} label="选择题" />
+                        <FormControlLabel value="judge" control={<Radio />} label="判断题" />
+                        <FormControlLabel value="choose" control={<Radio />} label="选择题" />
                     </RadioGroup>
                 </FormControl>
+                {this.state.value === "judge"  &&
+                    <ShowJudge questionTypeList={questionTypeList}/>
+                }
+
+
+                {this.state.value === "choose" &&
+                <div>
+                    <ShowChoose questionTypeList={questionTypeList}/>
+                </div>
+                }
+
             </div>
         );
     }
