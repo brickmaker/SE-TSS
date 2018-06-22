@@ -32,6 +32,7 @@ class ScoreRequest extends Component {
   };
 
   addRequest(cid, pid, sid, title, apply_des, score) {
+    const openAlert = ()=>this.props.alert(title);
     fetch("http://127.0.0.1:8000/api/score/createapplication/", {
       method: "POST",
       // mode: "no-cors",
@@ -43,7 +44,7 @@ class ScoreRequest extends Component {
       body: 'cid=' + cid + "&pid=" + pid + '&sid=' + sid + '&title=' + title + '&apply_des=' + apply_des + '&score=' + score
     }).then(function (res) {
       if (res.ok) {
-        alert("申请提交成功");
+        openAlert();
       } else {
         console.log("服务器回应异常，状态码：" + res.status);
       }
@@ -57,12 +58,8 @@ class ScoreRequest extends Component {
   render() {
     return (
       <Paper>
-        <div style={{textAlign: 'center'}}>
-          <div><TextField name={"title"}
-                          helperText={"必填"}
-                          label={"标题"}
-                          value={this.state.title}
-                          onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
+        <div style={{textAlign: 'center', margin:'10px,10px,10px,10px'}}>
+          <div style={{height:'10px'}}/>
           <div>
             <FormControl>
               <InputLabel>课程</InputLabel>
@@ -80,6 +77,11 @@ class ScoreRequest extends Component {
               </Select>
             </FormControl>
           </div>
+          <div><TextField name={"title"}
+                          helperText={"必填"}
+                          label={"标题"}
+                          value={this.state.title}
+                          onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
           <div><TextField name={"sid"}
                           helperText={"必填"}
                           label={"学号"}
@@ -95,11 +97,12 @@ class ScoreRequest extends Component {
                           label={"理由"}
                           value={this.state.description}
                           onChange={(e) => this.setState({[e.target.name]: e.target.value})}/></div>
-          <Button variant={"contained"}
+          <div><Button variant={"contained"}
                   onClick={(() => {
                     this.enterRequest(this.state.title, this.state.cid, this.state.sid,
                       this.state.score, this.state.description)
-                  })}>提交</Button>
+                  })}>提交</Button></div>
+          <div style={{height:'10px'}}/>
         </div>
       </Paper>
     );

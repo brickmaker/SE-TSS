@@ -106,7 +106,6 @@ class EnterScore extends Component {
               <Button variant={"contained"}
                       onClick={() => {
                         this.props.pushData(new Take(this.state.enter_cid, this.findcname(this.state.enter_cid), this.props.user.id, null, this.state.enter_sid, null, parseInt(this.state.enter_score, 10),this.findcdate(this.state.enter_cid)));
-                        alert("录入成功-学号：" + this.state.enter_sid + " 课程号：" + this.state.enter_cid + " 教师：" + this.props.user.name + " 分数：" + this.state.enter_score)
                       }}>提交</Button></div>}
 
             {tab === 2 && <div style={{textAlign: 'center'}}>
