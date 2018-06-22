@@ -1,4 +1,5 @@
-import {DEBUG, ROOT_URL} from "../../configs/config";
+import {ROOT_URL} from "../../configs/config";
+import {withAuthHeader} from "../../utils/api";
 
 export const GET_TEACHER_SCHEDULE_INFO = 'get_teacher_schedule_info';
 export const GET_ALL_SCHEDULE_INFO = 'get_All_Schedule_Info';
@@ -15,8 +16,15 @@ export const getTeacherScheduleInfo = (teacherName) => (dispatch, getState) => {
 }
 
 function fetchTeacherScheduleInfo(teacherName) {
-    return fetch(`${ROOT_URL}/timetable/?teachername=${teacherName}`)
+    return fetch(`${ROOT_URL}/timetable/?teachername=${teacherName}`, {
+        method: 'GET',
+        headers: withAuthHeader(),
+        credentials: 'same-origin',
+    })
         .then(response => response.json())
+        .catch((errors)=>{
+            console.log("Get one teacher schedule info error", errors.response);
+        })
 }
 
 export const getAllScheduleInfo = () => (dispatch, getState) => {
@@ -29,8 +37,13 @@ export const getAllScheduleInfo = () => (dispatch, getState) => {
         })
 }
 function fetchAllScheduleInfo() {
-    return fetch(`${ROOT_URL}/timetable/`)
+    return fetch(`${ROOT_URL}/timetable/`, {
+        method: 'GET',
+        headers: withAuthHeader(),
+        credentials: 'same-origin',
+    })
         .then(response => response.json())
-    /*return fetch(`../../Data/CourseTable.json`)
-        .then(response => response.json())*/
+        .catch((errors)=>{
+            console.log("Get all schedule info error", errors.response);
+        })
 }

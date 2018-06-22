@@ -4,7 +4,6 @@ import { withStyles } from "@material-ui/core";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,7 +20,7 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 import {lighten} from "@material-ui/core/styles/colorManipulator";
 
 import {connect} from "react-redux";
-import {getAllScheduleInfo, getTeacherScheduleInfo} from "./actions";
+import {getScheduleInfo} from "./actions";
 
 import appStyle from "../../assets/jss/appStyle.jsx";
 
@@ -152,7 +151,7 @@ const getCourseCell = (course) => {
     );
 };
 
-class CourseSchedule extends React.Component {
+class TeacherSchedule extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
@@ -207,7 +206,7 @@ class CourseSchedule extends React.Component {
         }
     };
     render() {
-        const { classes,  handleSearchButtonClick, showAllCourseSchedule, handleSearchInTableButtonClick, ...rest} = this.props;
+        const { classes,  showAllCourseSchedule, ...rest} = this.props;
         const { rowsPerPage, page, listMode} = this.state;
         const data = this.props.coursesInList;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
@@ -241,14 +240,6 @@ class CourseSchedule extends React.Component {
                                             }
                                             label="表格模式"
                                         />
-                                        <TextField
-                                            id="searchTeacher"
-                                            label="教师姓名"
-                                            style={{marginLeft:500, marginBottom:25}}
-                                        />
-                                        <Button variant="outlined" color="primary" style={{marginLeft:10, marginTop:20, height:35}} onClick={handleSearchButtonClick}>
-                                            搜索
-                                        </Button>
                                     </FormGroup>
                                     <Paper className={classes.paper}>
                                         <CourseInListToolbar/>
@@ -346,14 +337,6 @@ class CourseSchedule extends React.Component {
                                             }
                                             label="表格模式"
                                         />
-                                        <TextField
-                                            id="searchTeacher"
-                                            label="教师姓名"
-                                            style={{marginLeft:500, marginBottom:25}}
-                                        />
-                                        <Button variant="outlined" color="primary" style={{marginLeft:10, marginTop:20, height:35}} onClick={handleSearchButtonClick}>
-                                            搜索
-                                        </Button>
                                     </FormGroup>
                                     <Paper className={classes.paper}>
                                         <Table className={classes.table} style={{border:1}} id="allOfCourses">
@@ -406,20 +389,18 @@ class CourseSchedule extends React.Component {
 
 function mapStateToProps(state) {
     return{
-        coursesInList: state.courseSchedule.coursesInList,
-        coursesInTable: state.courseSchedule.coursesInTable,
+        coursesInList: state.teacherSchedule.coursesInList,
+        coursesInTable: state.teacherSchedule.coursesInTable,
     }
 }
 
 const mapDispatchToProps = (dispatch) =>({
-    handleSearchButtonClick: () => dispatch(getTeacherScheduleInfo(document.getElementById("searchTeacher").value)),
-    showAllCourseSchedule : () => dispatch(getAllScheduleInfo()),
-    handleSearchInTableButtonClick: () => dispatch(getTeacherScheduleInfo(document.getElementById("searchTeacher").value)),
+    showAllCourseSchedule : () => dispatch(getScheduleInfo()),
 });
 
-CourseSchedule.propTypes = {
+TeacherSchedule.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(appStyle)(connect( mapStateToProps,mapDispatchToProps)(CourseSchedule));
+export default withStyles(appStyle)(connect( mapStateToProps,mapDispatchToProps)(TeacherSchedule));
 

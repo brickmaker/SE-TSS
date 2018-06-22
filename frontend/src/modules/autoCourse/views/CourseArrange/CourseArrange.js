@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Sidebar  from "../../component/Sidebar";
-import AutoCourseRoutes from "../../routes/AutoCourseRoutes";
 import appStyle from "../../assets/jss/appStyle.jsx";
-import logo from "../../assets/img/reactlogo.png";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
@@ -47,10 +44,7 @@ const columnData = [
 ];
 
 class ArrangingHead extends React.Component {
-
     render() {
-        const { onSelectAllClick,  numSelected, rowCount } = this.props;
-
         return (
             <TableHead>
                 <TableRow>
@@ -343,18 +337,9 @@ class CourseArrange extends React.Component {
         const data = this.props.data;
         const dataM = this.props.dataM;
         const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
-        const emptyRowsM = rowsPerPageM - Math.min(rowsPerPageM, data.length - pageM * rowsPerPageM);
+        const emptyRowsM = rowsPerPageM - Math.min(rowsPerPageM, dataM.length - pageM * rowsPerPageM);
         return (
             <div className={classes.wrapper}>
-                <Sidebar
-                    routes={AutoCourseRoutes}
-                    logoText={"教学服务系统"}
-                    logo={logo}
-                    handleDrawerToggle={this.handleDrawerToggle}
-                    open={this.state.mobileOpen}
-                    color="blue"
-                    {...rest}
-                />
                 <div className={classes.mainPanel}>
                     <div className={classes.content}>
                         <div className={classes.container}>
@@ -373,7 +358,7 @@ class CourseArrange extends React.Component {
                                                             hover
                                                             role="checkbox"
                                                             tabIndex={-1}
-                                                            key={n.courseId}
+                                                            key={n.id}
                                                         >
                                                             <TableCell/>
                                                             <TableCell component="th" scope="row" padding="none">

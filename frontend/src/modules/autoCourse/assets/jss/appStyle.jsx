@@ -1,4 +1,4 @@
-import { drawerWidth, transition, container } from "../jss/dashBoard.jsx";
+import { transition, container } from "../jss/dashBoard.jsx";
 
 const appStyle = theme => ({
   wrapper: {
@@ -8,7 +8,6 @@ const appStyle = theme => ({
   },
   mainPanel: {
     [theme.breakpoints.up("md")]: {
-      width: `calc(100% - ${drawerWidth}px)`
     },
     overflow: "auto",
     position: "relative",
