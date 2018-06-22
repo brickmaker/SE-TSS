@@ -53,16 +53,16 @@ class ApplicationButton extends Component {
     }).then(function (res) {
       if (res.ok) {
         if (state === 1) {
-          alert('已同意申请：' + title);
+          console.log('已同意申请：' + title);
         }else{
-          alert('已拒绝申请：' + title);
+          console.log('已拒绝申请：' + title);
         }
         flush();
       } else {
-        alert("服务器回应异常，状态码：" + res.status);
+        console.log("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
-      alert("对不起，服务器发生错误");
+      console.log("对不起，服务器发生错误");
     })
   }
 }
@@ -97,10 +97,10 @@ class ApplicationPage extends Component {
       if (res.ok) {
         return res.json();
       } else {
-        alert("服务器回应异常，状态码：" + res.status);
+        console.log("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
-      alert("对不起，服务器发生错误");
+      console.log("对不起，服务器发生错误");
     }).then(json => {
       this.state.wait.splice(0,this.state.wait.length);
       this.state.pass.splice(0,this.state.pass.length);
@@ -118,22 +118,10 @@ class ApplicationPage extends Component {
     });
   }
 
-  agreeButton = (aid) => {
-    alert("agr" + aid);
-  };
-
-  disagreeButton = (aid) => {
-    alert("dis" + aid);
-  };
-
-  testFunc = (e) => {
-    console.log(e.target.component);
-  };
-
   getAllPanel = () => {
-    var data = this.state.wait.concat(this.state.reject,this.state.pass);
-    var retList = [];
-    for (var i = 0; i < data.length; i++) {
+    let data = this.state.wait.concat(this.state.reject,this.state.pass);
+    let retList = [];
+    for (let i = 0; i < data.length; i++) {
       console.log(data[i]);
       retList.push(
         <div style={{}}>

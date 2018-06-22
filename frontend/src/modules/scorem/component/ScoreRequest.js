@@ -26,7 +26,7 @@ class ScoreRequest extends Component {
   }
 
   enterRequest = (title, cid, sid, score, description) => {
-    alert("title : " + title + "\ncid: " + cid + "\nstudent : " + sid
+    console.log("title : " + title + "\ncid: " + cid + "\nstudent : " + sid
       + "\nnewScore : " + score + "\ndescription : " + description);
     this.addRequest(cid, this.props.user.id, sid, title, description, score)
   };
@@ -45,10 +45,10 @@ class ScoreRequest extends Component {
       if (res.ok) {
         alert("申请提交成功");
       } else {
-        alert("服务器回应异常，状态码：" + res.status);
+        console.log("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
-      alert("对不起，服务器发生错误");
+      console.log("对不起，服务器发生错误");
     })
   }
 

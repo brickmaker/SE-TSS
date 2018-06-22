@@ -142,10 +142,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return;
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       });
     }
 
@@ -162,10 +162,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return res.json();
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       }).then(data => {
         if (data !== undefined) {
           this.rank = data.rank;
@@ -187,10 +187,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return res.json();
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
@@ -210,10 +210,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return res.json();
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
@@ -237,10 +237,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return res.json();
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       }).then(data => {
         if (data !== undefined) {
           data.map(s => {
@@ -263,10 +263,10 @@ class ScoreManagement extends Component {
         if (res.ok) {
           return res.json();
         } else {
-          alert("服务器回应异常，状态码：" + res.status);
+          console.log("服务器回应异常，状态码：" + res.status);
         }
       }, function (e) {
-        alert("对不起，服务器产生错误");
+        console.log("对不起，服务器产生错误");
       }).then(data => {
         if (data !== undefined) {
           data.map(s => {
@@ -313,13 +313,13 @@ class ScoreManagement extends Component {
       body: 'test=' + JSON.stringify(newtake)
     }).then(function (res) {
       if (res.ok) {
-        alert("批量录入成功");
+        alert("录入成功");
         update();
       } else {
-        alert("服务器回应异常，状态码：" + res.status);
+        console.log("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
-      alert("对不起，服务器产生错误");
+      console.log("对不起，服务器产生错误");
     })
 
   }
@@ -344,10 +344,10 @@ class ScoreManagement extends Component {
         alert("录入成功");
         update();
       } else {
-        alert("服务器回应异常，状态码：" + res.status);
+        console.log("服务器回应异常，状态码：" + res.status);
       }
     }, function (e) {
-      alert("对不起，服务器产生错误");
+      console.log("对不起，服务器产生错误");
     })
   }
 
