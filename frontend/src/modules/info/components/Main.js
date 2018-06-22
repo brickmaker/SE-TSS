@@ -58,8 +58,11 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
+
         this.setState({type: this.props.type}, () => {
             let route = '';
+            const type = localStorage.getItem('type');
+            /*
             if (this.state.type === 'Staff')
                 route = '/info/staff';
             else if (this.state.type === 'Teacher')
@@ -68,6 +71,17 @@ class Main extends React.Component {
                 route = '/info/student';
             else if (this.state.type === 'Admin')
                 route = '/info/admin';
+            alert(this.state.type);
+            */
+            if (type == 3)
+                route = '/info/staff';
+            else if (type == 2)
+                route = '/info/teacher';
+            else if (type == 1)
+                route = '/info/student';
+            else if (type == 4)
+                route = '/info/admin';
+            // alert(type);
             this.props.history.push(route);
         });
     }

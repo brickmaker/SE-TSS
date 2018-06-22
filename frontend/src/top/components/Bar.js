@@ -98,6 +98,9 @@ class Bar extends React.Component {
 
     logout = () => {
         this.props.logoutAndRedirect();
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("type");
         this.props.history.push('/');
     };
 
