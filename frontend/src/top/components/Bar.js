@@ -172,7 +172,7 @@ class Bar extends React.Component {
                         <Button
                             component={Link}
                             raised
-                            to=""
+                            to="/scorem"
                             color="inherit">成绩管理</Button>
 
 
