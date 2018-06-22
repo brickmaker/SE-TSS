@@ -41,6 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    #'django.utils.timezone.now',
+    #'rest_framework',
+    #'information_management.apps.InformationManagementConfig',
+    #'forum.apps.ForumConfig',
+    'score_management.apps.ScoreManagementConfig',
+
     'rest_framework.authtoken',  # 设置token
     'rest_framework',
     'haystack',
@@ -50,6 +57,7 @@ INSTALLED_APPS = [
     'xkxt.apps.XkxtConfig',
     'auto_course.apps.AutoCourseConfig',
     
+
 ]
 
 HAYSTACK_CONNECTIONS = {
@@ -117,6 +125,7 @@ WEBPACK_LOADER = {
 
 
 #开启JWT验证
+
 REST_FRAMEWORK = {
     # 设置所有接口都需要被验证
     'DEFAULT_PERMISSION_CLASSES': (
@@ -125,9 +134,18 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        
+
     ),
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -231,10 +249,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-LOGIN_REDIRECT_URL = '/'  # redirect the user upon a successful login
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+LOGIN_REDIRECT_URL = '/'  # redirect the user upon a successful login
 
 LOGGING = {
     'version': 1,

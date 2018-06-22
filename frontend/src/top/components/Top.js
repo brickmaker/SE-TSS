@@ -50,7 +50,7 @@ class Top extends Component {
                                 <SubSystem name={'选课系统'} uri={'xkxt'}/>
                                 <SubSystem name={'论坛'} uri={'forum'}/>
                                 <SubSystem name={'在线测试'} uri={'online_testing'}/>
-                                <SubSystem name={'subsystem6'} uri={''}/>
+                                <SubSystem name={'成绩管理'} uri={'scorem'}/>
                             </Grid>
                         </div>
                     </div>
