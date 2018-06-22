@@ -99,7 +99,7 @@ export default class AutoGenerate extends React.Component {
                 'course': this.props.course_id
             };
             console.log('233', paper_info);
-            fetch(`http://47.100.233.129:8080/api/online_testing/paper/`, {
+            fetch(`http://127.0.0.1:8000/api/online_testing/paper/`, {
                 method: 'POST',
                 headers: headers,
                 body:JSON.stringify(paper_info)

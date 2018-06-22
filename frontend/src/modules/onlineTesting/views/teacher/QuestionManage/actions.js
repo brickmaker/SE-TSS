@@ -16,7 +16,7 @@ export const getTeacherAndTagList = (courseId, token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         );
-        fetch(`http://47.100.233.129:8080/api/online_testing/question/tags_and_teachers/?course=${courseId}`, {
+        fetch(`http://127.0.0.1:8000/api/online_testing/question/tags_and_teachers/?course=${courseId}`, {
             method: 'GET',
             headers:headers
         })
@@ -44,7 +44,7 @@ export const changeProblemShowList = (problem_show_list) =>{
 
 export const getProblemList =  (courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
     return dispatch=>{
-        let url = `http://47.100.233.129:8080/api/online_testing/question/`;
+        let url = `http://127.0.0.1:8000/api/online_testing/question/`;
         url += `?course=${courseId}`;
         console.log(teacher_list, teacher_list_selected, "rua ");
         teacher_list.forEach((teacher_detail, index)=>{

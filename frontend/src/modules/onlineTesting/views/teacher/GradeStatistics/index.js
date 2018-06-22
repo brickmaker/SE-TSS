@@ -6,7 +6,7 @@ import {getTestList} from "./actions";
 class GradeStatistics extends Component{
     componentDidMount(){
         let headers = new Headers();
-        fetch('http://47.100.233.129:8080/api/info/get_token', {
+        fetch('http://127.0.0.1:8000/api/info/get_token', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
