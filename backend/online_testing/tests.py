@@ -27,6 +27,8 @@ response = c.get('/api/online_testing/analysis/tagList/?course_id=211G0200',
                  HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
+exit(0)
+
 response = c.get('/api/online_testing/analysis/questionTypeList/?course_id=211G0200',
                  HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))

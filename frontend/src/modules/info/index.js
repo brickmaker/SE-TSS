@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route, Switch} from "react-router-dom"
+import {Route, Switch, withRouter} from "react-router-dom"
 
 import StaffView from './components/Staff/StaffView';
 import StaffLessonInfo from './components/Staff/LessonInfo';
@@ -49,4 +49,4 @@ class Info extends Component {
 }
 
 
-export default Info;
+export default withRouter(Info);

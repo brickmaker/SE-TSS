@@ -3,6 +3,10 @@
 echo "remove database"
 rm db.sqlite3
 
+echo "create log folder"
+
+mkdir log
+
 echo "remove migrations"
 rm -r authentication/migrations/
 rm -r auto_course/migrations/

@@ -31,6 +31,8 @@ class DropZone extends Component{
             .then(
               (data) => {
               alert(data);
+              window.location.reload();
+
               }
             )
             
