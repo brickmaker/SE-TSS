@@ -125,6 +125,8 @@ def insert_exam():
         for course in course_list[:5]:
             paper_list = Paper.objects.all().filter(course=course)
             paper_list = [paper for paper in paper_list]
+            if len(paper_list) == 0:
+                continue
             if len(paper_list) < 2:
                 paper_list = random.sample(
                     paper_list, 1)
