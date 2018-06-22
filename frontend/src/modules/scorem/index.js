@@ -15,6 +15,8 @@ import SearchScore from './component/SearchScore';
 import AnaScore from './component/AnaScore';
 import ApplicationPage from './component/Application';
 import ScoreRequest from './component/ScoreRequest';
+import WaitPage from './component/WaitPage';
+import AlertDialog from './component/AlertDialog';
 
 import {Take, newTake, Course} from "./utils";
 
@@ -72,21 +74,6 @@ const testAna = {
   ]
 };
 
-//{编号 aid, 申请人 applicant, 申请时间 time，课程 className，学生 student，原成绩 oriScore，新成绩 newScore, 理由 reason，同意或不同意按钮}
-const testApp = [
-  {
-    title: "AID000002",
-    techer_id: "teacherB",
-    create_time: "2018-09-11",
-    course_id: "classB",
-    student_id: "studentB",
-    score: 59,
-    apply_des: "sad",
-    state: '0',
-  }
-];
-
-
 const style = {
   leftMenu: {
     float: "left",
@@ -105,6 +92,14 @@ const style = {
 class ScoreManagement extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      alert:{
+        open:false,
+        ok:null,
+        body:null,
+        title:null,
+      },
+    };
     this.data = [];
     this.user = {
       type: store.getState().info.auth.type,
@@ -129,7 +124,7 @@ class ScoreManagement extends Component {
     //anadata start
 
 
-    if (this.user.type == "Student") {
+    if (this.user.type === "Student") {
       fetch("http://127.0.0.1:8000/api/score/updatestudentrank/", {
         method: "POST",
         // mode: "no-cors",
@@ -149,7 +144,7 @@ class ScoreManagement extends Component {
       });
     }
 
-    if (this.user.type == "Student") {
+    if (this.user.type === "Student") {
       fetch("http://127.0.0.1:8000/api/score/studentrank/", {
         method: "POST",
         // mode: "no-cors",
@@ -174,7 +169,7 @@ class ScoreManagement extends Component {
     }
 
 
-    if (this.user.type == "Student") {
+    if (this.user.type === "Student") {
       fetch("http://127.0.0.1:8000/api/score/listallscore/", {
         method: "POST",
         // mode: "no-cors",
@@ -194,7 +189,7 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
-          for (var i = 0; i < data.data.length; i++) this.scoreListName.push("个人分析");
+          for (let i = 0; i < data.data.length; i++) this.scoreListName.push("个人分析");
         }
       });
     } else if (this.user.type === "Teacher") {
@@ -217,7 +212,7 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           this.anaData = data;
-          for (var i = 0; i < data.data.length; i++) this.scoreListName.push("学生姓名");
+          for (let i = 0; i < data.data.length; i++) this.scoreListName.push("学生姓名");
         }
       });
     }
@@ -270,7 +265,7 @@ class ScoreManagement extends Component {
       }).then(data => {
         if (data !== undefined) {
           data.map(s => {
-            console.log(s);
+            // console.log(s);
             this.data.push(new Take(s['course_cid'], s['course_name'], null, s['faculty_name'], null, s['student_name'], s['score'], s['test_date']));
             this.addCourse(s['course_cid'], s['course_name'], s['test_date']);
           });
@@ -301,7 +296,7 @@ class ScoreManagement extends Component {
     takes.map(take => {
       newtake.push(new newTake(take.cid, take.tid, take.sid, take.score, take.test_date))
     });
-
+    const openAlert = ()=>this.setState({alert:{open:true,ok:'确认',body:'录入共计 '+takes.length+' 名学生成绩',title:"录入成功"}});
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
       method: "POST",
       // mode: "no-cors",
@@ -313,7 +308,7 @@ class ScoreManagement extends Component {
       body: 'test=' + JSON.stringify(newtake)
     }).then(function (res) {
       if (res.ok) {
-        alert("录入成功");
+        openAlert();
         update();
       } else {
         console.log("服务器回应异常，状态码：" + res.status);
@@ -328,6 +323,7 @@ class ScoreManagement extends Component {
     const newtake = [];
     newtake[0] = new newTake(take.cid, take.tid, take.sid, take.score, take.test_date);
     const update = this.getInitData.bind(this);
+    const openAlert = ()=>this.setState({alert:{open:true,ok:'确认',body:'学号:'+take.sid+'\n'+'成绩:'+take.score,title:"录入成功"}});
 
     fetch("http://127.0.0.1:8000/api/score/insertscore/", {
       method: "POST",
@@ -341,7 +337,7 @@ class ScoreManagement extends Component {
 
     }).then(function (res) {
       if (res.ok) {
-        alert("录入成功");
+        openAlert();
         update();
       } else {
         console.log("服务器回应异常，状态码：" + res.status);
@@ -355,6 +351,10 @@ class ScoreManagement extends Component {
     const rest = this.data.slice(index + 1);
     this.data.length = index;
     return this.data.push.apply(this.data, rest);
+  }
+
+  alertOnClose(){
+    this.setState({['alert']:{['open']:false}});
   }
 
   render() {
@@ -415,18 +415,13 @@ class ScoreManagement extends Component {
     return (
       <Bar listItems={listItems}>
         <div>
+          <AlertDialog open={this.state.alert.open} ok={this.state.alert.ok} body={this.state.alert.body} title={this.state.alert.title} onClose={()=>this.alertOnClose()}/>
           <Switch>
             <Route exact path={`${match.url}`} render={(props) => {
-              if (this.user.type === 'Staff' || this.user.type === 'Admin') {
-                return <ApplicationPage {...props}/>
-              }
-              else {
-                return <SearchScore {...props}
-                                    data={this.data}
-                                    user={this.user}
-                                    database={this.database}/>
-              }
-            }}/>
+              if(this.user.type === 'Teacher'||this.user.type === 'Student'){return <WaitPage {...props} user={this.user}/>}else{return <ApplicationPage {...props}/>}}}
+              />
+
+
             <Route path={`${match.url}/search`} render={(props) => <SearchScore {...props}
                                                                                 data={this.data}
                                                                                 user={this.user}
@@ -449,11 +444,17 @@ class ScoreManagement extends Component {
             {this.user.type === 'Teacher' &&
             <Route path={`${match.url}/request`} render={(props) => <ScoreRequest {...props}
                                                                                   database={this.database}
-                                                                                  user={this.user}/>}/>
+                                                                                  user={this.user}
+                                                                                  alert={
+                                                                                    (title)=>this.setState({alert:{open:true,ok:'确认',body:'标题为\"'+title+'\"的申请已经成功提交',title:"成功"}})}/>}/>
             }
             {(this.user.type === 'Staff' || this.user.type === 'Admin') &&
-            <Route path={`${match.url}/apply`} render={(props) => <ApplicationPage {...props}/>}/>
+            <Route path={`${match.url}/apply`} render={(props) => <ApplicationPage {...props}
+
+
+            />}/>
             }
+            <Route path={`${match.url}/wait`} render={(props) => <WaitPage {...props} />}/>
           </Switch>
         </div>
       </Bar>
