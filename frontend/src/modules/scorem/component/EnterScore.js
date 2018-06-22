@@ -157,7 +157,6 @@ class EnterScore extends Component {
       data.push(new Take(this.state.reader_cid,this.findcname(this.state.reader_cid),this.props.user.id,null,dataArray[i][0],null,parseInt(dataArray[i][1],10),this.findcdate(this.state.reader_cid)));
     }
     this.props.pushDatas(data);
-    alert('录入完毕！')
   };
 
   submitFile() {
