@@ -37,7 +37,7 @@ class Xkxt extends React.Component {
 		setTimeout(()=>{
 			this.props.quit();
 			console.log(111);
-		}, 1000*1*60);
+		}, 1000*20*60);
 		this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
 	}
 

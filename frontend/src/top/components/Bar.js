@@ -152,7 +152,7 @@ class Bar extends React.Component {
                         <Button
                             component={Link}
                             raised
-                            to="/autoCourse/teacherSchedule"
+                            to="/autoCourse"
                             color="inherit">排课系统</Button>
                         <Button
                             component={Link}

@@ -46,10 +46,10 @@ class Top extends Component {
                         }}>
                             <Grid container>
                                 <SubSystem name={'基础信息'} uri={'info'}/>
-                                <SubSystem name={'自动排课'} uri={'autoCourse/teacherSchedule'}/>
+                                <SubSystem name={'自动排课'} uri={'autoCourse'}/>
                                 <SubSystem name={'选课系统'} uri={'xkxt'}/>
                                 <SubSystem name={'论坛'} uri={'forum'}/>
-                                <SubSystem name={'在線測試'} uri={'online_testing'}/>
+                                <SubSystem name={'在线测试'} uri={'online_testing'}/>
                                 <SubSystem name={'subsystem6'} uri={''}/>
                             </Grid>
                         </div>

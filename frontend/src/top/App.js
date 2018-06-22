@@ -54,7 +54,7 @@ class App extends Component {
                             <Route path={'/forum'} component={Forum}/>
                             <Route path={'/xkxt'} component={Xkxt}/>
                             <Route path={'/online_testing'} component={OnlineTesting}/>
-                            <Route path={'/autoCourse/teacherSchedule'} component={AutoCourse}/>
+                            <Route path={'/autoCourse'} component={AutoCourse}/>
                         </div>
                     </div>
                 </BrowserRouter>
