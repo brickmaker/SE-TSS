@@ -43,6 +43,7 @@ import {
 
 } from "material-ui"
 
+import _SERVER_ADDRESS from '../../../../configs/config'
 
 
 const ITEM_HEIGHT = 48;
@@ -99,7 +100,7 @@ export default class AutoGenerate extends React.Component {
                 'course': this.props.course_id
             };
             console.log('233', paper_info);
-            fetch(`http://127.0.0.1:8000/api/online_testing/paper/`, {
+            fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/`, {
                 method: 'POST',
                 headers: headers,
                 body:JSON.stringify(paper_info)

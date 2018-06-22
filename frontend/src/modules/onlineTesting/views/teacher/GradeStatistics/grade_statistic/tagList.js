@@ -9,8 +9,8 @@ import { withStyles,
     CardActions,
     Button,
     Icon,
+    CircularProgress
 } from 'material-ui';
-import echarts from 'echarts'
 import 'echarts/lib/component/title'
 import 'echarts/lib/component/grid'
 import 'echarts/lib/component/tooltip'
@@ -42,6 +42,7 @@ class CheckboxLabels extends React.Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.checked });
+
     };
     send = ()=>{
        let tmp = [];
@@ -64,6 +65,7 @@ class CheckboxLabels extends React.Component {
             <Card className={classes.card}>
                 <CardContent>
             <FormGroup row>
+                {tagList.length===0 && ( <CircularProgress className={classes.progress} />) }
                 {tagList.map((tag,index)=>(
                     <FormControlLabel
                         control={

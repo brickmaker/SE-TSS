@@ -1,3 +1,5 @@
+import _SERVER_ADDRESS from '../../../configs/config'
+
 export const GET_STUDENT_GRADE = `get_student_grade`;
 export const getStudentGrade = (course_id, token)=>{
     return dispatch=>{
@@ -9,7 +11,7 @@ export const getStudentGrade = (course_id, token)=>{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://127.0.0.1:8000/api/online_testing/analysis/studentGradeList/?course_id=${course_id}`, {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/analysis/studentGradeList/?course_id=${course_id}`, {
             method: 'GET',
             headers:headers
         })

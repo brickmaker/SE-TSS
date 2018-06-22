@@ -1,5 +1,7 @@
 import {teacher_info} from "../../../fakeData/index";
 import 'isomorphic-fetch'
+import _SERVER_ADDRESS from '../../../configs/config'
+
 
 export const GET_TEACHER_AND_TAG_LIST = 'get_teacher_and_tag_list';
 export const GET_PROBLEM_LIST = 'get_problem_list';
@@ -16,7 +18,7 @@ export const getTeacherAndTagList = (courseId, token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         );
-        fetch(`http://127.0.0.1:8000/api/online_testing/question/tags_and_teachers/?course=${courseId}`, {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/tags_and_teachers/?course=${courseId}`, {
             method: 'GET',
             headers:headers
         })
@@ -44,7 +46,7 @@ export const changeProblemShowList = (problem_show_list) =>{
 
 export const getProblemList =  (courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
     return dispatch=>{
-        let url = `http://127.0.0.1:8000/api/online_testing/question/`;
+        let url = `http://${_SERVER_ADDRESS}:8000/api/online_testing/question/`;
         url += `?course=${courseId}`;
         console.log(teacher_list, teacher_list_selected, "rua ");
         teacher_list.forEach((teacher_detail, index)=>{

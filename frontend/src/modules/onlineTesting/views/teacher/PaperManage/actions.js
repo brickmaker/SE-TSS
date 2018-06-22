@@ -1,3 +1,6 @@
+import _SERVER_ADDRESS from '../../../configs/config'
+
+
 export const GET_TEACHER_PAPER_LIST = 'get_teacher_paper_list';
 
 export const getTeacherPaperList = (courseID, token) =>{
@@ -10,7 +13,7 @@ export const getTeacherPaperList = (courseID, token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         )
-        fetch(`http://127.0.0.1:8000/api/online_testing/paper/?course=${courseID}`, {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/?course=${courseID}`, {
             method: 'GET',
             headers:headers
         })

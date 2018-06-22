@@ -1,3 +1,6 @@
+import _SERVER_ADDRESS from '../../../configs/config'
+
+
 export const CHANGE_RENDER_TAB_GENERATE = 'change_render_tab_generate';
 export const GET_TAG_AND_TEACHER_LIST_GEN = "get_tag_and_teacher_list_gen";
 
@@ -19,7 +22,7 @@ export const getTeacherAndTagListGen = (course_id , token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         )
-        fetch(`http://127.0.0.1:8000/api/online_testing/question/tags_and_teachers/?course=${course_id}`, {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/tags_and_teachers/?course=${course_id}`, {
            method: 'GET',
             headers:headers
         })

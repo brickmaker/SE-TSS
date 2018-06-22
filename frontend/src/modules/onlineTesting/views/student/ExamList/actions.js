@@ -1,3 +1,5 @@
+import _SERVER_ADDRESS from '../../../configs/config'
+
 export const GET_STUDENT_PAPER_LIST = 'get_student_paper_list';
 export const GET_CURRENT_PAPER_ID = 'get_current_paper_id';
 
@@ -13,7 +15,7 @@ export const getStudentPaperList = (courseId, token) =>{
 
                 );
                 console.log(token);
-                fetch(`http://127.0.0.1:8000/api/online_testing/paper/?course=${courseId}`, {
+                fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/?course=${courseId}`, {
                     method: 'GET',
                     headers:headers
                 })
