@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 
 import Image from "./image/login_zju.jpg";
+import {BACKEND_API, BACKEND_SERVER_URL} from "../config";
 
 function mapStateToProps(state) {
     return {
@@ -86,6 +87,7 @@ class LoginView extends React.Component {
             password: '',
             user_type: 'Student',
             disabled: true,
+            status: false,
         };
     }
 
@@ -122,12 +124,30 @@ class LoginView extends React.Component {
         e.preventDefault();
         this.props.login(this.state.username, this.state.password, this.state.user_type);
     };
+    componentDidMount(){
+
+        let url = BACKEND_SERVER_URL + "api/info/is_token_valid" ;
+        fetch(url, {
+            method: 'post',
+            headers: {
+                'Authorization': 'JWT ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"token":localStorage.getItem('token')})
+        })
+            .then(response => {
+                this.setState({status: response.status == '200'});
+                // return response.json();
+                if (response.status == '200') {
+                    this.props.history.push('/main');
+                }
+            })
+    }
 
     render() {
         const {classes, isAuthenticated} = this.props;
-        if (isAuthenticated) {
+        if(isAuthenticated || this.state.status)
             this.props.history.push('/main');
-        }
         return (
             <div>
                 <div className={classes.Background}>

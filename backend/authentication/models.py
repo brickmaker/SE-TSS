@@ -1,7 +1,7 @@
 from django.db import models
 from django.db import transaction
 import django.utils.timezone as timezone
-from rest_framework.exceptions import APIException, ParseError, NotFound
+from rest_framework.exceptions import ParseError, APIException, NotFound
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
