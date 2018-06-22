@@ -111,11 +111,13 @@ class CourseSerializer(serializers.ModelSerializer):
     credit = serializers.FloatField(min_value=0.5, required=True)
     capacity = serializers.IntegerField(max_value=200)
     assessment = serializers.CharField(max_length=20)
-    # faculty=serializers.MultipleChoiceField(choices=Faculty.objects.all())
-    course_type = serializers.IntegerField(max_value=3, required=True)
-    state = serializers.IntegerField(max_value=3, default=1)
-    department = serializers.CharField(max_length=20)
-    semester = serializers.IntegerField(max_value=6, default=0)
+
+    #faculty = serializers.MultipleChoiceField(choices=Faculty.objects.all())
+    #faculty=serializers.MultipleChoiceField(choices=(1,2))
+    course_type=serializers.IntegerField(max_value=3, required=True)
+    state=serializers.IntegerField(max_value=3, default=1)
+    department=serializers.CharField(max_length=20)
+    semester=serializers.IntegerField(max_value=6, default=0)
 
     class Meta:
         model = Course

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db import transaction
 import django.utils.timezone as timezone
-from rest_framework.exceptions import APIException, ParseError, NotFound
+from rest_framework.exceptions import ParseError
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
@@ -173,6 +173,8 @@ class Student(People):
     grade = models.IntegerField("入学年份", null=False, default=2015)
     major = models.ForeignKey(Major, verbose_name="专业", on_delete=models.CASCADE, null=True)
     class_name = models.ForeignKey(Major_Class, verbose_name="所在班级", on_delete=models.CASCADE, null=True)
+
+
 
 
 # Professor
