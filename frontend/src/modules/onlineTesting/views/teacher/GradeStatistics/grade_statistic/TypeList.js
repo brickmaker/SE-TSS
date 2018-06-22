@@ -1,14 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles,
+import React, {Component} from "react"
+import PropTypes from 'prop-types'
+import {
     RadioGroup,
-    FormControlLabel,
+    Radio,
     FormControl,
     FormLabel,
-    Radio
-} from 'material-ui'
+    FormControlLabel,
+    withStyles
+} from "material-ui"
+
 import ShowJudge from './shoJudge';
-import ShowChoose from './shoChoose'
+import ShowChoose from './shoChoose';
 
 const styles = theme => ({
     root: {
@@ -55,12 +57,11 @@ class RadioButtonsGroup extends React.Component {
 
 
                 {this.state.value === "choose" &&
-                <div>
                     <ShowChoose questionTypeList={questionTypeList}/>
-                </div>
                 }
 
             </div>
+
         );
     }
 }
