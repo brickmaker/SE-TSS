@@ -18,6 +18,7 @@ import {
     Menu,
     MenuItem,
 } from '@material-ui/core';
+
 class Top extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +27,7 @@ class Top extends Component {
             anchorEl: null,
         };
     }
+
     render() {
         const {classes, theme, history} = this.props;
         return (
@@ -44,7 +46,7 @@ class Top extends Component {
                         }}>
                             <Grid container>
                                 <SubSystem name={'基础信息'} uri={'info'}/>
-                                <SubSystem name={'自动排课'} uri={'autoCourse'}/>
+                                <SubSystem name={'自动排课'} uri={'autoCourse/teacherSchedule'}/>
                                 <SubSystem name={'选课系统'} uri={'xkxt'}/>
                                 <SubSystem name={'论坛'} uri={'forum'}/>
                                 <SubSystem name={'在線測試'} uri={'online_testing'}/>
@@ -52,22 +54,11 @@ class Top extends Component {
                             </Grid>
                         </div>
                     </div>
-            
+
                 }
             />
 
-           
-            
 
-
-
-            
-                
-
-
-            
-
-            
         )
     }
 }
