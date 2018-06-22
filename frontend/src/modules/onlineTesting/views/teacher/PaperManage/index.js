@@ -20,7 +20,9 @@ import {
 
 
 
-import {getTeacherPaperList, deletePaper} from './actions'
+import {getTeacherPaperList} from './actions'
+
+import _SERVER_ADDRESS from '../../../configs/config'
 
 
 function timestampToTime(timestamp) {
@@ -130,7 +132,7 @@ class PaperManager extends Component{
                                         'Authorization','JWT '+ localStorage.getItem('token')
 
                                     )
-                                    fetch(`http://127.0.0.1:8000/api/online_testing/paper/${paperInfo.paper_id}/`, {
+                                    fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/${paperInfo.paper_id}/`, {
                                         method: 'DELETE',
                                         headers: headers
                                     })

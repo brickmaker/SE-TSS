@@ -1,5 +1,7 @@
 import {teacher_info} from "../../../fakeData/index";
 import 'isomorphic-fetch'
+import _SERVER_ADDRESS from '../../../configs/config'
+
 
 export const GET_COURSE_LIST = 'get_course_list';
 
@@ -17,7 +19,7 @@ const testCourseList = [
 
 export const getCourseList = (teacherId, token) =>{
     return dispatch=>{
-        fetch('http://127.0.0.1:8000/api/info/get_token', {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/info/get_token`, {
             method: 'POST',
             headers: {Accept: 'application/json',
                 'Content-Type': 'application/json',},
@@ -36,7 +38,7 @@ export const getCourseList = (teacherId, token) =>{
                 headers.append(
                     'Authorization','JWT '+ localStorage.getItem('token')
                 );
-                fetch('http://127.0.0.1:8000/api/online_testing/course/', {
+                fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/course/`, {
                     method: 'GET',
                     headers: headers,
                     credentials:'include'

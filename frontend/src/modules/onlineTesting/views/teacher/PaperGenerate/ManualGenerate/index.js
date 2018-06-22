@@ -50,6 +50,10 @@ import {
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
+import _SERVER_ADDRESS from '../../../../configs/config'
+
+
+
 const CUT_LENTH = 20;
 
 const ITEM_HEIGHT = 48;
@@ -91,7 +95,7 @@ class ProblemView extends Component{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/${this.state.question_id}/`, {
             method: 'GET',
             headers:headers
         })
@@ -194,109 +198,6 @@ class ProblemView extends Component{
                     </FormControl>
                     {answerField}
                 </div>
-                {edit_flag?
-                    <div>
-                        <Button
-                            color="primary"
-                            onClick={()=>{
-                                let headers = new Headers();
-                                headers.append(
-                                    'Content-Type', 'application/json'
-                                );
-                                headers.append(
-                                    'Authorization','JWT '+ localStorage.getItem('token')
-
-                                );
-                                fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
-                                    method: 'PUT',
-                                    headers:headers,
-                                    body:JSON.stringify({
-                                        type: this.state.type,
-                                        description: this.state.description,
-                                        choice_list: this.state.choice_list,
-                                        answer_list: this.state.answer_list,
-                                        level: this.state.level,
-                                        provider: this.state.provider,
-                                        tag:this.state.tag,
-                                        course: this.state.course_id
-                                    })
-                                })
-                                    .then(response => response.json())
-                                    .then(response => {
-                                        console.log(response);
-                                        this.handleCancel();
-
-                                    })
-                                    .catch(err => console.log(err));
-                            }}
-
-                        >
-                            {"确定"}
-                        </Button>
-                        <Button onClick={this.handleCancel} color="primary" autoFocus>
-                            {"取消"}
-                        </Button>
-                    </div>
-                    :  <div>
-                        <Button variant="fab" color="secondary" aria-label="edit"
-                                onClick={(e)=>{
-                                    // to revise
-                                    this.setState(Object.assign({}, this.state, {
-                                        edit_flag: true
-                                    }));
-                                }}
-                        >
-                            <EditIcon/>
-                        </Button>
-                        <Button variant="fab" color="secondary" aria-label="delete"
-                                onClick={(e)=>{
-                                    this.handleClickOpen();
-                                }}>
-                            <DeleteIcon/>
-                        </Button>
-                    </div>}
-                <Dialog
-                    open={open}
-                    onClose={this.handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">{"确定要删除吗？"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            {"删除后不可恢复"}
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={()=>{this.handleClose();}} color="primary">
-                            {"否"}
-                        </Button>
-                        <Button onClick={()=>{
-                            this.handleClose();
-                            let headers = new Headers();
-                            headers.append(
-                                'Content-Type', 'application/json'
-                            );
-                            headers.append(
-                                'Authorization','JWT '+ localStorage.getItem('token')
-
-                            );
-                            fetch(`http://127.0.0.1:8000/api/online_testing/question/${this.state.question_id}/`, {
-                                method: 'DELETE',
-                                headers:headers
-                            })
-                                .then(response => {
-                                    console.log(response);
-                                    this.props.refresh();
-                                })
-                                .catch(err => console.log(err));
-
-
-                        }} color="primary" autoFocus>
-                            {"是"}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </div>
         )
     }
@@ -306,7 +207,7 @@ class ProblemView extends Component{
 
 export default class ManualGenerate extends Component{
     getProblemList= (courseId, teacher_list_selected, teacher_list, tag_list_selected, token)=>{
-        let url = `http://127.0.0.1:8000/api/online_testing/question/`;
+        let url = `http://${_SERVER_ADDRESS}:8000/api/online_testing/question/`;
         url += `?course=${courseId}`;
         console.log(teacher_list, teacher_list_selected, "rua ");
         teacher_list.forEach((teacher_detail, index)=>{
@@ -578,7 +479,7 @@ export default class ManualGenerate extends Component{
                                     'question_id_list': this.state.problem_list_selected
                                 };
                                 console.log('233', paper_info);
-                                fetch(`http://127.0.0.1:8000/api/online_testing/paper/`, {
+                                fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/`, {
                                     method: 'POST',
                                     headers: headers,
                                     body:JSON.stringify(paper_info)

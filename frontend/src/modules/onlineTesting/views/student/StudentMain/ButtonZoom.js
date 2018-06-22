@@ -74,26 +74,28 @@ class SimpleZoom extends React.Component {
                 <IconButton checked={checked} onClick={this.handleChange}  color="primary">
                     <SortIcon/>
                 </IconButton>
+                {checked &&
                 <div className={classes.container}>
                     <Zoom in={checked}>
                         <IconButton className={classes.button} title={"试题列表"}
-                            onClick={(e)=>{
-                            this.props.history.push(`${this.props.match.url}/exam_list/${this.props.course_id}`);
-                        }
-                        }
+                                    onClick={(e)=>{
+                                        this.props.history.push(`${this.props.match.url}/exam_list/${this.props.course_id}`);
+                                    }
+                                    }
 
                         ><Dns/></IconButton>
                     </Zoom>
                     <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
                         <IconButton className={classes.button} title={"历史成绩"}
-                                onClick={(e)=>{
-                                    this.props.history.push(`${this.props.match.url}/history_grade/${this.props.course_id}`);
-                                }
-                                }
+                                    onClick={(e)=>{
+                                        this.props.history.push(`${this.props.match.url}/history_grade/${this.props.course_id}`);
+                                    }
+                                    }
                         > <PieChart/></IconButton>
                     </Zoom>
                 </div>
-               <Divider/>
+
+                }
             </div>
 
         );

@@ -11,6 +11,11 @@ import {
 import HistoryGrade from "../HistoryGrade/index";
 import ExamList from '../ExamList'
 import Examination from "../Examination/index";
+
+
+import _SERVER_ADDRESS from '../../../configs/config'
+
+
 const menuStyle = {
     display: 'inline-block',
     width: "20%",
@@ -30,7 +35,7 @@ class StudentMain extends Component {
 
     componentDidMount() {
         var headers = new Headers();
-        fetch('http://127.0.0.1:8000/api/info/get_token', {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/info/get_token`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -90,7 +95,7 @@ const mapDispatchToProps = (dispatch) => {
             headers.append(
                 'Authorization','JWT '+ localStorage.getItem('token')
             );
-            fetch('http://127.0.0.1:8000/api/online_testing/course/', {
+            fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/course/`, {
                 method: 'GET',
                 headers: headers,
                 credentials:'include'

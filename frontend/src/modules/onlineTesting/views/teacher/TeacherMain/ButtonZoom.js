@@ -14,6 +14,7 @@ import SortIcon from '@material-ui/icons/Sort'
 import Dns from '@material-ui/icons/Dns'
 import Description from '@material-ui/icons/Description'
 import PieChart from '@material-ui/icons/PieChart'
+
 const testCourseList = [
     {
         course_id: 0,
@@ -70,35 +71,37 @@ class SimpleZoom extends React.Component {
                 <IconButton checked={checked} onClick={this.handleChange}  color="primary">
                     <SortIcon/>
                 </IconButton>
+                {checked &&
                 <div className={classes.container}>
                     <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
                         <IconButton className={classes.button} title={"题库管理"}
-                                onClick={() => {
-                                    console.log(this);
-                                    const pathname = `${this.props.match.url}/question_manage/${this.props.courseInfo.course_id}`;
-                                    this.props.history.push(pathname);
-                                }}
+                                    onClick={() => {
+                                        console.log(this);
+                                        const pathname = `${this.props.match.url}/question_manage/${this.props.courseInfo.course_id}`;
+                                        this.props.history.push(pathname);
+                                    }}
 
                         ><Dns/></IconButton>
                     </Zoom>
                     <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
                         <IconButton className={classes.button} title={"试卷管理"}
-                                onClick={() => {
-                                    const pathname = `${this.props.match.url}/paper_manage/${this.props.courseInfo.course_id}`;
-                                    this.props.history.push(pathname);
-                                }}
+                                    onClick={() => {
+                                        const pathname = `${this.props.match.url}/paper_manage/${this.props.courseInfo.course_id}`;
+                                        this.props.history.push(pathname);
+                                    }}
                         > <Description/></IconButton>
                     </Zoom>
                     <Zoom in={checked} style={{ transitionDelay: checked ? 500 : 0 }}>
                         <IconButton className={classes.button} title={"成绩统计"}
-                                onClick={() => {
-                                    const pathname = `${this.props.match.url}/grade_statistics/${this.props.courseInfo.course_id}`;
-                                    this.props.history.push(pathname);
-                                }}
+                                    onClick={() => {
+                                        const pathname = `${this.props.match.url}/grade_statistics/${this.props.courseInfo.course_id}`;
+                                        this.props.history.push(pathname);
+                                    }}
                         > <PieChart/></IconButton>
                     </Zoom>
                 </div>
-            <Divider/>
+
+                }
             </div>
 
         );

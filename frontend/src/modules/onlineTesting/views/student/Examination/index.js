@@ -35,6 +35,9 @@ import {
 
 import CloseIcon from "@material-ui/icons/Close"
 
+import _SERVER_ADDRESS from '../../../configs/config'
+
+
 import {getStudentPaper, changeRenderTabExam, changeSolution, setLeftTime} from './actions'
 
 
@@ -321,7 +324,7 @@ class Examination extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             )
-                            fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/conservation/`, {
+                            fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/examination/${exam_id}/conservation/`, {
                                 method: 'POST',
                                 headers: headers,
                                 body:JSON.stringify({
@@ -413,7 +416,7 @@ class Examination extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             )
-                            fetch(`http://127.0.0.1:8000/api/online_testing/examination/${exam_id}/submission/`, {
+                            fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/examination/${exam_id}/submission/`, {
                                 method: 'POST',
                                 headers: headers,
                             })
