@@ -93,7 +93,7 @@ class CourseStudent extends React.Component {
 									<CustomTableCell >{n.time}</CustomTableCell>
 									<CustomTableCell >{
 										<Button variant="raised" className={classes.buttonStyle} onClick={() => {
-											HEAD = localStorage.name + ',' + n.name + ',' + n.time.replace(', ','').replace(', ','') + '\n';
+											HEAD = n.name + ',' + n.time.replace(', ','').replace(', ','') + '\n';
 											this.props.getCourseStudents("courseid="+n.id);
 										}}>导出</Button>
 									}</CustomTableCell>

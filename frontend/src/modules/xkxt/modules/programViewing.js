@@ -72,7 +72,7 @@ const ProgramViewing = ({ classes, program }) => {
         <Paper elevation={2} style={{'width': '97%', 'marginLeft': 'auto', 'marginRight': 'auto', textAlign:'center'}}>
             <Typography className={classes.title0}>培养方案</Typography>
             <Typography className={classes.title2}>
-                {localStorage.name+" "+localStorage.username}
+                {/*localStorage.name+" "+*/localStorage.username}
             </Typography>
             <Divider />
             <div className={classes.innerDiv}>
