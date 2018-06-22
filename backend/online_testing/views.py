@@ -449,7 +449,10 @@ class AnalysisViewSet(GenericViewSet):
                     papers = question.paper_question.all()
                 else:
                     papers = papers | question.paper_question.all()
-            for paper in papers:
+            #for paper in papers:
+            #    print(paper.paper_name)
+            #print('------------------------')
+            for paper in papers.distinct():
                 d['relevantTest'].append({
                     'testName': paper.paper_name,
                     'testScore': [
