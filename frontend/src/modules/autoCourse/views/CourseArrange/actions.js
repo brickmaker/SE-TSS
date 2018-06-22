@@ -1,4 +1,5 @@
-import {DEBUG, ROOT_URL} from "../../configs/config";
+import {ROOT_URL} from "../../configs/config";
+import {withAuthHeader} from "../../utils/api";
 
 export const ARRANGE_TEACHER_SCHEDULE_INFO = 'arrange_teacher_schedule_info'
 export const GET_ALL_REST_COURSE = 'get_All_rest_course'
@@ -14,7 +15,10 @@ export const arrangeTeacherScheduleInfo = (teacherName) => (dispatch, getState) 
 }
 
 function fetchTeacherScheduleInfo(teacherName) {
-    return fetch(`${ROOT_URL}/timetable/?teachername=${teacherName}`)
+    return fetch(`${ROOT_URL}/timetable/?teachername=${teacherName}`, {
+            method: 'GET',
+            headers: withAuthHeader(),
+        })
         .then(response => response.json())
 }
 
@@ -29,7 +33,10 @@ export const ShowAllRestCourse = () => (dispatch, getState) => {
 }
 
 function fetchAllRestCourse() {
-    return fetch(`${ROOT_URL}/arrange/?auto=false`)
+    return fetch(`${ROOT_URL}/arrange/?auto=false`, {
+        method: 'GET',
+        headers: withAuthHeader(),
+    })
         .then(response => response.json())
 }
 
@@ -44,7 +51,10 @@ export const ArrangeAllRestCourse= ()=>(dispatch) =>{
 }
 
 function arrangeAllRestCourse() {
-    return fetch(`${ROOT_URL}/arrange/?auto=true`)
+    return fetch(`${ROOT_URL}/arrange/?auto=true`, {
+        method: 'GET',
+        headers: withAuthHeader(),
+    })
         .then(response => response.json())
 }
 
@@ -52,10 +62,7 @@ export const HandIn=(newData)=> () =>{
     newData.map(function(element, index, array) {
         fetch(`${ROOT_URL}/timetable/${element.id}/`, {
             method: 'PUT',
-            headers:{
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
+            headers: withAuthHeader(),
             credentials: 'same-origin',
             body: JSON.stringify({
                 id:element.id,

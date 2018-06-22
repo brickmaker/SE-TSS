@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from 'classnames';
 import { withStyles } from "@material-ui/core";
-import Sidebar  from "../../component/Sidebar";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
@@ -21,7 +20,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { lighten } from '@material-ui/core/styles/colorManipulator';
 
-import AutoCourseRoutes from "../../routes/AutoCourseRoutes";
 import appStyle from "../../assets/jss/appStyle.jsx";
 
 import {addClassroom, getClassroomInfoWithName, modifyClassroom, deleteClassroomInfo, getAllClassroomInfo} from "./actions";
@@ -162,25 +160,39 @@ class RoomResource extends React.Component {
         const { selected } = this.state;
         let modifiedData={id: n.id, campus: n.campus, building: n.building, room: n.room, capacity: capacityValue}
         const selectedIndex = selected.indexOf(n.id);
-        if(event.target.checked)
-            this.setState({selectedData: this.state.selectedData.concat(modifiedData)});
-        else {
-            let deletedIndex = this.state.selectedData.indexOf(modifiedData);
-            console.log(deletedIndex);
-            this.state.selectedData.splice(deletedIndex, 1);
-        }
         let newSelected = [];
         if (selectedIndex === -1) {
             newSelected = newSelected.concat(selected, n.id);
+            console.log("selected");
+            this.setState({selectedData: this.state.selectedData.concat(modifiedData)});
+            console.log(this.state.selectedData);
         } else if (selectedIndex === 0) {
             newSelected = newSelected.concat(selected.slice(1));
+            console.log("the first one is dropped");
+            let deletedIndex = this.state.selectedData.indexOf(modifiedData);
+            console.log(deletedIndex);
+            if(deletedIndex===0)
+                this.state.selectedData.shift();
+            else
+                this.state.selectedData.splice(deletedIndex, 1);
+            console.log(this.state.selectedData);
         } else if (selectedIndex === selected.length - 1) {
+            console.log("last selected last dropped");
             newSelected = newSelected.concat(selected.slice(0, -1));
+            let deletedIndex = this.state.selectedData.indexOf(modifiedData);
+            console.log(deletedIndex);
+            this.state.selectedData.splice(deletedIndex, 1);
+            console.log(this.state.selectedData);
         } else if (selectedIndex > 0) {
+            console.log("last selected not last dropped");
             newSelected = newSelected.concat(
                 selected.slice(0, selectedIndex),
                 selected.slice(selectedIndex + 1),
             );
+            let deletedIndex = this.state.selectedData.indexOf(modifiedData);
+            console.log(deletedIndex);
+            this.state.selectedData.splice(deletedIndex, 1);
+            console.log(this.state.selectedData);
         }
         this.setState({ selected: newSelected });
     };
@@ -202,13 +214,6 @@ class RoomResource extends React.Component {
         ];
         return (
             <div className={classes.wrapper}>
-                <Sidebar
-                    routes={AutoCourseRoutes}
-                    handleDrawerToggle={this.handleDrawerToggle}
-                    open={this.state.mobileOpen}
-                    color="blue"
-                    {...rest}
-                />
                 <div className={classes.mainPanel}>
                     <div className={classes.content}>
                         <div className={classes.container}>

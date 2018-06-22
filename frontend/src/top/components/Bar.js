@@ -98,6 +98,9 @@ class Bar extends React.Component {
 
     logout = () => {
         this.props.logoutAndRedirect();
+        localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("type");
         this.props.history.push('/');
     };
 
@@ -152,7 +155,7 @@ class Bar extends React.Component {
                         <Button
                             component={Link}
                             raised
-                            to=""
+                            to="/autoCourse"
                             color="inherit">排课系统</Button>
                         <Button
                             component={Link}
@@ -167,12 +170,12 @@ class Bar extends React.Component {
                         <Button
                             component={Link}
                             raised
-                            to=""
+                            to="/online_testing"
                             color="inherit">在线测试</Button>
                         <Button
                             component={Link}
                             raised
-                            to=""
+                            to="/scorem"
                             color="inherit">成绩管理</Button>
 
 

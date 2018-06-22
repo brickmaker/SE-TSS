@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core";
-import Sidebar  from "../../component/Sidebar";
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Radio from '@material-ui/core/Radio';
@@ -24,7 +23,6 @@ import {lighten} from "@material-ui/core/styles/colorManipulator";
 import {connect} from "react-redux";
 import {getAllScheduleInfo, getTeacherScheduleInfo} from "./actions";
 
-import AutoCourseRoutes from "../../routes/AutoCourseRoutes";
 import appStyle from "../../assets/jss/appStyle.jsx";
 
 const columnData = [
@@ -216,13 +214,6 @@ class CourseSchedule extends React.Component {
         if(listMode){
             return (
                 <div className={classes.wrapper}>
-                    <Sidebar
-                        routes={AutoCourseRoutes}
-                        handleDrawerToggle={this.handleDrawerToggle}
-                        open={this.state.mobileOpen}
-                        color="blue"
-                        {...rest}
-                    />
                     <div className={classes.mainPanel}>
                         <div className={classes.content}>
                             <div className={classes.container}>
@@ -328,13 +319,6 @@ class CourseSchedule extends React.Component {
             console.log("In render: ", data)
             return (
                 <div className={classes.wrapper}>
-                    <Sidebar
-                        routes={AutoCourseRoutes}
-                        handleDrawerToggle={this.handleDrawerToggle}
-                        open={this.state.mobileOpen}
-                        color="blue"
-                        {...rest}
-                    />
                     <div className={classes.mainPanel}>
                         <div className={classes.content}>
                             <div className={classes.container}>

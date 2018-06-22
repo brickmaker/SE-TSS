@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.test import Client
-import os, django, time, datetime
+import os, django, time
 import json, random
 import numpy as np
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'top.settings')
@@ -8,6 +8,11 @@ django.setup()
 from authentication.models import *
 from online_testing.models import *
 from xkxt.models import *
+import datetime
+
+Question.objects.all().delete()
+Examination.objects.all().delete()
+Paper.objects.all().delete()
 
 course_data = [
     {'course_id': '211G0200', 'name': 'Python程序设计', 'credit': 3.0},
@@ -115,13 +120,19 @@ def insert_exam():
             'password': student.id_number[-6:],
         })
         data = json.loads(response.content.decode('utf-8'))
-        token = data['token']
         HTTP_AUTHORIZATION = 'JWT ' + data['token']
         random.shuffle(course_list)
         for course in course_list[:5]:
             paper_list = Paper.objects.all().filter(course=course)
-            paper_list = random.sample(
-                [paper for paper in paper_list], 2)
+            paper_list = [paper for paper in paper_list]
+            if len(paper_list) == 0:
+                continue
+            if len(paper_list) < 2:
+                paper_list = random.sample(
+                    paper_list, 1)
+            else:
+                paper_list = random.sample(
+                    paper_list, 2)
             for paper in paper_list:
                 l = [i.question_id for i in paper.question_id_list.all()]
                 d = {}

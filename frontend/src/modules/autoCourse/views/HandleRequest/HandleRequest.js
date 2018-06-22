@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Sidebar  from "../../component/Sidebar";
-import AutoCourseRoutes from "../../routes/AutoCourseRoutes";
 import appStyle from "../../assets/jss/appStyle.jsx";
-import logo from "../../assets/img/reactlogo.png";
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -40,17 +37,13 @@ class HandleRequest extends React.Component {
         const data = this.props.data;
         return (
             <div className={classes.wrapper}>
-                <Sidebar
-                    routes={AutoCourseRoutes}
-                    handleDrawerToggle={this.handleDrawerToggle}
-                    open={this.state.mobileOpen}
-                    color="blue"
-                    {...rest}
-                />
                 <div className={classes.mainPanel}>
                     <div className={classes.content}>
                         <div className={classes.container}>
                             <div style={{padding: 24, background: '#fff', minHeight: 550}}>
+                                <div>
+                                    <Typography variant="headline" component="h0">未处理的请求</Typography>  
+                                </div>
                                 <div>
                                     <Table className={classes.table} aria-labelledby="tableTitle" style={{border:'0'}}>
                                         <TableBody>
