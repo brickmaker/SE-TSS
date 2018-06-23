@@ -430,6 +430,42 @@ class AnalysisViewSet(GenericViewSet):
         return Response(data)
 
     @action(methods=['get'], detail=False)
+    def tag(self, request):
+        course_id = request.query_params.get('course_id')
+        tag_list = request.query_params.getlist('tag', [])
+        data = []
+        for tag in tag_list:
+            queryset = Question.objects.all().filter(course=course_id, tag=tag)
+            d = {
+                'tag': tag,
+                'relevantTest': [],
+            }
+            papers = None
+            for question in queryset:
+                if papers is None:
+                    papers = question.paper_question.all()
+                else:
+                    papers = papers | question.paper_question.all()
+            # for paper in papers:
+            #    print(paper.paper_name)
+            # print('------------------------')
+            for paper in papers.distinct():
+                avgSocore = 0
+                total = 0
+                for exam in Examination.objects.all().filter(paper=paper):
+                    avgSocore += exam.score
+                    total += 1
+                if total == 0:
+                    continue
+                else:
+                    d['relevantTest'].append({
+                        'testName': paper.paper_name,
+                        'avgScore': avgSocore / total
+                    })
+            data.append(d)
+        return Response(data)
+
+    @action(methods=['get'], detail=False)
     def tagList(self, request):
         course_id = request.query_params.get('course_id')
         data = []
