@@ -14,7 +14,7 @@ export const getTeacherPaper = (paper_id, token) =>{
             'Authorization', 'JWT ' + localStorage.getItem('token')
 
         )
-        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/paper/${paper_id}/`, {
+        fetch(`http://${_SERVER_ADDRESS}/api/online_testing/paper/${paper_id}/`, {
             method: 'GET',
             headers: headers
         })

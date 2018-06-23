@@ -1,6 +1,10 @@
 import React from 'react';
 import {Component} from 'react'
 import PropTypes from 'prop-types';
+import echarts from 'echarts/lib/echarts'
+import 'echarts/lib/component/tooltip';
+import  'echarts/lib/chart/bar';
+import 'echarts/lib/component/title';
 import { withStyles,
    GridList,
     GridListTile,
@@ -36,8 +40,10 @@ const styles = theme => ({
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
     },
-    gridListTile:{
-    }
+    chart:{
+      width:800,
+        height:400
+    },
 });
 
 
@@ -60,11 +66,98 @@ const styles = theme => ({
  */
 
 class TitlebarGridList extends Component{
-    state = Object.assign({}, this.state, {
-       select_index: -1
-    });
 
 
+    constructor(props){
+        super(props);
+        this.state = {
+            select_index: -1,
+            showChart:false,
+            scoreData:[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        };
+    }
+
+    static defaultProps={
+        option: {
+            title: { text: '成绩分布图' },
+            tooltip: {},
+            xAxis: {
+                data: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60","60-70","70-80","80-90","90-100"],
+            },
+            yAxis: {},
+            series: [{
+                name: '成绩分布 ',
+                type: 'bar',
+                data: [0, 0, 0, 0, 0, 0,0,0,0,0]
+            }]
+        },
+        testList:[]
+    };
+    componentDidMount(){
+        let dom = document.getElementById("chart");
+        let myChart = echarts.init(dom);
+        myChart.setOption(this.props.option);
+    }
+    componentDidUpdate(newProps) {
+        if (this.state.showChart === true) {
+            this.state.showChart = false;
+            console.log("index");
+            console.log(this.props);
+            console.log(newProps);
+            console.log(this);
+            this.props.testList[this.state.select_index].whoTakeThisTest.map((item, index) => {
+                let S = item.studentScore;
+                console.log("S",S);
+                if (S <= 100 && S > 90) {
+                    this.state.scoreData[9] = this.state.scoreData[9] + 1;
+                }
+                else if (S <= 90 && S > 80) {
+                    this.state.scoreData[8] = this.state.scoreData[8] + 1;
+                }
+                else if (S <= 80 && S > 70) {
+                    this.state.scoreData[7] = this.state.scoreData[7] + 1;
+                }
+                else if (S <= 70 && S > 60) {
+                    this.state.scoreData[6] = this.state.scoreData[6] + 1;
+                }
+                else if (S <= 60 && S > 50) {
+                    this.state.scoreData[5] = this.state.scoreData[5] + 1;
+                }
+                else if (S <= 50 && S > 40) {
+                    this.state.scoreData[4] = this.state.scoreData[4] + 1;
+                }
+                else if (S <= 40 && S > 30) {
+                    this.state.scoreData[3] = this.state.scoreData[3] + 1;
+                }
+                else if (S <= 30 && S > 20) {
+                    this.state.scoreData[2] = this.state.scoreData[2] + 1;
+                }
+                else if (S <= 20 && S > 10) {
+                    this.state.scoreData[1] = this.state.scoreData[1] + 1;
+                }
+                else if (S <= 10 && S >= 0) {
+                    this.state.scoreData[0] = this.state.scoreData[0] + 1;
+                }
+            });
+            let dom = document.getElementById("chart");
+            let myChart = echarts.init(dom);
+            myChart.setOption(
+                {
+                    title: {text: '成绩分布图'},
+                    tooltip: {},
+                    xAxis: {
+                        data: ["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70", "70-80", "80-90", "90-100"],
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '成绩分布 ',
+                        type: 'bar',
+                        data: this.state.scoreData,
+                    }]
+                }
+            );
+        }
+    }
     render(){
         const { classes } = this.props;
         const props = this.props;
@@ -94,12 +187,13 @@ class TitlebarGridList extends Component{
                                     <IconButton
                                         title={tile.title}
                                         className={classes.icon}
-                                        onClick={(e)=>this.setState(Object.assign({}, this.state, {select_index: index}))}
+                                        onClick={(e)=>this.setState(Object.assign({}, this.state, {select_index: index,showChart:true}))}
                                     >
                                         <InfoIcon />
                                     </IconButton>
                                 }
                             />
+
                         </GridListTile>
                     ))}
                 </GridList>
@@ -147,6 +241,7 @@ class TitlebarGridList extends Component{
                 </Paper>
 
                 }
+                <div  id="chart" className={classes.chart}></div>
             </div>
         );
     }

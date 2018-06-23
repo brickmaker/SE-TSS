@@ -218,7 +218,7 @@ export class ProblemAdd extends Component{
 
                                 );
                                 console.log("problem ", this.state);
-                                fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/`, {
+                                fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/`, {
                                     method: 'POST',
                                     headers:headers,
                                     body:JSON.stringify({
@@ -295,7 +295,7 @@ export class ProblemView extends Component{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/${this.state.question_id}/`, {
+        fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/${this.state.question_id}/`, {
             method: 'GET',
             headers:headers
         })
@@ -459,7 +459,7 @@ export class ProblemView extends Component{
                                 'Authorization','JWT '+ localStorage.getItem('token')
 
                             );
-                            fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/${this.state.question_id}/`, {
+                            fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/${this.state.question_id}/`, {
                                 method: 'PUT',
                                 headers:headers,
                                 body:JSON.stringify({
@@ -533,7 +533,7 @@ export class ProblemView extends Component{
                                     'Authorization','JWT '+ localStorage.getItem('token')
 
                                 );
-                                fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/${this.state.question_id}/`, {
+                                fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/${this.state.question_id}/`, {
                                     method: 'DELETE',
                                     headers:headers
                                 })

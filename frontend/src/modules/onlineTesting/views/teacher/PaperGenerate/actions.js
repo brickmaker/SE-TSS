@@ -22,7 +22,7 @@ export const getTeacherAndTagListGen = (course_id , token) =>{
         headers.append(
             'Authorization','JWT '+ localStorage.getItem('token')
         )
-        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/tags_and_teachers/?course=${course_id}`, {
+        fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/tags_and_teachers/?course=${course_id}`, {
            method: 'GET',
             headers:headers
         })

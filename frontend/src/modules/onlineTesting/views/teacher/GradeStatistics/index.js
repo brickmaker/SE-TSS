@@ -10,7 +10,7 @@ import _SERVER_ADDRESS from '../../../configs/config'
 class GradeStatistics extends Component{
     componentDidMount(){
         let headers = new Headers();
-        fetch(`http://${_SERVER_ADDRESS}:8000/api/info/get_token`, {
+        fetch(`http://${_SERVER_ADDRESS}/api/info/get_token`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -35,8 +35,9 @@ class GradeStatistics extends Component{
     }
     render(){
         const {match} = this.props;
+        const {course_id} = match.params;
         return (
-            <div><TGS testList={this.props.testList} studentList={this.props.studentList} tagList={this.props.tagList} questionTypeList={this.props.questionTypeList}/></div>
+            <div><TGS course_id={course_id} testList={this.props.testList} studentList={this.props.studentList} tagList={this.props.tagList} questionTypeList={this.props.questionTypeList}/></div>
         )
     }
 }
