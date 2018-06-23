@@ -73,11 +73,6 @@ class CheckboxListSecondary extends React.Component {
                                 <TableCell>
                                     {`${item.testScore}`+"/"+`${item.totalScore}`}
                                 </TableCell>
-
-                                {/*<ListItem key={index} dense button className={classes.listItem}>*/}
-                                {/*<ListItemText style={{maxWidth:"350px"}} primary={`${item.paperName}`} />*/}
-                                {/*<ListItemText style={{maxWidth:"200px"}}  primary={`${item.avgScore}`.substring(0,4)}/>*/}
-                                {/*<ListItemText style={{maxWidth:"200px"}}  primary={`${item.testScore}`+"/"+`${item.totalScore}`}/>*/}
                             </TableRow>
                     ))}
                     </TableBody>

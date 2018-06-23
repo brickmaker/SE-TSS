@@ -3,10 +3,14 @@ import {connect} from "react-redux"
 import TGS from "./grade_statistic/TeacherGradeStatistic";
 import {CHANGE_TOKEN, GET_COURSE_LIST_TEACHER, getQuestionTypeList, getStudentList,getTagList} from "./actions"
 import {getTestList} from "./actions";
+
+import _SERVER_ADDRESS from '../../../configs/config'
+
+
 class GradeStatistics extends Component{
     componentDidMount(){
         let headers = new Headers();
-        fetch('http://127.0.0.1:8000/api/info/get_token', {
+        fetch(`http://${_SERVER_ADDRESS}:8000/api/info/get_token`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
