@@ -74,7 +74,7 @@ class ProblemView extends Component{
             'Authorization','JWT '+ localStorage.getItem('token')
 
         );
-        fetch(`http://${_SERVER_ADDRESS}:8000/api/online_testing/question/${this.props.question_id}/`, {
+        fetch(`http://${_SERVER_ADDRESS}/api/online_testing/question/${this.props.question_id}/`, {
             method: 'GET',
             headers:headers
         })
