@@ -1265,7 +1265,7 @@ class courses_info(APIView):
     def get(self,request,format=None):
         collegeid = request.GET.get('collegeid',None)
         if collegeid is None:
-            return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
         
         try:
             college = models.College.objects.get(pk=collegeid)
@@ -1276,3 +1276,75 @@ class courses_info(APIView):
             'pageNum':college.course.all().count()//15+1
         }
         return Response(res,status=status.HTTP_200_OK)
+
+
+class course_newforum(APIView):
+    def post(self,request,format=None):
+        collegeid = request.data.get('collegeid', None)
+        code = request.data.get('code', None)
+        name = request.data.get('name', None)
+        if None in (collegeid,code,name):
+            return Response({'error':'Parameters error'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            admin = models.User.objects.get(pk=1)
+            college = models.College.objects.get(pk=collegeid)
+            sec = models.Section(name=name,type=models.Section.COURSE)
+            sec.save()
+            sec.admin.add(admin)
+            sec.save()
+            course = models.Course.objects.create(code=code,name=name,section=sec,college=college)
+        except Exception as e:
+            print(e)
+            return Response({'error':'no such college'},status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':None},status=status.HTTP_200_OK)
+
+class course_deleteforum(APIView):
+    def get(self,request,format=None):
+        collegeid = request.GET.get('collegeid',None)
+        courseid = request.GET.get('courseid',None)
+        if None in (collegeid,courseid):
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            course = models.Course.objects.get(pk=courseid)
+        except:
+            return Response({'error':'no such course'},status=status.HTTP_400_BAD_REQUEST)
+        course.section.delete()
+        return Response({'error':None},status=status.HTTP_200_OK)
+
+class teacher_newforum(APIView):
+    def post(self,request,format=None):
+        collegeid = request.data.get('collegeid',None)
+        courseid = request.data.get('courseid',None)
+        id = request.data.get('id',None)
+        name = request.data.get('name',None)
+        if None in (collegeid,courseid,id,name):
+            return Response({'error':'parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            ac = Account.objects.get(pk=id)
+            admin = models.User.objects.get(pk=ac)
+            college = models.College.objects.get(pk=collegeid)
+            course = models.Course.objects.get(pk=courseid)
+            sec = models.Section(name=name,type=models.Section.TEACHER)
+            sec.save()
+            sec.admin.add(admin)
+            sec.save()
+            teacher = models.Teacher.objects.create(name=name,section=sec,college=college,course=course)
+        except:
+            return Response({'error':'no such course or college or user'},status=status.HTTP_400_BAD_REQUEST)
+        return Response({'error':None},status=status.HTTP_200_OK)
+
+class teacher_deleteforum(APIView):
+    def get(self,request,format=None):
+        collegeid = request.GET.get('collegeid',None)
+        courseid = request.GET.get('courseid',None)
+        teacherid = request.GET.get('teacherid',None)
+        if None in (collegeid,courseid,teacherid):
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
+        try:
+            teacher = models.Teacher.objects.get(pk=teacherid)
+        except:
+            return Response({'error':'no such teacher forum'},status=status.HTTP_400_BAD_REQUEST)
+        teacher.section.delete()
+        return Response({'error':None},status=status.HTTP_200_OK)
+
+

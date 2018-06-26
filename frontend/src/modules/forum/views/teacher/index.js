@@ -12,6 +12,7 @@ import TopAnnouncement from "./components/TopAnnouncement"
 import PostEditor from "./components/PostEditor"
 import {goBottom} from "../../utils/pageHandler"
 import Announcements from '../announcements';
+import Manage from "./components/Manage"
 
 class Teacher extends Component {
     constructor(props) {
@@ -154,6 +155,8 @@ class Teacher extends Component {
                     <PostEditor
                         post={this.post}
                     />
+                    <Manage collegeId={collegeid} courseId={courseid} teacherId={teacherid}
+                            history={this.props.history}/>
                 </MainBody>
                 <Dialog
                     open={this.props.dialog.open}
