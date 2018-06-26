@@ -19,6 +19,7 @@ import {
 } from "material-ui"
 import {dateFormat} from "../../utils/time"
 import {Link} from "react-router-dom"
+import Manage from "./components/Manage"
 
 const styles = {
     root: {},
@@ -48,6 +49,11 @@ class Courses extends Component {
         const cid = this.props.match.params.collegeid
         this.props.getCourses(cid, page + 1) // material table count start with 0!!
     };
+
+    changeCourses = () => {
+        const cid = this.props.match.params.collegeid
+        this.props.getCoursesInfo(cid)
+    }
 
     render() {
         const {collegeid} = this.props.match.params
@@ -126,6 +132,7 @@ class Courses extends Component {
                                 </TableFooter>
                             </Table>
                         </Paper>
+                        <Manage changeCourses={this.changeCourses}/>
                     </div>
                 </MainBody>
             </div>
