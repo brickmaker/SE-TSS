@@ -132,7 +132,7 @@ class Courses extends Component {
                                 </TableFooter>
                             </Table>
                         </Paper>
-                        <Manage changeCourses={this.changeCourses}/>
+                        <Manage collegeId={collegeid} changeCourses={this.changeCourses}/>
                     </div>
                 </MainBody>
             </div>

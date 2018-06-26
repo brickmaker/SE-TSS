@@ -18,6 +18,7 @@ class Manage extends Component {
             method: 'POST',
             headers: withAuthHeader(),
             body: JSON.stringify({
+                collegeid: this.props.collegeId,
                 code: this.state.courseCode,
                 name: this.state.courseName
             })

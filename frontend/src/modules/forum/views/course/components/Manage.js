@@ -35,10 +35,13 @@ class Manage extends Component {
 
 
     submit = () => {
+        const {collegeId, courseId, history} = this.props
         fetch(`${ROOT_URL}/api/forum/teacher_newforum`, {
             method: 'POST',
             headers: withAuthHeader(),
             body: JSON.stringify({
+                collegeid: collegeId,
+                courseid: courseId,
                 id: this.state.teacherId,
                 name: this.state.teacherName
             })

@@ -5,6 +5,7 @@ POST /api/forum/course_newforum
 
 body:
 {
+    collegeid
     code: String // 课程代号
     name: String // 课程名称
 }
@@ -37,6 +38,8 @@ POST /api/forum/teacher_newforum
 
 body:
 {
+    collegeid
+    courseid
     id: String // 教师ID
     name: String // 教师板块名
 }
