@@ -1265,7 +1265,7 @@ class courses_info(APIView):
     def get(self,request,format=None):
         collegeid = request.GET.get('collegeid',None)
         if collegeid is None:
-            return Response({'error':'Paraneter error'},status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error':'Parameter error'},status=status.HTTP_400_BAD_REQUEST)
         
         try:
             college = models.College.objects.get(pk=collegeid)
@@ -1276,3 +1276,14 @@ class courses_info(APIView):
             'pageNum':college.course.all().count()//15+1
         }
         return Response(res,status=status.HTTP_200_OK)
+
+
+class course_newforum(APIView):
+    def post(self,request,format=None):
+        collegeid = request.data.get('collegeid', None)
+        code = request.data.get('code', None)
+        name = request.data.get('name', None)
+        if None in (collegeid,code,name):
+            return Response({'error':'Parameters error'},status=status.HTTP_400_BAD_REQUEST)
+
+
