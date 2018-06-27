@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { ROOT_URL, DEBUG } from '../../configs/config';
-import { withAuthHeader } from '../../utils/api';
+import {ROOT_URL, DEBUG} from '../../configs/config';
+import {withAuthHeader} from '../../utils/api';
+
 export const SELECT_SEARCHTYPE = "select_type";
 
 export function selectSearchType(searchType) {
@@ -11,6 +12,7 @@ export function selectSearchType(searchType) {
 }
 
 export const ANCHOR_MENU = "anchor_menu";
+
 export function anchorMenu(anchorEl) {
     return ({
         type: ANCHOR_MENU,
@@ -19,6 +21,7 @@ export function anchorMenu(anchorEl) {
 }
 
 export const GET_SEARCHCONTENT = "get_searchcontent";
+
 export function getContent(content) {
     return ({
         type: GET_SEARCHCONTENT,
@@ -35,15 +38,15 @@ export const SEARCH_FAILURE = "search_failure";
 export function search(searchType, query, pageNum, pageSize) {
     console.log("action search", searchType, query, pageNum, pageSize);
     return (dispatch, getState) => {
-        const { isFetching } = getState().forum.search;
+        const {isFetching} = getState().forum.search;
         if (isFetching) {
             return;
         }
-        dispatch({ type: SEARCH_REQUEST });
+        dispatch({type: SEARCH_REQUEST});
 
         let params = DEBUG ? {
-            resultType: searchType,
-        } :
+                resultType: searchType,
+            } :
             {
                 searchtype: searchType,
                 query: query,
@@ -56,13 +59,14 @@ export function search(searchType, query, pageNum, pageSize) {
             headers: withAuthHeader(),
         })
             .then((response) => {
+                // console.log(response)
                 dispatch({
                     type: SEARCH_SUCCESS,
                     //TODO: correct response
-                    results: response.data[0].results,
-                    resultNum: response.data[0].resultNum,
-                    // results: response.results,
-                    // resultNum: response.resultNum,
+                    // results: response.data[0].results,
+                    // resultNum: response.data[0].resultNum,
+                    results: response.data.results,
+                    resultNum: response.data.resultNum,
                 });
             })
             .catch((errors) => {
