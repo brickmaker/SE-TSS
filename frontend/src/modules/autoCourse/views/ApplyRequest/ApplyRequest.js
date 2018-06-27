@@ -66,6 +66,11 @@ class ApplyRequest extends React.Component {
                                                                     <Typography component="p">
                                                                         {n.content}
                                                                     </Typography>
+                                                                    <Typography variant="headline" component="h2">
+                                                                    {
+                                                                        n.status===1? "请求成功":n.status===2?"请求失败":"请求受理中"                                              
+                                                                    }
+                                                                    </Typography>
                                                                 </CardContent>
                                                                 <CardActions>
 
