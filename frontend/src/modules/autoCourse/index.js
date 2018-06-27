@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.css';
-import {Redirect, Link, Switch, Route } from 'react-router-dom';
+import { Redirect, Link, Switch, Route } from 'react-router-dom';
 import {Provider, connect} from 'react-redux';
 import {createStore, applyMiddleware} from "redux";
 import {createLogger} from 'redux-logger';
@@ -11,7 +11,7 @@ import CourseArrange from "./views/CourseArrange/CourseArrange";
 import HandleRequest from "./views/HandleRequest/HandleRequest";
 import TeacherSchedule from "./views/TeacherSchedule/TeacherSchedule";
 import ApplyRequest from "./views/ApplyRequest/ApplyRequest";
-
+import Sorry from "./views/Sorry";
 import {autoCourseReducer} from './reducers';
 import {Divider, ListItem, ListItemIcon, ListItemText} from "material-ui";
 import {Dashboard,LibraryBooks, BubbleChart, Notifications} from "@material-ui/icons";
@@ -83,11 +83,10 @@ class AutoCourse extends React.Component {
                 </ListItem>
             </div>
         );
-        if (localStorage.getItem('type')==="4") {
+        if (localStorage.getItem('type')==="3") {
             return (
                 <Provider store={store}>
                     <div>
-                    
                         <Bar listItems={listItems}>
                             <div style={styles}>
                                 <Switch>
@@ -95,10 +94,8 @@ class AutoCourse extends React.Component {
                                     <Route path='/autoCourse/roomResource' component={RoomResource}/>
                                     <Route path='/autoCourse/courseArrange' component={CourseArrange}/>
                                     <Route path='/autoCourse/handleRequest' component={HandleRequest}/>
-                                <Redirect from='/' to='/autoCourse/courses'/>
+                                    <Redirect from='/' to='/autoCourse/courses'/>
                                 </Switch>
-                                
-                                
                             </div>
                         </Bar>
                     </div>
@@ -107,25 +104,26 @@ class AutoCourse extends React.Component {
         }
         else if(localStorage.getItem('type')==="2"){
             return (
-                
                 <Provider store={store}>
                     <div>
-                    
                         <Bar listItems={listItemsForTeacher}>
                             <div style={styles}>
-                                <Switch> 
+                                <Switch>
                                     <Route path='/autoCourse/teacherSchedule' component={TeacherSchedule}/>
                                     <Route path='/autoCourse/applyRequest' component={ApplyRequest}/>
                                     <Redirect from='/' to='/autoCourse/teacherSchedule'/>
                                 </Switch>
-                                
                             </div>
                         </Bar>
                     </div>
                 </Provider>
             )
         }
-        
+        else {
+            return (
+                <Sorry/>
+            )
+        }
     }
 }
 
