@@ -30,10 +30,13 @@ def createCourse(filename):
             course_type=int(table.row_values(i)[col_dict['类别']]),
             credit=float(table.row_values(i)[col_dict['学分']]),
             capacity=int(table.row_values(i)[col_dict['容量']]),
-            #assessment=
+            assessment="50%笔试+50%大作业",
             department=depart
         )
         course.save()
+        if(table.row_values(i)[col_dict['课号']]=='1001'):
+            course.state=1
+            course.save()
         for var in ary:
             course.faculty.add(var)
         if(t=="1"):
