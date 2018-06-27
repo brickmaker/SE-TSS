@@ -58,6 +58,7 @@ class Courses extends Component {
     render() {
         const {collegeid} = this.props.match.params
         const {college, courses, pageNum, currPage, classes} = this.props
+        const type = localStorage.getItem('type');
         const path = {
             college: {
                 name: college,
@@ -132,7 +133,9 @@ class Courses extends Component {
                                 </TableFooter>
                             </Table>
                         </Paper>
+                        {(type === "3" || type === "4") &&
                         <Manage collegeId={collegeid} changeCourses={this.changeCourses}/>
+                        }
                     </div>
                 </MainBody>
             </div>

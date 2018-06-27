@@ -87,6 +87,7 @@ class Course extends Component {
     render() {
         const {college, course, subForums, subscribed} = this.props
         const {collegeid, courseid} = this.props.match.params
+        const type = localStorage.getItem('type');
         const path = {
             college: {
                 name: college,
@@ -166,8 +167,10 @@ class Course extends Component {
                     <PostEditor
                         post={this.post}
                     />
+                    {(type === "3" || type === "4") &&
                     <Manage update={this.update} collegeId={collegeid} courseId={courseid}
                             history={this.props.history}/>
+                    }
                 </MainBody>
                 <Dialog
                     open={this.props.dialog.open}

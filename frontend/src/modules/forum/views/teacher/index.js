@@ -76,6 +76,7 @@ class Teacher extends Component {
     render() {
         const {college, course, teacher, match, subscribed, anncPermission} = this.props
         const {collegeid, courseid, teacherid} = this.props.match.params
+        const type = localStorage.getItem('type');
         const path = {
             college: {
                 name: college,
@@ -155,8 +156,10 @@ class Teacher extends Component {
                     <PostEditor
                         post={this.post}
                     />
+                    {(type === "3" || type === "4") &&
                     <Manage collegeId={collegeid} courseId={courseid} teacherId={teacherid}
                             history={this.props.history}/>
+                    }
                 </MainBody>
                 <Dialog
                     open={this.props.dialog.open}

@@ -61,6 +61,8 @@ export function search(searchType, query, pageNum, pageSize) {
                     //TODO: correct response
                     results: response.data[0].results,
                     resultNum: response.data[0].resultNum,
+                    // results: response.results,
+                    // resultNum: response.resultNum,
                 });
             })
             .catch((errors) => {
