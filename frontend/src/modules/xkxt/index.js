@@ -21,6 +21,8 @@ import ScheduleViewing from './modules/scheduleViewing';
 import CourseManagement from './modules/courseManagement';
 import CourseStudent from './modules/courseStudent';
 
+import Sorry from './modules/Sorry';
+
 import Bar from "../../top/components/Bar";
 
 const drawerWidth = 210;
@@ -34,11 +36,13 @@ const styles = theme => ({
 
 class Xkxt extends React.Component {
 	componentDidMount(){
-		setTimeout(()=>{
-			this.props.quit();
-			console.log(111);
-		}, 1000*20*60);
-		this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
+		if(localStorage.type === '1' || localStorage.type === '2' || localStorage.type === '3'){
+			setTimeout(()=>{
+				this.props.quit();
+				console.log(111);
+			}, 1000*20*60);
+			this.props.getUserInfo("type=3&log=0&uid="+this.props.uid);
+		}
 	}
 
 	unLoad(e){
@@ -47,6 +51,8 @@ class Xkxt extends React.Component {
 	}
 
 	render(){
+		if(localStorage.type !== '1' && localStorage.type !== '2' && localStorage.type !== '3')
+			return <Sorry />;
 		let { isAdmin, utility, switchUtility, classes, changeCSFunc, tabsSVFunc, tabsCMFunc, program } = this.props;
 		let userInfo = this.props.userInfo;
 		//let userInfo = {auth: parseInt(localStorage.type)};

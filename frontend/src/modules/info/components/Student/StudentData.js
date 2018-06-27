@@ -1,7 +1,7 @@
 import React from 'react';
 import {ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {Link} from 'react-router-dom'
-import {Home, Star,} from '@material-ui/icons';
+import {Home, Star,AccountBox} from '@material-ui/icons';
 
 
 export const listItems = (
@@ -14,7 +14,7 @@ export const listItems = (
         </ListItem>
         <ListItem component={Link} to={"/info/student/basicInfo"} button>
             <ListItemIcon>
-                <Home/>
+                <AccountBox/>
             </ListItemIcon>
             <ListItemText primary="个人信息"/>
         </ListItem>
