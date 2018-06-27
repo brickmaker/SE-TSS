@@ -83,7 +83,7 @@ const convertFrom = (s) => {
     s.forEach((d) => {
         if(Boolean(d.time)){
             let day = d.time.substr(1, 1);//周一
-            let t = d.time.substr(3, d.time.length-4).replace(', ', '').replace(', ', '');//周一第3, 4, 5节
+            let t = d.time.substr(3, d.time.length-4).replace(',', '').replace(',', '');//周一第3, 4, 5节
             if(!(day in res))
                 res[day] = {};
             res[day][t] = [d.name, d.classroom];
