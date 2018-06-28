@@ -15,12 +15,15 @@ def getColumnTitle(sheet):
 def createAllOtherData():
     from auto_course.models import ClassRoom,course_teacher_time_classroom_relation
     from xkxt.models import course_select_relation
+    from authentication.models import Course, Student, Faculty
+    students = Student.objects.all()
+    '''
     print("Init classroom...")
-    ClassRoom.objects.all().delete()
+    #ClassRoom.objects.all().delete()
     create = ClassRoom.objects.create
     classroom=create(building="西区",room="513", classroom_capacity=100)
     print("Init course_teacher_time_classroom_relation...")
-    course_teacher_time_classroom_relation.objects.all().delete()
+    #course_teacher_time_classroom_relation.objects.all().delete()
     create = course_teacher_time_classroom_relation.objects.create
     from authentication.models import Course, Student, Faculty
     students = Student.objects.all()
@@ -32,9 +35,10 @@ def createAllOtherData():
         for k in range(courses.count()):
             c = courses[k]
             create(teacher=t, course=c, classroom=classroom,time="")
+    '''
 
     print("Init course_select_relation...")
-    course_select_relation.objects.all().delete()
+    #course_select_relation.objects.all().delete()
     create = course_select_relation.objects.create
     course_teacher_time_classroom_relations=course_teacher_time_classroom_relation.objects.all()
     for i in range (students.count()):
@@ -81,6 +85,7 @@ def createCourse(filename):
             print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
 
 
+'''
 def createTake():
     from authentication.models import Course, Student, Faculty
     from score_management.models import Take
@@ -96,6 +101,7 @@ def createTake():
                 score = min(i + j + k, 100)
                 take = Take(student=s, teacher=t, course=c, score=score)
                 take.save()
+'''
 
 
 
@@ -106,7 +112,7 @@ def main():
 
     course_filename = "score_management/course.xlsx"
 
-    createCourse(course_filename)
+    #createCourse(course_filename)
     #createTake()
     createAllOtherData()
     createScore()

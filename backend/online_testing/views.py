@@ -13,6 +13,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet, mixins
 
 from authentication.models import Student, Course, Faculty
+from xkxt.models import course_select_relation
+from auto_course.models import course_teacher_time_classroom_relation
 from online_testing.models import Question, Paper, Examination
 from online_testing.serializers import QuestionSerializer, QuestionDetailSerializer, \
     PaperSerializer, ExaminationSerializer, PaperDetailSerializer
@@ -20,13 +22,19 @@ from online_testing.filters import QuestionFilter
 from online_testing.permissions import ExamInfoAccessPermission, QuestionPermission, PaperPermission
 from rest_framework import permissions
 
+
 class CourseQuery(APIView):
     def get(self, request):
         if request.user.user_type == 1:
-            return Response(Course.objects.all().values_list('course_id', 'name'))
+            result = []
+            for course_select in course_select_relation.objects.all().filter(student=request.user.username):
+                course = course_select.course
+                result.append([course.course.course_id, course.course.name, course.teacher.username.username])
+            return Response(result)
         elif request.user.user_type == 2:
             faculty = Faculty.objects.all().get(username=request.user.username)
             return Response(faculty.teacher_course.all().values_list('course_id', 'name'))
+
 
 class QuestionViewSet(viewsets.ModelViewSet):
     # not safe: update(object), partial_update(object), delete(object), insert,
@@ -115,9 +123,7 @@ class PaperViewSet(mixins.CreateModelMixin,
     serializer_class = (PaperSerializer, PaperDetailSerializer)
     permission_classes = (IsAuthenticated, PaperPermission)
     filter_backends = (DjangoFilterBackend, )
-    filter_fields = ('course',)
-    # not safe: delete(object), insert,
-    # safe: list, retrieve(object)
+    filter_fields = ('course', 'teacher')
 
     def get_serializer_class(self):
         assert self.serializer_class is not None, (
@@ -227,7 +233,7 @@ class PaperViewSet(mixins.CreateModelMixin,
                         paper['done'] = False
                 except ObjectDoesNotExist:
                     paper['done'] = False
-                print(paper)
+                #print(paper)
         return Response({'paper_list': data})
 
 
@@ -315,12 +321,12 @@ class ExaminationViewSet(mixins.CreateModelMixin,
                             status=status.HTTP_400_BAD_REQUEST)
 
         answers = str(request.data.get('answers'))
-        print('myAns: ', answers)
+        #print('myAns: ', answers)
         exam.answers = answers
         serializer = self.get_serializer(exam, data={'answers': answers}, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        print('after saving', serializer.data)
+        #print('after saving', serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 
@@ -332,7 +338,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         if exam.submit:
             return Response({'message': 'already submitted', 'is_ok': False},
                             status=status.HTTP_400_BAD_REQUEST)
-        print(exam.answers)
+        #print(exam.answers)
         if exam.answers:
             answers = json.loads(exam.answers.replace('\'', '\"'))
 
@@ -358,7 +364,7 @@ class ExaminationViewSet(mixins.CreateModelMixin,
         serializer = self.get_serializer(exam, data=data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        print(serializer.data)
+        #print(serializer.data)
         if getattr(exam, '_prefetched_objects_cache', None):
             exam._prefetched_objects_cache = {}
 

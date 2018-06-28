@@ -321,7 +321,7 @@ class StudentViewSet(viewsets.ModelViewSet):
 
 
 class FacultyViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated, FacultyCheck,)
+    permission_classes = (IsAuthenticated,)
     queryset = Faculty.objects.all()
     serializer_class = FacultyQuerySerializer
 

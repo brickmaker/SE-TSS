@@ -23,7 +23,7 @@ HTTP_AUTHORIZATION = 'JWT ' + data['token']
 response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
-response = c.get('/api/online_testing/analysis/tag/?course_id=211G0200&tag=queue',
+response = c.get('/api/online_testing/analysis/tag/?course_id=211G0200&tag=queue&tag=stack',
                  HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
