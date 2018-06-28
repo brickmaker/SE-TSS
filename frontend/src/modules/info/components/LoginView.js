@@ -47,7 +47,7 @@ const styles = theme => ({
         'z-index': 1,
     },
     Paper: {
-        opacity: 0.8,
+        opacity: 0.9,
         marginTop: '10%',
         marginLeft: '25%',
         paddingBottom: 50,
@@ -73,6 +73,7 @@ const styles = theme => ({
     },
     title: {
         opacity: 1.0,
+        color: '#ffffff',
         fontSize: 15,
     },
 });
