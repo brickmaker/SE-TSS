@@ -18,6 +18,14 @@ import {
     Menu,
     MenuItem,
 } from '@material-ui/core';
+import {
+    Info as InfoIcon,
+    Forum as ForumIcon,
+    Assignment as AssignmentIcon,
+    Grade as GradeIcon,
+    CheckBox as CheckBoxIcon,
+    Poll as PollIcon,
+} from '@material-ui/icons'
 
 class Top extends Component {
     constructor(props) {
@@ -45,12 +53,24 @@ class Top extends Component {
                             marginTop: 120
                         }}>
                             <Grid container>
-                                <SubSystem name={'基础信息'} uri={'info'}/>
-                                <SubSystem name={'自动排课'} uri={'autoCourse'}/>
-                                <SubSystem name={'选课系统'} uri={'xkxt'}/>
-                                <SubSystem name={'论坛'} uri={'forum'}/>
-                                <SubSystem name={'在线测试'} uri={'online_testing'}/>
-                                <SubSystem name={'成绩管理'} uri={'scorem'}/>
+                                <SubSystem name={'基础信息'} uri={'info'}>
+                                    <InfoIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
+                                <SubSystem name={'自动排课'} uri={'autoCourse'}>
+                                    <PollIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
+                                <SubSystem name={'选课系统'} uri={'xkxt'}>
+                                    <CheckBoxIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
+                                <SubSystem name={'论坛'} uri={'forum'}>
+                                    <ForumIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
+                                <SubSystem name={'在线测试'} uri={'online_testing'}>
+                                    <AssignmentIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
+                                <SubSystem name={'成绩管理'} uri={'scorem'}>
+                                    <GradeIcon style={{width: '100%', height: '100%'}}/>
+                                </SubSystem>
                             </Grid>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ import {goBottom} from "../../utils/pageHandler"
 import PostsList from "./components/PostsList"
 import PostEditor from "../teacher/components/PostEditor"
 import SubForum from "./components/SubForum"
+import Manage from "./components/Manage"
 
 class Course extends Component {
     constructor(props) {
@@ -22,6 +23,14 @@ class Course extends Component {
         this.goToPost = this.goToPost.bind(this)
         this.post = this.post.bind(this)
         this.onDialogClose = this.onDialogClose.bind(this)
+    }
+
+    update = () => {
+        const {collegeid, courseid} = this.props.match.params
+        this.props.getCourseInfo(collegeid, courseid)
+        if (this.state.isLogin) {
+            this.props.checkSubscribed("uid", collegeid, courseid) // todo: get uid
+        }
     }
 
     componentDidMount() {
@@ -157,6 +166,8 @@ class Course extends Component {
                     <PostEditor
                         post={this.post}
                     />
+                    <Manage update={this.update} collegeId={collegeid} courseId={courseid}
+                            history={this.props.history}/>
                 </MainBody>
                 <Dialog
                     open={this.props.dialog.open}

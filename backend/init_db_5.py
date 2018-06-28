@@ -55,6 +55,8 @@ def insert_question():
     for i in range(500):
         print('question', i)
         faculty = random.choice(faculty_list)
+        if faculty.teacher_course.all().count() == 0:
+            continue
         if random.randint(0, 1) == 1:
             t = 'Judge'
             answers = str([random.randint(0, 1)])
@@ -85,6 +87,8 @@ def insert_paper():
         print('paper', i)
         faculty = random.choice(faculty_list)
         d = datetime.datetime.now()
+        if faculty.teacher_course.all().count() == 0:
+            continue
         course = random.choice(faculty.teacher_course.all())
         paper = Paper(
             paper_name='2017-2018 %s Examination%d' % (course.name, i),
@@ -122,7 +126,7 @@ def insert_exam():
         data = json.loads(response.content.decode('utf-8'))
         HTTP_AUTHORIZATION = 'JWT ' + data['token']
         random.shuffle(course_list)
-        for course in course_list[:5]:
+        for course in course_list:
             paper_list = Paper.objects.all().filter(course=course)
             paper_list = [paper for paper in paper_list]
             if len(paper_list) == 0:
@@ -142,17 +146,18 @@ def insert_exam():
                     'paper': str(paper.paper_id),
                 }, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
                 data = json.loads(response.content.decode('utf-8'))
-                print(data['exam_id'])
+                #print(data['exam_id'])
                 response = c.post('/api/online_testing/examination/%s/conservation/' % data['exam_id'], data={
                     'answers': [d],
                 }, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
-                print(response.content.decode('utf-8'))
+                #print(response.content.decode('utf-8'))
                 response = c.post('/api/online_testing/examination/%s/submission/' % data['exam_id'], data={
                 }, HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
-                print(response.content.decode('utf-8'))
+                #print(response.content.decode('utf-8'))
 
 if __name__ == '__main__':
-    papare_course()
+    #papare_course()
     insert_question()
     insert_paper()
     insert_exam()
+    print('data init successfully')

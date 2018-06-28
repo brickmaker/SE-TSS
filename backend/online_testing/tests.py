@@ -20,12 +20,25 @@ data = json.loads(response.content.decode('utf-8'))
 token = data['token']
 HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
+
+response = c.get('/api/online_testing/analysis/tag/?course_id=1001&tag=queue&tag=stack',
+                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+exit(0)
+
+response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+exit(0)
+
+response = c.delete('/api/online_testing/paper/98a83c7a-7a6e-11e8-ad7b-484520d476fe/',
+                    HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+exit(0)
+
 response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 
-response = c.get('/api/online_testing/analysis/tag/?course_id=211G0200&tag=queue',
-                 HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
-print(response.content.decode('utf-8'))
 
 exit(0)
 

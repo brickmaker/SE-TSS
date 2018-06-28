@@ -79,7 +79,7 @@ class SimpleZoom extends React.Component {
                     <Zoom in={checked}>
                         <IconButton className={classes.button} title={"试题列表"}
                                     onClick={(e)=>{
-                                        this.props.history.push(`${this.props.match.url}/exam_list/${this.props.course_id}`);
+                                        this.props.history.push(`${this.props.match.url}/exam_list/${this.props.course_id}/${this.props.teacher_id}`);
                                     }
                                     }
 

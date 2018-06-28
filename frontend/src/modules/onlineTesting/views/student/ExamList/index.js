@@ -54,8 +54,8 @@ class ExamList extends Component{
 
     update=()=>{
         const{token} = this.props;
-        const{course_id} = this.props.match.params;
-        this.props.getStudentPaperList(course_id,token);
+        const{course_id, teacher_id} = this.props.match.params;
+        this.props.getStudentPaperList(course_id,teacher_id, token);
     }
 
     componentDidMount(){
@@ -196,8 +196,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getStudentPaperList: (courseId, token)=>{
-            return dispatch(getStudentPaperList(courseId, token));
+        getStudentPaperList: (courseId, teacherID, token)=>{
+            return dispatch(getStudentPaperList(courseId,teacherID, token));
         },
     }
 };

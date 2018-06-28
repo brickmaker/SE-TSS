@@ -122,7 +122,7 @@ class ApplicationPage extends Component {
     let data = this.state.wait.concat(this.state.reject,this.state.pass);
     let retList = [];
     for (let i = 0; i < data.length; i++) {
-      console.log(data[i]);
+      // console.log(data[i]);
       retList.push(
         <div style={{}}>
           <div style={{float: "left", marginRight: '-250px', width: '100%'}}>

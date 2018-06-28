@@ -38,4 +38,8 @@ urlpatterns = [
     path('userinfo',views.userinfo.as_view(),name='userinfo'),
     path('colleges',views.colleges.as_view(),name='colleges'),
     path('courses_info',views.courses_info.as_view(),name='courses_info'),    
+    path('course_newforum',views.course_newforum.as_view(),name='course_newforum'),
+    path('course_deleteforum',views.course_deleteforum.as_view(),name='course_deleteforum'),
+    path('teacher_newforum',views.teacher_newforum.as_view(),name='teacher_newforum'),
+    path('teacher_deleteforum',views.teacher_deleteforum.as_view(),name='teacher_deleteforum'),
 ]

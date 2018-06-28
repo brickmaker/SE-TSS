@@ -95,6 +95,20 @@ def main():
     createCourse(c_filename)
     createClassroom(cr_filename)
     createRelation(r_filename)
+
+    from auto_course.models import ClassRoom, Request, course_teacher_time_classroom_relation
+    from authentication.models import Department,Major,Course,Faculty
+
+    request=Request(
+        teacher=Faculty.objects.get(username='2110100000'),
+        topic="教室调整",
+        content="把编译原理课教室换到东四509",
+        status=0
+    )
+    request.save()
+
+
+
  
 if __name__ == '__main__':
     main()

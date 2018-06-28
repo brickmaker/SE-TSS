@@ -97,7 +97,7 @@ class PaperView extends Component{
                                                    title={problem.description}
                                                />
                                                <FormControl component="fieldset" required >
-                                                   <RadioGroup value={(problem.answer_list[0] - 1).toString()}>
+                                                   <RadioGroup value={(problem.answer_list[0]).toString()}>
                                                        {choiceListItems}
                                                    </RadioGroup>
                                                </FormControl>

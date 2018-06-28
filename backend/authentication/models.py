@@ -221,7 +221,7 @@ class Course(models.Model):
     semester = models.PositiveSmallIntegerField("开课学期", choices=SEM_CHOICE, default=0)
     department = models.ForeignKey(Department, on_delete=models.CASCADE, null=False)
     assessment = models.CharField("考核方式", max_length=20, null=True)
-    state = models.PositiveSmallIntegerField("审核状态", choices=STATE_CHOICES, default=0)
+    state = models.PositiveSmallIntegerField("审核状态", choices=STATE_CHOICES, default=2)
     faculty = models.ManyToManyField(Faculty, related_name='teacher_course')
 
 
