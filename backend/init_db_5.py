@@ -126,7 +126,7 @@ def insert_exam():
         data = json.loads(response.content.decode('utf-8'))
         HTTP_AUTHORIZATION = 'JWT ' + data['token']
         random.shuffle(course_list)
-        for course in course_list[:5]:
+        for course in course_list:
             paper_list = Paper.objects.all().filter(course=course)
             paper_list = [paper for paper in paper_list]
             if len(paper_list) == 0:
