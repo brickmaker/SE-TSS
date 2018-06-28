@@ -61,7 +61,7 @@ class StudentMain extends Component {
             (courseInfo, index) => {
                 return (
                     <ListItem key={index} >
-                            <BZ courseName={courseInfo.course_name} course_id={courseInfo.course_id} history={this.props.history} match={match} />
+                            <BZ courseName={courseInfo.course_name} course_id={courseInfo.course_id} teacher_id={courseInfo.teacher_id} history={this.props.history} match={match} />
                     </ListItem>
                 )
             }
@@ -69,8 +69,8 @@ class StudentMain extends Component {
         return (
             <Bar listItems={courseListItems}>
                 <Paper style={windowStyle}>
-                    <Route exact path={`${match.url}/exam_list/:course_id`} component={ExamList} />
-                    <Route path={`${match.url}/exam_list/:course_id/exam/:paper_id`} component={Examination} />
+                    <Route exact path={`${match.url}/exam_list/:course_id/:teacher_id`} component={ExamList} />
+                    <Route path={`${match.url}/exam_list/:course_id/:teacher_id/exam/:paper_id`} component={Examination} />
                     <Route path={`${match.url}/history_grade/:course_id`} component={HistoryGrade} />
                     {/*<Route path={`${match.url}/search/:searchType/:query/:pageNum`} component={Search}/>*/}
                 </Paper>
@@ -106,7 +106,8 @@ const mapDispatchToProps = (dispatch) => {
                     response.map((temp_course_info)=>{
                         course_list.push({
                             course_id: temp_course_info[0],
-                            course_name: temp_course_info[1]
+                            course_name: temp_course_info[1],
+                            teacher_id: temp_course_info[2]
                         });
                     });
                     dispatch({
