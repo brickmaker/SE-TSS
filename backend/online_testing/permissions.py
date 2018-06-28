@@ -8,7 +8,7 @@ class QuestionPermission(permissions.BasePermission):
         t = request.user.user_type
         if t != 2:
             return False
-        if request.method not in permissions.SAFE_METHODS:
+        if request.method == 'POST':
             faculty = Faculty.objects.all().get(username=request.user)
             cnt = faculty.teacher_course.all().filter(course_id=request.data['course']).count()
             if cnt <= 0:
@@ -30,7 +30,7 @@ class PaperPermission(permissions.BasePermission):
         t = request.user.user_type
         if t != 2 and t != 1:
             return False
-        if request.method not in permissions.SAFE_METHODS:
+        if request.method == 'POST':
             faculty = Faculty.objects.all().get(username=request.user)
             cnt = faculty.teacher_course.all().filter(course_id=request.data['course']).count()
             if cnt <= 0:

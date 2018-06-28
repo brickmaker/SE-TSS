@@ -22,8 +22,17 @@ HTTP_AUTHORIZATION = 'JWT ' + data['token']
 
 response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
+exit(0)
 
-response = c.get('/api/online_testing/analysis/tag/?course_id=211G0200&tag=queue',
+response = c.delete('/api/online_testing/paper/98a83c7a-7a6e-11e8-ad7b-484520d476fe/',
+                    HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+exit(0)
+
+response = c.get('/api/online_testing/course/', HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
+print(response.content.decode('utf-8'))
+
+response = c.get('/api/online_testing/analysis/tag/?course_id=211G0200&tag=queue&tag=stack',
                  HTTP_AUTHORIZATION=HTTP_AUTHORIZATION)
 print(response.content.decode('utf-8'))
 

@@ -4,7 +4,7 @@ export const GET_STUDENT_PAPER_LIST = 'get_student_paper_list';
 export const GET_CURRENT_PAPER_ID = 'get_current_paper_id';
 
 
-export const getStudentPaperList = (courseId, token) =>{
+export const getStudentPaperList = (courseId, teacherID, token) =>{
     return dispatch=>{
                 let  headers = new Headers();
                 headers.append(
@@ -14,8 +14,8 @@ export const getStudentPaperList = (courseId, token) =>{
                     'Authorization','JWT '+ localStorage.getItem('token')
 
                 );
-                console.log(token);
-                fetch(`http://${_SERVER_ADDRESS}/api/online_testing/paper/?course=${courseId}`, {
+                const url = `http://${_SERVER_ADDRESS}/api/online_testing/paper/?course=${courseId}&teacher=${teacherID}`;
+                fetch(url, {
                     method: 'GET',
                     headers:headers
                 })
