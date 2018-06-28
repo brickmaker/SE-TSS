@@ -546,6 +546,10 @@ class LessonInfo extends React.Component {
 
     isSelected = id => this.state.selected.indexOf(id) !== -1;
 
+    handleChangePage = (event, page) => {
+        this.setState({page});
+    };
+
     render() {
         const {classes, theme,  history} = this.props;
         const {data, order, orderBy, selected, rowsPerPage, page, anchor, open, applyState} = this.state;

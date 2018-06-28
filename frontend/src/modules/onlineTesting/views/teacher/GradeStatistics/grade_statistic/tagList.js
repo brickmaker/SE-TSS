@@ -72,12 +72,12 @@ class CheckboxLabels extends React.Component {
             }
             graph_data.push(
                 {
-                    name:item.tag,
+                    name:item.tag.toLocaleUpperCase(),
                     type:'line',
                     data:item.relevantTest.map(test=>test.avgScore)
                 }
             );
-            graph_legend_data.push(item.tag);
+            graph_legend_data.push(item.tag.toLocaleUpperCase());
         });
 
         this.chart.hideLoading();
