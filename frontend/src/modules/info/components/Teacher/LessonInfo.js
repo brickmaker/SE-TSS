@@ -204,7 +204,7 @@ class LessonInfo extends React.Component {
                 let json = JSON.parse(data);
                 this.setState({originData: json, data: json});
                 this.setState({
-                            data: this.state.originData.filter(item => item.state === 1).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
+                            data: this.state.originData.filter(item => item.state === 1 || item.state === 2).sort((a, b) => (a.course_id < b.course_id ? -1 : 1)),
                             allowSelected: false
                 });
             })

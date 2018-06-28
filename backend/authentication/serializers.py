@@ -375,6 +375,7 @@ class CourseQuerySerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=20, required=True)
     credit = serializers.FloatField(min_value=0.5, required=True)
     capacity = serializers.IntegerField(max_value=200)
+    # faculty = serializers.MultipleChoiceField(choices=Faculty.objects.all())
     semester = serializers.IntegerField(required=True)
     assessment = serializers.CharField(max_length=20)
     state = serializers.IntegerField(required=True)

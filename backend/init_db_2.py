@@ -34,11 +34,11 @@ def createCourse(filename):
             department=depart
         )
         course.save()
-        if(table.row_values(i)[col_dict['课号']]=='1001'):
+        if(table.row_values(i)[col_dict['课号']]=='1007'):
             course.state=1
-            course.save()
         for var in ary:
             course.faculty.add(var)
+        course.save()
         if(t=="1"):
             ary=[]
 

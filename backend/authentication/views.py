@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render
 from rest_framework import status
-from rest_framework.parsers import FileUploadParser,MultiPartParser, FormParser
+from rest_framework.parsers import FileUploadParser, MultiPartParser, FormParser
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,7 +15,8 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib import auth
-from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck, LogCheck
+from authentication.permission import StudentCheck, StaffCheck, FacultyCheck, AdminCheck, CourseCheck, RegisterCheck, \
+    LogCheck
 import logging
 from django.core import serializers
 import json
@@ -25,14 +26,13 @@ from top.settings import MEDIA_ROOT
 import xlrd
 from django.db import transaction
 
-
-
 logger = logging.getLogger('django')
 
 
 class StudentRegister(APIView):
     serializer_class = StudentSerializer
-    #permission_classes = (IsAuthenticated, RegisterCheck,)
+
+    # permission_classes = (IsAuthenticated, RegisterCheck,)
 
     def post(self, request):
         logger.info("try to register student account")
@@ -49,189 +49,189 @@ class StudentRegister(APIView):
             logger.info('account register failed, invalid parameters')
             return Response({'msg': 'invalid parameters', 'state': False}, status=status.HTTP_400_BAD_REQUEST)
 
-def getColumnTitle(sheet):  
-    col_dict = {}    
-    for i in range(sheet.ncols):  
-        col_dict[sheet.cell_value(0, i).strip()] = i  
-    return col_dict  
+
+def getColumnTitle(sheet):
+    col_dict = {}
+    for i in range(sheet.ncols):
+        col_dict[sheet.cell_value(0, i).strip()] = i
+    return col_dict
+
 
 class BatchStudentView(APIView):
-
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
+
     @transaction.atomic
     def post(self, request, format=None):
-        #file_obj = request.FILES['file']
-        #logger.info(file_obj.read())
-        file_obj=self.request.data.get('file')
-        
-        
-        f1=open(file_obj.name,"wb")
+        # file_obj = request.FILES['file']
+        # logger.info(file_obj.read())
+        file_obj = self.request.data.get('file')
+
+        f1 = open(file_obj.name, "wb")
 
         for i in file_obj.chunks():
             f1.write(i)
 
         f1.close()
 
-        try :
-            wb=xlrd.open_workbook(filename=file_obj.name)
-           
+        try:
+            wb = xlrd.open_workbook(filename=file_obj.name)
+
         except ValueError as err:
             logger.info(err)
 
-        table=wb.sheets()[0]
+        table = wb.sheets()[0]
 
-        col_dict=getColumnTitle(table)
+        col_dict = getColumnTitle(table)
         logger.info(col_dict)
-        row=table.nrows
-        manager=AccountManager()
-        
+        row = table.nrows
+        manager = AccountManager()
+
         if os.path.exists(file_obj.name):
             os.remove(file_obj.name)
-        for i in range(1,row):
+        for i in range(1, row):
             try:
 
                 department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
-                major=Major.objects.get(major=table.row_values(i)[col_dict['专业']],depart=department)
-                class_name=Major_Class.objects.get(major=major,class_name=table.row_values(i)[col_dict['班级']])
-                student=manager.create_user(username=str(table.row_values(i)[col_dict['学号']]),id_number=table.row_values(i)[col_dict['身份证号']],
-                            email=table.row_values(i)[col_dict['电子邮件']],
-                            user_type=1,
-                            name=table.row_values(i)[col_dict['姓名']], 
-                            gender  =table.row_values(i)[col_dict['性别']], 
-                            department=department,
-                            grade=table.row_values(i)[col_dict['入学年份']],  
-                            major=major,
-                            class_name=class_name,  
-                            ) 
-                
-            except :
-               
-                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                
-                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
-                json_data = json.dumps(total, ensure_ascii=False)
-                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
+                major = Major.objects.get(major=table.row_values(i)[col_dict['专业']], depart=department)
+                class_name = Major_Class.objects.get(major=major, class_name=table.row_values(i)[col_dict['班级']])
+                student = manager.create_user(username=str(table.row_values(i)[col_dict['学号']]),
+                                              id_number=table.row_values(i)[col_dict['身份证号']],
+                                              email=table.row_values(i)[col_dict['电子邮件']],
+                                              user_type=1,
+                                              name=table.row_values(i)[col_dict['姓名']],
+                                              gender=table.row_values(i)[col_dict['性别']],
+                                              department=department,
+                                              grade=table.row_values(i)[col_dict['入学年份']],
+                                              major=major,
+                                              class_name=class_name,
+                                              )
 
-        total='Excel上传成功'
+            except:
+
+                print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
+
+                print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
+                total = '创建失败，请检查表格第' + str(i + 1) + '行' + '或检查表头格式是否一致'
+                json_data = json.dumps(total, ensure_ascii=False)
+                return Response(json_data, status=status.HTTP_400_BAD_REQUEST)
+
+        total = 'Excel上传成功'
         json_data = json.dumps(total, ensure_ascii=False)
         return Response(json_data, status=status.HTTP_200_OK)
+
 
 class BatchStaffView(APIView):
-
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
+
     @transaction.atomic
     def post(self, request, format=None):
-        #file_obj = request.FILES['file']
-        #logger.info(file_obj.read())
-        file_obj=self.request.data.get('file')
-        
-        
-        f1=open(file_obj.name,"wb")
+        # file_obj = request.FILES['file']
+        # logger.info(file_obj.read())
+        file_obj = self.request.data.get('file')
+
+        f1 = open(file_obj.name, "wb")
 
         for i in file_obj.chunks():
             f1.write(i)
 
         f1.close()
 
-        try :
-            wb=xlrd.open_workbook(filename=file_obj.name)
-           
+        try:
+            wb = xlrd.open_workbook(filename=file_obj.name)
+
         except ValueError as err:
             logger.info(err)
 
-        table=wb.sheets()[0]
+        table = wb.sheets()[0]
 
-        col_dict=getColumnTitle(table)
+        col_dict = getColumnTitle(table)
         logger.info(col_dict)
-        row=table.nrows
-        manager=AccountManager()
-        
+        row = table.nrows
+        manager = AccountManager()
+
         if os.path.exists(file_obj.name):
             os.remove(file_obj.name)
-        for i in range(1,row):
+        for i in range(1, row):
             try:
                 department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
-                manager.create_user(username=str(table.row_values(i)[col_dict['教工号']]),id_number=table.row_values(i)[col_dict['身份证号']],
-                            email=table.row_values(i)[col_dict['电子邮件']],
-                            user_type=3,
-                            name=table.row_values(i)[col_dict['姓名']], 
-                            gender  =table.row_values(i)[col_dict['性别']], 
-                            department=department,
-                            ) 
-            except :
-                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
+                manager.create_user(username=str(table.row_values(i)[col_dict['教工号']]),
+                                    id_number=table.row_values(i)[col_dict['身份证号']],
+                                    email=table.row_values(i)[col_dict['电子邮件']],
+                                    user_type=3,
+                                    name=table.row_values(i)[col_dict['姓名']],
+                                    gender=table.row_values(i)[col_dict['性别']],
+                                    department=department,
+                                    )
+            except:
+                print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
+                total = '创建失败，请检查表格第' + str(i + 1) + '行' + '或检查表头格式是否一致'
                 json_data = json.dumps(total, ensure_ascii=False)
-                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
+                return Response(json_data, status=status.HTTP_400_BAD_REQUEST)
 
-        total='Excel上传成功'
+        total = 'Excel上传成功'
         json_data = json.dumps(total, ensure_ascii=False)
         return Response(json_data, status=status.HTTP_200_OK)
-
-
-
-
 
 
 class BatchFacultyView(APIView):
-    #parser_classes = (FileUploadParser,)
+    # parser_classes = (FileUploadParser,)
     parser_classes = (MultiPartParser, FormParser,)
     permission_classes = (IsAuthenticated,)
+
     @transaction.atomic
     def post(self, request, format=None):
-        #file_obj = request.FILES['file']
-        #logger.info(file_obj.read())
-        file_obj=self.request.data.get('file')
-        
-        
-        f1=open(file_obj.name,"wb")
+        # file_obj = request.FILES['file']
+        # logger.info(file_obj.read())
+        file_obj = self.request.data.get('file')
+
+        f1 = open(file_obj.name, "wb")
 
         for i in file_obj.chunks():
             f1.write(i)
 
         f1.close()
 
-        try :
-            wb=xlrd.open_workbook(filename=file_obj.name)
-           
+        try:
+            wb = xlrd.open_workbook(filename=file_obj.name)
+
         except e as err:
             logger.info(err)
 
-        table=wb.sheets()[0]
+        table = wb.sheets()[0]
 
-        col_dict=getColumnTitle(table)
+        col_dict = getColumnTitle(table)
         logger.info(col_dict)
-        row=table.nrows
-        manager=AccountManager()
+        row = table.nrows
+        manager = AccountManager()
         if os.path.exists(file_obj.name):
             os.remove(file_obj.name)
-        
-        for i in range(1,row):
+
+        for i in range(1, row):
             try:
                 department = Department.objects.get(name=table.row_values(i)[col_dict['学院']])
-                manager.create_user(username=str(table.row_values(i)[col_dict['教工号']]),id_number=table.row_values(i)[col_dict['身份证号']],
-                            email=table.row_values(i)[col_dict['电子邮件']],
-                            user_type=2,
-                            name=table.row_values(i)[col_dict['姓名']], 
-                            gender  =table.row_values(i)[col_dict['性别']], 
-                            department=department,
-                            title= table.row_values(i)[col_dict['职称']],
-                            ) 
+                manager.create_user(username=str(table.row_values(i)[col_dict['教工号']]),
+                                    id_number=table.row_values(i)[col_dict['身份证号']],
+                                    email=table.row_values(i)[col_dict['电子邮件']],
+                                    user_type=2,
+                                    name=table.row_values(i)[col_dict['姓名']],
+                                    gender=table.row_values(i)[col_dict['性别']],
+                                    department=department,
+                                    title=table.row_values(i)[col_dict['职称']],
+                                    )
                 if os.path.exists(file_obj.name):
                     os.remove(file_obj.name)
-            except :
-               
-                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                
-                print('Format doesn\'t match!!check xlsx '+str(i)+'th line!')
-                total='创建失败，请检查表格第'+str(i+1)+'行'+'或检查表头格式是否一致'
-                json_data = json.dumps(total, ensure_ascii=False)
-                return Response(json_data,status=status.HTTP_400_BAD_REQUEST)
+            except:
 
-        total='Excel上传成功'
+                print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
+
+                print('Format doesn\'t match!!check xlsx ' + str(i) + 'th line!')
+                total = '创建失败，请检查表格第' + str(i + 1) + '行' + '或检查表头格式是否一致'
+                json_data = json.dumps(total, ensure_ascii=False)
+                return Response(json_data, status=status.HTTP_400_BAD_REQUEST)
+
+        total = 'Excel上传成功'
         json_data = json.dumps(total, ensure_ascii=False)
         return Response(json_data, status=status.HTTP_200_OK)
 
@@ -352,7 +352,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
 
 class LogViewSet(viewsets.ModelViewSet):
     queryset = Log.objects.all()
-    permission_classes = (IsAuthenticated, LogCheck, )
+    permission_classes = (IsAuthenticated, LogCheck,)
     serializer_class = LogQuerySerializer
 
 
@@ -391,6 +391,7 @@ class PasswordUpdate(APIView):
 
 class UserViewSet(APIView):
     permission_classes = (IsAuthenticated,)
+
     def get(self, request, format=None):
         Log.objects.create(content="[user]: %s [event]: get the data of user info" % request.user.username)
         users = People.objects.all().filter(username=request.user.username)
@@ -408,9 +409,11 @@ class UserViewSet(APIView):
 
         return Response(json_data, status=status.HTTP_200_OK)
 
+
 class CourseFacultyViewSet(APIView):
     serializer_class = CourseQuerySerializer
     permission_classes = (IsAuthenticated,)
+
     def get(self, request, format=None):
         Log.objects.create(content="[user]: %s [event]: get the data of course faculty" % request.user.username)
         courses = Course.objects.all().filter(faculty=request.user.username)
@@ -430,6 +433,11 @@ class CourseFacultyViewSet(APIView):
             total.append(data)
         json_data = json.dumps(total, ensure_ascii=False)
         return Response(json_data, status=status.HTTP_200_OK)
+
+    def patch(self, request):
+        serializer = CourseSerializer(request.user, data=request.data, partial=True)
+        serializer.save()
+        return Response({}, status=status.HTTP_200_OK)
 
 
 class UploadImageView(APIView):
@@ -451,10 +459,10 @@ class UploadImageView(APIView):
         }, status=status.HTTP_200_OK)
 
 
-
-#Temporary unused
+# Temporary unused
 class Login(APIView):
     serializer_class = LoginSerializer
+
     def post(self, request):
         Log.objects.create(content="try to login")
         logger.info("try to login")

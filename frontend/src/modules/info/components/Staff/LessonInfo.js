@@ -167,12 +167,12 @@ const styles = theme => ({
     chip: {
         margin: theme.spacing.unit / 2,
     },
-    card:{
-      margin: '20px',
-      position: 'relative',
-      overflow:  'auto',
-      height: '50%',
-      width: '90%',
+    card: {
+        margin: '20px',
+        position: 'relative',
+        overflow: 'auto',
+        height: '50%',
+        width: '90%',
     },
 });
 
@@ -618,15 +618,25 @@ class LessonInfo extends React.Component {
         selected.forEach((value, index) => {
             let url = BACKEND_SERVER_URL + BACKEND_API.get_course + value + '/';
             let data = this.state.data.filter(item => item.course_id === value)[0];
-            data.state = this.state.acceptState ? 2 : 0;
+            // data = data.map(item => {
+            //     delete item.faculty
+            //     return JSON.parse(JSON.stringify(item))
+            // })
+            let newData = {}
+            newData.state = data.state = this.state.acceptState ? 2 : 0;
+            newData.course_id = data.course_id
+            alert(JSON.stringify(newData))
+
+            // data = JSON.parse(JSON.stringify(data))
+            // data.state = this.state.acceptState ? 2 : 0;
             fetch(url, {
-                method: 'put',
+                method: 'patch',
                 headers: {
                     'Authorization': 'JWT ' + localStorage.getItem('token'),
                     'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(newData)
             })
                 .then(response => {
                     let status = response.status;
