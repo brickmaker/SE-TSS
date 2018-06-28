@@ -135,6 +135,18 @@ class PaperViewSet(mixins.CreateModelMixin,
             return self.serializer_class[1]
         return self.serializer_class[0]
 
+    def destroy(self, request, *args, **kwargs):
+        print(0)
+        instance = self.get_object()
+        print(1)
+        self.perform_destroy(instance)
+        print(2)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    def perform_destroy(self, instance):
+        instance.delete()
+
+
     def create(self, request, *args, **kwargs):
 
         def softmax(x):
