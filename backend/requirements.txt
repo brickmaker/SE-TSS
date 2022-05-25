@@ -17,7 +17,7 @@ pluggy==0.6.0
 py==1.5.3
 Pygments==2.2.0
 pyjade==4.0.0
-PyJWT==1.5.2
+PyJWT==2.4.0
 pytest==3.5.0
 pytz==2018.3
 six==1.11.0
